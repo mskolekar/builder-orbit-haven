@@ -62,13 +62,7 @@ export function Header() {
         {/* Search Bar */}
         <SearchBar />
         
-        {/* Quick Actions */}
-        <div className="hidden lg:flex items-center gap-2">
-          <Button variant="outline" size="sm" className="h-9">
-            <MessageSquare size={16} className="mr-2" />
-            Message
-          </Button>
-        </div>
+        {/* Quick Actions - removed message button */}
         
         {/* Notifications */}
         <Popover open={notificationsOpen} onOpenChange={setNotificationsOpen}>
