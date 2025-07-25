@@ -1,17 +1,20 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { 
-  BarChart3, 
-  User, 
-  MessageCircle, 
-  Users, 
-  Link as LinkIcon, 
-  CreditCard, 
+import {
+  BarChart3,
+  User,
+  MessageCircle,
+  Users,
+  Link as LinkIcon,
+  CreditCard,
   History,
   Bell,
   Settings,
-  LogOut 
+  LogOut,
+  Menu,
+  X
 } from 'lucide-react';
+import { useState } from 'react';
 
 const sidebarItems = [
   { icon: BarChart3, label: 'Overview', path: '/' },
