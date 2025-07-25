@@ -10,7 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Eye, Plus, FileText, AlertTriangle, Home, Car, Briefcase, Shield } from 'lucide-react';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Eye, Plus, FileText, AlertTriangle, Home, Car, Briefcase, Shield, Edit3, Filter } from 'lucide-react';
 
 const customerData = {
   name: "Rose K",
@@ -81,130 +88,149 @@ const recentActivity = [
 const getStatusBadge = (status: string) => {
   switch (status.toLowerCase()) {
     case 'active':
-      return <Badge className="bg-brand-green text-white">Active</Badge>;
+      return <Badge className="bg-brand-green text-white text-xs">Active</Badge>;
     case 'bound':
-      return <Badge className="bg-brand-blue text-white">Bound</Badge>;
+      return <Badge className="bg-brand-blue text-white text-xs">Bound</Badge>;
     case 'in progress':
-      return <Badge className="bg-brand-orange text-white">In progress</Badge>;
+      return <Badge className="bg-brand-orange text-white text-xs">In progress</Badge>;
     case 'pending':
-      return <Badge className="bg-gray-500 text-white">Pending</Badge>;
+      return <Badge className="bg-gray-500 text-white text-xs">Pending</Badge>;
     case 'expired':
-      return <Badge className="bg-brand-red text-white">Expired</Badge>;
+      return <Badge className="bg-brand-red text-white text-xs">Expired</Badge>;
     case 'approved':
-      return <Badge className="bg-brand-green text-white">Approved</Badge>;
+      return <Badge className="bg-brand-green text-white text-xs">Approved</Badge>;
     case 'closed':
-      return <Badge className="bg-gray-600 text-white">Closed</Badge>;
+      return <Badge className="bg-gray-600 text-white text-xs">Closed</Badge>;
     default:
-      return <Badge variant="secondary">{status}</Badge>;
+      return <Badge variant="secondary" className="text-xs">{status}</Badge>;
   }
 };
 
 const getPolicyIcon = (lob: string) => {
   switch (lob.toLowerCase()) {
     case 'auto':
-      return <Car size={16} className="text-brand-blue" />;
+      return <Car size={14} className="text-brand-blue" />;
     case 'home':
-      return <Home size={16} className="text-brand-green" />;
+      return <Home size={14} className="text-brand-green" />;
     case 'life':
     case 'critical illness':
     case 'disability':
-      return <Shield size={16} className="text-brand-purple" />;
+      return <Shield size={14} className="text-brand-purple" />;
     case 'business':
-      return <Briefcase size={16} className="text-brand-orange" />;
+      return <Briefcase size={14} className="text-brand-orange" />;
     default:
-      return <FileText size={16} className="text-gray-500" />;
+      return <FileText size={14} className="text-gray-500" />;
   }
 };
 
 export default function Dashboard() {
+  const [policyFilter, setPolicyFilter] = useState<string>("all");
+
+  const filteredPolicies = policyFilter === "active" 
+    ? policyData.filter(policy => policy.status.toLowerCase() === "active")
+    : policyData;
+
   return (
     <div className="flex-1 bg-light-gray/30 p-4 lg:p-6 overflow-auto">
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="max-w-7xl mx-auto space-y-4">
         {/* Customer Profile Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {/* Left Column - Customer Info */}
           <div className="lg:col-span-1">
-            <Card>
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto w-20 h-20 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-2xl font-semibold mb-3">
+            <Card className="relative">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="absolute top-2 right-2 p-1.5 h-auto"
+              >
+                <Edit3 size={14} />
+              </Button>
+              <CardHeader className="text-center pb-3">
+                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-lg font-semibold mb-2">
                   RK
                 </div>
-                <div className="space-y-2">
-                  <h2 className="text-xl font-semibold">{customerData.name}</h2>
-                  <p className="text-medium-gray">{customerData.role}</p>
-                  <Badge className="bg-brand-green text-white">{customerData.status}</Badge>
+                <div className="space-y-1">
+                  <h2 className="text-lg font-semibold">{customerData.name}</h2>
+                  <p className="text-sm text-medium-gray">{customerData.role}</p>
+                  <Badge className="bg-brand-green text-white text-xs">{customerData.status}</Badge>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4 text-sm">
+              <CardContent className="space-y-3">
+                <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
                     <span className="text-medium-gray">Date of Birth</span>
-                    <p>{customerData.dateOfBirth}</p>
+                    <p className="text-sm">{customerData.dateOfBirth}</p>
                   </div>
                   <div>
                     <span className="text-medium-gray">Gender</span>
-                    <p>{customerData.gender}</p>
+                    <p className="text-sm">{customerData.gender}</p>
                   </div>
                   <div>
                     <span className="text-medium-gray">LSC#</span>
-                    <p>{customerData.lsc}</p>
+                    <p className="text-sm">{customerData.lsc}</p>
                   </div>
                   <div>
                     <span className="text-medium-gray">Phone</span>
-                    <p>{customerData.phone}</p>
+                    <p className="text-sm">{customerData.phone}</p>
                   </div>
                 </div>
-                <div className="text-sm">
+                <div className="text-xs">
                   <span className="text-medium-gray">Email</span>
-                  <p>{customerData.email}</p>
+                  <p className="text-sm">{customerData.email}</p>
                 </div>
-                <div className="text-sm">
+                <div className="text-xs">
                   <span className="text-medium-gray">Address</span>
-                  <p>{customerData.address}</p>
-                </div>
-                
-                {/* Last Premium Paid */}
-                <div className="mt-6 p-4 bg-light-gray rounded-lg">
-                  <div className="text-sm">
-                    <span className="text-medium-gray">Last Premium Paid</span>
-                    <p className="text-lg font-semibold">$150</p>
-                    <p className="text-medium-gray">July 1, 2025</p>
-                  </div>
-                  <div className="mt-3">
-                    <span className="text-medium-gray">Upcoming Premium</span>
-                    <p className="text-lg font-semibold">$150</p>
-                    <p className="text-medium-gray">Aug 1, 2025</p>
-                  </div>
+                  <p className="text-sm">{customerData.address}</p>
                 </div>
               </CardContent>
             </Card>
           </div>
 
+          {/* Premium Tiles */}
+          <div className="lg:col-span-1">
+            <div className="space-y-3">
+              <Card className="bg-gradient-to-r from-brand-blue/10 to-brand-blue/5 border-brand-blue/20">
+                <CardContent className="p-4">
+                  <div className="text-xs text-medium-gray">Last Premium Paid</div>
+                  <div className="text-xl font-bold text-brand-blue">$150</div>
+                  <div className="text-xs text-medium-gray">July 1, 2025</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-r from-brand-orange/10 to-brand-orange/5 border-brand-orange/20">
+                <CardContent className="p-4">
+                  <div className="text-xs text-medium-gray">Upcoming Premium</div>
+                  <div className="text-xl font-bold text-brand-orange">$150</div>
+                  <div className="text-xs text-medium-gray">Aug 1, 2025</div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
           {/* Right Column - Reminders and Submissions */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4">
             {/* Upcoming Reminders */}
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-lg">Upcoming Reminders</CardTitle>
-                <Button variant="outline" size="sm">
-                  <Plus size={16} className="mr-2" />
+              <CardHeader className="flex flex-row items-center justify-between pb-3">
+                <CardTitle className="text-base">Upcoming Reminders</CardTitle>
+                <Button variant="outline" size="sm" className="h-8 text-xs">
+                  <Plus size={14} className="mr-1" />
                   Add Reminder
                 </Button>
               </CardHeader>
               <CardContent>
-                <p className="text-medium-gray text-sm mb-4">Critical upcoming events and tasks.</p>
-                <div className="space-y-3">
+                <p className="text-medium-gray text-xs mb-3">Critical upcoming events and tasks.</p>
+                <div className="space-y-2">
                   {upcomingReminders.map((reminder) => (
                     <div key={reminder.id} className="flex items-center justify-between p-3 bg-light-gray rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-brand-blue rounded-full"></div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-brand-blue rounded-full"></div>
                         <div>
-                          <p className="font-medium">{reminder.type}</p>
-                          <p className="text-sm text-medium-gray">{reminder.dueDate}</p>
+                          <p className="text-sm font-medium">{reminder.type}</p>
+                          <p className="text-xs text-medium-gray">{reminder.dueDate}</p>
                         </div>
                       </div>
-                      <Button variant="outline" size="sm">
-                        <Eye size={16} className="mr-2" />
+                      <Button variant="outline" size="sm" className="h-7 text-xs">
+                        <Eye size={12} className="mr-1" />
                         View
                       </Button>
                     </div>
@@ -215,87 +241,105 @@ export default function Dashboard() {
 
             {/* Submissions */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Submissions</CardTitle>
-                <p className="text-medium-gray text-sm">In progress</p>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base">Submissions</CardTitle>
+                <p className="text-medium-gray text-xs">In progress</p>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Submission No.</TableHead>
-                      <TableHead>LOB</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Start Date</TableHead>
-                      <TableHead>End Date</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {submissions.map((submission, index) => (
-                      <TableRow key={index}>
-                        <TableCell>{submission.id}</TableCell>
-                        <TableCell>{submission.lob}</TableCell>
-                        <TableCell>{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell>{submission.startDate}</TableCell>
-                        <TableCell>{submission.endDate}</TableCell>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs">Submission No.</TableHead>
+                        <TableHead className="text-xs">LOB</TableHead>
+                        <TableHead className="text-xs">Status</TableHead>
+                        <TableHead className="text-xs">Start Date</TableHead>
+                        <TableHead className="text-xs">End Date</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {submissions.map((submission, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="text-sm">{submission.id}</TableCell>
+                          <TableCell className="text-sm">{submission.lob}</TableCell>
+                          <TableCell>{getStatusBadge(submission.status)}</TableCell>
+                          <TableCell className="text-sm">{submission.startDate}</TableCell>
+                          <TableCell className="text-sm">{submission.endDate}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </CardContent>
             </Card>
           </div>
         </div>
 
         {/* Policy Details and Claims History */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
           {/* Policy Details */}
           <div className="xl:col-span-2">
             <Card>
-              <CardHeader>
-                <div className="flex justify-between items-center">
+              <CardHeader className="pb-3">
+                <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="text-lg">Policy Details</CardTitle>
-                    <p className="text-medium-gray text-sm">Overview of all active and inactive policies.</p>
+                    <div className="flex items-center gap-3 mb-2">
+                      <CardTitle className="text-base">Policy Details</CardTitle>
+                      <div className="flex items-center gap-2">
+                        <Filter size={14} className="text-medium-gray" />
+                        <Select value={policyFilter} onValueChange={setPolicyFilter}>
+                          <SelectTrigger className="w-32 h-7 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="all">All Policies</SelectItem>
+                            <SelectItem value="active">Active Only</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    <p className="text-medium-gray text-xs">Overview of all active and inactive policies.</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold">$9,500 / $12,500</p>
-                    <p className="text-sm text-medium-gray">Paid vs YTD Premium</p>
+                    <p className="text-lg font-bold">$9,500 / $12,500</p>
+                    <p className="text-xs text-medium-gray">Paid vs YTD Premium</p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Policy</TableHead>
-                      <TableHead>LOB</TableHead>
-                      <TableHead>Coverage</TableHead>
-                      <TableHead>Start Date</TableHead>
-                      <TableHead>End Date</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Premium</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {policyData.map((policy, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">
-                          <div className="flex items-center gap-2">
-                            {getPolicyIcon(policy.lob)}
-                            {policy.policy}
-                          </div>
-                        </TableCell>
-                        <TableCell>{policy.lob}</TableCell>
-                        <TableCell>{policy.coverage}</TableCell>
-                        <TableCell>{policy.startDate}</TableCell>
-                        <TableCell>{policy.endDate}</TableCell>
-                        <TableCell>{getStatusBadge(policy.status)}</TableCell>
-                        <TableCell>{policy.premium}</TableCell>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs">Policy</TableHead>
+                        <TableHead className="text-xs">LOB</TableHead>
+                        <TableHead className="text-xs">Coverage</TableHead>
+                        <TableHead className="text-xs">Start Date</TableHead>
+                        <TableHead className="text-xs">End Date</TableHead>
+                        <TableHead className="text-xs">Status</TableHead>
+                        <TableHead className="text-xs">Premium</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredPolicies.map((policy, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">
+                            <div className="flex items-center gap-2">
+                              {getPolicyIcon(policy.lob)}
+                              <span className="text-sm">{policy.policy}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-sm">{policy.lob}</TableCell>
+                          <TableCell className="text-sm">{policy.coverage}</TableCell>
+                          <TableCell className="text-sm">{policy.startDate}</TableCell>
+                          <TableCell className="text-sm">{policy.endDate}</TableCell>
+                          <TableCell>{getStatusBadge(policy.status)}</TableCell>
+                          <TableCell className="text-sm font-medium">{policy.premium}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -303,25 +347,25 @@ export default function Dashboard() {
           {/* Claims History */}
           <div className="xl:col-span-1">
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Claims History</CardTitle>
-                <p className="text-medium-gray text-sm">Recent claims submitted by the customer.</p>
-                <div className="mt-4">
-                  <p className="text-2xl font-bold">$6,500 / $10,000</p>
-                  <p className="text-sm text-medium-gray">Paid Claims vs Reserve</p>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base">Claims History</CardTitle>
+                <p className="text-medium-gray text-xs">Recent claims submitted by the customer.</p>
+                <div className="mt-3">
+                  <p className="text-lg font-bold">$6,500 / $10,000</p>
+                  <p className="text-xs text-medium-gray">Paid Claims vs Reserve</p>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 {claimsHistory.map((claim, index) => (
                   <div key={index} className="p-3 border rounded-lg">
-                    <div className="flex items-center gap-2 mb-2">
-                      <FileText size={16} className="text-brand-blue" />
-                      <span className="font-medium">{claim.type}</span>
+                    <div className="flex items-center gap-2 mb-1">
+                      <FileText size={14} className="text-brand-blue" />
+                      <span className="text-sm font-medium">{claim.type}</span>
                     </div>
-                    <p className="text-sm text-medium-gray">{claim.date}</p>
+                    <p className="text-xs text-medium-gray">{claim.date}</p>
                     <div className="flex justify-between items-center mt-2">
                       {getStatusBadge(claim.status)}
-                      <span className="font-semibold">{claim.amount}</span>
+                      <span className="text-sm font-semibold">{claim.amount}</span>
                     </div>
                   </div>
                 ))}
@@ -331,24 +375,24 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Activity and Risk Alerts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Recent Activity */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Recent Activity & Interactions</CardTitle>
-              <p className="text-medium-gray text-sm">Recent notes, calls, emails, and more.</p>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Recent Activity & Interactions</CardTitle>
+              <p className="text-medium-gray text-xs">Recent notes, calls, emails, and more.</p>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3">
               {recentActivity.map((activity, index) => (
                 <div key={index} className="p-3 border rounded-lg">
                   <div className="flex items-start gap-3">
-                    <FileText size={16} className="text-brand-blue mt-1" />
+                    <FileText size={14} className="text-brand-blue mt-0.5" />
                     <div className="flex-1">
-                      <p className="font-medium">{activity.type}</p>
-                      <p className="text-sm text-medium-gray mt-1">{activity.date}</p>
-                      <p className="text-sm text-medium-gray mt-1">{activity.description}</p>
+                      <p className="text-sm font-medium">{activity.type}</p>
+                      <p className="text-xs text-medium-gray mt-1">{activity.date}</p>
+                      <p className="text-xs text-medium-gray mt-1">{activity.description}</p>
                     </div>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="h-7 text-xs">
                       View Details
                     </Button>
                   </div>
@@ -359,13 +403,13 @@ export default function Dashboard() {
 
           {/* Risk Alerts */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Risk Alerts & Compliance</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Risk Alerts & Compliance</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-center py-8 text-medium-gray">
-                <AlertTriangle size={48} className="mx-auto mb-4 text-gray-300" />
-                <p>No current risk alerts or compliance issues.</p>
+              <div className="text-center py-6 text-medium-gray">
+                <AlertTriangle size={32} className="mx-auto mb-3 text-gray-300" />
+                <p className="text-sm">No current risk alerts or compliance issues.</p>
               </div>
             </CardContent>
           </Card>
