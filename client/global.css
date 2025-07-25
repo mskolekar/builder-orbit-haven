@@ -54,6 +54,15 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Brand colors from mockup */
+    --brand-blue: 243 87% 65%;
+    --brand-purple: 256 87% 65%;
+    --light-gray: 210 20% 96%;
+    --medium-gray: 215 16% 47%;
+    --brand-green: 142 76% 36%;
+    --brand-orange: 39 100% 57%;
+    --brand-red: 0 84% 60%;
   }
 
   .dark {
