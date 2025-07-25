@@ -1,30 +1,79 @@
-import "./global.css";
-
-import { Toaster } from "@/components/ui/toaster";
-import { createRoot } from "react-dom/client";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { Sidebar } from '@/components/ui/sidebar';
+import { Header } from '@/components/ui/header';
+import Dashboard from '@/pages/Dashboard';
+import PlaceholderPage from '@/pages/PlaceholderPage';
+import NotFound from '@/pages/NotFound';
 
-const queryClient = new QueryClient();
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="flex h-screen bg-gray-50">
+        <Sidebar />
+        <div className="flex-1 flex flex-col">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route 
+              path="/personal-details" 
+              element={
+                <PlaceholderPage 
+                  title="Personal Details" 
+                  description="Manage customer personal information and contact details."
+                />
+              } 
+            />
+            <Route 
+              path="/communication" 
+              element={
+                <PlaceholderPage 
+                  title="Communication" 
+                  description="View communication history and send messages."
+                />
+              } 
+            />
+            <Route 
+              path="/workgroup" 
+              element={
+                <PlaceholderPage 
+                  title="Workgroup" 
+                  description="Manage workgroup assignments and team collaboration."
+                />
+              } 
+            />
+            <Route 
+              path="/relationships" 
+              element={
+                <PlaceholderPage 
+                  title="Relationships" 
+                  description="View and manage customer relationships and referrals."
+                />
+              } 
+            />
+            <Route 
+              path="/credit-programs" 
+              element={
+                <PlaceholderPage 
+                  title="Credit Programs" 
+                  description="Manage customer credit programs and payment plans."
+                />
+              } 
+            />
+            <Route 
+              path="/history" 
+              element={
+                <PlaceholderPage 
+                  title="History" 
+                  description="View complete customer interaction and transaction history."
+                />
+              } 
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  );
+}
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-createRoot(document.getElementById("root")!).render(<App />);
+export default App;
