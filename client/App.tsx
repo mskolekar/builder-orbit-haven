@@ -17,59 +17,35 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route 
-              path="/personal-details" 
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/communication" element={<Communication />} />
+            <Route path="/history" element={<History />} />
+            <Route
+              path="/workgroup"
               element={
-                <PlaceholderPage 
-                  title="Personal Details" 
-                  description="Manage customer personal information and contact details."
-                />
-              } 
-            />
-            <Route 
-              path="/communication" 
-              element={
-                <PlaceholderPage 
-                  title="Communication" 
-                  description="View communication history and send messages."
-                />
-              } 
-            />
-            <Route 
-              path="/workgroup" 
-              element={
-                <PlaceholderPage 
-                  title="Workgroup" 
+                <PlaceholderPage
+                  title="Workgroup"
                   description="Manage workgroup assignments and team collaboration."
                 />
-              } 
+              }
             />
-            <Route 
-              path="/relationships" 
+            <Route
+              path="/relationships"
               element={
-                <PlaceholderPage 
-                  title="Relationships" 
+                <PlaceholderPage
+                  title="Relationships"
                   description="View and manage customer relationships and referrals."
                 />
-              } 
+              }
             />
-            <Route 
-              path="/credit-programs" 
+            <Route
+              path="/credit-programs"
               element={
-                <PlaceholderPage 
-                  title="Credit Programs" 
+                <PlaceholderPage
+                  title="Credit Programs"
                   description="Manage customer credit programs and payment plans."
                 />
-              } 
-            />
-            <Route 
-              path="/history" 
-              element={
-                <PlaceholderPage 
-                  title="History" 
-                  description="View complete customer interaction and transaction history."
-                />
-              } 
+              }
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
