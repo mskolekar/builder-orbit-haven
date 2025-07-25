@@ -131,8 +131,8 @@ export function Header() {
           <DropdownMenuContent className="w-56" align="end">
             <DropdownMenuLabel>
               <div>
-                <p className="font-medium">Agent Smith</p>
-                <p className="text-sm text-gray-500">agent.smith@vitily.com</p>
+                <p className="font-medium">UW John</p>
+                <p className="text-sm text-gray-500">uw.john@vitily.com</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
