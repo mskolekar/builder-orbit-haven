@@ -9,30 +9,85 @@ import {
   CreditCard, 
   History,
   Menu,
-  X
+  X,
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 import { useState } from 'react';
 
-const sidebarItems = [
+interface SubItem {
+  label: string;
+  path: string;
+}
+
+interface SidebarItem {
+  icon: any;
+  label: string;
+  path: string;
+  subItems?: SubItem[];
+}
+
+const sidebarItems: SidebarItem[] = [
   { icon: BarChart3, label: 'Overview', path: '/' },
-  { icon: User, label: 'Profile', path: '/profile' },
-  { icon: MessageCircle, label: 'Communication', path: '/communication' },
+  { 
+    icon: User, 
+    label: 'Profile', 
+    path: '/profile',
+    subItems: [
+      { label: 'Personal Details', path: '/profile?tab=personal-details' },
+      { label: 'Add Info', path: '/profile?tab=add-info' }
+    ]
+  },
+  { 
+    icon: MessageCircle, 
+    label: 'Communication', 
+    path: '/communication',
+    subItems: [
+      { label: 'Delivery Preferences', path: '/communication?tab=delivery-preferences' },
+      { label: 'Address', path: '/communication?tab=address' }
+    ]
+  },
   { icon: Users, label: 'Workgroup', path: '/workgroup' },
   { icon: LinkIcon, label: 'Relationships', path: '/relationships' },
   { icon: CreditCard, label: 'Credit Programs', path: '/credit-programs' },
-  { icon: History, label: 'History', path: '/history' },
+  { 
+    icon: History, 
+    label: 'History', 
+    path: '/history',
+    subItems: [
+      { label: 'Prior Loss', path: '/history?tab=prior-loss' },
+      { label: 'Prior Policy', path: '/history?tab=prior-policy' },
+      { label: 'Audit Logs', path: '/history?tab=audit-logs' }
+    ]
+  },
 ];
 
 export function Sidebar() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  const toggleExpanded = (itemPath: string) => {
+    setExpandedItems(prev => 
+      prev.includes(itemPath)
+        ? prev.filter(path => path !== itemPath)
+        : [...prev, itemPath]
+    );
+  };
+
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname === path || location.pathname + location.search === path;
+  };
 
   return (
     <>
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-brand-purple text-white rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-brand-blue text-white rounded-lg shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -51,31 +106,68 @@ export function Sidebar() {
         "lg:translate-x-0 lg:static lg:z-auto",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
-        <div className="p-6">
-          <h1 className="text-xl font-semibold">Customer Center</h1>
+        <div className="p-4">
+          <h1 className="text-lg font-semibold">Customer Center</h1>
         </div>
         
-        <nav className="flex-1 px-3">
+        <nav className="flex-1 px-2 overflow-y-auto">
           <ul className="space-y-1">
             {sidebarItems.map((item) => {
               const Icon = item.icon;
-              const isActive = location.pathname === item.path;
+              const hasSubItems = item.subItems && item.subItems.length > 0;
+              const isExpanded = expandedItems.includes(item.path);
+              const isMainActive = isActive(item.path);
               
               return (
                 <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
-                      isActive 
-                        ? "bg-white/20 text-white" 
-                        : "text-white/80 hover:bg-white/10 hover:text-white"
+                  <div className="flex items-center">
+                    <Link
+                      to={item.path}
+                      onClick={() => setIsOpen(false)}
+                      className={cn(
+                        "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors flex-1",
+                        isMainActive && !location.search
+                          ? "bg-white/20 text-white" 
+                          : "text-white/80 hover:bg-white/10 hover:text-white"
+                      )}
+                    >
+                      <Icon size={16} />
+                      {item.label}
+                    </Link>
+                    
+                    {hasSubItems && (
+                      <button
+                        onClick={() => toggleExpanded(item.path)}
+                        className="p-1 rounded hover:bg-white/10 transition-colors mr-2"
+                      >
+                        {isExpanded ? 
+                          <ChevronDown size={14} /> : 
+                          <ChevronRight size={14} />
+                        }
+                      </button>
                     )}
-                  >
-                    <Icon size={18} />
-                    {item.label}
-                  </Link>
+                  </div>
+                  
+                  {hasSubItems && isExpanded && (
+                    <ul className="mt-1 ml-6 space-y-1">
+                      {item.subItems!.map((subItem) => (
+                        <li key={subItem.path}>
+                          <Link
+                            to={subItem.path}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4",
+                              isActive(subItem.path)
+                                ? "bg-white/15 text-white border-white/40" 
+                                : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30"
+                            )}
+                          >
+                            {subItem.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               );
             })}
