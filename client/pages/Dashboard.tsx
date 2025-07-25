@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ColumnFilter } from '@/components/ui/column-filter';
 import { 
   Table,
   TableBody,
@@ -10,14 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Eye, Plus, FileText, AlertTriangle, Home, Car, Briefcase, Shield, Edit3, Filter } from 'lucide-react';
+import { Eye, Plus, FileText, AlertTriangle, Home, Car, Briefcase, Shield, Edit3, ExternalLink, Calendar, DollarSign } from 'lucide-react';
 
 const customerData = {
   name: "Rose K",
@@ -124,28 +118,39 @@ const getPolicyIcon = (lob: string) => {
 };
 
 export default function Dashboard() {
-  const [policyFilter, setPolicyFilter] = useState<string>("all");
-  const [submissionFilter, setSubmissionFilter] = useState<string>("all");
-  const [claimsFilter, setClaimsFilter] = useState<string>("all");
+  // Filter states
+  const [policyStatusFilter, setPolicyStatusFilter] = useState<string[]>([]);
+  const [policyLobFilter, setPolicyLobFilter] = useState<string[]>([]);
+  const [submissionStatusFilter, setSubmissionStatusFilter] = useState<string[]>([]);
+  const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
 
-  const filteredPolicies = policyFilter === "active" 
-    ? policyData.filter(policy => policy.status.toLowerCase() === "active")
-    : policyData;
+  // Get unique values for filters
+  const policyStatuses = [...new Set(policyData.map(p => p.status))];
+  const policyLobs = [...new Set(policyData.map(p => p.lob))];
+  const submissionStatuses = [...new Set(submissions.map(s => s.status))];
+  const claimsStatuses = [...new Set(claimsHistory.map(c => c.status))];
 
-  const filteredSubmissions = submissionFilter === "active"
-    ? submissions.filter(sub => sub.status.toLowerCase() !== "expired")
-    : submissions;
+  // Apply filters
+  const filteredPolicies = policyData.filter(policy => {
+    const statusMatch = policyStatusFilter.length === 0 || policyStatusFilter.includes(policy.status);
+    const lobMatch = policyLobFilter.length === 0 || policyLobFilter.includes(policy.lob);
+    return statusMatch && lobMatch;
+  });
 
-  const filteredClaims = claimsFilter === "pending"
-    ? claimsHistory.filter(claim => claim.status.toLowerCase() === "pending")
-    : claimsHistory;
+  const filteredSubmissions = submissions.filter(submission => 
+    submissionStatusFilter.length === 0 || submissionStatusFilter.includes(submission.status)
+  );
+
+  const filteredClaims = claimsHistory.filter(claim =>
+    claimsStatusFilter.length === 0 || claimsStatusFilter.includes(claim.status)
+  );
 
   return (
-    <div className="flex-1 bg-light-gray/30 p-4 lg:p-6 overflow-auto">
-      <div className="max-w-7xl mx-auto space-y-4">
+    <div className="flex-1 bg-gray-50 p-3 overflow-auto">
+      <div className="max-w-7xl mx-auto space-y-3">
         
         {/* Row 1: Personal Profile Section - Horizontal */}
-        <Card className="relative">
+        <Card className="relative shadow-sm">
           <Button 
             variant="ghost" 
             size="sm" 
@@ -153,22 +158,22 @@ export default function Dashboard() {
           >
             <Edit3 size={14} />
           </Button>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-lg font-semibold">
+          <CardContent className="p-3">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-sm font-semibold">
                   RK
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold">{customerData.name}</h2>
-                  <p className="text-sm text-medium-gray">{customerData.role}</p>
+                  <h2 className="text-base font-semibold">{customerData.name}</h2>
+                  <p className="text-xs text-medium-gray">{customerData.role}</p>
                   <Badge className="bg-brand-green text-white text-xs mt-1">{customerData.status}</Badge>
                 </div>
               </div>
               
-              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-xs">
+              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 text-xs">
                 <div>
-                  <span className="text-medium-gray">Date of Birth</span>
+                  <span className="text-medium-gray">DOB</span>
                   <p className="text-sm">{customerData.dateOfBirth}</p>
                 </div>
                 <div>
@@ -189,7 +194,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="mt-3 text-xs">
+            <div className="mt-2 text-xs">
               <span className="text-medium-gray">Address</span>
               <p className="text-sm">{customerData.address}</p>
             </div>
@@ -197,47 +202,61 @@ export default function Dashboard() {
         </Card>
 
         {/* Row 2: Premium Tiles and Upcoming Reminders */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="grid grid-cols-2 gap-3">
-            <Card className="bg-gradient-to-r from-brand-blue/10 to-brand-blue/5 border-brand-blue/20">
-              <CardContent className="p-4">
-                <div className="text-xs text-medium-gray">Last Premium Paid</div>
-                <div className="text-xl font-bold text-brand-blue">$150</div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-2">
+            <Card 
+              className="bg-gradient-to-r from-brand-blue/10 to-brand-blue/5 border-brand-blue/20 cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => console.log('Navigate to payment history')}
+            >
+              <CardContent className="p-3">
+                <div className="flex items-center gap-2 mb-1">
+                  <DollarSign size={14} className="text-brand-blue" />
+                  <div className="text-xs text-medium-gray">Last Premium</div>
+                  <ExternalLink size={10} className="text-brand-blue ml-auto" />
+                </div>
+                <div className="text-lg font-bold text-brand-blue">$150</div>
                 <div className="text-xs text-medium-gray">July 1, 2025</div>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-r from-brand-orange/10 to-brand-orange/5 border-brand-orange/20">
-              <CardContent className="p-4">
-                <div className="text-xs text-medium-gray">Upcoming Premium</div>
-                <div className="text-xl font-bold text-brand-orange">$150</div>
+            <Card 
+              className="bg-gradient-to-r from-brand-orange/10 to-brand-orange/5 border-brand-orange/20 cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => console.log('Navigate to upcoming payments')}
+            >
+              <CardContent className="p-3">
+                <div className="flex items-center gap-2 mb-1">
+                  <Calendar size={14} className="text-brand-orange" />
+                  <div className="text-xs text-medium-gray">Next Premium</div>
+                  <ExternalLink size={10} className="text-brand-orange ml-auto" />
+                </div>
+                <div className="text-lg font-bold text-brand-orange">$150</div>
                 <div className="text-xs text-medium-gray">Aug 1, 2025</div>
               </CardContent>
             </Card>
           </div>
 
           <div className="lg:col-span-2">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-3">
-                <CardTitle className="text-base">Upcoming Reminders</CardTitle>
-                <Button variant="outline" size="sm" className="h-8 text-xs">
-                  <Plus size={14} className="mr-1" />
-                  Add Reminder
+            <Card className="shadow-sm">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm">Upcoming Reminders</CardTitle>
+                <Button variant="outline" size="sm" className="h-7 text-xs">
+                  <Plus size={12} className="mr-1" />
+                  Add
                 </Button>
               </CardHeader>
               <CardContent>
-                <p className="text-medium-gray text-xs mb-3">Critical upcoming events and tasks.</p>
+                <p className="text-medium-gray text-xs mb-2">Critical upcoming events and tasks.</p>
                 <div className="space-y-2">
                   {upcomingReminders.map((reminder) => (
-                    <div key={reminder.id} className="flex items-center justify-between p-3 bg-light-gray rounded-lg">
+                    <div key={reminder.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
                       <div className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-brand-blue rounded-full"></div>
+                        <div className="w-1 h-1 bg-brand-blue rounded-full"></div>
                         <div>
-                          <p className="text-sm font-medium">{reminder.type}</p>
+                          <p className="text-xs font-medium">{reminder.type}</p>
                           <p className="text-xs text-medium-gray">{reminder.dueDate}</p>
                         </div>
                       </div>
-                      <Button variant="outline" size="sm" className="h-7 text-xs">
-                        <Eye size={12} className="mr-1" />
+                      <Button variant="outline" size="sm" className="h-6 text-xs px-2">
+                        <Eye size={10} className="mr-1" />
                         View
                       </Button>
                     </div>
@@ -249,47 +268,42 @@ export default function Dashboard() {
         </div>
 
         {/* Row 3: Submissions and Policy Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* Submissions */}
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-3">
-              <div>
-                <CardTitle className="text-base">Submissions</CardTitle>
-                <p className="text-medium-gray text-xs">In progress</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Filter size={14} className="text-medium-gray" />
-                <Select value={submissionFilter} onValueChange={setSubmissionFilter}>
-                  <SelectTrigger className="w-24 h-7 text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="active">Active</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Submissions</CardTitle>
+              <p className="text-medium-gray text-xs">In progress</p>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs">Submission No.</TableHead>
-                      <TableHead className="text-xs">LOB</TableHead>
-                      <TableHead className="text-xs">Status</TableHead>
-                      <TableHead className="text-xs">Start Date</TableHead>
-                      <TableHead className="text-xs">End Date</TableHead>
+                      <TableHead className="text-xs h-8">Submission No.</TableHead>
+                      <TableHead className="text-xs h-8">LOB</TableHead>
+                      <TableHead className="text-xs h-8">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={submissionStatuses}
+                            selectedValues={submissionStatusFilter}
+                            onFilterChange={setSubmissionStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8">Start Date</TableHead>
+                      <TableHead className="text-xs h-8">End Date</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredSubmissions.map((submission, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="text-sm">{submission.id}</TableCell>
-                        <TableCell className="text-sm">{submission.lob}</TableCell>
+                      <TableRow key={index} className="h-10">
+                        <TableCell className="text-xs">{submission.id}</TableCell>
+                        <TableCell className="text-xs">{submission.lob}</TableCell>
                         <TableCell>{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell className="text-sm">{submission.startDate}</TableCell>
-                        <TableCell className="text-sm">{submission.endDate}</TableCell>
+                        <TableCell className="text-xs">{submission.startDate}</TableCell>
+                        <TableCell className="text-xs">{submission.endDate}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -299,56 +313,60 @@ export default function Dashboard() {
           </Card>
 
           {/* Policy Details */}
-          <Card>
-            <CardHeader className="pb-3">
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
               <div className="flex justify-between items-start">
                 <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <CardTitle className="text-base">Policy Details</CardTitle>
-                    <div className="flex items-center gap-2">
-                      <Filter size={14} className="text-medium-gray" />
-                      <Select value={policyFilter} onValueChange={setPolicyFilter}>
-                        <SelectTrigger className="w-28 h-7 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Policies</SelectItem>
-                          <SelectItem value="active">Active Only</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
+                  <CardTitle className="text-sm">Policy Details</CardTitle>
                   <p className="text-medium-gray text-xs">Overview of policies.</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-bold">$9,500 / $12,500</p>
+                  <p className="text-sm font-bold">$9.5K / $12.5K</p>
                   <p className="text-xs text-medium-gray">Paid vs YTD</p>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto max-h-48 overflow-y-auto">
+              <div className="overflow-x-auto max-h-44 overflow-y-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs">Policy</TableHead>
-                      <TableHead className="text-xs">LOB</TableHead>
-                      <TableHead className="text-xs">Status</TableHead>
-                      <TableHead className="text-xs">Premium</TableHead>
+                      <TableHead className="text-xs h-8">Policy</TableHead>
+                      <TableHead className="text-xs h-8">
+                        <div className="flex items-center gap-1">
+                          LOB
+                          <ColumnFilter
+                            options={policyLobs}
+                            selectedValues={policyLobFilter}
+                            onFilterChange={setPolicyLobFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={policyStatuses}
+                            selectedValues={policyStatusFilter}
+                            onFilterChange={setPolicyStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8">Premium</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredPolicies.map((policy, index) => (
-                      <TableRow key={index}>
+                      <TableRow key={index} className="h-10">
                         <TableCell className="font-medium">
                           <div className="flex items-center gap-2">
                             {getPolicyIcon(policy.lob)}
-                            <span className="text-sm">{policy.policy}</span>
+                            <span className="text-xs">{policy.policy}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-sm">{policy.lob}</TableCell>
+                        <TableCell className="text-xs">{policy.lob}</TableCell>
                         <TableCell>{getStatusBadge(policy.status)}</TableCell>
-                        <TableCell className="text-sm font-medium">{policy.premium}</TableCell>
+                        <TableCell className="text-xs font-medium">{policy.premium}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -359,42 +377,37 @@ export default function Dashboard() {
         </div>
 
         {/* Row 4: Claims History and Risk Alerts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* Claims History */}
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-3">
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
               <div>
-                <CardTitle className="text-base">Claims History</CardTitle>
+                <div className="flex items-center gap-2">
+                  <CardTitle className="text-sm">Claims History</CardTitle>
+                  <ColumnFilter
+                    options={claimsStatuses}
+                    selectedValues={claimsStatusFilter}
+                    onFilterChange={setClaimsStatusFilter}
+                  />
+                </div>
                 <p className="text-medium-gray text-xs">Recent claims submitted.</p>
-                <div className="mt-2">
-                  <p className="text-sm font-bold">$6,500 / $10,000</p>
-                  <p className="text-xs text-medium-gray">Paid Claims vs Reserve</p>
+                <div className="mt-1">
+                  <p className="text-sm font-bold">$6.5K / $10K</p>
+                  <p className="text-xs text-medium-gray">Paid vs Reserve</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Filter size={14} className="text-medium-gray" />
-                <Select value={claimsFilter} onValueChange={setClaimsFilter}>
-                  <SelectTrigger className="w-24 h-7 text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-2">
               {filteredClaims.map((claim, index) => (
-                <div key={index} className="p-3 border rounded-lg">
+                <div key={index} className="p-2 border rounded">
                   <div className="flex items-center gap-2 mb-1">
-                    <FileText size={14} className="text-brand-blue" />
-                    <span className="text-sm font-medium">{claim.type}</span>
+                    <FileText size={12} className="text-brand-blue" />
+                    <span className="text-xs font-medium">{claim.type}</span>
                   </div>
                   <p className="text-xs text-medium-gray">{claim.date}</p>
-                  <div className="flex justify-between items-center mt-2">
+                  <div className="flex justify-between items-center mt-1">
                     {getStatusBadge(claim.status)}
-                    <span className="text-sm font-semibold">{claim.amount}</span>
+                    <span className="text-xs font-semibold">{claim.amount}</span>
                   </div>
                 </div>
               ))}
@@ -402,37 +415,37 @@ export default function Dashboard() {
           </Card>
 
           {/* Risk Alerts & Compliance */}
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-base">Risk Alerts & Compliance</CardTitle>
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Risk Alerts & Compliance</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-center py-6 text-medium-gray">
-                <AlertTriangle size={32} className="mx-auto mb-3 text-gray-300" />
-                <p className="text-sm">No current risk alerts or compliance issues.</p>
+              <div className="text-center py-4 text-medium-gray">
+                <AlertTriangle size={24} className="mx-auto mb-2 text-gray-300" />
+                <p className="text-xs">No current risk alerts or compliance issues.</p>
               </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Row 5: Recent Activity */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base">Recent Activity & Interactions</CardTitle>
+        <Card className="shadow-sm">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm">Recent Activity & Interactions</CardTitle>
             <p className="text-medium-gray text-xs">Recent notes, calls, emails, and more.</p>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="p-3 border rounded-lg">
-                  <div className="flex items-start gap-3">
-                    <FileText size={14} className="text-brand-blue mt-0.5" />
+                <div key={index} className="p-2 border rounded">
+                  <div className="flex items-start gap-2">
+                    <FileText size={12} className="text-brand-blue mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm font-medium">{activity.type}</p>
+                      <p className="text-xs font-medium">{activity.type}</p>
                       <p className="text-xs text-medium-gray mt-1">{activity.date}</p>
                       <p className="text-xs text-medium-gray mt-1">{activity.description}</p>
-                      <Button variant="outline" size="sm" className="h-7 text-xs mt-2">
-                        View Details
+                      <Button variant="outline" size="sm" className="h-6 text-xs mt-1 px-2">
+                        View
                       </Button>
                     </div>
                   </div>
