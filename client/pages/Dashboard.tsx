@@ -118,7 +118,7 @@ const getPolicyIcon = (lob: string) => {
 
 export default function Dashboard() {
   return (
-    <div className="flex-1 bg-light-gray/30 p-6 overflow-auto">
+    <div className="flex-1 bg-light-gray/30 p-4 lg:p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Customer Profile Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
