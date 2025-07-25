@@ -15,7 +15,7 @@ import { useState } from 'react';
 
 const sidebarItems = [
   { icon: BarChart3, label: 'Overview', path: '/' },
-  { icon: User, label: 'Personal Details', path: '/personal-details' },
+  { icon: User, label: 'Profile', path: '/profile' },
   { icon: MessageCircle, label: 'Communication', path: '/communication' },
   { icon: Users, label: 'Workgroup', path: '/workgroup' },
   { icon: LinkIcon, label: 'Relationships', path: '/relationships' },
