@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ColumnFilter } from '@/components/ui/column-filter';
+import { ProgressCircle } from '@/components/ui/progress-circle';
+import { KPICard } from '@/components/ui/kpi-card';
+import { Progress } from '@/components/ui/progress';
 import { 
   Table,
   TableBody,
@@ -11,7 +14,32 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Eye, Plus, FileText, AlertTriangle, Home, Car, Briefcase, Shield, Edit3, ExternalLink, Calendar, DollarSign } from 'lucide-react';
+import { 
+  Eye, 
+  Plus, 
+  FileText, 
+  AlertTriangle, 
+  Home, 
+  Car, 
+  Briefcase, 
+  Shield, 
+  Edit3, 
+  ExternalLink, 
+  Calendar, 
+  DollarSign,
+  TrendingUp,
+  Users,
+  Activity,
+  Clock,
+  CheckCircle,
+  XCircle,
+  AlertCircle,
+  Phone,
+  Mail,
+  MapPin,
+  Star,
+  MoreHorizontal
+} from 'lucide-react';
 
 const customerData = {
   name: "Rose K",
@@ -22,7 +50,10 @@ const customerData = {
   lsc: "000000",
   phone: "(416) 555-0123",
   email: "rose.greenthumb@example.com",
-  address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2"
+  address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
+  memberSince: "2019",
+  riskScore: 85,
+  satisfactionScore: 4.8
 };
 
 const upcomingReminders = [
@@ -30,90 +61,116 @@ const upcomingReminders = [
     id: 1,
     type: "Policy Renewal Review - Auto",
     dueDate: "Due in 45 days",
-    status: "pending"
+    status: "pending",
+    priority: "high"
   },
   {
     id: 2,
     type: "Follow up on Claim #C1122",
     dueDate: "Due in about 1 week",
-    status: "pending"
+    status: "pending",
+    priority: "medium"
+  },
+  {
+    id: 3,
+    type: "Annual Review Meeting",
+    dueDate: "Due in 2 weeks",
+    status: "scheduled",
+    priority: "low"
   }
 ];
 
 const submissions = [
-  { id: "A9876", lob: "PL", status: "In progress", startDate: "01/01/2024", endDate: "12/31/2024" },
-  { id: "A9876", lob: "PL", status: "Bound", startDate: "01/01/2024", endDate: "12/31/2024" }
+  { id: "A9876", lob: "PL", status: "In progress", startDate: "01/01/2024", endDate: "12/31/2024", progress: 75 },
+  { id: "A9876", lob: "PL", status: "Bound", startDate: "01/01/2024", endDate: "12/31/2024", progress: 100 }
 ];
 
 const policyData = [
-  { policy: "A9876", lob: "Auto", coverage: "Full Coverage", startDate: "01/01/2024", endDate: "12/31/2024", status: "Active", premium: "$1,200" },
-  { policy: "H2345", lob: "Home", coverage: "All Perils", startDate: "03/15/2023", endDate: "03/14/2025", status: "Active", premium: "$850" },
-  { policy: "L7890", lob: "Life", coverage: "$500,000", startDate: "06/01/2022", endDate: "05/31/2032", status: "Active", premium: "$340" },
-  { policy: "C1234", lob: "Critical Illness", coverage: "$100,000", startDate: "09/01/2023", endDate: "08/31/2028", status: "Active", premium: "$75" },
-  { policy: "D5678", lob: "Disability", coverage: "$3,000/mo", startDate: "04/01/2022", endDate: "03/31/2027", status: "Active", premium: "$50" },
-  { policy: "RV3333", lob: "RV", coverage: "Liability", startDate: "07/01/2021", endDate: "06/30/2023", status: "Expired", premium: "$45" },
-  { policy: "B9999", lob: "Business", coverage: "General Liability", startDate: "10/01/2023", endDate: "09/30/2024", status: "Pending", premium: "$1,250" }
+  { policy: "A9876", lob: "Auto", coverage: "Full Coverage", startDate: "01/01/2024", endDate: "12/31/2024", status: "Active", premium: "$1,200", lastClaim: "2023" },
+  { policy: "H2345", lob: "Home", coverage: "All Perils", startDate: "03/15/2023", endDate: "03/14/2025", status: "Active", premium: "$850", lastClaim: "2022" },
+  { policy: "L7890", lob: "Life", coverage: "$500,000", startDate: "06/01/2022", endDate: "05/31/2032", status: "Active", premium: "$340", lastClaim: "Never" },
+  { policy: "C1234", lob: "Critical Illness", coverage: "$100,000", startDate: "09/01/2023", endDate: "08/31/2028", status: "Active", premium: "$75", lastClaim: "Never" },
+  { policy: "D5678", lob: "Disability", coverage: "$3,000/mo", startDate: "04/01/2022", endDate: "03/31/2027", status: "Active", premium: "$50", lastClaim: "Never" },
+  { policy: "RV3333", lob: "RV", coverage: "Liability", startDate: "07/01/2021", endDate: "06/30/2023", status: "Expired", premium: "$45", lastClaim: "Never" },
+  { policy: "B9999", lob: "Business", coverage: "General Liability", startDate: "10/01/2023", endDate: "09/30/2024", status: "Pending", premium: "$1,250", lastClaim: "Never" }
 ];
 
 const claimsHistory = [
-  { type: "Auto Collision", date: "Filed: May 16, 2023", status: "Pending", amount: "N/A" },
-  { type: "Home Burglary", date: "Filed: Feb 28, 2023", status: "Approved", amount: "$5,300" },
-  { type: "Critical Illness", date: "Filed: Dec 15, 2023", status: "Closed", amount: "$0" }
+  { type: "Auto Collision", date: "Filed: May 16, 2023", status: "Pending", amount: "N/A", claimNumber: "C1122" },
+  { type: "Home Burglary", date: "Filed: Feb 28, 2023", status: "Approved", amount: "$5,300", claimNumber: "C1045" },
+  { type: "Critical Illness", date: "Filed: Dec 15, 2023", status: "Closed", amount: "$0", claimNumber: "C1189" }
 ];
 
 const recentActivity = [
   {
     type: "Follow-up on recent claim #C1122 progress.",
-    date: "Date: Jul 26, 2023",
-    description: "Provided update on claim status, awaiting adjuster report."
+    date: "2 hours ago",
+    description: "Provided update on claim status, awaiting adjuster report.",
+    user: "Agent Smith",
+    category: "claim"
   },
   {
     type: "Confirmation of payment received premium.",
-    date: "Date: May 08, 2023",
-    description: "Auto premium receipt sent to customer."
+    date: "1 day ago", 
+    description: "Auto premium receipt sent to customer.",
+    user: "System",
+    category: "payment"
   },
   {
     type: "Logged customer preference for email communication.",
-    date: "Date: Feb 17, 2023",
-    description: "Preferred contact method updated."
+    date: "3 days ago",
+    description: "Preferred contact method updated.",
+    user: "Agent Johnson",
+    category: "profile"
   }
 ];
 
 const getStatusBadge = (status: string) => {
-  switch (status.toLowerCase()) {
-    case 'active':
-      return <Badge className="bg-brand-green text-white text-xs">Active</Badge>;
-    case 'bound':
-      return <Badge className="bg-brand-blue text-white text-xs">Bound</Badge>;
-    case 'in progress':
-      return <Badge className="bg-brand-orange text-white text-xs">In progress</Badge>;
-    case 'pending':
-      return <Badge className="bg-gray-500 text-white text-xs">Pending</Badge>;
-    case 'expired':
-      return <Badge className="bg-brand-red text-white text-xs">Expired</Badge>;
-    case 'approved':
-      return <Badge className="bg-brand-green text-white text-xs">Approved</Badge>;
-    case 'closed':
-      return <Badge className="bg-gray-600 text-white text-xs">Closed</Badge>;
-    default:
-      return <Badge variant="secondary" className="text-xs">{status}</Badge>;
-  }
+  const statusConfig = {
+    'active': { color: 'bg-green-100 text-green-800 border-green-200', icon: CheckCircle },
+    'bound': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: CheckCircle },
+    'in progress': { color: 'bg-orange-100 text-orange-800 border-orange-200', icon: Clock },
+    'pending': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: AlertCircle },
+    'expired': { color: 'bg-red-100 text-red-800 border-red-200', icon: XCircle },
+    'approved': { color: 'bg-green-100 text-green-800 border-green-200', icon: CheckCircle },
+    'closed': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: XCircle },
+    'scheduled': { color: 'bg-purple-100 text-purple-800 border-purple-200', icon: Calendar }
+  };
+  
+  const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: AlertCircle };
+  const IconComponent = config.icon;
+  
+  return (
+    <Badge className={`${config.color} border text-xs flex items-center gap-1`}>
+      <IconComponent size={10} />
+      {status}
+    </Badge>
+  );
 };
 
 const getPolicyIcon = (lob: string) => {
   switch (lob.toLowerCase()) {
     case 'auto':
-      return <Car size={14} className="text-brand-blue" />;
+      return <Car size={14} className="text-blue-600" />;
     case 'home':
-      return <Home size={14} className="text-brand-green" />;
+      return <Home size={14} className="text-green-600" />;
     case 'life':
     case 'critical illness':
     case 'disability':
-      return <Shield size={14} className="text-brand-purple" />;
+      return <Shield size={14} className="text-purple-600" />;
     case 'business':
-      return <Briefcase size={14} className="text-brand-orange" />;
+      return <Briefcase size={14} className="text-orange-600" />;
     default:
       return <FileText size={14} className="text-gray-500" />;
+  }
+};
+
+const getPriorityColor = (priority: string) => {
+  switch (priority) {
+    case 'high': return 'bg-red-500';
+    case 'medium': return 'bg-orange-500';
+    case 'low': return 'bg-green-500';
+    default: return 'bg-gray-500';
   }
 };
 
@@ -123,6 +180,13 @@ export default function Dashboard() {
   const [policyLobFilter, setPolicyLobFilter] = useState<string[]>([]);
   const [submissionStatusFilter, setSubmissionStatusFilter] = useState<string[]>([]);
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
+  
+  // Animation states
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Get unique values for filters
   const policyStatuses = [...new Set(policyData.map(p => p.status))];
@@ -146,119 +210,205 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="flex-1 bg-gray-50 p-3 overflow-auto">
-      <div className="max-w-7xl mx-auto space-y-3">
+    <div className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 p-3 overflow-auto">
+      <div className="max-w-7xl mx-auto space-y-4">
         
-        {/* Row 1: Personal Profile Section - Horizontal */}
-        <Card className="relative shadow-sm">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="absolute top-2 right-2 p-1.5 h-auto"
-          >
-            <Edit3 size={14} />
-          </Button>
-          <CardContent className="p-3">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                  RK
+        {/* KPI Dashboard Row */}
+        <div className={`grid grid-cols-2 lg:grid-cols-4 gap-3 transition-all duration-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <KPICard 
+            title="Total Policies"
+            value="7"
+            change={{ value: 12, type: 'increase' }}
+            icon={FileText}
+            color="blue"
+          />
+          <KPICard 
+            title="Active Claims" 
+            value="1"
+            change={{ value: 33, type: 'decrease' }}
+            icon={AlertTriangle}
+            color="orange"
+          />
+          <KPICard 
+            title="Annual Premium"
+            value="$2.6K"
+            change={{ value: 8, type: 'increase' }}
+            icon={DollarSign}
+            color="green"
+          />
+          <KPICard 
+            title="Customer Score"
+            value={customerData.satisfactionScore}
+            icon={Star}
+            color="purple"
+          />
+        </div>
+        
+        {/* Enhanced Personal Profile Section */}
+        <Card className={`relative shadow-lg border-0 bg-gradient-to-r from-white to-blue-50 transition-all duration-1000 delay-200 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
+                    RK
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                    <CheckCircle size={12} className="text-white" />
+                  </div>
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold">{customerData.name}</h2>
-                  <p className="text-xs text-medium-gray">{customerData.role}</p>
-                  <Badge className="bg-brand-green text-white text-xs mt-1">{customerData.status}</Badge>
+                  <div className="flex items-center gap-3">
+                    <h2 className="text-xl font-bold text-gray-900">{customerData.name}</h2>
+                    <Badge className="bg-green-100 text-green-800 border-green-200">
+                      <CheckCircle size={10} className="mr-1" />
+                      {customerData.status}
+                    </Badge>
+                  </div>
+                  <p className="text-gray-600 font-medium">{customerData.role}</p>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="flex items-center gap-1 text-sm text-gray-500">
+                      <Calendar size={12} />
+                      Member since {customerData.memberSince}
+                    </div>
+                    <div className="flex items-center gap-1 text-sm text-gray-500">
+                      <Star size={12} />
+                      {customerData.satisfactionScore}/5.0
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 text-xs">
-                <div>
-                  <span className="text-medium-gray">DOB</span>
-                  <p className="text-sm">{customerData.dateOfBirth}</p>
+              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div className="flex items-center gap-2">
+                  <Calendar size={14} className="text-gray-400" />
+                  <div>
+                    <span className="text-xs text-gray-500">DOB</span>
+                    <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-medium-gray">Gender</span>
-                  <p className="text-sm">{customerData.gender}</p>
+                <div className="flex items-center gap-2">
+                  <Users size={14} className="text-gray-400" />
+                  <div>
+                    <span className="text-xs text-gray-500">Gender</span>
+                    <p className="text-sm font-medium">{customerData.gender}</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-medium-gray">LSC#</span>
-                  <p className="text-sm">{customerData.lsc}</p>
+                <div className="flex items-center gap-2">
+                  <FileText size={14} className="text-gray-400" />
+                  <div>
+                    <span className="text-xs text-gray-500">LSC#</span>
+                    <p className="text-sm font-medium">{customerData.lsc}</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-medium-gray">Phone</span>
-                  <p className="text-sm">{customerData.phone}</p>
+                <div className="flex items-center gap-2">
+                  <Phone size={14} className="text-gray-400" />
+                  <div>
+                    <span className="text-xs text-gray-500">Phone</span>
+                    <p className="text-sm font-medium">{customerData.phone}</p>
+                  </div>
                 </div>
-                <div className="col-span-2">
-                  <span className="text-medium-gray">Email</span>
-                  <p className="text-sm">{customerData.email}</p>
+                <div className="col-span-2 flex items-center gap-2">
+                  <Mail size={14} className="text-gray-400" />
+                  <div>
+                    <span className="text-xs text-gray-500">Email</span>
+                    <p className="text-sm font-medium">{customerData.email}</p>
+                  </div>
                 </div>
               </div>
+              
+              <div className="flex flex-col items-center gap-3">
+                <ProgressCircle 
+                  value={customerData.riskScore} 
+                  max={100} 
+                  color="green" 
+                  label="Risk Score"
+                  size="md"
+                />
+                <Button variant="outline" size="sm" className="h-8">
+                  <Edit3 size={12} className="mr-2" />
+                  Edit Profile
+                </Button>
+              </div>
             </div>
-            <div className="mt-2 text-xs">
-              <span className="text-medium-gray">Address</span>
-              <p className="text-sm">{customerData.address}</p>
+            
+            <div className="mt-3 flex items-center gap-2 text-sm">
+              <MapPin size={14} className="text-gray-400" />
+              <span className="text-gray-500">Address:</span>
+              <span className="font-medium">{customerData.address}</span>
             </div>
           </CardContent>
         </Card>
 
-        {/* Row 2: Premium Tiles and Upcoming Reminders */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-          <div className="grid grid-cols-2 gap-2">
+        {/* Enhanced Premium Tiles and Reminders */}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <div className="grid grid-cols-2 gap-3">
             <Card 
-              className="bg-gradient-to-r from-brand-blue/10 to-brand-blue/5 border-brand-blue/20 cursor-pointer hover:shadow-md transition-shadow"
+              className="bg-gradient-to-br from-blue-500 to-blue-600 text-white cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300 group"
               onClick={() => console.log('Navigate to payment history')}
             >
-              <CardContent className="p-3">
-                <div className="flex items-center gap-2 mb-1">
-                  <DollarSign size={14} className="text-brand-blue" />
-                  <div className="text-xs text-medium-gray">Last Premium</div>
-                  <ExternalLink size={10} className="text-brand-blue ml-auto" />
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <DollarSign size={16} className="group-hover:scale-110 transition-transform" />
+                  <ExternalLink size={12} className="opacity-70" />
                 </div>
-                <div className="text-lg font-bold text-brand-blue">$150</div>
-                <div className="text-xs text-medium-gray">July 1, 2025</div>
+                <div className="text-xs font-medium opacity-90">Last Premium</div>
+                <div className="text-2xl font-bold">$150</div>
+                <div className="text-xs opacity-75">July 1, 2025</div>
+                <Progress value={75} className="mt-2 h-1 bg-blue-400" />
               </CardContent>
             </Card>
+            
             <Card 
-              className="bg-gradient-to-r from-brand-orange/10 to-brand-orange/5 border-brand-orange/20 cursor-pointer hover:shadow-md transition-shadow"
+              className="bg-gradient-to-br from-orange-500 to-orange-600 text-white cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300 group"
               onClick={() => console.log('Navigate to upcoming payments')}
             >
-              <CardContent className="p-3">
-                <div className="flex items-center gap-2 mb-1">
-                  <Calendar size={14} className="text-brand-orange" />
-                  <div className="text-xs text-medium-gray">Next Premium</div>
-                  <ExternalLink size={10} className="text-brand-orange ml-auto" />
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <Calendar size={16} className="group-hover:scale-110 transition-transform" />
+                  <ExternalLink size={12} className="opacity-70" />
                 </div>
-                <div className="text-lg font-bold text-brand-orange">$150</div>
-                <div className="text-xs text-medium-gray">Aug 1, 2025</div>
+                <div className="text-xs font-medium opacity-90">Next Premium</div>
+                <div className="text-2xl font-bold">$150</div>
+                <div className="text-xs opacity-75">Aug 1, 2025</div>
+                <Progress value={25} className="mt-2 h-1 bg-orange-400" />
               </CardContent>
             </Card>
           </div>
 
           <div className="lg:col-span-2">
-            <Card className="shadow-sm">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm">Upcoming Reminders</CardTitle>
-                <Button variant="outline" size="sm" className="h-7 text-xs">
-                  <Plus size={12} className="mr-1" />
+            <Card className="shadow-lg">
+              <CardHeader className="flex flex-row items-center justify-between pb-3">
+                <div>
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <Clock size={16} />
+                    Upcoming Reminders
+                  </CardTitle>
+                  <p className="text-xs text-gray-500 mt-1">Critical upcoming events and tasks</p>
+                </div>
+                <Button variant="outline" size="sm" className="h-8">
+                  <Plus size={12} className="mr-2" />
                   Add
                 </Button>
               </CardHeader>
               <CardContent>
-                <p className="text-medium-gray text-xs mb-2">Critical upcoming events and tasks.</p>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {upcomingReminders.map((reminder) => (
-                    <div key={reminder.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                      <div className="flex items-center gap-2">
-                        <div className="w-1 h-1 bg-brand-blue rounded-full"></div>
+                    <div key={reminder.id} className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-white rounded-lg border hover:shadow-md transition-shadow">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-2 h-8 rounded-full ${getPriorityColor(reminder.priority)}`}></div>
                         <div>
-                          <p className="text-xs font-medium">{reminder.type}</p>
-                          <p className="text-xs text-medium-gray">{reminder.dueDate}</p>
+                          <p className="text-sm font-medium">{reminder.type}</p>
+                          <p className="text-xs text-gray-500">{reminder.dueDate}</p>
                         </div>
                       </div>
-                      <Button variant="outline" size="sm" className="h-6 text-xs px-2">
-                        <Eye size={10} className="mr-1" />
-                        View
-                      </Button>
+                      <div className="flex items-center gap-2">
+                        {getStatusBadge(reminder.status)}
+                        <Button variant="outline" size="sm" className="h-7 text-xs">
+                          <Eye size={10} className="mr-1" />
+                          View
+                        </Button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -267,20 +417,23 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Row 3: Submissions and Policy Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          {/* Submissions */}
-          <Card className="shadow-sm">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm">Submissions</CardTitle>
-              <p className="text-medium-gray text-xs">In progress</p>
+        {/* Enhanced Submissions and Policy Details */}
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          {/* Enhanced Submissions */}
+          <Card className="shadow-lg">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <TrendingUp size={16} />
+                Submissions
+              </CardTitle>
+              <p className="text-xs text-gray-500">Applications in progress</p>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Submission No.</TableHead>
+                      <TableHead className="text-xs h-8">Submission</TableHead>
                       <TableHead className="text-xs h-8">LOB</TableHead>
                       <TableHead className="text-xs h-8">
                         <div className="flex items-center gap-1">
@@ -292,18 +445,21 @@ export default function Dashboard() {
                           />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8">Start Date</TableHead>
-                      <TableHead className="text-xs h-8">End Date</TableHead>
+                      <TableHead className="text-xs h-8">Progress</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredSubmissions.map((submission, index) => (
-                      <TableRow key={index} className="h-10">
-                        <TableCell className="text-xs">{submission.id}</TableCell>
-                        <TableCell className="text-xs">{submission.lob}</TableCell>
+                      <TableRow key={index} className="h-12 hover:bg-gray-50">
+                        <TableCell className="text-sm font-medium">{submission.id}</TableCell>
+                        <TableCell className="text-sm">{submission.lob}</TableCell>
                         <TableCell>{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell className="text-xs">{submission.startDate}</TableCell>
-                        <TableCell className="text-xs">{submission.endDate}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Progress value={submission.progress} className="flex-1 h-2" />
+                            <span className="text-xs font-medium w-10">{submission.progress}%</span>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -312,22 +468,26 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Policy Details */}
-          <Card className="shadow-sm">
-            <CardHeader className="pb-2">
+          {/* Enhanced Policy Details */}
+          <Card className="shadow-lg">
+            <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div>
-                  <CardTitle className="text-sm">Policy Details</CardTitle>
-                  <p className="text-medium-gray text-xs">Overview of policies.</p>
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <Shield size={16} />
+                    Policy Details
+                  </CardTitle>
+                  <p className="text-xs text-gray-500 mt-1">Active policy portfolio</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-bold">$9.5K / $12.5K</p>
-                  <p className="text-xs text-medium-gray">Paid vs YTD</p>
+                  <p className="text-lg font-bold text-green-600">$9.5K</p>
+                  <p className="text-xs text-gray-500">of $12.5K YTD</p>
+                  <Progress value={76} className="w-20 h-1 mt-1" />
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto max-h-44 overflow-y-auto">
+              <div className="overflow-x-auto max-h-48 overflow-y-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -357,16 +517,23 @@ export default function Dashboard() {
                   </TableHeader>
                   <TableBody>
                     {filteredPolicies.map((policy, index) => (
-                      <TableRow key={index} className="h-10">
+                      <TableRow key={index} className="h-10 hover:bg-gray-50 group">
                         <TableCell className="font-medium">
                           <div className="flex items-center gap-2">
                             {getPolicyIcon(policy.lob)}
-                            <span className="text-xs">{policy.policy}</span>
+                            <span className="text-sm">{policy.policy}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-xs">{policy.lob}</TableCell>
+                        <TableCell className="text-sm">{policy.lob}</TableCell>
                         <TableCell>{getStatusBadge(policy.status)}</TableCell>
-                        <TableCell className="text-xs font-medium">{policy.premium}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium">{policy.premium}</span>
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <MoreHorizontal size={12} />
+                            </Button>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -376,77 +543,140 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Row 4: Claims History and Risk Alerts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          {/* Claims History */}
-          <Card className="shadow-sm">
-            <CardHeader className="pb-2">
-              <div>
-                <div className="flex items-center gap-2">
-                  <CardTitle className="text-sm">Claims History</CardTitle>
-                  <ColumnFilter
-                    options={claimsStatuses}
-                    selectedValues={claimsStatusFilter}
-                    onFilterChange={setClaimsStatusFilter}
-                  />
-                </div>
-                <p className="text-medium-gray text-xs">Recent claims submitted.</p>
-                <div className="mt-1">
-                  <p className="text-sm font-bold">$6.5K / $10K</p>
-                  <p className="text-xs text-medium-gray">Paid vs Reserve</p>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {filteredClaims.map((claim, index) => (
-                <div key={index} className="p-2 border rounded">
-                  <div className="flex items-center gap-2 mb-1">
-                    <FileText size={12} className="text-brand-blue" />
-                    <span className="text-xs font-medium">{claim.type}</span>
+        {/* Enhanced Claims and Risk Section */}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          {/* Enhanced Claims History */}
+          <div className="lg:col-span-2">
+            <Card className="shadow-lg">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-base flex items-center gap-2">
+                      <FileText size={16} />
+                      Claims History
+                      <ColumnFilter
+                        options={claimsStatuses}
+                        selectedValues={claimsStatusFilter}
+                        onFilterChange={setClaimsStatusFilter}
+                      />
+                    </CardTitle>
+                    <p className="text-xs text-gray-500 mt-1">Recent claims and settlements</p>
                   </div>
-                  <p className="text-xs text-medium-gray">{claim.date}</p>
-                  <div className="flex justify-between items-center mt-1">
-                    {getStatusBadge(claim.status)}
-                    <span className="text-xs font-semibold">{claim.amount}</span>
+                  <div className="text-right">
+                    <div className="flex items-center gap-3">
+                      <ProgressCircle value={65} max={100} color="orange" size="sm" />
+                      <div>
+                        <p className="text-sm font-bold">$6.5K / $10K</p>
+                        <p className="text-xs text-gray-500">Paid vs Reserve</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {filteredClaims.map((claim, index) => (
+                  <div key={index} className="p-3 bg-gradient-to-r from-white to-gray-50 border rounded-lg hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 bg-blue-100 rounded-lg">
+                          <FileText size={14} className="text-blue-600" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">{claim.type}</span>
+                            <span className="text-xs text-gray-500">#{claim.claimNumber}</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">{claim.date}</p>
+                          <div className="flex items-center gap-3 mt-2">
+                            {getStatusBadge(claim.status)}
+                            <span className="text-sm font-semibold text-green-600">{claim.amount}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <Button variant="outline" size="sm" className="h-8">
+                        <Eye size={12} className="mr-2" />
+                        Details
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Risk Alerts & Compliance */}
-          <Card className="shadow-sm">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm">Risk Alerts & Compliance</CardTitle>
+          {/* Enhanced Risk & Compliance */}
+          <Card className="shadow-lg">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Shield size={16} />
+                Risk & Compliance
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-center py-4 text-medium-gray">
-                <AlertTriangle size={24} className="mx-auto mb-2 text-gray-300" />
-                <p className="text-xs">No current risk alerts or compliance issues.</p>
+              <div className="space-y-4">
+                <div className="text-center py-3">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle size={24} className="text-green-600" />
+                  </div>
+                  <p className="text-sm font-medium">All Clear</p>
+                  <p className="text-xs text-gray-500">No active risk alerts</p>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-2 bg-green-50 rounded">
+                    <span className="text-xs">Compliance Score</span>
+                    <span className="text-sm font-bold text-green-600">98%</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
+                    <span className="text-xs">Last Audit</span>
+                    <span className="text-sm font-medium">2024-01-15</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-orange-50 rounded">
+                    <span className="text-xs">Next Review</span>
+                    <span className="text-sm font-medium">2024-07-15</span>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Row 5: Recent Activity */}
-        <Card className="shadow-sm">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm">Recent Activity & Interactions</CardTitle>
-            <p className="text-medium-gray text-xs">Recent notes, calls, emails, and more.</p>
+        {/* Enhanced Recent Activity */}
+        <Card className={`shadow-lg transition-all duration-1000 delay-600 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base flex items-center gap-2">
+              <Activity size={16} />
+              Recent Activity & Interactions
+            </CardTitle>
+            <p className="text-xs text-gray-500">Latest system activities and customer interactions</p>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="p-2 border rounded">
-                  <div className="flex items-start gap-2">
-                    <FileText size={12} className="text-brand-blue mt-0.5" />
+                <div key={index} className="p-3 bg-gradient-to-br from-white to-gray-50 border rounded-lg hover:shadow-md transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start gap-3">
+                    <div className={`p-2 rounded-lg ${
+                      activity.category === 'claim' ? 'bg-orange-100' :
+                      activity.category === 'payment' ? 'bg-green-100' :
+                      'bg-blue-100'
+                    }`}>
+                      {activity.category === 'claim' ? 
+                        <AlertTriangle size={14} className="text-orange-600" /> :
+                        activity.category === 'payment' ?
+                        <DollarSign size={14} className="text-green-600" /> :
+                        <User size={14} className="text-blue-600" />
+                      }
+                    </div>
                     <div className="flex-1">
-                      <p className="text-xs font-medium">{activity.type}</p>
-                      <p className="text-xs text-medium-gray mt-1">{activity.date}</p>
-                      <p className="text-xs text-medium-gray mt-1">{activity.description}</p>
-                      <Button variant="outline" size="sm" className="h-6 text-xs mt-1 px-2">
-                        View
-                      </Button>
+                      <p className="text-sm font-medium">{activity.type}</p>
+                      <p className="text-xs text-gray-500 mt-1">{activity.date}</p>
+                      <p className="text-xs text-gray-600 mt-1">{activity.description}</p>
+                      <div className="flex items-center justify-between mt-2">
+                        <span className="text-xs text-gray-500">by {activity.user}</span>
+                        <Button variant="ghost" size="sm" className="h-6 text-xs px-2 hover:bg-gray-100">
+                          View
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
