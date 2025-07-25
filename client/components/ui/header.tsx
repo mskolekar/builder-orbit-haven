@@ -120,10 +120,10 @@ export function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-9 px-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                  A
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                  J
                 </div>
-                <span className="hidden lg:block text-sm font-medium">Agent Smith</span>
+                <span className="hidden lg:block text-sm font-medium">UW John</span>
                 <ChevronDown size={14} />
               </div>
             </Button>
