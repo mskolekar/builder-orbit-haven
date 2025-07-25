@@ -121,7 +121,7 @@ export default function Dashboard() {
     <div className="flex-1 bg-light-gray/30 p-4 lg:p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Customer Profile Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
           {/* Left Column - Customer Info */}
           <div className="lg:col-span-1">
             <Card>
