@@ -102,9 +102,9 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Brand colors from mockup - dark mode */
-    --brand-blue: 243 87% 65%;
-    --brand-purple: 256 87% 65%;
+    /* Brand colors - updated to blue #2c35e0 - dark mode */
+    --brand-blue: 229 80% 53%;
+    --brand-purple: 229 80% 53%;
     --light-gray: 240 4% 16%;
     --medium-gray: 215 16% 65%;
     --brand-green: 142 76% 36%;
