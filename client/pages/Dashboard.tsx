@@ -3,8 +3,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ColumnFilter } from '@/components/ui/column-filter';
-import { ProgressCircle } from '@/components/ui/progress-circle';
-import { KPICard } from '@/components/ui/kpi-card';
 import { Progress } from '@/components/ui/progress';
 import { 
   Table,
@@ -14,18 +12,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  Eye,
-  Plus,
-  FileText,
-  AlertTriangle,
-  Home,
-  Car,
-  Briefcase,
-  Shield,
-  Edit3,
-  ExternalLink,
-  Calendar,
+import { 
+  Eye, 
+  Plus, 
+  FileText, 
+  AlertTriangle, 
+  Home, 
+  Car, 
+  Briefcase, 
+  Shield, 
+  Edit3, 
+  ExternalLink, 
+  Calendar, 
   DollarSign,
   TrendingUp,
   Users,
@@ -53,7 +51,6 @@ const customerData = {
   email: "rose.greenthumb@example.com",
   address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
   memberSince: "2019",
-  riskScore: 85,
   satisfactionScore: 4.8
 };
 
@@ -107,7 +104,7 @@ const recentActivity = [
     type: "Follow-up on recent claim #C1122 progress.",
     date: "2 hours ago",
     description: "Provided update on claim status, awaiting adjuster report.",
-    user: "Agent Smith",
+    user: "UW John",
     category: "claim"
   },
   {
@@ -128,14 +125,14 @@ const recentActivity = [
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
-    'active': { color: 'bg-green-100 text-green-800 border-green-200', icon: CheckCircle },
+    'active': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: CheckCircle },
     'bound': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: CheckCircle },
-    'in progress': { color: 'bg-orange-100 text-orange-800 border-orange-200', icon: Clock },
-    'pending': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: AlertCircle },
-    'expired': { color: 'bg-red-100 text-red-800 border-red-200', icon: XCircle },
-    'approved': { color: 'bg-green-100 text-green-800 border-green-200', icon: CheckCircle },
+    'in progress': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: Clock },
+    'pending': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: AlertCircle },
+    'expired': { color: 'bg-gray-100 text-gray-600 border-gray-200', icon: XCircle },
+    'approved': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: CheckCircle },
     'closed': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: XCircle },
-    'scheduled': { color: 'bg-purple-100 text-purple-800 border-purple-200', icon: Calendar }
+    'scheduled': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: Calendar }
   };
   
   const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: AlertCircle };
@@ -154,24 +151,24 @@ const getPolicyIcon = (lob: string) => {
     case 'auto':
       return <Car size={14} className="text-blue-600" />;
     case 'home':
-      return <Home size={14} className="text-green-600" />;
+      return <Home size={14} className="text-blue-600" />;
     case 'life':
     case 'critical illness':
     case 'disability':
-      return <Shield size={14} className="text-purple-600" />;
+      return <Shield size={14} className="text-blue-600" />;
     case 'business':
-      return <Briefcase size={14} className="text-orange-600" />;
+      return <Briefcase size={14} className="text-blue-600" />;
     default:
-      return <FileText size={14} className="text-gray-500" />;
+      return <FileText size={14} className="text-blue-600" />;
   }
 };
 
 const getPriorityColor = (priority: string) => {
   switch (priority) {
-    case 'high': return 'bg-red-500';
-    case 'medium': return 'bg-orange-500';
-    case 'low': return 'bg-green-500';
-    default: return 'bg-gray-500';
+    case 'high': return 'bg-blue-600';
+    case 'medium': return 'bg-blue-400';
+    case 'low': return 'bg-blue-200';
+    default: return 'bg-gray-400';
   }
 };
 
@@ -211,57 +208,33 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 p-3 overflow-auto">
+    <div className="flex-1 bg-white p-3 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-4">
         
-        {/* KPI Dashboard Row */}
-        <div className={`grid grid-cols-2 lg:grid-cols-4 gap-3 transition-all duration-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          <KPICard 
-            title="Total Policies"
-            value="7"
-            change={{ value: 12, type: 'increase' }}
-            icon={FileText}
-            color="blue"
-          />
-          <KPICard 
-            title="Active Claims" 
-            value="1"
-            change={{ value: 33, type: 'decrease' }}
-            icon={AlertTriangle}
-            color="orange"
-          />
-          <KPICard 
-            title="Annual Premium"
-            value="$2.6K"
-            change={{ value: 8, type: 'increase' }}
-            icon={DollarSign}
-            color="green"
-          />
-          <KPICard 
-            title="Customer Score"
-            value={customerData.satisfactionScore}
-            icon={Star}
-            color="purple"
-          />
-        </div>
-        
         {/* Enhanced Personal Profile Section */}
-        <Card className={`relative shadow-lg border-0 bg-gradient-to-r from-white to-blue-50 transition-all duration-1000 delay-200 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        <Card className={`relative shadow-sm border transition-all duration-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="absolute top-2 right-2 p-1 h-6 w-6"
+          >
+            <Edit3 size={12} />
+          </Button>
           <CardContent className="p-4">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
                     RK
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
                     <CheckCircle size={12} className="text-white" />
                   </div>
                 </div>
                 <div>
                   <div className="flex items-center gap-3">
                     <h2 className="text-xl font-bold text-gray-900">{customerData.name}</h2>
-                    <Badge className="bg-green-100 text-green-800 border-green-200">
+                    <Badge className="bg-blue-100 text-blue-800 border-blue-200">
                       <CheckCircle size={10} className="mr-1" />
                       {customerData.status}
                     </Badge>
@@ -317,20 +290,6 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-              
-              <div className="flex flex-col items-center gap-3">
-                <ProgressCircle 
-                  value={customerData.riskScore} 
-                  max={100} 
-                  color="green" 
-                  label="Risk Score"
-                  size="md"
-                />
-                <Button variant="outline" size="sm" className="h-8">
-                  <Edit3 size={12} className="mr-2" />
-                  Edit Profile
-                </Button>
-              </div>
             </div>
             
             <div className="mt-3 flex items-center gap-2 text-sm">
@@ -341,11 +300,11 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Enhanced Premium Tiles and Reminders */}
+        {/* Premium Tiles and Reminders */}
         <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           <div className="grid grid-cols-2 gap-3">
             <Card 
-              className="bg-gradient-to-br from-blue-500 to-blue-600 text-white cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-to-br from-blue-500 to-blue-600 text-white cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300 group"
               onClick={() => console.log('Navigate to payment history')}
             >
               <CardContent className="p-4">
@@ -356,12 +315,11 @@ export default function Dashboard() {
                 <div className="text-xs font-medium opacity-90">Last Premium</div>
                 <div className="text-2xl font-bold">$150</div>
                 <div className="text-xs opacity-75">July 1, 2025</div>
-                <Progress value={75} className="mt-2 h-1 bg-blue-400" />
               </CardContent>
             </Card>
             
             <Card 
-              className="bg-gradient-to-br from-orange-500 to-orange-600 text-white cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-to-br from-blue-400 to-blue-500 text-white cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300 group"
               onClick={() => console.log('Navigate to upcoming payments')}
             >
               <CardContent className="p-4">
@@ -372,13 +330,12 @@ export default function Dashboard() {
                 <div className="text-xs font-medium opacity-90">Next Premium</div>
                 <div className="text-2xl font-bold">$150</div>
                 <div className="text-xs opacity-75">Aug 1, 2025</div>
-                <Progress value={25} className="mt-2 h-1 bg-orange-400" />
               </CardContent>
             </Card>
           </div>
 
           <div className="lg:col-span-2">
-            <Card className="shadow-lg">
+            <Card className="shadow-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-3">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2">
@@ -395,7 +352,7 @@ export default function Dashboard() {
               <CardContent>
                 <div className="space-y-3">
                   {upcomingReminders.map((reminder) => (
-                    <div key={reminder.id} className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-white rounded-lg border hover:shadow-md transition-shadow">
+                    <div key={reminder.id} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
                         <div className={`w-2 h-8 rounded-full ${getPriorityColor(reminder.priority)}`}></div>
                         <div>
@@ -418,10 +375,10 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Enhanced Submissions and Policy Details */}
+        {/* Submissions and Policy Details */}
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          {/* Enhanced Submissions */}
-          <Card className="shadow-lg">
+          {/* Submissions */}
+          <Card className="shadow-sm">
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
                 <TrendingUp size={16} />
@@ -451,7 +408,7 @@ export default function Dashboard() {
                   </TableHeader>
                   <TableBody>
                     {filteredSubmissions.map((submission, index) => (
-                      <TableRow key={index} className="h-12 hover:bg-gray-50">
+                      <TableRow key={index} className="h-12 hover:bg-blue-50">
                         <TableCell className="text-sm font-medium">{submission.id}</TableCell>
                         <TableCell className="text-sm">{submission.lob}</TableCell>
                         <TableCell>{getStatusBadge(submission.status)}</TableCell>
@@ -469,8 +426,8 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Enhanced Policy Details */}
-          <Card className="shadow-lg">
+          {/* Policy Details */}
+          <Card className="shadow-sm">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div>
@@ -481,7 +438,7 @@ export default function Dashboard() {
                   <p className="text-xs text-gray-500 mt-1">Active policy portfolio</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-bold text-green-600">$9.5K</p>
+                  <p className="text-lg font-bold text-blue-600">$9.5K</p>
                   <p className="text-xs text-gray-500">of $12.5K YTD</p>
                   <Progress value={76} className="w-20 h-1 mt-1" />
                 </div>
@@ -518,7 +475,7 @@ export default function Dashboard() {
                   </TableHeader>
                   <TableBody>
                     {filteredPolicies.map((policy, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-gray-50 group">
+                      <TableRow key={index} className="h-10 hover:bg-blue-50 group">
                         <TableCell className="font-medium">
                           <div className="flex items-center gap-2">
                             {getPolicyIcon(policy.lob)}
@@ -544,11 +501,11 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Enhanced Claims and Risk Section */}
+        {/* Claims and Risk Section */}
         <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          {/* Enhanced Claims History */}
+          {/* Claims History */}
           <div className="lg:col-span-2">
-            <Card className="shadow-lg">
+            <Card className="shadow-sm">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <div>
@@ -564,19 +521,14 @@ export default function Dashboard() {
                     <p className="text-xs text-gray-500 mt-1">Recent claims and settlements</p>
                   </div>
                   <div className="text-right">
-                    <div className="flex items-center gap-3">
-                      <ProgressCircle value={65} max={100} color="orange" size="sm" />
-                      <div>
-                        <p className="text-sm font-bold">$6.5K / $10K</p>
-                        <p className="text-xs text-gray-500">Paid vs Reserve</p>
-                      </div>
-                    </div>
+                    <p className="text-sm font-bold">$6.5K / $10K</p>
+                    <p className="text-xs text-gray-500">Paid vs Reserve</p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
                 {filteredClaims.map((claim, index) => (
-                  <div key={index} className="p-3 bg-gradient-to-r from-white to-gray-50 border rounded-lg hover:shadow-md transition-shadow">
+                  <div key={index} className="p-3 bg-blue-50 border rounded-lg hover:shadow-md transition-shadow">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
                         <div className="p-2 bg-blue-100 rounded-lg">
@@ -590,7 +542,7 @@ export default function Dashboard() {
                           <p className="text-xs text-gray-500 mt-1">{claim.date}</p>
                           <div className="flex items-center gap-3 mt-2">
                             {getStatusBadge(claim.status)}
-                            <span className="text-sm font-semibold text-green-600">{claim.amount}</span>
+                            <span className="text-sm font-semibold text-blue-600">{claim.amount}</span>
                           </div>
                         </div>
                       </div>
@@ -605,8 +557,8 @@ export default function Dashboard() {
             </Card>
           </div>
 
-          {/* Enhanced Risk & Compliance */}
-          <Card className="shadow-lg">
+          {/* Risk & Compliance */}
+          <Card className="shadow-sm">
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
                 <Shield size={16} />
@@ -616,23 +568,23 @@ export default function Dashboard() {
             <CardContent>
               <div className="space-y-4">
                 <div className="text-center py-3">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <CheckCircle size={24} className="text-green-600" />
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle size={24} className="text-blue-600" />
                   </div>
                   <p className="text-sm font-medium">All Clear</p>
                   <p className="text-xs text-gray-500">No active risk alerts</p>
                 </div>
                 
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-2 bg-green-50 rounded">
+                  <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
                     <span className="text-xs">Compliance Score</span>
-                    <span className="text-sm font-bold text-green-600">98%</span>
+                    <span className="text-sm font-bold text-blue-600">98%</span>
                   </div>
                   <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
                     <span className="text-xs">Last Audit</span>
                     <span className="text-sm font-medium">2024-01-15</span>
                   </div>
-                  <div className="flex items-center justify-between p-2 bg-orange-50 rounded">
+                  <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
                     <span className="text-xs">Next Review</span>
                     <span className="text-sm font-medium">2024-07-15</span>
                   </div>
@@ -642,8 +594,8 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Enhanced Recent Activity */}
-        <Card className={`shadow-lg transition-all duration-1000 delay-600 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        {/* Recent Activity */}
+        <Card className={`shadow-sm transition-all duration-1000 delay-600 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <Activity size={16} />
@@ -654,17 +606,13 @@ export default function Dashboard() {
           <CardContent>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="p-3 bg-gradient-to-br from-white to-gray-50 border rounded-lg hover:shadow-md transition-all duration-300 hover:scale-105">
+                <div key={index} className="p-3 bg-blue-50 border rounded-lg hover:shadow-md transition-all duration-300 hover:scale-105">
                   <div className="flex items-start gap-3">
-                    <div className={`p-2 rounded-lg ${
-                      activity.category === 'claim' ? 'bg-orange-100' :
-                      activity.category === 'payment' ? 'bg-green-100' :
-                      'bg-blue-100'
-                    }`}>
+                    <div className="p-2 bg-blue-100 rounded-lg">
                       {activity.category === 'claim' ? 
-                        <AlertTriangle size={14} className="text-orange-600" /> :
+                        <AlertTriangle size={14} className="text-blue-600" /> :
                         activity.category === 'payment' ?
-                        <DollarSign size={14} className="text-green-600" /> :
+                        <DollarSign size={14} className="text-blue-600" /> :
                         <User size={14} className="text-blue-600" />
                       }
                     </div>
@@ -674,7 +622,8 @@ export default function Dashboard() {
                       <p className="text-xs text-gray-600 mt-1">{activity.description}</p>
                       <div className="flex items-center justify-between mt-2">
                         <span className="text-xs text-gray-500">by {activity.user}</span>
-                        <Button variant="ghost" size="sm" className="h-6 text-xs px-2 hover:bg-gray-100">
+                        <Button variant="ghost" size="sm" className="h-6 text-xs px-2 hover:bg-blue-100">
+                          <Eye size={10} className="mr-1" />
                           View
                         </Button>
                       </div>
