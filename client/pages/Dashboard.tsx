@@ -125,90 +125,97 @@ const getPolicyIcon = (lob: string) => {
 
 export default function Dashboard() {
   const [policyFilter, setPolicyFilter] = useState<string>("all");
+  const [submissionFilter, setSubmissionFilter] = useState<string>("all");
+  const [claimsFilter, setClaimsFilter] = useState<string>("all");
 
   const filteredPolicies = policyFilter === "active" 
     ? policyData.filter(policy => policy.status.toLowerCase() === "active")
     : policyData;
 
+  const filteredSubmissions = submissionFilter === "active"
+    ? submissions.filter(sub => sub.status.toLowerCase() !== "expired")
+    : submissions;
+
+  const filteredClaims = claimsFilter === "pending"
+    ? claimsHistory.filter(claim => claim.status.toLowerCase() === "pending")
+    : claimsHistory;
+
   return (
     <div className="flex-1 bg-light-gray/30 p-4 lg:p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-4">
-        {/* Customer Profile Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-          {/* Left Column - Customer Info */}
-          <div className="lg:col-span-1">
-            <Card className="relative">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="absolute top-2 right-2 p-1.5 h-auto"
-              >
-                <Edit3 size={14} />
-              </Button>
-              <CardHeader className="text-center pb-3">
-                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-lg font-semibold mb-2">
+        
+        {/* Row 1: Personal Profile Section - Horizontal */}
+        <Card className="relative">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="absolute top-2 right-2 p-1.5 h-auto"
+          >
+            <Edit3 size={14} />
+          </Button>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-blue rounded-full flex items-center justify-center text-white text-lg font-semibold">
                   RK
                 </div>
-                <div className="space-y-1">
+                <div>
                   <h2 className="text-lg font-semibold">{customerData.name}</h2>
                   <p className="text-sm text-medium-gray">{customerData.role}</p>
-                  <Badge className="bg-brand-green text-white text-xs">{customerData.status}</Badge>
+                  <Badge className="bg-brand-green text-white text-xs mt-1">{customerData.status}</Badge>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div>
-                    <span className="text-medium-gray">Date of Birth</span>
-                    <p className="text-sm">{customerData.dateOfBirth}</p>
-                  </div>
-                  <div>
-                    <span className="text-medium-gray">Gender</span>
-                    <p className="text-sm">{customerData.gender}</p>
-                  </div>
-                  <div>
-                    <span className="text-medium-gray">LSC#</span>
-                    <p className="text-sm">{customerData.lsc}</p>
-                  </div>
-                  <div>
-                    <span className="text-medium-gray">Phone</span>
-                    <p className="text-sm">{customerData.phone}</p>
-                  </div>
+              </div>
+              
+              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-xs">
+                <div>
+                  <span className="text-medium-gray">Date of Birth</span>
+                  <p className="text-sm">{customerData.dateOfBirth}</p>
                 </div>
-                <div className="text-xs">
+                <div>
+                  <span className="text-medium-gray">Gender</span>
+                  <p className="text-sm">{customerData.gender}</p>
+                </div>
+                <div>
+                  <span className="text-medium-gray">LSC#</span>
+                  <p className="text-sm">{customerData.lsc}</p>
+                </div>
+                <div>
+                  <span className="text-medium-gray">Phone</span>
+                  <p className="text-sm">{customerData.phone}</p>
+                </div>
+                <div className="col-span-2">
                   <span className="text-medium-gray">Email</span>
                   <p className="text-sm">{customerData.email}</p>
                 </div>
-                <div className="text-xs">
-                  <span className="text-medium-gray">Address</span>
-                  <p className="text-sm">{customerData.address}</p>
-                </div>
+              </div>
+            </div>
+            <div className="mt-3 text-xs">
+              <span className="text-medium-gray">Address</span>
+              <p className="text-sm">{customerData.address}</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Row 2: Premium Tiles and Upcoming Reminders */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-3">
+            <Card className="bg-gradient-to-r from-brand-blue/10 to-brand-blue/5 border-brand-blue/20">
+              <CardContent className="p-4">
+                <div className="text-xs text-medium-gray">Last Premium Paid</div>
+                <div className="text-xl font-bold text-brand-blue">$150</div>
+                <div className="text-xs text-medium-gray">July 1, 2025</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-gradient-to-r from-brand-orange/10 to-brand-orange/5 border-brand-orange/20">
+              <CardContent className="p-4">
+                <div className="text-xs text-medium-gray">Upcoming Premium</div>
+                <div className="text-xl font-bold text-brand-orange">$150</div>
+                <div className="text-xs text-medium-gray">Aug 1, 2025</div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Premium Tiles */}
-          <div className="lg:col-span-1">
-            <div className="space-y-3">
-              <Card className="bg-gradient-to-r from-brand-blue/10 to-brand-blue/5 border-brand-blue/20">
-                <CardContent className="p-4">
-                  <div className="text-xs text-medium-gray">Last Premium Paid</div>
-                  <div className="text-xl font-bold text-brand-blue">$150</div>
-                  <div className="text-xs text-medium-gray">July 1, 2025</div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-r from-brand-orange/10 to-brand-orange/5 border-brand-orange/20">
-                <CardContent className="p-4">
-                  <div className="text-xs text-medium-gray">Upcoming Premium</div>
-                  <div className="text-xl font-bold text-brand-orange">$150</div>
-                  <div className="text-xs text-medium-gray">Aug 1, 2025</div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Right Column - Reminders and Submissions */}
-          <div className="lg:col-span-2 space-y-4">
-            {/* Upcoming Reminders */}
+          <div className="lg:col-span-2">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-3">
                 <CardTitle className="text-base">Upcoming Reminders</CardTitle>
@@ -238,170 +245,163 @@ export default function Dashboard() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
 
-            {/* Submissions */}
-            <Card>
-              <CardHeader className="pb-3">
+        {/* Row 3: Submissions and Policy Details */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Submissions */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-3">
+              <div>
                 <CardTitle className="text-base">Submissions</CardTitle>
                 <p className="text-medium-gray text-xs">In progress</p>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="text-xs">Submission No.</TableHead>
-                        <TableHead className="text-xs">LOB</TableHead>
-                        <TableHead className="text-xs">Status</TableHead>
-                        <TableHead className="text-xs">Start Date</TableHead>
-                        <TableHead className="text-xs">End Date</TableHead>
+              </div>
+              <div className="flex items-center gap-2">
+                <Filter size={14} className="text-medium-gray" />
+                <Select value={submissionFilter} onValueChange={setSubmissionFilter}>
+                  <SelectTrigger className="w-24 h-7 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs">Submission No.</TableHead>
+                      <TableHead className="text-xs">LOB</TableHead>
+                      <TableHead className="text-xs">Status</TableHead>
+                      <TableHead className="text-xs">Start Date</TableHead>
+                      <TableHead className="text-xs">End Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredSubmissions.map((submission, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="text-sm">{submission.id}</TableCell>
+                        <TableCell className="text-sm">{submission.lob}</TableCell>
+                        <TableCell>{getStatusBadge(submission.status)}</TableCell>
+                        <TableCell className="text-sm">{submission.startDate}</TableCell>
+                        <TableCell className="text-sm">{submission.endDate}</TableCell>
                       </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {submissions.map((submission, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="text-sm">{submission.id}</TableCell>
-                          <TableCell className="text-sm">{submission.lob}</TableCell>
-                          <TableCell>{getStatusBadge(submission.status)}</TableCell>
-                          <TableCell className="text-sm">{submission.startDate}</TableCell>
-                          <TableCell className="text-sm">{submission.endDate}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
 
-        {/* Policy Details and Claims History */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
           {/* Policy Details */}
-          <div className="xl:col-span-2">
-            <Card>
-              <CardHeader className="pb-3">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <CardTitle className="text-base">Policy Details</CardTitle>
-                      <div className="flex items-center gap-2">
-                        <Filter size={14} className="text-medium-gray" />
-                        <Select value={policyFilter} onValueChange={setPolicyFilter}>
-                          <SelectTrigger className="w-32 h-7 text-xs">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">All Policies</SelectItem>
-                            <SelectItem value="active">Active Only</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                    <p className="text-medium-gray text-xs">Overview of all active and inactive policies.</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-lg font-bold">$9,500 / $12,500</p>
-                    <p className="text-xs text-medium-gray">Paid vs YTD Premium</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="text-xs">Policy</TableHead>
-                        <TableHead className="text-xs">LOB</TableHead>
-                        <TableHead className="text-xs">Coverage</TableHead>
-                        <TableHead className="text-xs">Start Date</TableHead>
-                        <TableHead className="text-xs">End Date</TableHead>
-                        <TableHead className="text-xs">Status</TableHead>
-                        <TableHead className="text-xs">Premium</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredPolicies.map((policy, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">
-                            <div className="flex items-center gap-2">
-                              {getPolicyIcon(policy.lob)}
-                              <span className="text-sm">{policy.policy}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="text-sm">{policy.lob}</TableCell>
-                          <TableCell className="text-sm">{policy.coverage}</TableCell>
-                          <TableCell className="text-sm">{policy.startDate}</TableCell>
-                          <TableCell className="text-sm">{policy.endDate}</TableCell>
-                          <TableCell>{getStatusBadge(policy.status)}</TableCell>
-                          <TableCell className="text-sm font-medium">{policy.premium}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Claims History */}
-          <div className="xl:col-span-1">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-base">Claims History</CardTitle>
-                <p className="text-medium-gray text-xs">Recent claims submitted by the customer.</p>
-                <div className="mt-3">
-                  <p className="text-lg font-bold">$6,500 / $10,000</p>
-                  <p className="text-xs text-medium-gray">Paid Claims vs Reserve</p>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {claimsHistory.map((claim, index) => (
-                  <div key={index} className="p-3 border rounded-lg">
-                    <div className="flex items-center gap-2 mb-1">
-                      <FileText size={14} className="text-brand-blue" />
-                      <span className="text-sm font-medium">{claim.type}</span>
-                    </div>
-                    <p className="text-xs text-medium-gray">{claim.date}</p>
-                    <div className="flex justify-between items-center mt-2">
-                      {getStatusBadge(claim.status)}
-                      <span className="text-sm font-semibold">{claim.amount}</span>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Recent Activity and Risk Alerts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Recent Activity */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Recent Activity & Interactions</CardTitle>
-              <p className="text-medium-gray text-xs">Recent notes, calls, emails, and more.</p>
+              <div className="flex justify-between items-start">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <CardTitle className="text-base">Policy Details</CardTitle>
+                    <div className="flex items-center gap-2">
+                      <Filter size={14} className="text-medium-gray" />
+                      <Select value={policyFilter} onValueChange={setPolicyFilter}>
+                        <SelectTrigger className="w-28 h-7 text-xs">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Policies</SelectItem>
+                          <SelectItem value="active">Active Only</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <p className="text-medium-gray text-xs">Overview of policies.</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-bold">$9,500 / $12,500</p>
+                  <p className="text-xs text-medium-gray">Paid vs YTD</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto max-h-48 overflow-y-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs">Policy</TableHead>
+                      <TableHead className="text-xs">LOB</TableHead>
+                      <TableHead className="text-xs">Status</TableHead>
+                      <TableHead className="text-xs">Premium</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredPolicies.map((policy, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">
+                          <div className="flex items-center gap-2">
+                            {getPolicyIcon(policy.lob)}
+                            <span className="text-sm">{policy.policy}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-sm">{policy.lob}</TableCell>
+                        <TableCell>{getStatusBadge(policy.status)}</TableCell>
+                        <TableCell className="text-sm font-medium">{policy.premium}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Row 4: Claims History and Risk Alerts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Claims History */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-3">
+              <div>
+                <CardTitle className="text-base">Claims History</CardTitle>
+                <p className="text-medium-gray text-xs">Recent claims submitted.</p>
+                <div className="mt-2">
+                  <p className="text-sm font-bold">$6,500 / $10,000</p>
+                  <p className="text-xs text-medium-gray">Paid Claims vs Reserve</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Filter size={14} className="text-medium-gray" />
+                <Select value={claimsFilter} onValueChange={setClaimsFilter}>
+                  <SelectTrigger className="w-24 h-7 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </CardHeader>
             <CardContent className="space-y-3">
-              {recentActivity.map((activity, index) => (
+              {filteredClaims.map((claim, index) => (
                 <div key={index} className="p-3 border rounded-lg">
-                  <div className="flex items-start gap-3">
-                    <FileText size={14} className="text-brand-blue mt-0.5" />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">{activity.type}</p>
-                      <p className="text-xs text-medium-gray mt-1">{activity.date}</p>
-                      <p className="text-xs text-medium-gray mt-1">{activity.description}</p>
-                    </div>
-                    <Button variant="outline" size="sm" className="h-7 text-xs">
-                      View Details
-                    </Button>
+                  <div className="flex items-center gap-2 mb-1">
+                    <FileText size={14} className="text-brand-blue" />
+                    <span className="text-sm font-medium">{claim.type}</span>
+                  </div>
+                  <p className="text-xs text-medium-gray">{claim.date}</p>
+                  <div className="flex justify-between items-center mt-2">
+                    {getStatusBadge(claim.status)}
+                    <span className="text-sm font-semibold">{claim.amount}</span>
                   </div>
                 </div>
               ))}
             </CardContent>
           </Card>
 
-          {/* Risk Alerts */}
+          {/* Risk Alerts & Compliance */}
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-base">Risk Alerts & Compliance</CardTitle>
@@ -414,6 +414,33 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Row 5: Recent Activity */}
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Recent Activity & Interactions</CardTitle>
+            <p className="text-medium-gray text-xs">Recent notes, calls, emails, and more.</p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+              {recentActivity.map((activity, index) => (
+                <div key={index} className="p-3 border rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <FileText size={14} className="text-brand-blue mt-0.5" />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{activity.type}</p>
+                      <p className="text-xs text-medium-gray mt-1">{activity.date}</p>
+                      <p className="text-xs text-medium-gray mt-1">{activity.description}</p>
+                      <Button variant="outline" size="sm" className="h-7 text-xs mt-2">
+                        View Details
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
