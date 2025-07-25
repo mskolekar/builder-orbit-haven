@@ -331,7 +331,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Activity and Risk Alerts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           {/* Recent Activity */}
           <Card>
             <CardHeader>
