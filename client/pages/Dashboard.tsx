@@ -248,7 +248,7 @@ export default function Dashboard() {
         </div>
 
         {/* Policy Details and Claims History */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-6">
           {/* Policy Details */}
           <div className="xl:col-span-2">
             <Card>
