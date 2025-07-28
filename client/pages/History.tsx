@@ -10,26 +10,26 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { FileText, Eye, Download, ChevronDown, ChevronRight } from 'lucide-react';
+import { FileText, Eye, Download, ChevronDown, ChevronRight, Expand, Minimize } from 'lucide-react';
 
 const CollapsibleSection = ({ 
   title, 
   children, 
-  defaultExpanded = false,
+  isExpanded,
+  onToggle,
   className = ""
 }: { 
   title: string; 
   children: React.ReactNode; 
-  defaultExpanded?: boolean;
+  isExpanded: boolean;
+  onToggle: () => void;
   className?: string;
 }) => {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-
   return (
     <Card className={`shadow-sm ${className}`}>
       <CardHeader 
         className="cursor-pointer hover:bg-gray-50 transition-colors pb-3"
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={onToggle}
       >
         <div className="flex items-center justify-between">
           <CardTitle className="text-base">{title}</CardTitle>
@@ -48,6 +48,38 @@ const CollapsibleSection = ({
 };
 
 export default function History() {
+  const [expandedSections, setExpandedSections] = useState({
+    priorLoss: true,
+    priorPolicy: false,
+    auditLogs: false,
+    documentHistory: false
+  });
+
+  const toggleSection = (section: keyof typeof expandedSections) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  const expandAll = () => {
+    setExpandedSections({
+      priorLoss: true,
+      priorPolicy: true,
+      auditLogs: true,
+      documentHistory: true
+    });
+  };
+
+  const collapseAll = () => {
+    setExpandedSections({
+      priorLoss: false,
+      priorPolicy: false,
+      auditLogs: false,
+      documentHistory: false
+    });
+  };
+
   const priorLosses = [
     { date: "2022-03-15", type: "Auto Accident", amount: "$3,200", status: "Settled", claim: "C2045" },
     { date: "2021-08-22", type: "Home Water Damage", amount: "$1,800", status: "Closed", claim: "C1876" },
@@ -73,13 +105,31 @@ export default function History() {
       <div className="max-w-7xl mx-auto">
         {/* Tab Name */}
         <div className="mb-6 border-b pb-4">
-          <h1 className="text-2xl font-semibold text-gray-900">History</h1>
-          <p className="text-medium-gray text-sm mt-1">View comprehensive historical data and audit trails.</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">History</h1>
+              <p className="text-medium-gray text-sm mt-1">View comprehensive historical data and audit trails.</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={expandAll} className="h-8">
+                <Expand size={14} className="mr-2" />
+                Expand All
+              </Button>
+              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8">
+                <Minimize size={14} className="mr-2" />
+                Collapse All
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-4">
           {/* Prior Loss Section */}
-          <CollapsibleSection title="Prior Loss" defaultExpanded={true}>
+          <CollapsibleSection 
+            title="Prior Loss" 
+            isExpanded={expandedSections.priorLoss}
+            onToggle={() => toggleSection('priorLoss')}
+          >
             <div className="space-y-4">
               <p className="text-xs text-medium-gray">Complete history of previous claims and losses</p>
               <Table>
@@ -116,7 +166,11 @@ export default function History() {
           </CollapsibleSection>
 
           {/* Prior Policy Section */}
-          <CollapsibleSection title="Prior Policy" defaultExpanded={false}>
+          <CollapsibleSection 
+            title="Prior Policy" 
+            isExpanded={expandedSections.priorPolicy}
+            onToggle={() => toggleSection('priorPolicy')}
+          >
             <div className="space-y-4">
               <p className="text-xs text-medium-gray">Historical policy information and coverage details</p>
               <Table>
@@ -153,7 +207,11 @@ export default function History() {
           </CollapsibleSection>
 
           {/* Audit Logs Section */}
-          <CollapsibleSection title="Audit Logs" defaultExpanded={false}>
+          <CollapsibleSection 
+            title="Audit Logs" 
+            isExpanded={expandedSections.auditLogs}
+            onToggle={() => toggleSection('auditLogs')}
+          >
             <div className="space-y-4">
               <p className="text-xs text-medium-gray">Complete audit trail of all system activities and changes</p>
               <div className="space-y-3">
@@ -177,7 +235,11 @@ export default function History() {
           </CollapsibleSection>
 
           {/* Document History Section */}
-          <CollapsibleSection title="Document History" defaultExpanded={false}>
+          <CollapsibleSection 
+            title="Document History" 
+            isExpanded={expandedSections.documentHistory}
+            onToggle={() => toggleSection('documentHistory')}
+          >
             <div className="space-y-4">
               <p className="text-xs text-medium-gray">History of all documents generated and sent</p>
               <div className="space-y-3">
