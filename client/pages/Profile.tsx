@@ -178,7 +178,7 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="h-8 border-gray-300">
+                  <Button variant="outline" size="sm" className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
                     <Edit3 size={14} className="mr-2" />
                     Edit
                   </Button>
