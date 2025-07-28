@@ -9,9 +9,7 @@ import {
   CreditCard, 
   History,
   Menu,
-  X,
-  ChevronDown,
-  ChevronRight
+  X
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -82,6 +80,13 @@ export function Sidebar() {
     return location.pathname === path || location.pathname + location.search === path;
   };
 
+  const isMainPageActive = (item: SidebarItem) => {
+    if (item.path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname === item.path;
+  };
+
   return (
     <>
       {/* Mobile menu button */}
@@ -116,37 +121,30 @@ export function Sidebar() {
               const Icon = item.icon;
               const hasSubItems = item.subItems && item.subItems.length > 0;
               const isExpanded = expandedItems.includes(item.path);
-              const isMainActive = isActive(item.path);
+              const isMainActive = isMainPageActive(item);
               
               return (
                 <li key={item.path}>
-                  <div className="flex items-center">
-                    <Link
-                      to={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors flex-1",
-                        isMainActive && !location.search
-                          ? "bg-white/20 text-white" 
-                          : "text-white/80 hover:bg-white/10 hover:text-white"
-                      )}
-                    >
-                      <Icon size={16} />
-                      {item.label}
-                    </Link>
-                    
-                    {hasSubItems && (
-                      <button
-                        onClick={() => toggleExpanded(item.path)}
-                        className="p-1 rounded hover:bg-white/10 transition-colors mr-2"
-                      >
-                        {isExpanded ? 
-                          <ChevronDown size={14} /> : 
-                          <ChevronRight size={14} />
-                        }
-                      </button>
+                  <Link
+                    to={item.path}
+                    onClick={(e) => {
+                      if (hasSubItems) {
+                        e.preventDefault();
+                        toggleExpanded(item.path);
+                      } else {
+                        setIsOpen(false);
+                      }
+                    }}
+                    className={cn(
+                      "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full",
+                      isMainActive && !location.search
+                        ? "bg-white/20 text-white" 
+                        : "text-white/80 hover:bg-white/10 hover:text-white"
                     )}
-                  </div>
+                  >
+                    <Icon size={16} />
+                    {item.label}
+                  </Link>
                   
                   {hasSubItems && isExpanded && (
                     <ul className="mt-1 ml-6 space-y-1">
