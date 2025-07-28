@@ -12,26 +12,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Mail, Phone, MessageCircle, Plus, Send, ChevronDown, ChevronRight } from 'lucide-react';
+import { Mail, Phone, MessageCircle, Plus, Send, ChevronDown, ChevronRight, Expand, Minimize } from 'lucide-react';
 
 const CollapsibleSection = ({ 
   title, 
   children, 
-  defaultExpanded = false,
+  isExpanded,
+  onToggle,
   className = ""
 }: { 
   title: string; 
   children: React.ReactNode; 
-  defaultExpanded?: boolean;
+  isExpanded: boolean;
+  onToggle: () => void;
   className?: string;
 }) => {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-
   return (
     <Card className={`shadow-sm ${className}`}>
       <CardHeader 
         className="cursor-pointer hover:bg-gray-50 transition-colors pb-3"
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={onToggle}
       >
         <div className="flex items-center justify-between">
           <CardTitle className="text-base">{title}</CardTitle>
@@ -50,18 +50,68 @@ const CollapsibleSection = ({
 };
 
 export default function Communication() {
+  const [expandedSections, setExpandedSections] = useState({
+    deliveryPreferences: true,
+    addressManagement: false,
+    contactHistory: false,
+    sendCommunication: false
+  });
+
+  const toggleSection = (section: keyof typeof expandedSections) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  const expandAll = () => {
+    setExpandedSections({
+      deliveryPreferences: true,
+      addressManagement: true,
+      contactHistory: true,
+      sendCommunication: true
+    });
+  };
+
+  const collapseAll = () => {
+    setExpandedSections({
+      deliveryPreferences: false,
+      addressManagement: false,
+      contactHistory: false,
+      sendCommunication: false
+    });
+  };
+
   return (
     <div className="flex-1 bg-white p-4 lg:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Tab Name */}
         <div className="mb-6 border-b pb-4">
-          <h1 className="text-2xl font-semibold text-gray-900">Communication</h1>
-          <p className="text-medium-gray text-sm mt-1">Manage customer communication preferences and address information.</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">Communication</h1>
+              <p className="text-medium-gray text-sm mt-1">Manage customer communication preferences and address information.</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={expandAll} className="h-8">
+                <Expand size={14} className="mr-2" />
+                Expand All
+              </Button>
+              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8">
+                <Minimize size={14} className="mr-2" />
+                Collapse All
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-4">
           {/* Delivery Preferences Section */}
-          <CollapsibleSection title="Delivery Preferences" defaultExpanded={true}>
+          <CollapsibleSection 
+            title="Delivery Preferences" 
+            isExpanded={expandedSections.deliveryPreferences}
+            onToggle={() => toggleSection('deliveryPreferences')}
+          >
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -132,7 +182,11 @@ export default function Communication() {
           </CollapsibleSection>
 
           {/* Address Management Section */}
-          <CollapsibleSection title="Address Management" defaultExpanded={false}>
+          <CollapsibleSection 
+            title="Address Management" 
+            isExpanded={expandedSections.addressManagement}
+            onToggle={() => toggleSection('addressManagement')}
+          >
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -182,7 +236,11 @@ export default function Communication() {
           </CollapsibleSection>
 
           {/* Contact History Section */}
-          <CollapsibleSection title="Contact History" defaultExpanded={false}>
+          <CollapsibleSection 
+            title="Contact History" 
+            isExpanded={expandedSections.contactHistory}
+            onToggle={() => toggleSection('contactHistory')}
+          >
             <div className="space-y-3">
               <div className="p-3 border rounded-lg">
                 <div className="flex items-start gap-3">
@@ -214,7 +272,11 @@ export default function Communication() {
           </CollapsibleSection>
 
           {/* Send Communication Section */}
-          <CollapsibleSection title="Send Communication" defaultExpanded={false}>
+          <CollapsibleSection 
+            title="Send Communication" 
+            isExpanded={expandedSections.sendCommunication}
+            onToggle={() => toggleSection('sendCommunication')}
+          >
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
