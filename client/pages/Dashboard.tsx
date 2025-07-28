@@ -273,9 +273,9 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone size={14} className="text-gray-400" />
-                  <div>
+                  <div className="min-w-0">
                     <span className="text-xs text-gray-500">Phone</span>
-                    <p className="text-sm font-medium">{customerData.phone}</p>
+                    <p className="text-sm font-medium whitespace-nowrap">{customerData.phone}</p>
                   </div>
                 </div>
                 <div className="col-span-2 flex items-center gap-2">
