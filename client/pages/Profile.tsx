@@ -1150,11 +1150,11 @@ export default function Profile() {
               <p className="text-gray-600 text-sm mt-1">Comprehensive customer profile management</p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={expandAll} className="h-8 border-gray-300">
+              <Button variant="outline" size="sm" onClick={expandAll} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
                 <Expand size={14} className="mr-2" />
                 Expand All
               </Button>
-              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8 border-gray-300">
+              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
                 <Minimize size={14} className="mr-2" />
                 Collapse All
               </Button>
