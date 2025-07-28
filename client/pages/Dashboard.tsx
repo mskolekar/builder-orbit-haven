@@ -297,38 +297,36 @@ export default function Dashboard() {
         </Card>
 
         {/* Premium Tiles and Reminders */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          <div className="grid grid-cols-2 gap-3">
-            <Card 
-              className="bg-gradient-to-br from-blue-500 to-blue-600 text-white cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300 group"
-              onClick={() => console.log('Navigate to payment history')}
-            >
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <DollarSign size={16} className="group-hover:scale-110 transition-transform" />
-                  <ExternalLink size={12} className="opacity-70" />
-                </div>
-                <div className="text-xs font-medium opacity-90">Last Premium</div>
-                <div className="text-2xl font-bold">$150</div>
-                <div className="text-xs opacity-75">July 1, 2025</div>
-              </CardContent>
-            </Card>
-            
-            <Card 
-              className="bg-gradient-to-br from-blue-400 to-blue-500 text-white cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300 group"
-              onClick={() => console.log('Navigate to upcoming payments')}
-            >
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <Calendar size={16} className="group-hover:scale-110 transition-transform" />
-                  <ExternalLink size={12} className="opacity-70" />
-                </div>
-                <div className="text-xs font-medium opacity-90">Next Premium</div>
-                <div className="text-2xl font-bold">$150</div>
-                <div className="text-xs opacity-75">Aug 1, 2025</div>
-              </CardContent>
-            </Card>
-          </div>
+        <div className={`grid grid-cols-1 lg:grid-cols-4 gap-3 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <Card
+            className="bg-gradient-to-br from-blue-500 to-blue-600 text-white cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300 group"
+            onClick={() => console.log('Navigate to payment history')}
+          >
+            <CardContent className="p-3">
+              <div className="flex items-center justify-between mb-1">
+                <DollarSign size={14} className="group-hover:scale-110 transition-transform" />
+                <ExternalLink size={10} className="opacity-70" />
+              </div>
+              <div className="text-xs font-medium opacity-90">Last Premium</div>
+              <div className="text-lg font-bold">$150</div>
+              <div className="text-xs opacity-75">July 1, 2025</div>
+            </CardContent>
+          </Card>
+
+          <Card
+            className="bg-gradient-to-br from-blue-400 to-blue-500 text-white cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300 group"
+            onClick={() => console.log('Navigate to upcoming payments')}
+          >
+            <CardContent className="p-3">
+              <div className="flex items-center justify-between mb-1">
+                <Calendar size={14} className="group-hover:scale-110 transition-transform" />
+                <ExternalLink size={10} className="opacity-70" />
+              </div>
+              <div className="text-xs font-medium opacity-90">Next Premium</div>
+              <div className="text-lg font-bold">$150</div>
+              <div className="text-xs opacity-75">Aug 1, 2025</div>
+            </CardContent>
+          </Card>
 
           <div className="lg:col-span-2">
             <Card className="shadow-sm">
