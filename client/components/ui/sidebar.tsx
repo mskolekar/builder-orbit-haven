@@ -27,37 +27,29 @@ interface SidebarItem {
 
 const sidebarItems: SidebarItem[] = [
   { icon: BarChart3, label: 'Overview', path: '/' },
-  { 
-    icon: User, 
-    label: 'Profile', 
+  {
+    icon: User,
+    label: 'Profile',
     path: '/profile',
     subItems: [
       { label: 'Personal Details', path: '/profile?tab=personal-details' },
-      { label: 'Add Info', path: '/profile?tab=add-info' }
+      { label: 'Additional Info', path: '/profile?tab=additional-info' },
+      { label: 'Work History', path: '/profile?tab=work-history' }
     ]
   },
-  { 
-    icon: MessageCircle, 
-    label: 'Communication', 
+  {
+    icon: MessageCircle,
+    label: 'Communication',
     path: '/communication',
     subItems: [
-      { label: 'Delivery Preferences', path: '/communication?tab=delivery-preferences' },
-      { label: 'Address', path: '/communication?tab=address' }
+      { label: 'Contact Details', path: '/communication?tab=contact-details' },
+      { label: 'Delivery Preferences', path: '/communication?tab=delivery-preferences' }
     ]
   },
   { icon: Users, label: 'Workgroup', path: '/workgroup' },
   { icon: LinkIcon, label: 'Relationships', path: '/relationships' },
   { icon: CreditCard, label: 'Credit Programs', path: '/credit-programs' },
-  { 
-    icon: History, 
-    label: 'History', 
-    path: '/history',
-    subItems: [
-      { label: 'Prior Loss', path: '/history?tab=prior-loss' },
-      { label: 'Prior Policy', path: '/history?tab=prior-policy' },
-      { label: 'Audit Logs', path: '/history?tab=audit-logs' }
-    ]
-  },
+  { icon: History, label: 'History', path: '/history' }
 ];
 
 export function Sidebar() {
