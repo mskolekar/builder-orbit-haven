@@ -793,7 +793,7 @@ export default function Profile() {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-base font-medium text-gray-900">Employment History</h3>
-                  <Button variant="outline" size="sm" onClick={addWorkHistory} className="h-8 border-gray-300">
+                  <Button variant="outline" size="sm" onClick={addWorkHistory} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
                     <Plus size={14} className="mr-2" />
                     Add Record
                   </Button>
