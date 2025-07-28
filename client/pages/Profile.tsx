@@ -1050,7 +1050,7 @@ export default function Profile() {
       default:
         return (
           <div className="text-center py-8">
-            <p className="text-gray-600">Content for {currentTab} will be implemented here.</p>
+            <p className="text-gray-600">Content for {currentSection} will be implemented here.</p>
           </div>
         );
     }
@@ -1078,7 +1078,7 @@ export default function Profile() {
           </div>
         </div>
 
-        {renderTabContent()}
+        {renderSectionContent()}
       </div>
     </div>
   );
