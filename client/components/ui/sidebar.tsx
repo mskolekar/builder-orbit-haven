@@ -107,7 +107,7 @@ export function Sidebar() {
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
         <div className="p-4">
-          <h1 className="text-lg font-semibold">Customer Center</h1>
+          {/* Removed Customer Center title */}
         </div>
         
         <nav className="flex-1 px-2 overflow-y-auto">
