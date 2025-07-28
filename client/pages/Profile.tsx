@@ -66,6 +66,7 @@ export default function Profile() {
   const [expandedSections, setExpandedSections] = useState({
     personalInfo: true,
     professionalInfo: false,
+    workHistory: false,
     riskCompliance: false,
     otherDetails: false
   });
