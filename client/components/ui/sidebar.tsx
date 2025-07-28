@@ -101,7 +101,7 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <div className={cn(
-        "w-64 h-screen bg-gradient-to-b from-brand-purple to-brand-blue text-white flex flex-col transition-transform duration-300 z-40",
+        "w-64 h-screen bg-gradient-to-b from-blue-600 to-blue-700 text-white flex flex-col transition-transform duration-300 z-40",
         "lg:translate-x-0 lg:static lg:z-auto",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
