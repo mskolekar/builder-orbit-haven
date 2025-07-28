@@ -330,7 +330,7 @@ export default function Dashboard() {
 
           <div className="lg:col-span-2">
             <Card className="shadow-sm">
-              <CardHeader className="flex flex-row items-center justify-between pb-3">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2">
                     <Clock size={16} />
@@ -338,17 +338,17 @@ export default function Dashboard() {
                   </CardTitle>
                   <p className="text-xs text-gray-500 mt-1">Critical upcoming events and tasks</p>
                 </div>
-                <Button variant="outline" size="sm" className="h-8">
-                  <Plus size={12} className="mr-2" />
+                <Button variant="outline" size="sm" className="h-7">
+                  <Plus size={10} className="mr-1" />
                   Add
                 </Button>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {upcomingReminders.map((reminder) => (
-                    <div key={reminder.id} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border hover:shadow-md transition-shadow">
+                    <div key={reminder.id} className="flex items-center justify-between p-2 bg-blue-50 rounded-lg border hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3">
-                        <div className={`w-2 h-8 rounded-full ${getPriorityColor(reminder.priority)}`}></div>
+                        <div className={`w-2 h-6 rounded-full ${getPriorityColor(reminder.priority)}`}></div>
                         <div>
                           <p className="text-sm font-medium">{reminder.type}</p>
                           <p className="text-xs text-gray-500">{reminder.dueDate}</p>
@@ -356,9 +356,8 @@ export default function Dashboard() {
                       </div>
                       <div className="flex items-center gap-2">
                         {getStatusBadge(reminder.status)}
-                        <Button variant="outline" size="sm" className="h-7 text-xs">
-                          <Eye size={10} className="mr-1" />
-                          View
+                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                          <Eye size={12} />
                         </Button>
                       </div>
                     </div>
