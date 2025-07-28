@@ -632,82 +632,416 @@ export default function Profile() {
           </div>
         );
 
-      case 'work-history':
+      case 'professional-legal':
         return (
           <div className="space-y-4">
-            <CollapsibleSection 
-              title="Work History" 
-              isExpanded={expandedSections.workHistory}
-              onToggle={() => toggleSection('workHistory')}
+            {/* Professional and Legal Info Section */}
+            <CollapsibleSection
+              title="Professional and Legal Info"
+              isExpanded={expandedSections.professionalInfo}
+              onToggle={() => toggleSection('professionalInfo')}
             >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-medium text-gray-900">Employment History</h3>
-                  <Button variant="outline" size="sm" onClick={addWorkHistory} className="h-8 border-gray-300">
-                    <Plus size={14} className="mr-2" />
-                    Add Record
-                  </Button>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Legal Practice Information</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Lawyer Type</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="barrister">Barrister</SelectItem>
+                          <SelectItem value="solicitor">Solicitor</SelectItem>
+                          <SelectItem value="barrister-solicitor">Barrister & Solicitor</SelectItem>
+                          <SelectItem value="notary">Notary Public</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Province / Jurisdiction</Label>
+                      <Select defaultValue="ontario">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="ontario">Ontario</SelectItem>
+                          <SelectItem value="british-columbia">British Columbia</SelectItem>
+                          <SelectItem value="alberta">Alberta</SelectItem>
+                          <SelectItem value="quebec">Quebec</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Bar Admission Number</Label>
+                      <Input placeholder="Enter admission number" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Admission Route</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue placeholder="Select route" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="law-school">Law School Graduate</SelectItem>
+                          <SelectItem value="transfer">Transfer from Another Jurisdiction</SelectItem>
+                          <SelectItem value="foreign-trained">Foreign Trained Lawyer</SelectItem>
+                          <SelectItem value="articling">Articling Route</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
                 </div>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs">Effective Date</TableHead>
-                      <TableHead className="text-xs">Expiration Date</TableHead>
-                      <TableHead className="text-xs">Firm Name</TableHead>
-                      <TableHead className="text-xs">PL Limit</TableHead>
-                      <TableHead className="text-xs">Deductible</TableHead>
-                      <TableHead className="text-xs">Innocent Party Sublimit</TableHead>
-                      <TableHead className="text-xs">RO/IROP</TableHead>
-                      <TableHead className="text-xs">Exemption Type</TableHead>
-                      <TableHead className="text-xs">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {workHistory.map((record) => (
-                      <TableRow key={record.id}>
-                        <TableCell>
-                          <Input type="date" value={record.effectiveDate} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <Input type="date" value={record.expirationDate} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <Input value={record.firmName} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <Input value={record.plLimit} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <Input value={record.deductible} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <Input value={record.innocentPartySublimit} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <Input value={record.roIrop} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <Input value={record.exemptionType} className="h-7 text-xs border-gray-300" />
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex gap-1">
-                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                              <Edit size={12} />
-                            </Button>
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              className="h-6 w-6 p-0 text-red-600"
-                              onClick={() => deleteWorkHistory(record.id)}
-                            >
-                              <Trash2 size={12} />
-                            </Button>
-                          </div>
-                        </TableCell>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Education</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Law School</Label>
+                      <Input placeholder="Enter law school name" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Degree</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue placeholder="Select degree" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="jd">Juris Doctor (JD)</SelectItem>
+                          <SelectItem value="llb">Bachelor of Laws (LLB)</SelectItem>
+                          <SelectItem value="llm">Master of Laws (LLM)</SelectItem>
+                          <SelectItem value="phd">Doctor of Philosophy (PhD)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Graduation Year</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue placeholder="Select year" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Array.from({ length: 30 }, (_, i) => 2024 - i).map(year => (
+                            <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Date of Call</Label>
+                      <Input type="date" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Employment Information</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Department</Label>
+                      <Input placeholder="Enter department" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Job Title</Label>
+                      <Input placeholder="Enter job title" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">IMIS ID</Label>
+                      <Input placeholder="Enter IMIS ID" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Account Group</Label>
+                      <Input placeholder="Enter account group" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Supervisor or Manager</Label>
+                      <Input placeholder="Search for supervisor" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Record Type</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="individual">Individual</SelectItem>
+                          <SelectItem value="corporate">Corporate</SelectItem>
+                          <SelectItem value="partnership">Partnership</SelectItem>
+                          <SelectItem value="firm">Law Firm</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CollapsibleSection>
+          </div>
+        );
+
+      case 'risk-compliance':
+        return (
+          <div className="space-y-4">
+            {/* Risk and Compliance Section */}
+            <CollapsibleSection
+              title="Risk and Compliance"
+              isExpanded={expandedSections.riskCompliance}
+              onToggle={() => toggleSection('riskCompliance')}
+            >
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Risk Assessment</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Risk Profile</Label>
+                      <Select defaultValue="low">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="low">Low Risk</SelectItem>
+                          <SelectItem value="medium">Medium Risk</SelectItem>
+                          <SelectItem value="high">High Risk</SelectItem>
+                          <SelectItem value="very-high">Very High Risk</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="md:col-span-2">
+                      <Label className="text-xs text-gray-600">Risk Reason</Label>
+                      <Input placeholder="Enter risk reasons or tags" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Compliance Checks</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="canadian-sanctions" />
+                      <Label htmlFor="canadian-sanctions" className="text-sm">Associated with Canadian Sanctions?</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="claim-history" />
+                      <Label htmlFor="claim-history" className="text-sm">Claim History</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="underwriting-reasons" />
+                      <Label htmlFor="underwriting-reasons" className="text-sm">Underwriting Reasons</Label>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Subscription Status</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">TP Subscriber Status</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue placeholder="Select status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="active">Active</SelectItem>
+                          <SelectItem value="inactive">Inactive</SelectItem>
+                          <SelectItem value="suspended">Suspended</SelectItem>
+                          <SelectItem value="pending">Pending</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">TP Subscriber Sub Status</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue placeholder="Select sub status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="full">Full Coverage</SelectItem>
+                          <SelectItem value="partial">Partial Coverage</SelectItem>
+                          <SelectItem value="trial">Trial Period</SelectItem>
+                          <SelectItem value="renewal">Renewal Required</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Program Eligibility</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Include in Campaign</Label>
+                      <Select defaultValue="yes">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Send IROP Reminder</Label>
+                      <Select defaultValue="yes">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">CPATA Eligible</Label>
+                      <Select defaultValue="yes">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Status Indian Certificate</Label>
+                      <Select defaultValue="no">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CollapsibleSection>
+          </div>
+        );
+
+      case 'other-details':
+        return (
+          <div className="space-y-4">
+            {/* Other Details Section */}
+            <CollapsibleSection
+              title="Other Details"
+              isExpanded={expandedSections.otherDetails}
+              onToggle={() => toggleSection('otherDetails')}
+            >
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Additional Information</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Effective Date</Label>
+                      <Input type="date" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Customer Since</Label>
+                      <Select defaultValue="2019">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Array.from({ length: 20 }, (_, i) => 2024 - i).map(year => (
+                            <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Last Contact Date</Label>
+                      <Input type="date" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Years of Experience</Label>
+                      <Input type="number" placeholder="Enter years" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Risk Category</Label>
+                      <Select defaultValue="low">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="low">Low</SelectItem>
+                          <SelectItem value="medium">Medium</SelectItem>
+                          <SelectItem value="high">High</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Account Manager</Label>
+                      <Input value="UW John" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-base font-medium text-gray-900">Other Names</h3>
+                    <Button variant="outline" size="sm" onClick={addOtherName} className="h-8 border-gray-300">
+                      <Plus size={14} className="mr-2" />
+                      Add Name
+                    </Button>
+                  </div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs">Type</TableHead>
+                        <TableHead className="text-xs">First Name</TableHead>
+                        <TableHead className="text-xs">Middle Initial</TableHead>
+                        <TableHead className="text-xs">Last Name</TableHead>
+                        <TableHead className="text-xs">Effective Date</TableHead>
+                        <TableHead className="text-xs">Expiry Date</TableHead>
+                        <TableHead className="text-xs">Actions</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {otherNames.map((name) => (
+                        <TableRow key={name.id}>
+                          <TableCell>
+                            <Input value={name.type} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={name.firstName} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={name.middleInitial} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={name.lastName} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input type="date" value={name.effectiveDate} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input type="date" value={name.expiryDate} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex gap-1">
+                              <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                                <Edit size={12} />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 w-6 p-0 text-red-600"
+                                onClick={() => deleteOtherName(name.id)}
+                              >
+                                <Trash2 size={12} />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             </CollapsibleSection>
           </div>
