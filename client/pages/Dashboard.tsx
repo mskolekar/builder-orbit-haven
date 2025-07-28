@@ -411,25 +411,46 @@ export default function Dashboard() {
                 <TrendingUp size={16} />
                 Submissions
               </CardTitle>
+              <p className="text-xs text-gray-500">Applications in progress</p>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {filteredSubmissions.map((submission, index) => (
-                  <div key={index} className="p-2 bg-blue-50 border rounded">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium">{submission.id}</span>
-                      {getStatusBadge(submission.status)}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Progress value={submission.progress} className="flex-1 h-1" />
-                      <span className="text-xs font-medium">{submission.progress}%</span>
-                    </div>
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
-                      <span>{submission.lob}</span>
-                      <span>{submission.endDate}</span>
-                    </div>
-                  </div>
-                ))}
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs h-6">Submission</TableHead>
+                      <TableHead className="text-xs h-6">LOB</TableHead>
+                      <TableHead className="text-xs h-6">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={submissionStatuses}
+                            selectedValues={submissionStatusFilter}
+                            onFilterChange={setSubmissionStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-6">Progress</TableHead>
+                      <TableHead className="text-xs h-6">End Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredSubmissions.map((submission, index) => (
+                      <TableRow key={index} className="h-8 hover:bg-blue-50">
+                        <TableCell className="text-xs font-medium py-1">{submission.id}</TableCell>
+                        <TableCell className="text-xs py-1">{submission.lob}</TableCell>
+                        <TableCell className="py-1">{getStatusBadge(submission.status)}</TableCell>
+                        <TableCell className="py-1">
+                          <div className="flex items-center gap-2">
+                            <Progress value={submission.progress} className="flex-1 h-1" />
+                            <span className="text-xs font-medium w-8">{submission.progress}%</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-xs py-1">{submission.endDate}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </CardContent>
           </Card>
