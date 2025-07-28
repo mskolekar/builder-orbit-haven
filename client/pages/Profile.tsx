@@ -154,11 +154,11 @@ export default function Profile() {
       case 'personal-info':
         return (
           <div className="space-y-4">
-            {/* Profile Header Section */}
-            <CollapsibleSection 
-              title="Profile Header" 
-              isExpanded={expandedSections.profileHeader}
-              onToggle={() => toggleSection('profileHeader')}
+            {/* Personal Info Section */}
+            <CollapsibleSection
+              title="Personal Info"
+              isExpanded={expandedSections.personalInfo}
+              onToggle={() => toggleSection('personalInfo')}
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between mb-4">
