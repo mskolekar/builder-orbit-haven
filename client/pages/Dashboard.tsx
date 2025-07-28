@@ -494,12 +494,12 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Claims and Risk Section */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        {/* Claims, Risk & Compliance, and Recent Activity in One Row */}
+        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           {/* Claims History */}
-          <div className="lg:col-span-2">
-            <Card className="shadow-sm">
-              <CardHeader className="pb-3">
+          <div className="lg:col-span-5">
+            <Card className="shadow-sm h-full">
+              <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="text-base flex items-center gap-2">
@@ -519,13 +519,13 @@ export default function Dashboard() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-2">
                 {filteredClaims.map((claim, index) => (
-                  <div key={index} className="p-3 bg-blue-50 border rounded-lg hover:shadow-md transition-shadow">
+                  <div key={index} className="p-2 bg-blue-50 border rounded-lg hover:shadow-md transition-shadow">
                     <div className="flex items-start justify-between">
-                      <div className="flex items-start gap-3">
-                        <div className="p-2 bg-blue-100 rounded-lg">
-                          <FileText size={14} className="text-blue-600" />
+                      <div className="flex items-start gap-2">
+                        <div className="p-1 bg-blue-100 rounded">
+                          <FileText size={12} className="text-blue-600" />
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
@@ -533,15 +533,14 @@ export default function Dashboard() {
                             <span className="text-xs text-gray-500">#{claim.claimNumber}</span>
                           </div>
                           <p className="text-xs text-gray-500 mt-1">{claim.date}</p>
-                          <div className="flex items-center gap-3 mt-2">
+                          <div className="flex items-center gap-3 mt-1">
                             {getStatusBadge(claim.status)}
                             <span className="text-sm font-semibold text-blue-600">{claim.amount}</span>
                           </div>
                         </div>
                       </div>
-                      <Button variant="outline" size="sm" className="h-8">
-                        <Eye size={12} className="mr-2" />
-                        Details
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                        <Eye size={12} />
                       </Button>
                     </div>
                   </div>
@@ -551,82 +550,85 @@ export default function Dashboard() {
           </div>
 
           {/* Risk & Compliance */}
-          <Card className="shadow-sm">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-base flex items-center gap-2">
-                <Shield size={16} />
-                Risk & Compliance
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="text-center py-3">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <CheckCircle size={24} className="text-blue-600" />
-                  </div>
-                  <p className="text-sm font-medium">All Clear</p>
-                  <p className="text-xs text-gray-500">No active risk alerts</p>
-                </div>
-                
+          <div className="lg:col-span-3">
+            <Card className="shadow-sm h-full">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Shield size={14} />
+                  Risk & Compliance
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
-                    <span className="text-xs">Compliance Score</span>
-                    <span className="text-sm font-bold text-blue-600">98%</span>
+                  <div className="text-center py-2">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <CheckCircle size={18} className="text-blue-600" />
+                    </div>
+                    <p className="text-xs font-medium">All Clear</p>
+                    <p className="text-xs text-gray-500">No active risk alerts</p>
                   </div>
-                  <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
-                    <span className="text-xs">Last Audit</span>
-                    <span className="text-sm font-medium">2024-01-15</span>
-                  </div>
-                  <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
-                    <span className="text-xs">Next Review</span>
-                    <span className="text-sm font-medium">2024-07-15</span>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
+                      <span className="text-xs">Compliance</span>
+                      <span className="text-xs font-bold text-blue-600">98%</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
+                      <span className="text-xs">Last Audit</span>
+                      <span className="text-xs font-medium">2024-01-15</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2 bg-blue-50 rounded">
+                      <span className="text-xs">Next Review</span>
+                      <span className="text-xs font-medium">2024-07-15</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+              </CardContent>
+            </Card>
+          </div>
 
-        {/* Recent Activity */}
-        <Card className={`shadow-sm transition-all duration-1000 delay-600 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base flex items-center gap-2">
-              <Activity size={16} />
-              Recent Activity & Interactions
-            </CardTitle>
-            <p className="text-xs text-gray-500">Latest system activities and customer interactions</p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-              {recentActivity.map((activity, index) => (
-                <div key={index} className="p-3 bg-blue-50 border rounded-lg hover:shadow-md transition-all duration-300 hover:scale-105">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      {activity.category === 'claim' ? 
-                        <AlertTriangle size={14} className="text-blue-600" /> :
-                        activity.category === 'payment' ?
-                        <DollarSign size={14} className="text-blue-600" /> :
-                        <User size={14} className="text-blue-600" />
-                      }
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">{activity.type}</p>
-                      <p className="text-xs text-gray-500 mt-1">{activity.date}</p>
-                      <p className="text-xs text-gray-600 mt-1">{activity.description}</p>
-                      <div className="flex items-center justify-between mt-2">
-                        <span className="text-xs text-gray-500">by {activity.user}</span>
-                        <Button variant="ghost" size="sm" className="h-6 text-xs px-2 hover:bg-blue-100">
-                          <Eye size={10} className="mr-1" />
-                          View
-                        </Button>
+          {/* Recent Activity */}
+          <div className="lg:col-span-4">
+            <Card className="shadow-sm h-full">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Activity size={16} />
+                  Recent Activity
+                </CardTitle>
+                <p className="text-xs text-gray-500">Latest system activities</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {recentActivity.map((activity, index) => (
+                    <div key={index} className="p-2 bg-blue-50 border rounded-lg hover:shadow-md transition-shadow">
+                      <div className="flex items-start gap-2">
+                        <div className="p-1 bg-blue-100 rounded">
+                          {activity.category === 'claim' ?
+                            <AlertTriangle size={12} className="text-blue-600" /> :
+                            activity.category === 'payment' ?
+                            <DollarSign size={12} className="text-blue-600" /> :
+                            <User size={12} className="text-blue-600" />
+                          }
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium">{activity.type}</p>
+                          <p className="text-xs text-gray-500 mt-1">{activity.date}</p>
+                          <p className="text-xs text-gray-600 mt-1 truncate">{activity.description}</p>
+                          <div className="flex items-center justify-between mt-1">
+                            <span className="text-xs text-gray-500">by {activity.user}</span>
+                            <Button variant="ghost" size="sm" className="h-4 w-4 p-0">
+                              <Eye size={10} />
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
