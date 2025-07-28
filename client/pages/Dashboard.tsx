@@ -243,11 +243,7 @@ export default function Dashboard() {
                   <div className="flex items-center gap-4 mt-2">
                     <div className="flex items-center gap-1 text-sm text-gray-500">
                       <Calendar size={12} />
-                      Member since {customerData.memberSince}
-                    </div>
-                    <div className="flex items-center gap-1 text-sm text-gray-500">
-                      <Star size={12} />
-                      {customerData.satisfactionScore}/5.0
+                      Customer since {customerData.memberSince}
                     </div>
                   </div>
                 </div>
