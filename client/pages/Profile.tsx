@@ -97,21 +97,19 @@ export default function Profile() {
 
   const expandAll = () => {
     setExpandedSections({
-      profileHeader: true,
+      personalInfo: true,
       professionalInfo: true,
       riskCompliance: true,
-      otherDetails: true,
-      workHistory: true
+      otherDetails: true
     });
   };
 
   const collapseAll = () => {
     setExpandedSections({
-      profileHeader: false,
+      personalInfo: false,
       professionalInfo: false,
       riskCompliance: false,
-      otherDetails: false,
-      workHistory: false
+      otherDetails: false
     });
   };
 
