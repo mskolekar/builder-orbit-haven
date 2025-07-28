@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 import { 
   Select,
   SelectContent,
@@ -12,7 +14,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Mail, Phone, MessageCircle, Plus, Send, ChevronDown, ChevronRight, Expand, Minimize } from 'lucide-react';
+import { 
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Mail, Phone, MessageCircle, Plus, Send, ChevronDown, ChevronRight, Expand, Minimize, Edit, Trash2 } from 'lucide-react';
 
 const CollapsibleSection = ({ 
   title, 
@@ -28,13 +38,13 @@ const CollapsibleSection = ({
   className?: string;
 }) => {
   return (
-    <Card className={`shadow-sm ${className}`}>
+    <Card className={`shadow-sm border-gray-200 ${className}`}>
       <CardHeader 
         className="cursor-pointer hover:bg-gray-50 transition-colors pb-3"
         onClick={onToggle}
       >
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base">{title}</CardTitle>
+          <CardTitle className="text-base font-medium text-gray-900">{title}</CardTitle>
           <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
             {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
           </Button>
@@ -50,12 +60,38 @@ const CollapsibleSection = ({
 };
 
 export default function Communication() {
+  const [searchParams] = useSearchParams();
+  const currentTab = searchParams.get('tab') || 'contact-details';
+
   const [expandedSections, setExpandedSections] = useState({
-    deliveryPreferences: true,
-    addressManagement: false,
-    contactHistory: false,
-    sendCommunication: false
+    contactDetails: true,
+    communicationPreferences: false,
+    documentDelivery: true,
+    communicationPrefs: false
   });
+
+  const [otherAddresses, setOtherAddresses] = useState([
+    { id: 1, type: 'Previous Address', fullAddress: '123 Main St', city: 'Toronto', state: 'ON', postal: 'M1A 1A1', country: 'Canada' }
+  ]);
+
+  const [documentDeliveryPrefs, setDocumentDeliveryPrefs] = useState([
+    { 
+      id: 1, 
+      documentType: 'Policy Documents', 
+      preference: 'Email', 
+      emailOrAddress: 'rose.k@lawfirm.com', 
+      status: 'Active', 
+      effectiveDate: '2024-01-01' 
+    },
+    { 
+      id: 2, 
+      documentType: 'Claims Correspondence', 
+      preference: 'Physical Mail', 
+      emailOrAddress: '1508 - 141 Lyon Court, Toronto, ON', 
+      status: 'Active', 
+      effectiveDate: '2024-01-01' 
+    }
+  ]);
 
   const toggleSection = (section: keyof typeof expandedSections) => {
     setExpandedSections(prev => ({
@@ -66,38 +102,459 @@ export default function Communication() {
 
   const expandAll = () => {
     setExpandedSections({
-      deliveryPreferences: true,
-      addressManagement: true,
-      contactHistory: true,
-      sendCommunication: true
+      contactDetails: true,
+      communicationPreferences: true,
+      documentDelivery: true,
+      communicationPrefs: true
     });
   };
 
   const collapseAll = () => {
     setExpandedSections({
-      deliveryPreferences: false,
-      addressManagement: false,
-      contactHistory: false,
-      sendCommunication: false
+      contactDetails: false,
+      communicationPreferences: false,
+      documentDelivery: false,
+      communicationPrefs: false
     });
+  };
+
+  const addOtherAddress = () => {
+    const newId = Math.max(...otherAddresses.map(a => a.id)) + 1;
+    setOtherAddresses([...otherAddresses, { 
+      id: newId, 
+      type: '', 
+      fullAddress: '', 
+      city: '', 
+      state: '', 
+      postal: '', 
+      country: '' 
+    }]);
+  };
+
+  const deleteOtherAddress = (id: number) => {
+    setOtherAddresses(otherAddresses.filter(a => a.id !== id));
+  };
+
+  const addDocumentPref = () => {
+    const newId = Math.max(...documentDeliveryPrefs.map(d => d.id)) + 1;
+    setDocumentDeliveryPrefs([...documentDeliveryPrefs, { 
+      id: newId, 
+      documentType: '', 
+      preference: '', 
+      emailOrAddress: '', 
+      status: 'Active', 
+      effectiveDate: '' 
+    }]);
+  };
+
+  const deleteDocumentPref = (id: number) => {
+    setDocumentDeliveryPrefs(documentDeliveryPrefs.filter(d => d.id !== id));
+  };
+
+  const renderTabContent = () => {
+    switch (currentTab) {
+      case 'contact-details':
+        return (
+          <div className="space-y-4">
+            {/* Contact Details Section */}
+            <CollapsibleSection 
+              title="Contact Information" 
+              isExpanded={expandedSections.contactDetails}
+              onToggle={() => toggleSection('contactDetails')}
+            >
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Email Addresses</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Work Email</Label>
+                      <Input value="rose.k@lawfirm.com" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Personal Email</Label>
+                      <Input value="rose.greenthumb@example.com" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Phone Numbers</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Business Phone</Label>
+                      <Input value="(416) 555-0123" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Mobile Phone</Label>
+                      <Input placeholder="Enter mobile number" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Home Phone</Label>
+                      <Input placeholder="Enter home number" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Alternate Phone</Label>
+                      <Input placeholder="Enter alternate number" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Fax</Label>
+                      <Input placeholder="Enter fax number" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Primary Address</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="md:col-span-2 lg:col-span-3">
+                      <Label className="text-xs text-gray-600">Street Address</Label>
+                      <Input value="1508 - 141 Lyon Court" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">City</Label>
+                      <Input value="Toronto" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Province</Label>
+                      <Select defaultValue="on">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="on">Ontario</SelectItem>
+                          <SelectItem value="bc">British Columbia</SelectItem>
+                          <SelectItem value="ab">Alberta</SelectItem>
+                          <SelectItem value="mb">Manitoba</SelectItem>
+                          <SelectItem value="sk">Saskatchewan</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Postal Code</Label>
+                      <Input value="M5B 3H2" className="mt-1 h-8 border-gray-300" />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Country</Label>
+                      <Select defaultValue="canada">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="canada">Canada</SelectItem>
+                          <SelectItem value="usa">United States</SelectItem>
+                          <SelectItem value="uk">United Kingdom</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">Communication Preferences</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <Label className="text-xs text-gray-600">Preferred Contact Method</Label>
+                      <Select defaultValue="email">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="email">Email</SelectItem>
+                          <SelectItem value="phone">Phone</SelectItem>
+                          <SelectItem value="sms">SMS</SelectItem>
+                          <SelectItem value="mail">Physical Mail</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-600">Language</Label>
+                      <Select defaultValue="english">
+                        <SelectTrigger className="mt-1 h-8 border-gray-300">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="english">English</SelectItem>
+                          <SelectItem value="french">French</SelectItem>
+                          <SelectItem value="spanish">Spanish</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex items-center space-x-2 mt-6">
+                      <Checkbox id="newsletter" defaultChecked />
+                      <Label htmlFor="newsletter" className="text-sm">Newsletter Subscription</Label>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-base font-medium text-gray-900">Other Addresses</h3>
+                    <Button variant="outline" size="sm" onClick={addOtherAddress} className="h-8 border-gray-300">
+                      <Plus size={14} className="mr-2" />
+                      Add Address
+                    </Button>
+                  </div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs">Type</TableHead>
+                        <TableHead className="text-xs">Full Address</TableHead>
+                        <TableHead className="text-xs">City</TableHead>
+                        <TableHead className="text-xs">State</TableHead>
+                        <TableHead className="text-xs">Postal</TableHead>
+                        <TableHead className="text-xs">Country</TableHead>
+                        <TableHead className="text-xs">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {otherAddresses.map((address) => (
+                        <TableRow key={address.id}>
+                          <TableCell>
+                            <Input value={address.type} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={address.fullAddress} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={address.city} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={address.state} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={address.postal} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <Input value={address.country} className="h-7 text-xs border-gray-300" />
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex gap-1">
+                              <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                                <Edit size={12} />
+                              </Button>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                className="h-6 w-6 p-0 text-red-600"
+                                onClick={() => deleteOtherAddress(address.id)}
+                              >
+                                <Trash2 size={12} />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            </CollapsibleSection>
+          </div>
+        );
+
+      case 'delivery-preferences':
+        return (
+          <div className="space-y-4">
+            {/* Document Delivery Preferences Section */}
+            <CollapsibleSection 
+              title="Document Delivery Preferences" 
+              isExpanded={expandedSections.documentDelivery}
+              onToggle={() => toggleSection('documentDelivery')}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-base font-medium text-gray-900">Document Delivery Settings</h3>
+                  <Button variant="outline" size="sm" onClick={addDocumentPref} className="h-8 border-gray-300">
+                    <Plus size={14} className="mr-2" />
+                    Add Preference
+                  </Button>
+                </div>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs">Document Type</TableHead>
+                      <TableHead className="text-xs">Preference</TableHead>
+                      <TableHead className="text-xs">Email or Address</TableHead>
+                      <TableHead className="text-xs">Status</TableHead>
+                      <TableHead className="text-xs">Effective Date</TableHead>
+                      <TableHead className="text-xs">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {documentDeliveryPrefs.map((pref) => (
+                      <TableRow key={pref.id}>
+                        <TableCell>
+                          <Select value={pref.documentType}>
+                            <SelectTrigger className="h-7 text-xs border-gray-300">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Policy Documents">Policy Documents</SelectItem>
+                              <SelectItem value="Claims Correspondence">Claims Correspondence</SelectItem>
+                              <SelectItem value="Payment Statements">Payment Statements</SelectItem>
+                              <SelectItem value="Legal Notices">Legal Notices</SelectItem>
+                              <SelectItem value="Marketing Materials">Marketing Materials</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </TableCell>
+                        <TableCell>
+                          <Select value={pref.preference}>
+                            <SelectTrigger className="h-7 text-xs border-gray-300">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Email">Email</SelectItem>
+                              <SelectItem value="Physical Mail">Physical Mail</SelectItem>
+                              <SelectItem value="Secure Portal">Secure Portal</SelectItem>
+                              <SelectItem value="No Delivery">No Delivery</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </TableCell>
+                        <TableCell>
+                          <Input value={pref.emailOrAddress} className="h-7 text-xs border-gray-300" />
+                        </TableCell>
+                        <TableCell>
+                          <Select value={pref.status}>
+                            <SelectTrigger className="h-7 text-xs border-gray-300">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Active">Active</SelectItem>
+                              <SelectItem value="Inactive">Inactive</SelectItem>
+                              <SelectItem value="Pending">Pending</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </TableCell>
+                        <TableCell>
+                          <Input type="date" value={pref.effectiveDate} className="h-7 text-xs border-gray-300" />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex gap-1">
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                              <Edit size={12} />
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="h-6 w-6 p-0 text-red-600"
+                              onClick={() => deleteDocumentPref(pref.id)}
+                            >
+                              <Trash2 size={12} />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CollapsibleSection>
+
+            {/* Communication Preferences Section */}
+            <CollapsibleSection 
+              title="Communication Preferences" 
+              isExpanded={expandedSections.communicationPrefs}
+              onToggle={() => toggleSection('communicationPrefs')}
+            >
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <Label className="text-xs text-gray-600">Preferred Contact Method</Label>
+                    <Select defaultValue="email">
+                      <SelectTrigger className="mt-1 h-8 border-gray-300">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="email">Email</SelectItem>
+                        <SelectItem value="phone">Phone</SelectItem>
+                        <SelectItem value="sms">SMS</SelectItem>
+                        <SelectItem value="mail">Physical Mail</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label className="text-xs text-gray-600">Language</Label>
+                    <Select defaultValue="english">
+                      <SelectTrigger className="mt-1 h-8 border-gray-300">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="english">English</SelectItem>
+                        <SelectItem value="french">French</SelectItem>
+                        <SelectItem value="spanish">Spanish</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex items-center space-x-2 mt-6">
+                    <Checkbox id="newsletter-delivery" defaultChecked />
+                    <Label htmlFor="newsletter-delivery" className="text-sm">Newsletter Subscription</Label>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium text-gray-900">Notification Preferences</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <div className="flex items-center gap-3">
+                        <Mail size={16} className="text-blue-600" />
+                        <div>
+                          <p className="text-sm font-medium">Policy Updates</p>
+                          <p className="text-xs text-gray-600">Receive notifications about policy changes</p>
+                        </div>
+                      </div>
+                      <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs">Email</Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <div className="flex items-center gap-3">
+                        <Phone size={16} className="text-blue-600" />
+                        <div>
+                          <p className="text-sm font-medium">Payment Reminders</p>
+                          <p className="text-xs text-gray-600">Notifications about upcoming payments</p>
+                        </div>
+                      </div>
+                      <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs">SMS</Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <div className="flex items-center gap-3">
+                        <MessageCircle size={16} className="text-blue-600" />
+                        <div>
+                          <p className="text-sm font-medium">Claims Updates</p>
+                          <p className="text-xs text-gray-600">Status updates on active claims</p>
+                        </div>
+                      </div>
+                      <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs">Phone</Badge>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CollapsibleSection>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="text-center py-8">
+            <p className="text-gray-600">Content for {currentTab} will be implemented here.</p>
+          </div>
+        );
+    }
   };
 
   return (
     <div className="flex-1 bg-white p-4 lg:p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Tab Name */}
-        <div className="mb-6 border-b pb-4">
+        <div className="mb-6 border-b border-gray-200 pb-4">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900">Communication</h1>
-              <p className="text-medium-gray text-sm mt-1">Manage customer communication preferences and address information.</p>
+              <p className="text-gray-600 text-sm mt-1">Manage customer communication preferences and contact information</p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={expandAll} className="h-8">
+              <Button variant="outline" size="sm" onClick={expandAll} className="h-8 border-gray-300">
                 <Expand size={14} className="mr-2" />
                 Expand All
               </Button>
-              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8">
+              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8 border-gray-300">
                 <Minimize size={14} className="mr-2" />
                 Collapse All
               </Button>
@@ -105,222 +562,7 @@ export default function Communication() {
           </div>
         </div>
 
-        <div className="space-y-4">
-          {/* Delivery Preferences Section */}
-          <CollapsibleSection 
-            title="Delivery Preferences" 
-            isExpanded={expandedSections.deliveryPreferences}
-            onToggle={() => toggleSection('deliveryPreferences')}
-          >
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label className="text-sm font-medium">Preferred Contact Method</Label>
-                  <Select defaultValue="email">
-                    <SelectTrigger className="mt-1 h-8">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="email">Email</SelectItem>
-                      <SelectItem value="phone">Phone</SelectItem>
-                      <SelectItem value="sms">SMS</SelectItem>
-                      <SelectItem value="mail">Physical Mail</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label className="text-sm font-medium">Language Preference</Label>
-                  <Select defaultValue="english">
-                    <SelectTrigger className="mt-1 h-8">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="english">English</SelectItem>
-                      <SelectItem value="french">French</SelectItem>
-                      <SelectItem value="spanish">Spanish</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Label className="text-sm font-medium">Communication Types</Label>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <Mail size={16} className="text-blue-600" />
-                      <div>
-                        <p className="text-sm font-medium">Policy Documents</p>
-                        <p className="text-xs text-medium-gray">Receive policy documents and updates</p>
-                      </div>
-                    </div>
-                    <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs">Email</Badge>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <Phone size={16} className="text-blue-600" />
-                      <div>
-                        <p className="text-sm font-medium">Payment Reminders</p>
-                        <p className="text-xs text-medium-gray">Notifications about upcoming payments</p>
-                      </div>
-                    </div>
-                    <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs">SMS</Badge>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <MessageCircle size={16} className="text-blue-600" />
-                      <div>
-                        <p className="text-sm font-medium">Claims Updates</p>
-                        <p className="text-xs text-medium-gray">Status updates on active claims</p>
-                      </div>
-                    </div>
-                    <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs">Phone</Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CollapsibleSection>
-
-          {/* Address Management Section */}
-          <CollapsibleSection 
-            title="Address Management" 
-            isExpanded={expandedSections.addressManagement}
-            onToggle={() => toggleSection('addressManagement')}
-          >
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-base font-medium">Customer Addresses</h3>
-                  <p className="text-xs text-medium-gray">Manage customer addresses and mailing preferences</p>
-                </div>
-                <Button variant="outline" size="sm" className="h-8">
-                  <Plus size={14} className="mr-2" />
-                  Add Address
-                </Button>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium mb-3">Primary Address</h4>
-                <div className="p-4 border rounded-lg bg-blue-50 border-blue-200">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-sm font-medium">Residential Address</p>
-                      <p className="text-sm text-medium-gray mt-1">1508 - 141 Lyon Court</p>
-                      <p className="text-sm text-medium-gray">Toronto, ON M5B 3H2</p>
-                      <p className="text-sm text-medium-gray">Canada</p>
-                      <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs mt-2">Primary</Badge>
-                    </div>
-                    <Button variant="outline" size="sm" className="h-7">Edit</Button>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium mb-3">Additional Addresses</h4>
-                <div className="space-y-3">
-                  <div className="p-4 border rounded-lg">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <p className="text-sm font-medium">Business Address</p>
-                        <p className="text-sm text-medium-gray mt-1">456 King Street West, Suite 200</p>
-                        <p className="text-sm text-medium-gray">Toronto, ON M5V 1L7</p>
-                        <p className="text-sm text-medium-gray">Canada</p>
-                        <Badge variant="outline" className="text-xs mt-2">Business</Badge>
-                      </div>
-                      <Button variant="outline" size="sm" className="h-7">Edit</Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CollapsibleSection>
-
-          {/* Contact History Section */}
-          <CollapsibleSection 
-            title="Contact History" 
-            isExpanded={expandedSections.contactHistory}
-            onToggle={() => toggleSection('contactHistory')}
-          >
-            <div className="space-y-3">
-              <div className="p-3 border rounded-lg">
-                <div className="flex items-start gap-3">
-                  <Mail size={14} className="text-blue-600 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-medium">Policy Renewal Email Sent</span>
-                      <Badge variant="outline" className="text-xs">Delivered</Badge>
-                    </div>
-                    <p className="text-xs text-medium-gray">Jan 15, 2024 - 09:30 AM</p>
-                    <p className="text-sm mt-1">Auto policy renewal notice sent to primary email address.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-3 border rounded-lg">
-                <div className="flex items-start gap-3">
-                  <Phone size={14} className="text-blue-600 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-medium">Outbound Call - Claim Follow-up</span>
-                      <Badge variant="outline" className="text-xs">Completed</Badge>
-                    </div>
-                    <p className="text-xs text-medium-gray">Jan 12, 2024 - 02:15 PM</p>
-                    <p className="text-sm mt-1">Spoke with customer about claim C1122 status update.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CollapsibleSection>
-
-          {/* Send Communication Section */}
-          <CollapsibleSection 
-            title="Send Communication" 
-            isExpanded={expandedSections.sendCommunication}
-            onToggle={() => toggleSection('sendCommunication')}
-          >
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label className="text-sm font-medium">Communication Type</Label>
-                  <Select>
-                    <SelectTrigger className="mt-1 h-8">
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="email">Email</SelectItem>
-                      <SelectItem value="letter">Physical Letter</SelectItem>
-                      <SelectItem value="document">Document Package</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label className="text-sm font-medium">Delivery Address</Label>
-                  <Select>
-                    <SelectTrigger className="mt-1 h-8">
-                      <SelectValue placeholder="Select address" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="primary">Primary Address</SelectItem>
-                      <SelectItem value="business">Business Address</SelectItem>
-                      <SelectItem value="mailing">Mailing Address</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div>
-                <Label className="text-sm font-medium">Subject</Label>
-                <Input placeholder="Enter subject" className="mt-1 h-8" />
-              </div>
-              <div>
-                <Label className="text-sm font-medium">Message</Label>
-                <Textarea placeholder="Enter your message..." className="mt-1" rows={4} />
-              </div>
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                <Send size={14} className="mr-2" />
-                Send Communication
-              </Button>
-            </div>
-          </CollapsibleSection>
-        </div>
+        {renderTabContent()}
       </div>
     </div>
   );
