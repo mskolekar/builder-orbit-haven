@@ -149,9 +149,9 @@ export default function Profile() {
     setWorkHistory(workHistory.filter(w => w.id !== id));
   };
 
-  const renderTabContent = () => {
-    switch (currentTab) {
-      case 'personal-details':
+  const renderSectionContent = () => {
+    switch (currentSection) {
+      case 'personal-info':
         return (
           <div className="space-y-4">
             {/* Profile Header Section */}
