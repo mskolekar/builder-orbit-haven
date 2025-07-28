@@ -64,11 +64,10 @@ export default function Profile() {
   const currentSection = searchParams.get('section') || 'personal-info';
 
   const [expandedSections, setExpandedSections] = useState({
-    profileHeader: true,
+    personalInfo: true,
     professionalInfo: false,
     riskCompliance: false,
-    otherDetails: false,
-    workHistory: false
+    otherDetails: false
   });
 
   const [otherNames, setOtherNames] = useState([
