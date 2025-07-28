@@ -61,7 +61,7 @@ const CollapsibleSection = ({
 
 export default function Profile() {
   const [searchParams] = useSearchParams();
-  const currentTab = searchParams.get('tab') || 'personal-details';
+  const currentSection = searchParams.get('section') || 'personal-info';
 
   const [expandedSections, setExpandedSections] = useState({
     profileHeader: true,
