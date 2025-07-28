@@ -428,7 +428,7 @@ export default function Dashboard() {
                     <Shield size={16} />
                     Policy Details
                   </CardTitle>
-                  <p className="text-xs text-gray-500 mt-1">Active policy portfolio</p>
+                  <p className="text-xs text-gray-500 mt-1">Policy Portfolio</p>
                 </div>
                 <div className="text-right">
                   <p className="text-lg font-bold text-blue-600">$9.5K</p>
