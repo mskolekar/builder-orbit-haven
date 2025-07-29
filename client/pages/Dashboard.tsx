@@ -174,12 +174,14 @@ const getPriorityColor = (priority: string) => {
 };
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
   // Filter states
   const [policyStatusFilter, setPolicyStatusFilter] = useState<string[]>([]);
   const [policyLobFilter, setPolicyLobFilter] = useState<string[]>([]);
   const [submissionStatusFilter, setSubmissionStatusFilter] = useState<string[]>([]);
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
-  
+
   // Animation states
   const [mounted, setMounted] = useState(false);
   
