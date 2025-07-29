@@ -225,13 +225,7 @@ export default function Dashboard() {
 
         {/* Enhanced Personal Profile Section */}
         <Card className={`relative shadow-sm border transition-all duration-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="absolute top-2 right-2 p-1 h-6 w-6"
-          >
-            <Edit3 size={12} />
-          </Button>
+
           <CardContent className="p-4">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
