@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
+import { 
   Table,
   TableBody,
   TableCell,
@@ -29,13 +29,13 @@ const CollapsibleSection = ({
   className?: string;
 }) => {
   return (
-    <Card className={`shadow-sm ${className}`}>
+    <Card className={`shadow-sm border-gray-200 ${className}`}>
       <CardHeader 
         className="cursor-pointer hover:bg-gray-50 transition-colors pb-3"
         onClick={onToggle}
       >
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base">{title}</CardTitle>
+          <CardTitle className="text-base font-medium text-gray-900">{title}</CardTitle>
           <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
             {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
           </Button>
@@ -50,6 +50,61 @@ const CollapsibleSection = ({
   );
 };
 
+const priorLosses = [
+  {
+    claim: "C1122",
+    date: "2019-05-15",
+    type: "Property Damage",
+    amount: "$5,500",
+    status: "Closed"
+  },
+  {
+    claim: "C0987",
+    date: "2018-09-20",
+    type: "Personal Injury",
+    amount: "$12,000",
+    status: "Closed"
+  }
+];
+
+const priorPolicies = [
+  {
+    policy: "A9875",
+    period: "2019-2020",
+    type: "Auto",
+    premium: "$1,200",
+    status: "Expired"
+  },
+  {
+    policy: "H5432",
+    period: "2018-2019",
+    type: "Home",
+    premium: "$800",
+    status: "Expired"
+  }
+];
+
+const auditLogs = [
+  {
+    action: "Policy Created",
+    user: "UW John",
+    timestamp: "2024-01-15 09:30:00",
+    details: "New auto policy A9876 created for customer Rose K"
+  },
+  {
+    action: "Claim Filed",
+    user: "Agent Johnson",
+    timestamp: "2024-01-10 14:22:00",
+    details: "Claim C1122 filed for policy A9876 - Minor fender bender"
+  },
+  {
+    action: "Profile Updated",
+    user: "Agent Smith",
+    timestamp: "2024-01-05 11:15:00",
+    details: "Customer communication preferences updated - Email preferred"
+  }
+];
+
 export default function History() {
   const [searchParams] = useSearchParams();
   const currentTab = searchParams.get('tab') || 'history';
@@ -63,16 +118,16 @@ export default function History() {
   });
 
   const [workHistory, setWorkHistory] = useState([
-    {
-      id: 1,
-      effectiveDate: '2019-01-01',
-      expirationDate: '2024-01-01',
-      firmName: 'Smith & Associates',
-      plLimit: '$1,000,000',
-      deductible: '$5,000',
-      innocentPartySublimit: '$250,000',
-      roIrop: 'IROP',
-      exemptionType: 'None'
+    { 
+      id: 1, 
+      effectiveDate: '2019-01-01', 
+      expirationDate: '2024-01-01', 
+      firmName: 'Smith & Associates', 
+      plLimit: '$1,000,000', 
+      deductible: '$5,000', 
+      innocentPartySublimit: '$250,000', 
+      roIrop: 'IROP', 
+      exemptionType: 'None' 
     }
   ]);
 
@@ -85,16 +140,16 @@ export default function History() {
 
   const addWorkHistory = () => {
     const newId = Math.max(...workHistory.map(w => w.id)) + 1;
-    setWorkHistory([...workHistory, {
-      id: newId,
-      effectiveDate: '',
-      expirationDate: '',
-      firmName: '',
-      plLimit: '',
-      deductible: '',
-      innocentPartySublimit: '',
-      roIrop: '',
-      exemptionType: ''
+    setWorkHistory([...workHistory, { 
+      id: newId, 
+      effectiveDate: '', 
+      expirationDate: '', 
+      firmName: '', 
+      plLimit: '', 
+      deductible: '', 
+      innocentPartySublimit: '', 
+      roIrop: '', 
+      exemptionType: '' 
     }]);
   };
 
@@ -122,79 +177,121 @@ export default function History() {
     });
   };
 
-  const priorLosses = [
-    { date: "2022-03-15", type: "Auto Accident", amount: "$3,200", status: "Settled", claim: "C2045" },
-    { date: "2021-08-22", type: "Home Water Damage", amount: "$1,800", status: "Closed", claim: "C1876" },
-    { date: "2020-11-10", type: "Theft", amount: "$950", status: "Paid", claim: "C1654" },
-  ];
-
-  const priorPolicies = [
-    { policy: "P2021-AUTO", period: "2021-2022", type: "Auto Insurance", premium: "$1,150", status: "Expired" },
-    { policy: "P2020-HOME", period: "2020-2021", type: "Home Insurance", premium: "$750", status: "Expired" },
-    { policy: "P2019-LIFE", period: "2019-2020", type: "Life Insurance", premium: "$320", status: "Expired" },
-  ];
-
-  const auditLogs = [
-    { timestamp: "2024-01-15 09:32:15", user: "UW John", action: "Policy Updated", details: "Premium amount modified for policy A9876" },
-    { timestamp: "2024-01-14 14:22:08", user: "Rose K", action: "Profile Updated", details: "Email address changed" },
-    { timestamp: "2024-01-13 11:15:43", user: "Admin User", action: "Claim Created", details: "New claim C1122 submitted" },
-    { timestamp: "2024-01-12 16:45:22", user: "Agent Johnson", action: "Communication Logged", details: "Phone call regarding policy renewal" },
-    { timestamp: "2024-01-11 10:08:31", user: "System", action: "Payment Processed", details: "Premium payment of $150 processed" },
-  ];
-
-  return (
-    <div className="flex-1 bg-white p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Tab Name */}
-        <div className="mb-6 border-b pb-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold text-gray-900">History</h1>
-              <p className="text-medium-gray text-sm mt-1">View comprehensive historical data and audit trails.</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={expandAll} className="h-8">
-                <Expand size={14} className="mr-2" />
-                Expand All
-              </Button>
-              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8">
-                <Minimize size={14} className="mr-2" />
-                Collapse All
+  const renderWorkHistoryTab = () => {
+    return (
+      <div className="space-y-4">
+        <CollapsibleSection 
+          title="Work History" 
+          isExpanded={expandedSections.workHistory}
+          onToggle={() => toggleSection('workHistory')}
+        >
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-base font-medium text-gray-900">Employment History</h3>
+              <Button variant="outline" size="sm" onClick={addWorkHistory} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+                <Plus size={14} className="mr-2" />
+                Add Record
               </Button>
             </div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-xs">Effective Date</TableHead>
+                  <TableHead className="text-xs">Expiration Date</TableHead>
+                  <TableHead className="text-xs">Firm Name</TableHead>
+                  <TableHead className="text-xs">PL Limit</TableHead>
+                  <TableHead className="text-xs">Deductible</TableHead>
+                  <TableHead className="text-xs">Innocent Party Sublimit</TableHead>
+                  <TableHead className="text-xs">RO/IROP</TableHead>
+                  <TableHead className="text-xs">Exemption Type</TableHead>
+                  <TableHead className="text-xs">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {workHistory.map((record) => (
+                  <TableRow key={record.id}>
+                    <TableCell>
+                      <Input type="date" value={record.effectiveDate} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <Input type="date" value={record.expirationDate} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <Input value={record.firmName} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <Input value={record.plLimit} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <Input value={record.deductible} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <Input value={record.innocentPartySublimit} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <Input value={record.roIrop} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <Input value={record.exemptionType} className="h-7 text-xs border-gray-300" />
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                          <Edit size={12} />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-6 w-6 p-0 text-red-600"
+                          onClick={() => deleteWorkHistory(record.id)}
+                        >
+                          <Trash2 size={12} />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
-        </div>
+        </CollapsibleSection>
+      </div>
+    );
+  };
 
-        <div className="space-y-4">
-          {/* Prior Loss Section */}
-          <CollapsibleSection 
-            title="Prior Loss" 
-            isExpanded={expandedSections.priorLoss}
-            onToggle={() => toggleSection('priorLoss')}
-          >
-            <div className="space-y-4">
-              <p className="text-xs text-medium-gray">Complete history of previous claims and losses</p>
+  const renderHistoryTab = () => {
+    return (
+      <div className="space-y-4">
+        {/* Prior Loss Section */}
+        <CollapsibleSection 
+          title="Prior Loss" 
+          isExpanded={expandedSections.priorLoss}
+          onToggle={() => toggleSection('priorLoss')}
+        >
+          <div className="space-y-4">
+            <p className="text-xs text-gray-600">Previous claims and loss history</p>
+            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
+                    <TableHead className="text-xs">Claim Number</TableHead>
                     <TableHead className="text-xs">Date</TableHead>
                     <TableHead className="text-xs">Type</TableHead>
                     <TableHead className="text-xs">Amount</TableHead>
                     <TableHead className="text-xs">Status</TableHead>
-                    <TableHead className="text-xs">Claim #</TableHead>
                     <TableHead className="text-xs">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {priorLosses.map((loss, index) => (
                     <TableRow key={index}>
+                      <TableCell className="text-sm font-medium">{loss.claim}</TableCell>
                       <TableCell className="text-sm">{loss.date}</TableCell>
                       <TableCell className="text-sm">{loss.type}</TableCell>
-                      <TableCell className="text-sm font-medium">{loss.amount}</TableCell>
+                      <TableCell className="text-sm">{loss.amount}</TableCell>
                       <TableCell>
-                        <Badge className="bg-blue-100 text-blue-800 border-blue-200 text-xs">{loss.status}</Badge>
+                        <Badge className="bg-gray-100 text-gray-800 border-gray-200 text-xs">{loss.status}</Badge>
                       </TableCell>
-                      <TableCell className="text-sm">{loss.claim}</TableCell>
                       <TableCell>
                         <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
                           <Eye size={12} />
@@ -214,7 +311,7 @@ export default function History() {
             onToggle={() => toggleSection('priorPolicy')}
           >
             <div className="space-y-4">
-              <p className="text-xs text-medium-gray">Historical policy information and coverage details</p>
+              <p className="text-xs text-gray-600">Historical policy information and coverage details</p>
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -255,18 +352,18 @@ export default function History() {
             onToggle={() => toggleSection('auditLogs')}
           >
             <div className="space-y-4">
-              <p className="text-xs text-medium-gray">Complete audit trail of all system activities and changes</p>
+              <p className="text-xs text-gray-600">Complete audit trail of all system activities and changes</p>
               <div className="space-y-3">
                 {auditLogs.map((log, index) => (
-                  <div key={index} className="p-3 border rounded-lg">
+                  <div key={index} className="p-3 border border-gray-200 rounded-lg">
                     <div className="flex items-start gap-3">
                       <FileText size={14} className="text-blue-600 mt-0.5" />
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-sm font-medium">{log.action}</span>
-                          <Badge variant="outline" className="text-xs">{log.user}</Badge>
+                          <Badge variant="outline" className="text-xs border-gray-300">{log.user}</Badge>
                         </div>
-                        <p className="text-xs text-medium-gray">{log.timestamp}</p>
+                        <p className="text-xs text-gray-600">{log.timestamp}</p>
                         <p className="text-sm mt-1">{log.details}</p>
                       </div>
                     </div>
@@ -283,16 +380,16 @@ export default function History() {
             onToggle={() => toggleSection('documentHistory')}
           >
             <div className="space-y-4">
-              <p className="text-xs text-medium-gray">History of all documents generated and sent</p>
+              <p className="text-xs text-gray-600">History of all documents generated and sent</p>
               <div className="space-y-3">
-                <div className="p-3 border rounded-lg">
+                <div className="p-3 border border-gray-200 rounded-lg">
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-3">
                       <FileText size={14} className="text-blue-600 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium">Policy Certificate - Auto A9876</p>
-                        <p className="text-xs text-medium-gray">Generated: Jan 15, 2024</p>
-                        <p className="text-xs text-medium-gray">Sent via: Email</p>
+                        <p className="text-xs text-gray-600">Generated: Jan 15, 2024</p>
+                        <p className="text-xs text-gray-600">Sent via: Email</p>
                       </div>
                     </div>
                     <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
@@ -300,14 +397,14 @@ export default function History() {
                     </Button>
                   </div>
                 </div>
-                <div className="p-3 border rounded-lg">
+                <div className="p-3 border border-gray-200 rounded-lg">
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-3">
                       <FileText size={14} className="text-blue-600 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium">Claim Report - C1122</p>
-                        <p className="text-xs text-medium-gray">Generated: Dec 20, 2023</p>
-                        <p className="text-xs text-medium-gray">Sent via: Portal</p>
+                        <p className="text-xs text-gray-600">Generated: Dec 20, 2023</p>
+                        <p className="text-xs text-gray-600">Sent via: Portal</p>
                       </div>
                     </div>
                     <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
@@ -319,6 +416,34 @@ export default function History() {
             </div>
           </CollapsibleSection>
         </div>
+    );
+  };
+
+  return (
+    <div className="flex-1 bg-white p-4 lg:p-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-6 border-b border-gray-200 pb-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">History</h1>
+              <p className="text-gray-600 text-sm mt-1">
+                {currentTab === 'work-history' ? 'Employment history and work records' : 'Claims history, policy records, audit logs, and document history'}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={expandAll} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+                <Expand size={14} className="mr-2" />
+                Expand All
+              </Button>
+              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+                <Minimize size={14} className="mr-2" />
+                Collapse All
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {currentTab === 'work-history' ? renderWorkHistoryTab() : renderHistoryTab()}
       </div>
     </div>
   );
