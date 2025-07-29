@@ -613,9 +613,9 @@ export default function Dashboard() {
                   </div>
                   
                   <div className="space-y-1">
-                    <div className="flex items-center justify-between p-1 bg-blue-50 rounded">
+                    <div className="flex items-center justify-between p-1 bg-blue-50 rounded cursor-pointer hover:bg-blue-100 transition-colors duration-200" onClick={() => console.log('Navigate to compliance details')}>
                       <span className="text-xs">Compliance</span>
-                      <span className="text-xs font-bold text-blue-600">98%</span>
+                      <span className="text-xs font-bold text-blue-600 hover:text-blue-800">98%</span>
                     </div>
                     <div className="flex items-center justify-between p-1 bg-blue-50 rounded">
                       <span className="text-xs">Last Audit</span>
