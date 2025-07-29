@@ -51,12 +51,6 @@ export function Header() {
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-16 lg:pl-6 shadow-sm">
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-3">
-          {/* OneShield Logo */}
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets%2F86997fd4f89947089fcffe144da21f6c%2Fe34c506be8104429a2a08aef998ca011?format=webp&width=800"
-            alt="OneShield"
-            className="h-8 w-auto"
-          />
           <div className="h-6 w-px bg-gray-300"></div>
           <h1 className="text-xl font-semibold text-gray-900">Customer Center</h1>
         </div>
