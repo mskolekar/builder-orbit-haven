@@ -261,7 +261,15 @@ export default function Dashboard() {
                 </div>
               </div>
               
-              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
+                  onClick={() => navigate('/profile?section=personal-info')}
+                >
+                  <Edit3 size={12} />
+                </Button>
                 <div className="flex items-center gap-2">
                   <Calendar size={14} className="text-gray-400" />
                   <div>
