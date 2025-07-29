@@ -34,7 +34,6 @@ const sidebarItems: SidebarItem[] = [
     subItems: [
       { label: 'Personal Info', path: '/profile?section=personal-info' },
       { label: 'Professional and Legal Info', path: '/profile?section=professional-legal' },
-      { label: 'Work History', path: '/profile?section=work-history' },
       { label: 'Risk and Compliance', path: '/profile?section=risk-compliance' },
       { label: 'Other Details', path: '/profile?section=other-details' }
     ]
