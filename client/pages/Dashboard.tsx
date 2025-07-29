@@ -374,31 +374,48 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
-                {recentActivity.map((activity, index) => (
-                  <div key={index} className="p-2 bg-blue-50 border rounded">
-                    <div className="flex items-start gap-2">
-                      <div className="p-1 bg-blue-100 rounded">
-                        {activity.category === 'claim' ? 
-                          <AlertTriangle size={10} className="text-blue-600" /> :
-                          activity.category === 'payment' ?
-                          <DollarSign size={10} className="text-blue-600" /> :
-                          <User size={10} className="text-blue-600" />
-                        }
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium truncate">{activity.type}</p>
-                        <p className="text-xs text-gray-500">{activity.date}</p>
-                        <div className="flex items-center justify-between mt-1">
-                          <span className="text-xs text-gray-500">by {activity.user}</span>
-                          <Button variant="ghost" size="sm" className="h-4 w-4 p-0">
-                            <Eye size={8} />
-                          </Button>
+              <div className="space-y-3">
+                {/* Last Premium Paid Tile */}
+                <div
+                  className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-3 rounded cursor-pointer hover:shadow-md transition-all duration-300"
+                  onClick={() => console.log('Navigate to payment history')}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <DollarSign size={14} />
+                    <ExternalLink size={10} className="opacity-70" />
+                  </div>
+                  <div className="text-xs font-medium opacity-90">Last Premium Paid</div>
+                  <div className="text-sm font-bold">$150</div>
+                  <div className="text-xs opacity-75">July 1, 2025</div>
+                </div>
+
+                {/* Activity Items */}
+                <div className="space-y-2">
+                  {recentActivity.slice(1).map((activity, index) => (
+                    <div key={index} className="p-2 bg-blue-50 border rounded">
+                      <div className="flex items-start gap-2">
+                        <div className="p-1 bg-blue-100 rounded">
+                          {activity.category === 'claim' ?
+                            <AlertTriangle size={10} className="text-blue-600" /> :
+                            activity.category === 'payment' ?
+                            <DollarSign size={10} className="text-blue-600" /> :
+                            <User size={10} className="text-blue-600" />
+                          }
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium truncate">{activity.type}</p>
+                          <p className="text-xs text-gray-500">{activity.date}</p>
+                          <div className="flex items-center justify-between mt-1">
+                            <span className="text-xs text-gray-500">by {activity.user}</span>
+                            <Button variant="ghost" size="sm" className="h-4 w-4 p-0">
+                              <Eye size={8} />
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </CardContent>
           </Card>
