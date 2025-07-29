@@ -50,7 +50,14 @@ const sidebarItems: SidebarItem[] = [
   { icon: Users, label: 'Workgroup', path: '/workgroup' },
   { icon: LinkIcon, label: 'Relationships', path: '/relationships' },
   { icon: CreditCard, label: 'Credit Programs', path: '/credit-programs' },
-  { icon: History, label: 'History', path: '/history' }
+  {
+    icon: History,
+    label: 'History',
+    path: '/history',
+    subItems: [
+      { label: 'Work History', path: '/history?tab=work-history' }
+    ]
+  }
 ];
 
 export function Sidebar() {
