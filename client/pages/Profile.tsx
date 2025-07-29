@@ -99,7 +99,6 @@ export default function Profile() {
     setExpandedSections({
       personalInfo: true,
       professionalInfo: true,
-      workHistory: true,
       riskCompliance: true,
       otherDetails: true
     });
@@ -109,7 +108,6 @@ export default function Profile() {
     setExpandedSections({
       personalInfo: false,
       professionalInfo: false,
-      workHistory: false,
       riskCompliance: false,
       otherDetails: false
     });
