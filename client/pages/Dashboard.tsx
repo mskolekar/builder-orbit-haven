@@ -328,20 +328,7 @@ export default function Dashboard() {
             <CardContent>
               {/* Premium Sub-tiles */}
               <div className="grid grid-cols-2 gap-2 mb-4">
-                <div 
-                  className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-2 rounded cursor-pointer hover:shadow-md transition-all duration-300"
-                  onClick={() => console.log('Navigate to payment history')}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <DollarSign size={12} />
-                    <ExternalLink size={8} className="opacity-70" />
-                  </div>
-                  <div className="text-xs font-medium opacity-90">Last Premium</div>
-                  <div className="text-sm font-bold">$150</div>
-                  <div className="text-xs opacity-75">July 1, 2025</div>
-                </div>
-                
-                <div 
+                <div
                   className="bg-gradient-to-br from-blue-400 to-blue-500 text-white p-2 rounded cursor-pointer hover:shadow-md transition-all duration-300"
                   onClick={() => console.log('Navigate to upcoming payments')}
                 >
