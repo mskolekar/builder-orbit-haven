@@ -51,12 +51,30 @@ const CollapsibleSection = ({
 };
 
 export default function History() {
+  const [searchParams] = useSearchParams();
+  const currentTab = searchParams.get('tab') || 'history';
+
   const [expandedSections, setExpandedSections] = useState({
     priorLoss: true,
     priorPolicy: false,
     auditLogs: false,
-    documentHistory: false
+    documentHistory: false,
+    workHistory: true
   });
+
+  const [workHistory, setWorkHistory] = useState([
+    {
+      id: 1,
+      effectiveDate: '2019-01-01',
+      expirationDate: '2024-01-01',
+      firmName: 'Smith & Associates',
+      plLimit: '$1,000,000',
+      deductible: '$5,000',
+      innocentPartySublimit: '$250,000',
+      roIrop: 'IROP',
+      exemptionType: 'None'
+    }
+  ]);
 
   const toggleSection = (section: keyof typeof expandedSections) => {
     setExpandedSections(prev => ({
