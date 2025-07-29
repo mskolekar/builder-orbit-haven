@@ -83,12 +83,32 @@ export default function History() {
     }));
   };
 
+  const addWorkHistory = () => {
+    const newId = Math.max(...workHistory.map(w => w.id)) + 1;
+    setWorkHistory([...workHistory, {
+      id: newId,
+      effectiveDate: '',
+      expirationDate: '',
+      firmName: '',
+      plLimit: '',
+      deductible: '',
+      innocentPartySublimit: '',
+      roIrop: '',
+      exemptionType: ''
+    }]);
+  };
+
+  const deleteWorkHistory = (id: number) => {
+    setWorkHistory(workHistory.filter(w => w.id !== id));
+  };
+
   const expandAll = () => {
     setExpandedSections({
       priorLoss: true,
       priorPolicy: true,
       auditLogs: true,
-      documentHistory: true
+      documentHistory: true,
+      workHistory: true
     });
   };
 
@@ -97,7 +117,8 @@ export default function History() {
       priorLoss: false,
       priorPolicy: false,
       auditLogs: false,
-      documentHistory: false
+      documentHistory: false,
+      workHistory: false
     });
   };
 
