@@ -102,6 +102,13 @@ const claimsHistory = [
 
 const recentActivity = [
   {
+    type: "Last Premium Paid - $150",
+    date: "July 1, 2025",
+    description: "Premium payment processed successfully.",
+    user: "System",
+    category: "payment"
+  },
+  {
     type: "Follow-up on recent claim #C1122 progress.",
     date: "2 hours ago",
     description: "Provided update on claim status, awaiting adjuster report.",
@@ -110,7 +117,7 @@ const recentActivity = [
   },
   {
     type: "Confirmation of payment received premium.",
-    date: "1 day ago", 
+    date: "1 day ago",
     description: "Auto premium receipt sent to customer.",
     user: "System",
     category: "payment"
