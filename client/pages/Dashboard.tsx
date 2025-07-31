@@ -394,10 +394,10 @@ export default function Dashboard() {
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-[#0054A6] to-[#003d7a] text-white p-4 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm opacity-90">Total Premiums YTD</span>
+                    <span className="text-sm opacity-90">Total Premiums paid / Total YTD Premium</span>
                     <TrendingUp size={14} className="opacity-70" />
                   </div>
-                  <div className="text-2xl font-bold">$3,760</div>
+                  <div className="text-2xl font-bold">$3,760 / $4,200</div>
                   <div className="text-xs opacity-75">+12% from last year</div>
                 </div>
 
@@ -430,16 +430,10 @@ export default function Dashboard() {
           {/* Policy Details */}
           <Card className="shadow-sm">
             <CardHeader className="pb-2">
-              <div className="flex justify-between items-start">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <Shield size={16} />
-                  Policy Details
-                </CardTitle>
-                <div className="text-right">
-                  <p className="text-sm font-bold text-[#0054A6]">$3,760</p>
-                  <p className="text-xs text-gray-500">Total Premium YTD</p>
-                </div>
-              </div>
+              <CardTitle className="text-base flex items-center gap-2">
+                <Shield size={16} />
+                Policy Details
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -467,16 +461,10 @@ export default function Dashboard() {
           {/* Claims History */}
           <Card className="shadow-sm">
             <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <FileText size={16} />
-                  Claims History
-                </CardTitle>
-                <div className="text-right">
-                  <p className="text-sm font-bold text-[#0054A6]">$5,300</p>
-                  <p className="text-xs text-gray-500">Total Paid</p>
-                </div>
-              </div>
+              <CardTitle className="text-base flex items-center gap-2">
+                <FileText size={16} />
+                Claims History
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {filteredClaims.map((claim, index) => (
