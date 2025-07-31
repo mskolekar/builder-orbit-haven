@@ -51,7 +51,7 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
   },
   { icon: LinkIcon, label: 'Relationships & Roles', path: '/relationships' },
   { icon: Users, label: 'Workgroups', path: '/workgroups' },
-  { icon: CreditCard, label: 'Risk Management Credit Program', path: '/risk-management-credit' },
+  { icon: CreditCard, label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
   {
     icon: MessageCircle,
     label: 'Contact & Delivery',
