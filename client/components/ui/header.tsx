@@ -50,7 +50,14 @@ export function Header() {
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-16 lg:pl-6 shadow-sm">
       <div className="flex items-center gap-4">
-        {/* Content area - no title needed as this is now a module within OMS */}
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-[#3B82F6] rounded flex items-center justify-center">
+              <span className="text-white font-bold text-sm">OS</span>
+            </div>
+            <span className="text-lg font-semibold text-[#3B82F6]">OneShield</span>
+          </div>
+        </div>
       </div>
       
       <div className="flex items-center gap-4">
