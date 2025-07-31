@@ -170,7 +170,7 @@ export function Sidebar() {
 
         <div className="p-3 border-t border-white/10">
           <div className="text-xs text-white/60 text-center">
-            Made with ❤️ Vitily
+            © 2024 OneShield Software
           </div>
         </div>
       </div>
