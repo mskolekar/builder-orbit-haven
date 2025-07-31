@@ -1063,7 +1063,6 @@ export default function Profile() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900">Profile</h1>
-              <p className="text-gray-600 text-sm mt-1">Comprehensive customer profile management</p>
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" onClick={expandAll} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
