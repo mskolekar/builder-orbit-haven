@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
   BarChart3,
-  User,
-  MessageCircle,
-  Users,
+  UserCheck,
+  Phone,
+  UserCog,
   Link as LinkIcon,
   CreditCard,
-  History,
-  FileText,
-  DollarSign,
+  Clock,
+  BookOpen,
+  Calculator,
   ChevronDown,
   ChevronRight,
   ChevronLeft
@@ -31,7 +31,7 @@ interface CustomerCenterSidebarItem {
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { icon: BarChart3, label: 'Overview', path: '/' },
   {
-    icon: User,
+    icon: UserCheck,
     label: 'Profile',
     path: '/profile',
     subItems: [
@@ -42,7 +42,7 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
     ]
   },
   {
-    icon: MessageCircle,
+    icon: Phone,
     label: 'Contact & Delivery',
     path: '/contact-delivery',
     subItems: [
@@ -51,7 +51,7 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
     ]
   },
   {
-    icon: History,
+    icon: Clock,
     label: 'Loss History',
     path: '/loss-history',
     subItems: [
@@ -60,10 +60,10 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
     ]
   },
   { icon: LinkIcon, label: 'Relationships & Roles', path: '/relationships' },
-  { icon: Users, label: 'Workgroups', path: '/workgroups' },
+  { icon: UserCog, label: 'Workgroups', path: '/workgroups' },
   { icon: CreditCard, label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
-  { icon: FileText, label: 'Journals', path: '/journals' },
-  { icon: DollarSign, label: 'Financials', path: '/financials' }
+  { icon: BookOpen, label: 'Journals', path: '/journals' },
+  { icon: Calculator, label: 'Financials', path: '/financials' }
 ];
 
 interface CustomerCenterSidebarProps {
@@ -137,11 +137,6 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
         {!isCollapsed && (
           <div>
             <h2 className="text-lg font-semibold text-gray-900">Customer Center</h2>
-            <div className="flex items-center gap-1 text-xs text-gray-500 mt-2">
-              <span>Customer Center</span>
-              <span>&gt;</span>
-              <span className="text-gray-700 font-medium">{getBreadcrumb()}</span>
-            </div>
           </div>
         )}
         <button
