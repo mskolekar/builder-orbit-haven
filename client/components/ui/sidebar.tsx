@@ -17,7 +17,8 @@ import {
   Settings,
   BarChart,
   TrendingUp,
-  Search
+  Search,
+  ChevronLeft
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -48,7 +49,12 @@ const sidebarItems: SidebarItem[] = [
   { icon: BarChart, label: 'Analytic Reports', path: '/reports' }
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
+}
+
+export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
@@ -98,17 +104,31 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <div className={cn(
-        "w-64 h-screen bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col transition-transform duration-300 z-40",
+        "h-screen bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col transition-all duration-300 z-40",
         "lg:translate-x-0 lg:static lg:z-auto",
+        isCollapsed ? "w-16" : "w-64",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
-        <div className="p-4 border-b border-white/20">
-          <div className="flex items-center gap-2">
+        <div className={cn("p-4 border-b border-white/20 flex items-center", isCollapsed ? "justify-center" : "justify-between")}>
+          {!isCollapsed && (
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
+                <span className="text-[#0054A6] font-bold text-sm">OS</span>
+              </div>
+              <span className="text-white font-semibold text-lg">OneShield</span>
+            </div>
+          )}
+          {isCollapsed && (
             <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
               <span className="text-[#0054A6] font-bold text-sm">OS</span>
             </div>
-            <span className="text-white font-semibold text-lg">OneShield</span>
-          </div>
+          )}
+          <button
+            onClick={onToggleCollapse}
+            className="text-white hover:bg-white/10 p-1 rounded transition-colors"
+          >
+            <ChevronLeft size={16} className={cn("transition-transform", isCollapsed && "rotate-180")} />
+          </button>
         </div>
         
         <nav className="flex-1 px-2 overflow-y-auto">
@@ -132,14 +152,16 @@ export function Sidebar() {
                       }
                     }}
                     className={cn(
-                      "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full",
+                      "flex items-center rounded-lg text-sm transition-colors w-full",
+                      isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
-                        ? "bg-white/20 text-white" 
+                        ? "bg-white/20 text-white"
                         : "text-white/80 hover:bg-white/10 hover:text-white"
                     )}
+                    title={isCollapsed ? item.label : undefined}
                   >
                     <Icon size={16} />
-                    {item.label}
+                    {!isCollapsed && item.label}
                   </Link>
                   
                   {hasSubItems && isExpanded && (

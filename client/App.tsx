@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useState } from 'react';
 import { Sidebar } from '@/components/ui/sidebar';
 import { CustomerCenterSidebar } from '@/components/ui/customer-center-sidebar';
+import { PersonDetailsSection } from '@/components/ui/person-details-section';
 import { Header } from '@/components/ui/header';
 import Dashboard from '@/pages/Dashboard';
 import Profile from '@/pages/Profile';
@@ -11,6 +13,8 @@ import NotFound from '@/pages/NotFound';
 
 function AppContent() {
   const location = useLocation();
+  const [isOmsSidebarCollapsed, setIsOmsSidebarCollapsed] = useState(false);
+  const [isCustomerCenterSidebarCollapsed, setIsCustomerCenterSidebarCollapsed] = useState(false);
 
   // Define which routes should show the Customer Center sidebar
   const customerCenterRoutes = ['/', '/profile', '/loss-history', '/relationships', '/workgroups', '/risk-management-credit', '/contact-delivery', '/journals', '/financials'];
@@ -20,10 +24,21 @@ function AppContent() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-      {showCustomerCenterSidebar && <CustomerCenterSidebar />}
+      <Sidebar
+        isCollapsed={isOmsSidebarCollapsed}
+        onToggleCollapse={() => setIsOmsSidebarCollapsed(!isOmsSidebarCollapsed)}
+      />
+      {showCustomerCenterSidebar && (
+        <CustomerCenterSidebar
+          isCollapsed={isCustomerCenterSidebarCollapsed}
+          onToggleCollapse={() => setIsCustomerCenterSidebarCollapsed(!isCustomerCenterSidebarCollapsed)}
+        />
+      )}
       <div className="flex-1 flex flex-col">
         <Header />
+        {showCustomerCenterSidebar && (
+          <PersonDetailsSection />
+        )}
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />

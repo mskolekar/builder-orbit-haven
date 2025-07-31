@@ -65,7 +65,12 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
   { icon: DollarSign, label: 'Financials', path: '/financials' }
 ];
 
-export function CustomerCenterSidebar() {
+interface CustomerCenterSidebarProps {
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
+}
+
+export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: CustomerCenterSidebarProps) {
   const location = useLocation();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
@@ -92,15 +97,29 @@ export function CustomerCenterSidebar() {
   };
 
   return (
-    <div className="w-64 h-full bg-white border-r border-gray-200 flex flex-col shadow-sm">
-      <div className="px-4 border-b border-gray-200 py-3">
-        <h2 className="text-lg font-semibold text-gray-900">Customer Center</h2>
-        <p className="text-sm text-gray-600">Rose K - Lawyer</p>
-        <div className="flex items-center gap-1 text-xs text-gray-500 mt-2">
-          <span>Customer Center</span>
-          <span>&gt;</span>
-          <span className="text-gray-700 font-medium">Overview</span>
-        </div>
+    <div className={cn("h-full bg-white border-r border-gray-200 flex flex-col shadow-sm transition-all duration-300",
+      isCollapsed ? "w-16" : "w-64"
+    )}>
+      <div className={cn("border-b border-gray-200 py-3 flex items-center",
+        isCollapsed ? "px-2 justify-center" : "px-4 justify-between"
+      )}>
+        {!isCollapsed && (
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">Customer Center</h2>
+            <div className="flex items-center gap-1 text-xs text-gray-500 mt-2">
+              <span>Customer Center</span>
+              <span>&gt;</span>
+              <span className="text-gray-700 font-medium">Overview</span>
+            </div>
+          </div>
+        )}
+        <button
+          onClick={onToggleCollapse}
+          className="text-gray-500 hover:bg-gray-100 p-1 rounded transition-colors"
+          title={isCollapsed ? "Expand Customer Center" : "Collapse Customer Center"}
+        >
+          <ChevronLeft size={16} className={cn("transition-transform", !isCollapsed && "rotate-180")} />
+        </button>
       </div>
       
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
@@ -141,7 +160,7 @@ export function CustomerCenterSidebar() {
                   )}
                 </button>
 
-                {hasSubItems && isExpanded && (
+                {hasSubItems && isExpanded && !isCollapsed && (
                   <ul className="mt-1 ml-6 space-y-1">
                     {item.subItems!.map((subItem) => (
                       <li key={subItem.path}>
