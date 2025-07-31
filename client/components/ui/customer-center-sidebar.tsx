@@ -165,29 +165,37 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
               <li key={item.path}>
                 <button
                   onClick={(e) => {
-                    if (hasSubItems) {
+                    if (hasSubItems && !isCollapsed) {
                       e.preventDefault();
                       toggleExpanded(item.path);
                     } else {
-                      // Navigate to the route if no sub-items
+                      // Navigate to the route if no sub-items or if collapsed
                       window.location.href = item.path;
                     }
                   }}
                   className={cn(
-                    "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full",
+                    "flex items-center rounded-lg text-sm transition-colors w-full",
+                    isCollapsed ? "justify-center p-2" : "justify-between gap-3 px-3 py-2",
                     isMainActive && !location.search
                       ? "bg-[#0054A6] text-white"
                       : "text-gray-700 hover:bg-gray-100"
                   )}
+                  title={isCollapsed ? item.label : undefined}
                 >
-                  <div className="flex items-center gap-3">
+                  {isCollapsed ? (
                     <Icon size={16} />
-                    {item.label}
-                  </div>
-                  {hasSubItems && (
-                    isExpanded ?
-                      <ChevronDown size={14} /> :
-                      <ChevronRight size={14} />
+                  ) : (
+                    <>
+                      <div className="flex items-center gap-3">
+                        <Icon size={16} />
+                        {item.label}
+                      </div>
+                      {hasSubItems && (
+                        isExpanded ?
+                          <ChevronDown size={14} /> :
+                          <ChevronRight size={14} />
+                      )}
+                    </>
                   )}
                 </button>
 
