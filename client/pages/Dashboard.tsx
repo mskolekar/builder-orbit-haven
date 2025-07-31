@@ -173,9 +173,9 @@ const getPolicyIcon = (lob: string) => {
 
 const getPriorityColor = (priority: string) => {
   switch (priority) {
-    case 'high': return 'bg-blue-600';
-    case 'medium': return 'bg-blue-400';
-    case 'low': return 'bg-blue-200';
+    case 'high': return 'bg-[#0054A6]';
+    case 'medium': return 'bg-[#0074cc]';
+    case 'low': return 'bg-[#4d9fff]';
     default: return 'bg-gray-400';
   }
 };
@@ -232,10 +232,10 @@ export default function Dashboard() {
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
                     RK
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#3B82F6] rounded-full border-2 border-white flex items-center justify-center">
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#0054A6] rounded-full border-2 border-white flex items-center justify-center">
                     <CheckCircle size={12} className="text-white" />
                   </div>
                 </div>
