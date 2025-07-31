@@ -1,15 +1,23 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { 
-  BarChart3, 
-  User, 
-  MessageCircle, 
-  Users, 
-  Link as LinkIcon, 
-  CreditCard, 
+import {
+  BarChart3,
+  User,
+  MessageCircle,
+  Users,
+  Link as LinkIcon,
+  CreditCard,
   History,
   Menu,
-  X
+  X,
+  Home,
+  FileText,
+  Briefcase,
+  Shield,
+  Settings,
+  BarChart,
+  TrendingUp,
+  Search
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -26,38 +34,18 @@ interface SidebarItem {
 }
 
 const sidebarItems: SidebarItem[] = [
-  { icon: BarChart3, label: 'Overview', path: '/' },
-  {
-    icon: User,
-    label: 'Profile',
-    path: '/profile',
-    subItems: [
-      { label: 'Personal Info', path: '/profile?section=personal-info' },
-      { label: 'Professional and Legal Info', path: '/profile?section=professional-legal' },
-      { label: 'Risk and Compliance', path: '/profile?section=risk-compliance' },
-      { label: 'Other Details', path: '/profile?section=other-details' }
-    ]
-  },
-  {
-    icon: MessageCircle,
-    label: 'Communication',
-    path: '/communication',
-    subItems: [
-      { label: 'Contact Details', path: '/communication?tab=contact-details' },
-      { label: 'Delivery Preferences', path: '/communication?tab=delivery-preferences' }
-    ]
-  },
-  { icon: Users, label: 'Workgroup', path: '/workgroup' },
-  { icon: LinkIcon, label: 'Relationships', path: '/relationships' },
-  { icon: CreditCard, label: 'Credit Programs', path: '/credit-programs' },
-  {
-    icon: History,
-    label: 'History',
-    path: '/history',
-    subItems: [
-      { label: 'Work History', path: '/history?tab=work-history' }
-    ]
-  }
+  { icon: Home, label: 'Home', path: '/' },
+  { icon: FileText, label: 'New Submission', path: '/new-submission' },
+  { icon: FileText, label: 'Submissions', path: '/submissions' },
+  { icon: Shield, label: 'Policies', path: '/policies' },
+  { icon: User, label: 'Customer Center', path: '/' },
+  { icon: Briefcase, label: 'Accounting', path: '/accounting' },
+  { icon: Search, label: 'Search Center', path: '/search' },
+  { icon: Settings, label: 'Other Utilities', path: '/utilities' },
+  { icon: Link as LinkIcon, label: 'Quick Links', path: '/links' },
+  { icon: TrendingUp, label: 'Bulk Change Endorsements', path: '/bulk-changes' },
+  { icon: Users, label: 'Manage Users', path: '/users' },
+  { icon: BarChart, label: 'Analytic Reports', path: '/reports' }
 ];
 
 export function Sidebar() {
@@ -111,8 +99,13 @@ export function Sidebar() {
         "lg:translate-x-0 lg:static lg:z-auto",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
-        <div className="p-4">
-          {/* Removed Customer Center title */}
+        <div className="p-4 border-b border-white/20">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
+              <span className="text-[#3B82F6] font-bold text-sm">OS</span>
+            </div>
+            <span className="text-white font-semibold text-lg">OneShield</span>
+          </div>
         </div>
         
         <nav className="flex-1 px-2 overflow-y-auto">
