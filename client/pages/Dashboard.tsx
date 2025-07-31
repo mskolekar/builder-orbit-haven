@@ -383,41 +383,71 @@ export default function Dashboard() {
           </Card>
 
           {/* Financial Summary */}
-          <Card className="shadow-sm">
-            <CardHeader className="pb-2">
+          <Card className="shadow-sm bg-white">
+            <CardHeader className="pb-4">
               <CardTitle className="text-base flex items-center gap-2">
                 <DollarSign size={16} />
                 Financial Summary
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="bg-gradient-to-br from-[#0054A6] to-[#003d7a] text-white p-4 rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm opacity-90">Total Premiums paid / Total YTD Premium</span>
-                    <TrendingUp size={14} className="opacity-70" />
+            <CardContent className="space-y-6">
+              {/* Premium Overview */}
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Premium Overview</h3>
+                <div className="grid grid-cols-2 gap-4 mb-3">
+                  <div>
+                    <div className="text-xs text-gray-500 mb-1">Paid to Date</div>
+                    <div className="text-lg font-bold text-gray-900">$3,760</div>
                   </div>
-                  <div className="text-2xl font-bold">$3,760 / $4,200</div>
-                  <div className="text-xs opacity-75">+12% from last year</div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 bg-green-50 rounded-lg border">
-                    <div className="text-xs text-gray-500">Paid Claims</div>
-                    <div className="text-lg font-semibold text-green-600">$5,300</div>
-                  </div>
-                  <div className="p-3 bg-orange-50 rounded-lg border">
-                    <div className="text-xs text-gray-500">Outstanding</div>
-                    <div className="text-lg font-semibold text-orange-600">$0</div>
+                  <div>
+                    <div className="text-xs text-gray-500 mb-1">Annual Premium Target</div>
+                    <div className="text-lg font-bold text-gray-900">$4,200</div>
                   </div>
                 </div>
+                <div className="mb-2">
+                  <div className="text-xs text-gray-500 mb-1">Progress</div>
+                  <div className="text-sm font-semibold text-green-600">+12% from last year</div>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-green-500 h-2 rounded-full" style={{width: '90%'}}></div>
+                </div>
+              </div>
 
-                <div className="p-3 bg-blue-50 rounded-lg border">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Next Premium Due</span>
-                    <span className="text-sm font-bold text-[#0054A6]">$150</span>
+              {/* Claims */}
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Claims</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-xs text-gray-500 mb-1">Claims Paid YTD</div>
+                    <div className="text-lg font-bold text-gray-900">$5,300</div>
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">Due: Aug 1, 2025</div>
+                  <div>
+                    <div className="text-xs text-gray-500 mb-1">Pending Claims</div>
+                    <div className="flex items-center gap-2">
+                      <div className="text-lg font-bold text-gray-900">$0</div>
+                      <CheckCircle size={16} className="text-green-500" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Upcoming Payment */}
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Upcoming Payment</h3>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-xs text-gray-500 mb-1">Amount</div>
+                      <div className="text-lg font-bold text-amber-800">$150</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-gray-500 mb-1">Due On</div>
+                      <div className="flex items-center gap-2">
+                        <Calendar size={14} className="text-amber-600" />
+                        <div className="text-sm font-semibold text-amber-800">Aug 1, 2025</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>

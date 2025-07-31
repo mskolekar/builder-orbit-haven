@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
   BarChart3,
@@ -9,7 +10,9 @@ import {
   CreditCard,
   History,
   FileText,
-  DollarSign
+  DollarSign,
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 
 interface SubItem {
@@ -64,6 +67,15 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
 
 export function CustomerCenterSidebar() {
   const location = useLocation();
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  const toggleExpanded = (itemPath: string) => {
+    setExpandedItems(prev =>
+      prev.includes(itemPath)
+        ? prev.filter(path => path !== itemPath)
+        : [...prev, itemPath]
+    );
+  };
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -81,9 +93,9 @@ export function CustomerCenterSidebar() {
 
   return (
     <div className="w-64 h-full bg-white border-r border-gray-200 flex flex-col shadow-sm">
-      <div className="p-4 border-b border-gray-200">
+      <div className="h-16 px-4 border-b border-gray-200 flex flex-col justify-center">
         <h2 className="text-lg font-semibold text-gray-900">Customer Center</h2>
-        <p className="text-sm text-gray-600 mt-1">Rose K - Lawyer</p>
+        <p className="text-sm text-gray-600">Rose K - Lawyer</p>
       </div>
       
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
@@ -92,23 +104,39 @@ export function CustomerCenterSidebar() {
             const Icon = item.icon;
             const hasSubItems = item.subItems && item.subItems.length > 0;
             const isMainActive = isMainPageActive(item);
-            
+            const isExpanded = expandedItems.includes(item.path);
+
             return (
               <li key={item.path}>
-                <Link
-                  to={item.path}
+                <button
+                  onClick={(e) => {
+                    if (hasSubItems) {
+                      e.preventDefault();
+                      toggleExpanded(item.path);
+                    } else {
+                      // Navigate to the route if no sub-items
+                      window.location.href = item.path;
+                    }
+                  }}
                   className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full",
+                    "flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full",
                     isMainActive && !location.search
-                      ? "bg-[#0054A6] text-white" 
+                      ? "bg-[#0054A6] text-white"
                       : "text-gray-700 hover:bg-gray-100"
                   )}
                 >
-                  <Icon size={16} />
-                  {item.label}
-                </Link>
-                
-                {hasSubItems && (
+                  <div className="flex items-center gap-3">
+                    <Icon size={16} />
+                    {item.label}
+                  </div>
+                  {hasSubItems && (
+                    isExpanded ?
+                      <ChevronDown size={14} /> :
+                      <ChevronRight size={14} />
+                  )}
+                </button>
+
+                {hasSubItems && isExpanded && (
                   <ul className="mt-1 ml-6 space-y-1">
                     {item.subItems!.map((subItem) => (
                       <li key={subItem.path}>
@@ -117,7 +145,7 @@ export function CustomerCenterSidebar() {
                           className={cn(
                             "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4",
                             isActive(subItem.path)
-                              ? "bg-blue-50 text-[#0054A6] border-[#0054A6]" 
+                              ? "bg-blue-50 text-[#0054A6] border-[#0054A6]"
                               : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                           )}
                         >
