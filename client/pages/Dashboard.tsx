@@ -220,10 +220,7 @@ export default function Dashboard() {
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Customer Details Header */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Overview</h1>
-        </div>
+
 
         {/* Enhanced Personal Profile Section */}
         <Card className={`relative shadow-sm border transition-all duration-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
