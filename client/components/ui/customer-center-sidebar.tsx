@@ -12,7 +12,8 @@ import {
   FileText,
   DollarSign,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  ChevronLeft
 } from 'lucide-react';
 
 interface SubItem {
