@@ -334,7 +334,7 @@ export default function Dashboard() {
               {/* Premium Sub-tiles */}
               <div className="grid grid-cols-2 gap-2 mb-4">
                 <div
-                  className="bg-gradient-to-br from-blue-400 to-blue-500 text-white p-2 rounded cursor-pointer hover:shadow-md transition-all duration-300"
+                  className="bg-gradient-to-br from-[#3B82F6] to-[#2563EB] text-white p-2 rounded cursor-pointer hover:shadow-md transition-all duration-300"
                   onClick={() => console.log('Navigate to upcoming payments')}
                 >
                   <div className="flex items-center justify-between mb-1">
@@ -380,7 +380,7 @@ export default function Dashboard() {
               <div className="space-y-3">
                 {/* Last Premium Paid Tile */}
                 <div
-                  className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-3 rounded cursor-pointer hover:shadow-md transition-all duration-300"
+                  className="bg-gradient-to-br from-[#3B82F6] to-[#2563EB] text-white p-3 rounded cursor-pointer hover:shadow-md transition-all duration-300"
                   onClick={() => console.log('Navigate to payment history')}
                 >
                   <div className="flex items-center justify-between mb-1">
