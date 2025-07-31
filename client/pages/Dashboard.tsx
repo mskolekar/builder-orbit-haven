@@ -220,10 +220,9 @@ export default function Dashboard() {
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Customer Center Module Header */}
+        {/* Customer Details Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Customer Center</h1>
-          <p className="text-gray-600 mt-1">Comprehensive customer management and overview</p>
+          <h1 className="text-2xl font-bold text-gray-900">Customer Details</h1>
         </div>
 
         {/* Enhanced Personal Profile Section */}
