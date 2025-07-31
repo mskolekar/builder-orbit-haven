@@ -13,7 +13,7 @@ function AppContent() {
   const location = useLocation();
 
   // Define which routes should show the Customer Center sidebar
-  const customerCenterRoutes = ['/', '/profile', '/communication', '/workgroup', '/relationships', '/credit-programs', '/history'];
+  const customerCenterRoutes = ['/', '/profile', '/loss-history', '/relationships', '/workgroups', '/risk-management-credit', '/contact-delivery', '/journals', '/financials'];
   const showCustomerCenterSidebar = customerCenterRoutes.some(route =>
     route === '/' ? location.pathname === '/' : location.pathname.startsWith(route)
   );
