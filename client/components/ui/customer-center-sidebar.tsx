@@ -75,6 +75,36 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
   const location = useLocation();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
+  const getBreadcrumb = () => {
+    const path = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    const section = searchParams.get('section');
+    const tab = searchParams.get('tab');
+
+    // Find the main menu item
+    const mainItem = customerCenterItems.find(item => {
+      if (item.path === '/') return path === '/';
+      return path.startsWith(item.path);
+    });
+
+    if (!mainItem) return 'Overview';
+
+    let breadcrumb = mainItem.label;
+
+    // If there's a section or tab, find the sub-item
+    if ((section || tab) && mainItem.subItems) {
+      const subItem = mainItem.subItems.find(sub => {
+        const subParams = new URLSearchParams(sub.path.split('?')[1] || '');
+        return subParams.get('section') === section || subParams.get('tab') === tab;
+      });
+      if (subItem) {
+        breadcrumb += ` > ${subItem.label}`;
+      }
+    }
+
+    return breadcrumb;
+  };
+
   const toggleExpanded = (itemPath: string) => {
     setExpandedItems(prev =>
       prev.includes(itemPath)
@@ -110,7 +140,7 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
             <div className="flex items-center gap-1 text-xs text-gray-500 mt-2">
               <span>Customer Center</span>
               <span>&gt;</span>
-              <span className="text-gray-700 font-medium">Overview</span>
+              <span className="text-gray-700 font-medium">{getBreadcrumb()}</span>
             </div>
           </div>
         )}
