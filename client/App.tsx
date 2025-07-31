@@ -47,6 +47,96 @@ function App() {
                 />
               }
             />
+            <Route
+              path="/new-submission"
+              element={
+                <PlaceholderPage
+                  title="New Submission"
+                  description="Create new insurance submissions."
+                />
+              }
+            />
+            <Route
+              path="/submissions"
+              element={
+                <PlaceholderPage
+                  title="Submissions"
+                  description="Manage insurance submissions."
+                />
+              }
+            />
+            <Route
+              path="/policies"
+              element={
+                <PlaceholderPage
+                  title="Policies"
+                  description="Manage insurance policies."
+                />
+              }
+            />
+            <Route
+              path="/accounting"
+              element={
+                <PlaceholderPage
+                  title="Accounting"
+                  description="Handle accounting and financial operations."
+                />
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <PlaceholderPage
+                  title="Search Center"
+                  description="Search across all system data."
+                />
+              }
+            />
+            <Route
+              path="/utilities"
+              element={
+                <PlaceholderPage
+                  title="Other Utilities"
+                  description="Access system utilities and tools."
+                />
+              }
+            />
+            <Route
+              path="/links"
+              element={
+                <PlaceholderPage
+                  title="Quick Links"
+                  description="Access frequently used links and resources."
+                />
+              }
+            />
+            <Route
+              path="/bulk-changes"
+              element={
+                <PlaceholderPage
+                  title="Bulk Change Endorsements"
+                  description="Process bulk policy endorsements."
+                />
+              }
+            />
+            <Route
+              path="/users"
+              element={
+                <PlaceholderPage
+                  title="Manage Users"
+                  description="Manage system users and permissions."
+                />
+              }
+            />
+            <Route
+              path="/reports"
+              element={
+                <PlaceholderPage
+                  title="Analytic Reports"
+                  description="View analytics and generate reports."
+                />
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
