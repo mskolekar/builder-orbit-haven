@@ -218,8 +218,8 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="flex-1 bg-white p-3 overflow-auto">
-      <div className="max-w-7xl mx-auto space-y-4">
+    <div className="flex-1 bg-gray-50 p-6 overflow-auto">
+      <div className="max-w-7xl mx-auto space-y-6">
         
 
 
