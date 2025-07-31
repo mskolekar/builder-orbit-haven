@@ -93,9 +93,14 @@ export function CustomerCenterSidebar() {
 
   return (
     <div className="w-64 h-full bg-white border-r border-gray-200 flex flex-col shadow-sm">
-      <div className="h-16 px-4 border-b border-gray-200 flex flex-col justify-center">
+      <div className="px-4 border-b border-gray-200 py-3">
         <h2 className="text-lg font-semibold text-gray-900">Customer Center</h2>
         <p className="text-sm text-gray-600">Rose K - Lawyer</p>
+        <div className="flex items-center gap-1 text-xs text-gray-500 mt-2">
+          <span>Customer Center</span>
+          <span>&gt;</span>
+          <span className="text-gray-700 font-medium">Overview</span>
+        </div>
       </div>
       
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
