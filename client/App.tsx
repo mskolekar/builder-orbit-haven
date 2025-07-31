@@ -30,11 +30,11 @@ function AppContent() {
           <Route path="/communication" element={<Communication />} />
           <Route path="/history" element={<History />} />
           <Route
-            path="/workgroup"
+            path="/loss-history"
             element={
               <PlaceholderPage
-                title="Workgroup"
-                description="Manage workgroup assignments and team collaboration."
+                title="Loss History"
+                description="View prior policies and losses history."
               />
             }
           />
@@ -42,17 +42,53 @@ function AppContent() {
             path="/relationships"
             element={
               <PlaceholderPage
-                title="Relationships"
-                description="View and manage customer relationships and referrals."
+                title="Relationships & Roles"
+                description="View and manage customer relationships and roles."
               />
             }
           />
           <Route
-            path="/credit-programs"
+            path="/workgroups"
             element={
               <PlaceholderPage
-                title="Credit Programs"
-                description="Manage customer credit programs and payment plans."
+                title="Workgroups"
+                description="Manage workgroup assignments and team collaboration."
+              />
+            }
+          />
+          <Route
+            path="/risk-management-credit"
+            element={
+              <PlaceholderPage
+                title="Risk Management Credit Program"
+                description="Manage risk assessment and credit programs."
+              />
+            }
+          />
+          <Route
+            path="/contact-delivery"
+            element={
+              <PlaceholderPage
+                title="Contact & Delivery"
+                description="Manage contact information and delivery preferences."
+              />
+            }
+          />
+          <Route
+            path="/journals"
+            element={
+              <PlaceholderPage
+                title="Journals"
+                description="View and manage customer journals and notes."
+              />
+            }
+          />
+          <Route
+            path="/financials"
+            element={
+              <PlaceholderPage
+                title="Financials"
+                description="View financial information and transactions."
               />
             }
           />

@@ -1,13 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { 
-  BarChart3, 
-  User, 
-  MessageCircle, 
-  Users, 
-  Link as LinkIcon, 
-  CreditCard, 
-  History
+import {
+  BarChart3,
+  User,
+  MessageCircle,
+  Users,
+  Link as LinkIcon,
+  CreditCard,
+  History,
+  FileText,
+  DollarSign
 } from 'lucide-react';
 
 interface SubItem {
@@ -29,32 +31,35 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
     label: 'Profile',
     path: '/profile',
     subItems: [
-      { label: 'Personal Info', path: '/profile?section=personal-info' },
-      { label: 'Professional and Legal Info', path: '/profile?section=professional-legal' },
-      { label: 'Risk and Compliance', path: '/profile?section=risk-compliance' },
-      { label: 'Other Details', path: '/profile?section=other-details' }
+      { label: 'Person Info', path: '/profile?section=person-info' },
+      { label: 'Addresses', path: '/profile?section=addresses' },
+      { label: 'Additional Info', path: '/profile?section=additional-info' },
+      { label: 'Person History', path: '/profile?section=person-history' }
     ]
   },
-  {
-    icon: MessageCircle,
-    label: 'Communication',
-    path: '/communication',
-    subItems: [
-      { label: 'Contact Details', path: '/communication?tab=contact-details' },
-      { label: 'Delivery Preferences', path: '/communication?tab=delivery-preferences' }
-    ]
-  },
-  { icon: Users, label: 'Workgroup', path: '/workgroup' },
-  { icon: LinkIcon, label: 'Relationships', path: '/relationships' },
-  { icon: CreditCard, label: 'Credit Programs', path: '/credit-programs' },
   {
     icon: History,
-    label: 'History',
-    path: '/history',
+    label: 'Loss History',
+    path: '/loss-history',
     subItems: [
-      { label: 'Work History', path: '/history?tab=work-history' }
+      { label: 'Prior Policy', path: '/loss-history?tab=prior-policy' },
+      { label: 'Prior Losses', path: '/loss-history?tab=prior-losses' }
     ]
-  }
+  },
+  { icon: LinkIcon, label: 'Relationships & Roles', path: '/relationships' },
+  { icon: Users, label: 'Workgroups', path: '/workgroups' },
+  { icon: CreditCard, label: 'Risk Management Credit Program', path: '/risk-management-credit' },
+  {
+    icon: MessageCircle,
+    label: 'Contact & Delivery',
+    path: '/contact-delivery',
+    subItems: [
+      { label: 'Delivery Preference', path: '/contact-delivery?tab=delivery-preference' },
+      { label: 'Contact', path: '/contact-delivery?tab=contact' }
+    ]
+  },
+  { icon: History, label: 'Journals', path: '/journals' },
+  { icon: BarChart3, label: 'Financials', path: '/financials' }
 ];
 
 export function CustomerCenterSidebar() {
