@@ -312,10 +312,10 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Row 1: Tiles - Upcoming Reminders, Recent Activity, Submissions */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-4 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          
-          {/* Upcoming Reminders with Premium Tiles */}
+        {/* Row 1: Diaries & Reminders, Recent Activity, Financial Summary */}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+
+          {/* Diaries & Reminders */}
           <Card className="shadow-sm">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
@@ -330,36 +330,18 @@ export default function Dashboard() {
               </div>
             </CardHeader>
             <CardContent>
-              {/* Premium Sub-tiles */}
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                <div
-                  className="bg-gradient-to-br from-[#3B82F6] to-[#2563EB] text-white p-2 rounded cursor-pointer hover:shadow-md transition-all duration-300"
-                  onClick={() => console.log('Navigate to upcoming payments')}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <Calendar size={12} />
-                    <ExternalLink size={8} className="opacity-70" />
-                  </div>
-                  <div className="text-xs font-medium opacity-90">Next Premium</div>
-                  <div className="text-sm font-bold">$150</div>
-                  <div className="text-xs opacity-75">Aug 1, 2025</div>
-                </div>
-              </div>
-
-              {/* Reminders List */}
               <div className="space-y-2">
-                <h4 className="text-xs text-gray-500 mb-2">Tasks & Events</h4>
                 {upcomingReminders.map((reminder) => (
-                  <div key={reminder.id} className="flex items-center justify-between p-2 bg-blue-50 rounded border">
-                    <div className="flex items-center gap-2">
-                      <div className={`w-1 h-4 rounded-full ${getPriorityColor(reminder.priority)}`}></div>
+                  <div key={reminder.id} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${getPriorityColor(reminder.priority)}`}></div>
                       <div>
-                        <p className="text-xs font-medium">{reminder.type}</p>
+                        <p className="text-sm font-medium">{reminder.type}</p>
                         <p className="text-xs text-gray-500">{reminder.dueDate}</p>
                       </div>
                     </div>
-                    <Button variant="ghost" size="sm" className="h-5 w-5 p-0">
-                      <Eye size={10} />
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                      <Eye size={12} />
                     </Button>
                   </div>
                 ))}
@@ -377,48 +359,148 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {/* Last Premium Paid Tile */}
-                <div
-                  className="bg-gradient-to-br from-[#3B82F6] to-[#2563EB] text-white p-3 rounded cursor-pointer hover:shadow-md transition-all duration-300"
-                  onClick={() => console.log('Navigate to payment history')}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <DollarSign size={14} />
-                    <ExternalLink size={10} className="opacity-70" />
-                  </div>
-                  <div className="text-xs font-medium opacity-90">Last Premium Paid</div>
-                  <div className="text-sm font-bold">$150</div>
-                  <div className="text-xs opacity-75">July 1, 2025</div>
-                </div>
-
-                {/* Activity Items */}
-                <div className="space-y-2">
-                  {recentActivity.slice(1).map((activity, index) => (
-                    <div key={index} className="p-2 bg-blue-50 border rounded">
-                      <div className="flex items-start gap-2">
-                        <div className="p-1 bg-blue-100 rounded">
-                          {activity.category === 'claim' ?
-                            <AlertTriangle size={10} className="text-blue-600" /> :
-                            activity.category === 'payment' ?
-                            <DollarSign size={10} className="text-blue-600" /> :
-                            <User size={10} className="text-blue-600" />
-                          }
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium truncate">{activity.type}</p>
-                          <p className="text-xs text-gray-500">{activity.date}</p>
-                          <div className="flex items-center justify-between mt-1">
-                            <span className="text-xs text-gray-500">by {activity.user}</span>
-                            <Button variant="ghost" size="sm" className="h-4 w-4 p-0">
-                              <Eye size={8} />
-                            </Button>
-                          </div>
-                        </div>
+                {recentActivity.map((activity, index) => (
+                  <div key={index} className="p-3 bg-blue-50 border rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <div className="p-2 bg-blue-100 rounded-lg">
+                        {activity.category === 'claim' ?
+                          <AlertTriangle size={12} className="text-[#0054A6]" /> :
+                          activity.category === 'payment' ?
+                          <DollarSign size={12} className="text-[#0054A6]" /> :
+                          <User size={12} className="text-[#0054A6]" />
+                        }
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium">{activity.type}</p>
+                        <p className="text-xs text-gray-500">{activity.date}</p>
+                        <span className="text-xs text-gray-600">by {activity.user}</span>
                       </div>
                     </div>
-                  ))}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Financial Summary */}
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                <DollarSign size={16} />
+                Financial Summary
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="bg-gradient-to-br from-[#0054A6] to-[#003d7a] text-white p-4 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm opacity-90">Total Premiums YTD</span>
+                    <TrendingUp size={14} className="opacity-70" />
+                  </div>
+                  <div className="text-2xl font-bold">$3,760</div>
+                  <div className="text-xs opacity-75">+12% from last year</div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 bg-green-50 rounded-lg border">
+                    <div className="text-xs text-gray-500">Paid Claims</div>
+                    <div className="text-lg font-semibold text-green-600">$5,300</div>
+                  </div>
+                  <div className="p-3 bg-orange-50 rounded-lg border">
+                    <div className="text-xs text-gray-500">Outstanding</div>
+                    <div className="text-lg font-semibold text-orange-600">$0</div>
+                  </div>
+                </div>
+
+                <div className="p-3 bg-blue-50 rounded-lg border">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Next Premium Due</span>
+                    <span className="text-sm font-bold text-[#0054A6]">$150</span>
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">Due: Aug 1, 2025</div>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Row 2: Policy Details, Claims History, Submissions */}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+
+          {/* Policy Details */}
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Shield size={16} />
+                  Policy Details
+                </CardTitle>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-[#0054A6]">$3,760</p>
+                  <p className="text-xs text-gray-500">Total Premium YTD</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {filteredPolicies.slice(0, 5).map((policy, index) => (
+                  <div key={index} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border">
+                    <div className="flex items-center gap-3">
+                      {getPolicyIcon(policy.lob)}
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium">{policy.policy}</span>
+                          {getStatusBadge(policy.status)}
+                        </div>
+                        <p className="text-xs text-gray-500">{policy.lob} - {policy.coverage}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-semibold text-[#0054A6]">{policy.premium}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Claims History */}
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <FileText size={16} />
+                  Claims History
+                </CardTitle>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-[#0054A6]">$5,300</p>
+                  <p className="text-xs text-gray-500">Total Paid</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {filteredClaims.map((claim, index) => (
+                <div key={index} className="p-3 bg-blue-50 border rounded-lg">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-3">
+                      <div className="p-2 bg-blue-100 rounded-lg">
+                        <FileText size={12} className="text-[#0054A6]" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium">{claim.type}</span>
+                          {getStatusBadge(claim.status)}
+                        </div>
+                        <p className="text-xs text-gray-500">#{claim.claimNumber} - {claim.date}</p>
+                        <div className="text-sm font-semibold text-[#0054A6] mt-1">{claim.amount}</div>
+                      </div>
+                    </div>
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                      <Eye size={12} />
+                    </Button>
+                  </div>
+                </div>
+              ))}
             </CardContent>
           </Card>
 
@@ -432,206 +514,30 @@ export default function Dashboard() {
               <p className="text-xs text-gray-500">Applications in progress</p>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-6">Submission</TableHead>
-                      <TableHead className="text-xs h-6">LOB</TableHead>
-                      <TableHead className="text-xs h-6">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ColumnFilter
-                            options={submissionStatuses}
-                            selectedValues={submissionStatusFilter}
-                            onFilterChange={setSubmissionStatusFilter}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-6">Progress</TableHead>
-                      <TableHead className="text-xs h-6">End Date</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredSubmissions.map((submission, index) => (
-                      <TableRow key={index} className="h-8 hover:bg-blue-50">
-                        <TableCell className="text-xs font-medium py-1">{submission.id}</TableCell>
-                        <TableCell className="text-xs py-1">{submission.lob}</TableCell>
-                        <TableCell className="py-1">{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell className="py-1">
-                          <div className="flex items-center gap-2">
-                            <Progress value={submission.progress} className="flex-1 h-1" />
-                            <span className="text-xs font-medium w-8">{submission.progress}%</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-xs py-1">{submission.endDate}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Row 2: Policy, Claims, Risk & Compliance */}
-        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          
-          {/* Policy Details */}
-          <div className="lg:col-span-5">
-            <Card className="shadow-sm h-full">
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <CardTitle className="text-base flex items-center gap-2">
-                      <Shield size={16} />
-                      Policy Details
-                    </CardTitle>
-                    <p className="text-xs text-gray-500 mt-1">Policy Portfolio</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm font-bold text-blue-600">$9.5K</p>
-                    <p className="text-xs text-gray-500">of $12.5K YTD</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto max-h-40 overflow-y-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="text-xs h-6">Policy</TableHead>
-                        <TableHead className="text-xs h-6">
-                          <div className="flex items-center gap-1">
-                            LOB
-                            <ColumnFilter
-                              options={policyLobs}
-                              selectedValues={policyLobFilter}
-                              onFilterChange={setPolicyLobFilter}
-                            />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-6">
-                          <div className="flex items-center gap-1">
-                            Status
-                            <ColumnFilter
-                              options={policyStatuses}
-                              selectedValues={policyStatusFilter}
-                              onFilterChange={setPolicyStatusFilter}
-                            />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-6">Premium</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredPolicies.slice(0, 4).map((policy, index) => (
-                        <TableRow key={index} className="h-8 hover:bg-blue-50">
-                          <TableCell className="py-1">
-                            <div className="flex items-center gap-1">
-                              {getPolicyIcon(policy.lob)}
-                              <span className="text-xs">{policy.policy}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="text-xs py-1">{policy.lob}</TableCell>
-                          <TableCell className="py-1">{getStatusBadge(policy.status)}</TableCell>
-                          <TableCell className="text-xs font-medium py-1">{policy.premium}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Claims History */}
-          <div className="lg:col-span-4">
-            <Card className="shadow-sm h-full">
-              <CardHeader className="pb-2">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-base flex items-center gap-2">
-                    <FileText size={16} />
-                    Claims History
-                    <ColumnFilter
-                      options={claimsStatuses}
-                      selectedValues={claimsStatusFilter}
-                      onFilterChange={setClaimsStatusFilter}
-                    />
-                  </CardTitle>
-                  <div className="text-right">
-                    <p className="text-xs font-bold">$6.5K / $10K</p>
-                    <p className="text-xs text-gray-500">Paid vs Reserve</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {filteredClaims.map((claim, index) => (
-                  <div key={index} className="p-2 bg-blue-50 border rounded">
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-start gap-2">
-                        <div className="p-1 bg-blue-100 rounded">
-                          <FileText size={10} className="text-blue-600" />
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-1">
-                            <span className="text-xs font-medium">{claim.type}</span>
-                            <span className="text-xs text-gray-500">#{claim.claimNumber}</span>
-                          </div>
-                          <p className="text-xs text-gray-500">{claim.date}</p>
-                          <div className="flex items-center gap-2 mt-1">
-                            {getStatusBadge(claim.status)}
-                            <span className="text-xs font-semibold text-blue-600">{claim.amount}</span>
-                          </div>
-                        </div>
+              <div className="space-y-3">
+                {filteredSubmissions.map((submission, index) => (
+                  <div key={index} className="p-3 bg-blue-50 border rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium">{submission.id}</span>
+                        <span className="text-xs bg-gray-100 px-2 py-1 rounded">{submission.lob}</span>
                       </div>
-                      <Button variant="ghost" size="sm" className="h-5 w-5 p-0">
-                        <Eye size={10} />
-                      </Button>
+                      {getStatusBadge(submission.status)}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="flex-1">
+                        <Progress value={submission.progress} className="h-2" />
+                      </div>
+                      <span className="text-sm font-medium">{submission.progress}%</span>
+                    </div>
+                    <div className="text-xs text-gray-500 mt-2">
+                      End Date: {submission.endDate}
                     </div>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Risk & Compliance */}
-          <div className="lg:col-span-3">
-            <Card className="shadow-sm h-full">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Shield size={14} />
-                  Risk & Compliance
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="text-center py-2">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <CheckCircle size={16} className="text-blue-600" />
-                    </div>
-                    <p className="text-xs font-medium">All Clear</p>
-                    <p className="text-xs text-gray-500">No active alerts</p>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between p-1 bg-blue-50 rounded cursor-pointer hover:bg-blue-100 transition-colors duration-200" onClick={() => console.log('Navigate to compliance details')}>
-                      <span className="text-xs">Compliance</span>
-                      <span className="text-xs font-bold text-blue-600 hover:text-blue-800">98%</span>
-                    </div>
-                    <div className="flex items-center justify-between p-1 bg-blue-50 rounded">
-                      <span className="text-xs">Last Audit</span>
-                      <span className="text-xs font-medium">Jan 15</span>
-                    </div>
-                    <div className="flex items-center justify-between p-1 bg-blue-50 rounded">
-                      <span className="text-xs">Next Review</span>
-                      <span className="text-xs font-medium">Jul 15</span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

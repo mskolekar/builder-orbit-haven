@@ -95,7 +95,7 @@ export function CustomerCenterSidebar() {
                   className={cn(
                     "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full",
                     isMainActive && !location.search
-                      ? "bg-[#3B82F6] text-white" 
+                      ? "bg-[#0054A6] text-white" 
                       : "text-gray-700 hover:bg-gray-100"
                   )}
                 >
@@ -112,7 +112,7 @@ export function CustomerCenterSidebar() {
                           className={cn(
                             "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4",
                             isActive(subItem.path)
-                              ? "bg-blue-50 text-[#3B82F6] border-[#3B82F6]" 
+                              ? "bg-blue-50 text-[#0054A6] border-[#0054A6]" 
                               : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                           )}
                         >

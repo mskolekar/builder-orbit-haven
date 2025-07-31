@@ -83,7 +83,7 @@ export function Sidebar() {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-[#3B82F6] text-white rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-[#0054A6] text-white rounded-lg shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -98,14 +98,14 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <div className={cn(
-        "w-64 h-screen bg-gradient-to-b from-[#3B82F6] to-[#2563EB] text-white flex flex-col transition-transform duration-300 z-40",
+        "w-64 h-screen bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col transition-transform duration-300 z-40",
         "lg:translate-x-0 lg:static lg:z-auto",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
         <div className="p-4 border-b border-white/20">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-              <span className="text-[#3B82F6] font-bold text-sm">OS</span>
+              <span className="text-[#0054A6] font-bold text-sm">OS</span>
             </div>
             <span className="text-white font-semibold text-lg">OneShield</span>
           </div>

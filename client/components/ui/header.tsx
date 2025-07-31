@@ -50,14 +50,7 @@ export function Header() {
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-16 lg:pl-6 shadow-sm">
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#3B82F6] rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm">OS</span>
-            </div>
-            <span className="text-lg font-semibold text-[#3B82F6]">OneShield</span>
-          </div>
-        </div>
+        {/* Header content area */}
       </div>
       
       <div className="flex items-center gap-4">
@@ -122,7 +115,7 @@ export function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-9 px-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                <div className="w-8 h-8 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-sm font-semibold">
                   J
                 </div>
                 <span className="hidden lg:block text-sm font-medium">UW John</span>
