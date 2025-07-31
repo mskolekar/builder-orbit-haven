@@ -69,8 +69,11 @@ export function Sidebar() {
   };
 
   const isMainPageActive = (item: SidebarItem) => {
-    if (item.path === '/') {
+    if (item.path === '/' && item.label === 'Customer Center') {
       return location.pathname === '/';
+    }
+    if (item.path === '/' && item.label === 'Home') {
+      return false; // Don't highlight Home when on Customer Center
     }
     return location.pathname === item.path;
   };
