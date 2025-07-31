@@ -222,7 +222,7 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Customer Details Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Customer Details</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Overview</h1>
         </div>
 
         {/* Enhanced Personal Profile Section */}
@@ -321,7 +321,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base flex items-center gap-2">
                   <Clock size={16} />
-                  Upcoming Reminders
+                  Diaries & Reminders
                 </CardTitle>
                 <Button variant="outline" size="sm" className="h-7">
                   <Plus size={10} className="mr-1" />
