@@ -390,62 +390,53 @@ export default function Dashboard() {
                 Financial Summary
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4">
+              {/* Upcoming Payment - moved to top */}
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Calendar size={14} className="text-amber-600" />
+                  Upcoming Payment
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-white rounded-lg p-3 shadow-sm">
+                    <div className="text-xs text-gray-500 mb-1">Amount</div>
+                    <div className="text-xl font-bold text-amber-800">$150</div>
+                  </div>
+                  <div className="bg-white rounded-lg p-3 shadow-sm">
+                    <div className="text-xs text-gray-500 mb-1">Due On</div>
+                    <div className="text-sm font-semibold text-amber-800">Aug 1, 2025</div>
+                  </div>
+                </div>
+              </div>
+
               {/* Premium Overview */}
               <div>
                 <h3 className="text-sm font-semibold text-gray-900 mb-3">Premium Overview</h3>
-                <div className="grid grid-cols-2 gap-4 mb-3">
-                  <div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-blue-50 rounded-lg p-3 shadow-sm">
                     <div className="text-xs text-gray-500 mb-1">Paid to Date</div>
                     <div className="text-lg font-bold text-gray-900">$3,760</div>
                   </div>
-                  <div>
-                    <div className="text-xs text-gray-500 mb-1">Annual Premium Target</div>
+                  <div className="bg-green-50 rounded-lg p-3 shadow-sm">
+                    <div className="text-xs text-gray-500 mb-1">Annual Premium</div>
                     <div className="text-lg font-bold text-gray-900">$4,200</div>
                   </div>
-                </div>
-                <div className="mb-2">
-                  <div className="text-xs text-gray-500 mb-1">Progress</div>
-                  <div className="text-sm font-semibold text-green-600">+12% from last year</div>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-green-500 h-2 rounded-full" style={{width: '90%'}}></div>
                 </div>
               </div>
 
               {/* Claims */}
               <div>
                 <h3 className="text-sm font-semibold text-gray-900 mb-3">Claims</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-blue-50 rounded-lg p-3 shadow-sm">
                     <div className="text-xs text-gray-500 mb-1">Claims Paid YTD</div>
                     <div className="text-lg font-bold text-gray-900">$5,300</div>
                   </div>
-                  <div>
+                  <div className="bg-green-50 rounded-lg p-3 shadow-sm">
                     <div className="text-xs text-gray-500 mb-1">Pending Claims</div>
                     <div className="flex items-center gap-2">
                       <div className="text-lg font-bold text-gray-900">$0</div>
                       <CheckCircle size={16} className="text-green-500" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Upcoming Payment */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">Upcoming Payment</h3>
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <div className="text-xs text-gray-500 mb-1">Amount</div>
-                      <div className="text-lg font-bold text-amber-800">$150</div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-gray-500 mb-1">Due On</div>
-                      <div className="flex items-center gap-2">
-                        <Calendar size={14} className="text-amber-600" />
-                        <div className="text-sm font-semibold text-amber-800">Aug 1, 2025</div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -466,24 +457,58 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {filteredPolicies.slice(0, 5).map((policy, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border">
-                    <div className="flex items-center gap-3">
-                      {getPolicyIcon(policy.lob)}
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">{policy.policy}</span>
-                          {getStatusBadge(policy.status)}
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs h-8">Policy</TableHead>
+                      <TableHead className="text-xs h-8">
+                        <div className="flex items-center gap-1">
+                          LOB
+                          <ColumnFilter
+                            options={policyLobs}
+                            selectedValues={policyLobFilter}
+                            onFilterChange={setPolicyLobFilter}
+                          />
                         </div>
-                        <p className="text-xs text-gray-500">{policy.lob} - {policy.coverage}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-semibold text-[#0054A6]">{policy.premium}</div>
-                    </div>
-                  </div>
-                ))}
+                      </TableHead>
+                      <TableHead className="text-xs h-8">Coverage</TableHead>
+                      <TableHead className="text-xs h-8">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={policyStatuses}
+                            selectedValues={policyStatusFilter}
+                            onFilterChange={setPolicyStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8">Premium</TableHead>
+                      <TableHead className="text-xs h-8">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredPolicies.map((policy, index) => (
+                      <TableRow key={index} className="h-10 hover:bg-blue-50">
+                        <TableCell className="py-2">
+                          <div className="flex items-center gap-2">
+                            {getPolicyIcon(policy.lob)}
+                            <span className="text-sm font-medium">{policy.policy}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-sm py-2">{policy.lob}</TableCell>
+                        <TableCell className="text-sm py-2">{policy.coverage}</TableCell>
+                        <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
+                        <TableCell className="text-sm font-semibold py-2">{policy.premium}</TableCell>
+                        <TableCell className="py-2">
+                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                            <Eye size={12} />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </CardContent>
           </Card>
@@ -496,29 +521,46 @@ export default function Dashboard() {
                 Claims History
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              {filteredClaims.map((claim, index) => (
-                <div key={index} className="p-3 bg-blue-50 border rounded-lg">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 bg-blue-100 rounded-lg">
-                        <FileText size={12} className="text-[#0054A6]" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">{claim.type}</span>
-                          {getStatusBadge(claim.status)}
+            <CardContent>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs h-8">Claim #</TableHead>
+                      <TableHead className="text-xs h-8">Type</TableHead>
+                      <TableHead className="text-xs h-8">Date Filed</TableHead>
+                      <TableHead className="text-xs h-8">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={claimsStatuses}
+                            selectedValues={claimsStatusFilter}
+                            onFilterChange={setClaimsStatusFilter}
+                          />
                         </div>
-                        <p className="text-xs text-gray-500">#{claim.claimNumber} - {claim.date}</p>
-                        <div className="text-sm font-semibold text-[#0054A6] mt-1">{claim.amount}</div>
-                      </div>
-                    </div>
-                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                      <Eye size={12} />
-                    </Button>
-                  </div>
-                </div>
-              ))}
+                      </TableHead>
+                      <TableHead className="text-xs h-8">Amount</TableHead>
+                      <TableHead className="text-xs h-8">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredClaims.map((claim, index) => (
+                      <TableRow key={index} className="h-10 hover:bg-blue-50">
+                        <TableCell className="text-sm font-medium py-2">{claim.claimNumber}</TableCell>
+                        <TableCell className="text-sm py-2">{claim.type}</TableCell>
+                        <TableCell className="text-sm py-2">{claim.date.replace('Filed: ', '')}</TableCell>
+                        <TableCell className="py-2">{getStatusBadge(claim.status)}</TableCell>
+                        <TableCell className="text-sm font-semibold py-2">{claim.amount}</TableCell>
+                        <TableCell className="py-2">
+                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                            <Eye size={12} />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
 
@@ -532,27 +574,49 @@ export default function Dashboard() {
               <p className="text-xs text-gray-500">Applications in progress</p>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {filteredSubmissions.map((submission, index) => (
-                  <div key={index} className="p-3 bg-blue-50 border rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">{submission.id}</span>
-                        <span className="text-xs bg-gray-100 px-2 py-1 rounded">{submission.lob}</span>
-                      </div>
-                      {getStatusBadge(submission.status)}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex-1">
-                        <Progress value={submission.progress} className="h-2" />
-                      </div>
-                      <span className="text-sm font-medium">{submission.progress}%</span>
-                    </div>
-                    <div className="text-xs text-gray-500 mt-2">
-                      End Date: {submission.endDate}
-                    </div>
-                  </div>
-                ))}
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs h-8">Submission</TableHead>
+                      <TableHead className="text-xs h-8">LOB</TableHead>
+                      <TableHead className="text-xs h-8">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={submissionStatuses}
+                            selectedValues={submissionStatusFilter}
+                            onFilterChange={setSubmissionStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8">Progress</TableHead>
+                      <TableHead className="text-xs h-8">End Date</TableHead>
+                      <TableHead className="text-xs h-8">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredSubmissions.map((submission, index) => (
+                      <TableRow key={index} className="h-10 hover:bg-blue-50">
+                        <TableCell className="text-sm font-medium py-2">{submission.id}</TableCell>
+                        <TableCell className="text-sm py-2">{submission.lob}</TableCell>
+                        <TableCell className="py-2">{getStatusBadge(submission.status)}</TableCell>
+                        <TableCell className="py-2">
+                          <div className="flex items-center gap-2">
+                            <Progress value={submission.progress} className="flex-1 h-1" />
+                            <span className="text-xs font-medium w-8">{submission.progress}%</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-sm py-2">{submission.endDate}</TableCell>
+                        <TableCell className="py-2">
+                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                            <Eye size={12} />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </CardContent>
           </Card>

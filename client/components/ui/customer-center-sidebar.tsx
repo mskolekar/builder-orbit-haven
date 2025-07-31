@@ -41,6 +41,15 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
     ]
   },
   {
+    icon: MessageCircle,
+    label: 'Contact & Delivery',
+    path: '/contact-delivery',
+    subItems: [
+      { label: 'Delivery Preference', path: '/contact-delivery?tab=delivery-preference' },
+      { label: 'Contact', path: '/contact-delivery?tab=contact' }
+    ]
+  },
+  {
     icon: History,
     label: 'Loss History',
     path: '/loss-history',
@@ -52,17 +61,8 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
   { icon: LinkIcon, label: 'Relationships & Roles', path: '/relationships' },
   { icon: Users, label: 'Workgroups', path: '/workgroups' },
   { icon: CreditCard, label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
-  {
-    icon: MessageCircle,
-    label: 'Contact & Delivery',
-    path: '/contact-delivery',
-    subItems: [
-      { label: 'Delivery Preference', path: '/contact-delivery?tab=delivery-preference' },
-      { label: 'Contact', path: '/contact-delivery?tab=contact' }
-    ]
-  },
-  { icon: History, label: 'Journals', path: '/journals' },
-  { icon: BarChart3, label: 'Financials', path: '/financials' }
+  { icon: FileText, label: 'Journals', path: '/journals' },
+  { icon: DollarSign, label: 'Financials', path: '/financials' }
 ];
 
 export function CustomerCenterSidebar() {
