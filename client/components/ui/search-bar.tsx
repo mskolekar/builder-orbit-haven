@@ -69,15 +69,15 @@ export function SearchBar() {
   return (
     <>
       <div className="relative">
-        <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60" />
         <Input
           placeholder="Search policies, claims, customers..."
           onClick={() => setOpen(true)}
-          className="pl-10 w-64 lg:w-80"
+          className="pl-10 w-64 lg:w-80 bg-white/10 border-white/20 text-white placeholder:text-white/60"
           readOnly
         />
         <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-          <kbd className="px-2 py-1 text-xs bg-gray-100 rounded border">⌘K</kbd>
+          <kbd className="px-2 py-1 text-xs bg-white/20 text-white rounded border border-white/30">⌘K</kbd>
         </div>
       </div>
 

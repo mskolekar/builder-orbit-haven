@@ -172,8 +172,8 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
                     "flex items-center rounded-lg text-sm transition-colors w-full",
                     isCollapsed ? "justify-center p-2" : "justify-between gap-3 px-3 py-2",
                     isMainActive && !location.search
-                      ? "bg-[#0054A6] text-white"
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-white text-[#0054A6]"
+                      : "text-white/80 hover:bg-white/10 hover:text-white"
                   )}
                   title={isCollapsed ? item.label : undefined}
                 >
