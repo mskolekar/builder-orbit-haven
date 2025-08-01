@@ -128,7 +128,7 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
   };
 
   return (
-    <div className={cn("h-full bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300",
+    <div className={cn("h-[calc(100vh-4rem)] bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300 mt-16",
       isCollapsed ? "w-16" : "w-64"
     )}>
       <div className={cn("border-b border-white/20 py-3 flex items-center",
