@@ -48,7 +48,7 @@ export function Header() {
   const unreadCount = notifications.filter(n => n.unread).length;
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-16 lg:pl-6 shadow-sm">
+    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-[32rem] lg:pl-[32rem] shadow-sm">
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
         </div>
