@@ -128,20 +128,20 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
   };
 
   return (
-    <div className={cn("h-full bg-white border-r border-gray-200 flex flex-col shadow-sm transition-all duration-300",
+    <div className={cn("h-full bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300",
       isCollapsed ? "w-16" : "w-64"
     )}>
-      <div className={cn("border-b border-gray-200 py-3 flex items-center",
+      <div className={cn("border-b border-white/20 py-3 flex items-center",
         isCollapsed ? "px-2 justify-center" : "px-4 justify-between"
       )}>
         {!isCollapsed && (
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Customer Center</h2>
+            <h2 className="text-lg font-semibold text-white">Customer Center</h2>
           </div>
         )}
         <button
           onClick={onToggleCollapse}
-          className="text-gray-500 hover:bg-gray-100 p-1 rounded transition-colors"
+          className="text-white hover:bg-white/10 p-1 rounded transition-colors"
           title={isCollapsed ? "Expand Customer Center" : "Collapse Customer Center"}
         >
           <ChevronLeft size={16} className={cn("transition-transform", !isCollapsed && "rotate-180")} />
@@ -201,10 +201,10 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
                         <Link
                           to={subItem.path}
                           className={cn(
-                            "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4",
+                            "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4",
                             isActive(subItem.path)
-                              ? "bg-blue-50 text-[#0054A6] border-[#0054A6]"
-                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                              ? "bg-white/15 text-white border-white/40"
+                              : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30"
                           )}
                         >
                           {subItem.label}

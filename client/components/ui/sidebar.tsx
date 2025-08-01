@@ -89,7 +89,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-[#0054A6] text-white rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-200 text-gray-700 rounded-lg shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -104,28 +104,28 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
 
       {/* Sidebar */}
       <div className={cn(
-        "h-screen bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col transition-all duration-300 z-40",
+        "h-screen bg-white border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
         "lg:translate-x-0 lg:static lg:z-auto",
         isCollapsed ? "w-16" : "w-64",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
-        <div className={cn("p-4 border-b border-white/20 flex items-center", isCollapsed ? "justify-center" : "justify-between")}>
+        <div className={cn("p-4 border-b border-gray-200 flex items-center", isCollapsed ? "justify-center" : "justify-between")}>
           {!isCollapsed && (
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-                <span className="text-[#0054A6] font-bold text-sm">OS</span>
+              <div className="w-8 h-8 bg-[#0054A6] rounded flex items-center justify-center">
+                <span className="text-white font-bold text-sm">OS</span>
               </div>
-              <span className="text-white font-semibold text-lg">OneShield</span>
+              <span className="text-[#0054A6] font-semibold text-lg">OneShield</span>
             </div>
           )}
           {isCollapsed && (
-            <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-              <span className="text-[#0054A6] font-bold text-sm">OS</span>
+            <div className="w-8 h-8 bg-[#0054A6] rounded flex items-center justify-center">
+              <span className="text-white font-bold text-sm">OS</span>
             </div>
           )}
           <button
             onClick={onToggleCollapse}
-            className="text-white hover:bg-white/10 p-1 rounded transition-colors"
+            className="text-gray-500 hover:bg-gray-100 p-1 rounded transition-colors"
           >
             <ChevronLeft size={16} className={cn("transition-transform", isCollapsed && "rotate-180")} />
           </button>
@@ -155,8 +155,8 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       "flex items-center rounded-lg text-sm transition-colors w-full",
                       isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
-                        ? "bg-white/20 text-white"
-                        : "text-white/80 hover:bg-white/10 hover:text-white"
+                        ? "bg-[#0054A6] text-white"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
@@ -190,8 +190,8 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
           </ul>
         </nav>
 
-        <div className="p-3 border-t border-white/10">
-          <div className="text-xs text-white/60 text-center">
+        <div className="p-3 border-t border-gray-200">
+          <div className="text-xs text-gray-500 text-center">
             © 2024 OneShield Software
           </div>
         </div>
