@@ -303,28 +303,22 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Upcoming Payment - moved to top */}
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              {/* Upcoming Payment - combined single card */}
+              <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-sm font-semibold text-gray-900 mb-6 flex items-center gap-2">
                   <Calendar size={14} className="text-amber-600" />
                   Upcoming Payment
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white rounded-lg p-3 shadow-sm">
-                    <div className="text-xs text-gray-500 mb-1">Amount</div>
-                    <div className="text-xl font-bold text-amber-800 mb-2">$150</div>
-                    <Button
-                      size="sm"
-                      className="w-full bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                      onClick={() => console.log('Navigate to payment')}
-                    >
-                      Pay Now
-                    </Button>
-                  </div>
-                  <div className="bg-white rounded-lg p-3 shadow-sm">
-                    <div className="text-xs text-gray-500 mb-1">Due On</div>
-                    <div className="text-sm font-semibold text-amber-800">Aug 1, 2025</div>
-                  </div>
+                <div className="flex flex-col items-center text-center space-y-2">
+                  <div className="text-3xl font-bold text-amber-800 mb-1">$150</div>
+                  <div className="text-sm text-gray-600 mb-4">Due on Aug 1, 2025</div>
+                  <Button
+                    size="sm"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white px-8 py-2 font-medium"
+                    onClick={() => console.log('Navigate to payment')}
+                  >
+                    Pay Now
+                  </Button>
                 </div>
               </div>
 
