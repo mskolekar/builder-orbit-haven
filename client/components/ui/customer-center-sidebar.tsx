@@ -183,6 +183,9 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
                       : "text-white/80 hover:bg-white/10 hover:text-white"
                   )}
                   title={isCollapsed ? item.label : undefined}
+                  aria-label={item.label}
+                  aria-expanded={hasSubItems ? isExpanded : undefined}
+                  aria-haspopup={hasSubItems ? "menu" : undefined}
                 >
                   {isCollapsed ? (
                     <Icon size={16} />
