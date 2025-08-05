@@ -310,17 +310,17 @@ export default function Dashboard() {
                     <Calendar size={14} className="text-amber-600" />
                     Upcoming Payment
                   </h3>
-                  <div className="text-right">
-                    <div className="text-sm font-medium text-gray-700">1-345567B</div>
-                    <div className="text-xs text-red-600 mt-1">Late fee after date</div>
+                  <div className="text-xs font-medium text-gray-600">
+                    Reference: 1-345567B
                   </div>
                 </div>
-                <div className="flex flex-col items-start space-y-4">
+                <div className="flex flex-col items-center text-center space-y-3">
                   <div className="text-3xl font-bold text-amber-800">$150</div>
                   <div className="text-lg font-semibold text-gray-800">Due on Aug 1, 2025</div>
+                  <div className="text-sm text-red-600 font-medium">Late fee after: Aug 5, 2025</div>
                   <Button
                     size="sm"
-                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white px-8 py-2 font-medium"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white px-8 py-2 font-medium mt-4"
                     onClick={() => console.log('Navigate to payment')}
                   >
                     Pay Now
