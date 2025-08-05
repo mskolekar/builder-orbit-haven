@@ -201,6 +201,15 @@ function AppContent() {
               />
             }
           />
+          <Route
+            path="/personal-details"
+            element={
+              <PlaceholderPage
+                title="Personal Details"
+                description="Manage customer personal information and details."
+              />
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
