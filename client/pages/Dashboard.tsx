@@ -312,7 +312,14 @@ export default function Dashboard() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white rounded-lg p-3 shadow-sm">
                     <div className="text-xs text-gray-500 mb-1">Amount</div>
-                    <div className="text-xl font-bold text-amber-800">$150</div>
+                    <div className="text-xl font-bold text-amber-800 mb-2">$150</div>
+                    <Button
+                      size="sm"
+                      className="w-full bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                      onClick={() => console.log('Navigate to payment')}
+                    >
+                      Pay Now
+                    </Button>
                   </div>
                   <div className="bg-white rounded-lg p-3 shadow-sm">
                     <div className="text-xs text-gray-500 mb-1">Due On</div>
