@@ -303,15 +303,21 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Upcoming Payment - combined single card */}
+              {/* Upcoming Payment - redesigned layout */}
               <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200 rounded-lg p-6 shadow-sm">
-                <h3 className="text-sm font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                  <Calendar size={14} className="text-amber-600" />
-                  Upcoming Payment
-                </h3>
-                <div className="flex flex-col items-center text-center space-y-2">
-                  <div className="text-3xl font-bold text-amber-800 mb-1">$150</div>
-                  <div className="text-sm text-gray-600 mb-4">Due on Aug 1, 2025</div>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                    <Calendar size={14} className="text-amber-600" />
+                    Upcoming Payment
+                  </h3>
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-gray-700">1-345567B</div>
+                    <div className="text-xs text-red-600 mt-1">Late fee after date</div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-start space-y-4">
+                  <div className="text-3xl font-bold text-amber-800">$150</div>
+                  <div className="text-lg font-semibold text-gray-800">Due on Aug 1, 2025</div>
                   <Button
                     size="sm"
                     className="bg-[#0054A6] hover:bg-[#003d7a] text-white px-8 py-2 font-medium"
