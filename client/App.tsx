@@ -18,7 +18,7 @@ function AppContent() {
   const [isCustomerCenterSidebarCollapsed, setIsCustomerCenterSidebarCollapsed] = useState(false);
 
   // Define which routes should show the Customer Center sidebar
-  const customerCenterRoutes = ['/', '/profile', '/loss-history', '/relationships', '/workgroups', '/risk-management-credit', '/contact-delivery', '/journals', '/financials'];
+  const customerCenterRoutes = ['/', '/profile', '/personal-details', '/loss-history', '/relationships', '/workgroups', '/risk-management-credit', '/contact-delivery', '/journals', '/financials'];
   const showCustomerCenterSidebar = customerCenterRoutes.some(route =>
     route === '/' ? location.pathname === '/' : location.pathname.startsWith(route)
   );

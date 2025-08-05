@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
   BarChart3,
-  UserCheck,
+  User,
   Phone,
   UserCog,
   Link as LinkIcon,
@@ -13,7 +13,11 @@ import {
   Calculator,
   ChevronDown,
   ChevronRight,
-  ChevronLeft
+  ChevronLeft,
+  Mail,
+  FileText,
+  ClipboardList,
+  UserCheck2
 } from 'lucide-react';
 
 interface SubItem {
@@ -31,23 +35,15 @@ interface CustomerCenterSidebarItem {
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { icon: BarChart3, label: 'Overview', path: '/' },
   {
-    icon: UserCheck,
-    label: 'Profile',
-    path: '/profile',
+    icon: User,
+    label: 'Personal Details',
+    path: '/personal-details',
     subItems: [
-      { label: 'Person Info', path: '/profile?section=person-info' },
+      { label: 'Basic Info', path: '/profile?section=person-info' },
       { label: 'Addresses', path: '/profile?section=addresses' },
+      { label: 'Contact Info', path: '/contact-delivery?tab=contact' },
       { label: 'Additional Info', path: '/profile?section=additional-info' },
-      { label: 'Person History', path: '/profile?section=person-history' }
-    ]
-  },
-  {
-    icon: Phone,
-    label: 'Contact & Delivery',
-    path: '/contact-delivery',
-    subItems: [
-      { label: 'Delivery Preference', path: '/contact-delivery?tab=delivery-preference' },
-      { label: 'Contact', path: '/contact-delivery?tab=contact' }
+      { label: 'History', path: '/profile?section=person-history' }
     ]
   },
   {
@@ -62,7 +58,18 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
   { icon: LinkIcon, label: 'Relationships & Roles', path: '/relationships' },
   { icon: UserCog, label: 'Workgroups', path: '/workgroups' },
   { icon: CreditCard, label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
-  { icon: BookOpen, label: 'Journals', path: '/journals' },
+  {
+    icon: BookOpen,
+    label: 'Journals',
+    path: '/journals',
+    subItems: [
+      { label: 'Diaries', path: '/journals?tab=diaries' },
+      { label: 'Notes', path: '/journals?tab=notes' },
+      { label: 'Document', path: '/journals?tab=document' },
+      { label: 'Email', path: '/journals?tab=email' },
+      { label: 'Assignment/Approval History', path: '/journals?tab=assignment-approval' }
+    ]
+  },
   { icon: Calculator, label: 'Financials', path: '/financials' }
 ];
 
@@ -148,8 +155,8 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
         </button>
       </div>
       
-      <nav className="flex-1 px-3 py-4 overflow-y-auto">
-        <ul className="space-y-1">
+      <nav className="flex-1 px-3 py-4 overflow-y-auto" role="navigation" aria-label="Customer Center Navigation">
+        <ul className="space-y-1" role="menubar">
           {customerCenterItems.map((item) => {
             const Icon = item.icon;
             const hasSubItems = item.subItems && item.subItems.length > 0;
@@ -206,6 +213,8 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
                               ? "bg-white/15 text-white border-white/40"
                               : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30"
                           )}
+                          role="menuitem"
+                          aria-label={subItem.label}
                         >
                           {subItem.label}
                         </Link>
