@@ -224,79 +224,139 @@ export default function Dashboard() {
 
 
 
-        {/* Row 1: Financial Summary (moved to first position) */}
-        <div className={`transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          <Card className="shadow-sm bg-white mb-6">
+        {/* Row 1: Financial Summary, Diaries, Activity Timeline, Documents */}
+        <div className={`grid grid-cols-1 lg:grid-cols-4 gap-6 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+
+          {/* Financial Summary */}
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
             <CardHeader className="pb-4">
-              <CardTitle className="text-base flex items-center gap-2">
-                <DollarSign size={16} />
-                Financial Summary - All Policies
+              <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                <DollarSign size={16} className="text-slate-600" />
+                Financial Summary
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-                <div className="bg-red-50 rounded-lg p-4 border border-red-200">
+              <div className="space-y-3">
+                <div className="border border-gray-200 rounded-lg p-3">
                   <div className="text-xs text-gray-500 mb-1">Current Due</div>
-                  <div className="text-2xl font-bold text-red-600">$150</div>
+                  <div className="text-xl font-bold text-gray-800">$150</div>
                 </div>
-                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
+                <div className="border border-gray-200 rounded-lg p-3">
                   <div className="text-xs text-gray-500 mb-1">Total Due</div>
-                  <div className="text-2xl font-bold text-orange-600">$275</div>
+                  <div className="text-xl font-bold text-gray-700">$275</div>
                 </div>
-                <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                <div className="border border-gray-200 rounded-lg p-3">
                   <div className="text-xs text-gray-500 mb-1">Total Paid</div>
-                  <div className="text-2xl font-bold text-green-600">$8,460</div>
+                  <div className="text-xl font-bold text-emerald-700">$8,460</div>
                 </div>
-                <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                  <div className="text-xs text-gray-500 mb-1">Annual Premium Total</div>
-                  <div className="text-2xl font-bold text-blue-600">$4,200</div>
+                <div className="border border-gray-200 rounded-lg p-3">
+                  <div className="text-xs text-gray-500 mb-1">Annual Premium</div>
+                  <div className="text-xl font-bold text-slate-700">$4,200</div>
                 </div>
-                <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                <div className="border border-gray-200 rounded-lg p-3">
                   <div className="text-xs text-gray-500 mb-1">Credit Available</div>
-                  <div className="text-2xl font-bold text-purple-600">$85</div>
+                  <div className="text-xl font-bold text-blue-700">$85</div>
                 </div>
-              </div>
-
-              {/* Upcoming Payment Section */}
-              <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200 rounded-lg p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
-                    <Calendar size={14} className="text-amber-600" />
-                    Upcoming Payment
-                  </h3>
-                  <div className="text-xs font-medium text-gray-600">
-                    Reference: 1-345567B
-                  </div>
-                </div>
-                <div className="flex flex-col items-center text-center space-y-3">
-                  <div className="text-3xl font-bold text-amber-800">$150</div>
-                  <div className="text-lg font-semibold text-gray-800">Due on Aug 1, 2025</div>
-                  <div className="text-sm text-red-600 font-medium">Late fee after: Aug 5, 2025</div>
-                  <Button
-                    size="sm"
-                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white px-8 py-2 font-medium mt-4"
-                    onClick={() => console.log('Navigate to payment')}
-                  >
-                    Pay Now
-                  </Button>
-                </div>
+                <Button
+                  size="sm"
+                  className="w-full bg-slate-700 hover:bg-slate-800 text-white mt-4"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Navigate to payment');
+                  }}
+                >
+                  Pay Now
+                </Button>
               </div>
             </CardContent>
           </Card>
-        </div>
 
-        {/* Row 2: Activity Timeline, Diaries */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-
-          {/* Activity Timeline */}
-          <Card className="shadow-sm">
+          {/* Diaries */}
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <Activity size={16} />
+                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                  <Calendar size={16} className="text-slate-600" />
+                  Diaries
+                </CardTitle>
+                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
+                  <Plus size={10} className="mr-1" />
+                  Add
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-xs h-8 text-gray-600">Due Date</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Title</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Priority</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Entity</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
+                      <TableCell className="text-xs py-1">08-15-25</TableCell>
+                      <TableCell className="text-xs py-1">Policy Renewal Review - Auto</TableCell>
+                      <TableCell className="py-1">
+                        <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
+                      </TableCell>
+                      <TableCell className="text-xs py-1">A9876</TableCell>
+                      <TableCell className="py-1">
+                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
+                      <TableCell className="text-xs py-1">08-20-25</TableCell>
+                      <TableCell className="text-xs py-1">Annual Policy Audit – Rose K</TableCell>
+                      <TableCell className="py-1">
+                        <span className="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700 border border-yellow-200">Medium</span>
+                      </TableCell>
+                      <TableCell className="text-xs py-1">H2345</TableCell>
+                      <TableCell className="py-1">
+                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
+                      <TableCell className="text-xs py-1">08-25-25</TableCell>
+                      <TableCell className="text-xs py-1">Review & Approve Claim #C1189</TableCell>
+                      <TableCell className="py-1">
+                        <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
+                      </TableCell>
+                      <TableCell className="text-xs py-1">L7890</TableCell>
+                      <TableCell className="py-1">
+                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
+                      <TableCell className="text-xs py-1">09-01-25</TableCell>
+                      <TableCell className="text-xs py-1">Financial Statement Review – Rose K</TableCell>
+                      <TableCell className="py-1">
+                        <span className="px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700 border border-emerald-200">Low</span>
+                      </TableCell>
+                      <TableCell className="text-xs py-1">A9876</TableCell>
+                      <TableCell className="py-1">
+                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Activity Timeline */}
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to activity timeline')}>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                  <Activity size={16} className="text-slate-600" />
                   Activity Timeline
                 </CardTitle>
-                <Button variant="outline" size="sm" className="h-7">
+                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
                   View All
                 </Button>
               </div>
@@ -306,22 +366,22 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Date</TableHead>
-                      <TableHead className="text-xs h-8">Activity</TableHead>
-                      <TableHead className="text-xs h-8">Action Taken By</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Date</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Activity</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Action Taken By</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {recentActivity.slice(0, 5).map((activity, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-blue-50">
+                    {recentActivity.slice(0, 4).map((activity, index) => (
+                      <TableRow key={index} className="h-10 hover:bg-gray-50">
                         <TableCell className="text-xs py-2">
                           {activity.date === '2 hours ago' ? 'Jul 01, 2025 14:30' :
                            activity.date === '1 day ago' ? 'Jun 30, 2025 09:15' :
                            activity.date === '3 days ago' ? 'Jun 28, 2025 16:45' :
                            'Jun 28, 2025 11:20'}
                         </TableCell>
-                        <TableCell className="text-sm py-2">{activity.type}</TableCell>
-                        <TableCell className="text-sm py-2">{activity.user}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{activity.type}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-600">{activity.user}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -330,73 +390,26 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Diaries & Documents */}
-          <Card className="shadow-sm">
+          {/* Documents */}
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to documents')}>
             <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <Clock size={16} />
-                  Diaries
-                </CardTitle>
-                <Button variant="outline" size="sm" className="h-7">
-                  <Plus size={10} className="mr-1" />
-                  Add
-                </Button>
-              </div>
+              <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                <FileText size={16} className="text-slate-600" />
+                Documents
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Diaries Table - 70% */}
-              <div className="h-48 overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-8">Due Date</TableHead>
-                      <TableHead className="text-xs h-8">Title</TableHead>
-                      <TableHead className="text-xs h-8">Priority</TableHead>
-                      <TableHead className="text-xs h-8">Entity</TableHead>
-                      <TableHead className="text-xs h-8">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {upcomingReminders.map((reminder, index) => (
-                      <TableRow key={reminder.id} className="h-8 hover:bg-blue-50 cursor-pointer">
-                        <TableCell className="text-xs py-1">
-                          <div className="flex items-center gap-1">
-                            <Calendar size={10} />
-                            08-15-25
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-xs py-1">{reminder.type}</TableCell>
-                        <TableCell className="py-1">
-                          <span className={`px-2 py-1 rounded-full text-xs ${
-                            reminder.priority === 'high' ? 'bg-red-100 text-red-700' :
-                            reminder.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
-                            'bg-green-100 text-green-700'
-                          }`}>
-                            {reminder.priority}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-xs py-1">A9876</TableCell>
-                        <TableCell className="py-1">
-                          <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs">
-                            Close
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-
-              {/* Documents Section - 30% */}
-              <div className="border-t pt-4">
-                <h4 className="text-sm font-medium text-gray-900 mb-2">Documents</h4>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="h-8">
+              <div className="text-center py-8">
+                <FileText size={32} className="mx-auto text-gray-400 mb-4" />
+                <p className="text-sm text-gray-500 mb-4">Manage customer documents</p>
+                <div className="space-y-2">
+                  <Button variant="outline" size="sm" className="w-full border-gray-300 text-gray-600">
+                    <Plus size={12} className="mr-2" />
                     Upload Documents
                   </Button>
-                  <Button variant="outline" size="sm" className="h-8">
-                    Download Documents
+                  <Button variant="outline" size="sm" className="w-full border-gray-300 text-gray-600">
+                    <Eye size={12} className="mr-2" />
+                    View Documents
                   </Button>
                 </div>
               </div>
