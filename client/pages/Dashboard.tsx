@@ -404,51 +404,39 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Row 2: Policy Details, Claims History, Submissions */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        {/* Row 3: Policy Details, Claims History, Submissions */}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Policy Details */}
           <Card className="shadow-sm">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <Shield size={16} />
-                Policy Details
-              </CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Shield size={16} />
+                  Policy Details
+                </CardTitle>
+                <Button variant="outline" size="sm" className="h-7">
+                  View All
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Policy</TableHead>
-                      <TableHead className="text-xs h-8">
-                        <div className="flex items-center gap-1">
-                          LOB
-                          <ColumnFilter
-                            options={policyLobs}
-                            selectedValues={policyLobFilter}
-                            onFilterChange={setPolicyLobFilter}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8">Coverage</TableHead>
-                      <TableHead className="text-xs h-8">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ColumnFilter
-                            options={policyStatuses}
-                            selectedValues={policyStatusFilter}
-                            onFilterChange={setPolicyStatusFilter}
-                          />
-                        </div>
-                      </TableHead>
+                      <TableHead className="text-xs h-8">Policy Number</TableHead>
+                      <TableHead className="text-xs h-8">Product</TableHead>
+                      <TableHead className="text-xs h-8">Status</TableHead>
+                      <TableHead className="text-xs h-8">Expiration Date</TableHead>
                       <TableHead className="text-xs h-8">Premium</TableHead>
-                      <TableHead className="text-xs h-8">Action</TableHead>
+                      <TableHead className="text-xs h-8">Current Due</TableHead>
+                      <TableHead className="text-xs h-8">Total Paid</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredPolicies.map((policy, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-blue-50">
+                    {filteredPolicies.filter(p => p.status === 'Active' || (p.status === 'Expired' && Math.random() > 0.5)).map((policy, index) => (
+                      <TableRow key={index} className="h-10 hover:bg-blue-50 cursor-pointer" onClick={() => console.log('Open policy details', policy.policy)}>
                         <TableCell className="py-2">
                           <div className="flex items-center gap-2">
                             {getPolicyIcon(policy.lob)}
@@ -456,14 +444,11 @@ export default function Dashboard() {
                           </div>
                         </TableCell>
                         <TableCell className="text-sm py-2">{policy.lob}</TableCell>
-                        <TableCell className="text-sm py-2">{policy.coverage}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
+                        <TableCell className="text-sm py-2">{policy.endDate}</TableCell>
                         <TableCell className="text-sm font-semibold py-2">{policy.premium}</TableCell>
-                        <TableCell className="py-2">
-                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                            <Eye size={12} />
-                          </Button>
-                        </TableCell>
+                        <TableCell className="text-sm py-2">{index === 0 ? '$150' : '$0'}</TableCell>
+                        <TableCell className="text-sm py-2">{policy.premium}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
