@@ -224,8 +224,8 @@ export default function Dashboard() {
 
 
 
-        {/* Row 1: Financial Summary, Diaries, Activity Timeline, Documents */}
-        <div className={`grid grid-cols-1 lg:grid-cols-4 gap-6 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        {/* Row 1: Financial Summary, Activity Timeline, Diaries + Documents */}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Financial Summary */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
@@ -267,83 +267,6 @@ export default function Dashboard() {
                 >
                   Pay Now
                 </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Diaries */}
-          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Calendar size={16} className="text-slate-600" />
-                  Diaries
-                </CardTitle>
-                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
-                  <Plus size={10} className="mr-1" />
-                  Add
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600">Due Date</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Title</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Priority</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Entity</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">08-15-25</TableCell>
-                      <TableCell className="text-xs py-1">Policy Renewal Review - Auto</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
-                      </TableCell>
-                      <TableCell className="text-xs py-1">A9876</TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">08-20-25</TableCell>
-                      <TableCell className="text-xs py-1">Annual Policy Audit – Rose K</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700 border border-yellow-200">Medium</span>
-                      </TableCell>
-                      <TableCell className="text-xs py-1">H2345</TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">08-25-25</TableCell>
-                      <TableCell className="text-xs py-1">Review & Approve Claim #C1189</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
-                      </TableCell>
-                      <TableCell className="text-xs py-1">L7890</TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">09-01-25</TableCell>
-                      <TableCell className="text-xs py-1">Financial Statement Review – Rose K</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700 border border-emerald-200">Low</span>
-                      </TableCell>
-                      <TableCell className="text-xs py-1">A9876</TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
               </div>
             </CardContent>
           </Card>
@@ -390,26 +313,83 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Documents */}
-          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to documents')}>
+          {/* Diaries + Documents */}
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries and documents')}>
             <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                <FileText size={16} className="text-slate-600" />
-                Documents
-              </CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                  <Calendar size={16} className="text-slate-600" />
+                  Diaries + Documents
+                </CardTitle>
+                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
+                  <Plus size={10} className="mr-1" />
+                  Add
+                </Button>
+              </div>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center py-8">
-                <FileText size={32} className="mx-auto text-gray-400 mb-4" />
-                <p className="text-sm text-gray-500 mb-4">Manage customer documents</p>
-                <div className="space-y-2">
-                  <Button variant="outline" size="sm" className="w-full border-gray-300 text-gray-600">
+            <CardContent>
+              {/* Diaries Section */}
+              <div className="mb-6">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs h-8 text-gray-600">Due Date</TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600">Title</TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600">Priority</TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600">Entity</TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
+                        <TableCell className="text-xs py-1">08-15-25</TableCell>
+                        <TableCell className="text-xs py-1">Policy Renewal Review - Auto</TableCell>
+                        <TableCell className="py-1">
+                          <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
+                        </TableCell>
+                        <TableCell className="text-xs py-1">A9876</TableCell>
+                        <TableCell className="py-1">
+                          <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
+                        <TableCell className="text-xs py-1">08-20-25</TableCell>
+                        <TableCell className="text-xs py-1">Annual Policy Audit – Rose K</TableCell>
+                        <TableCell className="py-1">
+                          <span className="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700 border border-yellow-200">Medium</span>
+                        </TableCell>
+                        <TableCell className="text-xs py-1">H2345</TableCell>
+                        <TableCell className="py-1">
+                          <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
+                        <TableCell className="text-xs py-1">08-25-25</TableCell>
+                        <TableCell className="text-xs py-1">Review & Approve Claim #C1189</TableCell>
+                        <TableCell className="py-1">
+                          <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
+                        </TableCell>
+                        <TableCell className="text-xs py-1">L7890</TableCell>
+                        <TableCell className="py-1">
+                          <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+
+              {/* Documents Section */}
+              <div className="border-t border-gray-200 pt-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <FileText size={14} className="text-slate-600" />
+                  <span className="text-sm font-medium text-gray-700">Documents</span>
+                </div>
+                <div className="text-center py-4">
+                  <Button variant="outline" size="sm" className="border-gray-300 text-gray-600">
                     <Plus size={12} className="mr-2" />
                     Upload Documents
-                  </Button>
-                  <Button variant="outline" size="sm" className="w-full border-gray-300 text-gray-600">
-                    <Eye size={12} className="mr-2" />
-                    View Documents
                   </Button>
                 </div>
               </div>
