@@ -460,45 +460,39 @@ export default function Dashboard() {
           {/* Claims History */}
           <Card className="shadow-sm">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <FileText size={16} />
-                Claims History
-              </CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <FileText size={16} />
+                  Claims History
+                </CardTitle>
+                <Button variant="outline" size="sm" className="h-7">
+                  View All
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Claim #</TableHead>
-                      <TableHead className="text-xs h-8">Type</TableHead>
-                      <TableHead className="text-xs h-8">Date Filed</TableHead>
-                      <TableHead className="text-xs h-8">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ColumnFilter
-                            options={claimsStatuses}
-                            selectedValues={claimsStatusFilter}
-                            onFilterChange={setClaimsStatusFilter}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8">Amount</TableHead>
-                      <TableHead className="text-xs h-8">Action</TableHead>
+                      <TableHead className="text-xs h-8">Claim Number</TableHead>
+                      <TableHead className="text-xs h-8">Status</TableHead>
+                      <TableHead className="text-xs h-8">Loss Date</TableHead>
+                      <TableHead className="text-xs h-8">Paid</TableHead>
+                      <TableHead className="text-xs h-8">Reserves</TableHead>
+                      <TableHead className="text-xs h-8">Incurred</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredClaims.map((claim, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-blue-50">
+                    {filteredClaims.filter(claim => claim.status === 'Pending' || claim.status === 'Approved').map((claim, index) => (
+                      <TableRow key={index} className="h-10 hover:bg-blue-50 cursor-pointer" onClick={() => console.log('Open claim details', claim.claimNumber)}>
                         <TableCell className="text-sm font-medium py-2">{claim.claimNumber}</TableCell>
-                        <TableCell className="text-sm py-2">{claim.type}</TableCell>
-                        <TableCell className="text-sm py-2">{claim.date.replace('Filed: ', '')}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(claim.status)}</TableCell>
-                        <TableCell className="text-sm font-semibold py-2">{claim.amount}</TableCell>
-                        <TableCell className="py-2">
-                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                            <Eye size={12} />
-                          </Button>
+                        <TableCell className="text-sm py-2">May 10, 2023</TableCell>
+                        <TableCell className="text-sm py-2">{claim.amount}</TableCell>
+                        <TableCell className="text-sm py-2">$2,000</TableCell>
+                        <TableCell className="text-sm font-semibold py-2">
+                          {claim.amount === '$5,300' ? '$7,300' : claim.amount === 'N/A' ? '$2,000' : '$0'}
                         </TableCell>
                       </TableRow>
                     ))}
