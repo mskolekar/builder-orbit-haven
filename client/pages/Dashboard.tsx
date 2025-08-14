@@ -505,52 +505,36 @@ export default function Dashboard() {
           {/* Submissions */}
           <Card className="shadow-sm">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <TrendingUp size={16} />
-                Submissions
-              </CardTitle>
-              <p className="text-xs text-gray-500">Applications in progress</p>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <TrendingUp size={16} />
+                  Submissions
+                </CardTitle>
+                <Button variant="outline" size="sm" className="h-7">
+                  View All
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Submission</TableHead>
-                      <TableHead className="text-xs h-8">LOB</TableHead>
-                      <TableHead className="text-xs h-8">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ColumnFilter
-                            options={submissionStatuses}
-                            selectedValues={submissionStatusFilter}
-                            onFilterChange={setSubmissionStatusFilter}
-                          />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8">Progress</TableHead>
-                      <TableHead className="text-xs h-8">End Date</TableHead>
-                      <TableHead className="text-xs h-8">Action</TableHead>
+                      <TableHead className="text-xs h-8">Submission Number</TableHead>
+                      <TableHead className="text-xs h-8">Product</TableHead>
+                      <TableHead className="text-xs h-8">Status</TableHead>
+                      <TableHead className="text-xs h-8">Effective Date</TableHead>
+                      <TableHead className="text-xs h-8">Expiration Date</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredSubmissions.map((submission, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-blue-50">
+                    {filteredSubmissions.filter(submission => submission.status === 'In progress').map((submission, index) => (
+                      <TableRow key={index} className="h-10 hover:bg-blue-50 cursor-pointer" onClick={() => console.log('Open submission details', submission.id)}>
                         <TableCell className="text-sm font-medium py-2">{submission.id}</TableCell>
                         <TableCell className="text-sm py-2">{submission.lob}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell className="py-2">
-                          <div className="flex items-center gap-2">
-                            <Progress value={submission.progress} className="flex-1 h-1" />
-                            <span className="text-xs font-medium w-8">{submission.progress}%</span>
-                          </div>
-                        </TableCell>
+                        <TableCell className="text-sm py-2">{submission.startDate}</TableCell>
                         <TableCell className="text-sm py-2">{submission.endDate}</TableCell>
-                        <TableCell className="py-2">
-                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                            <Eye size={12} />
-                          </Button>
-                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
