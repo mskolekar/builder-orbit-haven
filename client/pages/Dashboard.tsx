@@ -133,19 +133,19 @@ const recentActivity = [
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
-    'active': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: CheckCircle },
-    'bound': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: CheckCircle },
-    'in progress': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: Clock },
-    'pending': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: AlertCircle },
-    'expired': { color: 'bg-gray-100 text-gray-600 border-gray-200', icon: XCircle },
-    'approved': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: CheckCircle },
-    'closed': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: XCircle },
-    'scheduled': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: Calendar }
+    'active': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
+    'bound': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
+    'in progress': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Clock },
+    'pending': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
+    'expired': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
+    'approved': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
+    'closed': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
+    'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar }
   };
-  
-  const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: AlertCircle };
+
+  const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: AlertCircle };
   const IconComponent = config.icon;
-  
+
   return (
     <Badge className={`${config.color} border text-xs flex items-center gap-1`}>
       <IconComponent size={10} />
