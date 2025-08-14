@@ -417,18 +417,18 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Row 3: Policy Details, Claims History, Submissions */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        {/* Row 2: Policy Details, Claims History, Submissions */}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Policy Details */}
-          <Card className="shadow-sm">
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to policy details')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <Shield size={16} />
+                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                  <Shield size={16} className="text-slate-600" />
                   Policy Details
                 </CardTitle>
-                <Button variant="outline" size="sm" className="h-7">
+                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
                   View All
                 </Button>
               </div>
@@ -438,30 +438,49 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Policy Number</TableHead>
-                      <TableHead className="text-xs h-8">Product</TableHead>
-                      <TableHead className="text-xs h-8">Status</TableHead>
-                      <TableHead className="text-xs h-8">Expiration Date</TableHead>
-                      <TableHead className="text-xs h-8">Premium</TableHead>
-                      <TableHead className="text-xs h-8">Current Due</TableHead>
-                      <TableHead className="text-xs h-8">Total Paid</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Policy Number</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">
+                        <div className="flex items-center gap-1">
+                          Product
+                          <ColumnFilter
+                            options={policyLobs}
+                            selectedValues={policyLobFilter}
+                            onFilterChange={setPolicyLobFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={policyStatuses}
+                            selectedValues={policyStatusFilter}
+                            onFilterChange={setPolicyStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Expiration Date</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Premium</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Current Due</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredPolicies.filter(p => p.status === 'Active' || (p.status === 'Expired' && Math.random() > 0.5)).map((policy, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-blue-50 cursor-pointer" onClick={() => console.log('Open policy details', policy.policy)}>
+                      <TableRow key={index} className="h-10 hover:bg-gray-50 cursor-pointer" onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Open policy details', policy.policy);
+                      }}>
                         <TableCell className="py-2">
                           <div className="flex items-center gap-2">
                             {getPolicyIcon(policy.lob)}
-                            <span className="text-sm font-medium">{policy.policy}</span>
+                            <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-sm py-2">{policy.lob}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
-                        <TableCell className="text-sm py-2">{policy.endDate}</TableCell>
-                        <TableCell className="text-sm font-semibold py-2">{policy.premium}</TableCell>
-                        <TableCell className="text-sm py-2">{index === 0 ? '$150' : '$0'}</TableCell>
-                        <TableCell className="text-sm py-2">{policy.premium}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{policy.endDate}</TableCell>
+                        <TableCell className="text-sm font-semibold py-2 text-gray-800">{policy.premium}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{index === 0 ? '$150' : '$0'}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -471,14 +490,14 @@ export default function Dashboard() {
           </Card>
 
           {/* Claims History */}
-          <Card className="shadow-sm">
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to claims history')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <FileText size={16} />
+                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                  <AlertTriangle size={16} className="text-slate-600" />
                   Claims History
                 </CardTitle>
-                <Button variant="outline" size="sm" className="h-7">
+                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
                   View All
                 </Button>
               </div>
@@ -488,23 +507,35 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Claim Number</TableHead>
-                      <TableHead className="text-xs h-8">Status</TableHead>
-                      <TableHead className="text-xs h-8">Loss Date</TableHead>
-                      <TableHead className="text-xs h-8">Paid</TableHead>
-                      <TableHead className="text-xs h-8">Reserves</TableHead>
-                      <TableHead className="text-xs h-8">Incurred</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Claim Number</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={['Open', 'Reopen']}
+                            selectedValues={claimsStatusFilter}
+                            onFilterChange={setClaimsStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Loss Date</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Paid</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Reserves</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Incurred</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredClaims.filter(claim => claim.status === 'Pending' || claim.status === 'Approved').map((claim, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-blue-50 cursor-pointer" onClick={() => console.log('Open claim details', claim.claimNumber)}>
-                        <TableCell className="text-sm font-medium py-2">{claim.claimNumber}</TableCell>
+                      <TableRow key={index} className="h-10 hover:bg-gray-50 cursor-pointer" onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Open claim details', claim.claimNumber);
+                      }}>
+                        <TableCell className="text-sm font-medium py-2 text-gray-800">{claim.claimNumber}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(claim.status)}</TableCell>
-                        <TableCell className="text-sm py-2">May 10, 2023</TableCell>
-                        <TableCell className="text-sm py-2">{claim.amount}</TableCell>
-                        <TableCell className="text-sm py-2">$2,000</TableCell>
-                        <TableCell className="text-sm font-semibold py-2">
+                        <TableCell className="text-sm py-2 text-gray-700">May 10, 2023</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{claim.amount}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">$2,000</TableCell>
+                        <TableCell className="text-sm font-semibold py-2 text-gray-800">
                           {claim.amount === '$5,300' ? '$7,300' : claim.amount === 'N/A' ? '$2,000' : '$0'}
                         </TableCell>
                       </TableRow>
@@ -516,14 +547,14 @@ export default function Dashboard() {
           </Card>
 
           {/* Submissions */}
-          <Card className="shadow-sm">
+          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to submissions')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <TrendingUp size={16} />
+                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
+                  <TrendingUp size={16} className="text-slate-600" />
                   Submissions
                 </CardTitle>
-                <Button variant="outline" size="sm" className="h-7">
+                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
                   View All
                 </Button>
               </div>
@@ -533,21 +564,42 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8">Submission Number</TableHead>
-                      <TableHead className="text-xs h-8">Product</TableHead>
-                      <TableHead className="text-xs h-8">Status</TableHead>
-                      <TableHead className="text-xs h-8">Effective Date</TableHead>
-                      <TableHead className="text-xs h-8">Expiration Date</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Submission Number</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">
+                        <div className="flex items-center gap-1">
+                          Product
+                          <ColumnFilter
+                            options={submissionStatuses}
+                            selectedValues={submissionStatusFilter}
+                            onFilterChange={setSubmissionStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ColumnFilter
+                            options={submissionStatuses}
+                            selectedValues={submissionStatusFilter}
+                            onFilterChange={setSubmissionStatusFilter}
+                          />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Effective Date</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">Expiration Date</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredSubmissions.filter(submission => submission.status === 'In progress').map((submission, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-blue-50 cursor-pointer" onClick={() => console.log('Open submission details', submission.id)}>
-                        <TableCell className="text-sm font-medium py-2">{submission.id}</TableCell>
-                        <TableCell className="text-sm py-2">{submission.lob}</TableCell>
+                      <TableRow key={index} className="h-10 hover:bg-gray-50 cursor-pointer" onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Open submission details', submission.id);
+                      }}>
+                        <TableCell className="text-sm font-medium py-2 text-gray-800">{submission.id}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{submission.lob}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell className="text-sm py-2">{submission.startDate}</TableCell>
-                        <TableCell className="text-sm py-2">{submission.endDate}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{submission.startDate}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{submission.endDate}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
