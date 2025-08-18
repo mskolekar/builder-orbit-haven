@@ -254,28 +254,34 @@ export default function Dashboard() {
 
 
 
-        {/* Row 1: Financial Summary - Horizontal Strip */}
+        {/* Row 1: Financial Information - Horizontal Strip */}
         <div className={`transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
             <CardHeader className="pb-4">
               <CardTitle className="text-base flex items-center gap-2 text-gray-700">
                 <DollarSign size={16} className="text-slate-600" />
-                Financial Summary
+                Financial Information
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Paid</div>
-                  <div className="text-xl font-bold text-emerald-700">$8,460</div>
+                <div className="relative bg-green-50 border border-green-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-green-600 mb-1 font-medium">Amount Paid</div>
+                  <div className="text-xl font-bold text-green-800">$8,460</div>
+                  <div className="text-xs text-green-500 mt-1">Last payment: Jul 1, 2024</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-green-400"></div>
                 </div>
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Due</div>
-                  <div className="text-xl font-bold text-gray-800">$275</div>
+                <div className="relative bg-amber-50 border border-amber-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-amber-600 mb-1 font-medium">Total Due</div>
+                  <div className="text-xl font-bold text-amber-800">$275</div>
+                  <div className="text-xs text-amber-500 mt-1">Due date: Aug 15, 2024</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-amber-400"></div>
                 </div>
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Outstanding</div>
-                  <div className="text-xl font-bold text-gray-700">$190</div>
+                <div className="relative bg-blue-50 border border-blue-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-blue-600 mb-1 font-medium">Outstanding Balance</div>
+                  <div className="text-xl font-bold text-blue-800">$190</div>
+                  <div className="text-xs text-blue-500 mt-1">After credit applied</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-400"></div>
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
