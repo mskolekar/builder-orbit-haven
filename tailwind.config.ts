@@ -66,6 +66,26 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        emerald: {
+          25: "#fafdf9",
+          50: "#ecfdf5",
+        },
+        amber: {
+          25: "#fffef7",
+          50: "#fffbeb",
+        },
+        orange: {
+          25: "#fffef7",
+          50: "#fff7ed",
+        },
+        gray: {
+          25: "#fcfcfd",
+          50: "#f9fafb",
+        },
+        blue: {
+          25: "#f8fafc",
+          50: "#f1f5f9",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
