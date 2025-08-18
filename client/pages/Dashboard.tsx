@@ -452,25 +452,6 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Documents */}
-          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to documents')}>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                <FileText size={16} className="text-slate-600" />
-                Documents
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center py-8">
-                <FileText size={32} className="mx-auto text-gray-400 mb-4" />
-                <p className="text-sm text-gray-500 mb-4">Manage customer documents</p>
-                <Button variant="outline" size="sm" className="border-gray-300 text-gray-600">
-                  <Plus size={12} className="mr-2" />
-                  Upload Documents
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Row 2: Policy Details, Claims History, Submissions */}
