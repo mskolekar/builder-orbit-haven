@@ -308,7 +308,7 @@ export default function Dashboard() {
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Activity size={16} className="text-slate-600" />
+                  <Clock size={16} className="text-slate-600" />
                   Activity Timeline
                 </CardTitle>
                 <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
