@@ -13,18 +13,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { 
-  Eye, 
-  Plus, 
-  FileText, 
-  AlertTriangle, 
-  Home, 
-  Car, 
-  Briefcase, 
-  Shield, 
-  Edit3, 
-  ExternalLink, 
-  Calendar, 
+import {
+  Eye,
+  Plus,
+  FileText,
+  AlertTriangle,
+  Home,
+  Car,
+  Briefcase,
+  Shield,
+  Edit3,
+  ExternalLink,
+  Calendar,
   DollarSign,
   TrendingUp,
   Users,
@@ -38,7 +38,8 @@ import {
   Mail,
   MapPin,
   Star,
-  MoreHorizontal
+  MoreHorizontal,
+  ArrowUpDown
 } from 'lucide-react';
 
 const customerData = {
@@ -95,9 +96,9 @@ const policyData = [
 ];
 
 const claimsHistory = [
-  { type: "Auto Collision", date: "Filed: May 16, 2023", status: "Pending", amount: "N/A", claimNumber: "C1122" },
-  { type: "Home Burglary", date: "Filed: Feb 28, 2023", status: "Approved", amount: "$5,300", claimNumber: "C1045" },
-  { type: "Critical Illness", date: "Filed: Dec 15, 2023", status: "Closed", amount: "$0", claimNumber: "C1189" }
+  { type: "Auto Collision", date: "Filed: May 16, 2023", status: "Open", amount: "N/A", claimNumber: "C1122" },
+  { type: "Home Burglary", date: "Filed: Feb 28, 2023", status: "Reopen", amount: "$5,300", claimNumber: "C1045" },
+  { type: "Critical Illness", date: "Filed: Dec 15, 2023", status: "Open", amount: "$0", claimNumber: "C1189" }
 ];
 
 const recentActivity = [
@@ -140,7 +141,9 @@ const getStatusBadge = (status: string) => {
     'expired': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
     'approved': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
     'closed': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
-    'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar }
+    'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar },
+    'open': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
+    'reopen': { color: 'bg-orange-50 text-orange-700 border-orange-200', icon: AlertTriangle }
   };
 
   const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: AlertCircle };
@@ -178,6 +181,33 @@ const getPriorityColor = (priority: string) => {
     case 'low': return 'bg-[#4d9fff]';
     default: return 'bg-gray-400';
   }
+};
+
+const getRowBgColor = (status: string, type: 'policy' | 'claim' | 'submission') => {
+  const normalizedStatus = status.toLowerCase();
+
+  if (type === 'policy') {
+    switch (normalizedStatus) {
+      case 'active': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'expired': return 'bg-gray-25 hover:bg-gray-50';
+      case 'pending': return 'bg-amber-25 hover:bg-amber-50';
+      default: return 'hover:bg-gray-50';
+    }
+  } else if (type === 'claim') {
+    switch (normalizedStatus) {
+      case 'open': return 'bg-amber-25 hover:bg-amber-50';
+      case 'reopen': return 'bg-orange-25 hover:bg-orange-50';
+      default: return 'hover:bg-gray-50';
+    }
+  } else if (type === 'submission') {
+    switch (normalizedStatus) {
+      case 'in progress': return 'bg-blue-25 hover:bg-blue-50';
+      case 'bound': return 'bg-emerald-25 hover:bg-emerald-50';
+      default: return 'hover:bg-gray-50';
+    }
+  }
+
+  return 'hover:bg-gray-50';
 };
 
 export default function Dashboard() {
@@ -234,26 +264,18 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Current Due</div>
-                  <div className="text-xl font-bold text-gray-800">$150</div>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Total Due</div>
-                  <div className="text-xl font-bold text-gray-700">$275</div>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Total Paid</div>
+                  <div className="text-xs text-gray-500 mb-1">Paid</div>
                   <div className="text-xl font-bold text-emerald-700">$8,460</div>
                 </div>
                 <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Annual Premium</div>
-                  <div className="text-xl font-bold text-slate-700">$4,200</div>
+                  <div className="text-xs text-gray-500 mb-1">Due</div>
+                  <div className="text-xl font-bold text-gray-800">$275</div>
                 </div>
                 <div className="border border-gray-200 rounded-lg p-3">
-                  <div className="text-xs text-gray-500 mb-1">Credit Available</div>
-                  <div className="text-xl font-bold text-blue-700">$85</div>
+                  <div className="text-xs text-gray-500 mb-1">Outstanding</div>
+                  <div className="text-xl font-bold text-gray-700">$190</div>
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
@@ -293,9 +315,24 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600">Date</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Activity</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Action Taken By</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Date
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Activity
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Action Taken By
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -336,10 +373,30 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600">Due Date</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Title</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Priority</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Actions</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Due Date
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Title
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Priority
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Actions
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -431,35 +488,53 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600">Policy Number</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Policy Number
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
                           Product
-                          <ColumnFilter
-                            options={policyLobs}
-                            selectedValues={policyLobFilter}
-                            onFilterChange={setPolicyLobFilter}
-                          />
+                          <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
                           Status
-                          <ColumnFilter
-                            options={policyStatuses}
-                            selectedValues={policyStatusFilter}
-                            onFilterChange={setPolicyStatusFilter}
-                          />
+                          <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Expiration Date</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Premium</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Current Due</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Effective Date
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Expiration Date
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Premium
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Current Due
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredPolicies.filter(p => p.status === 'Active' || (p.status === 'Expired' && Math.random() > 0.5)).map((policy, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-gray-50 cursor-pointer" onClick={(e) => {
+                      <TableRow key={index} className={`h-10 ${getRowBgColor(policy.status, 'policy')} cursor-pointer`} onClick={(e) => {
                         e.stopPropagation();
                         console.log('Open policy details', policy.policy);
                       }}>
@@ -471,6 +546,7 @@ export default function Dashboard() {
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{policy.startDate}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.endDate}</TableCell>
                         <TableCell className="text-sm font-semibold py-2 text-gray-800">{policy.premium}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{index === 0 ? '$150' : '$0'}</TableCell>
@@ -500,26 +576,47 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600">Claim Number</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Status
-                          <ColumnFilter
-                            options={['Open', 'Reopen']}
-                            selectedValues={claimsStatusFilter}
-                            onFilterChange={setClaimsStatusFilter}
-                          />
+                          Claim Number
+                          <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Loss Date</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Paid</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Reserves</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Incurred</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Status
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Loss Date
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Paid
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Reserves
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Incurred
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredClaims.filter(claim => claim.status === 'Pending' || claim.status === 'Approved').map((claim, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-gray-50 cursor-pointer" onClick={(e) => {
+                    {filteredClaims.filter(claim => claim.status === 'Open' || claim.status === 'Reopen').map((claim, index) => (
+                      <TableRow key={index} className={`h-10 ${getRowBgColor(claim.status, 'claim')} cursor-pointer`} onClick={(e) => {
                         e.stopPropagation();
                         console.log('Open claim details', claim.claimNumber);
                       }}>
@@ -557,34 +654,41 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600">Submission Number</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Submission Number
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
                           Product
-                          <ColumnFilter
-                            options={submissionStatuses}
-                            selectedValues={submissionStatusFilter}
-                            onFilterChange={setSubmissionStatusFilter}
-                          />
+                          <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
                           Status
-                          <ColumnFilter
-                            options={submissionStatuses}
-                            selectedValues={submissionStatusFilter}
-                            onFilterChange={setSubmissionStatusFilter}
-                          />
+                          <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Effective Date</TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Expiration Date</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Effective Date
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Expiration Date
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredSubmissions.filter(submission => submission.status === 'In progress').map((submission, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-gray-50 cursor-pointer" onClick={(e) => {
+                      <TableRow key={index} className={`h-10 ${getRowBgColor(submission.status, 'submission')} cursor-pointer`} onClick={(e) => {
                         e.stopPropagation();
                         console.log('Open submission details', submission.id);
                       }}>
