@@ -550,7 +550,7 @@ export default function Dashboard() {
                   <AlertTriangle size={16} className="text-slate-600" />
                   Claims History
                 </CardTitle>
-                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
+                <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
                   View All
                 </Button>
               </div>
