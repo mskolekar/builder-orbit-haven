@@ -321,7 +321,7 @@ export default function Dashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
                         <div className="flex items-center gap-1">
                           Date
                           <ArrowUpDown size={12} className="text-gray-400" />
@@ -344,7 +344,7 @@ export default function Dashboard() {
                   <TableBody>
                     {recentActivity.slice(0, 4).map((activity, index) => (
                       <TableRow key={index} className="h-10 hover:bg-gray-50">
-                        <TableCell className="text-xs py-2">
+                        <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
                           {activity.date}
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{activity.type}</TableCell>
@@ -510,6 +510,12 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
+                          Paid
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
                           Current Due
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
@@ -533,6 +539,7 @@ export default function Dashboard() {
                         <TableCell className="text-sm py-2 text-gray-700">{policy.startDate}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.endDate}</TableCell>
                         <TableCell className="text-sm font-semibold py-2 text-gray-800">{policy.premium}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{index === 0 ? '$1,050' : index === 1 ? '$775' : '$290'}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{index === 0 ? '$150' : '$0'}</TableCell>
                       </TableRow>
                     ))}
@@ -572,7 +579,7 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
                         <div className="flex items-center gap-1">
                           Loss Date
                           <ArrowUpDown size={12} className="text-gray-400" />
@@ -606,7 +613,7 @@ export default function Dashboard() {
                       }}>
                         <TableCell className="text-sm font-medium py-2 text-gray-800">{claim.claimNumber}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(claim.status)}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{claim.date}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">{claim.date}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{claim.amount}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">$2,000</TableCell>
                         <TableCell className="text-sm font-semibold py-2 text-gray-800">
