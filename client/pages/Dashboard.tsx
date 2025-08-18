@@ -86,16 +86,16 @@ const submissions = [
 ];
 
 const policyData = [
-  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Processed", premium: "$2,450", lastClaim: "Never", employerName: "Travis LLP 2", employerNumber: "09212024", underwriter: "Amrita, Das", bindDate: "07-28-25" },
-  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Declined", premium: "$2,350", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "04-29-25" },
-  { policy: "1-2213668", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Declined", premium: "$2,275", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "04-29-25" },
-  { policy: "1-2731058", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,890", lastClaim: "Never", employerName: "First_LawFirm_85196", employerNumber: "F_96954", underwriter: "Underwriter, Auto", bindDate: "04-14-25" },
-  { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,975", lastClaim: "Never", employerName: "First_LawFirm_97332", employerNumber: "F_34810", underwriter: "Underwriter, Auto", bindDate: "03-25-25" },
-  { policy: "1-4755556", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,825", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "03-02-25" },
-  { policy: "121716LIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$2,150", lastClaim: "Never", employerName: "First_LawFirm_77761", employerNumber: "F_58672", underwriter: "Underwriter, Auto", bindDate: "07-15-25" },
-  { policy: "1-31490LIT71", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,950", lastClaim: "Never", employerName: "Second_LawFirm_97238", employerNumber: "F_11961", underwriter: "Underwriter, Auto", bindDate: "07-21-25" },
-  { policy: "1-436072B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,775", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "03-30-25" },
-  { policy: "1-541549B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,650", lastClaim: "Never", employerName: "First_LawFirm_32097", employerNumber: "F_44917", underwriter: "Underwriter, Auto", bindDate: "06-11-25" }
+  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", underwriter: "Amrita, Das", premiumDue: "$245", premiumPaid: "$2,205" },
+  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-23", endDate: "01-01-24", status: "Expired", premium: "$2,350", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$2,350" },
+  { policy: "1-2213668", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$2,275" },
+  { policy: "1-2731058", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,890", lastClaim: "Never", employerNumber: "F_96954", underwriter: "Underwriter, Auto", premiumDue: "$189", premiumPaid: "$1,701" },
+  { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,975", lastClaim: "Never", employerNumber: "F_34810", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$1,975" },
+  { policy: "1-4755556", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,825", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$365", premiumPaid: "$1,460" },
+  { policy: "121716LIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$2,150", lastClaim: "Never", employerNumber: "F_58672", underwriter: "Underwriter, Auto", premiumDue: "$430", premiumPaid: "$1,720" },
+  { policy: "1-31490LIT71", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,950", lastClaim: "Never", employerNumber: "F_11961", underwriter: "Underwriter, Auto", premiumDue: "$195", premiumPaid: "$1,755" },
+  { policy: "1-436072B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,775", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$1,775" },
+  { policy: "1-541549B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,650", lastClaim: "Never", employerNumber: "F_44917", underwriter: "Underwriter, Auto", premiumDue: "$165", premiumPaid: "$1,485" }
 ];
 
 const claimsHistory = [
@@ -147,8 +147,6 @@ const getStatusBadge = (status: string) => {
     'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar },
     'open': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
     'reopen': { color: 'bg-orange-50 text-orange-700 border-orange-200', icon: AlertTriangle },
-    'processed': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
-    'declined': { color: 'bg-red-50 text-red-700 border-red-200', icon: XCircle }
   };
 
   const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: AlertCircle };
@@ -194,10 +192,8 @@ const getRowBgColor = (status: string, type: 'policy' | 'claim' | 'submission') 
   if (type === 'policy') {
     switch (normalizedStatus) {
       case 'active': return 'bg-emerald-25 hover:bg-emerald-50';
-      case 'processed': return 'bg-emerald-25 hover:bg-emerald-50';
       case 'expired': return 'bg-gray-25 hover:bg-gray-50';
       case 'pending': return 'bg-amber-25 hover:bg-amber-50';
-      case 'declined': return 'bg-red-25 hover:bg-red-50';
       default: return 'hover:bg-gray-50';
     }
   } else if (type === 'claim') {
@@ -487,12 +483,6 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Employer Name
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
                           Program/LOB
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
@@ -523,7 +513,13 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Bind Date
+                          Premium Due
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Premium Paid
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
@@ -547,13 +543,13 @@ export default function Dashboard() {
                             <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{policy.employerName}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.underwriter}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.startDate}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.endDate}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{policy.bindDate}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">{policy.premiumDue}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">{policy.premiumPaid}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.coverage}</TableCell>
                       </TableRow>
                     ))}
