@@ -536,7 +536,7 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredPolicies.filter(p => p.status === 'Active' || (p.status === 'Expired' && Math.random() > 0.5)).map((policy, index) => (
+                    {filteredPolicies.map((policy, index) => (
                       <TableRow key={index} className={`h-10 ${getRowBgColor(policy.status, 'policy')} cursor-pointer`} onClick={(e) => {
                         e.stopPropagation();
                         console.log('Open policy details', policy.policy);
