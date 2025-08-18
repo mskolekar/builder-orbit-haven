@@ -81,51 +81,51 @@ const upcomingReminders = [
 ];
 
 const submissions = [
-  { id: "A9876", lob: "PL", status: "In progress", startDate: "01/01/2024", endDate: "12/31/2024", progress: 75 },
-  { id: "A9876", lob: "PL", status: "Bound", startDate: "01/01/2024", endDate: "12/31/2024", progress: 100 }
+  { id: "A9876", lob: "PL", status: "In progress", startDate: "01-01-24", endDate: "12-31-24", progress: 75 },
+  { id: "A9876", lob: "PL", status: "Bound", startDate: "01-01-24", endDate: "12-31-24", progress: 100 }
 ];
 
 const policyData = [
-  { policy: "A9876", lob: "Auto", coverage: "Full Coverage", startDate: "01/01/2024", endDate: "12/31/2024", status: "Active", premium: "$1,200", lastClaim: "2023" },
-  { policy: "H2345", lob: "Home", coverage: "All Perils", startDate: "03/15/2023", endDate: "03/14/2025", status: "Active", premium: "$850", lastClaim: "2022" },
-  { policy: "L7890", lob: "Life", coverage: "$500,000", startDate: "06/01/2022", endDate: "05/31/2032", status: "Active", premium: "$340", lastClaim: "Never" },
-  { policy: "C1234", lob: "Critical Illness", coverage: "$100,000", startDate: "09/01/2023", endDate: "08/31/2028", status: "Active", premium: "$75", lastClaim: "Never" },
-  { policy: "D5678", lob: "Disability", coverage: "$3,000/mo", startDate: "04/01/2022", endDate: "03/31/2027", status: "Active", premium: "$50", lastClaim: "Never" },
-  { policy: "RV3333", lob: "RV", coverage: "Liability", startDate: "07/01/2021", endDate: "06/30/2023", status: "Expired", premium: "$45", lastClaim: "Never" },
-  { policy: "B9999", lob: "Business", coverage: "General Liability", startDate: "10/01/2023", endDate: "09/30/2024", status: "Pending", premium: "$1,250", lastClaim: "Never" }
+  { policy: "A9876", lob: "Auto", coverage: "Full Coverage", startDate: "01-01-24", endDate: "12-31-24", status: "Active", premium: "$1,200", lastClaim: "2023" },
+  { policy: "H2345", lob: "Home", coverage: "All Perils", startDate: "03-15-23", endDate: "03-14-25", status: "Active", premium: "$850", lastClaim: "2022" },
+  { policy: "L7890", lob: "Life", coverage: "$500,000", startDate: "06-01-22", endDate: "05-31-32", status: "Active", premium: "$340", lastClaim: "Never" },
+  { policy: "C1234", lob: "Critical Illness", coverage: "$100,000", startDate: "09-01-23", endDate: "08-31-28", status: "Active", premium: "$75", lastClaim: "Never" },
+  { policy: "D5678", lob: "Disability", coverage: "$3,000/mo", startDate: "04-01-22", endDate: "03-31-27", status: "Active", premium: "$50", lastClaim: "Never" },
+  { policy: "RV3333", lob: "RV", coverage: "Liability", startDate: "07-01-21", endDate: "06-30-23", status: "Expired", premium: "$45", lastClaim: "Never" },
+  { policy: "B9999", lob: "Business", coverage: "General Liability", startDate: "10-01-23", endDate: "09-30-24", status: "Pending", premium: "$1,250", lastClaim: "Never" }
 ];
 
 const claimsHistory = [
-  { type: "Auto Collision", date: "Filed: May 16, 2023", status: "Open", amount: "N/A", claimNumber: "C1122" },
-  { type: "Home Burglary", date: "Filed: Feb 28, 2023", status: "Reopen", amount: "$5,300", claimNumber: "C1045" },
-  { type: "Critical Illness", date: "Filed: Dec 15, 2023", status: "Open", amount: "$0", claimNumber: "C1189" }
+  { type: "Auto Collision", date: "05-16-23", status: "Open", amount: "N/A", claimNumber: "C1122" },
+  { type: "Home Burglary", date: "02-28-23", status: "Reopen", amount: "$5,300", claimNumber: "C1045" },
+  { type: "Critical Illness", date: "12-15-23", status: "Open", amount: "$0", claimNumber: "C1189" }
 ];
 
 const recentActivity = [
   {
     type: "Last Premium Paid - $150",
-    date: "July 1, 2025",
+    date: "07-01-25",
     description: "Premium payment processed successfully.",
     user: "System",
     category: "payment"
   },
   {
     type: "Follow-up on recent claim #C1122 progress.",
-    date: "2 hours ago",
+    date: "06-30-25",
     description: "Provided update on claim status, awaiting adjuster report.",
     user: "UW John",
     category: "claim"
   },
   {
     type: "Confirmation of payment received premium.",
-    date: "1 day ago",
+    date: "06-29-25",
     description: "Auto premium receipt sent to customer.",
     user: "System",
     category: "payment"
   },
   {
     type: "Logged customer preference for email communication.",
-    date: "3 days ago",
+    date: "06-28-25",
     description: "Preferred contact method updated.",
     user: "Agent Johnson",
     category: "profile"
@@ -345,10 +345,7 @@ export default function Dashboard() {
                     {recentActivity.slice(0, 4).map((activity, index) => (
                       <TableRow key={index} className="h-10 hover:bg-gray-50">
                         <TableCell className="text-xs py-2">
-                          {activity.date === '2 hours ago' ? 'Jul 01, 2025 14:30' :
-                           activity.date === '1 day ago' ? 'Jun 30, 2025 09:15' :
-                           activity.date === '3 days ago' ? 'Jun 28, 2025 16:45' :
-                           'Jun 28, 2025 11:20'}
+                          {activity.date}
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{activity.type}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-600">{activity.user}</TableCell>
@@ -609,7 +606,7 @@ export default function Dashboard() {
                       }}>
                         <TableCell className="text-sm font-medium py-2 text-gray-800">{claim.claimNumber}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(claim.status)}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">May 10, 2023</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{claim.date}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{claim.amount}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">$2,000</TableCell>
                         <TableCell className="text-sm font-semibold py-2 text-gray-800">
