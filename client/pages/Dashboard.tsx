@@ -543,13 +543,14 @@ export default function Dashboard() {
                             <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
                           </div>
                         </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{policy.employerName}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{policy.underwriter}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.startDate}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.endDate}</TableCell>
-                        <TableCell className="text-sm font-semibold py-2 text-gray-800">{policy.premium}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{index === 0 ? '$1,050' : index === 1 ? '$775' : '$290'}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{index === 0 ? '$150' : '$0'}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{policy.bindDate}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{policy.coverage}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
