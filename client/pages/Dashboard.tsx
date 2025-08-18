@@ -194,8 +194,10 @@ const getRowBgColor = (status: string, type: 'policy' | 'claim' | 'submission') 
   if (type === 'policy') {
     switch (normalizedStatus) {
       case 'active': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'processed': return 'bg-emerald-25 hover:bg-emerald-50';
       case 'expired': return 'bg-gray-25 hover:bg-gray-50';
       case 'pending': return 'bg-amber-25 hover:bg-amber-50';
+      case 'declined': return 'bg-red-25 hover:bg-red-50';
       default: return 'hover:bg-gray-50';
     }
   } else if (type === 'claim') {
