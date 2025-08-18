@@ -86,13 +86,16 @@ const submissions = [
 ];
 
 const policyData = [
-  { policy: "A9876", lob: "Auto", coverage: "Full Coverage", startDate: "01-01-24", endDate: "12-31-24", status: "Active", premium: "$1,200", lastClaim: "2023" },
-  { policy: "H2345", lob: "Home", coverage: "All Perils", startDate: "03-15-23", endDate: "03-14-25", status: "Active", premium: "$850", lastClaim: "2022" },
-  { policy: "L7890", lob: "Life", coverage: "$500,000", startDate: "06-01-22", endDate: "05-31-32", status: "Active", premium: "$340", lastClaim: "Never" },
-  { policy: "C1234", lob: "Critical Illness", coverage: "$100,000", startDate: "09-01-23", endDate: "08-31-28", status: "Active", premium: "$75", lastClaim: "Never" },
-  { policy: "D5678", lob: "Disability", coverage: "$3,000/mo", startDate: "04-01-22", endDate: "03-31-27", status: "Active", premium: "$50", lastClaim: "Never" },
-  { policy: "RV3333", lob: "RV", coverage: "Liability", startDate: "07-01-21", endDate: "06-30-23", status: "Expired", premium: "$45", lastClaim: "Never" },
-  { policy: "B9999", lob: "Business", coverage: "General Liability", startDate: "10-01-23", endDate: "09-30-24", status: "Pending", premium: "$1,250", lastClaim: "Never" }
+  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Processed", premium: "$2,450", lastClaim: "Never", employerName: "Travis LLP 2", employerNumber: "09212024", underwriter: "Amrita, Das", bindDate: "07-28-25" },
+  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Declined", premium: "$2,350", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "04-29-25" },
+  { policy: "1-2213668", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Declined", premium: "$2,275", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "04-29-25" },
+  { policy: "1-2731058", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,890", lastClaim: "Never", employerName: "First_LawFirm_85196", employerNumber: "F_96954", underwriter: "Underwriter, Auto", bindDate: "04-14-25" },
+  { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,975", lastClaim: "Never", employerName: "First_LawFirm_97332", employerNumber: "F_34810", underwriter: "Underwriter, Auto", bindDate: "03-25-25" },
+  { policy: "1-4755556", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,825", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "03-02-25" },
+  { policy: "121716LIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$2,150", lastClaim: "Never", employerName: "First_LawFirm_77761", employerNumber: "F_58672", underwriter: "Underwriter, Auto", bindDate: "07-15-25" },
+  { policy: "1-31490LIT71", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,950", lastClaim: "Never", employerName: "Second_LawFirm_97238", employerNumber: "F_11961", underwriter: "Underwriter, Auto", bindDate: "07-21-25" },
+  { policy: "1-436072B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,775", lastClaim: "Never", employerName: "Travis LLP 3", employerNumber: "A001904", underwriter: "Underwriter, Auto", bindDate: "03-30-25" },
+  { policy: "1-541549B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Processed", premium: "$1,650", lastClaim: "Never", employerName: "First_LawFirm_32097", employerNumber: "F_44917", underwriter: "Underwriter, Auto", bindDate: "06-11-25" }
 ];
 
 const claimsHistory = [
