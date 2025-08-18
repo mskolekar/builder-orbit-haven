@@ -86,6 +86,10 @@ export default {
           25: "#f8fafc",
           50: "#f1f5f9",
         },
+        red: {
+          25: "#fef7f7",
+          50: "#fef2f2",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
