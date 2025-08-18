@@ -146,7 +146,9 @@ const getStatusBadge = (status: string) => {
     'closed': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
     'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar },
     'open': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
-    'reopen': { color: 'bg-orange-50 text-orange-700 border-orange-200', icon: AlertTriangle }
+    'reopen': { color: 'bg-orange-50 text-orange-700 border-orange-200', icon: AlertTriangle },
+    'processed': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
+    'declined': { color: 'bg-red-50 text-red-700 border-red-200', icon: XCircle }
   };
 
   const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: AlertCircle };
