@@ -405,10 +405,8 @@ export default function Dashboard() {
                         <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
                           {activity.date}
                         </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          <div>{activity.type}</div>
-                          <div className="text-xs text-gray-500 mt-1">by {activity.user}</div>
-                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{activity.type}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-600">{activity.user}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
