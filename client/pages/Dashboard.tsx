@@ -91,8 +91,8 @@ const upcomingReminders = [
 ];
 
 const submissions = [
-  { id: "A9876", lob: "PL", status: "In progress", startDate: "01-01-24", endDate: "12-31-24", progress: 75 },
-  { id: "A9876", lob: "PL", status: "Bound", startDate: "01-01-24", endDate: "12-31-24", progress: 100 }
+  { id: "1-928763A-0134", program: "Primary E&O", proposedEffectiveDate: "01-01-26", status: "In Progress", submissionType: "New" },
+  { id: "1-178221LT97-9914", program: "MDP E&O", proposedEffectiveDate: "01-01-26", status: "In Progress", submissionType: "Renewal" }
 ];
 
 const initialDiariesData = [
@@ -387,13 +387,7 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Activity
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Action Taken By
+                          Activity / Action Taken By
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
@@ -405,8 +399,10 @@ export default function Dashboard() {
                         <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
                           {activity.date}
                         </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{activity.type}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-600">{activity.user}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          <div>{activity.type}</div>
+                          <div className="text-xs text-gray-500 mt-1">by {activity.user}</div>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -700,7 +696,13 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Product
+                          Program
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Proposed Effective Date
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
@@ -712,29 +714,23 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Effective Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Expiration Date
+                          Submission Type
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredSubmissions.filter(submission => submission.status === 'In progress').map((submission, index) => (
+                    {filteredSubmissions.map((submission, index) => (
                       <TableRow key={index} className={`h-10 ${getRowBgColor(submission.status, 'submission')} cursor-pointer`} onClick={(e) => {
                         e.stopPropagation();
                         console.log('Open submission details', submission.id);
                       }}>
                         <TableCell className="text-sm font-medium py-2 text-gray-800">{submission.id}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{submission.lob}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{submission.program}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{submission.proposedEffectiveDate}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{submission.startDate}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{submission.endDate}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{submission.submissionType}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
