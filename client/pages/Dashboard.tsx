@@ -284,6 +284,15 @@ export default function Dashboard() {
     }
   };
 
+  const getDiaryRowBgColor = (priority: string) => {
+    switch (priority.toLowerCase()) {
+      case 'high': return 'bg-red-25 hover:bg-red-50';
+      case 'medium': return 'bg-amber-25 hover:bg-amber-50';
+      case 'low': return 'bg-emerald-25 hover:bg-emerald-50';
+      default: return 'hover:bg-gray-50';
+    }
+  };
+
   // Get unique values for filters
   const policyStatuses = [...new Set(policyData.map(p => p.status))];
   const policyLobs = [...new Set(policyData.map(p => p.lob))];
