@@ -96,24 +96,20 @@ const submissions = [
 ];
 
 const initialDiariesData = [
-  { id: 1, dueDate: "12-15-24", title: "Approval request approved.", priority: "Medium", status: "Open" },
-  { id: 2, dueDate: "12-15-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
-  { id: 3, dueDate: "12-15-24", title: "Approval request approved.", priority: "Medium", status: "Open" },
-  { id: 4, dueDate: "12-15-24", title: "Approval request declined.", priority: "Medium", status: "Open" },
-  { id: 5, dueDate: "12-15-24", title: "Approval request declined.", priority: "Medium", status: "Open" },
-  { id: 6, dueDate: "12-15-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
-  { id: 7, dueDate: "12-15-24", title: "Approval request approved.", priority: "Medium", status: "Open" },
-  { id: 8, dueDate: "12-22-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
-  { id: 9, dueDate: "12-22-24", title: "Approval request approved.", priority: "Medium", status: "Open" }
+  { id: 1, dueDate: "12-15-24", title: "Approval request declined.", priority: "High", status: "Open" },
+  { id: 2, dueDate: "12-15-24", title: "Approval request declined.", priority: "High", status: "Open" },
+  { id: 3, dueDate: "12-15-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
+  { id: 4, dueDate: "12-22-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
+  { id: 5, dueDate: "12-15-24", title: "Approval request approved.", priority: "Low", status: "Open" }
 ];
 
 const policyData = [
-  { policy: "1-2213668", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$125", premiumPaid: "$2,150" },
-  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-23", endDate: "01-01-24", status: "Expired", premium: "$2,350", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$175", premiumPaid: "$2,175" },
+  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", premiumDue: "$245", premiumPaid: "$2,205" },
   { policy: "1-2731058", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,890", lastClaim: "Never", employerNumber: "F_96954", premiumDue: "$189", premiumPaid: "$1,701" },
   { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,975", lastClaim: "Never", employerNumber: "F_34810", premiumDue: "$0", premiumPaid: "$1,975" },
   { policy: "1-4755556", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,825", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$365", premiumPaid: "$1,460" },
-  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", premiumDue: "$245", premiumPaid: "$2,205" }
+  { policy: "1-2213668", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$125", premiumPaid: "$2,150" },
+  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-23", endDate: "01-01-24", status: "Expired", premium: "$2,350", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$175", premiumPaid: "$2,175" }
 ];
 
 const claimsHistory = [
@@ -271,8 +267,13 @@ export default function Dashboard() {
     setDiaryToClose(null);
   };
 
-  // Filter open diaries for display
-  const openDiaries = diariesData.filter(diary => diary.status === 'Open');
+  // Filter and sort open diaries for display (High priority first, then Medium, then Low)
+  const openDiaries = diariesData
+    .filter(diary => diary.status === 'Open')
+    .sort((a, b) => {
+      const priorityOrder = { 'High': 0, 'Medium': 1, 'Low': 2 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
 
   const getPriorityBadgeColor = (priority: string) => {
     switch (priority.toLowerCase()) {
@@ -473,7 +474,7 @@ export default function Dashboard() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="h-5 w-12 p-0 text-xs text-gray-600 hover:text-red-600"
+                            className="h-5 w-12 p-0 text-xs text-gray-600 hover:text-[#0054A6] hover:bg-blue-50"
                             onClick={(e) => {
                               e.stopPropagation();
                               handleCloseDiary(diary.id);
