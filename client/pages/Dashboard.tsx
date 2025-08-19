@@ -4,6 +4,16 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ColumnFilter } from '@/components/ui/column-filter';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Progress } from '@/components/ui/progress';
 import { 
   Table,
@@ -83,6 +93,13 @@ const upcomingReminders = [
 const submissions = [
   { id: "A9876", lob: "PL", status: "In progress", startDate: "01-01-24", endDate: "12-31-24", progress: 75 },
   { id: "A9876", lob: "PL", status: "Bound", startDate: "01-01-24", endDate: "12-31-24", progress: 100 }
+];
+
+const initialDiariesData = [
+  { id: 1, dueDate: "08-15-25", title: "Policy Renewal Review - Auto", priority: "High", status: "Open" },
+  { id: 2, dueDate: "08-20-25", title: "Annual Policy Audit – Rose K", priority: "Medium", status: "Open" },
+  { id: 3, dueDate: "08-25-25", title: "Review & Approve Claim #C1189", priority: "High", status: "Open" },
+  { id: 4, dueDate: "09-01-25", title: "Financial Statement Review – Rose K", priority: "Low", status: "Open" }
 ];
 
 const policyData = [
@@ -222,12 +239,48 @@ export default function Dashboard() {
   const [submissionStatusFilter, setSubmissionStatusFilter] = useState<string[]>([]);
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
 
+  // Diaries state
+  const [diariesData, setDiariesData] = useState(initialDiariesData);
+  const [diaryToClose, setDiaryToClose] = useState<number | null>(null);
+
   // Animation states
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Diary functions
+  const handleCloseDiary = (diaryId: number) => {
+    setDiaryToClose(diaryId);
+  };
+
+  const confirmCloseDiary = () => {
+    if (diaryToClose) {
+      setDiariesData(prev => prev.map(diary =>
+        diary.id === diaryToClose
+          ? { ...diary, status: 'Closed' }
+          : diary
+      ));
+      setDiaryToClose(null);
+    }
+  };
+
+  const cancelCloseDiary = () => {
+    setDiaryToClose(null);
+  };
+
+  // Filter open diaries for display
+  const openDiaries = diariesData.filter(diary => diary.status === 'Open');
+
+  const getPriorityBadgeColor = (priority: string) => {
+    switch (priority.toLowerCase()) {
+      case 'high': return 'bg-red-100 text-red-700 border-red-200';
+      case 'medium': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
+      case 'low': return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+      default: return 'bg-gray-100 text-gray-700 border-gray-200';
+    }
+  };
 
   // Get unique values for filters
   const policyStatuses = [...new Set(policyData.map(p => p.status))];
@@ -406,46 +459,37 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">08-15-25</TableCell>
-                      <TableCell className="text-xs py-1">Policy Renewal Review - Auto</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
-                      </TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">08-20-25</TableCell>
-                      <TableCell className="text-xs py-1">Annual Policy Audit – Rose K</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700 border border-yellow-200">Medium</span>
-                      </TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">08-25-25</TableCell>
-                      <TableCell className="text-xs py-1">Review & Approve Claim #C1189</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700 border border-red-200">High</span>
-                      </TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow className="h-8 hover:bg-gray-50 cursor-pointer">
-                      <TableCell className="text-xs py-1">09-01-25</TableCell>
-                      <TableCell className="text-xs py-1">Financial Statement Review – Rose K</TableCell>
-                      <TableCell className="py-1">
-                        <span className="px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700 border border-emerald-200">Low</span>
-                      </TableCell>
-                      <TableCell className="py-1">
-                        <Button variant="ghost" size="sm" className="h-5 w-12 p-0 text-xs text-gray-600">Close</Button>
-                      </TableCell>
-                    </TableRow>
+                    {openDiaries.map((diary) => (
+                      <TableRow key={diary.id} className="h-8 hover:bg-gray-50 cursor-pointer">
+                        <TableCell className="text-xs py-1">{diary.dueDate}</TableCell>
+                        <TableCell className="text-xs py-1">{diary.title}</TableCell>
+                        <TableCell className="py-1">
+                          <span className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}>
+                            {diary.priority}
+                          </span>
+                        </TableCell>
+                        <TableCell className="py-1">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-5 w-12 p-0 text-xs text-gray-600 hover:text-red-600"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleCloseDiary(diary.id);
+                            }}
+                          >
+                            Close
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {openDiaries.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={4} className="text-center py-4 text-gray-500 text-sm">
+                          No open diaries
+                        </TableCell>
+                      </TableRow>
+                    )}
                   </TableBody>
                 </Table>
               </div>
@@ -706,6 +750,24 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Close Diary Confirmation Dialog */}
+        <AlertDialog open={diaryToClose !== null} onOpenChange={cancelCloseDiary}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Close Diary</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to close this diary? This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={cancelCloseDiary}>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={confirmCloseDiary} className="bg-red-600 hover:bg-red-700">
+                Close Diary
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );
