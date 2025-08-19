@@ -471,7 +471,7 @@ export default function Dashboard() {
                   </TableHeader>
                   <TableBody>
                     {openDiaries.map((diary) => (
-                      <TableRow key={diary.id} className="h-8 hover:bg-gray-50 cursor-pointer">
+                      <TableRow key={diary.id} className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}>
                         <TableCell className="text-xs py-1">{diary.dueDate}</TableCell>
                         <TableCell className="text-xs py-1">{diary.title}</TableCell>
                         <TableCell className="py-1">
