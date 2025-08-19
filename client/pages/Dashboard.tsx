@@ -56,7 +56,7 @@ const customerData = {
   name: "Rose K",
   role: "Lawyer",
   status: "Active",
-  dateOfBirth: "••••••••",
+  dateOfBirth: "••••���•••",
   gender: "Female",
   lsc: "000000",
   phone: "(416) 555-0123",
@@ -103,16 +103,12 @@ const initialDiariesData = [
 ];
 
 const policyData = [
-  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", underwriter: "Amrita, Das", premiumDue: "$245", premiumPaid: "$2,205" },
-  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-23", endDate: "01-01-24", status: "Expired", premium: "$2,350", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$2,350" },
-  { policy: "1-2213668", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$2,275" },
-  { policy: "1-2731058", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,890", lastClaim: "Never", employerNumber: "F_96954", underwriter: "Underwriter, Auto", premiumDue: "$189", premiumPaid: "$1,701" },
-  { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,975", lastClaim: "Never", employerNumber: "F_34810", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$1,975" },
-  { policy: "1-4755556", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,825", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$365", premiumPaid: "$1,460" },
-  { policy: "121716LIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$2,150", lastClaim: "Never", employerNumber: "F_58672", underwriter: "Underwriter, Auto", premiumDue: "$430", premiumPaid: "$1,720" },
-  { policy: "1-31490LIT71", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,950", lastClaim: "Never", employerNumber: "F_11961", underwriter: "Underwriter, Auto", premiumDue: "$195", premiumPaid: "$1,755" },
-  { policy: "1-436072B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,775", lastClaim: "Never", employerNumber: "A001904", underwriter: "Underwriter, Auto", premiumDue: "$0", premiumPaid: "$1,775" },
-  { policy: "1-541549B", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,650", lastClaim: "Never", employerNumber: "F_44917", underwriter: "Underwriter, Auto", premiumDue: "$165", premiumPaid: "$1,485" }
+  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", premiumDue: "$245", premiumPaid: "$2,205" },
+  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-23", endDate: "01-01-24", status: "Expired", premium: "$2,350", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$175", premiumPaid: "$2,175" },
+  { policy: "1-2731058", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,890", lastClaim: "Never", employerNumber: "F_96954", premiumDue: "$189", premiumPaid: "$1,701" },
+  { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,975", lastClaim: "Never", employerNumber: "F_34810", premiumDue: "$0", premiumPaid: "$1,975" },
+  { policy: "1-2213668", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$125", premiumPaid: "$2,150" },
+  { policy: "1-4755556", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,825", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$365", premiumPaid: "$1,460" }
 ];
 
 const claimsHistory = [
@@ -533,12 +529,6 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Underwriter
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
                           Status
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
@@ -567,12 +557,6 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Limit
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -588,13 +572,11 @@ export default function Dashboard() {
                           </div>
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{policy.underwriter}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.startDate}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.endDate}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700 font-semibold">{policy.premiumDue}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700 font-semibold">{policy.premiumPaid}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{policy.coverage}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -762,7 +744,7 @@ export default function Dashboard() {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel onClick={cancelCloseDiary}>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={confirmCloseDiary} className="bg-red-600 hover:bg-red-700">
+              <AlertDialogAction onClick={confirmCloseDiary} className="bg-[#0054A6] hover:bg-[#003d7a]">
                 Close Diary
               </AlertDialogAction>
             </AlertDialogFooter>
