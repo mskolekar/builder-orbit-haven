@@ -56,7 +56,7 @@ const customerData = {
   name: "Rose K",
   role: "Lawyer",
   status: "Active",
-  dateOfBirth: "••••���•••",
+  dateOfBirth: "••••••••",
   gender: "Female",
   lsc: "000000",
   phone: "(416) 555-0123",
@@ -96,25 +96,30 @@ const submissions = [
 ];
 
 const initialDiariesData = [
-  { id: 1, dueDate: "08-15-25", title: "Policy Renewal Review - Auto", priority: "High", status: "Open" },
-  { id: 2, dueDate: "08-20-25", title: "Annual Policy Audit – Rose K", priority: "Medium", status: "Open" },
-  { id: 3, dueDate: "08-25-25", title: "Review & Approve Claim #C1189", priority: "High", status: "Open" },
-  { id: 4, dueDate: "09-01-25", title: "Financial Statement Review – Rose K", priority: "Low", status: "Open" }
+  { id: 1, dueDate: "12-15-24", title: "Approval request approved.", priority: "Medium", status: "Open" },
+  { id: 2, dueDate: "12-15-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
+  { id: 3, dueDate: "12-15-24", title: "Approval request approved.", priority: "Medium", status: "Open" },
+  { id: 4, dueDate: "12-15-24", title: "Approval request declined.", priority: "Medium", status: "Open" },
+  { id: 5, dueDate: "12-15-24", title: "Approval request declined.", priority: "Medium", status: "Open" },
+  { id: 6, dueDate: "12-15-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
+  { id: 7, dueDate: "12-15-24", title: "Approval request approved.", priority: "Medium", status: "Open" },
+  { id: 8, dueDate: "12-22-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
+  { id: 9, dueDate: "12-22-24", title: "Approval request approved.", priority: "Medium", status: "Open" }
 ];
 
 const policyData = [
-  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", premiumDue: "$245", premiumPaid: "$2,205" },
+  { policy: "1-2213668", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$125", premiumPaid: "$2,150" },
   { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-23", endDate: "01-01-24", status: "Expired", premium: "$2,350", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$175", premiumPaid: "$2,175" },
-  { policy: "1-2731058", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,890", lastClaim: "Never", employerNumber: "F_96954", premiumDue: "$189", premiumPaid: "$1,701" },
+  { policy: "1-2731058", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,890", lastClaim: "Never", employerNumber: "F_96954", premiumDue: "$189", premiumPaid: "$1,701" },
   { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,975", lastClaim: "Never", employerNumber: "F_34810", premiumDue: "$0", premiumPaid: "$1,975" },
-  { policy: "1-2213668", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$125", premiumPaid: "$2,150" },
-  { policy: "1-4755556", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,825", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$365", premiumPaid: "$1,460" }
+  { policy: "1-4755556", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,825", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$365", premiumPaid: "$1,460" },
+  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", premiumDue: "$245", premiumPaid: "$2,205" }
 ];
 
 const claimsHistory = [
-  { type: "Auto Collision", date: "05-16-23", status: "Open", amount: "N/A", claimNumber: "C1122" },
-  { type: "Home Burglary", date: "02-28-23", status: "Reopen", amount: "$5,300", claimNumber: "C1045" },
-  { type: "Critical Illness", date: "12-15-23", status: "Open", amount: "$0", claimNumber: "C1189" }
+  { type: "Home Burglary", date: "02-28-23", status: "Reopen", amount: "$5,300", claimNumber: "C1045", incurred: "$7,300", reserves: "$2,000", paid: "$5,300", recoveries: "$500" },
+  { type: "Auto Collision", date: "05-16-23", status: "Open", amount: "$0", claimNumber: "C1122", incurred: "$2,000", reserves: "$2,000", paid: "$0", recoveries: "$0" },
+  { type: "Critical Illness", date: "12-15-23", status: "Open", amount: "$0", claimNumber: "C1189", incurred: "$0", reserves: "$0", paid: "$0", recoveries: "$0" }
 ];
 
 const recentActivity = [
@@ -339,7 +344,7 @@ export default function Dashboard() {
               <div className="mt-4 flex justify-end">
                 <Button
                   size="sm"
-                  className="bg-slate-700 hover:bg-slate-800 text-white"
+                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                   onClick={(e) => {
                     e.stopPropagation();
                     console.log('Navigate to payment');
@@ -503,7 +508,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base flex items-center gap-2 text-gray-700">
                   <Shield size={16} className="text-slate-600" />
-                  Policy Details
+                  Policies
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
                   View All
@@ -591,7 +596,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base flex items-center gap-2 text-gray-700">
                   <AlertTriangle size={16} className="text-slate-600" />
-                  Claims History
+                  Claims
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
                   View All
@@ -623,7 +628,7 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Paid
+                          Incurred
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
@@ -635,7 +640,13 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
-                          Incurred
+                          Paid
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Recoveries
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
@@ -650,11 +661,10 @@ export default function Dashboard() {
                         <TableCell className="text-sm font-medium py-2 text-gray-800">{claim.claimNumber}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(claim.status)}</TableCell>
                         <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">{claim.date}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{claim.amount}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">$2,000</TableCell>
-                        <TableCell className="text-sm font-semibold py-2 text-gray-800">
-                          {claim.amount === '$5,300' ? '$7,300' : claim.amount === 'N/A' ? '$2,000' : '$0'}
-                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{claim.incurred}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{claim.reserves}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{claim.paid}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">{claim.recoveries}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
