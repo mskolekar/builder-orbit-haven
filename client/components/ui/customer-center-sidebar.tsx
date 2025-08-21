@@ -43,7 +43,7 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
       { label: 'Addresses', path: '/profile?section=addresses' },
       { label: 'Contact Info', path: '/contact-delivery?tab=contact' },
       { label: 'Additional Info', path: '/profile?section=additional-info' },
-      { label: 'History', path: '/profile?section=person-history' }
+      { label: 'Work History', path: '/profile?section=person-history' }
     ]
   },
   {
