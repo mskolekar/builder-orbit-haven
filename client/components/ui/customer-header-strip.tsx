@@ -126,7 +126,7 @@ export function CustomerHeaderStrip({ isCustomerSidebarCollapsed, onToggleCustom
             <span key={index}>
               {crumb}
               {index < array.length - 1 && (
-                <span className="mx-2 text-gray-400">></span>
+                <span className="mx-2 text-gray-400">&gt;</span>
               )}
             </span>
           ))}
