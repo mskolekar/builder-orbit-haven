@@ -2,22 +2,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
-  BarChart3,
-  User,
-  Phone,
-  UserCog,
-  Link as LinkIcon,
-  CreditCard,
-  Clock,
-  BookOpen,
-  Calculator,
   ChevronDown,
   ChevronRight,
-  ChevronLeft,
-  Mail,
-  FileText,
-  ClipboardList,
-  UserCheck2
+  ChevronLeft
 } from 'lucide-react';
 
 interface SubItem {
@@ -26,16 +13,14 @@ interface SubItem {
 }
 
 interface CustomerCenterSidebarItem {
-  icon: any;
   label: string;
   path: string;
   subItems?: SubItem[];
 }
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
-  { icon: BarChart3, label: 'Overview', path: '/' },
+  { label: 'Overview', path: '/' },
   {
-    icon: User,
     label: 'Personal Details',
     path: '/personal-details',
     subItems: [
@@ -47,7 +32,6 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
     ]
   },
   {
-    icon: Clock,
     label: 'Loss History',
     path: '/loss-history',
     subItems: [
@@ -55,11 +39,10 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
       { label: 'Prior Losses', path: '/loss-history?tab=prior-losses' }
     ]
   },
-  { icon: LinkIcon, label: 'Relationships & Roles', path: '/relationships' },
-  { icon: UserCog, label: 'Workgroups', path: '/workgroups' },
-  { icon: CreditCard, label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
+  { label: 'Relationships & Roles', path: '/relationships' },
+  { label: 'Workgroups', path: '/workgroups' },
+  { label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
   {
-    icon: BookOpen,
     label: 'Journals',
     path: '/journals',
     subItems: [
@@ -70,7 +53,7 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
       { label: 'Assignment/Approval History', path: '/journals?tab=assignment-approval' }
     ]
   },
-  { icon: Calculator, label: 'Financials', path: '/financials' }
+  { label: 'Financials', path: '/financials' }
 ];
 
 interface CustomerCenterSidebarProps {
@@ -158,7 +141,6 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
       <nav className="flex-1 px-3 py-4 overflow-y-auto" role="navigation" aria-label="Customer Center Navigation">
         <ul className="space-y-1" role="menubar">
           {customerCenterItems.map((item) => {
-            const Icon = item.icon;
             const hasSubItems = item.subItems && item.subItems.length > 0;
             const isMainActive = isMainPageActive(item);
             const isExpanded = expandedItems.includes(item.path);
@@ -188,11 +170,10 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
                   aria-haspopup={hasSubItems ? "menu" : undefined}
                 >
                   {isCollapsed ? (
-                    <Icon size={16} />
+                    <span className="text-xs font-medium">{item.label.charAt(0)}</span>
                   ) : (
                     <>
-                      <div className="flex items-center gap-3">
-                        <Icon size={16} />
+                      <div className="flex items-center">
                         {item.label}
                       </div>
                       {hasSubItems && (
