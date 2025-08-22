@@ -325,8 +325,7 @@ export default function Dashboard() {
         <div className={`transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
             <CardHeader className="pb-4">
-              <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                <DollarSign size={16} className="text-slate-600" />
+              <CardTitle className="text-base text-gray-700">
                 Financial Information
               </CardTitle>
             </CardHeader>
@@ -374,8 +373,7 @@ export default function Dashboard() {
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to activity timeline')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Clock size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Activity Timeline
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
@@ -428,8 +426,7 @@ export default function Dashboard() {
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Calendar size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Diaries
                 </CardTitle>
                 <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
