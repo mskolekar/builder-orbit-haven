@@ -1,15 +1,24 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { 
-  BarChart3, 
-  User, 
-  MessageCircle, 
-  Users, 
-  Link as LinkIcon, 
-  CreditCard, 
+import {
+  BarChart3,
+  User,
+  MessageCircle,
+  Users,
+  Link as LinkIcon,
+  CreditCard,
   History,
   Menu,
-  X
+  X,
+  Home,
+  FileText,
+  Briefcase,
+  Shield,
+  Settings,
+  BarChart,
+  TrendingUp,
+  Search,
+  ChevronLeft
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -26,41 +35,26 @@ interface SidebarItem {
 }
 
 const sidebarItems: SidebarItem[] = [
-  { icon: BarChart3, label: 'Overview', path: '/' },
-  {
-    icon: User,
-    label: 'Profile',
-    path: '/profile',
-    subItems: [
-      { label: 'Personal Info', path: '/profile?section=personal-info' },
-      { label: 'Professional and Legal Info', path: '/profile?section=professional-legal' },
-      { label: 'Risk and Compliance', path: '/profile?section=risk-compliance' },
-      { label: 'Other Details', path: '/profile?section=other-details' }
-    ]
-  },
-  {
-    icon: MessageCircle,
-    label: 'Communication',
-    path: '/communication',
-    subItems: [
-      { label: 'Contact Details', path: '/communication?tab=contact-details' },
-      { label: 'Delivery Preferences', path: '/communication?tab=delivery-preferences' }
-    ]
-  },
-  { icon: Users, label: 'Workgroup', path: '/workgroup' },
-  { icon: LinkIcon, label: 'Relationships', path: '/relationships' },
-  { icon: CreditCard, label: 'Credit Programs', path: '/credit-programs' },
-  {
-    icon: History,
-    label: 'History',
-    path: '/history',
-    subItems: [
-      { label: 'Work History', path: '/history?tab=work-history' }
-    ]
-  }
+  { icon: Home, label: 'Home', path: '/' },
+  { icon: FileText, label: 'New Submission', path: '/new-submission' },
+  { icon: FileText, label: 'Submissions', path: '/submissions' },
+  { icon: Shield, label: 'Policies', path: '/policies' },
+  { icon: User, label: 'Customer Center', path: '/' },
+  { icon: Briefcase, label: 'Accounting', path: '/accounting' },
+  { icon: Search, label: 'Search Center', path: '/search' },
+  { icon: Settings, label: 'Other Utilities', path: '/utilities' },
+  { icon: Link as LinkIcon, label: 'Quick Links', path: '/links' },
+  { icon: TrendingUp, label: 'Bulk Change Endorsements', path: '/bulk-changes' },
+  { icon: Users, label: 'Manage Users', path: '/users' },
+  { icon: BarChart, label: 'Analytic Reports', path: '/reports' }
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
+}
+
+export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
@@ -81,8 +75,11 @@ export function Sidebar() {
   };
 
   const isMainPageActive = (item: SidebarItem) => {
-    if (item.path === '/') {
+    if (item.path === '/' && item.label === 'Customer Center') {
       return location.pathname === '/';
+    }
+    if (item.path === '/' && item.label === 'Home') {
+      return false; // Don't highlight Home when on Customer Center
     }
     return location.pathname === item.path;
   };
@@ -92,7 +89,7 @@ export function Sidebar() {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-brand-blue text-white rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-200 text-gray-700 rounded-lg shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -107,12 +104,31 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <div className={cn(
-        "w-64 h-screen bg-gradient-to-b from-blue-600 to-blue-700 text-white flex flex-col transition-transform duration-300 z-40",
+        "h-screen bg-white border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
         "lg:translate-x-0 lg:static lg:z-auto",
+        isCollapsed ? "w-16" : "w-64",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
-        <div className="p-4">
-          {/* Removed Customer Center title */}
+        <div className={cn("p-4 border-b border-gray-200 flex items-center", isCollapsed ? "justify-center" : "justify-between")}>
+          {!isCollapsed && (
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[#0054A6] rounded flex items-center justify-center">
+                <span className="text-white font-bold text-sm">OS</span>
+              </div>
+              <span className="text-[#0054A6] font-semibold text-lg">OneShield</span>
+            </div>
+          )}
+          {isCollapsed && (
+            <div className="w-8 h-8 bg-[#0054A6] rounded flex items-center justify-center">
+              <span className="text-white font-bold text-sm">OS</span>
+            </div>
+          )}
+          <button
+            onClick={onToggleCollapse}
+            className="text-gray-500 hover:bg-gray-100 p-1 rounded transition-colors"
+          >
+            <ChevronLeft size={16} className={cn("transition-transform", isCollapsed && "rotate-180")} />
+          </button>
         </div>
         
         <nav className="flex-1 px-2 overflow-y-auto">
@@ -136,14 +152,16 @@ export function Sidebar() {
                       }
                     }}
                     className={cn(
-                      "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full",
+                      "flex items-center rounded-lg text-sm transition-colors w-full",
+                      isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
-                        ? "bg-white/20 text-white" 
-                        : "text-white/80 hover:bg-white/10 hover:text-white"
+                        ? "bg-[#0054A6] text-white"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                     )}
+                    title={isCollapsed ? item.label : undefined}
                   >
                     <Icon size={16} />
-                    {item.label}
+                    {!isCollapsed && item.label}
                   </Link>
                   
                   {hasSubItems && isExpanded && (
@@ -172,9 +190,9 @@ export function Sidebar() {
           </ul>
         </nav>
 
-        <div className="p-3 border-t border-white/10">
-          <div className="text-xs text-white/60 text-center">
-            Made with ❤️ Vitily
+        <div className="p-3 border-t border-gray-200">
+          <div className="text-xs text-gray-500 text-center">
+            © 2024 OneShield Software
           </div>
         </div>
       </div>

@@ -48,11 +48,9 @@ export function Header() {
   const unreadCount = notifications.filter(n => n.unread).length;
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-16 lg:pl-6 shadow-sm">
+    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-[32rem] lg:pl-[32rem] shadow-sm">
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-3">
-          <div className="h-6 w-px bg-gray-300"></div>
-          <h1 className="text-xl font-semibold text-gray-900">Customer Center</h1>
+        <div className="flex items-center gap-2">
         </div>
       </div>
       
@@ -65,7 +63,7 @@ export function Header() {
         {/* Notifications */}
         <Popover open={notificationsOpen} onOpenChange={setNotificationsOpen}>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="sm" className="relative p-2">
+            <Button variant="ghost" size="sm" className="relative p-2 text-gray-600 hover:bg-gray-100">
               <Bell size={18} />
               {unreadCount > 0 && (
                 <Badge className="absolute -top-1 -right-1 h-5 w-5 text-xs bg-brand-red text-white rounded-full flex items-center justify-center">
@@ -109,16 +107,16 @@ export function Header() {
         </Popover>
         
         {/* Settings */}
-        <Button variant="ghost" size="sm" className="p-2">
+        <Button variant="ghost" size="sm" className="p-2 text-gray-600 hover:bg-gray-100">
           <Settings size={18} />
         </Button>
-        
+
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-9 px-3">
+            <Button variant="ghost" className="h-9 px-3 text-gray-600 hover:bg-gray-100">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                <div className="w-8 h-8 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-sm font-semibold">
                   J
                 </div>
                 <span className="hidden lg:block text-sm font-medium">UW John</span>
