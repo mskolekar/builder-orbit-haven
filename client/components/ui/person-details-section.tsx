@@ -1,15 +1,9 @@
 import { Button } from './button';
 import { Badge } from './badge';
 import { Card, CardContent } from './card';
-import { 
-  CheckCircle, 
-  Calendar, 
-  Users, 
-  FileText, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Edit3 
+import {
+  CheckCircle,
+  Edit3
 } from 'lucide-react';
 
 const customerData = {
@@ -57,8 +51,7 @@ export function PersonDetailsSection() {
                   </div>
                   <p className="text-gray-600 font-medium">{customerData.role}</p>
                   <div className="flex items-center gap-4 mt-2">
-                    <div className="flex items-center gap-1 text-sm text-gray-500">
-                      <Calendar size={12} />
+                    <div className="text-sm text-gray-500">
                       Customer since {customerData.memberSince}
                     </div>
                   </div>
@@ -74,48 +67,32 @@ export function PersonDetailsSection() {
                 >
                   <Edit3 size={12} />
                 </Button>
-                <div className="flex items-center gap-2">
-                  <Calendar size={14} className="text-gray-400" />
-                  <div>
-                    <span className="text-xs text-gray-500">DOB</span>
-                    <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
-                  </div>
+                <div>
+                  <span className="text-xs text-gray-500">DOB</span>
+                  <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Users size={14} className="text-gray-400" />
-                  <div>
-                    <span className="text-xs text-gray-500">Gender</span>
-                    <p className="text-sm font-medium">{customerData.gender}</p>
-                  </div>
+                <div>
+                  <span className="text-xs text-gray-500">Gender</span>
+                  <p className="text-sm font-medium">{customerData.gender}</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <FileText size={14} className="text-gray-400" />
-                  <div>
-                    <span className="text-xs text-gray-500">LSC#</span>
-                    <p className="text-sm font-medium">{customerData.lsc}</p>
-                  </div>
+                <div>
+                  <span className="text-xs text-gray-500">LSC#</span>
+                  <p className="text-sm font-medium">{customerData.lsc}</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Phone size={14} className="text-gray-400" />
-                  <div className="min-w-0">
-                    <span className="text-xs text-gray-500">Phone</span>
-                    <p className="text-sm font-medium whitespace-nowrap">{customerData.phone}</p>
-                  </div>
+                <div className="min-w-0">
+                  <span className="text-xs text-gray-500">Phone</span>
+                  <p className="text-sm font-medium whitespace-nowrap">{customerData.phone}</p>
                 </div>
-                <div className="col-span-2 flex items-center gap-2">
-                  <Mail size={14} className="text-gray-400" />
-                  <div>
-                    <span className="text-xs text-gray-500">Email</span>
-                    <p className="text-sm font-medium">{customerData.email}</p>
-                  </div>
+                <div className="col-span-2">
+                  <span className="text-xs text-gray-500">Email</span>
+                  <p className="text-sm font-medium">{customerData.email}</p>
                 </div>
               </div>
             </div>
             
-            <div className="mt-3 flex items-center gap-2 text-sm">
-              <MapPin size={14} className="text-gray-400" />
+            <div className="mt-3 text-sm">
               <span className="text-gray-500">Address:</span>
-              <span className="font-medium">{customerData.address}</span>
+              <span className="font-medium ml-2">{customerData.address}</span>
             </div>
           </CardContent>
         </Card>
