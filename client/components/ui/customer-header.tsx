@@ -1,5 +1,3 @@
-import { Phone, Mail } from 'lucide-react';
-
 const customerData = {
   name: "Rose K",
   role: "Lawyer",
@@ -22,12 +20,10 @@ export function CustomerHeader() {
             </div>
           </div>
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Phone size={16} className="text-blue-200" />
+            <div>
               <span className="text-sm">{customerData.phone}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Mail size={16} className="text-blue-200" />
+            <div>
               <span className="text-sm">{customerData.email}</span>
             </div>
           </div>
