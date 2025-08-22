@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -101,15 +101,15 @@ export function CustomerHeaderStrip({ isCustomerSidebarCollapsed, onToggleCustom
   return (
     <div className="sticky top-16 z-40 bg-white border-b border-gray-200">
       {/* Blue Header Strip */}
-      <div className="bg-[#0C3C78] text-white h-12 flex items-center px-4">
+      <div className="bg-[#0054A6] text-white h-12 flex items-center px-4">
         <div className="flex items-center gap-3">
           {/* Collapse/Expand Button */}
           <button
             onClick={onToggleCustomerSidebar}
-            className="text-white hover:bg-white/10 p-1 rounded transition-colors"
+            className="text-white hover:bg-white/10 p-1.5 rounded transition-colors flex items-center justify-center"
             title={isCustomerSidebarCollapsed ? "Expand Customer Center" : "Collapse Customer Center"}
           >
-            {isCustomerSidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+            {isCustomerSidebarCollapsed ? <Menu size={16} /> : <X size={16} />}
           </button>
           
           {/* Customer Name and Status */}
