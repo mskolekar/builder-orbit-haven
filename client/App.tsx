@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Sidebar } from '@/components/ui/sidebar';
 import { CustomerCenterSidebar } from '@/components/ui/customer-center-sidebar';
 import { PersonDetailsSection } from '@/components/ui/person-details-section';
-import { CustomerHeader } from '@/components/ui/customer-header';
+import { CustomerHeaderStrip } from '@/components/ui/customer-header-strip';
 import { Header } from '@/components/ui/header';
 import Dashboard from '@/pages/Dashboard';
 import Profile from '@/pages/Profile';
@@ -37,11 +37,14 @@ function AppContent() {
       )}
       <div className="flex-1 flex flex-col">
         <Header />
+        {showCustomerCenterSidebar && (
+          <CustomerHeaderStrip
+            isCustomerSidebarCollapsed={isCustomerCenterSidebarCollapsed}
+            onToggleCustomerSidebar={() => setIsCustomerCenterSidebarCollapsed(!isCustomerCenterSidebarCollapsed)}
+          />
+        )}
         {showCustomerCenterSidebar && location.pathname === '/' && (
           <PersonDetailsSection />
-        )}
-        {showCustomerCenterSidebar && location.pathname !== '/' && (
-          <CustomerHeader />
         )}
         <Routes>
           <Route path="/" element={<Dashboard />} />
