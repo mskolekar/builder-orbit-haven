@@ -471,8 +471,7 @@ export default function Dashboard() {
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to policy details')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Shield size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Policies
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
