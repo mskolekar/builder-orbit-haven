@@ -121,14 +121,7 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
     <div className={cn("h-[calc(100vh-4rem)] bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300 mt-16",
       isCollapsed ? "w-16" : "w-64"
     )}>
-      <div className={cn("border-b border-white/20 py-3 flex items-center",
-        isCollapsed ? "px-2 justify-center" : "px-4 justify-between"
-      )}>
-        {!isCollapsed && (
-          <div>
-            <h2 className="text-lg font-semibold text-white">Customer Center</h2>
-          </div>
-        )}
+      <div className={cn("border-b border-white/20 py-3 flex items-center justify-end px-4")}>
         <button
           onClick={onToggleCollapse}
           className="text-white hover:bg-white/10 p-1 rounded transition-colors"
