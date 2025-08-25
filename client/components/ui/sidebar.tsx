@@ -1,23 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
-  BarChart3,
-  User,
-  MessageCircle,
-  Users,
-  Link as LinkIcon,
-  CreditCard,
-  History,
   Menu,
   X,
-  Home,
-  FileText,
-  Briefcase,
-  Shield,
-  Settings,
-  BarChart,
-  TrendingUp,
-  Search,
   ChevronLeft
 } from 'lucide-react';
 import { useState } from 'react';
@@ -28,25 +13,24 @@ interface SubItem {
 }
 
 interface SidebarItem {
-  icon: any;
   label: string;
   path: string;
   subItems?: SubItem[];
 }
 
 const sidebarItems: SidebarItem[] = [
-  { icon: Home, label: 'Home', path: '/' },
-  { icon: FileText, label: 'New Submission', path: '/new-submission' },
-  { icon: FileText, label: 'Submissions', path: '/submissions' },
-  { icon: Shield, label: 'Policies', path: '/policies' },
-  { icon: User, label: 'Customer Center', path: '/' },
-  { icon: Briefcase, label: 'Accounting', path: '/accounting' },
-  { icon: Search, label: 'Search Center', path: '/search' },
-  { icon: Settings, label: 'Other Utilities', path: '/utilities' },
-  { icon: Link as LinkIcon, label: 'Quick Links', path: '/links' },
-  { icon: TrendingUp, label: 'Bulk Change Endorsements', path: '/bulk-changes' },
-  { icon: Users, label: 'Manage Users', path: '/users' },
-  { icon: BarChart, label: 'Analytic Reports', path: '/reports' }
+  { label: 'Home', path: '/' },
+  { label: 'New Submission', path: '/new-submission' },
+  { label: 'Submissions', path: '/submissions' },
+  { label: 'Policies', path: '/policies' },
+  { label: 'Customer Center', path: '/' },
+  { label: 'Accounting', path: '/accounting' },
+  { label: 'Search Center', path: '/search' },
+  { label: 'Other Utilities', path: '/utilities' },
+  { label: 'Quick Links', path: '/links' },
+  { label: 'Bulk Change Endorsements', path: '/bulk-changes' },
+  { label: 'Manage Users', path: '/users' },
+  { label: 'Analytic Reports', path: '/reports' }
 ];
 
 interface SidebarProps {
@@ -134,7 +118,6 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
         <nav className="flex-1 px-2 overflow-y-auto">
           <ul className="space-y-1">
             {sidebarItems.map((item) => {
-              const Icon = item.icon;
               const hasSubItems = item.subItems && item.subItems.length > 0;
               const isExpanded = expandedItems.includes(item.path);
               const isMainActive = isMainPageActive(item);
@@ -160,8 +143,11 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
-                    <Icon size={16} />
-                    {!isCollapsed && item.label}
+                    {isCollapsed ? (
+                      <span className="text-xs font-medium">{item.label.charAt(0)}</span>
+                    ) : (
+                      item.label
+                    )}
                   </Link>
                   
                   {hasSubItems && isExpanded && (

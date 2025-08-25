@@ -24,31 +24,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import {
-  Eye,
   Plus,
-  FileText,
-  AlertTriangle,
-  Home,
-  Car,
-  Briefcase,
-  Shield,
-  Edit3,
-  ExternalLink,
-  Calendar,
-  DollarSign,
-  TrendingUp,
-  Users,
-  User,
-  Activity,
-  Clock,
-  CheckCircle,
-  XCircle,
-  AlertCircle,
-  Phone,
-  Mail,
-  MapPin,
-  Star,
-  MoreHorizontal,
   ArrowUpDown
 } from 'lucide-react';
 
@@ -151,45 +127,27 @@ const recentActivity = [
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
-    'active': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
-    'bound': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
-    'in progress': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Clock },
-    'pending': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
-    'expired': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
-    'approved': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
-    'closed': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
-    'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar },
-    'open': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
-    'reopen': { color: 'bg-orange-50 text-orange-700 border-orange-200', icon: AlertTriangle },
+    'active': { color: 'bg-blue-50 text-blue-700 border-blue-200' },
+    'bound': { color: 'bg-blue-50 text-blue-700 border-blue-200' },
+    'in progress': { color: 'bg-slate-50 text-slate-700 border-slate-200' },
+    'pending': { color: 'bg-gray-100 text-gray-700 border-gray-200' },
+    'expired': { color: 'bg-gray-50 text-gray-600 border-gray-200' },
+    'approved': { color: 'bg-blue-50 text-blue-700 border-blue-200' },
+    'closed': { color: 'bg-gray-50 text-gray-600 border-gray-200' },
+    'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200' },
+    'open': { color: 'bg-white text-gray-700 border-gray-300' },
+    'reopen': { color: 'bg-gray-100 text-gray-700 border-gray-300' },
   };
 
-  const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: AlertCircle };
-  const IconComponent = config.icon;
+  const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200' };
 
   return (
-    <Badge className={`${config.color} border text-xs flex items-center gap-1`}>
-      <IconComponent size={10} />
+    <Badge className={`${config.color} border text-xs`}>
       {status}
     </Badge>
   );
 };
 
-const getPolicyIcon = (lob: string) => {
-  switch (lob.toLowerCase()) {
-    case 'auto':
-      return <Car size={14} className="text-blue-600" />;
-    case 'home':
-      return <Home size={14} className="text-blue-600" />;
-    case 'life':
-    case 'critical illness':
-    case 'disability':
-      return <Shield size={14} className="text-blue-600" />;
-    case 'business':
-      return <Briefcase size={14} className="text-blue-600" />;
-    default:
-      return <FileText size={14} className="text-blue-600" />;
-  }
-};
 
 const getPriorityColor = (priority: string) => {
   switch (priority) {
@@ -205,21 +163,21 @@ const getRowBgColor = (status: string, type: 'policy' | 'claim' | 'submission') 
 
   if (type === 'policy') {
     switch (normalizedStatus) {
-      case 'active': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'active': return 'bg-blue-25 hover:bg-blue-50';
       case 'expired': return 'bg-gray-25 hover:bg-gray-50';
-      case 'pending': return 'bg-amber-25 hover:bg-amber-50';
+      case 'pending': return 'bg-gray-50 hover:bg-gray-100';
       default: return 'hover:bg-gray-50';
     }
   } else if (type === 'claim') {
     switch (normalizedStatus) {
-      case 'open': return 'bg-amber-25 hover:bg-amber-50';
-      case 'reopen': return 'bg-orange-25 hover:bg-orange-50';
+      case 'open': return 'bg-gray-50 hover:bg-gray-100';
+      case 'reopen': return 'bg-gray-100 hover:bg-gray-200';
       default: return 'hover:bg-gray-50';
     }
   } else if (type === 'submission') {
     switch (normalizedStatus) {
       case 'in progress': return 'bg-blue-25 hover:bg-blue-50';
-      case 'bound': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'bound': return 'bg-blue-25 hover:bg-blue-50';
       default: return 'hover:bg-gray-50';
     }
   }
@@ -277,18 +235,18 @@ export default function Dashboard() {
 
   const getPriorityBadgeColor = (priority: string) => {
     switch (priority.toLowerCase()) {
-      case 'high': return 'bg-red-100 text-red-700 border-red-200';
-      case 'medium': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
-      case 'low': return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+      case 'high': return 'bg-gray-200 text-gray-800 border-gray-300';
+      case 'medium': return 'bg-gray-100 text-gray-700 border-gray-200';
+      case 'low': return 'bg-blue-100 text-blue-700 border-blue-200';
       default: return 'bg-gray-100 text-gray-700 border-gray-200';
     }
   };
 
   const getDiaryRowBgColor = (priority: string) => {
     switch (priority.toLowerCase()) {
-      case 'high': return 'bg-red-25 hover:bg-red-50';
-      case 'medium': return 'bg-amber-25 hover:bg-amber-50';
-      case 'low': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'high': return 'bg-gray-50 hover:bg-gray-100';
+      case 'medium': return 'bg-gray-25 hover:bg-gray-50';
+      case 'low': return 'bg-blue-25 hover:bg-blue-50';
       default: return 'hover:bg-gray-50';
     }
   };
@@ -325,30 +283,29 @@ export default function Dashboard() {
         <div className={`transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
             <CardHeader className="pb-4">
-              <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                <DollarSign size={16} className="text-slate-600" />
+              <CardTitle className="text-base text-gray-700">
                 Financial Information
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="relative bg-green-50 border border-green-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-green-600 mb-1 font-medium">Amount Paid</div>
-                  <div className="text-xl font-bold text-green-800">$8,460</div>
-                  <div className="text-xs text-green-500 mt-1">Aggregate premium paid to date</div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-green-400"></div>
-                </div>
-                <div className="relative bg-amber-50 border border-amber-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-amber-600 mb-1 font-medium">Total Due</div>
-                  <div className="text-xl font-bold text-amber-800">$275</div>
-                  <div className="text-xs text-amber-500 mt-1">Aggregate premium currently due (YTD)</div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-amber-400"></div>
-                </div>
                 <div className="relative bg-blue-50 border border-blue-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-blue-600 mb-1 font-medium">Outstanding Balance</div>
-                  <div className="text-xl font-bold text-blue-800">$190</div>
-                  <div className="text-xs text-blue-500 mt-1">Outstanding premium (after credit application)</div>
+                  <div className="text-xs text-blue-600 mb-1 font-medium">Amount Paid</div>
+                  <div className="text-xl font-bold text-blue-800">$8,460</div>
+                  <div className="text-xs text-blue-500 mt-1">Aggregate premium paid to date</div>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-400"></div>
+                </div>
+                <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-gray-600 mb-1 font-medium">Total Due</div>
+                  <div className="text-xl font-bold text-gray-800">$275</div>
+                  <div className="text-xs text-gray-500 mt-1">Aggregate premium currently due (YTD)</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                </div>
+                <div className="relative bg-white border border-gray-300 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-gray-700 mb-1 font-medium">Outstanding Balance</div>
+                  <div className="text-xl font-bold text-gray-900">$190</div>
+                  <div className="text-xs text-gray-600 mt-1">Outstanding premium (after credit application)</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></div>
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
@@ -374,8 +331,7 @@ export default function Dashboard() {
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to activity timeline')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Clock size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Activity Timeline
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
@@ -428,8 +384,7 @@ export default function Dashboard() {
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Calendar size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Diaries
                 </CardTitle>
                 <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
@@ -509,15 +464,14 @@ export default function Dashboard() {
 
         </div>
 
-        {/* Row 2: Policy Details, Claims History, Submissions */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        {/* Row 3: Policy Details, Claims History */}
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Policy Details */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to policy details')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <Shield size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Policies
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
@@ -581,10 +535,7 @@ export default function Dashboard() {
                         console.log('Open policy details', policy.policy);
                       }}>
                         <TableCell className="py-2">
-                          <div className="flex items-center gap-2">
-                            {getPolicyIcon(policy.lob)}
-                            <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
-                          </div>
+                          <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
@@ -604,8 +555,7 @@ export default function Dashboard() {
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to claims history')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <AlertTriangle size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Claims
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
@@ -682,13 +632,15 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+        </div>
 
+        {/* Row 4: Submissions */}
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-600 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           {/* Submissions */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to submissions')}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2 text-gray-700">
-                  <TrendingUp size={16} className="text-slate-600" />
+                <CardTitle className="text-base text-gray-700">
                   Submissions
                 </CardTitle>
                 <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
