@@ -151,16 +151,16 @@ const recentActivity = [
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
-    'active': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
-    'bound': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
+    'active': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: CheckCircle },
+    'bound': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: CheckCircle },
     'in progress': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Clock },
-    'pending': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
+    'pending': { color: 'bg-gray-100 text-gray-700 border-gray-200', icon: AlertCircle },
     'expired': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
-    'approved': { color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: CheckCircle },
+    'approved': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: CheckCircle },
     'closed': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
     'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar },
-    'open': { color: 'bg-amber-50 text-amber-700 border-amber-200', icon: AlertCircle },
-    'reopen': { color: 'bg-orange-50 text-orange-700 border-orange-200', icon: AlertTriangle },
+    'open': { color: 'bg-gray-100 text-gray-700 border-gray-200', icon: AlertCircle },
+    'reopen': { color: 'bg-slate-100 text-slate-700 border-slate-200', icon: AlertTriangle },
   };
 
   const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: AlertCircle };
@@ -205,21 +205,21 @@ const getRowBgColor = (status: string, type: 'policy' | 'claim' | 'submission') 
 
   if (type === 'policy') {
     switch (normalizedStatus) {
-      case 'active': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'active': return 'bg-blue-25 hover:bg-blue-50';
       case 'expired': return 'bg-gray-25 hover:bg-gray-50';
-      case 'pending': return 'bg-amber-25 hover:bg-amber-50';
+      case 'pending': return 'bg-slate-25 hover:bg-slate-50';
       default: return 'hover:bg-gray-50';
     }
   } else if (type === 'claim') {
     switch (normalizedStatus) {
-      case 'open': return 'bg-amber-25 hover:bg-amber-50';
-      case 'reopen': return 'bg-orange-25 hover:bg-orange-50';
+      case 'open': return 'bg-gray-25 hover:bg-gray-50';
+      case 'reopen': return 'bg-slate-25 hover:bg-slate-50';
       default: return 'hover:bg-gray-50';
     }
   } else if (type === 'submission') {
     switch (normalizedStatus) {
       case 'in progress': return 'bg-blue-25 hover:bg-blue-50';
-      case 'bound': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'bound': return 'bg-blue-25 hover:bg-blue-50';
       default: return 'hover:bg-gray-50';
     }
   }
@@ -277,18 +277,18 @@ export default function Dashboard() {
 
   const getPriorityBadgeColor = (priority: string) => {
     switch (priority.toLowerCase()) {
-      case 'high': return 'bg-red-100 text-red-700 border-red-200';
-      case 'medium': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
-      case 'low': return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+      case 'high': return 'bg-slate-200 text-slate-700 border-slate-300';
+      case 'medium': return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'low': return 'bg-gray-100 text-gray-600 border-gray-200';
       default: return 'bg-gray-100 text-gray-700 border-gray-200';
     }
   };
 
   const getDiaryRowBgColor = (priority: string) => {
     switch (priority.toLowerCase()) {
-      case 'high': return 'bg-red-25 hover:bg-red-50';
-      case 'medium': return 'bg-amber-25 hover:bg-amber-50';
-      case 'low': return 'bg-emerald-25 hover:bg-emerald-50';
+      case 'high': return 'bg-slate-25 hover:bg-slate-50';
+      case 'medium': return 'bg-blue-25 hover:bg-blue-50';
+      case 'low': return 'bg-gray-25 hover:bg-gray-50';
       default: return 'hover:bg-gray-50';
     }
   };
@@ -331,23 +331,23 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="relative bg-green-50 border border-green-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-green-600 mb-1 font-medium">Amount Paid</div>
-                  <div className="text-xl font-bold text-green-800">$8,460</div>
-                  <div className="text-xs text-green-500 mt-1">Aggregate premium paid to date</div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-green-400"></div>
-                </div>
-                <div className="relative bg-amber-50 border border-amber-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-amber-600 mb-1 font-medium">Total Due</div>
-                  <div className="text-xl font-bold text-amber-800">$275</div>
-                  <div className="text-xs text-amber-500 mt-1">Aggregate premium currently due (YTD)</div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-amber-400"></div>
-                </div>
                 <div className="relative bg-blue-50 border border-blue-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-blue-600 mb-1 font-medium">Outstanding Balance</div>
-                  <div className="text-xl font-bold text-blue-800">$190</div>
-                  <div className="text-xs text-blue-500 mt-1">Outstanding premium (after credit application)</div>
+                  <div className="text-xs text-blue-600 mb-1 font-medium">Amount Paid</div>
+                  <div className="text-xl font-bold text-blue-800">$8,460</div>
+                  <div className="text-xs text-blue-500 mt-1">Aggregate premium paid to date</div>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-400"></div>
+                </div>
+                <div className="relative bg-slate-50 border border-slate-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-slate-600 mb-1 font-medium">Total Due</div>
+                  <div className="text-xl font-bold text-slate-800">$275</div>
+                  <div className="text-xs text-slate-500 mt-1">Aggregate premium currently due (YTD)</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-slate-400"></div>
+                </div>
+                <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-gray-600 mb-1 font-medium">Outstanding Balance</div>
+                  <div className="text-xl font-bold text-gray-800">$190</div>
+                  <div className="text-xs text-gray-500 mt-1">Outstanding premium (after credit application)</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
