@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
   ChevronDown,
-  ChevronRight,
-  ChevronLeft
+  ChevronRight
 } from 'lucide-react';
 
 interface SubItem {
