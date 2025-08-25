@@ -577,10 +577,7 @@ export default function Dashboard() {
                         console.log('Open policy details', policy.policy);
                       }}>
                         <TableCell className="py-2">
-                          <div className="flex items-center gap-2">
-                            {getPolicyIcon(policy.lob)}
-                            <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
-                          </div>
+                          <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
                         <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
