@@ -122,7 +122,7 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
       isCollapsed ? "w-0 overflow-hidden" : "w-64"
     )}>
       
-      <nav className="flex-1 px-3 py-4 overflow-y-auto" role="navigation" aria-label="Customer Center Navigation">
+      <nav className="flex-1 px-3 pt-4 pb-4 overflow-y-auto" role="navigation" aria-label="Customer Center Navigation">
         <ul className="space-y-1" role="menubar">
           {customerCenterItems.map((item) => {
             const hasSubItems = item.subItems && item.subItems.length > 0;
