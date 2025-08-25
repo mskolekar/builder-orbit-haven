@@ -9,6 +9,7 @@ import Dashboard from '@/pages/Dashboard';
 import Profile from '@/pages/Profile';
 import Communication from '@/pages/Communication';
 import History from '@/pages/History';
+import CustomerDetails from '@/pages/CustomerDetails';
 import PlaceholderPage from '@/pages/PlaceholderPage';
 import NotFound from '@/pages/NotFound';
 
