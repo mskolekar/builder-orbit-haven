@@ -275,8 +275,8 @@ export default function Dashboard() {
 
   const getPriorityBadgeColor = (priority: string) => {
     switch (priority.toLowerCase()) {
-      case 'high': return 'bg-slate-200 text-slate-700 border-slate-300';
-      case 'medium': return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'high': return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'medium': return 'bg-slate-200 text-slate-700 border-slate-300';
       case 'low': return 'bg-gray-100 text-gray-600 border-gray-200';
       default: return 'bg-gray-100 text-gray-700 border-gray-200';
     }
@@ -284,8 +284,8 @@ export default function Dashboard() {
 
   const getDiaryRowBgColor = (priority: string) => {
     switch (priority.toLowerCase()) {
-      case 'high': return 'bg-slate-25 hover:bg-slate-50';
-      case 'medium': return 'bg-blue-25 hover:bg-blue-50';
+      case 'high': return 'bg-blue-25 hover:bg-blue-50';
+      case 'medium': return 'bg-slate-25 hover:bg-slate-50';
       case 'low': return 'bg-gray-25 hover:bg-gray-50';
       default: return 'hover:bg-gray-50';
     }
