@@ -217,9 +217,9 @@ export default function CustomerDetails() {
           <div className="bg-white border-b border-gray-200 px-6 py-3">
             <div className="text-sm text-gray-600">
               <span className="hover:text-blue-600 cursor-pointer" onClick={() => navigate('/')}>Home</span>
-              <span className="mx-2">></span>
+              <span className="mx-2">&gt;</span>
               <span className="hover:text-blue-600 cursor-pointer" onClick={() => navigate('/')}>Customer Center</span>
-              <span className="mx-2">></span>
+              <span className="mx-2">&gt;</span>
               <span className="text-gray-900">Overview</span>
             </div>
           </div>
