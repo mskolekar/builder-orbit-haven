@@ -46,6 +46,7 @@ function AppContent() {
         )}
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/customer-details/*" element={<CustomerDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/communication" element={<Communication />} />
           <Route path="/history" element={<History />} />
