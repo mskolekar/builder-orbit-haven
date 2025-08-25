@@ -151,24 +151,22 @@ const recentActivity = [
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
-    'active': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: CheckCircle },
-    'bound': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: CheckCircle },
-    'in progress': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Clock },
-    'pending': { color: 'bg-gray-100 text-gray-700 border-gray-200', icon: AlertCircle },
-    'expired': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
-    'approved': { color: 'bg-blue-50 text-blue-700 border-blue-200', icon: CheckCircle },
-    'closed': { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: XCircle },
-    'scheduled': { color: 'bg-slate-50 text-slate-700 border-slate-200', icon: Calendar },
-    'open': { color: 'bg-gray-100 text-gray-700 border-gray-200', icon: AlertCircle },
-    'reopen': { color: 'bg-slate-100 text-slate-700 border-slate-200', icon: AlertTriangle },
+    'active': 'bg-blue-50 text-blue-700 border-blue-200',
+    'bound': 'bg-blue-50 text-blue-700 border-blue-200',
+    'in progress': 'bg-slate-50 text-slate-700 border-slate-200',
+    'pending': 'bg-gray-100 text-gray-700 border-gray-200',
+    'expired': 'bg-gray-50 text-gray-600 border-gray-200',
+    'approved': 'bg-blue-50 text-blue-700 border-blue-200',
+    'closed': 'bg-gray-50 text-gray-600 border-gray-200',
+    'scheduled': 'bg-slate-50 text-slate-700 border-slate-200',
+    'open': 'bg-gray-100 text-gray-700 border-gray-200',
+    'reopen': 'bg-slate-100 text-slate-700 border-slate-200',
   };
 
-  const config = statusConfig[status.toLowerCase()] || { color: 'bg-gray-50 text-gray-600 border-gray-200', icon: AlertCircle };
-  const IconComponent = config.icon;
+  const color = statusConfig[status.toLowerCase()] || 'bg-gray-50 text-gray-600 border-gray-200';
 
   return (
-    <Badge className={`${config.color} border text-xs flex items-center gap-1`}>
-      <IconComponent size={10} />
+    <Badge className={`${color} border text-xs`}>
       {status}
     </Badge>
   );
