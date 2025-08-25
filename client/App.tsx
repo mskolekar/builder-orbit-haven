@@ -46,254 +46,257 @@ function AppContent() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar
-        isCollapsed={isOmsSidebarCollapsed}
-        onToggleCollapse={() => setIsOmsSidebarCollapsed(!isOmsSidebarCollapsed)}
-      />
-      
-      {showCustomerCenterSidebar ? (
-        <div className="flex flex-col flex-1">
-          {/* Unified Blue Header spanning Customer Center area */}
-          <div className="bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-3 flex items-center gap-4 shadow-lg">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsCustomerCenterSidebarCollapsed(!isCustomerCenterSidebarCollapsed)}
-              className="text-white hover:bg-white/10 p-1 h-8 w-8"
-              title={isCustomerCenterSidebarCollapsed ? "Expand Panel" : "Collapse Panel"}
-            >
-              {isCustomerCenterSidebarCollapsed ? <Menu size={16} /> : <ChevronLeft size={16} />}
-            </Button>
-            
-            <div className="flex items-center gap-3">
-              <h1 className="text-lg font-semibold">{customerData.name}</h1>
-              <div className="text-white/70">|</div>
-              <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
-                <CheckCircle size={10} className="mr-1" />
-                {customerData.status}
-              </Badge>
-            </div>
-          </div>
+    <div className="h-screen bg-gray-50 flex flex-col">
+      {/* White OneShield Header - Full Width at Top */}
+      <Header />
 
-          <div className="flex flex-1">
-            <CustomerCenterSidebar
-              isCollapsed={isCustomerCenterSidebarCollapsed}
-              onToggleCollapse={() => setIsCustomerCenterSidebarCollapsed(!isCustomerCenterSidebarCollapsed)}
-            />
-            <div className="flex-1 flex flex-col">
-              <Header />
-              {/* Breadcrumb */}
-              <div className="bg-white border-b border-gray-200 px-6 py-3">
-                <div className="text-sm text-gray-600">
-                  <span className="hover:text-blue-600 cursor-pointer">Home</span>
-                  <span className="mx-2">&gt;</span>
-                  <span className="hover:text-blue-600 cursor-pointer">Customer Center</span>
-                  <span className="mx-2">&gt;</span>
-                  <span className="text-gray-900">
-                    {location.pathname === '/' ? 'Overview' :
-                     location.pathname === '/profile' ? 'Profile' :
-                     location.pathname === '/loss-history' ? 'Loss History' :
-                     location.pathname === '/relationships' ? 'Relationships & Roles' :
-                     location.pathname === '/workgroups' ? 'Workgroups' :
-                     location.pathname === '/risk-management-credit' ? 'Risk Management Credit' :
-                     location.pathname === '/contact-delivery' ? 'Contact & Delivery' :
-                     location.pathname === '/journals' ? 'Journals' :
-                     location.pathname === '/financials' ? 'Financials' :
-                     'Overview'}
-                  </span>
-                </div>
+      <div className="flex flex-1">
+        <Sidebar
+          isCollapsed={isOmsSidebarCollapsed}
+          onToggleCollapse={() => setIsOmsSidebarCollapsed(!isOmsSidebarCollapsed)}
+        />
+
+        {showCustomerCenterSidebar ? (
+          <div className="flex flex-col flex-1">
+            {/* Blue Customer Header spanning Customer Center area */}
+            <div className="bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-3 flex items-center gap-4 shadow-lg">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsCustomerCenterSidebarCollapsed(!isCustomerCenterSidebarCollapsed)}
+                className="text-white hover:bg-white/10 p-1 h-8 w-8"
+                title={isCustomerCenterSidebarCollapsed ? "Expand Panel" : "Collapse Panel"}
+              >
+                {isCustomerCenterSidebarCollapsed ? <Menu size={16} /> : <ChevronLeft size={16} />}
+              </Button>
+
+              <div className="flex items-center gap-3">
+                <h1 className="text-lg font-semibold">{customerData.name}</h1>
+                <div className="text-white/70">|</div>
+                <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
+                  <CheckCircle size={10} className="mr-1" />
+                  {customerData.status}
+                </Badge>
               </div>
-              {location.pathname === '/' && (
-                <PersonDetailsSection />
-              )}
-              {location.pathname !== '/' && (
-                <CustomerHeader />
-              )}
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/communication" element={<Communication />} />
-                <Route path="/history" element={<History />} />
-                <Route
-                  path="/loss-history"
-                  element={
-                    <PlaceholderPage
-                      title="Loss History"
-                      description="View prior policies and losses history."
-                    />
-                  }
-                />
-                <Route
-                  path="/relationships"
-                  element={
-                    <PlaceholderPage
-                      title="Relationships & Roles"
-                      description="View and manage customer relationships and roles."
-                    />
-                  }
-                />
-                <Route
-                  path="/workgroups"
-                  element={
-                    <PlaceholderPage
-                      title="Workgroups"
-                      description="Manage workgroup assignments and team collaboration."
-                    />
-                  }
-                />
-                <Route
-                  path="/risk-management-credit"
-                  element={
-                    <PlaceholderPage
-                      title="Risk Management Credit Program"
-                      description="Manage risk assessment and credit programs."
-                    />
-                  }
-                />
-                <Route
-                  path="/contact-delivery"
-                  element={
-                    <PlaceholderPage
-                      title="Contact & Delivery"
-                      description="Manage contact information and delivery preferences."
-                    />
-                  }
-                />
-                <Route
-                  path="/journals"
-                  element={
-                    <PlaceholderPage
-                      title="Journals"
-                      description="View and manage customer journals and notes."
-                    />
-                  }
-                />
-                <Route
-                  path="/financials"
-                  element={
-                    <PlaceholderPage
-                      title="Financials"
-                      description="View financial information and transactions."
-                    />
-                  }
-                />
-                <Route
-                  path="/personal-details"
-                  element={
-                    <PlaceholderPage
-                      title="Personal Details"
-                      description="Manage customer personal information and details."
-                    />
-                  }
-                />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+            </div>
+
+            <div className="flex flex-1">
+              <CustomerCenterSidebar
+                isCollapsed={isCustomerCenterSidebarCollapsed}
+                onToggleCollapse={() => setIsCustomerCenterSidebarCollapsed(!isCustomerCenterSidebarCollapsed)}
+              />
+              <div className="flex-1 flex flex-col">
+                {/* Breadcrumb */}
+                <div className="bg-white border-b border-gray-200 px-6 py-3">
+                  <div className="text-sm text-gray-600">
+                    <span className="hover:text-blue-600 cursor-pointer">Home</span>
+                    <span className="mx-2">&gt;</span>
+                    <span className="hover:text-blue-600 cursor-pointer">Customer Center</span>
+                    <span className="mx-2">&gt;</span>
+                    <span className="text-gray-900">
+                      {location.pathname === '/' ? 'Overview' :
+                       location.pathname === '/profile' ? 'Profile' :
+                       location.pathname === '/loss-history' ? 'Loss History' :
+                       location.pathname === '/relationships' ? 'Relationships & Roles' :
+                       location.pathname === '/workgroups' ? 'Workgroups' :
+                       location.pathname === '/risk-management-credit' ? 'Risk Management Credit' :
+                       location.pathname === '/contact-delivery' ? 'Contact & Delivery' :
+                       location.pathname === '/journals' ? 'Journals' :
+                       location.pathname === '/financials' ? 'Financials' :
+                       'Overview'}
+                    </span>
+                  </div>
+                </div>
+                {location.pathname === '/' && (
+                  <PersonDetailsSection />
+                )}
+                {location.pathname !== '/' && (
+                  <CustomerHeader />
+                )}
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/communication" element={<Communication />} />
+                  <Route path="/history" element={<History />} />
+                  <Route
+                    path="/loss-history"
+                    element={
+                      <PlaceholderPage
+                        title="Loss History"
+                        description="View prior policies and losses history."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/relationships"
+                    element={
+                      <PlaceholderPage
+                        title="Relationships & Roles"
+                        description="View and manage customer relationships and roles."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/workgroups"
+                    element={
+                      <PlaceholderPage
+                        title="Workgroups"
+                        description="Manage workgroup assignments and team collaboration."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/risk-management-credit"
+                    element={
+                      <PlaceholderPage
+                        title="Risk Management Credit Program"
+                        description="Manage risk assessment and credit programs."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/contact-delivery"
+                    element={
+                      <PlaceholderPage
+                        title="Contact & Delivery"
+                        description="Manage contact information and delivery preferences."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/journals"
+                    element={
+                      <PlaceholderPage
+                        title="Journals"
+                        description="View and manage customer journals and notes."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/financials"
+                    element={
+                      <PlaceholderPage
+                        title="Financials"
+                        description="View financial information and transactions."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/personal-details"
+                    element={
+                      <PlaceholderPage
+                        title="Personal Details"
+                        description="Manage customer personal information and details."
+                      />
+                    }
+                  />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="flex-1 flex flex-col">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/communication" element={<Communication />} />
-            <Route path="/history" element={<History />} />
-            <Route
-              path="/new-submission"
-              element={
-                <PlaceholderPage
-                  title="New Submission"
-                  description="Create new insurance submissions."
-                />
-              }
-            />
-            <Route
-              path="/submissions"
-              element={
-                <PlaceholderPage
-                  title="Submissions"
-                  description="Manage insurance submissions."
-                />
-              }
-            />
-            <Route
-              path="/policies"
-              element={
-                <PlaceholderPage
-                  title="Policies"
-                  description="Manage insurance policies."
-                />
-              }
-            />
-            <Route
-              path="/accounting"
-              element={
-                <PlaceholderPage
-                  title="Accounting"
-                  description="Handle accounting and financial operations."
-                />
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <PlaceholderPage
-                  title="Search Center"
-                  description="Search across all system data."
-                />
-              }
-            />
-            <Route
-              path="/utilities"
-              element={
-                <PlaceholderPage
-                  title="Other Utilities"
-                  description="Access system utilities and tools."
-                />
-              }
-            />
-            <Route
-              path="/links"
-              element={
-                <PlaceholderPage
-                  title="Quick Links"
-                  description="Access frequently used links and resources."
-                />
-              }
-            />
-            <Route
-              path="/bulk-changes"
-              element={
-                <PlaceholderPage
-                  title="Bulk Change Endorsements"
-                  description="Process bulk policy endorsements."
-                />
-              }
-            />
-            <Route
-              path="/users"
-              element={
-                <PlaceholderPage
-                  title="Manage Users"
-                  description="Manage system users and permissions."
-                />
-              }
-            />
-            <Route
-              path="/reports"
-              element={
-                <PlaceholderPage
-                  title="Analytic Reports"
-                  description="View analytics and generate reports."
-                />
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      )}
+        ) : (
+          <div className="flex-1 flex flex-col">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/communication" element={<Communication />} />
+              <Route path="/history" element={<History />} />
+              <Route
+                path="/new-submission"
+                element={
+                  <PlaceholderPage
+                    title="New Submission"
+                    description="Create new insurance submissions."
+                  />
+                }
+              />
+              <Route
+                path="/submissions"
+                element={
+                  <PlaceholderPage
+                    title="Submissions"
+                    description="Manage insurance submissions."
+                  />
+                }
+              />
+              <Route
+                path="/policies"
+                element={
+                  <PlaceholderPage
+                    title="Policies"
+                    description="Manage insurance policies."
+                  />
+                }
+              />
+              <Route
+                path="/accounting"
+                element={
+                  <PlaceholderPage
+                    title="Accounting"
+                    description="Handle accounting and financial operations."
+                  />
+                }
+              />
+              <Route
+                path="/search"
+                element={
+                  <PlaceholderPage
+                    title="Search Center"
+                    description="Search across all system data."
+                  />
+                }
+              />
+              <Route
+                path="/utilities"
+                element={
+                  <PlaceholderPage
+                    title="Other Utilities"
+                    description="Access system utilities and tools."
+                  />
+                }
+              />
+              <Route
+                path="/links"
+                element={
+                  <PlaceholderPage
+                    title="Quick Links"
+                    description="Access frequently used links and resources."
+                  />
+                }
+              />
+              <Route
+                path="/bulk-changes"
+                element={
+                  <PlaceholderPage
+                    title="Bulk Change Endorsements"
+                    description="Process bulk policy endorsements."
+                  />
+                }
+              />
+              <Route
+                path="/users"
+                element={
+                  <PlaceholderPage
+                    title="Manage Users"
+                    description="Manage system users and permissions."
+                  />
+                }
+              />
+              <Route
+                path="/reports"
+                element={
+                  <PlaceholderPage
+                    title="Analytic Reports"
+                    description="View analytics and generate reports."
+                  />
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
