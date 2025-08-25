@@ -17,6 +17,11 @@ import CustomerDetails from '@/pages/CustomerDetails';
 import PlaceholderPage from '@/pages/PlaceholderPage';
 import NotFound from '@/pages/NotFound';
 
+const customerData = {
+  name: "Rose K",
+  status: "Active"
+};
+
 function AppContent() {
   const location = useLocation();
   const [isOmsSidebarCollapsed, setIsOmsSidebarCollapsed] = useState(false);
