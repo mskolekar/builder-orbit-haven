@@ -506,8 +506,8 @@ export default function Dashboard() {
 
         </div>
 
-        {/* Row 2: Policy Details, Claims History, Submissions */}
-        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        {/* Row 2: Policy Details and Claims History */}
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Policy Details */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to policy details')}>
@@ -677,7 +677,10 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+        </div>
 
+        {/* Row 3: Submissions */}
+        <div className={`grid grid-cols-1 gap-6 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           {/* Submissions */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to submissions')}>
             <CardHeader className="pb-2">
