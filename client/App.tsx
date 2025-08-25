@@ -18,11 +18,23 @@ function AppContent() {
   const [isOmsSidebarCollapsed, setIsOmsSidebarCollapsed] = useState(false);
   const [isCustomerCenterSidebarCollapsed, setIsCustomerCenterSidebarCollapsed] = useState(false);
 
+  // Check if current route is customer details (which has its own layout)
+  const isCustomerDetailsRoute = location.pathname.startsWith('/customer-details');
+
   // Define which routes should show the Customer Center sidebar
   const customerCenterRoutes = ['/', '/profile', '/personal-details', '/loss-history', '/relationships', '/workgroups', '/risk-management-credit', '/contact-delivery', '/journals', '/financials'];
   const showCustomerCenterSidebar = customerCenterRoutes.some(route =>
     route === '/' ? location.pathname === '/' : location.pathname.startsWith(route)
   );
+
+  // If it's a customer details route, render just that component
+  if (isCustomerDetailsRoute) {
+    return (
+      <Routes>
+        <Route path="/customer-details/*" element={<CustomerDetails />} />
+      </Routes>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -46,7 +58,6 @@ function AppContent() {
         )}
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/customer-details/*" element={<CustomerDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/communication" element={<Communication />} />
           <Route path="/history" element={<History />} />
