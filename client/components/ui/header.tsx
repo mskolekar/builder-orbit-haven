@@ -50,7 +50,11 @@ export function Header() {
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 pl-[32rem] lg:pl-[32rem] shadow-sm">
       <div className="flex items-center gap-4">
-        {/* Global Search */}
+        {/* Empty space for now */}
+      </div>
+
+      <div className="flex items-center gap-4">
+        {/* Global Search - Moved next to bell icon */}
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <input
@@ -59,9 +63,6 @@ export function Header() {
             className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
           />
         </div>
-      </div>
-      
-      <div className="flex items-center gap-4">
         {/* Notifications */}
         <Popover open={notificationsOpen} onOpenChange={setNotificationsOpen}>
           <PopoverTrigger asChild>

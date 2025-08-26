@@ -89,22 +89,9 @@ function AppContent() {
                 {/* Breadcrumb */}
                 <div className="bg-white border-b border-gray-200 px-6 py-3">
                   <div className="text-sm text-gray-600">
-                    <span className="hover:text-blue-600 cursor-pointer">Home</span>
-                    <span className="mx-2">&gt;</span>
                     <span className="hover:text-blue-600 cursor-pointer">Customer Center</span>
                     <span className="mx-2">&gt;</span>
-                    <span className="text-gray-900">
-                      {location.pathname === '/' ? 'Overview' :
-                       location.pathname === '/profile' ? 'Profile' :
-                       location.pathname === '/loss-history' ? 'Loss History' :
-                       location.pathname === '/relationships' ? 'Relationships & Roles' :
-                       location.pathname === '/workgroups' ? 'Workgroups' :
-                       location.pathname === '/risk-management-credit' ? 'Risk Management Credit' :
-                       location.pathname === '/contact-delivery' ? 'Contact & Delivery' :
-                       location.pathname === '/journals' ? 'Journals' :
-                       location.pathname === '/financials' ? 'Financials' :
-                       'Overview'}
-                    </span>
+                    <span className="text-gray-900">Overview</span>
                   </div>
                 </div>
                 {location.pathname === '/' && (
