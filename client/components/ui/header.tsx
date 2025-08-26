@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Bell, Settings, User, LogOut, ChevronDown, MessageSquare, HelpCircle } from 'lucide-react';
+import { Bell, Settings, User, LogOut, ChevronDown, MessageSquare, HelpCircle, Search } from 'lucide-react';
 import { Button } from './button';
 import { SearchBar } from './search-bar';
 import { Badge } from './badge';
