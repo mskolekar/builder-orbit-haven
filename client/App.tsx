@@ -46,15 +46,17 @@ function AppContent() {
   }
 
   return (
-    <div className="h-screen bg-gray-50 flex flex-col">
-      {/* White OneShield Header - Full Width at Top */}
-      <Header />
+    <div className="h-screen bg-gray-50 flex">
+      {/* OneShield Sidebar - Starts from top of page */}
+      <Sidebar
+        isCollapsed={isOmsSidebarCollapsed}
+        onToggleCollapse={() => setIsOmsSidebarCollapsed(!isOmsSidebarCollapsed)}
+      />
 
-      <div className="flex flex-1">
-        <Sidebar
-          isCollapsed={isOmsSidebarCollapsed}
-          onToggleCollapse={() => setIsOmsSidebarCollapsed(!isOmsSidebarCollapsed)}
-        />
+      {/* Main content area with header and content */}
+      <div className="flex flex-col flex-1">
+        {/* White OneShield Header */}
+        <Header />
 
         {showCustomerCenterSidebar ? (
           <div className="flex flex-col flex-1">
