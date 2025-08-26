@@ -748,6 +748,9 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Empty space to maintain layout consistency with Policy/Claims row */}
+          <div></div>
         </div>
 
         {/* Close Diary Confirmation Dialog */}
