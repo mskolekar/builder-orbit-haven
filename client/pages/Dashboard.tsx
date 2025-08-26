@@ -427,10 +427,15 @@ export default function Dashboard() {
                 <CardTitle className="text-base text-gray-700">
                   Diaries
                 </CardTitle>
-                <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
-                  <Plus size={10} className="mr-1" />
-                  Add
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
+                    View All
+                  </Button>
+                  <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
+                    <Plus size={10} className="mr-1" />
+                    Add
+                  </Button>
+                </div>
               </div>
             </CardHeader>
             <CardContent>
