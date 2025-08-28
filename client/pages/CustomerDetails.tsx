@@ -77,7 +77,7 @@ const customerData = {
   phone: "(416) 555-0123",
   email: "rose.greenthumb@example.com",
   address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
-  memberSince: "2019",
+
   satisfactionScore: 4.8
 };
 
