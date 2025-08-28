@@ -526,7 +526,7 @@ export default function Profile() {
                       <Input type="date" className="mt-1 h-8 border-gray-300" />
                     </div>
                     <div>
-                  
+                     
                       <Select defaultValue="2019">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
