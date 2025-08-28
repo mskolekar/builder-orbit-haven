@@ -239,13 +239,7 @@ export default function CustomerDetails() {
                       </div>
                     </div>
                     <div>
-                      <div className="flex items-center gap-3">
-                        <h2 className="text-xl font-bold text-gray-900">{customerData.name}</h2>
-                        <Badge className="bg-blue-100 text-blue-800 border-blue-200">
-                          <CheckCircle size={10} className="mr-1" />
-                          {customerData.status}
-                        </Badge>
-                      </div>
+                    
                       <p className="text-gray-600 font-medium">{customerData.role}</p>
                       <div className="flex items-center gap-4 mt-2">
                         <div className="flex items-center gap-1 text-sm text-gray-500">
