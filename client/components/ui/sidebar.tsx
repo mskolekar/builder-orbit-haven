@@ -43,7 +43,7 @@ const sidebarItems: SidebarItem[] = [
   { icon: Briefcase, label: 'Accounting', path: '/accounting' },
   { icon: Search, label: 'Search Center', path: '/search' },
   { icon: Settings, label: 'Other Utilities', path: '/utilities' },
-  { icon: Link as LinkIcon, label: 'Quick Links', path: '/links' },
+  { icon: LinkIcon, label: 'Quick Links', path: '/links' },
   { icon: TrendingUp, label: 'Bulk Change Endorsements', path: '/bulk-changes' },
   { icon: Users, label: 'Manage Users', path: '/users' },
   { icon: BarChart, label: 'Analytic Reports', path: '/reports' }
