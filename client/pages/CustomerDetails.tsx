@@ -133,7 +133,6 @@ export default function CustomerDetails() {
           <h1 className="text-lg font-semibold">{customerData.name}</h1>
           <div className="text-white/70">|</div>
           <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
-            <CheckCircle size={10} className="mr-1" />
             {customerData.status}
           </Badge>
         </div>

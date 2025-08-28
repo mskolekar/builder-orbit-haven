@@ -151,16 +151,16 @@ const recentActivity = [
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
-    'active': 'bg-blue-50 text-blue-700 border-blue-200',
-    'bound': 'bg-blue-50 text-blue-700 border-blue-200',
-    'in progress': 'bg-slate-50 text-slate-700 border-slate-200',
+    'active': 'bg-gray-50 text-gray-700 border-gray-200',
+    'bound': 'bg-gray-50 text-gray-700 border-gray-200',
+    'in progress': 'bg-gray-50 text-gray-700 border-gray-200',
     'pending': 'bg-gray-100 text-gray-700 border-gray-200',
     'expired': 'bg-gray-50 text-gray-600 border-gray-200',
-    'approved': 'bg-blue-50 text-blue-700 border-blue-200',
+    'approved': 'bg-gray-50 text-gray-700 border-gray-200',
     'closed': 'bg-gray-50 text-gray-600 border-gray-200',
-    'scheduled': 'bg-slate-50 text-slate-700 border-slate-200',
+    'scheduled': 'bg-gray-50 text-gray-700 border-gray-200',
     'open': 'bg-gray-100 text-gray-700 border-gray-200',
-    'reopen': 'bg-slate-100 text-slate-700 border-slate-200',
+    'reopen': 'bg-gray-100 text-gray-700 border-gray-200',
   };
 
   const color = statusConfig[status.toLowerCase()] || 'bg-gray-50 text-gray-600 border-gray-200';
@@ -191,37 +191,14 @@ const getPolicyIcon = (lob: string) => {
 
 const getPriorityColor = (priority: string) => {
   switch (priority) {
-    case 'high': return 'bg-[#0054A6]';
-    case 'medium': return 'bg-[#0074cc]';
-    case 'low': return 'bg-[#4d9fff]';
+    case 'high': return 'bg-gray-400';
+    case 'medium': return 'bg-gray-400';
+    case 'low': return 'bg-gray-400';
     default: return 'bg-gray-400';
   }
 };
 
 const getRowBgColor = (status: string, type: 'policy' | 'claim' | 'submission') => {
-  const normalizedStatus = status.toLowerCase();
-
-  if (type === 'policy') {
-    switch (normalizedStatus) {
-      case 'active': return 'bg-blue-25 hover:bg-blue-50';
-      case 'expired': return 'bg-gray-25 hover:bg-gray-50';
-      case 'pending': return 'bg-slate-25 hover:bg-slate-50';
-      default: return 'hover:bg-gray-50';
-    }
-  } else if (type === 'claim') {
-    switch (normalizedStatus) {
-      case 'open': return 'bg-gray-25 hover:bg-gray-50';
-      case 'reopen': return 'bg-slate-25 hover:bg-slate-50';
-      default: return 'hover:bg-gray-50';
-    }
-  } else if (type === 'submission') {
-    switch (normalizedStatus) {
-      case 'in progress': return 'bg-blue-25 hover:bg-blue-50';
-      case 'bound': return 'bg-blue-25 hover:bg-blue-50';
-      default: return 'hover:bg-gray-50';
-    }
-  }
-
   return 'hover:bg-gray-50';
 };
 
@@ -274,21 +251,11 @@ export default function Dashboard() {
     });
 
   const getPriorityBadgeColor = (priority: string) => {
-    switch (priority.toLowerCase()) {
-      case 'high': return 'bg-blue-100 text-blue-700 border-blue-200';
-      case 'medium': return 'bg-slate-200 text-slate-700 border-slate-300';
-      case 'low': return 'bg-gray-100 text-gray-600 border-gray-200';
-      default: return 'bg-gray-100 text-gray-700 border-gray-200';
-    }
+    return 'bg-gray-100 text-gray-700 border-gray-200';
   };
 
   const getDiaryRowBgColor = (priority: string) => {
-    switch (priority.toLowerCase()) {
-      case 'high': return 'bg-blue-25 hover:bg-blue-50';
-      case 'medium': return 'bg-slate-25 hover:bg-slate-50';
-      case 'low': return 'bg-gray-25 hover:bg-gray-50';
-      default: return 'hover:bg-gray-50';
-    }
+    return 'hover:bg-gray-50';
   };
 
   // Get unique values for filters
@@ -322,24 +289,34 @@ export default function Dashboard() {
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div className={`transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
-            <CardHeader className="pb-4">
+            <CardHeader className="pb-4 flex flex-row items-center justify-between">
               <CardTitle className="text-base text-gray-700">
                 Financial Information
               </CardTitle>
+              <Button
+                size="sm"
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log('Navigate to payment');
+                }}
+              >
+                Pay Now
+              </Button>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="relative bg-blue-50 border border-blue-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-blue-600 mb-1 font-medium">Amount Paid</div>
-                  <div className="text-xl font-bold text-blue-800">$8,460</div>
-                  <div className="text-xs text-blue-500 mt-1">Aggregate premium paid to date</div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-400"></div>
+                <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-gray-600 mb-1 font-medium">Amount Paid</div>
+                  <div className="text-xl font-bold text-gray-800">$8,460</div>
+                  <div className="text-xs text-gray-500 mt-1">Aggregate premium paid to date</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                 </div>
-                <div className="relative bg-slate-50 border border-slate-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-slate-600 mb-1 font-medium">Total Due</div>
-                  <div className="text-xl font-bold text-slate-800">$275</div>
-                  <div className="text-xs text-slate-500 mt-1">Aggregate premium currently due (YTD)</div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-slate-400"></div>
+                <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                  <div className="text-xs text-gray-600 mb-1 font-medium">Total Due</div>
+                  <div className="text-xl font-bold text-gray-800">$275</div>
+                  <div className="text-xs text-gray-500 mt-1">Aggregate premium currently due (YTD)</div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                 </div>
                 <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
                   <div className="text-xs text-gray-600 mb-1 font-medium">Outstanding Balance</div>
@@ -347,18 +324,6 @@ export default function Dashboard() {
                   <div className="text-xs text-gray-500 mt-1">Outstanding premium (after credit application)</div>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                 </div>
-              </div>
-              <div className="mt-4 flex justify-end">
-                <Button
-                  size="sm"
-                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log('Navigate to payment');
-                  }}
-                >
-                  Pay Now
-                </Button>
               </div>
             </CardContent>
           </Card>
