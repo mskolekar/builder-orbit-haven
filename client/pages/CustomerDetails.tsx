@@ -233,15 +233,11 @@ export default function CustomerDetails() {
                       <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
                         RK
                       </div>
-                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#0054A6] rounded-full border-2 border-white flex items-center justify-center">
-                        <CheckCircle size={12} className="text-white" />
-                      </div>
                     </div>
                     <div>
                       <div className="flex items-center gap-3">
                         <h2 className="text-xl font-bold text-gray-900">{customerData.name}</h2>
-                        <Badge className="bg-blue-100 text-blue-800 border-blue-200">
-                          <CheckCircle size={10} className="mr-1" />
+                        <Badge className="bg-gray-100 text-gray-700 border-gray-200">
                           {customerData.status}
                         </Badge>
                       </div>
