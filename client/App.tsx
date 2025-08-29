@@ -61,7 +61,7 @@ function AppContent() {
         {showCustomerCenterSidebar ? (
           <div className="flex flex-col flex-1">
             {/* Blue Customer Header spanning Customer Center area */}
-            <div className="bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-3 flex items-center gap-4 shadow-lg">
+            <div className="mt-px bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-3 flex items-center gap-4 shadow-lg">
               <Button
                 variant="ghost"
                 size="sm"
