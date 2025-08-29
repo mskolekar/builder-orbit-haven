@@ -109,7 +109,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
         isCollapsed ? "w-16" : "w-64",
         isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
       )}>
-        <div className={cn("p-4 border-b border-gray-200 flex items-center", isCollapsed ? "justify-center" : "justify-between")}>
+        <div className={cn("h-16 px-4 border-b border-gray-200 flex items-center", isCollapsed ? "justify-center" : "justify-between")}>
           {!isCollapsed && (
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-[#0054A6] rounded flex items-center justify-center">
