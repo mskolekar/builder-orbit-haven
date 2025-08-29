@@ -97,7 +97,7 @@ function AppContent() {
 
                       const mainMap: Record<string, { label: string; to: string }> = {
                         '/': { label: 'Overview', to: '/' },
-                        '/profile': { label: 'Profile', to: '/profile' },
+                        '/profile': { label: 'Personal Details', to: '/personal-details' },
                         '/personal-details': { label: 'Personal Details', to: '/personal-details' },
                         '/loss-history': { label: 'Loss History', to: '/loss-history' },
                         '/relationships': { label: 'Relationships & Roles', to: '/relationships' },
