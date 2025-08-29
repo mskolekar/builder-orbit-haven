@@ -89,10 +89,79 @@ function AppContent() {
               <div className="flex-1 flex flex-col">
                 {/* Breadcrumb */}
                 <div className="bg-white border-b border-gray-200 px-6 py-3">
-                  <div className="text-sm text-gray-600">
-                    <span className="hover:text-blue-600 cursor-pointer">Customer Center</span>
-                    <span className="mx-2">&gt;</span>
-                    <span className="text-gray-900">Overview</span>
+                  <div className="text-sm text-gray-600 flex items-center flex-wrap gap-1">
+                    {(() => {
+                      const params = new URLSearchParams(location.search);
+                      const section = params.get('section');
+                      const tab = params.get('tab');
+                      const path = location.pathname;
+
+                      const mainMap: Record<string, { label: string; to: string }> = {
+                        '/': { label: 'Overview', to: '/' },
+                        '/profile': { label: 'Profile', to: '/profile' },
+                        '/personal-details': { label: 'Personal Details', to: '/personal-details' },
+                        '/loss-history': { label: 'Loss History', to: '/loss-history' },
+                        '/relationships': { label: 'Relationships & Roles', to: '/relationships' },
+                        '/workgroups': { label: 'Workgroups', to: '/workgroups' },
+                        '/risk-management-credit': { label: 'Risk Mgt Credit Program', to: '/risk-management-credit' },
+                        '/contact-delivery': { label: 'Contact & Delivery', to: '/contact-delivery' },
+                        '/journals': { label: 'Journals', to: '/journals' },
+                        '/financials': { label: 'Financials', to: '/financials' },
+                      };
+
+                      const sectionMap: Record<string, string> = {
+                        'personal-info': 'Basic Info',
+                        'person-info': 'Basic Info',
+                        'addresses': 'Addresses',
+                        'additional-info': 'Additional Info',
+                        'person-history': 'Work History',
+                      };
+
+                      const tabMap: Record<string, string> = {
+                        'contact': 'Contact Info',
+                        'prior-policy': 'Prior Policy',
+                        'prior-losses': 'Prior Losses',
+                        'diaries': 'Diaries',
+                        'notes': 'Notes',
+                        'document': 'Document',
+                        'email': 'Email',
+                        'assignment-approval': 'Assignment/Approval History',
+                      };
+
+                      const keys = Object.keys(mainMap);
+                      const currentKey = keys.find(k => (k === '/' ? path === '/' : path.startsWith(k))) || '/';
+                      const crumbs: { label: string; to?: string }[] = [];
+
+                      crumbs.push({ label: 'Customer Center', to: '/' });
+
+                      if (currentKey !== '/') {
+                        crumbs.push(mainMap[currentKey]);
+                      } else {
+                        crumbs.push({ label: mainMap['/'].label });
+                      }
+
+                      const subLabel = section ? sectionMap[section] : (tab ? tabMap[tab] : undefined);
+                      if (subLabel) {
+                        crumbs.push({ label: subLabel, to: location.pathname + location.search });
+                      }
+
+                      return (
+                        <>
+                          {crumbs.map((c, i) => (
+                            <span key={i} className="flex items-center">
+                              {c.to ? (
+                                <a href={c.to} className="hover:text-blue-600 cursor-pointer">
+                                  {c.label}
+                                </a>
+                              ) : (
+                                <span className={i === crumbs.length - 1 ? 'text-gray-900' : ''}>{c.label}</span>
+                              )}
+                              {i < crumbs.length - 1 && <span className="mx-2">&gt;</span>}
+                            </span>
+                          ))}
+                        </>
+                      );
+                    })()}
                   </div>
                 </div>
                 {location.pathname === '/' && (
