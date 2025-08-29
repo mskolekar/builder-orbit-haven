@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Sidebar } from '@/components/ui/sidebar';
 import { CustomerCenterSidebar } from '@/components/ui/customer-center-sidebar';
 import { PersonDetailsSection } from '@/components/ui/person-details-section';
-import { CustomerHeader } from '@/components/ui/customer-header';
 import { Header } from '@/components/ui/header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -166,9 +165,6 @@ function AppContent() {
                 </div>
                 {location.pathname === '/' && (
                   <PersonDetailsSection />
-                )}
-                {location.pathname !== '/' && (
-                  <CustomerHeader />
                 )}
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
