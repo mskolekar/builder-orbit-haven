@@ -1,5 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
-import { cn } from '@/lib/utils';
+import { Link, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
 import {
   BarChart3,
   User,
@@ -18,9 +18,9 @@ import {
   BarChart,
   TrendingUp,
   Search,
-  ChevronLeft
-} from 'lucide-react';
-import { useState } from 'react';
+  ChevronLeft,
+} from "lucide-react";
+import { useState } from "react";
 
 interface SubItem {
   label: string;
@@ -35,18 +35,22 @@ interface SidebarItem {
 }
 
 const sidebarItems: SidebarItem[] = [
-  { icon: Home, label: 'Home', path: '/' },
-  { icon: FileText, label: 'New Submission', path: '/new-submission' },
-  { icon: FileText, label: 'Submissions', path: '/submissions' },
-  { icon: Shield, label: 'Policies', path: '/policies' },
-  { icon: User, label: 'Customer Center', path: '/' },
-  { icon: Briefcase, label: 'Accounting', path: '/accounting' },
-  { icon: Search, label: 'Search Center', path: '/search' },
-  { icon: Settings, label: 'Other Utilities', path: '/utilities' },
-  { icon: Link as LinkIcon, label: 'Quick Links', path: '/links' },
-  { icon: TrendingUp, label: 'Bulk Change Endorsements', path: '/bulk-changes' },
-  { icon: Users, label: 'Manage Users', path: '/users' },
-  { icon: BarChart, label: 'Analytic Reports', path: '/reports' }
+  { icon: Home, label: "Home", path: "/" },
+  { icon: FileText, label: "New Submission", path: "/new-submission" },
+  { icon: FileText, label: "Submissions", path: "/submissions" },
+  { icon: Shield, label: "Policies", path: "/policies" },
+  { icon: User, label: "Customer Center", path: "/" },
+  { icon: Briefcase, label: "Accounting", path: "/accounting" },
+  { icon: Search, label: "Search Center", path: "/search" },
+  { icon: Settings, label: "Other Utilities", path: "/utilities" },
+  { icon: LinkIcon, label: "Quick Links", path: "/links" },
+  {
+    icon: TrendingUp,
+    label: "Bulk Change Endorsements",
+    path: "/bulk-changes",
+  },
+  { icon: Users, label: "Manage Users", path: "/users" },
+  { icon: BarChart, label: "Analytic Reports", path: "/reports" },
 ];
 
 interface SidebarProps {
@@ -60,25 +64,27 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems(prev => 
+    setExpandedItems((prev) =>
       prev.includes(itemPath)
-        ? prev.filter(path => path !== itemPath)
-        : [...prev, itemPath]
+        ? prev.filter((path) => path !== itemPath)
+        : [...prev, itemPath],
     );
   };
 
   const isActive = (path: string) => {
-    if (path === '/') {
-      return location.pathname === '/';
+    if (path === "/") {
+      return location.pathname === "/";
     }
-    return location.pathname === path || location.pathname + location.search === path;
+    return (
+      location.pathname === path || location.pathname + location.search === path
+    );
   };
 
   const isMainPageActive = (item: SidebarItem) => {
-    if (item.path === '/' && item.label === 'Customer Center') {
-      return location.pathname === '/';
+    if (item.path === "/" && item.label === "Customer Center") {
+      return location.pathname === "/";
     }
-    if (item.path === '/' && item.label === 'Home') {
+    if (item.path === "/" && item.label === "Home") {
       return false; // Don't highlight Home when on Customer Center
     }
     return location.pathname === item.path;
@@ -96,26 +102,37 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
 
       {/* Mobile overlay */}
       {isOpen && (
-        <div 
+        <div
           className="lg:hidden fixed inset-0 bg-black/50 z-40"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <div className={cn(
-        "h-screen bg-white border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
-        "lg:translate-x-0 lg:static lg:z-auto",
-        isCollapsed ? "w-16" : "w-64",
-        isOpen ? "fixed translate-x-0" : "fixed -translate-x-full lg:translate-x-0"
-      )}>
-        <div className={cn("p-4 border-b border-gray-200 flex items-center", isCollapsed ? "justify-center" : "justify-between")}>
+      <div
+        className={cn(
+          "h-screen bg-white border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
+          "lg:translate-x-0 lg:static lg:z-auto",
+          isCollapsed ? "w-16" : "w-64",
+          isOpen
+            ? "fixed translate-x-0"
+            : "fixed -translate-x-full lg:translate-x-0",
+        )}
+      >
+        <div
+          className={cn(
+            "h-[62px] px-4 border-b border-gray-200 flex items-center",
+            isCollapsed ? "justify-center" : "justify-between",
+          )}
+        >
           {!isCollapsed && (
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-[#0054A6] rounded flex items-center justify-center">
                 <span className="text-white font-bold text-sm">OS</span>
               </div>
-              <span className="text-[#0054A6] font-semibold text-lg">OneShield</span>
+              <span className="text-[#0054A6] font-semibold text-lg">
+                OneShield
+              </span>
             </div>
           )}
           {isCollapsed && (
@@ -127,10 +144,16 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
             onClick={onToggleCollapse}
             className="text-gray-500 hover:bg-gray-100 p-1 rounded transition-colors"
           >
-            <ChevronLeft size={16} className={cn("transition-transform", isCollapsed && "rotate-180")} />
+            <ChevronLeft
+              size={16}
+              className={cn(
+                "transition-transform",
+                isCollapsed && "rotate-180",
+              )}
+            />
           </button>
         </div>
-        
+
         <nav className="flex-1 px-2 overflow-y-auto">
           <ul className="space-y-1">
             {sidebarItems.map((item) => {
@@ -138,9 +161,9 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
               const hasSubItems = item.subItems && item.subItems.length > 0;
               const isExpanded = expandedItems.includes(item.path);
               const isMainActive = isMainPageActive(item);
-              
+
               return (
-                <li key={item.path}>
+                <li key={`${item.label}-${item.path}`}>
                   <Link
                     to={item.path}
                     onClick={(e) => {
@@ -156,14 +179,14 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
                         ? "bg-[#0054A6] text-white"
-                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
                     <Icon size={16} />
                     {!isCollapsed && item.label}
                   </Link>
-                  
+
                   {hasSubItems && isExpanded && (
                     <ul className="mt-1 ml-6 space-y-1">
                       {item.subItems!.map((subItem) => (
@@ -174,8 +197,8 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                             className={cn(
                               "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4",
                               isActive(subItem.path)
-                                ? "bg-white/15 text-white border-white/40" 
-                                : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30"
+                                ? "bg-white/15 text-white border-white/40"
+                                : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30",
                             )}
                           >
                             {subItem.label}

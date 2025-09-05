@@ -2,22 +2,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
-  BarChart3,
-  User,
-  Phone,
-  UserCog,
-  Link as LinkIcon,
-  CreditCard,
-  Clock,
-  BookOpen,
-  Calculator,
   ChevronDown,
   ChevronRight,
-  ChevronLeft,
-  Mail,
-  FileText,
-  ClipboardList,
-  UserCheck2
+  ChevronLeft
 } from 'lucide-react';
 
 interface SubItem {
@@ -26,16 +13,14 @@ interface SubItem {
 }
 
 interface CustomerCenterSidebarItem {
-  icon: any;
   label: string;
   path: string;
   subItems?: SubItem[];
 }
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
-  { icon: BarChart3, label: 'Overview', path: '/' },
+  { label: 'Overview', path: '/' },
   {
-    icon: User,
     label: 'Personal Details',
     path: '/personal-details',
     subItems: [
@@ -47,7 +32,6 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
     ]
   },
   {
-    icon: Clock,
     label: 'Loss History',
     path: '/loss-history',
     subItems: [
@@ -55,11 +39,10 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
       { label: 'Prior Losses', path: '/loss-history?tab=prior-losses' }
     ]
   },
-  { icon: LinkIcon, label: 'Relationships & Roles', path: '/relationships' },
-  { icon: UserCog, label: 'Workgroups', path: '/workgroups' },
-  { icon: CreditCard, label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
+  { label: 'Relationships & Roles', path: '/relationships' },
+  { label: 'Workgroups', path: '/workgroups' },
+  { label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
   {
-    icon: BookOpen,
     label: 'Journals',
     path: '/journals',
     subItems: [
@@ -70,7 +53,7 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
       { label: 'Assignment/Approval History', path: '/journals?tab=assignment-approval' }
     ]
   },
-  { icon: Calculator, label: 'Financials', path: '/financials' }
+  { label: 'Financials', path: '/financials' }
 ];
 
 interface CustomerCenterSidebarProps {
@@ -135,30 +118,13 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
   };
 
   return (
-    <div className={cn("h-[calc(100vh-4rem)] bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300 mt-16",
-      isCollapsed ? "w-16" : "w-64"
+    <div className={cn("h-full bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300",
+      isCollapsed ? "w-0 overflow-hidden" : "w-64"
     )}>
-      <div className={cn("border-b border-white/20 py-3 flex items-center",
-        isCollapsed ? "px-2 justify-center" : "px-4 justify-between"
-      )}>
-        {!isCollapsed && (
-          <div>
-            <h2 className="text-lg font-semibold text-white">Customer Center</h2>
-          </div>
-        )}
-        <button
-          onClick={onToggleCollapse}
-          className="text-white hover:bg-white/10 p-1 rounded transition-colors"
-          title={isCollapsed ? "Expand Customer Center" : "Collapse Customer Center"}
-        >
-          <ChevronLeft size={16} className={cn("transition-transform", !isCollapsed && "rotate-180")} />
-        </button>
-      </div>
       
-      <nav className="flex-1 px-3 py-4 overflow-y-auto" role="navigation" aria-label="Customer Center Navigation">
+      <nav className="flex-1 px-3 pt-4 pb-4 overflow-y-auto" role="navigation" aria-label="Customer Center Navigation">
         <ul className="space-y-1" role="menubar">
           {customerCenterItems.map((item) => {
-            const Icon = item.icon;
             const hasSubItems = item.subItems && item.subItems.length > 0;
             const isMainActive = isMainPageActive(item);
             const isExpanded = expandedItems.includes(item.path);
@@ -188,11 +154,10 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
                   aria-haspopup={hasSubItems ? "menu" : undefined}
                 >
                   {isCollapsed ? (
-                    <Icon size={16} />
+                    <span className="text-xs font-medium">{item.label.substring(0, 2).toUpperCase()}</span>
                   ) : (
                     <>
                       <div className="flex items-center gap-3">
-                        <Icon size={16} />
                         {item.label}
                       </div>
                       {hasSubItems && (
