@@ -2,15 +2,16 @@ import { useState } from 'react';
 import { Button } from './button';
 import { Badge } from './badge';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
-import { 
-  CheckCircle, 
-  Calendar, 
-  Users, 
-  FileText, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Edit3 
+import {
+  CheckCircle,
+  Calendar,
+  Users,
+  FileText,
+  Phone,
+  Mail,
+  MapPin,
+  Edit3,
+  ChevronDown
 } from 'lucide-react';
 
 const customerData = {
@@ -45,7 +46,10 @@ export function PersonDetailsSection() {
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
           <CardHeader className="p-4 pb-0 cursor-pointer select-none" onClick={() => setIsCollapsed(v => !v)}>
-            <CardTitle className="text-base text-gray-700">Basic Info</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base text-gray-700">Basic Info</CardTitle>
+              <ChevronDown size={14} className={`text-gray-400 transition-transform ${isCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+            </div>
           </CardHeader>
           <CardContent className={`p-4 ${isCollapsed ? 'hidden' : ''}`}>
             <div className="flex items-center gap-6">
