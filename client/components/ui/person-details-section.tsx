@@ -14,7 +14,7 @@ import {
 
 const customerData = {
   name: "Rose K",
-  role: "Lawyer",
+  role: "Insured",
   status: "Active",
   dateOfBirth: "••••••••",
   gender: "Female",
@@ -98,7 +98,7 @@ export function PersonDetailsSection() {
                 <div className="flex items-center gap-2">
                   <FileText size={14} className="text-gray-400" />
                   <div>
-                    <span className="text-xs text-gray-500">LSC#</span>
+                    <span className="text-xs text-gray-500">SSN#</span>
                     <p className="text-sm font-medium">{customerData.lsc}</p>
                   </div>
                 </div>
