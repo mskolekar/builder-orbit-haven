@@ -21,7 +21,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 interface SubItem {
   label: string;
