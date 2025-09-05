@@ -351,7 +351,7 @@ export default function Dashboard() {
               </Button>
             </div>
           )}
-          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to activity timeline')}>
+          <Card className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isActivityCollapsed ? 'hidden' : ''}`} onClick={() => console.log('Navigate to activity timeline')}>
             <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsActivityCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
