@@ -80,13 +80,35 @@ function AppContent() {
                 {isCustomerCenterSidebarCollapsed ? <Menu size={16} /> : <ChevronLeft size={16} />}
               </Button>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-1">
                 <h1 className="text-lg font-semibold">{activeProfile.name}</h1>
                 <div className="text-white/70">|</div>
                 <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
                   {activeProfile.status}
                 </Badge>
               </div>
+              <nav className="flex items-center gap-2">
+                {[
+                  { id: 'olivia', label: 'Olivia R' },
+                  { id: 'john-wills', label: 'John Wills' },
+                  { id: 'shawn-elkins', label: 'Shawn Elkins' },
+                  { id: 'abc-ltd', label: 'ABC Ltd' },
+                ].map((p) => (
+                  <Link key={p.id} to={`/overview/${p.id}`}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className={cn(
+                        'h-8 px-3 text-white/90 hover:bg-white/15 hover:text-white',
+                        activeProfileKey === p.id && 'bg-white/20 text-white'
+                      )}
+                      title={p.label}
+                    >
+                      {p.label}
+                    </Button>
+                  </Link>
+                ))}
+              </nav>
             </div>
 
             <div className="flex flex-1">
