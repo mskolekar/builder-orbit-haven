@@ -67,7 +67,9 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [expandedItems, setExpandedItems] = useState<string[]>(() => (
+    location.pathname.startsWith('/overview') ? ['/overview'] : []
+  ));
 
   const toggleExpanded = (itemPath: string) => {
     setExpandedItems((prev) =>
