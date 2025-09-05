@@ -44,9 +44,6 @@ const CollapsibleSection = ({
       >
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-medium text-gray-900">{title}</CardTitle>
-          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-            {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
-          </Button>
         </div>
       </CardHeader>
       {isExpanded && (
