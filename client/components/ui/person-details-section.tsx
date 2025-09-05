@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { Button } from './button';
 import { Badge } from './badge';
-import { Card, CardContent } from './card';
+import { Card, CardContent, CardHeader, CardTitle } from './card';
 import { 
   CheckCircle, 
   Calendar, 
@@ -37,11 +38,16 @@ export function PersonDetailsSection() {
     window.location.href = '/customer-details';
   };
 
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
     <div className="bg-white border-b border-gray-200 p-4">
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
-          <CardContent className="p-4">
+          <CardHeader className="p-4 pb-0 cursor-pointer select-none" onClick={() => setIsCollapsed(v => !v)}>
+            <CardTitle className="text-base text-gray-700">Basic Info</CardTitle>
+          </CardHeader>
+          <CardContent className={`p-4 ${isCollapsed ? 'hidden' : ''}`}>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
                 <div className="relative">
