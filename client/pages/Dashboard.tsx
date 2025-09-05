@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -446,12 +446,15 @@ export default function Dashboard() {
       claimsStatusFilter.includes(claim.status),
   );
 
+  const { profileId } = useParams();
+  const hideFinancial = profileId === 'john-wills';
+
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div
-          className={`transition-all duration-1000 delay-300 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+          className={`${hideFinancial ? 'hidden' : ''} transition-all duration-1000 delay-300 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
           <Card
             className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
