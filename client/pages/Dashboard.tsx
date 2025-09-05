@@ -224,8 +224,10 @@ export default function Dashboard() {
 
   // Collapsible states
   const [isFinancialCollapsed, setIsFinancialCollapsed] = useState(false);
-  const [row2Collapsed, setRow2Collapsed] = useState<null | 'activity' | 'diaries'>(null);
-  const [rowPCCollapsed, setRowPCCollapsed] = useState<null | 'policies' | 'claims'>(null);
+  const [isActivityCollapsed, setIsActivityCollapsed] = useState(false);
+  const [isDiariesCollapsed, setIsDiariesCollapsed] = useState(false);
+  const [isPoliciesCollapsed, setIsPoliciesCollapsed] = useState(false);
+  const [isClaimsCollapsed, setIsClaimsCollapsed] = useState(false);
   const [isSubmissionsCollapsed, setIsSubmissionsCollapsed] = useState(false);
 
   // Diary functions
@@ -339,11 +341,11 @@ export default function Dashboard() {
         </div>
 
         {/* Row 2: Activity Timeline, Diaries */}
-        <div className={`grid grid-cols-1 ${row2Collapsed ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Activity Timeline */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to activity timeline')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setRow2Collapsed(prev => prev === 'activity' ? null : 'activity'); }}>
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsActivityCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Activity Timeline
@@ -352,11 +354,11 @@ export default function Dashboard() {
                   <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
                     View All
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${row2Collapsed === 'activity' ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isActivityCollapsed ? '-rotate-90' : 'rotate-0'}`} />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={row2Collapsed === 'activity' ? 'hidden' : ''}>
+            <CardContent className={isActivityCollapsed ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -399,7 +401,7 @@ export default function Dashboard() {
 
           {/* Diaries */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setRow2Collapsed(prev => prev === 'diaries' ? null : 'diaries'); }}>
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsDiariesCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Diaries
@@ -412,11 +414,11 @@ export default function Dashboard() {
                     <Plus size={10} className="mr-1" />
                     Add
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${row2Collapsed === 'diaries' ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isDiariesCollapsed ? '-rotate-90' : 'rotate-0'}`} />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={row2Collapsed === 'diaries' ? 'hidden' : ''}>
+            <CardContent className={isDiariesCollapsed ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -488,11 +490,11 @@ export default function Dashboard() {
         </div>
 
         {/* Row 2: Policy Details and Claims History */}
-        <div className={`grid grid-cols-1 ${rowPCCollapsed ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Policy Details */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to policy details')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setRowPCCollapsed(prev => prev === 'policies' ? null : 'policies'); }}>
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsPoliciesCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Policies
@@ -501,11 +503,11 @@ export default function Dashboard() {
                   <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
                     View All
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${rowPCCollapsed === 'policies' ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isPoliciesCollapsed ? '-rotate-90' : 'rotate-0'}`} />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={rowPCCollapsed === 'policies' ? 'hidden' : ''}>
+            <CardContent className={isPoliciesCollapsed ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -579,7 +581,7 @@ export default function Dashboard() {
 
           {/* Claims History */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to claims history')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setRowPCCollapsed(prev => prev === 'claims' ? null : 'claims'); }}>
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsClaimsCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Claims
@@ -588,11 +590,11 @@ export default function Dashboard() {
                   <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
                     View All
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${rowPCCollapsed === 'claims' ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isClaimsCollapsed ? '-rotate-90' : 'rotate-0'}`} />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={rowPCCollapsed === 'claims' ? 'hidden' : ''}>
+            <CardContent className={isClaimsCollapsed ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
