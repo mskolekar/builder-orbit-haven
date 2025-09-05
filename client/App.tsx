@@ -13,12 +13,16 @@ import Profile from '@/pages/Profile';
 import Communication from '@/pages/Communication';
 import History from '@/pages/History';
 import CustomerDetails from '@/pages/CustomerDetails';
+import CustomerCenterHome from '@/pages/CustomerCenterHome';
 import PlaceholderPage from '@/pages/PlaceholderPage';
 import NotFound from '@/pages/NotFound';
+import { BasicDetailsSection } from '@/components/ui/basic-details-section';
 
-const customerData = {
-  name: "Olivia R",
-  status: "Active"
+const profileMap: Record<string, { name: string; status: string; role: string; memberSince?: string }> = {
+  'olivia': { name: 'Olivia R', status: 'Active', role: 'Insured', memberSince: '2019' },
+  'john-wills': { name: 'John Wills', status: 'Active', role: 'Underwriter', memberSince: '2018' },
+  'shawn-elkins': { name: 'Shawn Elkins', status: 'Active', role: 'Claimant', memberSince: '2021' },
+  'abc-ltd': { name: 'ABC Ltd', status: 'Active', role: 'Organization', memberSince: '2017' },
 };
 
 function AppContent() {
@@ -29,11 +33,14 @@ function AppContent() {
   // Check if current route is customer details (which has its own layout)
   const isCustomerDetailsRoute = location.pathname.startsWith('/customer-details');
 
-  // Define which routes should show the Customer Center sidebar
-  const customerCenterRoutes = ['/', '/profile', '/personal-details', '/loss-history', '/relationships', '/workgroups', '/risk-management-credit', '/contact-delivery', '/journals', '/financials'];
-  const showCustomerCenterSidebar = customerCenterRoutes.some(route =>
-    route === '/' ? location.pathname === '/' : location.pathname.startsWith(route)
-  );
+  // Active profile (from /overview/:id)
+  const overviewMatch = location.pathname.match(/^\/overview\/([^/]+)/);
+  const activeProfileKey = overviewMatch ? overviewMatch[1] : 'olivia';
+  const activeProfile = profileMap[activeProfileKey] || profileMap['olivia'];
+
+  // Define which routes should show the Customer Center sidebar (exclude /customer-center picker)
+  const customerCenterRoutes = ['/overview', '/profile', '/personal-details', '/loss-history', '/relationships', '/workgroups', '/risk-management-credit', '/contact-delivery', '/journals', '/financials'];
+  const showCustomerCenterSidebar = customerCenterRoutes.some(route => location.pathname.startsWith(route));
 
   // If it's a customer details route, render just that component
   if (isCustomerDetailsRoute) {
@@ -72,10 +79,10 @@ function AppContent() {
               </Button>
 
               <div className="flex items-center gap-3">
-                <h1 className="text-lg font-semibold">{customerData.name}</h1>
+                <h1 className="text-lg font-semibold">{activeProfile.name}</h1>
                 <div className="text-white/70">|</div>
                 <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
-                  {customerData.status}
+                  {activeProfile.status}
                 </Badge>
               </div>
             </div>
@@ -96,7 +103,7 @@ function AppContent() {
                       const path = location.pathname;
 
                       const mainMap: Record<string, { label: string; to: string }> = {
-                        '/': { label: 'Overview', to: '/' },
+                        '/overview': { label: 'Overview', to: `/overview/${activeProfileKey}` },
                         '/profile': { label: 'Personal Details', to: '/personal-details' },
                         '/personal-details': { label: 'Personal Details', to: '/personal-details' },
                         '/loss-history': { label: 'Loss History', to: '/loss-history' },
@@ -163,11 +170,15 @@ function AppContent() {
                     })()}
                   </div>
                 </div>
-                {location.pathname === '/' && (
-                  <PersonDetailsSection />
+                {location.pathname.startsWith('/overview/') && (
+                  activeProfileKey === 'olivia' ? (
+                    <PersonDetailsSection />
+                  ) : (
+                    <BasicDetailsSection name={activeProfile.name} role={activeProfile.role} status={activeProfile.status} memberSince={activeProfile.memberSince} />
+                  )
                 )}
                 <Routes>
-                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/overview/:profileId" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/communication" element={<Communication />} />
                   <Route path="/history" element={<History />} />
@@ -251,6 +262,7 @@ function AppContent() {
         ) : (
           <div className="flex-1 flex flex-col">
             <Routes>
+              <Route path="/customer-center" element={<CustomerCenterHome />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/communication" element={<Communication />} />
