@@ -49,7 +49,7 @@ export function OrganizationDetailsSection() {
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {/* Row 1: Industry and Reg. No */}
               <div className="flex items-center gap-2">
                 <Briefcase size={14} className="text-gray-400" />
@@ -67,7 +67,7 @@ export function OrganizationDetailsSection() {
               </div>
 
               {/* Row 2: Address, Phone, Email */}
-              <div className="flex items-center gap-2 md:col-span-2 lg:col-span-1">
+              <div className="flex items-center gap-2">
                 <MapPin size={14} className="text-gray-400" />
                 <div>
                   <div className="text-xs text-gray-500">Address</div>

@@ -70,7 +70,27 @@ function AppContent() {
   // Active profile (from /overview/:id)
   const overviewMatch = location.pathname.match(/^\/overview\/([^/]+)/);
   const activeProfileKey = overviewMatch ? overviewMatch[1] : "olivia";
-  const activeProfile = profileMap[activeProfileKey] || profileMap["olivia"];
+  let activeProfile = profileMap[activeProfileKey] || profileMap["olivia"];
+  let newPersonData: any | undefined;
+  if (activeProfileKey === "new-person") {
+    try {
+      const raw = localStorage.getItem("newPerson");
+      if (raw) {
+        newPersonData = JSON.parse(raw);
+        const role = newPersonData?.isInternal
+          ? "Employee"
+          : newPersonData?.relationshipType
+            ? newPersonData.relationshipType
+            : "Contact";
+        activeProfile = {
+          name: newPersonData?.name || "New Person",
+          status: "Active",
+          role,
+          memberSince: String(new Date().getFullYear()),
+        };
+      }
+    } catch {}
+  }
 
   // Define which routes should show the Customer Center sidebar (exclude /customer-center picker)
   const customerCenterRoutes = [
@@ -312,6 +332,9 @@ function AppContent() {
                       role={activeProfile.role}
                       status={activeProfile.status}
                       memberSince={activeProfile.memberSince}
+                      phone={newPersonData?.phone}
+                      email={newPersonData?.email}
+                      address={newPersonData?.address}
                     />
                   ))}
                 <Routes>
