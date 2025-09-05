@@ -173,7 +173,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
 
               return (
                 <li key={`${item.label}-${item.path}`}>
-                  <Link
+                  <RouterLink
                     to={item.path}
                     onClick={(e) => {
                       if (hasSubItems) {
@@ -194,13 +194,13 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                   >
                     <Icon size={16} />
                     {!isCollapsed && item.label}
-                  </Link>
+                  </RouterLink>
 
                   {hasSubItems && isExpanded && (
                     <ul className="mt-1 ml-6 space-y-1">
                       {item.subItems!.map((subItem) => (
                         <li key={subItem.path}>
-                          <Link
+                          <RouterLink
                             to={subItem.path}
                             onClick={() => setIsOpen(false)}
                             className={cn(
@@ -211,7 +211,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                             )}
                           >
                             {subItem.label}
-                          </Link>
+                          </RouterLink>
                         </li>
                       ))}
                     </ul>
