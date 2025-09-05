@@ -62,7 +62,9 @@ export function OrganizationDetailsSection() {
                 <FileText size={14} className="text-gray-400" />
                 <div>
                   <div className="text-xs text-gray-500">Reg. No</div>
-                  <div className="text-sm font-medium">{org.registrationNumber}</div>
+                  <div className="text-sm font-medium">
+                    {org.registrationNumber}
+                  </div>
                 </div>
               </div>
 

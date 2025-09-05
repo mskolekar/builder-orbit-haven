@@ -160,7 +160,9 @@ function AppContent() {
               </Button>
 
               <div className="flex items-center gap-3 flex-1">
-                <h1 className="text-lg font-semibold">{isAddNew ? "Add New" : activeProfile.name}</h1>
+                <h1 className="text-lg font-semibold">
+                  {isAddNew ? "Add New" : activeProfile.name}
+                </h1>
                 {!isAddNew && (
                   <>
                     <div className="text-white/70">|</div>
@@ -266,7 +268,10 @@ function AppContent() {
                       });
 
                       if (path === "/overview/add-new") {
-                        crumbs.push({ label: "Add New", to: "/overview/add-new" });
+                        crumbs.push({
+                          label: "Add New",
+                          to: "/overview/add-new",
+                        });
                       } else if (currentKey !== "/") {
                         crumbs.push(mainMap[currentKey]);
                       } else {
@@ -317,7 +322,8 @@ function AppContent() {
                     })()}
                   </div>
                 </div>
-                {location.pathname.startsWith("/overview/") && !isAddNew &&
+                {location.pathname.startsWith("/overview/") &&
+                  !isAddNew &&
                   (activeProfileKey === "olivia" ? (
                     <PersonDetailsSection />
                   ) : activeProfileKey === "abc-ltd" ? (
