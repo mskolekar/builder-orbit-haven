@@ -1,94 +1,109 @@
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
-import { 
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { 
+} from "@/components/ui/select";
+import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Edit3, Plus, ChevronDown, ChevronRight, Expand, Minimize, Trash2, Edit } from 'lucide-react';
+} from "@/components/ui/table";
+import {
+  Edit3,
+  Plus,
+  ChevronDown,
+  ChevronRight,
+  Expand,
+  Minimize,
+  Trash2,
+  Edit,
+} from "lucide-react";
 
-const CollapsibleSection = ({ 
-  title, 
-  children, 
+const CollapsibleSection = ({
+  title,
+  children,
   isExpanded,
   onToggle,
-  className = ""
-}: { 
-  title: string; 
-  children: React.ReactNode; 
+  className = "",
+}: {
+  title: string;
+  children: React.ReactNode;
   isExpanded: boolean;
   onToggle: () => void;
   className?: string;
 }) => {
   return (
     <Card className={`shadow-sm border-gray-200 ${className}`}>
-      <CardHeader 
+      <CardHeader
         className="cursor-pointer hover:bg-gray-50 transition-colors pb-3"
         onClick={onToggle}
       >
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base font-medium text-gray-900">{title}</CardTitle>
+          <CardTitle className="text-base font-medium text-gray-900">
+            {title}
+          </CardTitle>
         </div>
       </CardHeader>
-      {isExpanded && (
-        <CardContent className="pt-0">
-          {children}
-        </CardContent>
-      )}
+      {isExpanded && <CardContent className="pt-0">{children}</CardContent>}
     </Card>
   );
 };
 
 export default function Profile() {
   const [searchParams] = useSearchParams();
-  const currentSection = searchParams.get('section') || 'personal-info';
+  const currentSection = searchParams.get("section") || "personal-info";
 
   const [expandedSections, setExpandedSections] = useState({
     personalInfo: true,
     professionalInfo: false,
     riskCompliance: false,
-    otherDetails: false
+    otherDetails: false,
   });
 
   const [otherNames, setOtherNames] = useState([
-    { id: 1, type: 'Maiden Name', firstName: 'Rose', middleInitial: 'M', lastName: 'Smith', effectiveDate: '2019-01-01', expiryDate: '2024-01-01' }
+    {
+      id: 1,
+      type: "Maiden Name",
+      firstName: "Rose",
+      middleInitial: "M",
+      lastName: "Smith",
+      effectiveDate: "2019-01-01",
+      expiryDate: "2024-01-01",
+    },
   ]);
 
   const [workHistory, setWorkHistory] = useState([
-    { 
-      id: 1, 
-      effectiveDate: '2019-01-01', 
-      expirationDate: '2024-01-01', 
-      firmName: 'Smith & Associates', 
-      plLimit: '$1,000,000', 
-      deductible: '$5,000', 
-      innocentPartySublimit: '$250,000', 
-      roIrop: 'IROP', 
-      exemptionType: 'None' 
-    }
+    {
+      id: 1,
+      effectiveDate: "2019-01-01",
+      expirationDate: "2024-01-01",
+      firmName: "Smith & Associates",
+      plLimit: "$1,000,000",
+      deductible: "$5,000",
+      innocentPartySublimit: "$250,000",
+      roIrop: "IROP",
+      exemptionType: "None",
+    },
   ]);
 
   const toggleSection = (section: keyof typeof expandedSections) => {
-    setExpandedSections(prev => ({
+    setExpandedSections((prev) => ({
       ...prev,
-      [section]: !prev[section]
+      [section]: !prev[section],
     }));
   };
 
@@ -97,7 +112,7 @@ export default function Profile() {
       personalInfo: true,
       professionalInfo: true,
       riskCompliance: true,
-      otherDetails: true
+      otherDetails: true,
     });
   };
 
@@ -106,56 +121,62 @@ export default function Profile() {
       personalInfo: false,
       professionalInfo: false,
       riskCompliance: false,
-      otherDetails: false
+      otherDetails: false,
     });
   };
 
   const addOtherName = () => {
-    const newId = Math.max(...otherNames.map(n => n.id)) + 1;
-    setOtherNames([...otherNames, { 
-      id: newId, 
-      type: '', 
-      firstName: '', 
-      middleInitial: '', 
-      lastName: '', 
-      effectiveDate: '', 
-      expiryDate: '' 
-    }]);
+    const newId = Math.max(...otherNames.map((n) => n.id)) + 1;
+    setOtherNames([
+      ...otherNames,
+      {
+        id: newId,
+        type: "",
+        firstName: "",
+        middleInitial: "",
+        lastName: "",
+        effectiveDate: "",
+        expiryDate: "",
+      },
+    ]);
   };
 
   const deleteOtherName = (id: number) => {
-    setOtherNames(otherNames.filter(n => n.id !== id));
+    setOtherNames(otherNames.filter((n) => n.id !== id));
   };
 
   const addWorkHistory = () => {
-    const newId = Math.max(...workHistory.map(w => w.id)) + 1;
-    setWorkHistory([...workHistory, { 
-      id: newId, 
-      effectiveDate: '', 
-      expirationDate: '', 
-      firmName: '', 
-      plLimit: '', 
-      deductible: '', 
-      innocentPartySublimit: '', 
-      roIrop: '', 
-      exemptionType: '' 
-    }]);
+    const newId = Math.max(...workHistory.map((w) => w.id)) + 1;
+    setWorkHistory([
+      ...workHistory,
+      {
+        id: newId,
+        effectiveDate: "",
+        expirationDate: "",
+        firmName: "",
+        plLimit: "",
+        deductible: "",
+        innocentPartySublimit: "",
+        roIrop: "",
+        exemptionType: "",
+      },
+    ]);
   };
 
   const deleteWorkHistory = (id: number) => {
-    setWorkHistory(workHistory.filter(w => w.id !== id));
+    setWorkHistory(workHistory.filter((w) => w.id !== id));
   };
 
   const renderSectionContent = () => {
     switch (currentSection) {
-      case 'personal-info':
+      case "personal-info":
         return (
           <div className="space-y-4">
             {/* Personal Info Section */}
             <CollapsibleSection
               title="Personal Info"
               isExpanded={expandedSections.personalInfo}
-              onToggle={() => toggleSection('personalInfo')}
+              onToggle={() => toggleSection("personalInfo")}
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between mb-4">
@@ -164,15 +185,23 @@ export default function Profile() {
                       RK
                     </div>
                     <div>
-                      <h2 className="text-xl font-semibold text-gray-900">Rose K</h2>
+                      <h2 className="text-xl font-semibold text-gray-900">
+                        Rose K
+                      </h2>
                       <p className="text-sm text-gray-600">Lawyer</p>
                       <div className="flex items-center gap-2 mt-2">
                         <Checkbox id="active-status" defaultChecked />
-                        <Label htmlFor="active-status" className="text-sm">Active Status</Label>
+                        <Label htmlFor="active-status" className="text-sm">
+                          Active Status
+                        </Label>
                       </div>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50"
+                  >
                     <Edit3 size={14} className="mr-2" />
                     Edit
                   </Button>
@@ -197,12 +226,16 @@ export default function Profile() {
                         <SelectItem value="female">Female</SelectItem>
                         <SelectItem value="male">Male</SelectItem>
                         <SelectItem value="other">Other</SelectItem>
-                        <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                        <SelectItem value="prefer-not-to-say">
+                          Prefer not to say
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
-                    <Label className="text-xs text-gray-600">Date of Birth</Label>
+                    <Label className="text-xs text-gray-600">
+                      Date of Birth
+                    </Label>
                     <Input type="date" className="mt-1 h-8 border-gray-300" />
                   </div>
                   <div>
@@ -214,31 +247,40 @@ export default function Profile() {
                       <SelectContent>
                         <SelectItem value="lawyer">Lawyer</SelectItem>
                         <SelectItem value="paralegal">Paralegal</SelectItem>
-                        <SelectItem value="legal-assistant">Legal Assistant</SelectItem>
+                        <SelectItem value="legal-assistant">
+                          Legal Assistant
+                        </SelectItem>
                         <SelectItem value="notary">Notary</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
                     <Label className="text-xs text-gray-600">LSO# / LSC#</Label>
-                    <Input value="000000" className="mt-1 h-8 border-gray-300" />
+                    <Input
+                      value="000000"
+                      className="mt-1 h-8 border-gray-300"
+                    />
                   </div>
                 </div>
               </div>
             </CollapsibleSection>
 
             {/* Professional and Legal Info Section */}
-            <CollapsibleSection 
-              title="Professional and Legal Info" 
+            <CollapsibleSection
+              title="Professional and Legal Info"
               isExpanded={expandedSections.professionalInfo}
-              onToggle={() => toggleSection('professionalInfo')}
+              onToggle={() => toggleSection("professionalInfo")}
             >
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Legal Practice Information</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Legal Practice Information
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Lawyer Type</Label>
+                      <Label className="text-xs text-gray-600">
+                        Lawyer Type
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select type" />
@@ -246,40 +288,61 @@ export default function Profile() {
                         <SelectContent>
                           <SelectItem value="barrister">Barrister</SelectItem>
                           <SelectItem value="solicitor">Solicitor</SelectItem>
-                          <SelectItem value="barrister-solicitor">Barrister & Solicitor</SelectItem>
+                          <SelectItem value="barrister-solicitor">
+                            Barrister & Solicitor
+                          </SelectItem>
                           <SelectItem value="notary">Notary Public</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Province / Jurisdiction</Label>
+                      <Label className="text-xs text-gray-600">
+                        Province / Jurisdiction
+                      </Label>
                       <Select defaultValue="ontario">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="ontario">Ontario</SelectItem>
-                          <SelectItem value="british-columbia">British Columbia</SelectItem>
+                          <SelectItem value="british-columbia">
+                            British Columbia
+                          </SelectItem>
                           <SelectItem value="alberta">Alberta</SelectItem>
                           <SelectItem value="quebec">Quebec</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Bar Admission Number</Label>
-                      <Input placeholder="Enter admission number" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Bar Admission Number
+                      </Label>
+                      <Input
+                        placeholder="Enter admission number"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Admission Route</Label>
+                      <Label className="text-xs text-gray-600">
+                        Admission Route
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select route" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="law-school">Law School Graduate</SelectItem>
-                          <SelectItem value="transfer">Transfer from Another Jurisdiction</SelectItem>
-                          <SelectItem value="foreign-trained">Foreign Trained Lawyer</SelectItem>
-                          <SelectItem value="articling">Articling Route</SelectItem>
+                          <SelectItem value="law-school">
+                            Law School Graduate
+                          </SelectItem>
+                          <SelectItem value="transfer">
+                            Transfer from Another Jurisdiction
+                          </SelectItem>
+                          <SelectItem value="foreign-trained">
+                            Foreign Trained Lawyer
+                          </SelectItem>
+                          <SelectItem value="articling">
+                            Articling Route
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -287,11 +350,18 @@ export default function Profile() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Education</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Education
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Law School</Label>
-                      <Input placeholder="Enter law school name" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Law School
+                      </Label>
+                      <Input
+                        placeholder="Enter law school name"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
                       <Label className="text-xs text-gray-600">Degree</Label>
@@ -301,57 +371,96 @@ export default function Profile() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="jd">Juris Doctor (JD)</SelectItem>
-                          <SelectItem value="llb">Bachelor of Laws (LLB)</SelectItem>
-                          <SelectItem value="llm">Master of Laws (LLM)</SelectItem>
-                          <SelectItem value="phd">Doctor of Philosophy (PhD)</SelectItem>
+                          <SelectItem value="llb">
+                            Bachelor of Laws (LLB)
+                          </SelectItem>
+                          <SelectItem value="llm">
+                            Master of Laws (LLM)
+                          </SelectItem>
+                          <SelectItem value="phd">
+                            Doctor of Philosophy (PhD)
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Graduation Year</Label>
+                      <Label className="text-xs text-gray-600">
+                        Graduation Year
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select year" />
                         </SelectTrigger>
                         <SelectContent>
-                          {Array.from({ length: 30 }, (_, i) => 2024 - i).map(year => (
-                            <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
-                          ))}
+                          {Array.from({ length: 30 }, (_, i) => 2024 - i).map(
+                            (year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ),
+                          )}
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Date of Call</Label>
+                      <Label className="text-xs text-gray-600">
+                        Date of Call
+                      </Label>
                       <Input type="date" className="mt-1 h-8 border-gray-300" />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Employment Information</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Employment Information
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Department</Label>
-                      <Input placeholder="Enter department" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Department
+                      </Label>
+                      <Input
+                        placeholder="Enter department"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
                       <Label className="text-xs text-gray-600">Job Title</Label>
-                      <Input placeholder="Enter job title" className="mt-1 h-8 border-gray-300" />
+                      <Input
+                        placeholder="Enter job title"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
                       <Label className="text-xs text-gray-600">IMIS ID</Label>
-                      <Input placeholder="Enter IMIS ID" className="mt-1 h-8 border-gray-300" />
+                      <Input
+                        placeholder="Enter IMIS ID"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Account Group</Label>
-                      <Input placeholder="Enter account group" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Account Group
+                      </Label>
+                      <Input
+                        placeholder="Enter account group"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Supervisor or Manager</Label>
-                      <Input placeholder="Search for supervisor" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Supervisor or Manager
+                      </Label>
+                      <Input
+                        placeholder="Search for supervisor"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Record Type</Label>
+                      <Label className="text-xs text-gray-600">
+                        Record Type
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select type" />
@@ -359,7 +468,9 @@ export default function Profile() {
                         <SelectContent>
                           <SelectItem value="individual">Individual</SelectItem>
                           <SelectItem value="corporate">Corporate</SelectItem>
-                          <SelectItem value="partnership">Partnership</SelectItem>
+                          <SelectItem value="partnership">
+                            Partnership
+                          </SelectItem>
                           <SelectItem value="firm">Law Firm</SelectItem>
                         </SelectContent>
                       </Select>
@@ -370,17 +481,21 @@ export default function Profile() {
             </CollapsibleSection>
 
             {/* Risk and Compliance Section */}
-            <CollapsibleSection 
-              title="Risk and Compliance" 
+            <CollapsibleSection
+              title="Risk and Compliance"
               isExpanded={expandedSections.riskCompliance}
-              onToggle={() => toggleSection('riskCompliance')}
+              onToggle={() => toggleSection("riskCompliance")}
             >
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Risk Assessment</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Risk Assessment
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Risk Profile</Label>
+                      <Label className="text-xs text-gray-600">
+                        Risk Profile
+                      </Label>
                       <Select defaultValue="low">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -389,40 +504,59 @@ export default function Profile() {
                           <SelectItem value="low">Low Risk</SelectItem>
                           <SelectItem value="medium">Medium Risk</SelectItem>
                           <SelectItem value="high">High Risk</SelectItem>
-                          <SelectItem value="very-high">Very High Risk</SelectItem>
+                          <SelectItem value="very-high">
+                            Very High Risk
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="md:col-span-2">
-                      <Label className="text-xs text-gray-600">Risk Reason</Label>
-                      <Input placeholder="Enter risk reasons or tags" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Risk Reason
+                      </Label>
+                      <Input
+                        placeholder="Enter risk reasons or tags"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Compliance Checks</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Compliance Checks
+                  </h3>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
                       <Checkbox id="canadian-sanctions" />
-                      <Label htmlFor="canadian-sanctions" className="text-sm">Associated with Canadian Sanctions?</Label>
+                      <Label htmlFor="canadian-sanctions" className="text-sm">
+                        Associated with Canadian Sanctions?
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox id="claim-history" />
-                      <Label htmlFor="claim-history" className="text-sm">Claim History</Label>
+                      <Label htmlFor="claim-history" className="text-sm">
+                        Claim History
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox id="underwriting-reasons" />
-                      <Label htmlFor="underwriting-reasons" className="text-sm">Underwriting Reasons</Label>
+                      <Label htmlFor="underwriting-reasons" className="text-sm">
+                        Underwriting Reasons
+                      </Label>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Subscription Status</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Subscription Status
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">TP Subscriber Status</Label>
+                      <Label className="text-xs text-gray-600">
+                        TP Subscriber Status
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select status" />
@@ -436,16 +570,22 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">TP Subscriber Sub Status</Label>
+                      <Label className="text-xs text-gray-600">
+                        TP Subscriber Sub Status
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select sub status" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="full">Full Coverage</SelectItem>
-                          <SelectItem value="partial">Partial Coverage</SelectItem>
+                          <SelectItem value="partial">
+                            Partial Coverage
+                          </SelectItem>
                           <SelectItem value="trial">Trial Period</SelectItem>
-                          <SelectItem value="renewal">Renewal Required</SelectItem>
+                          <SelectItem value="renewal">
+                            Renewal Required
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -453,10 +593,14 @@ export default function Profile() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Program Eligibility</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Program Eligibility
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Include in Campaign</Label>
+                      <Label className="text-xs text-gray-600">
+                        Include in Campaign
+                      </Label>
                       <Select defaultValue="yes">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -468,7 +612,9 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Send IROP Reminder</Label>
+                      <Label className="text-xs text-gray-600">
+                        Send IROP Reminder
+                      </Label>
                       <Select defaultValue="yes">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -480,7 +626,9 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">CPATA Eligible</Label>
+                      <Label className="text-xs text-gray-600">
+                        CPATA Eligible
+                      </Label>
                       <Select defaultValue="yes">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -492,7 +640,9 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Status Indian Certificate</Label>
+                      <Label className="text-xs text-gray-600">
+                        Status Indian Certificate
+                      </Label>
                       <Select defaultValue="no">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -509,42 +659,59 @@ export default function Profile() {
             </CollapsibleSection>
 
             {/* Other Details Section */}
-            <CollapsibleSection 
-              title="Other Details" 
+            <CollapsibleSection
+              title="Other Details"
               isExpanded={expandedSections.otherDetails}
-              onToggle={() => toggleSection('otherDetails')}
+              onToggle={() => toggleSection("otherDetails")}
             >
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Additional Information</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Additional Information
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Effective Date</Label>
+                      <Label className="text-xs text-gray-600">
+                        Effective Date
+                      </Label>
                       <Input type="date" className="mt-1 h-8 border-gray-300" />
                     </div>
                     <div>
-                     
                       <Select defaultValue="2019">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {Array.from({ length: 20 }, (_, i) => 2024 - i).map(year => (
-                            <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
-                          ))}
+                          {Array.from({ length: 20 }, (_, i) => 2024 - i).map(
+                            (year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ),
+                          )}
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Last Contact Date</Label>
+                      <Label className="text-xs text-gray-600">
+                        Last Contact Date
+                      </Label>
                       <Input type="date" className="mt-1 h-8 border-gray-300" />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Years of Experience</Label>
-                      <Input type="number" placeholder="Enter years" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Years of Experience
+                      </Label>
+                      <Input
+                        type="number"
+                        placeholder="Enter years"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Risk Category</Label>
+                      <Label className="text-xs text-gray-600">
+                        Risk Category
+                      </Label>
                       <Select defaultValue="low">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -557,16 +724,28 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Account Manager</Label>
-                      <Input value="UW John" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Account Manager
+                      </Label>
+                      <Input
+                        value="UW John"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                   </div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-base font-medium text-gray-900">Other Names</h3>
-                    <Button variant="outline" size="sm" onClick={addOtherName} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+                    <h3 className="text-base font-medium text-gray-900">
+                      Other Names
+                    </h3>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={addOtherName}
+                      className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50"
+                    >
                       <Plus size={14} className="mr-2" />
                       Add Name
                     </Button>
@@ -576,9 +755,13 @@ export default function Profile() {
                       <TableRow>
                         <TableHead className="text-xs">Type</TableHead>
                         <TableHead className="text-xs">First Name</TableHead>
-                        <TableHead className="text-xs">Middle Initial</TableHead>
+                        <TableHead className="text-xs">
+                          Middle Initial
+                        </TableHead>
                         <TableHead className="text-xs">Last Name</TableHead>
-                        <TableHead className="text-xs">Effective Date</TableHead>
+                        <TableHead className="text-xs">
+                          Effective Date
+                        </TableHead>
                         <TableHead className="text-xs">Expiry Date</TableHead>
                         <TableHead className="text-xs">Actions</TableHead>
                       </TableRow>
@@ -587,31 +770,55 @@ export default function Profile() {
                       {otherNames.map((name) => (
                         <TableRow key={name.id}>
                           <TableCell>
-                            <Input value={name.type} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.type}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input value={name.firstName} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.firstName}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input value={name.middleInitial} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.middleInitial}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input value={name.lastName} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.lastName}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input type="date" value={name.effectiveDate} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              type="date"
+                              value={name.effectiveDate}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input type="date" value={name.expiryDate} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              type="date"
+                              value={name.expiryDate}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
                             <div className="flex gap-1">
-                              <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 w-6 p-0"
+                              >
                                 <Edit size={12} />
                               </Button>
-                              <Button 
-                                variant="ghost" 
-                                size="sm" 
+                              <Button
+                                variant="ghost"
+                                size="sm"
                                 className="h-6 w-6 p-0 text-red-600"
                                 onClick={() => deleteOtherName(name.id)}
                               >
@@ -629,21 +836,25 @@ export default function Profile() {
           </div>
         );
 
-      case 'professional-legal':
+      case "professional-legal":
         return (
           <div className="space-y-4">
             {/* Professional and Legal Info Section */}
             <CollapsibleSection
               title="Professional and Legal Info"
               isExpanded={expandedSections.professionalInfo}
-              onToggle={() => toggleSection('professionalInfo')}
+              onToggle={() => toggleSection("professionalInfo")}
             >
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Legal Practice Information</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Legal Practice Information
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Lawyer Type</Label>
+                      <Label className="text-xs text-gray-600">
+                        Lawyer Type
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select type" />
@@ -651,40 +862,61 @@ export default function Profile() {
                         <SelectContent>
                           <SelectItem value="barrister">Barrister</SelectItem>
                           <SelectItem value="solicitor">Solicitor</SelectItem>
-                          <SelectItem value="barrister-solicitor">Barrister & Solicitor</SelectItem>
+                          <SelectItem value="barrister-solicitor">
+                            Barrister & Solicitor
+                          </SelectItem>
                           <SelectItem value="notary">Notary Public</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Province / Jurisdiction</Label>
+                      <Label className="text-xs text-gray-600">
+                        Province / Jurisdiction
+                      </Label>
                       <Select defaultValue="ontario">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="ontario">Ontario</SelectItem>
-                          <SelectItem value="british-columbia">British Columbia</SelectItem>
+                          <SelectItem value="british-columbia">
+                            British Columbia
+                          </SelectItem>
                           <SelectItem value="alberta">Alberta</SelectItem>
                           <SelectItem value="quebec">Quebec</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Bar Admission Number</Label>
-                      <Input placeholder="Enter admission number" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Bar Admission Number
+                      </Label>
+                      <Input
+                        placeholder="Enter admission number"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Admission Route</Label>
+                      <Label className="text-xs text-gray-600">
+                        Admission Route
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select route" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="law-school">Law School Graduate</SelectItem>
-                          <SelectItem value="transfer">Transfer from Another Jurisdiction</SelectItem>
-                          <SelectItem value="foreign-trained">Foreign Trained Lawyer</SelectItem>
-                          <SelectItem value="articling">Articling Route</SelectItem>
+                          <SelectItem value="law-school">
+                            Law School Graduate
+                          </SelectItem>
+                          <SelectItem value="transfer">
+                            Transfer from Another Jurisdiction
+                          </SelectItem>
+                          <SelectItem value="foreign-trained">
+                            Foreign Trained Lawyer
+                          </SelectItem>
+                          <SelectItem value="articling">
+                            Articling Route
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -692,11 +924,18 @@ export default function Profile() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Education</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Education
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Law School</Label>
-                      <Input placeholder="Enter law school name" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Law School
+                      </Label>
+                      <Input
+                        placeholder="Enter law school name"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
                       <Label className="text-xs text-gray-600">Degree</Label>
@@ -706,57 +945,96 @@ export default function Profile() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="jd">Juris Doctor (JD)</SelectItem>
-                          <SelectItem value="llb">Bachelor of Laws (LLB)</SelectItem>
-                          <SelectItem value="llm">Master of Laws (LLM)</SelectItem>
-                          <SelectItem value="phd">Doctor of Philosophy (PhD)</SelectItem>
+                          <SelectItem value="llb">
+                            Bachelor of Laws (LLB)
+                          </SelectItem>
+                          <SelectItem value="llm">
+                            Master of Laws (LLM)
+                          </SelectItem>
+                          <SelectItem value="phd">
+                            Doctor of Philosophy (PhD)
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Graduation Year</Label>
+                      <Label className="text-xs text-gray-600">
+                        Graduation Year
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select year" />
                         </SelectTrigger>
                         <SelectContent>
-                          {Array.from({ length: 30 }, (_, i) => 2024 - i).map(year => (
-                            <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
-                          ))}
+                          {Array.from({ length: 30 }, (_, i) => 2024 - i).map(
+                            (year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ),
+                          )}
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Date of Call</Label>
+                      <Label className="text-xs text-gray-600">
+                        Date of Call
+                      </Label>
                       <Input type="date" className="mt-1 h-8 border-gray-300" />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Employment Information</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Employment Information
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Department</Label>
-                      <Input placeholder="Enter department" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Department
+                      </Label>
+                      <Input
+                        placeholder="Enter department"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
                       <Label className="text-xs text-gray-600">Job Title</Label>
-                      <Input placeholder="Enter job title" className="mt-1 h-8 border-gray-300" />
+                      <Input
+                        placeholder="Enter job title"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
                       <Label className="text-xs text-gray-600">IMIS ID</Label>
-                      <Input placeholder="Enter IMIS ID" className="mt-1 h-8 border-gray-300" />
+                      <Input
+                        placeholder="Enter IMIS ID"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Account Group</Label>
-                      <Input placeholder="Enter account group" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Account Group
+                      </Label>
+                      <Input
+                        placeholder="Enter account group"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Supervisor or Manager</Label>
-                      <Input placeholder="Search for supervisor" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Supervisor or Manager
+                      </Label>
+                      <Input
+                        placeholder="Search for supervisor"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Record Type</Label>
+                      <Label className="text-xs text-gray-600">
+                        Record Type
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select type" />
@@ -764,7 +1042,9 @@ export default function Profile() {
                         <SelectContent>
                           <SelectItem value="individual">Individual</SelectItem>
                           <SelectItem value="corporate">Corporate</SelectItem>
-                          <SelectItem value="partnership">Partnership</SelectItem>
+                          <SelectItem value="partnership">
+                            Partnership
+                          </SelectItem>
                           <SelectItem value="firm">Law Firm</SelectItem>
                         </SelectContent>
                       </Select>
@@ -776,21 +1056,25 @@ export default function Profile() {
           </div>
         );
 
-      case 'risk-compliance':
+      case "risk-compliance":
         return (
           <div className="space-y-4">
             {/* Risk and Compliance Section */}
             <CollapsibleSection
               title="Risk and Compliance"
               isExpanded={expandedSections.riskCompliance}
-              onToggle={() => toggleSection('riskCompliance')}
+              onToggle={() => toggleSection("riskCompliance")}
             >
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Risk Assessment</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Risk Assessment
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Risk Profile</Label>
+                      <Label className="text-xs text-gray-600">
+                        Risk Profile
+                      </Label>
                       <Select defaultValue="low">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -799,40 +1083,59 @@ export default function Profile() {
                           <SelectItem value="low">Low Risk</SelectItem>
                           <SelectItem value="medium">Medium Risk</SelectItem>
                           <SelectItem value="high">High Risk</SelectItem>
-                          <SelectItem value="very-high">Very High Risk</SelectItem>
+                          <SelectItem value="very-high">
+                            Very High Risk
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="md:col-span-2">
-                      <Label className="text-xs text-gray-600">Risk Reason</Label>
-                      <Input placeholder="Enter risk reasons or tags" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Risk Reason
+                      </Label>
+                      <Input
+                        placeholder="Enter risk reasons or tags"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Compliance Checks</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Compliance Checks
+                  </h3>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
                       <Checkbox id="canadian-sanctions" />
-                      <Label htmlFor="canadian-sanctions" className="text-sm">Associated with Canadian Sanctions?</Label>
+                      <Label htmlFor="canadian-sanctions" className="text-sm">
+                        Associated with Canadian Sanctions?
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox id="claim-history" />
-                      <Label htmlFor="claim-history" className="text-sm">Claim History</Label>
+                      <Label htmlFor="claim-history" className="text-sm">
+                        Claim History
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox id="underwriting-reasons" />
-                      <Label htmlFor="underwriting-reasons" className="text-sm">Underwriting Reasons</Label>
+                      <Label htmlFor="underwriting-reasons" className="text-sm">
+                        Underwriting Reasons
+                      </Label>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Subscription Status</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Subscription Status
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">TP Subscriber Status</Label>
+                      <Label className="text-xs text-gray-600">
+                        TP Subscriber Status
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select status" />
@@ -846,16 +1149,22 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">TP Subscriber Sub Status</Label>
+                      <Label className="text-xs text-gray-600">
+                        TP Subscriber Sub Status
+                      </Label>
                       <Select>
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue placeholder="Select sub status" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="full">Full Coverage</SelectItem>
-                          <SelectItem value="partial">Partial Coverage</SelectItem>
+                          <SelectItem value="partial">
+                            Partial Coverage
+                          </SelectItem>
                           <SelectItem value="trial">Trial Period</SelectItem>
-                          <SelectItem value="renewal">Renewal Required</SelectItem>
+                          <SelectItem value="renewal">
+                            Renewal Required
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -863,10 +1172,14 @@ export default function Profile() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Program Eligibility</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Program Eligibility
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Include in Campaign</Label>
+                      <Label className="text-xs text-gray-600">
+                        Include in Campaign
+                      </Label>
                       <Select defaultValue="yes">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -878,7 +1191,9 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Send IROP Reminder</Label>
+                      <Label className="text-xs text-gray-600">
+                        Send IROP Reminder
+                      </Label>
                       <Select defaultValue="yes">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -890,7 +1205,9 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">CPATA Eligible</Label>
+                      <Label className="text-xs text-gray-600">
+                        CPATA Eligible
+                      </Label>
                       <Select defaultValue="yes">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -902,7 +1219,9 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Status Indian Certificate</Label>
+                      <Label className="text-xs text-gray-600">
+                        Status Indian Certificate
+                      </Label>
                       <Select defaultValue="no">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -920,46 +1239,66 @@ export default function Profile() {
           </div>
         );
 
-      case 'other-details':
+      case "other-details":
         return (
           <div className="space-y-4">
             {/* Other Details Section */}
             <CollapsibleSection
               title="Other Details"
               isExpanded={expandedSections.otherDetails}
-              onToggle={() => toggleSection('otherDetails')}
+              onToggle={() => toggleSection("otherDetails")}
             >
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-base font-medium mb-3 text-gray-900">Additional Information</h3>
+                  <h3 className="text-base font-medium mb-3 text-gray-900">
+                    Additional Information
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                      <Label className="text-xs text-gray-600">Effective Date</Label>
+                      <Label className="text-xs text-gray-600">
+                        Effective Date
+                      </Label>
                       <Input type="date" className="mt-1 h-8 border-gray-300" />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Customer Since</Label>
+                      <Label className="text-xs text-gray-600">
+                        Customer Since
+                      </Label>
                       <Select defaultValue="2019">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {Array.from({ length: 20 }, (_, i) => 2024 - i).map(year => (
-                            <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
-                          ))}
+                          {Array.from({ length: 20 }, (_, i) => 2024 - i).map(
+                            (year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ),
+                          )}
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Last Contact Date</Label>
+                      <Label className="text-xs text-gray-600">
+                        Last Contact Date
+                      </Label>
                       <Input type="date" className="mt-1 h-8 border-gray-300" />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Years of Experience</Label>
-                      <Input type="number" placeholder="Enter years" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Years of Experience
+                      </Label>
+                      <Input
+                        type="number"
+                        placeholder="Enter years"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Risk Category</Label>
+                      <Label className="text-xs text-gray-600">
+                        Risk Category
+                      </Label>
                       <Select defaultValue="low">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
                           <SelectValue />
@@ -972,16 +1311,28 @@ export default function Profile() {
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-xs text-gray-600">Account Manager</Label>
-                      <Input value="UW John" className="mt-1 h-8 border-gray-300" />
+                      <Label className="text-xs text-gray-600">
+                        Account Manager
+                      </Label>
+                      <Input
+                        value="UW John"
+                        className="mt-1 h-8 border-gray-300"
+                      />
                     </div>
                   </div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-base font-medium text-gray-900">Other Names</h3>
-                    <Button variant="outline" size="sm" onClick={addOtherName} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+                    <h3 className="text-base font-medium text-gray-900">
+                      Other Names
+                    </h3>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={addOtherName}
+                      className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50"
+                    >
                       <Plus size={14} className="mr-2" />
                       Add Name
                     </Button>
@@ -991,9 +1342,13 @@ export default function Profile() {
                       <TableRow>
                         <TableHead className="text-xs">Type</TableHead>
                         <TableHead className="text-xs">First Name</TableHead>
-                        <TableHead className="text-xs">Middle Initial</TableHead>
+                        <TableHead className="text-xs">
+                          Middle Initial
+                        </TableHead>
                         <TableHead className="text-xs">Last Name</TableHead>
-                        <TableHead className="text-xs">Effective Date</TableHead>
+                        <TableHead className="text-xs">
+                          Effective Date
+                        </TableHead>
                         <TableHead className="text-xs">Expiry Date</TableHead>
                         <TableHead className="text-xs">Actions</TableHead>
                       </TableRow>
@@ -1002,26 +1357,50 @@ export default function Profile() {
                       {otherNames.map((name) => (
                         <TableRow key={name.id}>
                           <TableCell>
-                            <Input value={name.type} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.type}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input value={name.firstName} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.firstName}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input value={name.middleInitial} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.middleInitial}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input value={name.lastName} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              value={name.lastName}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input type="date" value={name.effectiveDate} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              type="date"
+                              value={name.effectiveDate}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
-                            <Input type="date" value={name.expiryDate} className="h-7 text-xs border-gray-300" />
+                            <Input
+                              type="date"
+                              value={name.expiryDate}
+                              className="h-7 text-xs border-gray-300"
+                            />
                           </TableCell>
                           <TableCell>
                             <div className="flex gap-1">
-                              <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 w-6 p-0"
+                              >
                                 <Edit size={12} />
                               </Button>
                               <Button
@@ -1047,7 +1426,9 @@ export default function Profile() {
       default:
         return (
           <div className="text-center py-8">
-            <p className="text-gray-600">Content for {currentSection} will be implemented here.</p>
+            <p className="text-gray-600">
+              Content for {currentSection} will be implemented here.
+            </p>
           </div>
         );
     }
@@ -1062,11 +1443,21 @@ export default function Profile() {
               <h1 className="text-2xl font-semibold text-gray-900">Profile</h1>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={expandAll} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={expandAll}
+                className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50"
+              >
                 <Expand size={14} className="mr-2" />
                 Expand All
               </Button>
-              <Button variant="outline" size="sm" onClick={collapseAll} className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={collapseAll}
+                className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50"
+              >
                 <Minimize size={14} className="mr-2" />
                 Collapse All
               </Button>

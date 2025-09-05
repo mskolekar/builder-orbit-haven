@@ -447,14 +447,14 @@ export default function Dashboard() {
   );
 
   const { profileId } = useParams();
-  const hideFinancial = profileId === 'john-wills';
+  const hideFinancial = profileId === "john-wills";
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div
-          className={`${hideFinancial ? 'hidden' : ''} transition-all duration-1000 delay-300 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+          className={`${hideFinancial ? "hidden" : ""} transition-all duration-1000 delay-300 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
           <Card
             className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
@@ -526,7 +526,9 @@ export default function Dashboard() {
         >
           {/* Activity Timeline */}
           <Card
-            className={"shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"}
+            className={
+              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+            }
             onClick={() => console.log("Navigate to activity timeline")}
           >
             <CardHeader
@@ -599,7 +601,9 @@ export default function Dashboard() {
 
           {/* Diaries */}
           <Card
-            className={"shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"}
+            className={
+              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+            }
             onClick={() => console.log("Navigate to diaries")}
           >
             <CardHeader
@@ -722,7 +726,9 @@ export default function Dashboard() {
         >
           {/* Policy Details */}
           <Card
-            className={"shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"}
+            className={
+              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+            }
             onClick={() => console.log("Navigate to policy details")}
           >
             <CardHeader
@@ -840,7 +846,9 @@ export default function Dashboard() {
 
           {/* Claims History */}
           <Card
-            className={"shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"}
+            className={
+              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+            }
             onClick={() => console.log("Navigate to claims history")}
           >
             <CardHeader
@@ -969,7 +977,9 @@ export default function Dashboard() {
         >
           {/* Submissions */}
           <Card
-            className={"shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"}
+            className={
+              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+            }
             onClick={() => console.log("Navigate to submissions")}
           >
             <CardHeader

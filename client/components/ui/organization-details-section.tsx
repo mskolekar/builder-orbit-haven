@@ -21,17 +21,30 @@ export function OrganizationDetailsSection() {
           <CardContent className="p-4">
             <div className="flex items-center gap-6">
               <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
-                {org.name.split(" ").map((n) => n[0]).join("")}
+                {org.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
               </div>
               <div>
                 <div className="flex items-center gap-3">
-                  <h2 className="text-xl font-bold text-gray-900">{org.name}</h2>
-                  <Badge className="bg-gray-100 text-gray-700 border-gray-200">{org.status}</Badge>
+                  <h2 className="text-xl font-bold text-gray-900">
+                    {org.name}
+                  </h2>
+                  <Badge className="bg-gray-100 text-gray-700 border-gray-200">
+                    {org.status}
+                  </Badge>
                 </div>
                 <p className="text-gray-600 font-medium">Organization</p>
                 <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
-                  <div className="flex items-center gap-1"><Briefcase size={14} className="text-gray-400" /> {org.industry}</div>
-                  <div className="flex items-center gap-1"><FileText size={14} className="text-gray-400" /> Reg. No: {org.registrationNumber}</div>
+                  <div className="flex items-center gap-1">
+                    <Briefcase size={14} className="text-gray-400" />{" "}
+                    {org.industry}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <FileText size={14} className="text-gray-400" /> Reg. No:{" "}
+                    {org.registrationNumber}
+                  </div>
                 </div>
               </div>
             </div>
@@ -60,7 +73,9 @@ export function OrganizationDetailsSection() {
               </div>
             </div>
 
-            <div className="mt-3 text-sm text-gray-500">Customer since {org.memberSince}</div>
+            <div className="mt-3 text-sm text-gray-500">
+              Customer since {org.memberSince}
+            </div>
           </CardContent>
         </Card>
       </div>

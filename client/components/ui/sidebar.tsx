@@ -82,7 +82,10 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
 
   const isMainPageActive = (item: SidebarItem) => {
     if (item.label === "Customer Center") {
-      return location.pathname.startsWith("/customer-center") || location.pathname.startsWith("/overview");
+      return (
+        location.pathname.startsWith("/customer-center") ||
+        location.pathname.startsWith("/overview")
+      );
     }
     if (item.path === "/" && item.label === "Home") {
       return location.pathname === "/";
