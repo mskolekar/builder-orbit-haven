@@ -291,7 +291,7 @@ export default function Dashboard() {
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
             <CardHeader className="pb-4 flex flex-row items-center justify-between">
               <CardTitle className="text-base text-gray-700">
-                Financial Information
+                Financial Summary
               </CardTitle>
               <Button
                 size="sm"
