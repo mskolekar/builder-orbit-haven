@@ -448,7 +448,8 @@ export default function Dashboard() {
 
   const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
-  const hideFinancial = profileId === "john-wills" ? true : false;
+  const isJohn = profileId === "john-wills";
+  const hideFinancial = isJohn || isShawn;
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
