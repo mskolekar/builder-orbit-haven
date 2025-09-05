@@ -17,6 +17,7 @@ import CustomerCenterHome from '@/pages/CustomerCenterHome';
 import PlaceholderPage from '@/pages/PlaceholderPage';
 import NotFound from '@/pages/NotFound';
 import { BasicDetailsSection } from '@/components/ui/basic-details-section';
+import { OrganizationDetailsSection } from '@/components/ui/organization-details-section';
 
 const profileMap: Record<string, { name: string; status: string; role: string; memberSince?: string }> = {
   'olivia': { name: 'Olivia R', status: 'Active', role: 'Insured', memberSince: '2019' },
@@ -173,6 +174,8 @@ function AppContent() {
                 {location.pathname.startsWith('/overview/') && (
                   activeProfileKey === 'olivia' ? (
                     <PersonDetailsSection />
+                  ) : activeProfileKey === 'abc-ltd' ? (
+                    <OrganizationDetailsSection />
                   ) : (
                     <BasicDetailsSection name={activeProfile.name} role={activeProfile.role} status={activeProfile.status} memberSince={activeProfile.memberSince} />
                   )
