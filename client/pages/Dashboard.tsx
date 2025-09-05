@@ -601,6 +601,13 @@ export default function Dashboard() {
           </Card>
 
           {/* Claims History */}
+          {isClaimsCollapsed && (
+            <div className="flex justify-end">
+              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsClaimsCollapsed(false); }}>
+                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
+              </Button>
+            </div>
+          )}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to claims history')}>
             <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsClaimsCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
