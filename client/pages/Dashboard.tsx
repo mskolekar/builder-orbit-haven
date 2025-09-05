@@ -656,7 +656,7 @@ export default function Dashboard() {
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           {/* Submissions */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to submissions')}>
-            <CardHeader className="pb-2">
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsSubmissionsCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Submissions
@@ -666,7 +666,7 @@ export default function Dashboard() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className={isSubmissionsCollapsed ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
