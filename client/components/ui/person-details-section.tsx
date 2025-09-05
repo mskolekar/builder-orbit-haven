@@ -15,14 +15,14 @@ import {
 } from 'lucide-react';
 
 const customerData = {
-  name: "Rose K",
+  name: "Olivia R",
   role: "Insured",
   status: "Active",
   dateOfBirth: "••••••••",
   gender: "Female",
   lsc: "000000",
   phone: "(416) 555-0123",
-  email: "rose.greenthumb@example.com",
+  email: "olivia.reynolds@example.com",
   address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
   memberSince: "2019",
   satisfactionScore: 4.8
@@ -55,7 +55,7 @@ export function PersonDetailsSection() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
-                    RK
+                    OR
                   </div>
                 </div>
                 <div>
