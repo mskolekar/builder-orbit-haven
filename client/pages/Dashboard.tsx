@@ -521,23 +521,8 @@ export default function Dashboard() {
           className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
           {/* Activity Timeline */}
-          {isActivityCollapsed && (
-            <div className="flex justify-end">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-7"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsActivityCollapsed(false);
-                }}
-              >
-                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
-              </Button>
-            </div>
-          )}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isActivityCollapsed ? "hidden" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => console.log("Navigate to activity timeline")}
           >
             <CardHeader
@@ -560,10 +545,6 @@ export default function Dashboard() {
                   >
                     View All
                   </Button>
-                  <ChevronDown
-                    size={14}
-                    className={`ml-2 text-gray-400 transition-transform ${isActivityCollapsed ? "-rotate-90" : "rotate-0"}`}
-                  />
                 </div>
               </div>
             </CardHeader>
@@ -613,23 +594,8 @@ export default function Dashboard() {
           </Card>
 
           {/* Diaries */}
-          {isDiariesCollapsed && (
-            <div className="flex justify-end">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-7"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsDiariesCollapsed(false);
-                }}
-              >
-                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
-              </Button>
-            </div>
-          )}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isDiariesCollapsed ? "hidden" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => console.log("Navigate to diaries")}
           >
             <CardHeader
@@ -661,10 +627,6 @@ export default function Dashboard() {
                     <Plus size={10} className="mr-1" />
                     Add
                   </Button>
-                  <ChevronDown
-                    size={14}
-                    className={`ml-2 text-gray-400 transition-transform ${isDiariesCollapsed ? "-rotate-90" : "rotate-0"}`}
-                  />
                 </div>
               </div>
             </CardHeader>
@@ -755,23 +717,8 @@ export default function Dashboard() {
           className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
           {/* Policy Details */}
-          {isPoliciesCollapsed && (
-            <div className="flex justify-end">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-7"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsPoliciesCollapsed(false);
-                }}
-              >
-                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
-              </Button>
-            </div>
-          )}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? "hidden" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => console.log("Navigate to policy details")}
           >
             <CardHeader
@@ -794,10 +741,6 @@ export default function Dashboard() {
                   >
                     View All
                   </Button>
-                  <ChevronDown
-                    size={14}
-                    className={`ml-2 text-gray-400 transition-transform ${isPoliciesCollapsed ? "-rotate-90" : "rotate-0"}`}
-                  />
                 </div>
               </div>
             </CardHeader>
@@ -892,23 +835,8 @@ export default function Dashboard() {
           </Card>
 
           {/* Claims History */}
-          {isClaimsCollapsed && (
-            <div className="flex justify-end">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-7"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsClaimsCollapsed(false);
-                }}
-              >
-                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
-              </Button>
-            </div>
-          )}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isClaimsCollapsed ? "hidden" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => console.log("Navigate to claims history")}
           >
             <CardHeader
@@ -931,10 +859,6 @@ export default function Dashboard() {
                   >
                     View All
                   </Button>
-                  <ChevronDown
-                    size={14}
-                    className={`ml-2 text-gray-400 transition-transform ${isClaimsCollapsed ? "-rotate-90" : "rotate-0"}`}
-                  />
                 </div>
               </div>
             </CardHeader>
@@ -1040,23 +964,8 @@ export default function Dashboard() {
           className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
           {/* Submissions */}
-          {isSubmissionsCollapsed && (
-            <div className="flex justify-end">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-7"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsSubmissionsCollapsed(false);
-                }}
-              >
-                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
-              </Button>
-            </div>
-          )}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isSubmissionsCollapsed ? "hidden" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => console.log("Navigate to submissions")}
           >
             <CardHeader
@@ -1079,10 +988,6 @@ export default function Dashboard() {
                   >
                     View All
                   </Button>
-                  <ChevronDown
-                    size={14}
-                    className={`ml-2 text-gray-400 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : "rotate-0"}`}
-                  />
                 </div>
               </div>
             </CardHeader>
