@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Sidebar } from "@/components/ui/sidebar";
 import { CustomerCenterSidebar } from "@/components/ui/customer-center-sidebar";
 import { PersonDetailsSection } from "@/components/ui/person-details-section";
+import { PersonDetailsClaimant } from "@/components/ui/person-details-claimant";
 import { Header } from "@/components/ui/header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,8 @@ import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
 import { OrganizationDetailsSection } from "@/components/ui/organization-details-section";
+import { PersonDetailsUnderwriter } from "@/components/ui/person-details-underwriter";
+import { PersonDetailsClaimant } from "@/components/ui/person-details-claimant";
 
 const profileMap: Record<
   string,
@@ -141,28 +144,6 @@ function AppContent() {
                   {activeProfile.status}
                 </Badge>
               </div>
-              <nav className="flex items-center gap-2">
-                {[
-                  { id: "olivia", label: "Olivia R" },
-                  { id: "john-wills", label: "John Wills" },
-                  { id: "shawn-elkins", label: "Shawn Elkins" },
-                  { id: "abc-ltd", label: "ABC Ltd" },
-                ].map((p) => (
-                  <Link key={p.id} to={`/overview/${p.id}`}>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={cn(
-                        "h-8 px-3 text-white/90 hover:bg-white/15 hover:text-white",
-                        activeProfileKey === p.id && "bg-white/20 text-white",
-                      )}
-                      title={p.label}
-                    >
-                      {p.label}
-                    </Button>
-                  </Link>
-                ))}
-              </nav>
             </div>
 
             <div className="flex flex-1">
@@ -313,6 +294,10 @@ function AppContent() {
                     <PersonDetailsSection />
                   ) : activeProfileKey === "abc-ltd" ? (
                     <OrganizationDetailsSection />
+                  ) : activeProfileKey === "shawn-elkins" ? (
+                    <PersonDetailsClaimant />
+                  ) : activeProfileKey === "john-wills" ? (
+                    <PersonDetailsUnderwriter />
                   ) : (
                     <BasicDetailsSection
                       name={activeProfile.name}

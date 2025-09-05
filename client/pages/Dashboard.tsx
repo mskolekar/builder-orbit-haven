@@ -447,7 +447,9 @@ export default function Dashboard() {
   );
 
   const { profileId } = useParams();
-  const hideFinancial = profileId === "john-wills";
+  const isShawn = profileId === "shawn-elkins";
+  const isJohn = profileId === "john-wills";
+  const hideFinancial = isJohn || isShawn;
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
@@ -470,52 +472,97 @@ export default function Dashboard() {
               <CardTitle className="text-base text-gray-700">
                 Financial Summary
               </CardTitle>
-              <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("Navigate to payment");
-                  }}
-                >
-                  Pay Now
-                </Button>
-              </div>
+              {!isShawn && (
+                <div className="flex items-center gap-2">
+                  <Button
+                    size="sm"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      console.log("Navigate to payment");
+                    }}
+                  >
+                    Pay Now
+                  </Button>
+                </div>
+              )}
             </CardHeader>
             <CardContent className={isFinancialCollapsed ? "hidden" : ""}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-gray-600 mb-1 font-medium">
-                    Amount Paid
+              {isShawn ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Total Incurred (This Claimant)
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">
+                      $11,800.00
+                    </div>
+                    <Progress value={21} className="h-2 mt-2" />
+                    <div className="text-xs text-gray-500 mt-1">
+                      21% of available coverage
+                    </div>
                   </div>
-                  <div className="text-xl font-bold text-gray-800">$8,460</div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Aggregate premium paid to date
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Outstanding Reserves
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">
+                      $7,250.00
+                    </div>
+                    <Progress value={60} className="h-2 mt-2" />
+                    <div className="text-xs text-gray-500 mt-1">
+                      Reserve adequacy: Good
+                    </div>
                   </div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Amount Paid
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">
+                      $5,200.00
+                    </div>
+                    <Progress value={40} className="h-2 mt-2" />
+                    <div className="text-xs text-gray-500 mt-1">
+                      Last payment Mar 15, 2024
+                    </div>
+                  </div>
                 </div>
-                <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-gray-600 mb-1 font-medium">
-                    Total Due
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Amount Paid
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">
+                      $8,460
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Aggregate premium paid to date
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                   </div>
-                  <div className="text-xl font-bold text-gray-800">$275</div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Aggregate premium currently due (YTD)
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Total Due
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">$275</div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Aggregate premium currently due (YTD)
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                   </div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Outstanding Balance
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">$190</div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Outstanding premium (after credit application)
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                  </div>
                 </div>
-                <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-gray-600 mb-1 font-medium">
-                    Outstanding Balance
-                  </div>
-                  <div className="text-xl font-bold text-gray-800">$190</div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Outstanding premium (after credit application)
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
-                </div>
-              </div>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -722,362 +769,716 @@ export default function Dashboard() {
 
         {/* Row 2: Policy Details and Claims History */}
         <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+          className={`grid grid-cols-1 ${isShawn ? "" : "lg:grid-cols-2"} gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
           {/* Policy Details */}
-          <Card
-            className={
-              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-            }
-            onClick={() => console.log("Navigate to policy details")}
-          >
-            <CardHeader
-              className="pb-2 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsPoliciesCollapsed((v) => !v);
-              }}
+          {!isShawn && (
+            <Card
+              className={
+                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+              }
+              onClick={() => console.log("Navigate to policy details")}
             >
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base text-gray-700">
-                  Policies
-                </CardTitle>
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View All
-                  </Button>
+              <CardHeader
+                className="pb-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPoliciesCollapsed((v) => !v);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base text-gray-700">
+                    Policies
+                  </CardTitle>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Policy Number
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Program/LOB
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Effective Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Expiration Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Premium Due
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Premium Paid
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredPolicies.map((policy, index) => (
-                      <TableRow
-                        key={index}
-                        className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          console.log("Open policy details", policy.policy);
-                        }}
-                      >
-                        <TableCell className="py-2">
-                          <span className="text-sm font-medium text-gray-800">
-                            {policy.policy}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {policy.lob}
-                        </TableCell>
-                        <TableCell className="py-2">
-                          {getStatusBadge(policy.status)}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {policy.startDate}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {policy.endDate}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">
-                          {policy.premiumDue}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">
-                          {policy.premiumPaid}
-                        </TableCell>
+              </CardHeader>
+              <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Policy Number
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Program/LOB
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Status
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Effective Date
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Expiration Date
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Premium Due
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Premium Paid
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Claims History */}
-          <Card
-            className={
-              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-            }
-            onClick={() => console.log("Navigate to claims history")}
-          >
-            <CardHeader
-              className="pb-2 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsClaimsCollapsed((v) => !v);
-              }}
-            >
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base text-gray-700">
-                  Claims
-                </CardTitle>
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View All
-                  </Button>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Claim Number
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
-                        <div className="flex items-center gap-1">
-                          Loss Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Incurred
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Reserves
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Paid
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Recoveries
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredClaims
-                      .filter(
-                        (claim) =>
-                          claim.status === "Open" || claim.status === "Reopen",
-                      )
-                      .map((claim, index) => (
+                    </TableHeader>
+                    <TableBody>
+                      {filteredPolicies.map((policy, index) => (
                         <TableRow
                           key={index}
-                          className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
+                          className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log("Open policy details", policy.policy);
+                          }}
+                        >
+                          <TableCell className="py-2">
+                            <span className="text-sm font-medium text-gray-800">
+                              {policy.policy}
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.lob}
+                          </TableCell>
+                          <TableCell className="py-2">
+                            {getStatusBadge(policy.status)}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.startDate}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.endDate}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                            {policy.premiumDue}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                            {policy.premiumPaid}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Right column: Submissions for John, Claims otherwise */}
+          {isJohn ? (
+            <Card
+              className={
+                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+              }
+              onClick={() => console.log("Navigate to submissions")}
+            >
+              <CardHeader
+                className="pb-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSubmissionsCollapsed((v) => !v);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base text-gray-700">
+                    Submissions
+                  </CardTitle>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Submission Number
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Program
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Proposed Effective Date
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Status
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Submission Type
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredSubmissions.map((submission, index) => (
+                        <TableRow
+                          key={index}
+                          className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
                           onClick={(e) => {
                             e.stopPropagation();
                             console.log(
-                              "Open claim details",
-                              claim.claimNumber,
+                              "Open submission details",
+                              submission.id,
                             );
                           }}
                         >
                           <TableCell className="text-sm font-medium py-2 text-gray-800">
-                            {claim.claimNumber}
+                            {submission.id}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.program}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.proposedEffectiveDate}
                           </TableCell>
                           <TableCell className="py-2">
-                            {getStatusBadge(claim.status)}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
-                            {claim.date}
+                            {getStatusBadge(submission.status)}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
-                            {claim.incurred}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {claim.reserves}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {claim.paid}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {claim.recoveries}
+                            {submission.submissionType}
                           </TableCell>
                         </TableRow>
                       ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Row 3: Submissions */}
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-        >
-          {/* Submissions */}
-          <Card
-            className={
-              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-            }
-            onClick={() => console.log("Navigate to submissions")}
-          >
-            <CardHeader
-              className="pb-2 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsSubmissionsCollapsed((v) => !v);
-              }}
-            >
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base text-gray-700">
-                  Submissions
-                </CardTitle>
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View All
-                  </Button>
+                    </TableBody>
+                  </Table>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Submission Number
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Program
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Proposed Effective Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Submission Type
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredSubmissions.map((submission, index) => (
-                      <TableRow
-                        key={index}
-                        className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          console.log("Open submission details", submission.id);
-                        }}
-                      >
-                        <TableCell className="text-sm font-medium py-2 text-gray-800">
-                          {submission.id}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {submission.program}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {submission.proposedEffectiveDate}
-                        </TableCell>
-                        <TableCell className="py-2">
-                          {getStatusBadge(submission.status)}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {submission.submissionType}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Empty space to maintain layout consistency with Policy/Claims row */}
-          <div></div>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card
+              className={
+                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+              }
+              onClick={() => console.log("Navigate to claims history")}
+            >
+              <CardHeader
+                className="pb-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsClaimsCollapsed((v) => !v);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base text-gray-700">
+                    {isShawn ? "Claims & Incidents" : "Claims"}
+                  </CardTitle>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
+                <div className="overflow-x-auto">
+                  <Table>
+                    {isShawn ? (
+                      <>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              ID
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              Type
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              Description
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              Date
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {[
+                            {
+                              id: "23E-1234",
+                              type: "Claim",
+                              desc: "Property damage - Garage Fire",
+                              date: "2024-01-15",
+                            },
+                            {
+                              id: "23E-5678",
+                              type: "Claim",
+                              desc: "Auto accident - Rear end collision",
+                              date: "2024-02-20",
+                            },
+                            {
+                              id: "INCIDENT-1234",
+                              type: "Incident",
+                              desc: "Multi-vehicle collision",
+                              date: "2024-03-10",
+                            },
+                            {
+                              id: "INCIDENT-5678",
+                              type: "Incident",
+                              desc: "Weather-related damage",
+                              date: "2024-03-25",
+                            },
+                          ].map((row) => (
+                            <TableRow
+                              key={row.id}
+                              className="h-10 hover:bg-gray-50"
+                            >
+                              <TableCell className="text-sm font-medium text-blue-600">
+                                {row.id}
+                              </TableCell>
+                              <TableCell>
+                                <span
+                                  className={`px-2 py-1 rounded-full text-xs border ${row.type === "Claim" ? "bg-blue-100 text-blue-700 border-blue-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
+                                >
+                                  {row.type}
+                                </span>
+                              </TableCell>
+                              <TableCell className="text-sm text-gray-700">
+                                {row.desc}
+                              </TableCell>
+                              <TableCell className="text-sm text-gray-700">
+                                {row.date}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </>
+                    ) : (
+                      <>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Claim Number
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Status
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
+                              <div className="flex items-center gap-1">
+                                Loss Date
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Incurred
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Reserves
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Paid
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Recoveries
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {filteredClaims
+                            .filter(
+                              (claim) =>
+                                claim.status === "Open" ||
+                                claim.status === "Reopen",
+                            )
+                            .map((claim, index) => (
+                              <TableRow
+                                key={index}
+                                className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  console.log(
+                                    "Open claim details",
+                                    claim.claimNumber,
+                                  );
+                                }}
+                              >
+                                <TableCell className="text-sm font-medium py-2 text-gray-800">
+                                  {claim.claimNumber}
+                                </TableCell>
+                                <TableCell className="py-2">
+                                  {getStatusBadge(claim.status)}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
+                                  {claim.date}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700">
+                                  {claim.incurred}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700">
+                                  {claim.reserves}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700">
+                                  {claim.paid}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700">
+                                  {claim.recoveries}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                        </TableBody>
+                      </>
+                    )}
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
+
+        {/* Row 3 */}
+        {isJohn ? (
+          <div
+            className={`grid grid-cols-1 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+          >
+            {/* Claims moved to last row for John */}
+            <Card
+              className={
+                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+              }
+              onClick={() => console.log("Navigate to claims history")}
+            >
+              <CardHeader
+                className="pb-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsClaimsCollapsed((v) => !v);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base text-gray-700">
+                    Claims
+                  </CardTitle>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Claim Number
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Status
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
+                          <div className="flex items-center gap-1">
+                            Loss Date
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Incurred
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Reserves
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Paid
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Recoveries
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredClaims
+                        .filter(
+                          (claim) =>
+                            claim.status === "Open" ||
+                            claim.status === "Reopen",
+                        )
+                        .map((claim, index) => (
+                          <TableRow
+                            key={index}
+                            className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log(
+                                "Open claim details",
+                                claim.claimNumber,
+                              );
+                            }}
+                          >
+                            <TableCell className="text-sm font-medium py-2 text-gray-800">
+                              {claim.claimNumber}
+                            </TableCell>
+                            <TableCell className="py-2">
+                              {getStatusBadge(claim.status)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
+                              {claim.date}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {claim.incurred}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {claim.reserves}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {claim.paid}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {claim.recoveries}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        ) : (
+          !isShawn && (
+            <div
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+            >
+              {/* Submissions */}
+              <Card
+                className={
+                  "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+                }
+                onClick={() => console.log("Navigate to submissions")}
+              >
+                <CardHeader
+                  className="pb-2 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsSubmissionsCollapsed((v) => !v);
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-base text-gray-700">
+                      Submissions
+                    </CardTitle>
+                    <div className="flex items-center">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        View All
+                      </Button>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                            <div className="flex items-center gap-1">
+                              Submission Number
+                              <ArrowUpDown
+                                size={12}
+                                className="text-gray-400"
+                              />
+                            </div>
+                          </TableHead>
+                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                            <div className="flex items-center gap-1">
+                              Program
+                              <ArrowUpDown
+                                size={12}
+                                className="text-gray-400"
+                              />
+                            </div>
+                          </TableHead>
+                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                            <div className="flex items-center gap-1">
+                              Proposed Effective Date
+                              <ArrowUpDown
+                                size={12}
+                                className="text-gray-400"
+                              />
+                            </div>
+                          </TableHead>
+                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                            <div className="flex items-center gap-1">
+                              Status
+                              <ArrowUpDown
+                                size={12}
+                                className="text-gray-400"
+                              />
+                            </div>
+                          </TableHead>
+                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                            <div className="flex items-center gap-1">
+                              Submission Type
+                              <ArrowUpDown
+                                size={12}
+                                className="text-gray-400"
+                              />
+                            </div>
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {filteredSubmissions.map((submission, index) => (
+                          <TableRow
+                            key={index}
+                            className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log(
+                                "Open submission details",
+                                submission.id,
+                              );
+                            }}
+                          >
+                            <TableCell className="text-sm font-medium py-2 text-gray-800">
+                              {submission.id}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {submission.program}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {submission.proposedEffectiveDate}
+                            </TableCell>
+                            <TableCell className="py-2">
+                              {getStatusBadge(submission.status)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {submission.submissionType}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Empty space to maintain layout consistency with Policy/Claims row */}
+              <div></div>
+            </div>
+          )
+        )}
 
         {/* Close Diary Confirmation Dialog */}
         <AlertDialog
