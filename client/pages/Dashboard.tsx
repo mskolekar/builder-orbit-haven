@@ -402,13 +402,14 @@ export default function Dashboard() {
                   Diaries
                 </CardTitle>
                 <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
+                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
                     View All
                   </Button>
-                  <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600">
+                  <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600" onClick={(e) => e.stopPropagation()}>
                     <Plus size={10} className="mr-1" />
                     Add
                   </Button>
+                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${row2Collapsed === 'diaries' ? '-rotate-90' : 'rotate-0'}`} />
                 </div>
               </div>
             </CardHeader>
