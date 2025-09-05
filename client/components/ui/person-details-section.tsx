@@ -11,7 +11,6 @@ import {
   Mail,
   MapPin,
   Edit3,
-  ChevronDown,
 } from "lucide-react";
 
 const customerData = {
@@ -49,12 +48,7 @@ export function PersonDetailsSection() {
             className="p-4 pb-0 cursor-pointer select-none"
             onClick={() => setIsCollapsed((v) => !v)}
           >
-            <div className="flex items-center justify-end w-full">
-              <ChevronDown
-                size={14}
-                className={`text-gray-400 transition-transform ${isCollapsed ? "-rotate-90" : "rotate-0"}`}
-              />
-            </div>
+            <div className="flex items-center justify-end w-full"></div>
           </CardHeader>
           <CardContent className={`p-4 ${isCollapsed ? "hidden" : ""}`}>
             <div className="flex items-center gap-6">
