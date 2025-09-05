@@ -10,41 +10,31 @@ import { useNavigate } from "react-router-dom";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 
-const personSteps = [
-  "Basic Info",
-  "Contact Info",
-  "Role",
-  "Access",
-  "Summary",
-];
+const stepLabels = ["Basic & Contact", "Role & Access"] as const;
 
-function Stepper({ current, total }: { current: number; total: number }) {
-  const pct = (current / total) * 100;
+function Stepper({ current, labels }: { current: number; labels: readonly string[] }) {
+  const pct = (current / labels.length) * 100;
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between text-xs text-gray-600">
-        {personSteps.map((label, idx) => {
+        {labels.map((label, idx) => {
           const stepNum = idx + 1;
           const isActive = stepNum === current;
           const isDone = stepNum < current;
           return (
             <div key={label} className="flex-1 flex items-center">
-              <div className={cn(
-                "flex items-center gap-2",
-                idx === 0 ? "" : "pl-2"
-              )}>
-                <div className={cn(
-                  "h-6 w-6 rounded-full flex items-center justify-center text-[10px] border",
-                  isDone && "bg-[#0054A6] text-white border-[#0054A6]",
-                  isActive && "bg-white text-[#0054A6] border-[#0054A6]",
-                  !isActive && !isDone && "bg-gray-100 text-gray-500 border-gray-200",
-                )}>
+              <div className={cn("flex items-center gap-2", idx === 0 ? "" : "pl-2")}>
+                <div
+                  className={cn(
+                    "h-6 w-6 rounded-full flex items-center justify-center text-[10px] border",
+                    isDone && "bg-[#0054A6] text-white border-[#0054A6]",
+                    isActive && "bg-white text-[#0054A6] border-[#0054A6]",
+                    !isActive && !isDone && "bg-gray-100 text-gray-500 border-gray-200",
+                  )}
+                >
                   {stepNum}
                 </div>
-                <span className={cn(
-                  "hidden sm:block",
-                  isActive ? "text-[#0054A6] font-medium" : "text-gray-600"
-                )}>{label}</span>
+                <span className={cn("hidden sm:block", isActive ? "text-[#0054A6] font-medium" : "text-gray-600")}>{label}</span>
               </div>
             </div>
           );
@@ -60,8 +50,7 @@ export default function AddNew() {
   const [tab, setTab] = useState<"person" | "organization">("person");
 
   // Person flow state
-  const [step, setStep] = useState(1); // 1..5
-  const totalSteps = 5;
+  const [step, setStep] = useState(1); // 1..2
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -81,11 +70,34 @@ export default function AddNew() {
   const [needsB2C, setNeedsB2C] = useState(false);
   const [b2cLoginId, setB2cLoginId] = useState("");
 
-  const gotoOverview = () => {
-    navigate("/overview/olivia?tab=summary");
+  const canContinueStep1 = fullName.trim().length > 0;
+
+  const savePersonAndGo = () => {
+    const payload = {
+      name: fullName,
+      email,
+      phone,
+      address,
+      isInternal,
+      internalProfile,
+      internalLoginId,
+      relatedToOrg: !!relatedToOrg,
+      orgName,
+      relationshipType,
+      needsOMS,
+      omsProfile,
+      needsB2C,
+      b2cLoginId,
+    };
+    try {
+      localStorage.setItem("newPerson", JSON.stringify(payload));
+    } catch {}
+    navigate("/overview/new-person");
   };
 
-  const canContinueStep1 = fullName.trim().length > 0;
+  const gotoOverviewOrg = () => {
+    navigate("/overview/abc-ltd");
+  };
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
@@ -95,7 +107,6 @@ export default function AddNew() {
             <CardTitle className="text-base text-gray-700">Add New</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Step 1: Select Type */}
             <Tabs value={tab} onValueChange={(v) => setTab(v as any)} className="w-full">
               <TabsList>
                 <TabsTrigger value="person">Add Person</TabsTrigger>
@@ -104,25 +115,15 @@ export default function AddNew() {
 
               {/* Person flow with stepper */}
               <TabsContent value="person" className="mt-4 space-y-6">
-                <Stepper current={Math.min(step, totalSteps)} total={totalSteps} />
+                <Stepper current={Math.min(step, stepLabels.length)} labels={stepLabels} />
 
                 {step === 1 && (
-                  <div className="space-y-4">
-                    <div className="space-y-2 max-w-md">
-                      <Label htmlFor="p-name">Full Name</Label>
-                      <Input id="p-name" placeholder="Full name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-                    </div>
-                    <div className="flex justify-end">
-                      <Button disabled={!canContinueStep1} className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={() => setStep(2)}>
-                        Save & Continue
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {step === 2 && (
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2 md:col-span-2">
+                        <Label htmlFor="p-name">Full Name</Label>
+                        <Input id="p-name" placeholder="Full name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                      </div>
                       <div className="space-y-2">
                         <Label>Email</Label>
                         <Input type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -136,14 +137,15 @@ export default function AddNew() {
                         <Input placeholder="Street, City, State, ZIP" value={address} onChange={(e) => setAddress(e.target.value)} />
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <Button variant="outline" onClick={() => setStep(1)}>Back</Button>
-                      <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={() => setStep(3)}>Save & Continue</Button>
+                    <div className="flex justify-end">
+                      <Button disabled={!canContinueStep1} className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={() => setStep(2)}>
+                        Save & Continue
+                      </Button>
                     </div>
                   </div>
                 )}
 
-                {step === 3 && (
+                {step === 2 && (
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
@@ -152,15 +154,7 @@ export default function AddNew() {
                       </div>
                       <Switch checked={isInternal} onCheckedChange={setIsInternal} />
                     </div>
-                    <div className="flex items-center justify-between">
-                      <Button variant="outline" onClick={() => setStep(2)}>Back</Button>
-                      <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={() => setStep(4)}>Save & Continue</Button>
-                    </div>
-                  </div>
-                )}
 
-                {step === 4 && (
-                  <div className="space-y-6">
                     {isInternal ? (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
@@ -180,16 +174,14 @@ export default function AddNew() {
                           <Label>Login ID</Label>
                           <Input placeholder="user@company" value={internalLoginId} onChange={(e) => setInternalLoginId(e.target.value)} />
                         </div>
-                        <div className="md:col-span-2 text-xs text-gray-500">
-                          Relationship will be auto-added as Employee with selected role.
-                        </div>
+                        <div className="md:col-span-2 text-xs text-gray-500">Relationship will be auto-added as Employee with selected role.</div>
                       </div>
                     ) : (
                       <div className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="space-y-2">
                             <Label>Related to Organization?</Label>
-                            <Select value={relatedToOrg === undefined ? undefined : relatedToOrg ? "yes" : "no"} onValueChange={(v) => setRelatedToOrg(v === "yes") }>
+                            <Select value={relatedToOrg === undefined ? undefined : relatedToOrg ? "yes" : "no"} onValueChange={(v) => setRelatedToOrg(v === "yes")}>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select" />
                               </SelectTrigger>
@@ -262,8 +254,8 @@ export default function AddNew() {
                     )}
 
                     <div className="flex items-center justify-between">
-                      <Button variant="outline" onClick={() => setStep(3)}>Back</Button>
-                      <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={gotoOverview}>Save & Finish</Button>
+                      <Button variant="outline" onClick={() => setStep(1)}>Back</Button>
+                      <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={savePersonAndGo}>Save & Finish</Button>
                     </div>
                   </div>
                 )}
@@ -290,7 +282,7 @@ export default function AddNew() {
                   </div>
                 </div>
                 <div className="mt-6 flex justify-end">
-                  <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={gotoOverview}>Save</Button>
+                  <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={gotoOverviewOrg}>Save</Button>
                 </div>
               </TabsContent>
             </Tabs>
