@@ -17,7 +17,7 @@ import PlaceholderPage from '@/pages/PlaceholderPage';
 import NotFound from '@/pages/NotFound';
 
 const customerData = {
-  name: "Rose K",
+  name: "Olivia R",
   status: "Active"
 };
 
