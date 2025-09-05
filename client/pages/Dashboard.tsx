@@ -507,6 +507,13 @@ export default function Dashboard() {
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
 
           {/* Policy Details */}
+          {isPoliciesCollapsed && (
+            <div className="flex justify-end">
+              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsPoliciesCollapsed(false); }}>
+                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
+              </Button>
+            </div>
+          )}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to policy details')}>
             <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsPoliciesCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
