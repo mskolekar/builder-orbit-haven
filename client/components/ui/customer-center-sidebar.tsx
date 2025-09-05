@@ -19,7 +19,7 @@ interface CustomerCenterSidebarItem {
 }
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
-  { label: 'Overview', path: '/' },
+  { label: 'Overview', path: '/overview' },
   {
     label: 'Personal Details',
     path: '/personal-details',
