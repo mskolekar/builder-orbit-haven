@@ -103,8 +103,8 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
   };
 
   const isActive = (path: string) => {
-    if (path === '/') {
-      return location.pathname === '/';
+    if (path === '/overview') {
+      return location.pathname.startsWith('/overview');
     }
     return location.pathname === path || location.pathname + location.search === path;
   };
