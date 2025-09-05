@@ -41,7 +41,6 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
   },
   { label: 'Relationships & Roles', path: '/relationships' },
   { label: 'Workgroups', path: '/workgroups' },
-  { label: 'Risk Mgt Credit Program', path: '/risk-management-credit' },
   {
     label: 'Journals',
     path: '/journals',
