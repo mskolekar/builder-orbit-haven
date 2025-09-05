@@ -21,6 +21,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 interface SubItem {
   label: string;
@@ -39,7 +40,17 @@ const sidebarItems: SidebarItem[] = [
   { icon: FileText, label: "New Submission", path: "/new-submission" },
   { icon: FileText, label: "Submissions", path: "/submissions" },
   { icon: Shield, label: "Policies", path: "/policies" },
-  { icon: User, label: "Customer Center", path: "/" },
+  {
+    icon: User,
+    label: "Customer Center",
+    path: "/overview",
+    subItems: [
+      { label: "Olivia R (Insured)", path: "/overview/olivia" },
+      { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
+      { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
+      { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
+    ],
+  },
   { icon: Briefcase, label: "Accounting", path: "/accounting" },
   { icon: Search, label: "Search Center", path: "/search" },
   { icon: Settings, label: "Other Utilities", path: "/utilities" },
@@ -61,7 +72,9 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [expandedItems, setExpandedItems] = useState<string[]>(() =>
+    location.pathname.startsWith("/overview") ? ["/overview"] : [],
+  );
 
   const toggleExpanded = (itemPath: string) => {
     setExpandedItems((prev) =>
@@ -81,11 +94,14 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   };
 
   const isMainPageActive = (item: SidebarItem) => {
-    if (item.path === "/" && item.label === "Customer Center") {
-      return location.pathname === "/";
+    if (item.label === "Customer Center") {
+      return (
+        location.pathname.startsWith("/customer-center") ||
+        location.pathname.startsWith("/overview")
+      );
     }
     if (item.path === "/" && item.label === "Home") {
-      return false; // Don't highlight Home when on Customer Center
+      return location.pathname === "/";
     }
     return location.pathname === item.path;
   };
@@ -164,7 +180,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
 
               return (
                 <li key={`${item.label}-${item.path}`}>
-                  <Link
+                  <RouterLink
                     to={item.path}
                     onClick={(e) => {
                       if (hasSubItems) {
@@ -185,24 +201,24 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                   >
                     <Icon size={16} />
                     {!isCollapsed && item.label}
-                  </Link>
+                  </RouterLink>
 
                   {hasSubItems && isExpanded && (
                     <ul className="mt-1 ml-6 space-y-1">
                       {item.subItems!.map((subItem) => (
                         <li key={subItem.path}>
-                          <Link
+                          <RouterLink
                             to={subItem.path}
                             onClick={() => setIsOpen(false)}
                             className={cn(
-                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4",
+                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4",
                               isActive(subItem.path)
-                                ? "bg-white/15 text-white border-white/40"
-                                : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30",
+                                ? "bg-gray-100 text-gray-900 border-gray-300"
+                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300",
                             )}
                           >
                             {subItem.label}
-                          </Link>
+                          </RouterLink>
                         </li>
                       ))}
                     </ul>

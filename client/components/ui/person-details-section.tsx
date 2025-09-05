@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "./button";
 import { Badge } from "./badge";
-import { Card, CardContent, CardHeader } from "./card";
+import { Card, CardContent } from "./card";
 import {
   CheckCircle,
   Calendar,
@@ -11,7 +11,6 @@ import {
   Mail,
   MapPin,
   Edit3,
-  ChevronDown,
 } from "lucide-react";
 
 const customerData = {
@@ -39,24 +38,11 @@ export function PersonDetailsSection() {
     window.location.href = "/customer-details";
   };
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
   return (
     <div className="bg-white border-b border-gray-200 p-4">
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
-          <CardHeader
-            className="p-4 pb-0 cursor-pointer select-none"
-            onClick={() => setIsCollapsed((v) => !v)}
-          >
-            <div className="flex items-center justify-end w-full">
-              <ChevronDown
-                size={14}
-                className={`text-gray-400 transition-transform ${isCollapsed ? "-rotate-90" : "rotate-0"}`}
-              />
-            </div>
-          </CardHeader>
-          <CardContent className={`p-4 ${isCollapsed ? "hidden" : ""}`}>
+          <CardContent className="p-4">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
                 <div className="relative">
@@ -95,6 +81,7 @@ export function PersonDetailsSection() {
                   size="sm"
                   className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
                   onClick={navigateToProfile}
+                  title="Edit Personal Details"
                 >
                   <Edit3 size={12} />
                 </Button>
