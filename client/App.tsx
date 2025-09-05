@@ -7,6 +7,7 @@ import { Header } from '@/components/ui/header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Menu, ChevronLeft, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import Dashboard from '@/pages/Dashboard';
 import Profile from '@/pages/Profile';
