@@ -297,7 +297,7 @@ export default function Dashboard() {
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div className={`transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
-            <CardHeader className="pb-4 flex flex-row items-center justify-between">
+            <CardHeader className="pb-4 flex flex-row items-center justify-between cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsFinancialCollapsed(v => !v); }}>
               <CardTitle className="text-base text-gray-700">
                 Financial Summary
               </CardTitle>
@@ -312,7 +312,7 @@ export default function Dashboard() {
                 Pay Now
               </Button>
             </CardHeader>
-            <CardContent>
+            <CardContent className={isFinancialCollapsed ? 'hidden' : ''}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
                   <div className="text-xs text-gray-600 mb-1 font-medium">Amount Paid</div>
