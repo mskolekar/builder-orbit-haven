@@ -49,7 +49,7 @@ import {
   MapPin,
   Star,
   MoreHorizontal,
-  ArrowUpDown
+  ArrowUpDown, ChevronDown
 } from 'lucide-react';
 
 const customerData = {
