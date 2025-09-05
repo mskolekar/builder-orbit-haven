@@ -395,7 +395,7 @@ export default function Dashboard() {
 
           {/* Diaries */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
-            <CardHeader className="pb-2">
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsDiariesCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Diaries
@@ -411,7 +411,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className={isDiariesCollapsed ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
