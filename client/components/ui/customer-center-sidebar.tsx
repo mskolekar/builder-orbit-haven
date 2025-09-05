@@ -110,8 +110,8 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
   };
 
   const isMainPageActive = (item: CustomerCenterSidebarItem) => {
-    if (item.path === '/') {
-      return location.pathname === '/';
+    if (item.path === '/overview') {
+      return location.pathname.startsWith('/overview');
     }
     return location.pathname === item.path;
   };
