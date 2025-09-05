@@ -222,6 +222,14 @@ export default function Dashboard() {
     setMounted(true);
   }, []);
 
+  // Collapsible states
+  const [isFinancialCollapsed, setIsFinancialCollapsed] = useState(false);
+  const [isActivityCollapsed, setIsActivityCollapsed] = useState(false);
+  const [isDiariesCollapsed, setIsDiariesCollapsed] = useState(false);
+  const [isPoliciesCollapsed, setIsPoliciesCollapsed] = useState(false);
+  const [isClaimsCollapsed, setIsClaimsCollapsed] = useState(false);
+  const [isSubmissionsCollapsed, setIsSubmissionsCollapsed] = useState(false);
+
   // Diary functions
   const handleCloseDiary = (diaryId: number) => {
     setDiaryToClose(diaryId);
