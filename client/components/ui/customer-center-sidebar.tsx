@@ -137,7 +137,10 @@ export function CustomerCenterSidebar({ isCollapsed, onToggleCollapse }: Custome
                       toggleExpanded(item.path);
                     } else {
                       // Navigate to the route if no sub-items or if collapsed
-                      window.location.href = item.path;
+                      const match = location.pathname.match(/^\/overview\/([^/]+)/);
+                      const profile = match ? match[1] : 'olivia';
+                      const target = item.path === '/overview' ? `/overview/${profile}` : item.path;
+                      window.location.href = target;
                     }
                   }}
                   className={cn(
