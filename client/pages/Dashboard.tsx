@@ -477,10 +477,6 @@ export default function Dashboard() {
                 >
                   Pay Now
                 </Button>
-                <ChevronDown
-                  size={14}
-                  className={`text-gray-400 transition-transform ${isFinancialCollapsed ? "-rotate-90" : "rotate-0"}`}
-                />
               </div>
             </CardHeader>
             <CardContent className={isFinancialCollapsed ? "hidden" : ""}>
