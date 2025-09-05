@@ -669,9 +669,12 @@ export default function Dashboard() {
                 <CardTitle className="text-base text-gray-700">
                   Submissions
                 </CardTitle>
-                <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium">
-                  View All
-                </Button>
+                <div className="flex items-center">
+                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
+                    View All
+                  </Button>
+                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isSubmissionsCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+                </div>
               </div>
             </CardHeader>
             <CardContent className={isSubmissionsCollapsed ? 'hidden' : ''}>
