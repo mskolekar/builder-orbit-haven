@@ -22,6 +22,7 @@ import { BasicDetailsSection } from "@/components/ui/basic-details-section";
 import { OrganizationDetailsSection } from "@/components/ui/organization-details-section";
 import { PersonDetailsUnderwriter } from "@/components/ui/person-details-underwriter";
 import { PersonDetailsClaimant } from "@/components/ui/person-details-claimant";
+import AddNew from "@/pages/AddNew";
 
 const profileMap: Record<
   string,
@@ -60,6 +61,7 @@ function AppContent() {
     isCustomerCenterSidebarCollapsed,
     setIsCustomerCenterSidebarCollapsed,
   ] = useState(false);
+  const isAddNew = location.pathname.startsWith("/overview/add-new");
 
   // Check if current route is customer details (which has its own layout)
   const isCustomerDetailsRoute =
@@ -138,11 +140,15 @@ function AppContent() {
               </Button>
 
               <div className="flex items-center gap-3 flex-1">
-                <h1 className="text-lg font-semibold">{activeProfile.name}</h1>
-                <div className="text-white/70">|</div>
-                <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
-                  {activeProfile.status}
-                </Badge>
+                <h1 className="text-lg font-semibold">{isAddNew ? "Add New" : activeProfile.name}</h1>
+                {!isAddNew && (
+                  <>
+                    <div className="text-white/70">|</div>
+                    <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
+                      {activeProfile.status}
+                    </Badge>
+                  </>
+                )}
               </div>
             </div>
 
@@ -239,7 +245,9 @@ function AppContent() {
                         to: "/customer-center",
                       });
 
-                      if (currentKey !== "/") {
+                      if (path === "/overview/add-new") {
+                        crumbs.push({ label: "Add New", to: "/overview/add-new" });
+                      } else if (currentKey !== "/") {
                         crumbs.push(mainMap[currentKey]);
                       } else {
                         crumbs.push({ label: mainMap["/"].label });
@@ -289,7 +297,7 @@ function AppContent() {
                     })()}
                   </div>
                 </div>
-                {location.pathname.startsWith("/overview/") &&
+                {location.pathname.startsWith("/overview/") && !isAddNew &&
                   (activeProfileKey === "olivia" ? (
                     <PersonDetailsSection />
                   ) : activeProfileKey === "abc-ltd" ? (
@@ -307,6 +315,7 @@ function AppContent() {
                     />
                   ))}
                 <Routes>
+                  <Route path="/overview/add-new" element={<AddNew />} />
                   <Route path="/overview/:profileId" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/communication" element={<Communication />} />
