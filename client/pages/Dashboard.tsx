@@ -224,10 +224,8 @@ export default function Dashboard() {
 
   // Collapsible states
   const [isFinancialCollapsed, setIsFinancialCollapsed] = useState(false);
-  const [isActivityCollapsed, setIsActivityCollapsed] = useState(false);
-  const [isDiariesCollapsed, setIsDiariesCollapsed] = useState(false);
-  const [isPoliciesCollapsed, setIsPoliciesCollapsed] = useState(false);
-  const [isClaimsCollapsed, setIsClaimsCollapsed] = useState(false);
+  const [row2Collapsed, setRow2Collapsed] = useState<null | 'activity' | 'diaries'>(null);
+  const [rowPCCollapsed, setRowPCCollapsed] = useState<null | 'policies' | 'claims'>(null);
   const [isSubmissionsCollapsed, setIsSubmissionsCollapsed] = useState(false);
 
   // Diary functions
