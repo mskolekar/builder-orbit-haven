@@ -48,7 +48,9 @@ export function PersonDetailsUnderwriter() {
                       {customerData.status}
                     </Badge>
                   </div>
-                  <p className="text-gray-600 font-medium">{customerData.role}</p>
+                  <p className="text-gray-600 font-medium">
+                    {customerData.role}
+                  </p>
                 </div>
               </div>
 
@@ -66,7 +68,9 @@ export function PersonDetailsUnderwriter() {
                   <Calendar size={14} className="text-gray-400" />
                   <div>
                     <span className="text-xs text-gray-500">DOB</span>
-                    <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
+                    <p className="text-sm font-medium">
+                      {customerData.dateOfBirth}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -87,7 +91,9 @@ export function PersonDetailsUnderwriter() {
                   <Phone size={14} className="text-gray-400" />
                   <div className="min-w-0">
                     <span className="text-xs text-gray-500">Phone</span>
-                    <p className="text-sm font-medium whitespace-nowrap">{customerData.phone}</p>
+                    <p className="text-sm font-medium whitespace-nowrap">
+                      {customerData.phone}
+                    </p>
                   </div>
                 </div>
                 <div className="col-span-2 flex items-center gap-2">

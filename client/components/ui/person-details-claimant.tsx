@@ -48,7 +48,9 @@ export function PersonDetailsClaimant() {
                       {customerData.status}
                     </Badge>
                   </div>
-                  <p className="text-gray-600 font-medium">{customerData.role}</p>
+                  <p className="text-gray-600 font-medium">
+                    {customerData.role}
+                  </p>
                 </div>
               </div>
 
