@@ -407,6 +407,13 @@ export default function Dashboard() {
           </Card>
 
           {/* Diaries */}
+          {isDiariesCollapsed && (
+            <div className="flex justify-end">
+              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsDiariesCollapsed(false); }}>
+                <ChevronDown size={14} className="-rotate-90 text-gray-400" />
+              </Button>
+            </div>
+          )}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
             <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsDiariesCollapsed(v => !v); }}>
               <div className="flex items-center justify-between">
