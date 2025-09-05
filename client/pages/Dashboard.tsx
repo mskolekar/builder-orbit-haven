@@ -341,7 +341,7 @@ export default function Dashboard() {
 
           {/* Activity Timeline */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to activity timeline')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsActivityCollapsed(v => !v); }}>
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setRow2Collapsed(prev => prev === 'activity' ? null : 'activity'); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Activity Timeline
@@ -354,7 +354,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isActivityCollapsed ? 'hidden' : ''}>
+            <CardContent className={row2Collapsed === 'activity' ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -397,7 +397,7 @@ export default function Dashboard() {
 
           {/* Diaries */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to diaries')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsDiariesCollapsed(v => !v); }}>
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setRow2Collapsed(prev => prev === 'diaries' ? null : 'diaries'); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Diaries
