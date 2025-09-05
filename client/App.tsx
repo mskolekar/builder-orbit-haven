@@ -22,6 +22,7 @@ import { BasicDetailsSection } from "@/components/ui/basic-details-section";
 import { OrganizationDetailsSection } from "@/components/ui/organization-details-section";
 import { PersonDetailsUnderwriter } from "@/components/ui/person-details-underwriter";
 import { PersonDetailsClaimant } from "@/components/ui/person-details-claimant";
+import AddNew from "@/pages/AddNew";
 
 const profileMap: Record<
   string,
@@ -60,6 +61,7 @@ function AppContent() {
     isCustomerCenterSidebarCollapsed,
     setIsCustomerCenterSidebarCollapsed,
   ] = useState(false);
+  const isAddNew = location.pathname.startsWith("/overview/add-new");
 
   // Check if current route is customer details (which has its own layout)
   const isCustomerDetailsRoute =
@@ -68,7 +70,27 @@ function AppContent() {
   // Active profile (from /overview/:id)
   const overviewMatch = location.pathname.match(/^\/overview\/([^/]+)/);
   const activeProfileKey = overviewMatch ? overviewMatch[1] : "olivia";
-  const activeProfile = profileMap[activeProfileKey] || profileMap["olivia"];
+  let activeProfile = profileMap[activeProfileKey] || profileMap["olivia"];
+  let newPersonData: any | undefined;
+  if (activeProfileKey === "new-person") {
+    try {
+      const raw = localStorage.getItem("newPerson");
+      if (raw) {
+        newPersonData = JSON.parse(raw);
+        const role = newPersonData?.isInternal
+          ? "Employee"
+          : newPersonData?.relationshipType
+            ? newPersonData.relationshipType
+            : "Contact";
+        activeProfile = {
+          name: newPersonData?.name || "New Person",
+          status: "Active",
+          role,
+          memberSince: String(new Date().getFullYear()),
+        };
+      }
+    } catch {}
+  }
 
   // Define which routes should show the Customer Center sidebar (exclude /customer-center picker)
   const customerCenterRoutes = [
@@ -138,11 +160,17 @@ function AppContent() {
               </Button>
 
               <div className="flex items-center gap-3 flex-1">
-                <h1 className="text-lg font-semibold">{activeProfile.name}</h1>
-                <div className="text-white/70">|</div>
-                <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
-                  {activeProfile.status}
-                </Badge>
+                <h1 className="text-lg font-semibold">
+                  {isAddNew ? "Add New" : activeProfile.name}
+                </h1>
+                {!isAddNew && (
+                  <>
+                    <div className="text-white/70">|</div>
+                    <Badge className="bg-white/15 text-white border-white/30 hover:bg-white/20">
+                      {activeProfile.status}
+                    </Badge>
+                  </>
+                )}
               </div>
             </div>
 
@@ -239,7 +267,12 @@ function AppContent() {
                         to: "/customer-center",
                       });
 
-                      if (currentKey !== "/") {
+                      if (path === "/overview/add-new") {
+                        crumbs.push({
+                          label: "Add New",
+                          to: "/overview/add-new",
+                        });
+                      } else if (currentKey !== "/") {
                         crumbs.push(mainMap[currentKey]);
                       } else {
                         crumbs.push({ label: mainMap["/"].label });
@@ -290,6 +323,7 @@ function AppContent() {
                   </div>
                 </div>
                 {location.pathname.startsWith("/overview/") &&
+                  !isAddNew &&
                   (activeProfileKey === "olivia" ? (
                     <PersonDetailsSection />
                   ) : activeProfileKey === "abc-ltd" ? (
@@ -304,9 +338,13 @@ function AppContent() {
                       role={activeProfile.role}
                       status={activeProfile.status}
                       memberSince={activeProfile.memberSince}
+                      phone={newPersonData?.phone}
+                      email={newPersonData?.email}
+                      address={newPersonData?.address}
                     />
                   ))}
                 <Routes>
+                  <Route path="/overview/add-new" element={<AddNew />} />
                   <Route path="/overview/:profileId" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/communication" element={<Communication />} />
