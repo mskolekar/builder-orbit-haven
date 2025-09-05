@@ -18,7 +18,7 @@ export function OrganizationDetailsSection() {
     <div className="bg-white border-b border-gray-200 p-4">
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
-          <CardContent className="p-4">
+          <CardContent className="p-4 min-h-[140px]">
             <div className="flex items-center gap-6">
               <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
                 {org.name
