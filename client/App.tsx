@@ -20,6 +20,8 @@ import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
 import { OrganizationDetailsSection } from "@/components/ui/organization-details-section";
+import { PersonDetailsUnderwriter } from "@/components/ui/person-details-underwriter";
+import { PersonDetailsClaimant } from "@/components/ui/person-details-claimant";
 
 const profileMap: Record<
   string,
@@ -316,6 +318,8 @@ function AppContent() {
                     <OrganizationDetailsSection />
                   ) : activeProfileKey === "shawn-elkins" ? (
                     <PersonDetailsClaimant />
+                  ) : activeProfileKey === "john-wills" ? (
+                    <PersonDetailsUnderwriter />
                   ) : (
                     <BasicDetailsSection
                       name={activeProfile.name}
