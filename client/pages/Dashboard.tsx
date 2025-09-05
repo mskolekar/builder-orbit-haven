@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ColumnFilter } from '@/components/ui/column-filter';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ColumnFilter } from "@/components/ui/column-filter";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,16 +13,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Progress } from '@/components/ui/progress';
-import { 
+} from "@/components/ui/alert-dialog";
+import { Progress } from "@/components/ui/progress";
+import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 import {
   Eye,
   Plus,
@@ -49,8 +49,9 @@ import {
   MapPin,
   Star,
   MoreHorizontal,
-  ArrowUpDown, ChevronDown
-} from 'lucide-react';
+  ArrowUpDown,
+  ChevronDown,
+} from "lucide-react";
 
 const customerData = {
   name: "Rose K",
@@ -63,7 +64,7 @@ const customerData = {
   email: "rose.greenthumb@example.com",
   address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
   memberSince: "2019",
-  satisfactionScore: 4.8
+  satisfactionScore: 4.8,
 };
 
 const upcomingReminders = [
@@ -72,50 +73,194 @@ const upcomingReminders = [
     type: "Policy Renewal Review - Auto",
     dueDate: "Due in 45 days",
     status: "pending",
-    priority: "high"
+    priority: "high",
   },
   {
     id: 2,
     type: "Follow up on Claim #C1122",
     dueDate: "Due in about 1 week",
     status: "pending",
-    priority: "medium"
+    priority: "medium",
   },
   {
     id: 3,
     type: "Annual Review Meeting",
     dueDate: "Due in 2 weeks",
     status: "scheduled",
-    priority: "low"
-  }
+    priority: "low",
+  },
 ];
 
 const submissions = [
-  { id: "1-928763A-0134", program: "Primary E&O", proposedEffectiveDate: "01-01-26", status: "In Progress", submissionType: "New" },
-  { id: "1-178221LT97-9914", program: "MDP E&O", proposedEffectiveDate: "01-01-26", status: "In Progress", submissionType: "Renewal" }
+  {
+    id: "1-928763A-0134",
+    program: "Primary E&O",
+    proposedEffectiveDate: "01-01-26",
+    status: "In Progress",
+    submissionType: "New",
+  },
+  {
+    id: "1-178221LT97-9914",
+    program: "MDP E&O",
+    proposedEffectiveDate: "01-01-26",
+    status: "In Progress",
+    submissionType: "Renewal",
+  },
 ];
 
 const initialDiariesData = [
-  { id: 1, dueDate: "12-15-24", title: "Approval request declined.", priority: "High", status: "Open" },
-  { id: 2, dueDate: "12-15-24", title: "Approval request declined.", priority: "High", status: "Open" },
-  { id: 3, dueDate: "12-15-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
-  { id: 4, dueDate: "12-22-24", title: "Invoice Approval Request", priority: "Medium", status: "Open" },
-  { id: 5, dueDate: "12-15-24", title: "Approval request approved.", priority: "Low", status: "Open" }
+  {
+    id: 1,
+    dueDate: "12-15-24",
+    title: "Approval request declined.",
+    priority: "High",
+    status: "Open",
+  },
+  {
+    id: 2,
+    dueDate: "12-15-24",
+    title: "Approval request declined.",
+    priority: "High",
+    status: "Open",
+  },
+  {
+    id: 3,
+    dueDate: "12-15-24",
+    title: "Invoice Approval Request",
+    priority: "Medium",
+    status: "Open",
+  },
+  {
+    id: 4,
+    dueDate: "12-22-24",
+    title: "Invoice Approval Request",
+    priority: "Medium",
+    status: "Open",
+  },
+  {
+    id: 5,
+    dueDate: "12-15-24",
+    title: "Approval request approved.",
+    priority: "Low",
+    status: "Open",
+  },
 ];
 
 const policyData = [
-  { policy: "1-8793492", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-26", endDate: "01-01-27", status: "Active", premium: "$2,450", lastClaim: "Never", employerNumber: "09212024", premiumDue: "$245", premiumPaid: "$2,205" },
-  { policy: "1-2731058", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,890", lastClaim: "Never", employerNumber: "F_96954", premiumDue: "$189", premiumPaid: "$1,701" },
-  { policy: "37676SLIT70", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,975", lastClaim: "Never", employerNumber: "F_34810", premiumDue: "$0", premiumPaid: "$1,975" },
-  { policy: "1-4755556", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "06-01-25", endDate: "01-01-26", status: "Active", premium: "$1,825", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$365", premiumPaid: "$1,460" },
-  { policy: "1-2213668", lob: "Excess E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-22", endDate: "01-01-23", status: "Expired", premium: "$2,275", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$125", premiumPaid: "$2,150" },
-  { policy: "1-7433808", lob: "Primary E&O", coverage: "$1,000,000/$2,000,000", startDate: "01-01-23", endDate: "01-01-24", status: "Expired", premium: "$2,350", lastClaim: "Never", employerNumber: "A001904", premiumDue: "$175", premiumPaid: "$2,175" }
+  {
+    policy: "1-8793492",
+    lob: "Primary E&O",
+    coverage: "$1,000,000/$2,000,000",
+    startDate: "01-01-26",
+    endDate: "01-01-27",
+    status: "Active",
+    premium: "$2,450",
+    lastClaim: "Never",
+    employerNumber: "09212024",
+    premiumDue: "$245",
+    premiumPaid: "$2,205",
+  },
+  {
+    policy: "1-2731058",
+    lob: "Excess E&O",
+    coverage: "$1,000,000/$2,000,000",
+    startDate: "06-01-25",
+    endDate: "01-01-26",
+    status: "Active",
+    premium: "$1,890",
+    lastClaim: "Never",
+    employerNumber: "F_96954",
+    premiumDue: "$189",
+    premiumPaid: "$1,701",
+  },
+  {
+    policy: "37676SLIT70",
+    lob: "Primary E&O",
+    coverage: "$1,000,000/$2,000,000",
+    startDate: "06-01-25",
+    endDate: "01-01-26",
+    status: "Active",
+    premium: "$1,975",
+    lastClaim: "Never",
+    employerNumber: "F_34810",
+    premiumDue: "$0",
+    premiumPaid: "$1,975",
+  },
+  {
+    policy: "1-4755556",
+    lob: "Excess E&O",
+    coverage: "$1,000,000/$2,000,000",
+    startDate: "06-01-25",
+    endDate: "01-01-26",
+    status: "Active",
+    premium: "$1,825",
+    lastClaim: "Never",
+    employerNumber: "A001904",
+    premiumDue: "$365",
+    premiumPaid: "$1,460",
+  },
+  {
+    policy: "1-2213668",
+    lob: "Excess E&O",
+    coverage: "$1,000,000/$2,000,000",
+    startDate: "01-01-22",
+    endDate: "01-01-23",
+    status: "Expired",
+    premium: "$2,275",
+    lastClaim: "Never",
+    employerNumber: "A001904",
+    premiumDue: "$125",
+    premiumPaid: "$2,150",
+  },
+  {
+    policy: "1-7433808",
+    lob: "Primary E&O",
+    coverage: "$1,000,000/$2,000,000",
+    startDate: "01-01-23",
+    endDate: "01-01-24",
+    status: "Expired",
+    premium: "$2,350",
+    lastClaim: "Never",
+    employerNumber: "A001904",
+    premiumDue: "$175",
+    premiumPaid: "$2,175",
+  },
 ];
 
 const claimsHistory = [
-  { type: "Home Burglary", date: "02-28-23", status: "Reopen", amount: "$5,300", claimNumber: "C1045", incurred: "$7,300", reserves: "$2,000", paid: "$5,300", recoveries: "$500" },
-  { type: "Auto Collision", date: "05-16-23", status: "Open", amount: "$0", claimNumber: "C1122", incurred: "$2,000", reserves: "$2,000", paid: "$0", recoveries: "$0" },
-  { type: "Critical Illness", date: "12-15-23", status: "Open", amount: "$0", claimNumber: "C1189", incurred: "$0", reserves: "$0", paid: "$0", recoveries: "$0" }
+  {
+    type: "Home Burglary",
+    date: "02-28-23",
+    status: "Reopen",
+    amount: "$5,300",
+    claimNumber: "C1045",
+    incurred: "$7,300",
+    reserves: "$2,000",
+    paid: "$5,300",
+    recoveries: "$500",
+  },
+  {
+    type: "Auto Collision",
+    date: "05-16-23",
+    status: "Open",
+    amount: "$0",
+    claimNumber: "C1122",
+    incurred: "$2,000",
+    reserves: "$2,000",
+    paid: "$0",
+    recoveries: "$0",
+  },
+  {
+    type: "Critical Illness",
+    date: "12-15-23",
+    status: "Open",
+    amount: "$0",
+    claimNumber: "C1189",
+    incurred: "$0",
+    reserves: "$0",
+    paid: "$0",
+    recoveries: "$0",
+  },
 ];
 
 const recentActivity = [
@@ -124,65 +269,63 @@ const recentActivity = [
     date: "07-01-25",
     description: "Premium payment processed successfully.",
     user: "System",
-    category: "payment"
+    category: "payment",
   },
   {
     type: "Follow-up on recent claim #C1122 progress.",
     date: "06-30-25",
     description: "Provided update on claim status, awaiting adjuster report.",
     user: "UW John",
-    category: "claim"
+    category: "claim",
   },
   {
     type: "Confirmation of payment received premium.",
     date: "06-29-25",
     description: "Auto premium receipt sent to customer.",
     user: "System",
-    category: "payment"
+    category: "payment",
   },
   {
     type: "Logged customer preference for email communication.",
     date: "06-28-25",
     description: "Preferred contact method updated.",
     user: "Agent Johnson",
-    category: "profile"
-  }
+    category: "profile",
+  },
 ];
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
-    'active': 'bg-gray-50 text-gray-700 border-gray-200',
-    'bound': 'bg-gray-50 text-gray-700 border-gray-200',
-    'in progress': 'bg-gray-50 text-gray-700 border-gray-200',
-    'pending': 'bg-gray-100 text-gray-700 border-gray-200',
-    'expired': 'bg-gray-50 text-gray-600 border-gray-200',
-    'approved': 'bg-gray-50 text-gray-700 border-gray-200',
-    'closed': 'bg-gray-50 text-gray-600 border-gray-200',
-    'scheduled': 'bg-gray-50 text-gray-700 border-gray-200',
-    'open': 'bg-gray-100 text-gray-700 border-gray-200',
-    'reopen': 'bg-gray-100 text-gray-700 border-gray-200',
+    active: "bg-gray-50 text-gray-700 border-gray-200",
+    bound: "bg-gray-50 text-gray-700 border-gray-200",
+    "in progress": "bg-gray-50 text-gray-700 border-gray-200",
+    pending: "bg-gray-100 text-gray-700 border-gray-200",
+    expired: "bg-gray-50 text-gray-600 border-gray-200",
+    approved: "bg-gray-50 text-gray-700 border-gray-200",
+    closed: "bg-gray-50 text-gray-600 border-gray-200",
+    scheduled: "bg-gray-50 text-gray-700 border-gray-200",
+    open: "bg-gray-100 text-gray-700 border-gray-200",
+    reopen: "bg-gray-100 text-gray-700 border-gray-200",
   };
 
-  const color = statusConfig[status.toLowerCase()] || 'bg-gray-50 text-gray-600 border-gray-200';
+  const color =
+    statusConfig[status.toLowerCase()] ||
+    "bg-gray-50 text-gray-600 border-gray-200";
 
-  return (
-    <Badge className={`${color} border text-xs`}>
-      {status}
-    </Badge>
-  );
+  return <Badge className={`${color} border text-xs`}>{status}</Badge>;
 };
 
 const getPolicyIcon = (lob: string) => {
   switch (lob.toLowerCase()) {
-    case 'auto':
+    case "auto":
       return <Car size={14} className="text-blue-600" />;
-    case 'home':
+    case "home":
       return <Home size={14} className="text-blue-600" />;
-    case 'life':
-    case 'critical illness':
-    case 'disability':
+    case "life":
+    case "critical illness":
+    case "disability":
       return <Shield size={14} className="text-blue-600" />;
-    case 'business':
+    case "business":
       return <Briefcase size={14} className="text-blue-600" />;
     default:
       return <FileText size={14} className="text-blue-600" />;
@@ -191,15 +334,22 @@ const getPolicyIcon = (lob: string) => {
 
 const getPriorityColor = (priority: string) => {
   switch (priority) {
-    case 'high': return 'bg-gray-400';
-    case 'medium': return 'bg-gray-400';
-    case 'low': return 'bg-gray-400';
-    default: return 'bg-gray-400';
+    case "high":
+      return "bg-gray-400";
+    case "medium":
+      return "bg-gray-400";
+    case "low":
+      return "bg-gray-400";
+    default:
+      return "bg-gray-400";
   }
 };
 
-const getRowBgColor = (status: string, type: 'policy' | 'claim' | 'submission') => {
-  return 'hover:bg-gray-50';
+const getRowBgColor = (
+  status: string,
+  type: "policy" | "claim" | "submission",
+) => {
+  return "hover:bg-gray-50";
 };
 
 export default function Dashboard() {
@@ -208,7 +358,9 @@ export default function Dashboard() {
   // Filter states
   const [policyStatusFilter, setPolicyStatusFilter] = useState<string[]>([]);
   const [policyLobFilter, setPolicyLobFilter] = useState<string[]>([]);
-  const [submissionStatusFilter, setSubmissionStatusFilter] = useState<string[]>([]);
+  const [submissionStatusFilter, setSubmissionStatusFilter] = useState<
+    string[]
+  >([]);
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
 
   // Diaries state
@@ -237,11 +389,11 @@ export default function Dashboard() {
 
   const confirmCloseDiary = () => {
     if (diaryToClose) {
-      setDiariesData(prev => prev.map(diary =>
-        diary.id === diaryToClose
-          ? { ...diary, status: 'Closed' }
-          : diary
-      ));
+      setDiariesData((prev) =>
+        prev.map((diary) =>
+          diary.id === diaryToClose ? { ...diary, status: "Closed" } : diary,
+        ),
+      );
       setDiaryToClose(null);
     }
   };
@@ -252,52 +404,66 @@ export default function Dashboard() {
 
   // Filter and sort open diaries for display (High priority first, then Medium, then Low)
   const openDiaries = diariesData
-    .filter(diary => diary.status === 'Open')
+    .filter((diary) => diary.status === "Open")
     .sort((a, b) => {
-      const priorityOrder = { 'High': 0, 'Medium': 1, 'Low': 2 };
+      const priorityOrder = { High: 0, Medium: 1, Low: 2 };
       return priorityOrder[a.priority] - priorityOrder[b.priority];
     });
 
   const getPriorityBadgeColor = (priority: string) => {
-    return 'bg-gray-100 text-gray-700 border-gray-200';
+    return "bg-gray-100 text-gray-700 border-gray-200";
   };
 
   const getDiaryRowBgColor = (priority: string) => {
-    return 'hover:bg-gray-50';
+    return "hover:bg-gray-50";
   };
 
   // Get unique values for filters
-  const policyStatuses = [...new Set(policyData.map(p => p.status))];
-  const policyLobs = [...new Set(policyData.map(p => p.lob))];
-  const submissionStatuses = [...new Set(submissions.map(s => s.status))];
-  const claimsStatuses = [...new Set(claimsHistory.map(c => c.status))];
+  const policyStatuses = [...new Set(policyData.map((p) => p.status))];
+  const policyLobs = [...new Set(policyData.map((p) => p.lob))];
+  const submissionStatuses = [...new Set(submissions.map((s) => s.status))];
+  const claimsStatuses = [...new Set(claimsHistory.map((c) => c.status))];
 
   // Apply filters
-  const filteredPolicies = policyData.filter(policy => {
-    const statusMatch = policyStatusFilter.length === 0 || policyStatusFilter.includes(policy.status);
-    const lobMatch = policyLobFilter.length === 0 || policyLobFilter.includes(policy.lob);
+  const filteredPolicies = policyData.filter((policy) => {
+    const statusMatch =
+      policyStatusFilter.length === 0 ||
+      policyStatusFilter.includes(policy.status);
+    const lobMatch =
+      policyLobFilter.length === 0 || policyLobFilter.includes(policy.lob);
     return statusMatch && lobMatch;
   });
 
-  const filteredSubmissions = submissions.filter(submission => 
-    submissionStatusFilter.length === 0 || submissionStatusFilter.includes(submission.status)
+  const filteredSubmissions = submissions.filter(
+    (submission) =>
+      submissionStatusFilter.length === 0 ||
+      submissionStatusFilter.includes(submission.status),
   );
 
-  const filteredClaims = claimsHistory.filter(claim =>
-    claimsStatusFilter.length === 0 || claimsStatusFilter.includes(claim.status)
+  const filteredClaims = claimsHistory.filter(
+    (claim) =>
+      claimsStatusFilter.length === 0 ||
+      claimsStatusFilter.includes(claim.status),
   );
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
-
-
-
-
         {/* Row 1: Financial Information - Horizontal Strip */}
-        <div className={`transition-all duration-1000 delay-300 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to financial details')}>
-            <CardHeader className="pb-4 flex flex-row items-center justify-between cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsFinancialCollapsed(v => !v); }}>
+        <div
+          className={`transition-all duration-1000 delay-300 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+        >
+          <Card
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => console.log("Navigate to financial details")}
+          >
+            <CardHeader
+              className="pb-4 flex flex-row items-center justify-between cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsFinancialCollapsed((v) => !v);
+              }}
+            >
               <CardTitle className="text-base text-gray-700">
                 Financial Summary
               </CardTitle>
@@ -307,32 +473,47 @@ export default function Dashboard() {
                   className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                   onClick={(e) => {
                     e.stopPropagation();
-                    console.log('Navigate to payment');
+                    console.log("Navigate to payment");
                   }}
                 >
                   Pay Now
                 </Button>
-                <ChevronDown size={14} className={`text-gray-400 transition-transform ${isFinancialCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+                <ChevronDown
+                  size={14}
+                  className={`text-gray-400 transition-transform ${isFinancialCollapsed ? "-rotate-90" : "rotate-0"}`}
+                />
               </div>
             </CardHeader>
-            <CardContent className={isFinancialCollapsed ? 'hidden' : ''}>
+            <CardContent className={isFinancialCollapsed ? "hidden" : ""}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-gray-600 mb-1 font-medium">Amount Paid</div>
+                  <div className="text-xs text-gray-600 mb-1 font-medium">
+                    Amount Paid
+                  </div>
                   <div className="text-xl font-bold text-gray-800">$8,460</div>
-                  <div className="text-xs text-gray-500 mt-1">Aggregate premium paid to date</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Aggregate premium paid to date
+                  </div>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                 </div>
                 <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-gray-600 mb-1 font-medium">Total Due</div>
+                  <div className="text-xs text-gray-600 mb-1 font-medium">
+                    Total Due
+                  </div>
                   <div className="text-xl font-bold text-gray-800">$275</div>
-                  <div className="text-xs text-gray-500 mt-1">Aggregate premium currently due (YTD)</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Aggregate premium currently due (YTD)
+                  </div>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                 </div>
                 <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                  <div className="text-xs text-gray-600 mb-1 font-medium">Outstanding Balance</div>
+                  <div className="text-xs text-gray-600 mb-1 font-medium">
+                    Outstanding Balance
+                  </div>
                   <div className="text-xl font-bold text-gray-800">$190</div>
-                  <div className="text-xs text-gray-500 mt-1">Outstanding premium (after credit application)</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Outstanding premium (after credit application)
+                  </div>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                 </div>
               </div>
@@ -341,31 +522,57 @@ export default function Dashboard() {
         </div>
 
         {/* Row 2: Activity Timeline, Diaries */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+        >
           {/* Activity Timeline */}
           {isActivityCollapsed && (
             <div className="flex justify-end">
-              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsActivityCollapsed(false); }}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsActivityCollapsed(false);
+                }}
+              >
                 <ChevronDown size={14} className="-rotate-90 text-gray-400" />
               </Button>
             </div>
           )}
-          <Card className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isActivityCollapsed ? 'hidden' : ''}`} onClick={() => console.log('Navigate to activity timeline')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsActivityCollapsed(v => !v); }}>
+          <Card
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isActivityCollapsed ? "hidden" : ""}`}
+            onClick={() => console.log("Navigate to activity timeline")}
+          >
+            <CardHeader
+              className="pb-2 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsActivityCollapsed((v) => !v);
+              }}
+            >
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Activity Timeline
                 </CardTitle>
                 <div className="flex items-center">
-                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     View All
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isActivityCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown
+                    size={14}
+                    className={`ml-2 text-gray-400 transition-transform ${isActivityCollapsed ? "-rotate-90" : "rotate-0"}`}
+                  />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isActivityCollapsed ? 'hidden' : ''}>
+            <CardContent className={isActivityCollapsed ? "hidden" : ""}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -396,8 +603,12 @@ export default function Dashboard() {
                         <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
                           {activity.date}
                         </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{activity.type}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-600">{activity.user}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {activity.type}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-600">
+                          {activity.user}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -409,30 +620,60 @@ export default function Dashboard() {
           {/* Diaries */}
           {isDiariesCollapsed && (
             <div className="flex justify-end">
-              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsDiariesCollapsed(false); }}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsDiariesCollapsed(false);
+                }}
+              >
                 <ChevronDown size={14} className="-rotate-90 text-gray-400" />
               </Button>
             </div>
           )}
-          <Card className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isDiariesCollapsed ? 'hidden' : ''}`} onClick={() => console.log('Navigate to diaries')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsDiariesCollapsed(v => !v); }}>
+          <Card
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isDiariesCollapsed ? "hidden" : ""}`}
+            onClick={() => console.log("Navigate to diaries")}
+          >
+            <CardHeader
+              className="pb-2 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDiariesCollapsed((v) => !v);
+              }}
+            >
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Diaries
                 </CardTitle>
                 <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     View All
                   </Button>
-                  <Button variant="outline" size="sm" className="h-7 border-gray-300 text-gray-600" onClick={(e) => e.stopPropagation()}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 border-gray-300 text-gray-600"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Plus size={10} className="mr-1" />
                     Add
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isDiariesCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown
+                    size={14}
+                    className={`ml-2 text-gray-400 transition-transform ${isDiariesCollapsed ? "-rotate-90" : "rotate-0"}`}
+                  />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isDiariesCollapsed ? 'hidden' : ''}>
+            <CardContent className={isDiariesCollapsed ? "hidden" : ""}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -465,11 +706,20 @@ export default function Dashboard() {
                   </TableHeader>
                   <TableBody>
                     {openDiaries.map((diary) => (
-                      <TableRow key={diary.id} className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}>
-                        <TableCell className="text-xs py-1">{diary.dueDate}</TableCell>
-                        <TableCell className="text-xs py-1">{diary.title}</TableCell>
+                      <TableRow
+                        key={diary.id}
+                        className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
+                      >
+                        <TableCell className="text-xs py-1">
+                          {diary.dueDate}
+                        </TableCell>
+                        <TableCell className="text-xs py-1">
+                          {diary.title}
+                        </TableCell>
                         <TableCell className="py-1">
-                          <span className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
+                          >
                             {diary.priority}
                           </span>
                         </TableCell>
@@ -490,7 +740,10 @@ export default function Dashboard() {
                     ))}
                     {openDiaries.length === 0 && (
                       <TableRow>
-                        <TableCell colSpan={4} className="text-center py-4 text-gray-500 text-sm">
+                        <TableCell
+                          colSpan={4}
+                          className="text-center py-4 text-gray-500 text-sm"
+                        >
                           No open diaries
                         </TableCell>
                       </TableRow>
@@ -500,35 +753,60 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
-
         </div>
 
         {/* Row 2: Policy Details and Claims History */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+        >
           {/* Policy Details */}
           {isPoliciesCollapsed && (
             <div className="flex justify-end">
-              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsPoliciesCollapsed(false); }}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPoliciesCollapsed(false);
+                }}
+              >
                 <ChevronDown size={14} className="-rotate-90 text-gray-400" />
               </Button>
             </div>
           )}
-          <Card className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? 'hidden' : ''}`} onClick={() => console.log('Navigate to policy details')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsPoliciesCollapsed(v => !v); }}>
+          <Card
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? "hidden" : ""}`}
+            onClick={() => console.log("Navigate to policy details")}
+          >
+            <CardHeader
+              className="pb-2 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsPoliciesCollapsed((v) => !v);
+              }}
+            >
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Policies
                 </CardTitle>
                 <div className="flex items-center">
-                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     View All
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isPoliciesCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown
+                    size={14}
+                    className={`ml-2 text-gray-400 transition-transform ${isPoliciesCollapsed ? "-rotate-90" : "rotate-0"}`}
+                  />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isPoliciesCollapsed ? 'hidden' : ''}>
+            <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -579,19 +857,37 @@ export default function Dashboard() {
                   </TableHeader>
                   <TableBody>
                     {filteredPolicies.map((policy, index) => (
-                      <TableRow key={index} className={`h-10 ${getRowBgColor(policy.status, 'policy')} cursor-pointer`} onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('Open policy details', policy.policy);
-                      }}>
+                      <TableRow
+                        key={index}
+                        className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("Open policy details", policy.policy);
+                        }}
+                      >
                         <TableCell className="py-2">
-                          <span className="text-sm font-medium text-gray-800">{policy.policy}</span>
+                          <span className="text-sm font-medium text-gray-800">
+                            {policy.policy}
+                          </span>
                         </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{policy.lob}</TableCell>
-                        <TableCell className="py-2">{getStatusBadge(policy.status)}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{policy.startDate}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{policy.endDate}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">{policy.premiumDue}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">{policy.premiumPaid}</TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {policy.lob}
+                        </TableCell>
+                        <TableCell className="py-2">
+                          {getStatusBadge(policy.status)}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {policy.startDate}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {policy.endDate}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                          {policy.premiumDue}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                          {policy.premiumPaid}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -603,26 +899,51 @@ export default function Dashboard() {
           {/* Claims History */}
           {isClaimsCollapsed && (
             <div className="flex justify-end">
-              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsClaimsCollapsed(false); }}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsClaimsCollapsed(false);
+                }}
+              >
                 <ChevronDown size={14} className="-rotate-90 text-gray-400" />
               </Button>
             </div>
           )}
-          <Card className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isClaimsCollapsed ? 'hidden' : ''}`} onClick={() => console.log('Navigate to claims history')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsClaimsCollapsed(v => !v); }}>
+          <Card
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isClaimsCollapsed ? "hidden" : ""}`}
+            onClick={() => console.log("Navigate to claims history")}
+          >
+            <CardHeader
+              className="pb-2 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsClaimsCollapsed((v) => !v);
+              }}
+            >
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Claims
                 </CardTitle>
                 <div className="flex items-center">
-                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     View All
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isClaimsCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown
+                    size={14}
+                    className={`ml-2 text-gray-400 transition-transform ${isClaimsCollapsed ? "-rotate-90" : "rotate-0"}`}
+                  />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isClaimsCollapsed ? 'hidden' : ''}>
+            <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -672,20 +993,46 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredClaims.filter(claim => claim.status === 'Open' || claim.status === 'Reopen').map((claim, index) => (
-                      <TableRow key={index} className={`h-10 ${getRowBgColor(claim.status, 'claim')} cursor-pointer`} onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('Open claim details', claim.claimNumber);
-                      }}>
-                        <TableCell className="text-sm font-medium py-2 text-gray-800">{claim.claimNumber}</TableCell>
-                        <TableCell className="py-2">{getStatusBadge(claim.status)}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">{claim.date}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{claim.incurred}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{claim.reserves}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{claim.paid}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{claim.recoveries}</TableCell>
-                      </TableRow>
-                    ))}
+                    {filteredClaims
+                      .filter(
+                        (claim) =>
+                          claim.status === "Open" || claim.status === "Reopen",
+                      )
+                      .map((claim, index) => (
+                        <TableRow
+                          key={index}
+                          className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log(
+                              "Open claim details",
+                              claim.claimNumber,
+                            );
+                          }}
+                        >
+                          <TableCell className="text-sm font-medium py-2 text-gray-800">
+                            {claim.claimNumber}
+                          </TableCell>
+                          <TableCell className="py-2">
+                            {getStatusBadge(claim.status)}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
+                            {claim.date}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {claim.incurred}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {claim.reserves}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {claim.paid}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {claim.recoveries}
+                          </TableCell>
+                        </TableRow>
+                      ))}
                   </TableBody>
                 </Table>
               </div>
@@ -694,30 +1041,57 @@ export default function Dashboard() {
         </div>
 
         {/* Row 3: Submissions */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+        >
           {/* Submissions */}
           {isSubmissionsCollapsed && (
             <div className="flex justify-end">
-              <Button variant="ghost" size="sm" className="h-7" onClick={(e) => { e.stopPropagation(); setIsSubmissionsCollapsed(false); }}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSubmissionsCollapsed(false);
+                }}
+              >
                 <ChevronDown size={14} className="-rotate-90 text-gray-400" />
               </Button>
             </div>
           )}
-          <Card className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isSubmissionsCollapsed ? 'hidden' : ''}`} onClick={() => console.log('Navigate to submissions')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsSubmissionsCollapsed(v => !v); }}>
+          <Card
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isSubmissionsCollapsed ? "hidden" : ""}`}
+            onClick={() => console.log("Navigate to submissions")}
+          >
+            <CardHeader
+              className="pb-2 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsSubmissionsCollapsed((v) => !v);
+              }}
+            >
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Submissions
                 </CardTitle>
                 <div className="flex items-center">
-                  <Button variant="ghost" size="sm" className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium" onClick={(e) => e.stopPropagation()}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     View All
                   </Button>
-                  <ChevronDown size={14} className={`ml-2 text-gray-400 transition-transform ${isSubmissionsCollapsed ? '-rotate-90' : 'rotate-0'}`} />
+                  <ChevronDown
+                    size={14}
+                    className={`ml-2 text-gray-400 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : "rotate-0"}`}
+                  />
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isSubmissionsCollapsed ? 'hidden' : ''}>
+            <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
@@ -756,15 +1130,29 @@ export default function Dashboard() {
                   </TableHeader>
                   <TableBody>
                     {filteredSubmissions.map((submission, index) => (
-                      <TableRow key={index} className={`h-10 ${getRowBgColor(submission.status, 'submission')} cursor-pointer`} onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('Open submission details', submission.id);
-                      }}>
-                        <TableCell className="text-sm font-medium py-2 text-gray-800">{submission.id}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{submission.program}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{submission.proposedEffectiveDate}</TableCell>
-                        <TableCell className="py-2">{getStatusBadge(submission.status)}</TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">{submission.submissionType}</TableCell>
+                      <TableRow
+                        key={index}
+                        className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("Open submission details", submission.id);
+                        }}
+                      >
+                        <TableCell className="text-sm font-medium py-2 text-gray-800">
+                          {submission.id}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {submission.program}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {submission.proposedEffectiveDate}
+                        </TableCell>
+                        <TableCell className="py-2">
+                          {getStatusBadge(submission.status)}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {submission.submissionType}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -778,17 +1166,26 @@ export default function Dashboard() {
         </div>
 
         {/* Close Diary Confirmation Dialog */}
-        <AlertDialog open={diaryToClose !== null} onOpenChange={cancelCloseDiary}>
+        <AlertDialog
+          open={diaryToClose !== null}
+          onOpenChange={cancelCloseDiary}
+        >
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Close Diary</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to close this diary? This action cannot be undone.
+                Are you sure you want to close this diary? This action cannot be
+                undone.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel onClick={cancelCloseDiary}>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={confirmCloseDiary} className="bg-[#0054A6] hover:bg-[#003d7a]">
+              <AlertDialogCancel onClick={cancelCloseDiary}>
+                Cancel
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={confirmCloseDiary}
+                className="bg-[#0054A6] hover:bg-[#003d7a]"
+              >
                 Close Diary
               </AlertDialogAction>
             </AlertDialogFooter>
