@@ -46,7 +46,7 @@ export function PersonDetailsSection() {
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
           <CardHeader className="p-4 pb-0 cursor-pointer select-none" onClick={() => setIsCollapsed(v => !v)}>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-end w-full">
               <ChevronDown size={14} className={`text-gray-400 transition-transform ${isCollapsed ? '-rotate-90' : 'rotate-0'}`} />
             </div>
           </CardHeader>
