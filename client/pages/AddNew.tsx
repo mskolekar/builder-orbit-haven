@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 export default function AddNew() {
   const [isInternal, setIsInternal] = useState(false);
   const [needsOMS, setNeedsOMS] = useState(false);
-  const [needsB2C, setNeedsB2C] = useState(false);
   const [defineContacts, setDefineContacts] = useState(false);
   const navigate = useNavigate();
 
@@ -127,13 +126,6 @@ export default function AddNew() {
                           </div>
                           <Switch checked={needsOMS} onCheckedChange={setNeedsOMS} />
                         </div>
-                        <div className="flex items-center justify-between">
-                          <div className="space-y-1">
-                            <div className="text-sm font-medium text-gray-700">Login access to B2C?</div>
-                            <div className="text-xs text-gray-500">Enable customer portal login</div>
-                          </div>
-                          <Switch checked={needsB2C} onCheckedChange={setNeedsB2C} />
-                        </div>
                         {needsOMS && (
                           <div className="space-y-2">
                             <Label>Security Profile</Label>
@@ -148,12 +140,6 @@ export default function AddNew() {
                             </Select>
                           </div>
                         )}
-                        {needsB2C && (
-                          <div className="space-y-2">
-                            <Label>Login ID</Label>
-                            <Input placeholder="user@example.com" />
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
@@ -161,7 +147,8 @@ export default function AddNew() {
                   <div className="mt-6 flex justify-end">
                     <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={saveToOlivia}>Save</Button>
                   </div>
-                </TabsContent>
+                </div>
+              </TabsContent>
 
               <TabsContent value="organization" className="mt-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
