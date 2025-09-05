@@ -21,6 +21,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface SubItem {
   label: string;
@@ -39,7 +40,12 @@ const sidebarItems: SidebarItem[] = [
   { icon: FileText, label: "New Submission", path: "/new-submission" },
   { icon: FileText, label: "Submissions", path: "/submissions" },
   { icon: Shield, label: "Policies", path: "/policies" },
-  { icon: User, label: "Customer Center", path: "/overview/olivia" },
+  { icon: User, label: "Customer Center", path: "/overview", subItems: [
+      { label: "Olivia R (Insured)", path: "/overview/olivia" },
+      { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
+      { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
+      { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
+    ] },
   { icon: Briefcase, label: "Accounting", path: "/accounting" },
   { icon: Search, label: "Search Center", path: "/search" },
   { icon: Settings, label: "Other Utilities", path: "/utilities" },
@@ -198,10 +204,10 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                             to={subItem.path}
                             onClick={() => setIsOpen(false)}
                             className={cn(
-                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4",
+                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4",
                               isActive(subItem.path)
-                                ? "bg-white/15 text-white border-white/40"
-                                : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30",
+                                ? "bg-gray-100 text-gray-900 border-gray-300"
+                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300",
                             )}
                           >
                             {subItem.label}
