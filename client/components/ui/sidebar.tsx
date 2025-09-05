@@ -39,7 +39,7 @@ const sidebarItems: SidebarItem[] = [
   { icon: FileText, label: 'New Submission', path: '/new-submission' },
   { icon: FileText, label: 'Submissions', path: '/submissions' },
   { icon: Shield, label: 'Policies', path: '/policies' },
-  { icon: User, label: 'Customer Center', path: '/' },
+  { icon: User, label: 'Customer Center', path: '/customer-center' },
   { icon: Briefcase, label: 'Accounting', path: '/accounting' },
   { icon: Search, label: 'Search Center', path: '/search' },
   { icon: Settings, label: 'Other Utilities', path: '/utilities' },
