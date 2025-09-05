@@ -502,7 +502,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isPoliciesCollapsed ? 'hidden' : ''}>
+            <CardContent className={rowPCCollapsed === 'policies' ? 'hidden' : ''}>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
