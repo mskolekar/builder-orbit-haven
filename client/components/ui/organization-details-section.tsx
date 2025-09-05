@@ -26,7 +26,7 @@ export function OrganizationDetailsSection() {
                   .map((n) => n[0])
                   .join("")}
               </div>
-              <div>
+              <div className="flex-1">
                 <div className="flex items-center gap-3">
                   <h2 className="text-xl font-bold text-gray-900">
                     {org.name}
@@ -36,7 +36,7 @@ export function OrganizationDetailsSection() {
                   </Badge>
                 </div>
                 <p className="text-gray-600 font-medium">Organization</p>
-                <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+                <div className="hidden">
                   <div className="flex items-center gap-1">
                     <Briefcase size={14} className="text-gray-400" />{" "}
                     {org.industry}
@@ -49,7 +49,21 @@ export function OrganizationDetailsSection() {
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="flex items-center gap-2">
+                <Briefcase size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Industry</div>
+                  <div className="text-sm font-medium">{org.industry}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Reg. No</div>
+                  <div className="text-sm font-medium">{org.registrationNumber}</div>
+                </div>
+              </div>
               <div className="flex items-center gap-2">
                 <Phone size={14} className="text-gray-400" />
                 <div>
@@ -64,17 +78,12 @@ export function OrganizationDetailsSection() {
                   <div className="text-sm font-medium">{org.email}</div>
                 </div>
               </div>
-              <div className="flex items-center gap-2 md:col-span-1 col-span-2">
-                <MapPin size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Address</div>
-                  <div className="text-sm font-medium">{org.address}</div>
-                </div>
-              </div>
             </div>
 
-            <div className="mt-3 text-sm text-gray-500">
-              Customer since {org.memberSince}
+            <div className="mt-3 flex items-center gap-2 text-sm">
+              <MapPin size={14} className="text-gray-400" />
+              <span className="text-gray-500">Address:</span>
+              <span className="font-medium">{org.address}</span>
             </div>
           </CardContent>
         </Card>
