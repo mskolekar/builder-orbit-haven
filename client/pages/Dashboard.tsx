@@ -471,18 +471,20 @@ export default function Dashboard() {
               <CardTitle className="text-base text-gray-700">
                 Financial Summary
               </CardTitle>
-              <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("Navigate to payment");
-                  }}
-                >
-                  Pay Now
-                </Button>
-              </div>
+              {!isShawn && (
+                <div className="flex items-center gap-2">
+                  <Button
+                    size="sm"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      console.log("Navigate to payment");
+                    }}
+                  >
+                    Pay Now
+                  </Button>
+                </div>
+              )}
             </CardHeader>
             <CardContent className={isFinancialCollapsed ? "hidden" : ""}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
