@@ -451,6 +451,14 @@ export default function Dashboard() {
   const isJohn = profileId === "john-wills";
   const hideFinancial = isJohn || isShawn;
 
+  if (profileId === "new-person") {
+    return (
+      <div className="flex-1 bg-gray-50 p-6 overflow-auto">
+        <div className="max-w-7xl mx-auto" />
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
