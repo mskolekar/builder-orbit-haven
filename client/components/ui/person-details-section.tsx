@@ -49,20 +49,18 @@ export function PersonDetailsSection() {
             onClick={() => setIsCollapsed((v) => !v)}
           >
             <div className="flex items-center justify-between w-full">
-              <CardTitle className="text-base text-gray-700">Person Details</CardTitle>
               <div className="flex items-center gap-2">
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                  className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium items-start justify-end lg:items-center lg:justify-center"
                   onClick={(e) => {
                     e.stopPropagation();
                     navigateToProfile();
                   }}
                   title="Edit Personal Details"
                 >
-                  <Edit3 size={12} className="mr-1" />
-                  Edit
+                  <Edit3 size={12} />
                 </Button>
               </div>
             </div>
