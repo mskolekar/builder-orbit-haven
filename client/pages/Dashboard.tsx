@@ -736,127 +736,129 @@ export default function Dashboard() {
 
         {/* Row 2: Policy Details and Claims History */}
         <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+          className={`grid grid-cols-1 ${isShawn ? "" : "lg:grid-cols-2"} gap-6 transition-all duration-1000 delay-400 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
           {/* Policy Details */}
-          <Card
-            className={
-              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-            }
-            onClick={() => console.log("Navigate to policy details")}
-          >
-            <CardHeader
-              className="pb-2 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsPoliciesCollapsed((v) => !v);
-              }}
+          {!isShawn && (
+            <Card
+              className={
+                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+              }
+              onClick={() => console.log("Navigate to policy details")}
             >
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base text-gray-700">
-                  Policies
-                </CardTitle>
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View All
-                  </Button>
+              <CardHeader
+                className="pb-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPoliciesCollapsed((v) => !v);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base text-gray-700">
+                    Policies
+                  </CardTitle>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Policy Number
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Program/LOB
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Effective Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Expiration Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Premium Due
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Premium Paid
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredPolicies.map((policy, index) => (
-                      <TableRow
-                        key={index}
-                        className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          console.log("Open policy details", policy.policy);
-                        }}
-                      >
-                        <TableCell className="py-2">
-                          <span className="text-sm font-medium text-gray-800">
-                            {policy.policy}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {policy.lob}
-                        </TableCell>
-                        <TableCell className="py-2">
-                          {getStatusBadge(policy.status)}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {policy.startDate}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {policy.endDate}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">
-                          {policy.premiumDue}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 font-semibold">
-                          {policy.premiumPaid}
-                        </TableCell>
+              </CardHeader>
+              <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Policy Number
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Program/LOB
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Status
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Effective Date
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Expiration Date
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Premium Due
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Premium Paid
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredPolicies.map((policy, index) => (
+                        <TableRow
+                          key={index}
+                          className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log("Open policy details", policy.policy);
+                          }}
+                        >
+                          <TableCell className="py-2">
+                            <span className="text-sm font-medium text-gray-800">
+                              {policy.policy}
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.lob}
+                          </TableCell>
+                          <TableCell className="py-2">
+                            {getStatusBadge(policy.status)}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.startDate}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.endDate}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                            {policy.premiumDue}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                            {policy.premiumPaid}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Claims History */}
           <Card
@@ -986,112 +988,114 @@ export default function Dashboard() {
         </div>
 
         {/* Row 3: Submissions */}
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-        >
-          {/* Submissions */}
-          <Card
-            className={
-              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-            }
-            onClick={() => console.log("Navigate to submissions")}
+        {!isShawn && (
+          <div
+            className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
           >
-            <CardHeader
-              className="pb-2 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsSubmissionsCollapsed((v) => !v);
-              }}
+            {/* Submissions */}
+            <Card
+              className={
+                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+              }
+              onClick={() => console.log("Navigate to submissions")}
             >
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base text-gray-700">
-                  Submissions
-                </CardTitle>
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View All
-                  </Button>
+              <CardHeader
+                className="pb-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSubmissionsCollapsed((v) => !v);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base text-gray-700">
+                    Submissions
+                  </CardTitle>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Submission Number
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Program
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Proposed Effective Date
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Status
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Submission Type
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredSubmissions.map((submission, index) => (
-                      <TableRow
-                        key={index}
-                        className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          console.log("Open submission details", submission.id);
-                        }}
-                      >
-                        <TableCell className="text-sm font-medium py-2 text-gray-800">
-                          {submission.id}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {submission.program}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {submission.proposedEffectiveDate}
-                        </TableCell>
-                        <TableCell className="py-2">
-                          {getStatusBadge(submission.status)}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {submission.submissionType}
-                        </TableCell>
+              </CardHeader>
+              <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Submission Number
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Program
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Proposed Effective Date
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Status
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Submission Type
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredSubmissions.map((submission, index) => (
+                        <TableRow
+                          key={index}
+                          className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log("Open submission details", submission.id);
+                          }}
+                        >
+                          <TableCell className="text-sm font-medium py-2 text-gray-800">
+                            {submission.id}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.program}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.proposedEffectiveDate}
+                          </TableCell>
+                          <TableCell className="py-2">
+                            {getStatusBadge(submission.status)}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.submissionType}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
 
-          {/* Empty space to maintain layout consistency with Policy/Claims row */}
-          <div></div>
-        </div>
+            {/* Empty space to maintain layout consistency with Policy/Claims row */}
+            <div></div>
+          </div>
+        )}
 
         {/* Close Diary Confirmation Dialog */}
         <AlertDialog
