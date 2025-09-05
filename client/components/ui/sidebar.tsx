@@ -39,7 +39,7 @@ const sidebarItems: SidebarItem[] = [
   { icon: FileText, label: "New Submission", path: "/new-submission" },
   { icon: FileText, label: "Submissions", path: "/submissions" },
   { icon: Shield, label: "Policies", path: "/policies" },
-  { icon: User, label: "Customer Center", path: "/" },
+  { icon: User, label: "Customer Center", path: "/customer-center" },
   { icon: Briefcase, label: "Accounting", path: "/accounting" },
   { icon: Search, label: "Search Center", path: "/search" },
   { icon: Settings, label: "Other Utilities", path: "/utilities" },
@@ -81,11 +81,11 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   };
 
   const isMainPageActive = (item: SidebarItem) => {
-    if (item.path === "/" && item.label === "Customer Center") {
-      return location.pathname === "/";
+    if (item.label === "Customer Center") {
+      return location.pathname.startsWith("/customer-center") || location.pathname.startsWith("/overview");
     }
     if (item.path === "/" && item.label === "Home") {
-      return false; // Don't highlight Home when on Customer Center
+      return location.pathname === "/";
     }
     return location.pathname === item.path;
   };
