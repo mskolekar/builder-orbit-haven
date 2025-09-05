@@ -1,52 +1,67 @@
-import { Button } from './button';
-import { Badge } from './badge';
-import { Card, CardContent } from './card';
-import { 
-  CheckCircle, 
-  Calendar, 
-  Users, 
-  FileText, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Edit3 
-} from 'lucide-react';
+import { useState } from "react";
+import { Button } from "./button";
+import { Badge } from "./badge";
+import { Card, CardContent, CardHeader } from "./card";
+import {
+  CheckCircle,
+  Calendar,
+  Users,
+  FileText,
+  Phone,
+  Mail,
+  MapPin,
+  Edit3,
+  ChevronDown,
+} from "lucide-react";
 
 const customerData = {
-  name: "Rose K",
-  role: "Lawyer",
+  name: "Olivia R",
+  role: "Insured",
   status: "Active",
   dateOfBirth: "••••••••",
   gender: "Female",
   lsc: "000000",
   phone: "(416) 555-0123",
-  email: "rose.greenthumb@example.com",
+  email: "olivia.reynolds@example.com",
   address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
   memberSince: "2019",
-  satisfactionScore: 4.8
+  satisfactionScore: 4.8,
 };
 
 export function PersonDetailsSection() {
   const navigateToProfile = () => {
     // Navigate to profile
-    window.location.href = '/profile?section=personal-info';
+    window.location.href = "/profile?section=personal-info";
   };
 
   const navigateToCustomerDetails = () => {
     // Navigate to customer details page
-    window.location.href = '/customer-details';
+    window.location.href = "/customer-details";
   };
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div className="bg-white border-b border-gray-200 p-4">
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
-          <CardContent className="p-4">
+          <CardHeader
+            className="p-4 pb-0 cursor-pointer select-none"
+            onClick={() => setIsCollapsed((v) => !v)}
+          >
+            <div className="flex items-center justify-end w-full">
+              <ChevronDown
+                size={14}
+                className={`text-gray-400 transition-transform ${isCollapsed ? "-rotate-90" : "rotate-0"}`}
+              />
+            </div>
+          </CardHeader>
+          <CardContent className={`p-4 ${isCollapsed ? "hidden" : ""}`}>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
-                    RK
+                    OR
                   </div>
                 </div>
                 <div>
@@ -62,7 +77,9 @@ export function PersonDetailsSection() {
                       {customerData.status}
                     </Badge>
                   </div>
-                  <p className="text-gray-600 font-medium">{customerData.role}</p>
+                  <p className="text-gray-600 font-medium">
+                    {customerData.role}
+                  </p>
                   <div className="flex items-center gap-4 mt-2">
                     <div className="flex items-center gap-1 text-sm text-gray-500">
                       <Calendar size={12} />
@@ -71,7 +88,7 @@ export function PersonDetailsSection() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative">
                 <Button
                   variant="ghost"
@@ -85,7 +102,9 @@ export function PersonDetailsSection() {
                   <Calendar size={14} className="text-gray-400" />
                   <div>
                     <span className="text-xs text-gray-500">DOB</span>
-                    <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
+                    <p className="text-sm font-medium">
+                      {customerData.dateOfBirth}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -98,7 +117,7 @@ export function PersonDetailsSection() {
                 <div className="flex items-center gap-2">
                   <FileText size={14} className="text-gray-400" />
                   <div>
-                    <span className="text-xs text-gray-500">LSC#</span>
+                    <span className="text-xs text-gray-500">SSN#</span>
                     <p className="text-sm font-medium">{customerData.lsc}</p>
                   </div>
                 </div>
@@ -106,7 +125,9 @@ export function PersonDetailsSection() {
                   <Phone size={14} className="text-gray-400" />
                   <div className="min-w-0">
                     <span className="text-xs text-gray-500">Phone</span>
-                    <p className="text-sm font-medium whitespace-nowrap">{customerData.phone}</p>
+                    <p className="text-sm font-medium whitespace-nowrap">
+                      {customerData.phone}
+                    </p>
                   </div>
                 </div>
                 <div className="col-span-2 flex items-center gap-2">
@@ -118,7 +139,7 @@ export function PersonDetailsSection() {
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-3 flex items-center gap-2 text-sm">
               <MapPin size={14} className="text-gray-400" />
               <span className="text-gray-500">Address:</span>
