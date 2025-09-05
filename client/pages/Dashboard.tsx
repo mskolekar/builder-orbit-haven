@@ -50,7 +50,6 @@ import {
   Star,
   MoreHorizontal,
   ArrowUpDown,
-  ChevronDown,
 } from "lucide-react";
 
 const customerData = {
