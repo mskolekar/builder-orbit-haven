@@ -139,7 +139,7 @@ function AppContent() {
                       const currentKey = keys.find(k => (k === '/' ? path === '/' : path.startsWith(k))) || '/';
                       const crumbs: { label: string; to?: string }[] = [];
 
-                      crumbs.push({ label: 'Customer Center', to: '/' });
+                      crumbs.push({ label: 'Customer Center', to: '/customer-center' });
 
                       if (currentKey !== '/') {
                         crumbs.push(mainMap[currentKey]);
