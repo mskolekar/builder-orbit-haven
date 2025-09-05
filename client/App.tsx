@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Sidebar } from "@/components/ui/sidebar";
 import { CustomerCenterSidebar } from "@/components/ui/customer-center-sidebar";
 import { PersonDetailsSection } from "@/components/ui/person-details-section";
+import { PersonDetailsClaimant } from "@/components/ui/person-details-claimant";
 import { Header } from "@/components/ui/header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -313,6 +314,8 @@ function AppContent() {
                     <PersonDetailsSection />
                   ) : activeProfileKey === "abc-ltd" ? (
                     <OrganizationDetailsSection />
+                  ) : activeProfileKey === "shawn-elkins" ? (
+                    <PersonDetailsClaimant />
                   ) : (
                     <BasicDetailsSection
                       name={activeProfile.name}
