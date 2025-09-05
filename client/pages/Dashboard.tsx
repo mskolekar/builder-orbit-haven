@@ -489,7 +489,7 @@ export default function Dashboard() {
 
           {/* Policy Details */}
           <Card className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => console.log('Navigate to policy details')}>
-            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsPoliciesCollapsed(v => !v); }}>
+            <CardHeader className="pb-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setRowPCCollapsed(prev => prev === 'policies' ? null : 'policies'); }}>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base text-gray-700">
                   Policies
