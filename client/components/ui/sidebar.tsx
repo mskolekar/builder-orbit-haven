@@ -40,12 +40,17 @@ const sidebarItems: SidebarItem[] = [
   { icon: FileText, label: "New Submission", path: "/new-submission" },
   { icon: FileText, label: "Submissions", path: "/submissions" },
   { icon: Shield, label: "Policies", path: "/policies" },
-  { icon: User, label: "Customer Center", path: "/overview", subItems: [
+  {
+    icon: User,
+    label: "Customer Center",
+    path: "/overview",
+    subItems: [
       { label: "Olivia R (Insured)", path: "/overview/olivia" },
       { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
       { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
       { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
-    ] },
+    ],
+  },
   { icon: Briefcase, label: "Accounting", path: "/accounting" },
   { icon: Search, label: "Search Center", path: "/search" },
   { icon: Settings, label: "Other Utilities", path: "/utilities" },
@@ -67,9 +72,9 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>(() => (
-    location.pathname.startsWith('/overview') ? ['/overview'] : []
-  ));
+  const [expandedItems, setExpandedItems] = useState<string[]>(() =>
+    location.pathname.startsWith("/overview") ? ["/overview"] : [],
+  );
 
   const toggleExpanded = (itemPath: string) => {
     setExpandedItems((prev) =>
