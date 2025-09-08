@@ -344,10 +344,10 @@ function AppContent() {
                       role={activeProfile.role}
                       status={activeProfile.status}
                       memberSince={activeProfile.memberSince}
-                      phone={activeProfileKey === "mark-jacobs" ? "—" : newPersonData?.phone}
-                      email={activeProfileKey === "mark-jacobs" ? "—" : newPersonData?.email}
-                      address={activeProfileKey === "mark-jacobs" ? "—" : newPersonData?.address}
-                      ssin={activeProfileKey === "mark-jacobs" ? "—" : undefined}
+                      phone={activeProfileKey === "mark-jacobs" ? "(555) 210-9988" : newPersonData?.phone}
+                      email={activeProfileKey === "mark-jacobs" ? "mark.jacobs@example.com" : newPersonData?.email}
+                      address={activeProfileKey === "mark-jacobs" ? "123 Market St, Springfield, IL 62704" : newPersonData?.address}
+                      ssin={activeProfileKey === "mark-jacobs" ? "123-45-6789" : undefined}
                     />
                   ))}
                 <Routes>
