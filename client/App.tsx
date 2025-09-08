@@ -348,6 +348,7 @@ function AppContent() {
                       email={activeProfileKey === "mark-jacobs" ? "mark.jacobs@example.com" : newPersonData?.email}
                       address={activeProfileKey === "mark-jacobs" ? "123 Market St, Springfield, IL 62704" : newPersonData?.address}
                       ssin={activeProfileKey === "mark-jacobs" ? "123-45-6789" : undefined}
+                      showMemberSince={activeProfileKey !== "mark-jacobs"}
                     />
                   ))}
                 <Routes>
