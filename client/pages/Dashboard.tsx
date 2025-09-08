@@ -1585,6 +1585,13 @@ export default function Dashboard() {
                               </TableCell>
                             </TableRow>
                           ))}
+                          {isProspect && (
+                            <TableRow>
+                              <TableCell colSpan={5} className="text-center py-6 text-gray-500 text-sm">
+                                No submissions in progress. Create your first submission to begin.
+                              </TableCell>
+                            </TableRow>
+                          )}
                         </TableBody>
                       </Table>
                     </div>
