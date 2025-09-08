@@ -55,7 +55,7 @@ export function BasicDetailsSection({
               </div>
             </div>
 
-            {(phone || email || address || ssin) && (
+            {(phone || email || ssin) && (
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 {phone && (
                   <div className="flex items-center gap-2">
@@ -75,15 +75,6 @@ export function BasicDetailsSection({
                     </div>
                   </div>
                 )}
-                {address && (
-                  <div className="flex items-center gap-2">
-                    <MapPin size={14} className="text-gray-400" />
-                    <div>
-                      <div className="text-xs text-gray-500">Address</div>
-                      <div className="text-sm font-medium">{address}</div>
-                    </div>
-                  </div>
-                )}
                 {ssin && (
                   <div className="flex items-center gap-2">
                     <IdCard size={14} className="text-gray-400" />
@@ -93,6 +84,16 @@ export function BasicDetailsSection({
                     </div>
                   </div>
                 )}
+              </div>
+            )}
+
+            {address && (
+              <div className="mt-3 flex items-center gap-2">
+                <MapPin size={14} className="text-gray-400" />
+                <div>
+                  <span className="text-xs text-gray-500 mr-1">Address:</span>
+                  <span className="text-sm font-medium">{address}</span>
+                </div>
               </div>
             )}
           </CardContent>
