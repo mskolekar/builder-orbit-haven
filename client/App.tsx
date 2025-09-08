@@ -52,6 +52,12 @@ const profileMap: Record<
     role: "Organization",
     memberSince: "2017",
   },
+  "mark-jacobs": {
+    name: "Mark Jacobs",
+    status: "Active",
+    role: "Prospect",
+    memberSince: "2025",
+  },
 };
 
 function AppContent() {
@@ -338,9 +344,10 @@ function AppContent() {
                       role={activeProfile.role}
                       status={activeProfile.status}
                       memberSince={activeProfile.memberSince}
-                      phone={newPersonData?.phone}
-                      email={newPersonData?.email}
-                      address={newPersonData?.address}
+                      phone={activeProfileKey === "mark-jacobs" ? "—" : newPersonData?.phone}
+                      email={activeProfileKey === "mark-jacobs" ? "—" : newPersonData?.email}
+                      address={activeProfileKey === "mark-jacobs" ? "—" : newPersonData?.address}
+                      ssin={activeProfileKey === "mark-jacobs" ? "—" : undefined}
                     />
                   ))}
                 <Routes>

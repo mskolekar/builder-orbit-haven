@@ -47,6 +47,7 @@ const sidebarItems: SidebarItem[] = [
     subItems: [
       { label: "Olivia R (Insured)", path: "/overview/olivia" },
       { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
+      { label: "Mark Jacobs (Prospect)", path: "/overview/mark-jacobs" },
       { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
       { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
       { label: "Add New", path: "/overview/add-new" },
