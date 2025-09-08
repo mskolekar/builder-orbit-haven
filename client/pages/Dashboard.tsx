@@ -909,8 +909,8 @@ export default function Dashboard() {
                         <TableCell
                           colSpan={4}
                           className="text-center py-4 text-gray-500 text-sm"
-                        >
-                          There are no diaries available as yet.
+>
+                          {isProspect ? "There are no diaries available as yet." : "No open diaries"}
                         </TableCell>
                       </TableRow>
                     )}
