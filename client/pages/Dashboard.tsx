@@ -4,7 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ColumnFilter } from "@/components/ui/column-filter";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -486,7 +491,13 @@ export default function Dashboard() {
   const hideFinancial = isJohn || isShawn;
 
   const getTooltipText = (
-    section: "financial" | "activity" | "diaries" | "policies" | "claims" | "submissions",
+    section:
+      | "financial"
+      | "activity"
+      | "diaries"
+      | "policies"
+      | "claims"
+      | "submissions",
   ): string | undefined => {
     if (isOlivia) {
       switch (section) {
@@ -746,14 +757,14 @@ export default function Dashboard() {
                           <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
                             {activity.date}
                           </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {activity.type}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-600">
-                          {activity.user}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {activity.type}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-600">
+                            {activity.user}
+                          </TableCell>
+                        </TableRow>
+                      ))}
                   </TableBody>
                 </Table>
               </div>
@@ -920,36 +931,39 @@ export default function Dashboard() {
               >
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base text-gray-700">
-                  Policies
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  {getTooltipText("policies") && (
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button
-                            className="p-1 text-gray-400 hover:text-gray-600"
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label="Info"
+                    Policies
+                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    {getTooltipText("policies") && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              className="p-1 text-gray-400 hover:text-gray-600"
+                              onClick={(e) => e.stopPropagation()}
+                              aria-label="Info"
+                            >
+                              <Info size={14} />
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="top"
+                            className="max-w-xs text-xs"
                           >
-                            <Info size={14} />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent side="top" className="max-w-xs text-xs">
-                          {getTooltipText("policies")}
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  )}
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View All
-                  </Button>
-                </div>
+                            {getTooltipText("policies")}
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
@@ -1075,7 +1089,10 @@ export default function Dashboard() {
                               <Info size={14} />
                             </button>
                           </TooltipTrigger>
-                          <TooltipContent side="top" className="max-w-xs text-xs">
+                          <TooltipContent
+                            side="top"
+                            className="max-w-xs text-xs"
+                          >
                             {getTooltipText("submissions")}
                           </TooltipContent>
                         </Tooltip>
@@ -1195,7 +1212,10 @@ export default function Dashboard() {
                               <Info size={14} />
                             </button>
                           </TooltipTrigger>
-                          <TooltipContent side="top" className="max-w-xs text-xs">
+                          <TooltipContent
+                            side="top"
+                            className="max-w-xs text-xs"
+                          >
                             {getTooltipText("claims")}
                           </TooltipContent>
                         </Tooltip>
@@ -1406,154 +1426,157 @@ export default function Dashboard() {
         </div>
 
         {/* Row 3 */}
-        {isJohn ? (
-          null
-        ) : (
-          !isShawn && (
-            <div
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-            >
-              {/* Submissions */}
-              <Card
-                className={
-                  "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-                }
-                onClick={() => console.log("Navigate to submissions")}
+        {isJohn
+          ? null
+          : !isShawn && (
+              <div
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
               >
-                <CardHeader
-                  className="pb-2 cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsSubmissionsCollapsed((v) => !v);
-                  }}
+                {/* Submissions */}
+                <Card
+                  className={
+                    "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+                  }
+                  onClick={() => console.log("Navigate to submissions")}
                 >
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-base text-gray-700">
-                    Submissions
-                  </CardTitle>
-                  <div className="flex items-center gap-2">
-                    {getTooltipText("submissions") && (
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <button
-                              className="p-1 text-gray-400 hover:text-gray-600"
-                              onClick={(e) => e.stopPropagation()}
-                              aria-label="Info"
-                            >
-                              <Info size={14} />
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" className="max-w-xs text-xs">
-                            {getTooltipText("submissions")}
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    )}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
-                  </div>
-                </CardHeader>
-                <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Submission Number
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Program
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Proposed Effective Date
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Status
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Submission Type
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {filteredSubmissions.map((submission, index) => (
-                          <TableRow
-                            key={index}
-                            className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log(
-                                "Open submission details",
-                                submission.id,
-                              );
-                            }}
-                          >
-                            <TableCell className="text-sm font-medium py-2 text-gray-800">
-                              {submission.id}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {submission.program}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {submission.proposedEffectiveDate}
-                            </TableCell>
-                            <TableCell className="py-2">
-                              {getStatusBadge(submission.status)}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {submission.submissionType}
-                            </TableCell>
+                  <CardHeader
+                    className="pb-2 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsSubmissionsCollapsed((v) => !v);
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-base text-gray-700">
+                        Submissions
+                      </CardTitle>
+                      <div className="flex items-center gap-2">
+                        {getTooltipText("submissions") && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <button
+                                  className="p-1 text-gray-400 hover:text-gray-600"
+                                  onClick={(e) => e.stopPropagation()}
+                                  aria-label="Info"
+                                >
+                                  <Info size={14} />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent
+                                side="top"
+                                className="max-w-xs text-xs"
+                              >
+                                {getTooltipText("submissions")}
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          View All
+                        </Button>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent
+                    className={isSubmissionsCollapsed ? "hidden" : ""}
+                  >
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Submission Number
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Program
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Proposed Effective Date
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Status
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
+                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                              <div className="flex items-center gap-1">
+                                Submission Type
+                                <ArrowUpDown
+                                  size={12}
+                                  className="text-gray-400"
+                                />
+                              </div>
+                            </TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </CardContent>
-              </Card>
+                        </TableHeader>
+                        <TableBody>
+                          {filteredSubmissions.map((submission, index) => (
+                            <TableRow
+                              key={index}
+                              className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                console.log(
+                                  "Open submission details",
+                                  submission.id,
+                                );
+                              }}
+                            >
+                              <TableCell className="text-sm font-medium py-2 text-gray-800">
+                                {submission.id}
+                              </TableCell>
+                              <TableCell className="text-sm py-2 text-gray-700">
+                                {submission.program}
+                              </TableCell>
+                              <TableCell className="text-sm py-2 text-gray-700">
+                                {submission.proposedEffectiveDate}
+                              </TableCell>
+                              <TableCell className="py-2">
+                                {getStatusBadge(submission.status)}
+                              </TableCell>
+                              <TableCell className="text-sm py-2 text-gray-700">
+                                {submission.submissionType}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </CardContent>
+                </Card>
 
-              {/* Empty space to maintain layout consistency with Policy/Claims row */}
-              <div></div>
-            </div>
-          )
-        )}
+                {/* Empty space to maintain layout consistency with Policy/Claims row */}
+                <div></div>
+              </div>
+            )}
 
         {/* Close Diary Confirmation Dialog */}
         <AlertDialog
