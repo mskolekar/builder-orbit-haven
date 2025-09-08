@@ -54,7 +54,7 @@ const profileMap: Record<
   },
   "mark-jacobs": {
     name: "Mark Jacobs",
-    status: "Active",
+    status: "New",
     role: "Prospect",
     memberSince: "2025",
   },
