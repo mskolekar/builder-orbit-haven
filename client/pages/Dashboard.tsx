@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ColumnFilter } from "@/components/ui/column-filter";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -51,6 +52,7 @@ import {
   MoreHorizontal,
   ArrowUpDown,
   ChevronDown,
+  Info,
 } from "lucide-react";
 
 const customerData = {
@@ -294,6 +296,37 @@ const recentActivity = [
   },
 ];
 
+const underwriterRecentActivity = [
+  {
+    type: "Renewal proposal quote shared with broker.",
+    date: "07-01-25",
+    description: "Renewal proposal quote shared with broker.",
+    user: "UW John",
+    category: "policy",
+  },
+  {
+    type: "Endorsement committed #1-8793492.",
+    date: "06-30-25",
+    description: "Endorsement committed.",
+    user: "UW John",
+    category: "policy",
+  },
+  {
+    type: "Requested documents for UW review (Sub# 1-928763A-01).",
+    date: "06-29-25",
+    description: "Requested documents for underwriting review.",
+    user: "UW John",
+    category: "submission",
+  },
+  {
+    type: "Logged customer preference for email communication.",
+    date: "06-28-25",
+    description: "Preferred contact method updated.",
+    user: "UW John",
+    category: "profile",
+  },
+];
+
 const getStatusBadge = (status: string) => {
   const statusConfig = {
     active: "bg-gray-50 text-gray-700 border-gray-200",
@@ -449,7 +482,42 @@ export default function Dashboard() {
   const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
+  const isOlivia = profileId === "olivia";
   const hideFinancial = isJohn || isShawn;
+
+  const getTooltipText = (
+    section: "financial" | "activity" | "diaries" | "policies" | "claims" | "submissions",
+  ): string | undefined => {
+    if (isOlivia) {
+      switch (section) {
+        case "financial":
+          return "Shows the Insured’s aggregate policy financials (paid, due, outstanding).";
+        case "activity":
+          return "Shows all recent activities across the Insured’s policies, claims, and submissions.";
+        case "diaries":
+          return "Shows diaries linked to the Insured’s policies, claims, or submissions.";
+        case "policies":
+          return "Shows active policies and expired ones with dues/credits. ‘View All’ link takes user to the complete list.";
+        case "claims":
+          return "Shows the Insured’s open or reopened claims. ‘View All’ link takes user to the complete list.";
+        case "submissions":
+          return "Shows the Insured’s in-progress submissions. ‘View All’ link takes user to the complete list.";
+      }
+    }
+    if (isJohn) {
+      switch (section) {
+        case "activity":
+          return "Shows the Underwriter’s recent activities (quotes, endorsements, approvals, notes).";
+        case "diaries":
+          return "Shows diaries assigned to the Underwriter or linked to their policies/submissions.";
+        case "policies":
+          return "Shows policies where the Underwriter is assigned. ‘View All’ link takes user to the complete list.";
+        case "submissions":
+          return "Shows submissions assigned to the Underwriter (new/renewal, in progress). ‘View All’ link takes user to the complete list.";
+      }
+    }
+    return undefined;
+  };
 
   if (profileId === "new-person") {
     return (
@@ -482,6 +550,24 @@ export default function Dashboard() {
               </CardTitle>
               {!isShawn && (
                 <div className="flex items-center gap-2">
+                  {getTooltipText("financial") && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            className="p-1 text-gray-400 hover:text-gray-600"
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label="Info"
+                          >
+                            <Info size={14} />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="top" className="max-w-xs text-xs">
+                          {getTooltipText("financial")}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                   <Button
                     size="sm"
                     className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
@@ -597,7 +683,25 @@ export default function Dashboard() {
                 <CardTitle className="text-base text-gray-700">
                   Activity Timeline
                 </CardTitle>
-                <div className="flex items-center">
+                <div className="flex items-center gap-2">
+                  {getTooltipText("activity") && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            className="p-1 text-gray-400 hover:text-gray-600"
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label="Info"
+                          >
+                            <Info size={14} />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="top" className="max-w-xs text-xs">
+                          {getTooltipText("activity")}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
@@ -635,11 +739,13 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {recentActivity.slice(0, 4).map((activity, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-gray-50">
-                        <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
-                          {activity.date}
-                        </TableCell>
+                    {(isJohn ? underwriterRecentActivity : recentActivity)
+                      .slice(0, 4)
+                      .map((activity, index) => (
+                        <TableRow key={index} className="h-10 hover:bg-gray-50">
+                          <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
+                            {activity.date}
+                          </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">
                           {activity.type}
                         </TableCell>
@@ -673,6 +779,24 @@ export default function Dashboard() {
                   Diaries
                 </CardTitle>
                 <div className="flex items-center gap-2">
+                  {getTooltipText("diaries") && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            className="p-1 text-gray-400 hover:text-gray-600"
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label="Info"
+                          >
+                            <Info size={14} />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="top" className="max-w-xs text-xs">
+                          {getTooltipText("diaries")}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
@@ -796,18 +920,36 @@ export default function Dashboard() {
               >
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base text-gray-700">
-                    Policies
-                  </CardTitle>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
+                  Policies
+                </CardTitle>
+                <div className="flex items-center gap-2">
+                  {getTooltipText("policies") && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            className="p-1 text-gray-400 hover:text-gray-600"
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label="Info"
+                          >
+                            <Info size={14} />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="top" className="max-w-xs text-xs">
+                          {getTooltipText("policies")}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    View All
+                  </Button>
+                </div>
                 </div>
               </CardHeader>
               <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
@@ -920,7 +1062,25 @@ export default function Dashboard() {
                   <CardTitle className="text-base text-gray-700">
                     Submissions
                   </CardTitle>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2">
+                    {getTooltipText("submissions") && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              className="p-1 text-gray-400 hover:text-gray-600"
+                              onClick={(e) => e.stopPropagation()}
+                              aria-label="Info"
+                            >
+                              <Info size={14} />
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="max-w-xs text-xs">
+                            {getTooltipText("submissions")}
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
                     <Button
                       variant="ghost"
                       size="sm"
@@ -1022,7 +1182,25 @@ export default function Dashboard() {
                   <CardTitle className="text-base text-gray-700">
                     {isShawn ? "Claims & Incidents" : "Claims"}
                   </CardTitle>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2">
+                    {getTooltipText("claims") && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              className="p-1 text-gray-400 hover:text-gray-600"
+                              onClick={(e) => e.stopPropagation()}
+                              aria-label="Info"
+                            >
+                              <Info size={14} />
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="max-w-xs text-xs">
+                            {getTooltipText("claims")}
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
                     <Button
                       variant="ghost"
                       size="sm"
@@ -1251,18 +1429,36 @@ export default function Dashboard() {
                 >
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-base text-gray-700">
-                      Submissions
-                    </CardTitle>
-                    <div className="flex items-center">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        View All
-                      </Button>
-                    </div>
+                    Submissions
+                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    {getTooltipText("submissions") && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              className="p-1 text-gray-400 hover:text-gray-600"
+                              onClick={(e) => e.stopPropagation()}
+                              aria-label="Info"
+                            >
+                              <Info size={14} />
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="max-w-xs text-xs">
+                            {getTooltipText("submissions")}
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View All
+                    </Button>
+                  </div>
                   </div>
                 </CardHeader>
                 <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
