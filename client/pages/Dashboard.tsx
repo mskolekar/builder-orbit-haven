@@ -265,25 +265,25 @@ const claimsHistory = [
 
 const recentActivity = [
   {
-    type: "Last Premium Paid - $150",
+    type: "Last Premium Paid – $150",
     date: "07-01-25",
     description: "Premium payment processed successfully.",
     user: "System",
     category: "payment",
   },
   {
-    type: "Follow-up on recent claim #C1122 progress.",
+    type: "Renewal proposal quote shared with customer",
     date: "06-30-25",
-    description: "Provided update on claim status, awaiting adjuster report.",
+    description: "Provided update on renewal proposal shared with customer.",
     user: "UW John",
-    category: "claim",
+    category: "policy",
   },
   {
-    type: "Confirmation of payment received premium.",
+    type: "Policy endorsement processed – Address updated",
     date: "06-29-25",
-    description: "Auto premium receipt sent to customer.",
-    user: "System",
-    category: "payment",
+    description: "Endorsement completed and address updated.",
+    user: "UWA Krish",
+    category: "policy",
   },
   {
     type: "Logged customer preference for email communication.",
@@ -1229,136 +1229,7 @@ export default function Dashboard() {
 
         {/* Row 3 */}
         {isJohn ? (
-          <div
-            className={`grid grid-cols-1 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-          >
-            {/* Claims moved to last row for John */}
-            <Card
-              className={
-                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-              }
-              onClick={() => console.log("Navigate to claims history")}
-            >
-              <CardHeader
-                className="pb-2 cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsClaimsCollapsed((v) => !v);
-                }}
-              >
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-base text-gray-700">
-                    Claims
-                  </CardTitle>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Claim Number
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Status
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
-                          <div className="flex items-center gap-1">
-                            Loss Date
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Incurred
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Reserves
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Paid
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Recoveries
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredClaims
-                        .filter(
-                          (claim) =>
-                            claim.status === "Open" ||
-                            claim.status === "Reopen",
-                        )
-                        .map((claim, index) => (
-                          <TableRow
-                            key={index}
-                            className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log(
-                                "Open claim details",
-                                claim.claimNumber,
-                              );
-                            }}
-                          >
-                            <TableCell className="text-sm font-medium py-2 text-gray-800">
-                              {claim.claimNumber}
-                            </TableCell>
-                            <TableCell className="py-2">
-                              {getStatusBadge(claim.status)}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
-                              {claim.date}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.incurred}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.reserves}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.paid}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.recoveries}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          null
         ) : (
           !isShawn && (
             <div
