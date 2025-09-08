@@ -1440,6 +1440,13 @@ export default function Dashboard() {
                                 </TableCell>
                               </TableRow>
                             ))}
+                            {isProspect && (
+                              <TableRow>
+                                <TableCell colSpan={7} className="text-center py-6 text-gray-500 text-sm">
+                                  No claims filed yet.
+                                </TableCell>
+                              </TableRow>
+                            )}
                         </TableBody>
                       </>
                     )}
