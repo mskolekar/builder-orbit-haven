@@ -1050,6 +1050,13 @@ export default function Dashboard() {
                           </TableCell>
                         </TableRow>
                       ))}
+                      {isProspect && (
+                        <TableRow>
+                          <TableCell colSpan={7} className="text-center py-6 text-gray-500 text-sm">
+                            No policies to display. Start a quote to create first policy.
+                          </TableCell>
+                        </TableRow>
+                      )}
                     </TableBody>
                   </Table>
                 </div>
