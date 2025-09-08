@@ -871,7 +871,7 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {openDiaries.map((diary) => (
+                    {(isProspect ? [] : openDiaries).map((diary) => (
                       <TableRow
                         key={diary.id}
                         className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
