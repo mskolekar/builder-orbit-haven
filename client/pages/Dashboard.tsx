@@ -1402,7 +1402,7 @@ export default function Dashboard() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {filteredClaims
+                          {(isProspect ? [] : filteredClaims)
                             .filter(
                               (claim) =>
                                 claim.status === "Open" ||
