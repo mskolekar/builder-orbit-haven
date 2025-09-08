@@ -504,7 +504,7 @@ export default function Dashboard() {
         case "financial":
           return "Shows the Insured’s aggregate policy financials (paid, due, outstanding).";
         case "activity":
-          return "Shows all recent activities across the Insured’s policies, claims, and submissions.";
+          return "Shows recent activities across the Insured’s policies, claims, and submissions.";
         case "diaries":
           return "Shows diaries linked to the Insured’s policies, claims, or submissions.";
         case "policies":
@@ -518,7 +518,7 @@ export default function Dashboard() {
     if (isJohn) {
       switch (section) {
         case "activity":
-          return "Shows the Underwriter’s recent activities (quotes, endorsements, approvals, notes).";
+          return "Shows the Underwriter’s recent activities (quotes, endorsements etc).";
         case "diaries":
           return "Shows diaries assigned to the Underwriter or linked to their policies/submissions.";
         case "policies":
