@@ -1165,7 +1165,7 @@ export default function Dashboard() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {filteredSubmissions.map((submission, index) => (
+                      {(isProspect ? [] : filteredSubmissions).map((submission, index) => (
                         <TableRow
                           key={index}
                           className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
@@ -1556,7 +1556,7 @@ export default function Dashboard() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {filteredSubmissions.map((submission, index) => (
+                          {(isProspect ? [] : filteredSubmissions).map((submission, index) => (
                             <TableRow
                               key={index}
                               className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
