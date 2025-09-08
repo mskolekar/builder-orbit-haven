@@ -1016,7 +1016,7 @@ export default function Dashboard() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {filteredPolicies.map((policy, index) => (
+                      {(isProspect ? [] : filteredPolicies).map((policy, index) => (
                         <TableRow
                           key={index}
                           className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
