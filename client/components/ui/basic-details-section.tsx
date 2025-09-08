@@ -11,6 +11,7 @@ export interface BasicDetailsProps {
   email?: string;
   address?: string;
   ssin?: string;
+  showMemberSince?: boolean;
 }
 
 export function BasicDetailsSection({
@@ -22,6 +23,7 @@ export function BasicDetailsSection({
   email,
   address,
   ssin,
+  showMemberSince = true,
 }: BasicDetailsProps) {
   return (
     <div className="bg-white border-b border-gray-200 p-4">
@@ -45,7 +47,9 @@ export function BasicDetailsSection({
                 <p className="text-gray-600 font-medium">{role}</p>
                 <div className="flex items-center gap-4 mt-2">
                   <div className="flex items-center gap-1 text-sm text-gray-500">
-                    Customer since {memberSince}
+                    {showMemberSince ? (
+                      <>Customer since {memberSince}</>
+                    ) : null}
                   </div>
                 </div>
               </div>
