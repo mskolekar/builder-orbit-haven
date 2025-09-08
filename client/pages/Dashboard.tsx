@@ -488,6 +488,7 @@ export default function Dashboard() {
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
   const isOlivia = profileId === "olivia";
+  const isProspect = profileId === "mark-jacobs";
   const hideFinancial = isJohn || isShawn;
 
   const getTooltipText = (
