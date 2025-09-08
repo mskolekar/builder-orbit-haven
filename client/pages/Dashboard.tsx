@@ -759,7 +759,7 @@ export default function Dashboard() {
                       isJohn
                         ? underwriterRecentActivity
                         : isProspect
-                          ? [{ date: "", type: "Prospect profile created.", user: "" }]
+                          ? [{ date: "09-08-25", type: "Prospect profile created.", user: "Agent Johnson" }]
                           : recentActivity
                     )
                       .slice(0, 4)
@@ -1258,6 +1258,9 @@ export default function Dashboard() {
                 </div>
               </CardHeader>
               <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
+                {isProspect ? (
+                  <div className="p-6 text-center text-gray-500 text-sm">No claims filed yet.</div>
+                ) : (
                 <div className="overflow-x-auto">
                   <Table>
                     {isShawn ? (
@@ -1452,6 +1455,7 @@ export default function Dashboard() {
                     )}
                   </Table>
                 </div>
+                )}
               </CardContent>
             </Card>
           )}
