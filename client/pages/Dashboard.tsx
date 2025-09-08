@@ -750,7 +750,13 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {(isJohn ? underwriterRecentActivity : recentActivity)
+                    {(
+                      isJohn
+                        ? underwriterRecentActivity
+                        : isProspect
+                          ? [{ date: "", type: "Prospect profile created.", user: "" }]
+                          : recentActivity
+                    )
                       .slice(0, 4)
                       .map((activity, index) => (
                         <TableRow key={index} className="h-10 hover:bg-gray-50">
