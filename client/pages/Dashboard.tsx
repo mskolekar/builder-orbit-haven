@@ -523,7 +523,7 @@ export default function Dashboard() {
         case "diaries":
           return "Shows diaries assigned to the Underwriter or linked to their policies/submissions.";
         case "policies":
-          return "Shows policies where the Underwriter is assigned. ‘View All�� link takes user to the complete list.";
+          return "Shows policies where the Underwriter is assigned. ‘View All’ link takes user to the complete list.";
         case "submissions":
           return "Shows submissions assigned to the Underwriter (new/renewal, in progress). ‘View All’ link takes user to the complete list.";
       }
@@ -634,40 +634,44 @@ export default function Dashboard() {
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                    <div className="text-xs text-gray-600 mb-1 font-medium">
-                      Amount Paid
+                isProspect ? (
+                  <div className="p-4 text-sm text-gray-600">No policies yet</div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                      <div className="text-xs text-gray-600 mb-1 font-medium">
+                        Amount Paid
+                      </div>
+                      <div className="text-xl font-bold text-gray-800">
+                        $8,460
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        Aggregate premium paid to date
+                      </div>
+                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
-                      $8,460
+                    <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                      <div className="text-xs text-gray-600 mb-1 font-medium">
+                        Total Due
+                      </div>
+                      <div className="text-xl font-bold text-gray-800">$275</div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        Aggregate premium currently due (YTD)
+                      </div>
+                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                     </div>
-                    <div className="text-xs text-gray-500 mt-1">
-                      Aggregate premium paid to date
+                    <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                      <div className="text-xs text-gray-600 mb-1 font-medium">
+                        Outstanding Balance
+                      </div>
+                      <div className="text-xl font-bold text-gray-800">$190</div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        Outstanding premium (after credit application)
+                      </div>
+                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                     </div>
-                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                   </div>
-                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                    <div className="text-xs text-gray-600 mb-1 font-medium">
-                      Total Due
-                    </div>
-                    <div className="text-xl font-bold text-gray-800">$275</div>
-                    <div className="text-xs text-gray-500 mt-1">
-                      Aggregate premium currently due (YTD)
-                    </div>
-                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
-                  </div>
-                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                    <div className="text-xs text-gray-600 mb-1 font-medium">
-                      Outstanding Balance
-                    </div>
-                    <div className="text-xl font-bold text-gray-800">$190</div>
-                    <div className="text-xs text-gray-500 mt-1">
-                      Outstanding premium (after credit application)
-                    </div>
-                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
-                  </div>
-                </div>
+                )
               )}
             </CardContent>
           </Card>
