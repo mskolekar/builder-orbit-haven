@@ -523,7 +523,7 @@ export default function Dashboard() {
         case "diaries":
           return "Shows diaries assigned to the Underwriter or linked to their policies/submissions.";
         case "policies":
-          return "Shows policies where the Underwriter is assigned. ‘View All’ link takes user to the complete list.";
+          return "Shows policies where the Underwriter is assigned. ‘View All�� link takes user to the complete list.";
         case "submissions":
           return "Shows submissions assigned to the Underwriter (new/renewal, in progress). ‘View All’ link takes user to the complete list.";
       }
@@ -585,10 +585,10 @@ export default function Dashboard() {
                     className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                     onClick={(e) => {
                       e.stopPropagation();
-                      console.log("Navigate to payment");
+                      console.log(isProspect ? "Start a quote" : "Navigate to payment");
                     }}
                   >
-                    Pay Now
+                    {isProspect ? "Start a Quote" : "Pay Now"}
                   </Button>
                 </div>
               )}
