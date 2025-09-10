@@ -6,16 +6,12 @@ export function OrganizationDetailsSection() {
   const org = {
     name: "ABC Ltd",
     status: "Active",
-    industry: "Professional Services",
     website: "https://www.abcltd.com",
-    taxId: "12-3456789",
     phone: "(416) 555-0456",
     email: "info@abcltd.com",
     address: "200 King St W, Toronto, ON M5H 3T4",
     memberSince: "2017",
   };
-
-  const maskTaxId = (id: string) => id.replace(/\d(?=.*\d{4})/g, "•");
 
   return (
     <div className="bg-white border-b border-gray-200 p-4">
@@ -43,52 +39,23 @@ export function OrganizationDetailsSection() {
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="flex items-center gap-2">
-                <Briefcase size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Industry</div>
-                  <div className="text-sm font-medium">{org.industry}</div>
-                </div>
-              </div>
+            <div className="mt-4 flex items-center gap-6 whitespace-nowrap overflow-x-auto">
               <div className="flex items-center gap-2">
                 <FileText size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Website</div>
-                  <div className="text-sm font-medium truncate max-w-[180px]">
-                    <a
-                      href={org.website}
-                      className="text-blue-600 hover:underline"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {org.website}
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <FileText size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Tax ID</div>
-                  <div className="text-sm font-medium">
-                    {maskTaxId(org.taxId)}
-                  </div>
+                <div className="text-xs text-gray-500">Website</div>
+                <div className="text-sm font-medium text-gray-800 truncate max-w-[200px]">
+                  {org.website}
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Phone</div>
-                  <div className="text-sm font-medium">{org.phone}</div>
-                </div>
+                <div className="text-xs text-gray-500">Phone</div>
+                <div className="text-sm font-medium text-gray-800">{org.phone}</div>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Email</div>
-                  <div className="text-sm font-medium">{org.email}</div>
-                </div>
+                <div className="text-xs text-gray-500">Email</div>
+                <div className="text-sm font-medium text-gray-800 truncate max-w-[220px]">{org.email}</div>
               </div>
             </div>
 
