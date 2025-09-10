@@ -1037,7 +1037,7 @@ export default function Dashboard() {
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
-                          colSpan={5}
+                          colSpan={4}
                           className="text-center py-4 text-gray-500 text-sm"
                         >
                           No open diaries
