@@ -793,6 +793,9 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700">
                             {activity.type}
                           </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {activity.file || "-"}
+                          </TableCell>
                           <TableCell className="text-sm py-2 text-gray-600">
                             {activity.user}
                           </TableCell>
