@@ -861,7 +861,7 @@ export default function Dashboard() {
             className={
               "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
             }
-            onClick={() => console.log("Navigate to activity timeline")}
+            onClick={() => setIsActivityCollapsed((v) => !v)}
           >
             <CardHeader
               className="pb-2 cursor-pointer"
