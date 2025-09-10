@@ -115,43 +115,41 @@ const submissions = [
   },
 ];
 
-const initialDiariesData = [
-  {
-    id: 1,
-    dueDate: "12-15-24",
-    title: "Approval request declined.",
-    priority: "High",
-    status: "Open",
-  },
-  {
-    id: 2,
-    dueDate: "12-15-24",
-    title: "Approval request declined.",
-    priority: "High",
-    status: "Open",
-  },
-  {
-    id: 3,
-    dueDate: "12-15-24",
-    title: "Invoice Approval Request",
-    priority: "Medium",
-    status: "Open",
-  },
-  {
-    id: 4,
-    dueDate: "12-22-24",
-    title: "Invoice Approval Request",
-    priority: "Medium",
-    status: "Open",
-  },
-  {
-    id: 5,
-    dueDate: "12-15-24",
-    title: "Approval request approved.",
-    priority: "Low",
-    status: "Open",
-  },
+type DiaryItem = { id: number; dueDate: string; title: string; priority: "High"|"Medium"|"Low"; status: "Open"|"Closed"; file?: string };
+
+const diariesOlivia: DiaryItem[] = [
+  { id: 1, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928703A" },
+  { id: 2, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-475556" },
+  { id: 3, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "P 1-7433808" },
+  { id: 4, dueDate: "09-13-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 1045" },
+  { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928703B" },
 ];
+
+const diariesJohn: DiaryItem[] = [
+  { id: 6, dueDate: "09-10-25", title: "Proposal Review Request", priority: "High", status: "Open", file: "P 1-4712556" },
+  { id: 7, dueDate: "09-11-25", title: "Added Endorsement", priority: "Medium", status: "Open", file: "P 1-8793492" },
+  { id: 8, dueDate: "09-12-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "S 928763A-01" },
+  { id: 9, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "P 1-4712557" },
+  { id: 10, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928763B" },
+];
+
+const diariesShawn: DiaryItem[] = [
+  { id: 11, dueDate: "09-10-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "C 2025-45" },
+  { id: 12, dueDate: "09-11-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-46" },
+  { id: 13, dueDate: "09-12-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 2025-47" },
+  { id: 14, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "I 789432" },
+  { id: 15, dueDate: "09-14-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-48" },
+];
+
+const diariesOrg: DiaryItem[] = [
+  { id: 16, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928800A" },
+  { id: 17, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-9834521" },
+  { id: 18, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "C 1122" },
+  { id: 19, dueDate: "09-13-25", title: "Approval Request Pending", priority: "High", status: "Open", file: "C 1045" },
+  { id: 20, dueDate: "09-14-25", title: "Invoice Approved", priority: "Low", status: "Open", file: "P 1-9834522" },
+];
+
+const initialDiariesData: DiaryItem[] = diariesOlivia;
 
 const policyData = [
   {
