@@ -59,9 +59,7 @@ export function PersonDetailsSection() {
                     >
                       {customerData.name}
                     </h2>
-                    <Badge
-                      className="bg-gray-100 text-gray-700 border-gray-200"
-                    >
+                    <Badge className="bg-gray-100 text-gray-700 border-gray-200">
                       {customerData.status}
                     </Badge>
                   </div>

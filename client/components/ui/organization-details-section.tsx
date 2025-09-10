@@ -31,9 +31,7 @@ export function OrganizationDetailsSection() {
                     <h2 className="text-xl font-bold text-gray-900">
                       {org.name}
                     </h2>
-                    <Badge
-                      className="bg-gray-100 text-gray-700 border-gray-200"
-                    >
+                    <Badge className="bg-gray-100 text-gray-700 border-gray-200">
                       {org.status}
                     </Badge>
                   </div>

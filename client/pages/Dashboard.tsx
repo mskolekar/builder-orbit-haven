@@ -1058,7 +1058,7 @@ export default function Dashboard() {
           {/* Policy Details */}
           {!isShawn && (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${(isSubmissionsCollapsed || isClaimsCollapsed) ? "lg:col-span-2" : ""}`}
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isSubmissionsCollapsed || isClaimsCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsPoliciesCollapsed((v) => !v)}
             >
               <CardHeader

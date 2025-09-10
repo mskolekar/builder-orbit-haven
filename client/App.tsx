@@ -146,7 +146,13 @@ function AppContent() {
               <div className="flex items-center gap-3 flex-1">
                 <h1 className="text-lg font-semibold">{activeProfile.name}</h1>
                 <div className="text-white/70">|</div>
-                <Badge className={activeProfile.status === "Active" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-white/15 text-white border-white/30 hover:bg-white/20"}>
+                <Badge
+                  className={
+                    activeProfile.status === "Active"
+                      ? "bg-emerald-100 text-emerald-700 border-emerald-200"
+                      : "bg-white/15 text-white border-white/30 hover:bg-white/20"
+                  }
+                >
                   {activeProfile.status}
                 </Badge>
               </div>
