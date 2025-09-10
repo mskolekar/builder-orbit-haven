@@ -735,6 +735,12 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-32">
+                        <div className="flex items-center gap-1">
+                          File
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
                           Action Taken By
@@ -744,16 +750,22 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {recentActivity.slice(0, 4).map((activity, index) => (
+                    {getRecentActivity(profileId).map((row, index) => (
                       <TableRow key={index} className="h-10 hover:bg-gray-50">
                         <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
-                          {activity.date}
+                          {formatMMDDYY(row.date)}
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">
-                          {activity.type}
+                          {row.activity}
+                        </TableCell>
+                        <TableCell className="text-xs py-2 text-gray-700 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border bg-gray-50 text-gray-700">
+                            <span className="font-semibold">{row.fileType}</span>
+                            <span>{row.fileId}</span>
+                          </span>
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-600">
-                          {activity.user}
+                          {row.takenBy}
                         </TableCell>
                       </TableRow>
                     ))}
