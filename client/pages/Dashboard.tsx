@@ -108,43 +108,176 @@ const submissions = [
   },
 ];
 
-const initialDiariesData = [
-  {
-    id: 1,
-    dueDate: "12-15-24",
-    title: "Approval request declined.",
-    priority: "High",
-    status: "Open",
-  },
-  {
-    id: 2,
-    dueDate: "12-15-24",
-    title: "Approval request declined.",
-    priority: "High",
-    status: "Open",
-  },
-  {
-    id: 3,
-    dueDate: "12-15-24",
-    title: "Invoice Approval Request",
-    priority: "Medium",
-    status: "Open",
-  },
-  {
-    id: 4,
-    dueDate: "12-22-24",
-    title: "Invoice Approval Request",
-    priority: "Medium",
-    status: "Open",
-  },
-  {
-    id: 5,
-    dueDate: "12-15-24",
-    title: "Approval request approved.",
-    priority: "Low",
-    status: "Open",
-  },
-];
+type DiaryRow = {
+  id: number;
+  dueDate: string;
+  title: string;
+  priority: "High" | "Medium" | "Low";
+  status: "Open" | "Closed";
+  fileType: "P" | "S" | "C" | "I";
+  fileId: string;
+};
+
+const getDiariesData = (profileId?: string): DiaryRow[] => {
+  const rows = (list: Omit<DiaryRow, "id" | "status">[]) =>
+    list.map((r, i) => ({ id: i + 1, status: "Open" as const, ...r }));
+
+  switch (profileId) {
+    case "john-wills":
+      return rows([
+        {
+          dueDate: "09-10-2025",
+          title: "Proposal Review Request",
+          priority: "High",
+          fileType: "P",
+          fileId: "1-4712556",
+        },
+        {
+          dueDate: "09-11-2025",
+          title: "Added Endorsement",
+          priority: "Medium",
+          fileType: "P",
+          fileId: "1-8793492",
+        },
+        {
+          dueDate: "09-12-2025",
+          title: "Requested Documents for Review",
+          priority: "High",
+          fileType: "S",
+          fileId: "928763A-01",
+        },
+        {
+          dueDate: "09-13-2025",
+          title: "Approval Request Approved",
+          priority: "Low",
+          fileType: "P",
+          fileId: "1-4712557",
+        },
+        {
+          dueDate: "09-14-2025",
+          title: "Follow-Up Required on Submission",
+          priority: "Medium",
+          fileType: "S",
+          fileId: "928763B",
+        },
+      ]);
+    case "shawn-elkins":
+      return rows([
+        {
+          dueDate: "09-10-2025",
+          title: "Requested Documents for Review",
+          priority: "High",
+          fileType: "C",
+          fileId: "2025-45",
+        },
+        {
+          dueDate: "09-11-2025",
+          title: "Follow-Up Required on Claim",
+          priority: "Medium",
+          fileType: "C",
+          fileId: "2025-46",
+        },
+        {
+          dueDate: "09-12-2025",
+          title: "Approval Request Declined",
+          priority: "High",
+          fileType: "C",
+          fileId: "2025-47",
+        },
+        {
+          dueDate: "09-13-2025",
+          title: "Approval Request Approved",
+          priority: "Low",
+          fileType: "I",
+          fileId: "789432",
+        },
+        {
+          dueDate: "09-14-2025",
+          title: "Follow-Up Required on Claim",
+          priority: "Medium",
+          fileType: "C",
+          fileId: "2025-48",
+        },
+      ]);
+    case "abc-ltd":
+      return rows([
+        {
+          dueDate: "09-10-2025",
+          title: "New Submission Added for Review",
+          priority: "High",
+          fileType: "S",
+          fileId: "928800A",
+        },
+        {
+          dueDate: "09-11-2025",
+          title: "Report Review Request",
+          priority: "Medium",
+          fileType: "P",
+          fileId: "1-9834521",
+        },
+        {
+          dueDate: "09-12-2025",
+          title: "Invoice Approval Request",
+          priority: "Medium",
+          fileType: "C",
+          fileId: "1122",
+        },
+        {
+          dueDate: "09-13-2025",
+          title: "Approval Request Pending",
+          priority: "High",
+          fileType: "C",
+          fileId: "1045",
+        },
+        {
+          dueDate: "09-14-2025",
+          title: "Invoice Approved",
+          priority: "Low",
+          fileType: "P",
+          fileId: "1-9834522",
+        },
+      ]);
+    case "olivia":
+    default:
+      return rows([
+        {
+          dueDate: "09-10-2025",
+          title: "New Submission Added for Review",
+          priority: "High",
+          fileType: "S",
+          fileId: "928703A",
+        },
+        {
+          dueDate: "09-11-2025",
+          title: "Report Review Request",
+          priority: "Medium",
+          fileType: "P",
+          fileId: "1-475556",
+        },
+        {
+          dueDate: "09-12-2025",
+          title: "Invoice Approval Request",
+          priority: "Medium",
+          fileType: "P",
+          fileId: "1-7433808",
+        },
+        {
+          dueDate: "09-13-2025",
+          title: "Approval Request Declined",
+          priority: "High",
+          fileType: "C",
+          fileId: "1045",
+        },
+        {
+          dueDate: "09-14-2025",
+          title: "Follow-Up Required on Submission",
+          priority: "Medium",
+          fileType: "S",
+          fileId: "928703B",
+        },
+      ]);
+  }
+};
 
 const policyData = [
   {
@@ -481,7 +614,7 @@ export default function Dashboard() {
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
 
   // Diaries state
-  const [diariesData, setDiariesData] = useState(initialDiariesData);
+  const [diariesData, setDiariesData] = useState<DiaryRow[]>([]);
   const [diaryToClose, setDiaryToClose] = useState<number | null>(null);
 
   // Animation states
@@ -490,6 +623,10 @@ export default function Dashboard() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    setDiariesData(getDiariesData(profileId));
+  }, [profileId]);
 
   // Collapsible states
   const [isFinancialCollapsed, setIsFinancialCollapsed] = useState(false);
@@ -566,7 +703,7 @@ export default function Dashboard() {
   const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
-  const hideFinancial = isJohn || isShawn;
+  const hideFinancial = false;
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
@@ -837,6 +974,12 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-32">
+                        <div className="flex items-center gap-1">
+                          File
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
                           Actions
@@ -852,7 +995,7 @@ export default function Dashboard() {
                         className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
                       >
                         <TableCell className="text-xs py-1">
-                          {diary.dueDate}
+                          {formatMMDDYY(diary.dueDate)}
                         </TableCell>
                         <TableCell className="text-xs py-1">
                           {diary.title}
@@ -862,6 +1005,12 @@ export default function Dashboard() {
                             className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
                           >
                             {diary.priority}
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-xs py-1 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border bg-gray-50 text-gray-700">
+                            <span className="font-semibold">{diary.fileType}</span>
+                            <span>{diary.fileId}</span>
                           </span>
                         </TableCell>
                         <TableCell className="py-1">
@@ -882,7 +1031,7 @@ export default function Dashboard() {
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
-                          colSpan={4}
+                          colSpan={5}
                           className="text-center py-4 text-gray-500 text-sm"
                         >
                           No open diaries
