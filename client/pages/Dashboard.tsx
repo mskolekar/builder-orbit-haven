@@ -776,8 +776,12 @@ export default function Dashboard() {
                     {(
                       isJohn
                         ? underwriterRecentActivity
-                        : isProspect
-                          ? [{ date: "09-08-25", type: "Prospect profile created.", user: "Agent Johnson" }]
+                        : isShawn
+                          ? claimantRecentActivity
+                          : profileId === "abc-ltd"
+                          ? organizationRecentActivity
+                          : isProspect
+                          ? [{ date: "09-08-25", type: "Prospect profile created.", file: "", user: "Agent Johnson" }]
                           : recentActivity
                     )
                       .slice(0, 4)
