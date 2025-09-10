@@ -604,6 +604,7 @@ const getRowBgColor = (
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const { profileId } = useParams();
 
   // Filter states
   const [policyStatusFilter, setPolicyStatusFilter] = useState<string[]>([]);
