@@ -701,7 +701,6 @@ export default function Dashboard() {
       claimsStatusFilter.includes(claim.status),
   );
 
-  const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
   const hideFinancial = false;
