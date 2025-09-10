@@ -263,36 +263,153 @@ const claimsHistory = [
   },
 ];
 
-const recentActivity = [
-  {
-    type: "Last Premium Paid - $150",
-    date: "07-01-25",
-    description: "Premium payment processed successfully.",
-    user: "System",
-    category: "payment",
-  },
-  {
-    type: "Follow-up on recent claim #C1122 progress.",
-    date: "06-30-25",
-    description: "Provided update on claim status, awaiting adjuster report.",
-    user: "UW John",
-    category: "claim",
-  },
-  {
-    type: "Confirmation of payment received premium.",
-    date: "06-29-25",
-    description: "Auto premium receipt sent to customer.",
-    user: "System",
-    category: "payment",
-  },
-  {
-    type: "Logged customer preference for email communication.",
-    date: "06-28-25",
-    description: "Preferred contact method updated.",
-    user: "Agent Johnson",
-    category: "profile",
-  },
-];
+type ActivityRow = {
+  date: string;
+  activity: string;
+  fileType: "P" | "S" | "C" | "I";
+  fileId: string;
+  takenBy: string;
+};
+
+const formatMMDDYY = (d: string) => {
+  // Accepts MM-DD-YYYY or MM-DD-YY and returns MM-DD-YY
+  const parts = d.split("-");
+  if (parts.length === 3 && parts[2].length === 4) {
+    return `${parts[0]}-${parts[1]}-${parts[2].slice(2)}`;
+  }
+  return d;
+};
+
+const getRecentActivity = (profileId?: string): ActivityRow[] => {
+  switch (profileId) {
+    case "john-wills":
+      return [
+        {
+          date: "09-07-2025",
+          activity: "Proposal quote shared with broker",
+          fileType: "P",
+          fileId: "1-4712556",
+          takenBy: "John W",
+        },
+        {
+          date: "09-01-2025",
+          activity: "Added an endorsement",
+          fileType: "P",
+          fileId: "1-8793492",
+          takenBy: "John W",
+        },
+        {
+          date: "08-20-2025",
+          activity: "Requested documents for UW review",
+          fileType: "S",
+          fileId: "928763A-01",
+          takenBy: "John W",
+        },
+        {
+          date: "07-31-2025",
+          activity:
+            "Logged customer preference for email communication Olivia R",
+          fileType: "S",
+          fileId: "",
+          takenBy: "John W",
+        },
+      ];
+    case "shawn-elkins":
+      return [
+        {
+          date: "09-08-2025",
+          activity: "Claim payment issued $2,500",
+          fileType: "C",
+          fileId: "2025-45",
+          takenBy: "System",
+        },
+        {
+          date: "09-03-2025",
+          activity: "Medical reserve increased by $10,000",
+          fileType: "C",
+          fileId: "2025-45",
+          takenBy: "Anna R",
+        },
+        {
+          date: "08-29-2025",
+          activity: "Indemnity reserve decreased by $3,000",
+          fileType: "C",
+          fileId: "2025-45",
+          takenBy: "Anna R",
+        },
+        {
+          date: "08-20-2025",
+          activity: "FNOL submitted",
+          fileType: "I",
+          fileId: "789432",
+          takenBy: "Josh K",
+        },
+      ];
+    case "abc-ltd":
+      return [
+        {
+          date: "09-09-2025",
+          activity: "Proposal quote shared with broker",
+          fileType: "P",
+          fileId: "1-9834521",
+          takenBy: "John W",
+        },
+        {
+          date: "09-04-2025",
+          activity: "Claim payment issued $12,000",
+          fileType: "C",
+          fileId: "1045",
+          takenBy: "System",
+        },
+        {
+          date: "08-30-2025",
+          activity: "Reserve increased by $25,000",
+          fileType: "C",
+          fileId: "1122",
+          takenBy: "Anna R",
+        },
+        {
+          date: "08-15-2025",
+          activity: "Added an endorsement",
+          fileType: "P",
+          fileId: "1-9834521",
+          takenBy: "John W",
+        },
+      ];
+    case "olivia":
+    default:
+      return [
+        {
+          date: "09-07-2025",
+          activity: "Recurring payment profile set with Credit_Card",
+          fileType: "P",
+          fileId: "1-4755556",
+          takenBy: "Shelton K",
+        },
+        {
+          date: "09-01-2025",
+          activity: "Recurring payment received $150",
+          fileType: "P",
+          fileId: "1-7433808",
+          takenBy: "System",
+        },
+        {
+          date: "08-20-2025",
+          activity: "Indemnity reserve decreased by $1,000",
+          fileType: "C",
+          fileId: "1045",
+          takenBy: "Anna R",
+        },
+        {
+          date: "07-31-2025",
+          activity: "Proposal quote shared with broker",
+          fileType: "S",
+          fileId: "928703A",
+          takenBy: "Shelton K",
+        },
+      ];
+  }
+};
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
