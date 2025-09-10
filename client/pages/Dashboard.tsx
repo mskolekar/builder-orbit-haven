@@ -897,7 +897,9 @@ export default function Dashboard() {
                         </TableCell>
                         <TableCell className="text-xs py-2 text-gray-700 whitespace-nowrap">
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border bg-gray-50 text-gray-700">
-                            <span className="font-semibold">{row.fileType}</span>
+                            <span className="font-semibold">
+                              {row.fileType}
+                            </span>
                             <span>{row.fileId}</span>
                           </span>
                         </TableCell>
@@ -1009,7 +1011,9 @@ export default function Dashboard() {
                         </TableCell>
                         <TableCell className="text-xs py-1 whitespace-nowrap">
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border bg-gray-50 text-gray-700">
-                            <span className="font-semibold">{diary.fileType}</span>
+                            <span className="font-semibold">
+                              {diary.fileType}
+                            </span>
                             <span>{diary.fileId}</span>
                           </span>
                         </TableCell>
