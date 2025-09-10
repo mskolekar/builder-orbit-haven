@@ -57,10 +57,8 @@ export function OrganizationDetailsSection() {
               <div className="flex items-center gap-2">
                 <FileText size={14} className="text-gray-400" />
                 <div>
-                  <div className="text-xs text-gray-500">Reg. No</div>
-                  <div className="text-sm font-medium">
-                    {org.registrationNumber}
-                  </div>
+                  <div className="text-xs text-gray-500">Website</div>
+                  <div className="text-sm font-medium">{org.website}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -75,6 +73,13 @@ export function OrganizationDetailsSection() {
                 <div>
                   <div className="text-xs text-gray-500">Email</div>
                   <div className="text-sm font-medium">{org.email}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Tax ID</div>
+                  <div className="text-sm font-medium">{org.taxIdMasked}</div>
                 </div>
               </div>
             </div>
