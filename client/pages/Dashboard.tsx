@@ -920,6 +920,9 @@ export default function Dashboard() {
                             {diary.priority}
                           </span>
                         </TableCell>
+                        <TableCell className="text-xs py-1">
+                          {diary.file || "-"}
+                        </TableCell>
                         <TableCell className="py-1">
                           <Button
                             variant="ghost"
