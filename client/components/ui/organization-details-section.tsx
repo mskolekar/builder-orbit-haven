@@ -63,10 +63,19 @@ export function OrganizationDetailsSection() {
               <div className="flex items-center gap-2">
                 <FileText size={14} className="text-gray-400" />
                 <div>
-                  <div className="text-xs text-gray-500">Reg. No</div>
-                  <div className="text-sm font-medium">
-                    {org.registrationNumber}
+                  <div className="text-xs text-gray-500">Website</div>
+                  <div className="text-sm font-medium truncate max-w-[180px]">
+                    <a href={org.website} className="text-blue-600 hover:underline" target="_blank" rel="noreferrer">
+                      {org.website}
+                    </a>
                   </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Tax ID</div>
+                  <div className="text-sm font-medium">{maskTaxId(org.taxId)}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
