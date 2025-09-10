@@ -39,16 +39,7 @@ export function OrganizationDetailsSection() {
                   </Badge>
                 </div>
                 <p className="text-gray-600 font-medium">Organization</p>
-                <div className="hidden">
-                  <div className="flex items-center gap-1">
-                    <Briefcase size={14} className="text-gray-400" />{" "}
-                    {org.industry}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <FileText size={14} className="text-gray-400" /> Reg. No:{" "}
-                    {org.registrationNumber}
-                  </div>
-                </div>
+                <div className="hidden"></div>
               </div>
             </div>
 
