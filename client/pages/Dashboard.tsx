@@ -133,7 +133,10 @@ const getTodayMMDDYY = () => {
   return `${mm}-${dd}-${yy}`;
 };
 
-const activitiesByProfile: Record<string, { date: string; type: string; file: string; user: string }[]> = {
+const activitiesByProfile: Record<
+  string,
+  { date: string; type: string; file: string; user: string }[]
+> = {
   olivia: [
     {
       date: "09-07-25",
@@ -248,34 +251,184 @@ const activitiesByProfile: Record<string, { date: string; type: string; file: st
   ],
 };
 
-const diariesByProfile: Record<string, { id: number; dueDate: string; title: string; priority: "High"|"Medium"|"Low"; status: "Open"|"Closed"; file: string }[]> = {
+const diariesByProfile: Record<
+  string,
+  {
+    id: number;
+    dueDate: string;
+    title: string;
+    priority: "High" | "Medium" | "Low";
+    status: "Open" | "Closed";
+    file: string;
+  }[]
+> = {
   olivia: [
-    { id: 1, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928703A" },
-    { id: 2, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-475556" },
-    { id: 3, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "P 1-7433808" },
-    { id: 4, dueDate: "09-13-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 1045" },
-    { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928703B" },
+    {
+      id: 1,
+      dueDate: "09-10-25",
+      title: "New Submission Added for Review",
+      priority: "High",
+      status: "Open",
+      file: "S 928703A",
+    },
+    {
+      id: 2,
+      dueDate: "09-11-25",
+      title: "Report Review Request",
+      priority: "Medium",
+      status: "Open",
+      file: "P 1-475556",
+    },
+    {
+      id: 3,
+      dueDate: "09-12-25",
+      title: "Invoice Approval Request",
+      priority: "Medium",
+      status: "Open",
+      file: "P 1-7433808",
+    },
+    {
+      id: 4,
+      dueDate: "09-13-25",
+      title: "Approval Request Declined",
+      priority: "High",
+      status: "Open",
+      file: "C 1045",
+    },
+    {
+      id: 5,
+      dueDate: "09-14-25",
+      title: "Follow-Up Required on Submission",
+      priority: "Medium",
+      status: "Open",
+      file: "S 928703B",
+    },
   ],
   "john-wills": [
-    { id: 1, dueDate: "09-10-25", title: "Proposal Review Request", priority: "High", status: "Open", file: "P 1-4712556" },
-    { id: 2, dueDate: "09-11-25", title: "Added Endorsement", priority: "Medium", status: "Open", file: "P 1-8793492" },
-    { id: 3, dueDate: "09-12-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "S 928763A-01" },
-    { id: 4, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "P 1-4712557" },
-    { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928763B" },
+    {
+      id: 1,
+      dueDate: "09-10-25",
+      title: "Proposal Review Request",
+      priority: "High",
+      status: "Open",
+      file: "P 1-4712556",
+    },
+    {
+      id: 2,
+      dueDate: "09-11-25",
+      title: "Added Endorsement",
+      priority: "Medium",
+      status: "Open",
+      file: "P 1-8793492",
+    },
+    {
+      id: 3,
+      dueDate: "09-12-25",
+      title: "Requested Documents for Review",
+      priority: "High",
+      status: "Open",
+      file: "S 928763A-01",
+    },
+    {
+      id: 4,
+      dueDate: "09-13-25",
+      title: "Approval Request Approved",
+      priority: "Low",
+      status: "Open",
+      file: "P 1-4712557",
+    },
+    {
+      id: 5,
+      dueDate: "09-14-25",
+      title: "Follow-Up Required on Submission",
+      priority: "Medium",
+      status: "Open",
+      file: "S 928763B",
+    },
   ],
   "shawn-elkins": [
-    { id: 1, dueDate: "09-10-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "C 2025-45" },
-    { id: 2, dueDate: "09-11-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-46" },
-    { id: 3, dueDate: "09-12-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 2025-47" },
-    { id: 4, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "I 789432" },
-    { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-48" },
+    {
+      id: 1,
+      dueDate: "09-10-25",
+      title: "Requested Documents for Review",
+      priority: "High",
+      status: "Open",
+      file: "C 2025-45",
+    },
+    {
+      id: 2,
+      dueDate: "09-11-25",
+      title: "Follow-Up Required on Claim",
+      priority: "Medium",
+      status: "Open",
+      file: "C 2025-46",
+    },
+    {
+      id: 3,
+      dueDate: "09-12-25",
+      title: "Approval Request Declined",
+      priority: "High",
+      status: "Open",
+      file: "C 2025-47",
+    },
+    {
+      id: 4,
+      dueDate: "09-13-25",
+      title: "Approval Request Approved",
+      priority: "Low",
+      status: "Open",
+      file: "I 789432",
+    },
+    {
+      id: 5,
+      dueDate: "09-14-25",
+      title: "Follow-Up Required on Claim",
+      priority: "Medium",
+      status: "Open",
+      file: "C 2025-48",
+    },
   ],
   "abc-ltd": [
-    { id: 1, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928800A" },
-    { id: 2, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-9834521" },
-    { id: 3, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "C 1122" },
-    { id: 4, dueDate: "09-13-25", title: "Approval Request Pending", priority: "High", status: "Open", file: "C 1045" },
-    { id: 5, dueDate: "09-14-25", title: "Invoice Approved", priority: "Low", status: "Open", file: "P 1-9834522" },
+    {
+      id: 1,
+      dueDate: "09-10-25",
+      title: "New Submission Added for Review",
+      priority: "High",
+      status: "Open",
+      file: "S 928800A",
+    },
+    {
+      id: 2,
+      dueDate: "09-11-25",
+      title: "Report Review Request",
+      priority: "Medium",
+      status: "Open",
+      file: "P 1-9834521",
+    },
+    {
+      id: 3,
+      dueDate: "09-12-25",
+      title: "Invoice Approval Request",
+      priority: "Medium",
+      status: "Open",
+      file: "C 1122",
+    },
+    {
+      id: 4,
+      dueDate: "09-13-25",
+      title: "Approval Request Pending",
+      priority: "High",
+      status: "Open",
+      file: "C 1045",
+    },
+    {
+      id: 5,
+      dueDate: "09-14-25",
+      title: "Invoice Approved",
+      priority: "Low",
+      status: "Open",
+      file: "P 1-9834522",
+    },
   ],
   "josh-fernandes": [],
 };
@@ -530,26 +683,26 @@ export default function Dashboard() {
   const claimsStatuses = [...new Set(claimsHistory.map((c) => c.status))];
 
   // Apply filters
-  const filteredPolicies = (policyData.filter((policy) => {
+  const filteredPolicies = policyData.filter((policy) => {
     const statusMatch =
       policyStatusFilter.length === 0 ||
       policyStatusFilter.includes(policy.status);
     const lobMatch =
       policyLobFilter.length === 0 || policyLobFilter.includes(policy.lob);
     return statusMatch && lobMatch;
-  }));
+  });
 
-  const filteredSubmissions = (submissions.filter(
+  const filteredSubmissions = submissions.filter(
     (submission) =>
       submissionStatusFilter.length === 0 ||
       submissionStatusFilter.includes(submission.status),
-  ));
+  );
 
-  const filteredClaims = (claimsHistory.filter(
+  const filteredClaims = claimsHistory.filter(
     (claim) =>
       claimsStatusFilter.length === 0 ||
       claimsStatusFilter.includes(claim.status),
-  ));
+  );
 
   const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
@@ -565,9 +718,7 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    const key = profileId && diariesByProfile[profileId]
-      ? profileId
-      : "olivia";
+    const key = profileId && diariesByProfile[profileId] ? profileId : "olivia";
     setDiariesData(diariesByProfile[key]);
 
     // Collapse all tiles by default for new prospect
@@ -580,9 +731,10 @@ export default function Dashboard() {
     setIsSubmissionsCollapsed(collapse);
   }, [profileId]);
 
-  const selectedActivities = (profileId && activitiesByProfile[profileId])
-    ? activitiesByProfile[profileId]
-    : activitiesByProfile["olivia"];
+  const selectedActivities =
+    profileId && activitiesByProfile[profileId]
+      ? activitiesByProfile[profileId]
+      : activitiesByProfile["olivia"];
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
@@ -1005,7 +1157,12 @@ export default function Dashboard() {
                     <TableBody>
                       {filteredPolicies.length === 0 && (
                         <TableRow>
-                          <TableCell colSpan={7} className="text-center py-4 text-gray-500 text-sm">No policies</TableCell>
+                          <TableCell
+                            colSpan={7}
+                            className="text-center py-4 text-gray-500 text-sm"
+                          >
+                            No policies
+                          </TableCell>
                         </TableRow>
                       )}
                       {filteredPolicies.map((policy, index) => (
@@ -1324,16 +1481,20 @@ export default function Dashboard() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {filteredClaims
-                            .filter(
-                              (claim) =>
-                                claim.status === "Open" ||
-                                claim.status === "Reopen",
-                            ).length === 0 && (
-                              <TableRow>
-                                <TableCell colSpan={7} className="text-center py-4 text-gray-500 text-sm">No claims</TableCell>
-                              </TableRow>
-                            )}
+                          {filteredClaims.filter(
+                            (claim) =>
+                              claim.status === "Open" ||
+                              claim.status === "Reopen",
+                          ).length === 0 && (
+                            <TableRow>
+                              <TableCell
+                                colSpan={7}
+                                className="text-center py-4 text-gray-500 text-sm"
+                              >
+                                No claims
+                              </TableCell>
+                            </TableRow>
+                          )}
                           {filteredClaims
                             .filter(
                               (claim) =>
@@ -1607,7 +1768,12 @@ export default function Dashboard() {
                       <TableBody>
                         {filteredSubmissions.length === 0 && (
                           <TableRow>
-                            <TableCell colSpan={5} className="text-center py-4 text-gray-500 text-sm">No submissions</TableCell>
+                            <TableCell
+                              colSpan={5}
+                              className="text-center py-4 text-gray-500 text-sm"
+                            >
+                              No submissions
+                            </TableCell>
                           </TableRow>
                         )}
                         {filteredSubmissions.map((submission, index) => (
