@@ -1553,9 +1553,7 @@ export default function Dashboard() {
           >
             {/* Claims moved to last row for John */}
             <Card
-              className={
-                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-              }
+              className={"hidden"}
               onClick={() => console.log("Navigate to claims history")}
             >
               <CardHeader
