@@ -38,6 +38,12 @@ const profileMap: Record<
     role: "Underwriter",
     memberSince: "2018",
   },
+  "josh-fernandes": {
+    name: "Josh Fernandes",
+    status: "Prospect",
+    role: "Prospect",
+    memberSince: "2025",
+  },
   "shawn-elkins": {
     name: "Shawn Elkins",
     status: "Active",
