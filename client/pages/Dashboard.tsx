@@ -1393,7 +1393,7 @@ export default function Dashboard() {
                               key={row.id}
                               className="h-10 hover:bg-gray-50"
                             >
-                              <TableCell className="text-sm font-medium text-blue-600">
+                              <TableCell className="text-sm font-medium text-gray-800">
                                 {row.id}
                               </TableCell>
                               <TableCell>
