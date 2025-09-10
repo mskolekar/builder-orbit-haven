@@ -21,6 +21,7 @@ import { BasicDetailsSection } from "@/components/ui/basic-details-section";
 import { OrganizationDetailsSection } from "@/components/ui/organization-details-section";
 import { PersonDetailsUnderwriter } from "@/components/ui/person-details-underwriter";
 import { PersonDetailsClaimant } from "@/components/ui/person-details-claimant";
+import { PersonDetailsProspect } from "@/components/ui/person-details-prospect";
 
 const profileMap: Record<
   string,
@@ -52,7 +53,7 @@ const profileMap: Record<
   },
   "josh-fernandes": {
     name: "Josh Fernandes",
-    status: "Prospect",
+    status: "New",
     role: "Prospect",
     memberSince: "2025",
   },
@@ -303,6 +304,8 @@ function AppContent() {
                     <PersonDetailsClaimant />
                   ) : activeProfileKey === "john-wills" ? (
                     <PersonDetailsUnderwriter />
+                  ) : activeProfileKey === "josh-fernandes" ? (
+                    <PersonDetailsProspect />
                   ) : (
                     <BasicDetailsSection
                       name={activeProfile.name}
