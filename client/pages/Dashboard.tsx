@@ -766,7 +766,9 @@ export default function Dashboard() {
                     className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                     onClick={(e) => {
                       e.stopPropagation();
-                      console.log(isNewProspect ? "Create quote" : "Navigate to payment");
+                      console.log(
+                        isNewProspect ? "Create quote" : "Navigate to payment",
+                      );
                     }}
                   >
                     {isNewProspect ? "Create Quote" : "Pay Now"}

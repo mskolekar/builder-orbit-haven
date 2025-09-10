@@ -50,12 +50,16 @@ export function OrganizationDetailsSection() {
               <div className="flex items-center gap-2">
                 <Phone size={14} className="text-gray-400" />
                 <div className="text-xs text-gray-500">Phone</div>
-                <div className="text-sm font-medium text-gray-800">{org.phone}</div>
+                <div className="text-sm font-medium text-gray-800">
+                  {org.phone}
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={14} className="text-gray-400" />
                 <div className="text-xs text-gray-500">Email</div>
-                <div className="text-sm font-medium text-gray-800 truncate max-w-[220px]">{org.email}</div>
+                <div className="text-sm font-medium text-gray-800 truncate max-w-[220px]">
+                  {org.email}
+                </div>
               </div>
             </div>
 
