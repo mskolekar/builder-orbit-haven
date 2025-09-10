@@ -108,43 +108,160 @@ const submissions = [
   },
 ];
 
-const initialDiariesData = [
-  {
-    id: 1,
-    dueDate: "12-15-24",
-    title: "Approval request declined.",
-    priority: "High",
-    status: "Open",
-  },
-  {
-    id: 2,
-    dueDate: "12-15-24",
-    title: "Approval request declined.",
-    priority: "High",
-    status: "Open",
-  },
-  {
-    id: 3,
-    dueDate: "12-15-24",
-    title: "Invoice Approval Request",
-    priority: "Medium",
-    status: "Open",
-  },
-  {
-    id: 4,
-    dueDate: "12-22-24",
-    title: "Invoice Approval Request",
-    priority: "Medium",
-    status: "Open",
-  },
-  {
-    id: 5,
-    dueDate: "12-15-24",
-    title: "Approval request approved.",
-    priority: "Low",
-    status: "Open",
-  },
-];
+const formatToMMDDYY = (input: string) => {
+  // Convert common date formats to MM-DD-YY; otherwise return as-is
+  // YYYY-MM-DD -> MM-DD-YY
+  const isoMatch = input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoMatch) {
+    const [, y, m, d] = isoMatch;
+    return `${m}-${d}-${y.slice(2)}`;
+  }
+  // MM-DD-YYYY -> MM-DD-YY
+  const usMatch = input.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (usMatch) {
+    const [, m, d, y] = usMatch;
+    return `${m}-${d}-${y.slice(2)}`;
+  }
+  return input;
+};
+
+const activitiesByProfile: Record<string, { date: string; type: string; file: string; user: string }[]> = {
+  olivia: [
+    {
+      date: "09-07-25",
+      type: "Recurring payment profile set with Credit_Card",
+      file: "P 1-4755556",
+      user: "Shelton K",
+    },
+    {
+      date: "09-01-25",
+      type: "Recurring payment received $150",
+      file: "P 1-7433808",
+      user: "System",
+    },
+    {
+      date: "08-20-25",
+      type: "Indemnity reserve decreased by $1,000",
+      file: "C 1045",
+      user: "Anna R",
+    },
+    {
+      date: "07-31-25",
+      type: "Proposal quote shared with broker",
+      file: "S 928703A",
+      user: "Shelton K",
+    },
+  ],
+  "john-wills": [
+    {
+      date: "09-07-25",
+      type: "Proposal quote shared with broker",
+      file: "P 1-4712556",
+      user: "John W",
+    },
+    {
+      date: "09-01-25",
+      type: "Requested documents",
+      file: "P 1-8793492",
+      user: "John W",
+    },
+    {
+      date: "08-20-25",
+      type: "Requested documents for UW review",
+      file: "S 928763A-01",
+      user: "John W",
+    },
+    {
+      date: "07-31-25",
+      type: "Logged customer preference for email communication",
+      file: "N/A",
+      user: "John W",
+    },
+  ],
+  "shawn-elkins": [
+    {
+      date: "09-08-25",
+      type: "Claim payment issued $2,500",
+      file: "C 2025-45",
+      user: "System",
+    },
+    {
+      date: "09-03-25",
+      type: "Medical reserve increased by $10,000",
+      file: "C 2025-45",
+      user: "Anna R",
+    },
+    {
+      date: "08-29-25",
+      type: "Indemnity reserve decreased by $3,000",
+      file: "C 2025-45",
+      user: "Anna R",
+    },
+    {
+      date: "08-20-25",
+      type: "FNOL submitted",
+      file: "I 789432",
+      user: "Josh K",
+    },
+  ],
+  "abc-ltd": [
+    {
+      date: "09-09-25",
+      type: "Proposal quote shared with broker",
+      file: "P 1-9834521",
+      user: "John W",
+    },
+    {
+      date: "09-04-25",
+      type: "Claim payment issued $12,000",
+      file: "C 1045",
+      user: "System",
+    },
+    {
+      date: "08-30-25",
+      type: "Reserve increased by $25,000",
+      file: "C 1122",
+      user: "Anna R",
+    },
+    {
+      date: "08-15-25",
+      type: "Added an endorsement",
+      file: "P 1-9834521",
+      user: "John W",
+    },
+  ],
+};
+
+const diariesByProfile: Record<string, { id: number; dueDate: string; title: string; priority: "High"|"Medium"|"Low"; status: "Open"|"Closed"; file: string }[]> = {
+  olivia: [
+    { id: 1, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928703A" },
+    { id: 2, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-475556" },
+    { id: 3, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "P 1-7433808" },
+    { id: 4, dueDate: "09-13-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 1045" },
+    { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928703B" },
+  ],
+  "john-wills": [
+    { id: 1, dueDate: "09-10-25", title: "Proposal Review Request", priority: "High", status: "Open", file: "P 1-4712556" },
+    { id: 2, dueDate: "09-11-25", title: "Added Endorsement", priority: "Medium", status: "Open", file: "P 1-8793492" },
+    { id: 3, dueDate: "09-12-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "S 928763A-01" },
+    { id: 4, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "P 1-4712557" },
+    { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928763B" },
+  ],
+  "shawn-elkins": [
+    { id: 1, dueDate: "09-10-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "C 2025-45" },
+    { id: 2, dueDate: "09-11-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-46" },
+    { id: 3, dueDate: "09-12-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 2025-47" },
+    { id: 4, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "I 789432" },
+    { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-48" },
+  ],
+  "abc-ltd": [
+    { id: 1, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928800A" },
+    { id: 2, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-9834521" },
+    { id: 3, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "C 1122" },
+    { id: 4, dueDate: "09-13-25", title: "Approval Request Pending", priority: "High", status: "Open", file: "C 1045" },
+    { id: 5, dueDate: "09-14-25", title: "Invoice Approved", priority: "Low", status: "Open", file: "P 1-9834522" },
+  ],
+};
 
 const policyData = [
   {
@@ -263,36 +380,7 @@ const claimsHistory = [
   },
 ];
 
-const recentActivity = [
-  {
-    type: "Last Premium Paid - $150",
-    date: "07-01-25",
-    description: "Premium payment processed successfully.",
-    user: "System",
-    category: "payment",
-  },
-  {
-    type: "Follow-up on recent claim #C1122 progress.",
-    date: "06-30-25",
-    description: "Provided update on claim status, awaiting adjuster report.",
-    user: "UW John",
-    category: "claim",
-  },
-  {
-    type: "Confirmation of payment received premium.",
-    date: "06-29-25",
-    description: "Auto premium receipt sent to customer.",
-    user: "System",
-    category: "payment",
-  },
-  {
-    type: "Logged customer preference for email communication.",
-    date: "06-28-25",
-    description: "Preferred contact method updated.",
-    user: "Agent Johnson",
-    category: "profile",
-  },
-];
+// Activities moved to activitiesByProfile above
 
 const getStatusBadge = (status: string) => {
   const statusConfig = {
@@ -364,7 +452,7 @@ export default function Dashboard() {
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
 
   // Diaries state
-  const [diariesData, setDiariesData] = useState(initialDiariesData);
+  const [diariesData, setDiariesData] = useState(diariesByProfile["olivia"]);
   const [diaryToClose, setDiaryToClose] = useState<number | null>(null);
 
   // Animation states
@@ -450,6 +538,17 @@ export default function Dashboard() {
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
   const hideFinancial = isJohn || isShawn;
+
+  useEffect(() => {
+    const key = profileId && diariesByProfile[profileId]
+      ? profileId
+      : "olivia";
+    setDiariesData(diariesByProfile[key]);
+  }, [profileId]);
+
+  const selectedActivities = (profileId && activitiesByProfile[profileId])
+    ? activitiesByProfile[profileId]
+    : activitiesByProfile["olivia"];
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
@@ -620,6 +719,12 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
+                          File
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
                           Action Taken By
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
@@ -627,13 +732,16 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {recentActivity.slice(0, 4).map((activity, index) => (
+                    {selectedActivities.slice(0, 4).map((activity, index) => (
                       <TableRow key={index} className="h-10 hover:bg-gray-50">
                         <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
-                          {activity.date}
+                          {formatToMMDDYY(activity.date)}
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-700">
                           {activity.type}
+                        </TableCell>
+                        <TableCell className="text-sm py-2 text-gray-700">
+                          {activity.file}
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-600">
                           {activity.user}
@@ -710,6 +818,12 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
+                          File
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
                           Actions
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
@@ -723,7 +837,7 @@ export default function Dashboard() {
                         className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
                       >
                         <TableCell className="text-xs py-1">
-                          {diary.dueDate}
+                          {formatToMMDDYY(diary.dueDate)}
                         </TableCell>
                         <TableCell className="text-xs py-1">
                           {diary.title}
@@ -734,6 +848,9 @@ export default function Dashboard() {
                           >
                             {diary.priority}
                           </span>
+                        </TableCell>
+                        <TableCell className="text-xs py-1 text-gray-700">
+                          {diary.file}
                         </TableCell>
                         <TableCell className="py-1">
                           <Button
@@ -753,7 +870,7 @@ export default function Dashboard() {
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
-                          colSpan={4}
+                          colSpan={5}
                           className="text-center py-4 text-gray-500 text-sm"
                         >
                           No open diaries
