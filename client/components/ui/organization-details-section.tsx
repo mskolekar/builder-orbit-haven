@@ -42,10 +42,6 @@ export function OrganizationDetailsSection() {
                     <Briefcase size={14} className="text-gray-400" />{" "}
                     {org.industry}
                   </div>
-                  <div className="flex items-center gap-1">
-                    <FileText size={14} className="text-gray-400" /> Reg. No:{" "}
-                    {org.registrationNumber}
-                  </div>
                 </div>
               </div>
             </div>
