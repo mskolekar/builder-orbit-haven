@@ -51,6 +51,12 @@ const profileMap: Record<
     role: "Organization",
     memberSince: "2017",
   },
+  "josh-fernandes": {
+    name: "Josh Fernandes",
+    status: "Prospect",
+    role: "Prospect",
+    memberSince: "2025",
+  },
 };
 
 function AppContent() {

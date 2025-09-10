@@ -125,6 +125,14 @@ const formatToMMDDYY = (input: string) => {
   return input;
 };
 
+const getTodayMMDDYY = () => {
+  const d = new Date();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(2);
+  return `${mm}-${dd}-${yy}`;
+};
+
 const activitiesByProfile: Record<string, { date: string; type: string; file: string; user: string }[]> = {
   olivia: [
     {
@@ -230,6 +238,14 @@ const activitiesByProfile: Record<string, { date: string; type: string; file: st
       user: "John W",
     },
   ],
+  "josh-fernandes": [
+    {
+      date: getTodayMMDDYY(),
+      type: "New Profile Added",
+      file: "-",
+      user: "System",
+    },
+  ],
 };
 
 const diariesByProfile: Record<string, { id: number; dueDate: string; title: string; priority: "High"|"Medium"|"Low"; status: "Open"|"Closed"; file: string }[]> = {
@@ -261,6 +277,7 @@ const diariesByProfile: Record<string, { id: number; dueDate: string; title: str
     { id: 4, dueDate: "09-13-25", title: "Approval Request Pending", priority: "High", status: "Open", file: "C 1045" },
     { id: 5, dueDate: "09-14-25", title: "Invoice Approved", priority: "Low", status: "Open", file: "P 1-9834522" },
   ],
+  "josh-fernandes": [],
 };
 
 const policyData = [
@@ -513,30 +530,38 @@ export default function Dashboard() {
   const claimsStatuses = [...new Set(claimsHistory.map((c) => c.status))];
 
   // Apply filters
-  const filteredPolicies = policyData.filter((policy) => {
+  const filteredPolicies = (policyData.filter((policy) => {
     const statusMatch =
       policyStatusFilter.length === 0 ||
       policyStatusFilter.includes(policy.status);
     const lobMatch =
       policyLobFilter.length === 0 || policyLobFilter.includes(policy.lob);
     return statusMatch && lobMatch;
-  });
+  }));
 
-  const filteredSubmissions = submissions.filter(
+  const filteredSubmissions = (submissions.filter(
     (submission) =>
       submissionStatusFilter.length === 0 ||
       submissionStatusFilter.includes(submission.status),
-  );
+  ));
 
-  const filteredClaims = claimsHistory.filter(
+  const filteredClaims = (claimsHistory.filter(
     (claim) =>
       claimsStatusFilter.length === 0 ||
       claimsStatusFilter.includes(claim.status),
-  );
+  ));
+
+  if (isNewProspect) {
+    // No data for new prospect
+    filteredPolicies.length = 0;
+    filteredSubmissions.length = 0;
+    filteredClaims.length = 0;
+  }
 
   const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
+  const isNewProspect = profileId === "josh-fernandes";
   const hideFinancial = isJohn || isShawn;
 
   useEffect(() => {
@@ -544,6 +569,15 @@ export default function Dashboard() {
       ? profileId
       : "olivia";
     setDiariesData(diariesByProfile[key]);
+
+    // Collapse all tiles by default for new prospect
+    const collapse = !!(profileId === "josh-fernandes");
+    setIsFinancialCollapsed(collapse);
+    setIsActivityCollapsed(collapse);
+    setIsDiariesCollapsed(collapse);
+    setIsPoliciesCollapsed(collapse);
+    setIsClaimsCollapsed(collapse);
+    setIsSubmissionsCollapsed(collapse);
   }, [profileId]);
 
   const selectedActivities = (profileId && activitiesByProfile[profileId])
@@ -969,6 +1003,11 @@ export default function Dashboard() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
+                      {filteredPolicies.length === 0 && (
+                        <TableRow>
+                          <TableCell colSpan={7} className="text-center py-4 text-gray-500 text-sm">No policies</TableCell>
+                        </TableRow>
+                      )}
                       {filteredPolicies.map((policy, index) => (
                         <TableRow
                           key={index}
@@ -1290,6 +1329,16 @@ export default function Dashboard() {
                               (claim) =>
                                 claim.status === "Open" ||
                                 claim.status === "Reopen",
+                            ).length === 0 && (
+                              <TableRow>
+                                <TableCell colSpan={7} className="text-center py-4 text-gray-500 text-sm">No claims</TableCell>
+                              </TableRow>
+                            )}
+                          {filteredClaims
+                            .filter(
+                              (claim) =>
+                                claim.status === "Open" ||
+                                claim.status === "Reopen",
                             )
                             .map((claim, index) => (
                               <TableRow
@@ -1556,6 +1605,11 @@ export default function Dashboard() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
+                        {filteredSubmissions.length === 0 && (
+                          <TableRow>
+                            <TableCell colSpan={5} className="text-center py-4 text-gray-500 text-sm">No submissions</TableCell>
+                          </TableRow>
+                        )}
                         {filteredSubmissions.map((submission, index) => (
                           <TableRow
                             key={index}
