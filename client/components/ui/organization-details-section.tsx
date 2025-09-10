@@ -7,12 +7,15 @@ export function OrganizationDetailsSection() {
     name: "ABC Ltd",
     status: "Active",
     industry: "Professional Services",
-    registrationNumber: "REG-489231",
+    website: "https://www.abcltd.com",
+    taxId: "12-3456789",
     phone: "(416) 555-0456",
     email: "info@abcltd.com",
     address: "200 King St W, Toronto, ON M5H 3T4",
     memberSince: "2017",
   };
+
+  const maskTaxId = (id: string) => id.replace(/\d(?=.*\d{4})/g, "•");
 
   return (
     <div className="bg-white border-b border-gray-200 p-4">
