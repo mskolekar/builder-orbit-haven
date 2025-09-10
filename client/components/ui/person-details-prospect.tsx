@@ -1,20 +1,18 @@
 import { Button } from "./button";
 import { Badge } from "./badge";
 import { Card, CardContent } from "./card";
-import { Users, FileText, Phone, Mail, MapPin, Edit3 } from "lucide-react";
+import { Phone, Mail, MapPin, Edit3 } from "lucide-react";
 
 const customerData = {
-  name: "Shawn Elkins",
-  role: "Claimant",
-  status: "Active",
-  gender: "Male",
-  lsc: "000000",
-  phone: "(416) 555-0123",
-  email: "Shawnelkins@sample.com",
-  address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
+  name: "Josh Fernandes",
+  role: "Prospect",
+  status: "New",
+  phone: "(416) 555-0199",
+  email: "josh.fernandes@example.com",
+  address: "250 King St W, Toronto, ON M5H 1J9",
 };
 
-export function PersonDetailsClaimant() {
+export function PersonDetailsProspect() {
   const navigateToProfile = () => {
     window.location.href = "/profile?section=personal-info";
   };
@@ -30,10 +28,11 @@ export function PersonDetailsClaimant() {
           <CardContent className="p-4">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
-                <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
-                    SE
-                  </div>
+                <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
+                  {customerData.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
                 </div>
                 <div>
                   <div className="flex items-center gap-3">
@@ -44,9 +43,7 @@ export function PersonDetailsClaimant() {
                     >
                       {customerData.name}
                     </h2>
-                    <Badge
-                      className={`${customerData.status === "Active" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
-                    >
+                    <Badge className="bg-gray-100 text-gray-700 border-gray-200">
                       {customerData.status}
                     </Badge>
                   </div>
@@ -56,7 +53,7 @@ export function PersonDetailsClaimant() {
                 </div>
               </div>
 
-              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 relative">
+              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -67,20 +64,6 @@ export function PersonDetailsClaimant() {
                   <Edit3 size={12} />
                 </Button>
                 <div className="flex items-center gap-2">
-                  <Users size={14} className="text-gray-400" />
-                  <div>
-                    <span className="text-xs text-gray-500">Gender</span>
-                    <p className="text-sm font-medium">{customerData.gender}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FileText size={14} className="text-gray-400" />
-                  <div>
-                    <span className="text-xs text-gray-500">SSN#</span>
-                    <p className="text-sm font-medium">{customerData.lsc}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
                   <Phone size={14} className="text-gray-400" />
                   <div className="min-w-0">
                     <span className="text-xs text-gray-500">Phone</span>
@@ -89,11 +72,13 @@ export function PersonDetailsClaimant() {
                     </p>
                   </div>
                 </div>
-                <div className="col-span-2 lg:col-span-2 flex items-center gap-2">
+                <div className="col-span-2 flex items-center gap-2">
                   <Mail size={14} className="text-gray-400" />
-                  <div>
+                  <div className="min-w-0">
                     <span className="text-xs text-gray-500">Email</span>
-                    <p className="text-sm font-medium">{customerData.email}</p>
+                    <p className="text-sm font-medium truncate">
+                      {customerData.email}
+                    </p>
                   </div>
                 </div>
               </div>
