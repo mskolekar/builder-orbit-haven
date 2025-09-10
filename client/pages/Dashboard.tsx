@@ -1032,19 +1032,6 @@ export default function Dashboard() {
                         <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
                           {diary.file}
                         </TableCell>
-                        <TableCell className="py-1">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-5 w-12 p-0 text-xs text-gray-600 hover:text-[#0054A6] hover:bg-blue-50"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleCloseDiary(diary.id);
-                            }}
-                          >
-                            Close
-                          </Button>
-                        </TableCell>
                       </TableRow>
                     ))}
                     {openDiaries.length === 0 && (
