@@ -3,7 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useNavigate } from "react-router-dom";
@@ -56,10 +62,17 @@ export default function AddNew() {
                 <div className="mt-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
-                      <div className="text-sm font-medium text-gray-700">Internal (Employee)</div>
-                      <div className="text-xs text-gray-500">Toggle for internal employees</div>
+                      <div className="text-sm font-medium text-gray-700">
+                        Internal (Employee)
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        Toggle for internal employees
+                      </div>
                     </div>
-                    <Switch checked={isInternal} onCheckedChange={setIsInternal} />
+                    <Switch
+                      checked={isInternal}
+                      onCheckedChange={setIsInternal}
+                    />
                   </div>
 
                   {isInternal ? (
@@ -82,7 +95,8 @@ export default function AddNew() {
                         <Input placeholder="user@company" />
                       </div>
                       <div className="md:col-span-2 text-xs text-gray-500">
-                        Relationship will be added as Employee with appropriate role.
+                        Relationship will be added as Employee with appropriate
+                        role.
                       </div>
                     </div>
                   ) : (
@@ -111,8 +125,12 @@ export default function AddNew() {
                               <SelectValue placeholder="Select type" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="broker">Broker Contact</SelectItem>
-                              <SelectItem value="insured">Insured Contact</SelectItem>
+                              <SelectItem value="broker">
+                                Broker Contact
+                              </SelectItem>
+                              <SelectItem value="insured">
+                                Insured Contact
+                              </SelectItem>
                               <SelectItem value="claim">Claim Party</SelectItem>
                             </SelectContent>
                           </Select>
@@ -122,17 +140,31 @@ export default function AddNew() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex items-center justify-between">
                           <div className="space-y-1">
-                            <div className="text-sm font-medium text-gray-700">Login access to OMS?</div>
-                            <div className="text-xs text-gray-500">Provide OMS portal access</div>
+                            <div className="text-sm font-medium text-gray-700">
+                              Login access to OMS?
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              Provide OMS portal access
+                            </div>
                           </div>
-                          <Switch checked={needsOMS} onCheckedChange={setNeedsOMS} />
+                          <Switch
+                            checked={needsOMS}
+                            onCheckedChange={setNeedsOMS}
+                          />
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="space-y-1">
-                            <div className="text-sm font-medium text-gray-700">Login access to B2C?</div>
-                            <div className="text-xs text-gray-500">Enable customer portal login</div>
+                            <div className="text-sm font-medium text-gray-700">
+                              Login access to B2C?
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              Enable customer portal login
+                            </div>
                           </div>
-                          <Switch checked={needsB2C} onCheckedChange={setNeedsB2C} />
+                          <Switch
+                            checked={needsB2C}
+                            onCheckedChange={setNeedsB2C}
+                          />
                         </div>
                         {needsOMS && (
                           <div className="space-y-2">
@@ -143,7 +175,9 @@ export default function AddNew() {
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="basic">Basic</SelectItem>
-                                <SelectItem value="power">Power User</SelectItem>
+                                <SelectItem value="power">
+                                  Power User
+                                </SelectItem>
                               </SelectContent>
                             </Select>
                           </div>
@@ -159,10 +193,15 @@ export default function AddNew() {
                   )}
 
                   <div className="mt-6 flex justify-end">
-                    <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={saveToOlivia}>Save</Button>
+                    <Button
+                      className="bg-[#0054A6] hover:bg-[#003d7a]"
+                      onClick={saveToOlivia}
+                    >
+                      Save
+                    </Button>
                   </div>
                 </div>
-                </TabsContent>
+              </TabsContent>
 
               <TabsContent value="organization" className="mt-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -186,14 +225,26 @@ export default function AddNew() {
 
                 <div className="mt-6 flex items-center justify-between">
                   <div className="space-y-1">
-                    <div className="text-sm font-medium text-gray-700">Define employees/contacts?</div>
-                    <div className="text-xs text-gray-500">You can link people after creating the organization</div>
+                    <div className="text-sm font-medium text-gray-700">
+                      Define employees/contacts?
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      You can link people after creating the organization
+                    </div>
                   </div>
-                  <Switch checked={defineContacts} onCheckedChange={setDefineContacts} />
+                  <Switch
+                    checked={defineContacts}
+                    onCheckedChange={setDefineContacts}
+                  />
                 </div>
 
                 <div className="mt-6 flex justify-end">
-                  <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={saveToOlivia}>Save</Button>
+                  <Button
+                    className="bg-[#0054A6] hover:bg-[#003d7a]"
+                    onClick={saveToOlivia}
+                  >
+                    Save
+                  </Button>
                 </div>
               </TabsContent>
             </Tabs>
