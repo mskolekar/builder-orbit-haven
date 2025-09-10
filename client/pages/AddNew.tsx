@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function AddNew() {
   const [isInternal, setIsInternal] = useState(false);
@@ -161,6 +162,7 @@ export default function AddNew() {
                   <div className="mt-6 flex justify-end">
                     <Button className="bg-[#0054A6] hover:bg-[#003d7a]" onClick={saveToOlivia}>Save</Button>
                   </div>
+                </div>
                 </TabsContent>
 
               <TabsContent value="organization" className="mt-4">
