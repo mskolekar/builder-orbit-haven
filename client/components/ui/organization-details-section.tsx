@@ -28,8 +28,12 @@ export function OrganizationDetailsSection() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-3">
-                    <h2 className="text-xl font-bold text-gray-900">{org.name}</h2>
-                    <Badge className={`${org.status === "Active" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}>
+                    <h2 className="text-xl font-bold text-gray-900">
+                      {org.name}
+                    </h2>
+                    <Badge
+                      className={`${org.status === "Active" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
+                    >
                       {org.status}
                     </Badge>
                   </div>
