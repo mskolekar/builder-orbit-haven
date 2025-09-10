@@ -7,9 +7,10 @@ export function OrganizationDetailsSection() {
     name: "ABC Ltd",
     status: "Active",
     industry: "Professional Services",
-    registrationNumber: "REG-489231",
     phone: "(416) 555-0456",
     email: "info@abcltd.com",
+    website: "www.abcltd.com",
+    taxIdMasked: "•••-••-1234",
     address: "200 King St W, Toronto, ON M5H 3T4",
     memberSince: "2017",
   };
