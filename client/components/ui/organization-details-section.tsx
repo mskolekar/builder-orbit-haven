@@ -7,18 +7,21 @@ export function OrganizationDetailsSection() {
     name: "ABC Ltd",
     status: "Active",
     industry: "Professional Services",
-    registrationNumber: "REG-489231",
+    website: "https://www.abcltd.com",
+    taxId: "12-3456789",
     phone: "(416) 555-0456",
     email: "info@abcltd.com",
     address: "200 King St W, Toronto, ON M5H 3T4",
     memberSince: "2017",
   };
 
+  const maskTaxId = (id: string) => id.replace(/\d(?=.*\d{4})/g, "•");
+
   return (
     <div className="bg-white border-b border-gray-200 p-4">
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
-          <CardContent className="p-4 min-h-[140px]">
+          <CardContent className="p-4">
             <div className="flex items-center gap-6">
               <div className="w-16 h-16 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-lg font-semibold shadow-lg">
                 {org.name
@@ -36,16 +39,7 @@ export function OrganizationDetailsSection() {
                   </Badge>
                 </div>
                 <p className="text-gray-600 font-medium">Organization</p>
-                <div className="hidden">
-                  <div className="flex items-center gap-1">
-                    <Briefcase size={14} className="text-gray-400" />{" "}
-                    {org.industry}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <FileText size={14} className="text-gray-400" /> Reg. No:{" "}
-                    {org.registrationNumber}
-                  </div>
-                </div>
+                <div className="hidden"></div>
               </div>
             </div>
 
@@ -60,9 +54,25 @@ export function OrganizationDetailsSection() {
               <div className="flex items-center gap-2">
                 <FileText size={14} className="text-gray-400" />
                 <div>
-                  <div className="text-xs text-gray-500">Reg. No</div>
+                  <div className="text-xs text-gray-500">Website</div>
+                  <div className="text-sm font-medium truncate max-w-[180px]">
+                    <a
+                      href={org.website}
+                      className="text-blue-600 hover:underline"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {org.website}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Tax ID</div>
                   <div className="text-sm font-medium">
-                    {org.registrationNumber}
+                    {maskTaxId(org.taxId)}
                   </div>
                 </div>
               </div>

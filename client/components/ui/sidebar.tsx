@@ -49,7 +49,7 @@ const sidebarItems: SidebarItem[] = [
       { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
       { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
       { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
-      { label: "Add New", path: "/overview/add-new" },
+      { label: "New Prospect", path: "/overview/josh-fernandes" },
     ],
   },
   { icon: Briefcase, label: "Accounting", path: "/accounting" },
