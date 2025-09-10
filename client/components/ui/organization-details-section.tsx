@@ -46,7 +46,7 @@ export function OrganizationDetailsSection() {
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="mt-4 grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="flex items-center gap-2">
                 <Briefcase size={14} className="text-gray-400" />
                 <div>
@@ -82,12 +82,13 @@ export function OrganizationDetailsSection() {
                   <div className="text-sm font-medium">{org.taxIdMasked}</div>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-3 flex items-center gap-2 text-sm">
-              <MapPin size={14} className="text-gray-400" />
-              <span className="text-gray-500">Address:</span>
-              <span className="font-medium">{org.address}</span>
+              <div className="flex items-center gap-2 md:col-span-2">
+                <MapPin size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Address</div>
+                  <div className="text-sm font-medium">{org.address}</div>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
