@@ -551,18 +551,18 @@ export default function Dashboard() {
       claimsStatusFilter.includes(claim.status),
   ));
 
+  const { profileId } = useParams();
+  const isShawn = profileId === "shawn-elkins";
+  const isJohn = profileId === "john-wills";
+  const isNewProspect = profileId === "josh-fernandes";
+  const hideFinancial = isJohn || isShawn;
+
   if (isNewProspect) {
     // No data for new prospect
     filteredPolicies.length = 0;
     filteredSubmissions.length = 0;
     filteredClaims.length = 0;
   }
-
-  const { profileId } = useParams();
-  const isShawn = profileId === "shawn-elkins";
-  const isJohn = profileId === "john-wills";
-  const isNewProspect = profileId === "josh-fernandes";
-  const hideFinancial = isJohn || isShawn;
 
   useEffect(() => {
     const key = profileId && diariesByProfile[profileId]
