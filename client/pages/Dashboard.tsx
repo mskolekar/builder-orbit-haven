@@ -133,13 +133,6 @@ const getDiariesData = (profileId?: string): DiaryRow[] => {
           fileId: "1-4712556",
         },
         {
-          dueDate: "09-11-2025",
-          title: "Added Endorsement",
-          priority: "Medium",
-          fileType: "P",
-          fileId: "1-8793492",
-        },
-        {
           dueDate: "09-12-2025",
           title: "Requested Documents for Review",
           priority: "High",
@@ -237,6 +230,8 @@ const getDiariesData = (profileId?: string): DiaryRow[] => {
           fileId: "1-9834522",
         },
       ]);
+    case "josh-fernandes":
+      return [];
     case "olivia":
     default:
       return rows([
@@ -415,6 +410,16 @@ const formatMMDDYY = (d: string) => {
 
 const getRecentActivity = (profileId?: string): ActivityRow[] => {
   switch (profileId) {
+    case "josh-fernandes":
+      return [
+        {
+          date: "09-10-2025",
+          activity: "Profile Created in OMS",
+          fileType: "I",
+          fileId: "",
+          takenBy: "System",
+        },
+      ];
     case "john-wills":
       return [
         {
@@ -630,12 +635,12 @@ export default function Dashboard() {
   }, [profileId]);
 
   // Collapsible states
-  const [isFinancialCollapsed, setIsFinancialCollapsed] = useState(false);
-  const [isActivityCollapsed, setIsActivityCollapsed] = useState(false);
-  const [isDiariesCollapsed, setIsDiariesCollapsed] = useState(false);
-  const [isPoliciesCollapsed, setIsPoliciesCollapsed] = useState(false);
-  const [isClaimsCollapsed, setIsClaimsCollapsed] = useState(false);
-  const [isSubmissionsCollapsed, setIsSubmissionsCollapsed] = useState(false);
+  const [isFinancialCollapsed, setIsFinancialCollapsed] = useState(true);
+  const [isActivityCollapsed, setIsActivityCollapsed] = useState(true);
+  const [isDiariesCollapsed, setIsDiariesCollapsed] = useState(true);
+  const [isPoliciesCollapsed, setIsPoliciesCollapsed] = useState(true);
+  const [isClaimsCollapsed, setIsClaimsCollapsed] = useState(true);
+  const [isSubmissionsCollapsed, setIsSubmissionsCollapsed] = useState(true);
 
   // Diary functions
   const handleCloseDiary = (diaryId: number) => {
@@ -680,30 +685,38 @@ export default function Dashboard() {
   const claimsStatuses = [...new Set(claimsHistory.map((c) => c.status))];
 
   // Apply filters
-  const filteredPolicies = policyData.filter((policy) => {
-    const statusMatch =
-      policyStatusFilter.length === 0 ||
-      policyStatusFilter.includes(policy.status);
-    const lobMatch =
-      policyLobFilter.length === 0 || policyLobFilter.includes(policy.lob);
-    return statusMatch && lobMatch;
-  });
+  const isProspect = profileId === "josh-fernandes";
 
-  const filteredSubmissions = submissions.filter(
-    (submission) =>
-      submissionStatusFilter.length === 0 ||
-      submissionStatusFilter.includes(submission.status),
-  );
+  const filteredPolicies = isProspect
+    ? []
+    : policyData.filter((policy) => {
+        const statusMatch =
+          policyStatusFilter.length === 0 ||
+          policyStatusFilter.includes(policy.status);
+        const lobMatch =
+          policyLobFilter.length === 0 || policyLobFilter.includes(policy.lob);
+        return statusMatch && lobMatch;
+      });
 
-  const filteredClaims = claimsHistory.filter(
-    (claim) =>
-      claimsStatusFilter.length === 0 ||
-      claimsStatusFilter.includes(claim.status),
-  );
+  const filteredSubmissions = isProspect
+    ? []
+    : submissions.filter(
+        (submission) =>
+          submissionStatusFilter.length === 0 ||
+          submissionStatusFilter.includes(submission.status),
+      );
+
+  const filteredClaims = isProspect
+    ? []
+    : claimsHistory.filter(
+        (claim) =>
+          claimsStatusFilter.length === 0 ||
+          claimsStatusFilter.includes(claim.status),
+      );
 
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
-  const hideFinancial = false;
+  const hideFinancial = isProspect;
 
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
