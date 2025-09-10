@@ -47,7 +47,7 @@ export function OrganizationDetailsSection() {
                   <div>
                     <div className="text-xs text-gray-500">Website</div>
                     <div className="text-sm font-medium truncate max-w-[220px] text-gray-800">
-                      {org.website}
+                      {org.website.replace(/^https?:\/\//, "")}
                     </div>
                   </div>
                 </div>
