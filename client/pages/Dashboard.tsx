@@ -64,7 +64,7 @@ const customerData = {
   name: "Rose K",
   role: "Lawyer",
   status: "Active",
-  dateOfBirth: "••••••••",
+  dateOfBirth: "•���••••••",
   gender: "Female",
   lsc: "000000",
   phone: "(416) 555-0123",
@@ -409,6 +409,20 @@ export default function Dashboard() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isProspect) {
+      setDiariesData([]);
+    } else if (isJohn) {
+      setDiariesData(diariesJohn);
+    } else if (isShawn) {
+      setDiariesData(diariesShawn);
+    } else if (profileId === "abc-ltd") {
+      setDiariesData(diariesOrg);
+    } else {
+      setDiariesData(diariesOlivia);
+    }
+  }, [isProspect, isJohn, isShawn, profileId]);
 
   // Collapsible states
   const [isFinancialCollapsed, setIsFinancialCollapsed] = useState(false);
