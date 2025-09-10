@@ -308,7 +308,7 @@ function AppContent() {
                       name={activeProfile.name}
                       role={activeProfile.role}
                       status={activeProfile.status}
-                      memberSince={activeProfile.memberSince}
+                      memberSince={activeProfileKey === "josh-fernandes" ? undefined : activeProfile.memberSince}
                     />
                   ))}
                 <Routes>
