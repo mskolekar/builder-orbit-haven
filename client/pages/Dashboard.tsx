@@ -300,34 +300,24 @@ const recentActivity = [
 ];
 
 const underwriterRecentActivity = [
-  {
-    type: "Renewal proposal quote shared with broker.",
-    date: "07-01-25",
-    description: "Renewal proposal quote shared with broker.",
-    user: "UW John",
-    category: "policy",
-  },
-  {
-    type: "Endorsement committed #1-8793492.",
-    date: "06-30-25",
-    description: "Endorsement committed.",
-    user: "UW John",
-    category: "policy",
-  },
-  {
-    type: "Requested documents for UW review (Sub# 1-928763A-01).",
-    date: "06-29-25",
-    description: "Requested documents for underwriting review.",
-    user: "UW John",
-    category: "submission",
-  },
-  {
-    type: "Logged customer preference for email communication.",
-    date: "06-28-25",
-    description: "Preferred contact method updated.",
-    user: "UW John",
-    category: "profile",
-  },
+  { date: "09-07-25", type: "Proposal quote shared with broker", file: "P 1-4712556", user: "John W", category: "policy" },
+  { date: "09-01-25", type: "Added an endorsement", file: "P 1-8793492", user: "John W", category: "policy" },
+  { date: "08-20-25", type: "Requested documents for UW review", file: "S 928763A-01", user: "John W", category: "submission" },
+  { date: "07-31-25", type: "Logged customer preference for email communication", file: "Olivia R", user: "John W", category: "profile" },
+];
+
+const claimantRecentActivity = [
+  { date: "09-08-25", type: "Claim payment issued $2,500", file: "C 2025-45", user: "System", category: "claim" },
+  { date: "09-03-25", type: "Medical reserve increased by $10,000", file: "C 2025-45", user: "Anna R", category: "claim" },
+  { date: "08-29-25", type: "Indemnity reserve decreased by $3,000", file: "C 2025-45", user: "Anna R", category: "claim" },
+  { date: "08-20-25", type: "FNOL submitted", file: "I 789432", user: "Josh K", category: "incident" },
+];
+
+const organizationRecentActivity = [
+  { date: "09-09-25", type: "Proposal quote shared with broker", file: "P 1-9834521", user: "John W", category: "policy" },
+  { date: "09-04-25", type: "Claim payment issued $12,000", file: "C 1045", user: "System", category: "claim" },
+  { date: "08-30-25", type: "Reserve increased by $25,000", file: "C 1122", user: "Anna R", category: "claim" },
+  { date: "08-15-25", type: "Added an endorsement", file: "P 1-9834521", user: "John W", category: "policy" },
 ];
 
 const getStatusBadge = (status: string) => {
