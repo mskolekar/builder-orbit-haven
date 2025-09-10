@@ -269,34 +269,10 @@ const claimsHistory = [
 ];
 
 const recentActivity = [
-  {
-    type: "Last Premium Paid – $150",
-    date: "07-01-25",
-    description: "Premium payment processed successfully.",
-    user: "System",
-    category: "payment",
-  },
-  {
-    type: "Renewal proposal quote shared with customer",
-    date: "06-30-25",
-    description: "Provided update on renewal proposal shared with customer.",
-    user: "UW John",
-    category: "policy",
-  },
-  {
-    type: "Policy endorsement processed – Address updated",
-    date: "06-29-25",
-    description: "Endorsement completed and address updated.",
-    user: "UWA Krish",
-    category: "policy",
-  },
-  {
-    type: "Logged customer preference for email communication.",
-    date: "06-28-25",
-    description: "Preferred contact method updated.",
-    user: "Agent Johnson",
-    category: "profile",
-  },
+  { date: "09-07-25", type: "Recurring payment profile set with Credit_Card", file: "P 1-4755556", user: "Shelton K", category: "payment" },
+  { date: "09-01-25", type: "Recurring payment received $150", file: "P 1-7433808", user: "System", category: "payment" },
+  { date: "08-20-25", type: "Indemnity reserve decreased by $1,000", file: "C 1045", user: "Anna R", category: "claim" },
+  { date: "07-31-25", type: "Proposal quote shared with broker", file: "S 928703A", user: "Shelton K", category: "submission" },
 ];
 
 const underwriterRecentActivity = [
