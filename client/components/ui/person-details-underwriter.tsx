@@ -45,7 +45,7 @@ export function PersonDetailsUnderwriter() {
                       {customerData.name}
                     </h2>
                     <Badge
-                      className={`${customerData.status === "Active" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
+                      className="bg-gray-100 text-gray-700 border-gray-200"
                     >
                       {customerData.status}
                     </Badge>

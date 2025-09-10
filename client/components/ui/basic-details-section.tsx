@@ -30,7 +30,7 @@ export function BasicDetailsSection({
                 <div className="flex items-center gap-3">
                   <h2 className="text-xl font-bold text-gray-900">{name}</h2>
                   <Badge
-                    className={`${status === "Active" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
+                    className="bg-gray-100 text-gray-700 border-gray-200"
                   >
                     {status}
                   </Badge>
