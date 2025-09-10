@@ -1,7 +1,7 @@
 import { Button } from "./button";
 import { Badge } from "./badge";
 import { Card, CardContent } from "./card";
-import { Phone, Mail, MapPin, Edit3 } from "lucide-react";
+import { Phone, Mail, MapPin, Edit3, FileText } from "lucide-react";
 
 const customerData = {
   name: "Josh Fernandes",
@@ -10,6 +10,7 @@ const customerData = {
   phone: "(416) 555-0199",
   email: "josh.fernandes@example.com",
   address: "250 King St W, Toronto, ON M5H 1J9",
+  ssn: "•••-••-6789",
 };
 
 export function PersonDetailsProspect() {
@@ -70,6 +71,13 @@ export function PersonDetailsProspect() {
                     <p className="text-sm font-medium whitespace-nowrap">
                       {customerData.phone}
                     </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FileText size={14} className="text-gray-400" />
+                  <div>
+                    <span className="text-xs text-gray-500">SSN#</span>
+                    <p className="text-sm font-medium">{customerData.ssn}</p>
                   </div>
                 </div>
                 <div className="col-span-2 flex items-center gap-2">

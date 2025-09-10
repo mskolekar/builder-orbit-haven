@@ -764,10 +764,14 @@ export default function Dashboard() {
                     className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                     onClick={(e) => {
                       e.stopPropagation();
-                      console.log("Navigate to payment");
+                      if (isNewProspect) {
+                        console.log("Create quote for prospect");
+                      } else {
+                        console.log("Navigate to payment");
+                      }
                     }}
                   >
-                    Pay Now
+                    {isNewProspect ? "Create Quote" : "Pay Now"}
                   </Button>
                 </div>
               )}
@@ -858,9 +862,7 @@ export default function Dashboard() {
         >
           {/* Activity Timeline */}
           <Card
-            className={
-              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-            }
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isDiariesCollapsed ? "lg:col-span-2" : ""}`}
             onClick={() => setIsActivityCollapsed((v) => !v)}
           >
             <CardHeader
@@ -903,7 +905,7 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-32">
                         <div className="flex items-center gap-1">
                           File
                           <ArrowUpDown size={12} className="text-gray-400" />
@@ -926,7 +928,7 @@ export default function Dashboard() {
                         <TableCell className="text-sm py-2 text-gray-700">
                           {activity.type}
                         </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
+                        <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                           {activity.file}
                         </TableCell>
                         <TableCell className="text-sm py-2 text-gray-600">
@@ -942,9 +944,7 @@ export default function Dashboard() {
 
           {/* Diaries */}
           <Card
-            className={
-              "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-            }
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isActivityCollapsed ? "lg:col-span-2" : ""}`}
             onClick={() => setIsDiariesCollapsed((v) => !v)}
           >
             <CardHeader
@@ -1002,15 +1002,9 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-32">
                         <div className="flex items-center gap-1">
                           File
-                          <ArrowUpDown size={12} className="text-gray-400" />
-                        </div>
-                      </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                        <div className="flex items-center gap-1">
-                          Actions
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
@@ -1035,28 +1029,15 @@ export default function Dashboard() {
                             {diary.priority}
                           </span>
                         </TableCell>
-                        <TableCell className="text-xs py-1 text-gray-700">
+                        <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
                           {diary.file}
-                        </TableCell>
-                        <TableCell className="py-1">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-5 w-12 p-0 text-xs text-gray-600 hover:text-[#0054A6] hover:bg-blue-50"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleCloseDiary(diary.id);
-                            }}
-                          >
-                            Close
-                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
-                          colSpan={5}
+                          colSpan={4}
                           className="text-center py-4 text-gray-500 text-sm"
                         >
                           No open diaries
@@ -1077,9 +1058,7 @@ export default function Dashboard() {
           {/* Policy Details */}
           {!isShawn && (
             <Card
-              className={
-                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-              }
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isSubmissionsCollapsed || isClaimsCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsPoliciesCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1209,9 +1188,7 @@ export default function Dashboard() {
           {/* Right column: Submissions for John, Claims otherwise */}
           {isJohn ? (
             <Card
-              className={
-                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-              }
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsSubmissionsCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1311,9 +1288,7 @@ export default function Dashboard() {
             </Card>
           ) : (
             <Card
-              className={
-                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-              }
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsClaimsCollapsed((v) => !v)}
             >
               <CardHeader
