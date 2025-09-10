@@ -366,7 +366,7 @@ export default function Dashboard() {
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
 
   // Diaries state
-  const [diariesData, setDiariesData] = useState(initialDiariesData);
+  const [diariesData, setDiariesData] = useState<DiaryItem[]>(initialDiariesData);
   const [diaryToClose, setDiaryToClose] = useState<number | null>(null);
 
   // Animation states
