@@ -57,7 +57,7 @@ const customerData = {
   name: "Rose K",
   role: "Lawyer",
   status: "Active",
-  dateOfBirth: "••••••••",
+  dateOfBirth: "••••���•••",
   gender: "Female",
   lsc: "000000",
   phone: "(416) 555-0123",
@@ -1314,7 +1314,7 @@ export default function Dashboard() {
               className={
                 "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
               }
-              onClick={() => console.log("Navigate to claims history")}
+              onClick={() => setIsClaimsCollapsed((v) => !v)}
             >
               <CardHeader
                 className="pb-2 cursor-pointer"
