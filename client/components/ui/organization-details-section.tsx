@@ -1,13 +1,14 @@
 import { Card, CardContent } from "./card";
 import { Badge } from "./badge";
-import { Mail, Phone, MapPin, Briefcase, FileText } from "lucide-react";
+import { Mail, Phone, MapPin, Briefcase, Globe, ShieldCheck } from "lucide-react";
 
 export function OrganizationDetailsSection() {
   const org = {
     name: "ABC Ltd",
     status: "Active",
     industry: "Professional Services",
-    registrationNumber: "REG-489231",
+    website: "www.abcltd.com",
+    taxIdMasked: "XXX-XX-4321",
     phone: "(416) 555-0456",
     email: "info@abcltd.com",
     address: "200 King St W, Toronto, ON M5H 3T4",
@@ -50,7 +51,7 @@ export function OrganizationDetailsSection() {
             </div>
 
             <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
-              {/* Row 1: Industry and Reg. No */}
+              {/* Row 1: Industry, Website, Tax ID */}
               <div className="flex items-center gap-2">
                 <Briefcase size={14} className="text-gray-400" />
                 <div>
@@ -59,12 +60,17 @@ export function OrganizationDetailsSection() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <FileText size={14} className="text-gray-400" />
+                <Globe size={14} className="text-gray-400" />
                 <div>
-                  <div className="text-xs text-gray-500">Reg. No</div>
-                  <div className="text-sm font-medium">
-                    {org.registrationNumber}
-                  </div>
+                  <div className="text-xs text-gray-500">Website</div>
+                  <div className="text-sm font-medium">{org.website}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <ShieldCheck size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Tax ID</div>
+                  <div className="text-sm font-medium">{org.taxIdMasked}</div>
                 </div>
               </div>
 
