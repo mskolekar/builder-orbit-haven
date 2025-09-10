@@ -27,7 +27,7 @@ export function PersonDetailsUnderwriter() {
     <div className="bg-white border-b border-gray-200 p-4">
       <div className="max-w-7xl mx-auto">
         <Card className="shadow-sm border">
-          <CardContent className="p-4">
+          <CardContent className="p-4 min-h-[140px]">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
                 <div className="relative">

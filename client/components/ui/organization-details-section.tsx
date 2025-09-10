@@ -7,9 +7,10 @@ export function OrganizationDetailsSection() {
     name: "ABC Ltd",
     status: "Active",
     industry: "Professional Services",
-    registrationNumber: "REG-489231",
     phone: "(416) 555-0456",
     email: "info@abcltd.com",
+    website: "www.abcltd.com",
+    taxIdMasked: "•••-••-1234",
     address: "200 King St W, Toronto, ON M5H 3T4",
     memberSince: "2017",
   };
@@ -41,10 +42,6 @@ export function OrganizationDetailsSection() {
                     <Briefcase size={14} className="text-gray-400" />{" "}
                     {org.industry}
                   </div>
-                  <div className="flex items-center gap-1">
-                    <FileText size={14} className="text-gray-400" /> Reg. No:{" "}
-                    {org.registrationNumber}
-                  </div>
                 </div>
               </div>
             </div>
@@ -60,10 +57,8 @@ export function OrganizationDetailsSection() {
               <div className="flex items-center gap-2">
                 <FileText size={14} className="text-gray-400" />
                 <div>
-                  <div className="text-xs text-gray-500">Reg. No</div>
-                  <div className="text-sm font-medium">
-                    {org.registrationNumber}
-                  </div>
+                  <div className="text-xs text-gray-500">Website</div>
+                  <div className="text-sm font-medium">{org.website}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -78,6 +73,13 @@ export function OrganizationDetailsSection() {
                 <div>
                   <div className="text-xs text-gray-500">Email</div>
                   <div className="text-sm font-medium">{org.email}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText size={14} className="text-gray-400" />
+                <div>
+                  <div className="text-xs text-gray-500">Tax ID</div>
+                  <div className="text-sm font-medium">{org.taxIdMasked}</div>
                 </div>
               </div>
             </div>
