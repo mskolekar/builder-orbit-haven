@@ -1,21 +1,17 @@
-import { Card, CardContent } from "./card";
 import { Badge } from "./badge";
-import { Mail, Phone, MapPin, Briefcase, FileText } from "lucide-react";
+import { Mail, Phone, MapPin, FileText } from "lucide-react";
+import { Card, CardContent } from "./card";
 
 export function OrganizationDetailsSection() {
   const org = {
     name: "ABC Ltd",
     status: "Active",
-    industry: "Professional Services",
     website: "https://www.abcltd.com",
-    taxId: "12-3456789",
     phone: "(416) 555-0456",
     email: "info@abcltd.com",
     address: "200 King St W, Toronto, ON M5H 3T4",
     memberSince: "2017",
   };
-
-  const maskTaxId = (id: string) => id.replace(/\d(?=.*\d{4})/g, "•");
 
   return (
     <div className="bg-white border-b border-gray-200 p-4">
@@ -31,48 +27,22 @@ export function OrganizationDetailsSection() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-3">
-                  <h2 className="text-xl font-bold text-gray-900">
-                    {org.name}
-                  </h2>
+                  <h2 className="text-xl font-bold text-gray-900">{org.name}</h2>
                   <Badge className="bg-gray-100 text-gray-700 border-gray-200">
                     {org.status}
                   </Badge>
                 </div>
                 <p className="text-gray-600 font-medium">Organization</p>
-                <div className="hidden"></div>
               </div>
             </div>
 
             <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="flex items-center gap-2">
-                <Briefcase size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Industry</div>
-                  <div className="text-sm font-medium">{org.industry}</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
                 <FileText size={14} className="text-gray-400" />
                 <div>
                   <div className="text-xs text-gray-500">Website</div>
-                  <div className="text-sm font-medium truncate max-w-[180px]">
-                    <a
-                      href={org.website}
-                      className="text-blue-600 hover:underline"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {org.website}
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <FileText size={14} className="text-gray-400" />
-                <div>
-                  <div className="text-xs text-gray-500">Tax ID</div>
-                  <div className="text-sm font-medium">
-                    {maskTaxId(org.taxId)}
+                  <div className="text-sm font-medium truncate max-w-[220px] text-gray-800">
+                    {org.website}
                   </div>
                 </div>
               </div>
