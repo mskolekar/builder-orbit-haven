@@ -64,7 +64,7 @@ const customerData = {
   name: "Rose K",
   role: "Lawyer",
   status: "Active",
-  dateOfBirth: "•���••••••",
+  dateOfBirth: "••••••••",
   gender: "Female",
   lsc: "000000",
   phone: "(416) 555-0123",
@@ -755,6 +755,12 @@ export default function Dashboard() {
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center gap-1">
                           Activity
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          File
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
