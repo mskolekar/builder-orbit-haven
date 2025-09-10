@@ -1391,12 +1391,12 @@ export default function Dashboard() {
                               key={row.id}
                               className="h-10 hover:bg-gray-50"
                             >
-                              <TableCell className="text-sm font-medium text-blue-600">
+                              <TableCell className="text-sm font-medium text-gray-800">
                                 {row.id}
                               </TableCell>
                               <TableCell>
                                 <span
-                                  className={`px-2 py-1 rounded-full text-xs border ${row.type === "Claim" ? "bg-blue-100 text-blue-700 border-blue-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
+                                  className={`px-2 py-1 rounded-full text-xs border ${row.type === "Claim" ? "bg-gray-100 text-gray-700 border-gray-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
                                 >
                                   {row.type}
                                 </span>
@@ -1547,27 +1547,27 @@ export default function Dashboard() {
         </div>
 
         {/* Row 3 */}
-        {isJohn ? (
+        {!isJohn && !isShawn && (
           <div
-            className={`grid grid-cols-1 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+            className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
           >
-            {/* Claims moved to last row for John */}
+            {/* Submissions */}
             <Card
               className={
                 "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
               }
-              onClick={() => console.log("Navigate to claims history")}
+              onClick={() => console.log("Navigate to submissions")}
             >
               <CardHeader
                 className="pb-2 cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsClaimsCollapsed((v) => !v);
+                  setIsSubmissionsCollapsed((v) => !v);
                 }}
               >
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base text-gray-700">
-                    Claims
+                    Submissions
                   </CardTitle>
                   <div className="flex items-center">
                     <Button
@@ -1581,14 +1581,26 @@ export default function Dashboard() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
+              <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
                       <TableRow>
                         <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                           <div className="flex items-center gap-1">
-                            Claim Number
+                            Submission Number
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Program
+                            <ArrowUpDown size={12} className="text-gray-400" />
+                          </div>
+                        </TableHead>
+                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center gap-1">
+                            Proposed Effective Date
                             <ArrowUpDown size={12} className="text-gray-400" />
                           </div>
                         </TableHead>
@@ -1598,223 +1610,63 @@ export default function Dashboard() {
                             <ArrowUpDown size={12} className="text-gray-400" />
                           </div>
                         </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
-                          <div className="flex items-center gap-1">
-                            Loss Date
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
                         <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                           <div className="flex items-center gap-1">
-                            Incurred
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Reserves
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Paid
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Recoveries
+                            Submission Type
                             <ArrowUpDown size={12} className="text-gray-400" />
                           </div>
                         </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {filteredClaims
-                        .filter(
-                          (claim) =>
-                            claim.status === "Open" ||
-                            claim.status === "Reopen",
-                        )
-                        .map((claim, index) => (
-                          <TableRow
-                            key={index}
-                            className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log(
-                                "Open claim details",
-                                claim.claimNumber,
-                              );
-                            }}
+                      {filteredSubmissions.length === 0 && (
+                        <TableRow>
+                          <TableCell
+                            colSpan={5}
+                            className="text-center py-4 text-gray-500 text-sm"
                           >
-                            <TableCell className="text-sm font-medium py-2 text-gray-800">
-                              {claim.claimNumber}
-                            </TableCell>
-                            <TableCell className="py-2">
-                              {getStatusBadge(claim.status)}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
-                              {claim.date}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.incurred}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.reserves}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.paid}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {claim.recoveries}
-                            </TableCell>
-                          </TableRow>
-                        ))}
+                            No submissions
+                          </TableCell>
+                        </TableRow>
+                      )}
+                      {filteredSubmissions.map((submission, index) => (
+                        <TableRow
+                          key={index}
+                          className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log(
+                              "Open submission details",
+                              submission.id,
+                            );
+                          }}
+                        >
+                          <TableCell className="text-sm font-medium py-2 text-gray-800">
+                            {submission.id}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.program}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.proposedEffectiveDate}
+                          </TableCell>
+                          <TableCell className="py-2">
+                            {getStatusBadge(submission.status)}
+                          </TableCell>
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.submissionType}
+                          </TableCell>
+                        </TableRow>
+                      ))}
                     </TableBody>
                   </Table>
                 </div>
               </CardContent>
             </Card>
-          </div>
-        ) : (
-          !isShawn && (
-            <div
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-            >
-              {/* Submissions */}
-              <Card
-                className={
-                  "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
-                }
-                onClick={() => console.log("Navigate to submissions")}
-              >
-                <CardHeader
-                  className="pb-2 cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsSubmissionsCollapsed((v) => !v);
-                  }}
-                >
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-base text-gray-700">
-                      Submissions
-                    </CardTitle>
-                    <div className="flex items-center">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        View All
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Submission Number
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Program
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Proposed Effective Date
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Status
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                          <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                            <div className="flex items-center gap-1">
-                              Submission Type
-                              <ArrowUpDown
-                                size={12}
-                                className="text-gray-400"
-                              />
-                            </div>
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {filteredSubmissions.length === 0 && (
-                          <TableRow>
-                            <TableCell
-                              colSpan={5}
-                              className="text-center py-4 text-gray-500 text-sm"
-                            >
-                              No submissions
-                            </TableCell>
-                          </TableRow>
-                        )}
-                        {filteredSubmissions.map((submission, index) => (
-                          <TableRow
-                            key={index}
-                            className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log(
-                                "Open submission details",
-                                submission.id,
-                              );
-                            }}
-                          >
-                            <TableCell className="text-sm font-medium py-2 text-gray-800">
-                              {submission.id}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {submission.program}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {submission.proposedEffectiveDate}
-                            </TableCell>
-                            <TableCell className="py-2">
-                              {getStatusBadge(submission.status)}
-                            </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700">
-                              {submission.submissionType}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </CardContent>
-              </Card>
 
-              {/* Empty space to maintain layout consistency with Policy/Claims row */}
-              <div></div>
-            </div>
-          )
+            {/* Empty space to maintain layout consistency with Policy/Claims row */}
+            <div></div>
+          </div>
         )}
 
         {/* Close Diary Confirmation Dialog */}
