@@ -115,38 +115,185 @@ const submissions = [
   },
 ];
 
-type DiaryItem = { id: number; dueDate: string; title: string; priority: "High"|"Medium"|"Low"; status: "Open"|"Closed"; file?: string };
+type DiaryItem = {
+  id: number;
+  dueDate: string;
+  title: string;
+  priority: "High" | "Medium" | "Low";
+  status: "Open" | "Closed";
+  file?: string;
+};
 
 const diariesOlivia: DiaryItem[] = [
-  { id: 1, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928703A" },
-  { id: 2, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-475556" },
-  { id: 3, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "P 1-7433808" },
-  { id: 4, dueDate: "09-13-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 1045" },
-  { id: 5, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928703B" },
+  {
+    id: 1,
+    dueDate: "09-10-25",
+    title: "New Submission Added for Review",
+    priority: "High",
+    status: "Open",
+    file: "S 928703A",
+  },
+  {
+    id: 2,
+    dueDate: "09-11-25",
+    title: "Report Review Request",
+    priority: "Medium",
+    status: "Open",
+    file: "P 1-475556",
+  },
+  {
+    id: 3,
+    dueDate: "09-12-25",
+    title: "Invoice Approval Request",
+    priority: "Medium",
+    status: "Open",
+    file: "P 1-7433808",
+  },
+  {
+    id: 4,
+    dueDate: "09-13-25",
+    title: "Approval Request Declined",
+    priority: "High",
+    status: "Open",
+    file: "C 1045",
+  },
+  {
+    id: 5,
+    dueDate: "09-14-25",
+    title: "Follow-Up Required on Submission",
+    priority: "Medium",
+    status: "Open",
+    file: "S 928703B",
+  },
 ];
 
 const diariesJohn: DiaryItem[] = [
-  { id: 6, dueDate: "09-10-25", title: "Proposal Review Request", priority: "High", status: "Open", file: "P 1-4712556" },
-  { id: 7, dueDate: "09-11-25", title: "Added Endorsement", priority: "Medium", status: "Open", file: "P 1-8793492" },
-  { id: 8, dueDate: "09-12-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "S 928763A-01" },
-  { id: 9, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "P 1-4712557" },
-  { id: 10, dueDate: "09-14-25", title: "Follow-Up Required on Submission", priority: "Medium", status: "Open", file: "S 928763B" },
+  {
+    id: 6,
+    dueDate: "09-10-25",
+    title: "Proposal Review Request",
+    priority: "High",
+    status: "Open",
+    file: "P 1-4712556",
+  },
+  {
+    id: 7,
+    dueDate: "09-11-25",
+    title: "Added Endorsement",
+    priority: "Medium",
+    status: "Open",
+    file: "P 1-8793492",
+  },
+  {
+    id: 8,
+    dueDate: "09-12-25",
+    title: "Requested Documents for Review",
+    priority: "High",
+    status: "Open",
+    file: "S 928763A-01",
+  },
+  {
+    id: 9,
+    dueDate: "09-13-25",
+    title: "Approval Request Approved",
+    priority: "Low",
+    status: "Open",
+    file: "P 1-4712557",
+  },
+  {
+    id: 10,
+    dueDate: "09-14-25",
+    title: "Follow-Up Required on Submission",
+    priority: "Medium",
+    status: "Open",
+    file: "S 928763B",
+  },
 ];
 
 const diariesShawn: DiaryItem[] = [
-  { id: 11, dueDate: "09-10-25", title: "Requested Documents for Review", priority: "High", status: "Open", file: "C 2025-45" },
-  { id: 12, dueDate: "09-11-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-46" },
-  { id: 13, dueDate: "09-12-25", title: "Approval Request Declined", priority: "High", status: "Open", file: "C 2025-47" },
-  { id: 14, dueDate: "09-13-25", title: "Approval Request Approved", priority: "Low", status: "Open", file: "I 789432" },
-  { id: 15, dueDate: "09-14-25", title: "Follow-Up Required on Claim", priority: "Medium", status: "Open", file: "C 2025-48" },
+  {
+    id: 11,
+    dueDate: "09-10-25",
+    title: "Requested Documents for Review",
+    priority: "High",
+    status: "Open",
+    file: "C 2025-45",
+  },
+  {
+    id: 12,
+    dueDate: "09-11-25",
+    title: "Follow-Up Required on Claim",
+    priority: "Medium",
+    status: "Open",
+    file: "C 2025-46",
+  },
+  {
+    id: 13,
+    dueDate: "09-12-25",
+    title: "Approval Request Declined",
+    priority: "High",
+    status: "Open",
+    file: "C 2025-47",
+  },
+  {
+    id: 14,
+    dueDate: "09-13-25",
+    title: "Approval Request Approved",
+    priority: "Low",
+    status: "Open",
+    file: "I 789432",
+  },
+  {
+    id: 15,
+    dueDate: "09-14-25",
+    title: "Follow-Up Required on Claim",
+    priority: "Medium",
+    status: "Open",
+    file: "C 2025-48",
+  },
 ];
 
 const diariesOrg: DiaryItem[] = [
-  { id: 16, dueDate: "09-10-25", title: "New Submission Added for Review", priority: "High", status: "Open", file: "S 928800A" },
-  { id: 17, dueDate: "09-11-25", title: "Report Review Request", priority: "Medium", status: "Open", file: "P 1-9834521" },
-  { id: 18, dueDate: "09-12-25", title: "Invoice Approval Request", priority: "Medium", status: "Open", file: "C 1122" },
-  { id: 19, dueDate: "09-13-25", title: "Approval Request Pending", priority: "High", status: "Open", file: "C 1045" },
-  { id: 20, dueDate: "09-14-25", title: "Invoice Approved", priority: "Low", status: "Open", file: "P 1-9834522" },
+  {
+    id: 16,
+    dueDate: "09-10-25",
+    title: "New Submission Added for Review",
+    priority: "High",
+    status: "Open",
+    file: "S 928800A",
+  },
+  {
+    id: 17,
+    dueDate: "09-11-25",
+    title: "Report Review Request",
+    priority: "Medium",
+    status: "Open",
+    file: "P 1-9834521",
+  },
+  {
+    id: 18,
+    dueDate: "09-12-25",
+    title: "Invoice Approval Request",
+    priority: "Medium",
+    status: "Open",
+    file: "C 1122",
+  },
+  {
+    id: 19,
+    dueDate: "09-13-25",
+    title: "Approval Request Pending",
+    priority: "High",
+    status: "Open",
+    file: "C 1045",
+  },
+  {
+    id: 20,
+    dueDate: "09-14-25",
+    title: "Invoice Approved",
+    priority: "Low",
+    status: "Open",
+    file: "P 1-9834522",
+  },
 ];
 
 const initialDiariesData: DiaryItem[] = diariesOlivia;
@@ -269,31 +416,127 @@ const claimsHistory = [
 ];
 
 const recentActivity = [
-  { date: "09-07-25", type: "Recurring payment profile set with Credit_Card", file: "P 1-4755556", user: "Shelton K", category: "payment" },
-  { date: "09-01-25", type: "Recurring payment received $150", file: "P 1-7433808", user: "System", category: "payment" },
-  { date: "08-20-25", type: "Indemnity reserve decreased by $1,000", file: "C 1045", user: "Anna R", category: "claim" },
-  { date: "07-31-25", type: "Proposal quote shared with broker", file: "S 928703A", user: "Shelton K", category: "submission" },
+  {
+    date: "09-07-25",
+    type: "Recurring payment profile set with Credit_Card",
+    file: "P 1-4755556",
+    user: "Shelton K",
+    category: "payment",
+  },
+  {
+    date: "09-01-25",
+    type: "Recurring payment received $150",
+    file: "P 1-7433808",
+    user: "System",
+    category: "payment",
+  },
+  {
+    date: "08-20-25",
+    type: "Indemnity reserve decreased by $1,000",
+    file: "C 1045",
+    user: "Anna R",
+    category: "claim",
+  },
+  {
+    date: "07-31-25",
+    type: "Proposal quote shared with broker",
+    file: "S 928703A",
+    user: "Shelton K",
+    category: "submission",
+  },
 ];
 
 const underwriterRecentActivity = [
-  { date: "09-07-25", type: "Proposal quote shared with broker", file: "P 1-4712556", user: "John W", category: "policy" },
-  { date: "09-01-25", type: "Added an endorsement", file: "P 1-8793492", user: "John W", category: "policy" },
-  { date: "08-20-25", type: "Requested documents for UW review", file: "S 928763A-01", user: "John W", category: "submission" },
-  { date: "07-31-25", type: "Logged customer preference for email communication", file: "Olivia R", user: "John W", category: "profile" },
+  {
+    date: "09-07-25",
+    type: "Proposal quote shared with broker",
+    file: "P 1-4712556",
+    user: "John W",
+    category: "policy",
+  },
+  {
+    date: "09-01-25",
+    type: "Added an endorsement",
+    file: "P 1-8793492",
+    user: "John W",
+    category: "policy",
+  },
+  {
+    date: "08-20-25",
+    type: "Requested documents for UW review",
+    file: "S 928763A-01",
+    user: "John W",
+    category: "submission",
+  },
+  {
+    date: "07-31-25",
+    type: "Logged customer preference for email communication",
+    file: "Olivia R",
+    user: "John W",
+    category: "profile",
+  },
 ];
 
 const claimantRecentActivity = [
-  { date: "09-08-25", type: "Claim payment issued $2,500", file: "C 2025-45", user: "System", category: "claim" },
-  { date: "09-03-25", type: "Medical reserve increased by $10,000", file: "C 2025-45", user: "Anna R", category: "claim" },
-  { date: "08-29-25", type: "Indemnity reserve decreased by $3,000", file: "C 2025-45", user: "Anna R", category: "claim" },
-  { date: "08-20-25", type: "FNOL submitted", file: "I 789432", user: "Josh K", category: "incident" },
+  {
+    date: "09-08-25",
+    type: "Claim payment issued $2,500",
+    file: "C 2025-45",
+    user: "System",
+    category: "claim",
+  },
+  {
+    date: "09-03-25",
+    type: "Medical reserve increased by $10,000",
+    file: "C 2025-45",
+    user: "Anna R",
+    category: "claim",
+  },
+  {
+    date: "08-29-25",
+    type: "Indemnity reserve decreased by $3,000",
+    file: "C 2025-45",
+    user: "Anna R",
+    category: "claim",
+  },
+  {
+    date: "08-20-25",
+    type: "FNOL submitted",
+    file: "I 789432",
+    user: "Josh K",
+    category: "incident",
+  },
 ];
 
 const organizationRecentActivity = [
-  { date: "09-09-25", type: "Proposal quote shared with broker", file: "P 1-9834521", user: "John W", category: "policy" },
-  { date: "09-04-25", type: "Claim payment issued $12,000", file: "C 1045", user: "System", category: "claim" },
-  { date: "08-30-25", type: "Reserve increased by $25,000", file: "C 1122", user: "Anna R", category: "claim" },
-  { date: "08-15-25", type: "Added an endorsement", file: "P 1-9834521", user: "John W", category: "policy" },
+  {
+    date: "09-09-25",
+    type: "Proposal quote shared with broker",
+    file: "P 1-9834521",
+    user: "John W",
+    category: "policy",
+  },
+  {
+    date: "09-04-25",
+    type: "Claim payment issued $12,000",
+    file: "C 1045",
+    user: "System",
+    category: "claim",
+  },
+  {
+    date: "08-30-25",
+    type: "Reserve increased by $25,000",
+    file: "C 1122",
+    user: "Anna R",
+    category: "claim",
+  },
+  {
+    date: "08-15-25",
+    type: "Added an endorsement",
+    file: "P 1-9834521",
+    user: "John W",
+    category: "policy",
+  },
 ];
 
 const getStatusBadge = (status: string) => {
@@ -366,7 +609,8 @@ export default function Dashboard() {
   const [claimsStatusFilter, setClaimsStatusFilter] = useState<string[]>([]);
 
   // Diaries state
-  const [diariesData, setDiariesData] = useState<DiaryItem[]>(initialDiariesData);
+  const [diariesData, setDiariesData] =
+    useState<DiaryItem[]>(initialDiariesData);
   const [diaryToClose, setDiaryToClose] = useState<number | null>(null);
 
   // Animation states
@@ -563,7 +807,9 @@ export default function Dashboard() {
                     className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                     onClick={(e) => {
                       e.stopPropagation();
-                      console.log(isProspect ? "Start a quote" : "Navigate to payment");
+                      console.log(
+                        isProspect ? "Start a quote" : "Navigate to payment",
+                      );
                     }}
                   >
                     {isProspect ? "Start a Quote" : "Pay Now"}
@@ -611,45 +857,43 @@ export default function Dashboard() {
                     </div>
                   </div>
                 </div>
+              ) : isProspect ? (
+                <div className="p-4 text-sm text-gray-600">No policies yet</div>
               ) : (
-                isProspect ? (
-                  <div className="p-4 text-sm text-gray-600">No policies yet</div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                      <div className="text-xs text-gray-600 mb-1 font-medium">
-                        Amount Paid
-                      </div>
-                      <div className="text-xl font-bold text-gray-800">
-                        $8,460
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        Aggregate premium paid to date
-                      </div>
-                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Amount Paid
                     </div>
-                    <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                      <div className="text-xs text-gray-600 mb-1 font-medium">
-                        Total Due
-                      </div>
-                      <div className="text-xl font-bold text-gray-800">$275</div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        Aggregate premium currently due (YTD)
-                      </div>
-                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                    <div className="text-xl font-bold text-gray-800">
+                      $8,460
                     </div>
-                    <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
-                      <div className="text-xs text-gray-600 mb-1 font-medium">
-                        Outstanding Balance
-                      </div>
-                      <div className="text-xl font-bold text-gray-800">$190</div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        Outstanding premium (after credit application)
-                      </div>
-                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Aggregate premium paid to date
                     </div>
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                   </div>
-                )
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Total Due
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">$275</div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Aggregate premium currently due (YTD)
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                  </div>
+                  <div className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-hidden">
+                    <div className="text-xs text-gray-600 mb-1 font-medium">
+                      Outstanding Balance
+                    </div>
+                    <div className="text-xl font-bold text-gray-800">$190</div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Outstanding premium (after credit application)
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
+                  </div>
+                </div>
               )}
             </CardContent>
           </Card>
@@ -731,30 +975,36 @@ export default function Dashboard() {
                         </div>
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            File
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
-                        <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                          <div className="flex items-center gap-1">
-                            Action Taken By
-                            <ArrowUpDown size={12} className="text-gray-400" />
-                          </div>
-                        </TableHead>
+                        <div className="flex items-center gap-1">
+                          File
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Action Taken By
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {(
-                      isJohn
-                        ? underwriterRecentActivity
-                        : isShawn
-                          ? claimantRecentActivity
-                          : profileId === "abc-ltd"
+                    {(isJohn
+                      ? underwriterRecentActivity
+                      : isShawn
+                        ? claimantRecentActivity
+                        : profileId === "abc-ltd"
                           ? organizationRecentActivity
                           : isProspect
-                          ? [{ date: "09-08-25", type: "Prospect profile created.", file: "", user: "Agent Johnson" }]
-                          : recentActivity
+                            ? [
+                                {
+                                  date: "09-08-25",
+                                  type: "Prospect profile created.",
+                                  file: "",
+                                  user: "Agent Johnson",
+                                },
+                              ]
+                            : recentActivity
                     )
                       .slice(0, 4)
                       .map((activity, index) => (
@@ -915,8 +1165,10 @@ export default function Dashboard() {
                         <TableCell
                           colSpan={4}
                           className="text-center py-4 text-gray-500 text-sm"
->
-                          {isProspect ? "There are no diaries available as yet." : "No open diaries"}
+                        >
+                          {isProspect
+                            ? "There are no diaries available as yet."
+                            : "No open diaries"}
                         </TableCell>
                       </TableRow>
                     )}
@@ -1033,44 +1285,50 @@ export default function Dashboard() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {(isProspect ? [] : filteredPolicies).map((policy, index) => (
-                        <TableRow
-                          key={index}
-                          className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            console.log("Open policy details", policy.policy);
-                          }}
-                        >
-                          <TableCell className="py-2">
-                            <span className="text-sm font-medium text-gray-800">
-                              {policy.policy}
-                            </span>
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {policy.lob}
-                          </TableCell>
-                          <TableCell className="py-2">
-                            {getStatusBadge(policy.status)}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {policy.startDate}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {policy.endDate}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
-                            {policy.premiumDue}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
-                            {policy.premiumPaid}
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                      {(isProspect ? [] : filteredPolicies).map(
+                        (policy, index) => (
+                          <TableRow
+                            key={index}
+                            className={`h-10 ${getRowBgColor(policy.status, "policy")} cursor-pointer`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log("Open policy details", policy.policy);
+                            }}
+                          >
+                            <TableCell className="py-2">
+                              <span className="text-sm font-medium text-gray-800">
+                                {policy.policy}
+                              </span>
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {policy.lob}
+                            </TableCell>
+                            <TableCell className="py-2">
+                              {getStatusBadge(policy.status)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {policy.startDate}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {policy.endDate}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                              {policy.premiumDue}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                              {policy.premiumPaid}
+                            </TableCell>
+                          </TableRow>
+                        ),
+                      )}
                       {isProspect && (
                         <TableRow>
-                          <TableCell colSpan={7} className="text-center py-6 text-gray-500 text-sm">
-                            No policies to display. Start a quote to create first policy.
+                          <TableCell
+                            colSpan={7}
+                            className="text-center py-6 text-gray-500 text-sm"
+                          >
+                            No policies to display. Start a quote to create
+                            first policy.
                           </TableCell>
                         </TableRow>
                       )}
@@ -1171,39 +1429,45 @@ export default function Dashboard() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {(isProspect ? [] : filteredSubmissions).map((submission, index) => (
-                        <TableRow
-                          key={index}
-                          className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            console.log(
-                              "Open submission details",
-                              submission.id,
-                            );
-                          }}
-                        >
-                          <TableCell className="text-sm font-medium py-2 text-gray-800">
-                            {submission.id}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {submission.program}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {submission.proposedEffectiveDate}
-                          </TableCell>
-                          <TableCell className="py-2">
-                            {getStatusBadge(submission.status)}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {submission.submissionType}
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                      {(isProspect ? [] : filteredSubmissions).map(
+                        (submission, index) => (
+                          <TableRow
+                            key={index}
+                            className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log(
+                                "Open submission details",
+                                submission.id,
+                              );
+                            }}
+                          >
+                            <TableCell className="text-sm font-medium py-2 text-gray-800">
+                              {submission.id}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {submission.program}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {submission.proposedEffectiveDate}
+                            </TableCell>
+                            <TableCell className="py-2">
+                              {getStatusBadge(submission.status)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {submission.submissionType}
+                            </TableCell>
+                          </TableRow>
+                        ),
+                      )}
                       {isProspect && (
                         <TableRow>
-                          <TableCell colSpan={5} className="text-center py-6 text-gray-500 text-sm">
-                            No submissions in progress. Create first submission to begin.
+                          <TableCell
+                            colSpan={5}
+                            className="text-center py-6 text-gray-500 text-sm"
+                          >
+                            No submissions in progress. Create first submission
+                            to begin.
                           </TableCell>
                         </TableRow>
                       )}
@@ -1265,202 +1529,207 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
                 {isProspect ? (
-                  <div className="p-6 text-center text-gray-500 text-sm">No claims filed yet.</div>
+                  <div className="p-6 text-center text-gray-500 text-sm">
+                    No claims filed yet.
+                  </div>
                 ) : (
-                <div className="overflow-x-auto">
-                  <Table>
-                    {isShawn ? (
-                      <>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              ID
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              Type
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              Description
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              Date
-                            </TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {[
-                            {
-                              id: "23E-1234",
-                              type: "Claim",
-                              desc: "Property damage - Garage Fire",
-                              date: "2024-01-15",
-                            },
-                            {
-                              id: "23E-5678",
-                              type: "Claim",
-                              desc: "Auto accident - Rear end collision",
-                              date: "2024-02-20",
-                            },
-                            {
-                              id: "INCIDENT-1234",
-                              type: "Incident",
-                              desc: "Multi-vehicle collision",
-                              date: "2024-03-10",
-                            },
-                            {
-                              id: "INCIDENT-5678",
-                              type: "Incident",
-                              desc: "Weather-related damage",
-                              date: "2024-03-25",
-                            },
-                          ].map((row) => (
-                            <TableRow
-                              key={row.id}
-                              className="h-10 hover:bg-gray-50"
-                            >
-                              <TableCell className="text-sm font-medium text-blue-600">
-                                {row.id}
-                              </TableCell>
-                              <TableCell>
-                                <span
-                                  className={`px-2 py-1 rounded-full text-xs border ${row.type === "Claim" ? "bg-blue-100 text-blue-700 border-blue-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
-                                >
-                                  {row.type}
-                                </span>
-                              </TableCell>
-                              <TableCell className="text-sm text-gray-700">
-                                {row.desc}
-                              </TableCell>
-                              <TableCell className="text-sm text-gray-700">
-                                {row.date}
-                              </TableCell>
+                  <div className="overflow-x-auto">
+                    <Table>
+                      {isShawn ? (
+                        <>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                ID
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                Type
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                Description
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                Date
+                              </TableHead>
                             </TableRow>
-                          ))}
-                        </TableBody>
-                      </>
-                    ) : (
-                      <>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Claim Number
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Status
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
-                              <div className="flex items-center gap-1">
-                                Loss Date
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Incurred
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Reserves
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Paid
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Recoveries
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {(isProspect ? [] : filteredClaims)
-                            .filter(
-                              (claim) =>
-                                claim.status === "Open" ||
-                                claim.status === "Reopen",
-                            )
-                            .map((claim, index) => (
+                          </TableHeader>
+                          <TableBody>
+                            {[
+                              {
+                                id: "23E-1234",
+                                type: "Claim",
+                                desc: "Property damage - Garage Fire",
+                                date: "2024-01-15",
+                              },
+                              {
+                                id: "23E-5678",
+                                type: "Claim",
+                                desc: "Auto accident - Rear end collision",
+                                date: "2024-02-20",
+                              },
+                              {
+                                id: "INCIDENT-1234",
+                                type: "Incident",
+                                desc: "Multi-vehicle collision",
+                                date: "2024-03-10",
+                              },
+                              {
+                                id: "INCIDENT-5678",
+                                type: "Incident",
+                                desc: "Weather-related damage",
+                                date: "2024-03-25",
+                              },
+                            ].map((row) => (
                               <TableRow
-                                key={index}
-                                className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  console.log(
-                                    "Open claim details",
-                                    claim.claimNumber,
-                                  );
-                                }}
+                                key={row.id}
+                                className="h-10 hover:bg-gray-50"
                               >
-                                <TableCell className="text-sm font-medium py-2 text-gray-800">
-                                  {claim.claimNumber}
+                                <TableCell className="text-sm font-medium text-blue-600">
+                                  {row.id}
                                 </TableCell>
-                                <TableCell className="py-2">
-                                  {getStatusBadge(claim.status)}
+                                <TableCell>
+                                  <span
+                                    className={`px-2 py-1 rounded-full text-xs border ${row.type === "Claim" ? "bg-blue-100 text-blue-700 border-blue-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
+                                  >
+                                    {row.type}
+                                  </span>
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
-                                  {claim.date}
+                                <TableCell className="text-sm text-gray-700">
+                                  {row.desc}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
-                                  {claim.incurred}
-                                </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
-                                  {claim.reserves}
-                                </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
-                                  {claim.paid}
-                                </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
-                                  {claim.recoveries}
+                                <TableCell className="text-sm text-gray-700">
+                                  {row.date}
                                 </TableCell>
                               </TableRow>
                             ))}
+                          </TableBody>
+                        </>
+                      ) : (
+                        <>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Claim Number
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Status
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
+                                <div className="flex items-center gap-1">
+                                  Loss Date
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Incurred
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Reserves
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Paid
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Recoveries
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {(isProspect ? [] : filteredClaims)
+                              .filter(
+                                (claim) =>
+                                  claim.status === "Open" ||
+                                  claim.status === "Reopen",
+                              )
+                              .map((claim, index) => (
+                                <TableRow
+                                  key={index}
+                                  className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    console.log(
+                                      "Open claim details",
+                                      claim.claimNumber,
+                                    );
+                                  }}
+                                >
+                                  <TableCell className="text-sm font-medium py-2 text-gray-800">
+                                    {claim.claimNumber}
+                                  </TableCell>
+                                  <TableCell className="py-2">
+                                    {getStatusBadge(claim.status)}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
+                                    {claim.date}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.incurred}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.reserves}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.paid}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.recoveries}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
                             {isProspect && (
                               <TableRow>
-                                <TableCell colSpan={7} className="text-center py-6 text-gray-500 text-sm">
+                                <TableCell
+                                  colSpan={7}
+                                  className="text-center py-6 text-gray-500 text-sm"
+                                >
                                   No claims filed yet.
                                 </TableCell>
                               </TableRow>
                             )}
-                        </TableBody>
-                      </>
-                    )}
-                  </Table>
-                </div>
+                          </TableBody>
+                        </>
+                      )}
+                    </Table>
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -1580,39 +1849,45 @@ export default function Dashboard() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {(isProspect ? [] : filteredSubmissions).map((submission, index) => (
-                            <TableRow
-                              key={index}
-                              className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                console.log(
-                                  "Open submission details",
-                                  submission.id,
-                                );
-                              }}
-                            >
-                              <TableCell className="text-sm font-medium py-2 text-gray-800">
-                                {submission.id}
-                              </TableCell>
-                              <TableCell className="text-sm py-2 text-gray-700">
-                                {submission.program}
-                              </TableCell>
-                              <TableCell className="text-sm py-2 text-gray-700">
-                                {submission.proposedEffectiveDate}
-                              </TableCell>
-                              <TableCell className="py-2">
-                                {getStatusBadge(submission.status)}
-                              </TableCell>
-                              <TableCell className="text-sm py-2 text-gray-700">
-                                {submission.submissionType}
-                              </TableCell>
-                            </TableRow>
-                          ))}
+                          {(isProspect ? [] : filteredSubmissions).map(
+                            (submission, index) => (
+                              <TableRow
+                                key={index}
+                                className={`h-10 ${getRowBgColor(submission.status, "submission")} cursor-pointer`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  console.log(
+                                    "Open submission details",
+                                    submission.id,
+                                  );
+                                }}
+                              >
+                                <TableCell className="text-sm font-medium py-2 text-gray-800">
+                                  {submission.id}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700">
+                                  {submission.program}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700">
+                                  {submission.proposedEffectiveDate}
+                                </TableCell>
+                                <TableCell className="py-2">
+                                  {getStatusBadge(submission.status)}
+                                </TableCell>
+                                <TableCell className="text-sm py-2 text-gray-700">
+                                  {submission.submissionType}
+                                </TableCell>
+                              </TableRow>
+                            ),
+                          )}
                           {isProspect && (
                             <TableRow>
-                              <TableCell colSpan={5} className="text-center py-6 text-gray-500 text-sm">
-                                No submissions in progress. Create first submission to begin.
+                              <TableCell
+                                colSpan={5}
+                                className="text-center py-6 text-gray-500 text-sm"
+                              >
+                                No submissions in progress. Create first
+                                submission to begin.
                               </TableCell>
                             </TableRow>
                           )}

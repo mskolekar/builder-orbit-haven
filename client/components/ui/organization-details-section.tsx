@@ -1,6 +1,13 @@
 import { Card, CardContent } from "./card";
 import { Badge } from "./badge";
-import { Mail, Phone, MapPin, Briefcase, Globe, ShieldCheck } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Briefcase,
+  Globe,
+  ShieldCheck,
+} from "lucide-react";
 
 export function OrganizationDetailsSection() {
   const org = {
