@@ -721,14 +721,16 @@ export default function Dashboard() {
     const key = profileId && diariesByProfile[profileId] ? profileId : "olivia";
     setDiariesData(diariesByProfile[key]);
 
-    // Collapse all tiles by default for new prospect
-    const collapse = !!(profileId === "josh-fernandes");
-    setIsFinancialCollapsed(collapse);
-    setIsActivityCollapsed(collapse);
-    setIsDiariesCollapsed(collapse);
-    setIsPoliciesCollapsed(collapse);
-    setIsClaimsCollapsed(collapse);
-    setIsSubmissionsCollapsed(collapse);
+    // Collapse all tiles by default for new prospect; leave Activity open
+    const isJosh = profileId === "josh-fernandes";
+    if (isJosh) {
+      setIsFinancialCollapsed(true);
+      setIsActivityCollapsed(false);
+      setIsDiariesCollapsed(true);
+      setIsPoliciesCollapsed(true);
+      setIsClaimsCollapsed(true);
+      setIsSubmissionsCollapsed(true);
+    }
   }, [profileId]);
 
   const selectedActivities =
