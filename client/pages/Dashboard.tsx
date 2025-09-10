@@ -1080,7 +1080,7 @@ export default function Dashboard() {
               className={
                 "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
               }
-              onClick={() => console.log("Navigate to policy details")}
+              onClick={() => setIsPoliciesCollapsed((v) => !v)}
             >
               <CardHeader
                 className="pb-2 cursor-pointer"
