@@ -826,7 +826,7 @@ export default function Dashboard() {
                       $8,460
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
-                      Aggregate premium paid to date
+                      <p>YTD Premium Paid</p>
                     </div>
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                   </div>
@@ -836,7 +836,7 @@ export default function Dashboard() {
                     </div>
                     <div className="text-xl font-bold text-gray-800">$275</div>
                     <div className="text-xs text-gray-500 mt-1">
-                      Aggregate premium currently due (YTD)
+                      <p>Current Premium Due (YTD)</p>
                     </div>
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                   </div>
@@ -846,7 +846,7 @@ export default function Dashboard() {
                     </div>
                     <div className="text-xl font-bold text-gray-800">$190</div>
                     <div className="text-xs text-gray-500 mt-1">
-                      Outstanding premium (after credit application)
+                      <p>Outstanding Balance (after credits)</p>
                     </div>
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-400"></div>
                   </div>
