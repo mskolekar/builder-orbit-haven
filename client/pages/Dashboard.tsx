@@ -51,6 +51,8 @@ import {
   MoreHorizontal,
   ArrowUpDown,
   ChevronDown,
+  ArrowRight,
+  Check,
 } from "lucide-react";
 
 const customerData = {
@@ -1008,6 +1010,9 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">
+                        Actions
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -1032,12 +1037,40 @@ export default function Dashboard() {
                         <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
                           {diary.file}
                         </TableCell>
+                        <TableCell className="py-1">
+                          <div className="flex gap-1">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                navigate("/journals?tab=diaries");
+                              }}
+                              aria-label="Go to diary"
+                            >
+                              <ArrowRight size={12} />
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCloseDiary(diary.id);
+                              }}
+                              aria-label="Mark diary complete"
+                            >
+                              <Check size={12} />
+                            </Button>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     ))}
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
-                          colSpan={4}
+                          colSpan={5}
                           className="text-center py-4 text-gray-500 text-sm"
                         >
                           No open diaries
