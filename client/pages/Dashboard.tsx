@@ -1010,7 +1010,9 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600">Actions</TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600">
+                        Actions
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
