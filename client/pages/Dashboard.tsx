@@ -1068,7 +1068,12 @@ export default function Dashboard() {
                           {diary.file}
                         </TableCell>
                         <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
-                          {getAssignedTo(profileId, diary.file, index, openDiaries.length)}
+                          {getAssignedTo(
+                            profileId,
+                            diary.file,
+                            index,
+                            openDiaries.length,
+                          )}
                         </TableCell>
                         <TableCell className="py-1">
                           <div className="flex gap-1">

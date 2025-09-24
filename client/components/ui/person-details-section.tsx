@@ -80,13 +80,17 @@ export function PersonDetailsSection() {
                   <Calendar size={14} className="text-gray-400" />
                   <div>
                     <span className="text-xs text-gray-500">DOB</span>
-                    <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
+                    <p className="text-sm font-medium">
+                      {customerData.dateOfBirth}
+                    </p>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() => (window.location.href = "/profile?section=personal-info")}
+                    onClick={() =>
+                      (window.location.href = "/profile?section=personal-info")
+                    }
                     aria-label="Edit DOB"
                   >
                     <Edit3 size={12} />
@@ -102,7 +106,9 @@ export function PersonDetailsSection() {
                     variant="ghost"
                     size="sm"
                     className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() => (window.location.href = "/profile?section=personal-info")}
+                    onClick={() =>
+                      (window.location.href = "/profile?section=personal-info")
+                    }
                     aria-label="Edit Gender"
                   >
                     <Edit3 size={12} />
@@ -118,7 +124,9 @@ export function PersonDetailsSection() {
                     variant="ghost"
                     size="sm"
                     className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() => (window.location.href = "/profile?section=personal-info")}
+                    onClick={() =>
+                      (window.location.href = "/profile?section=personal-info")
+                    }
                     aria-label="Edit SSN"
                   >
                     <Edit3 size={12} />
@@ -128,13 +136,17 @@ export function PersonDetailsSection() {
                   <Phone size={14} className="text-gray-400" />
                   <div className="min-w-0">
                     <span className="text-xs text-gray-500">Phone</span>
-                    <p className="text-sm font-medium whitespace-nowrap">{customerData.phone}</p>
+                    <p className="text-sm font-medium whitespace-nowrap">
+                      {customerData.phone}
+                    </p>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() => (window.location.href = "/contact-delivery?tab=contact")}
+                    onClick={() =>
+                      (window.location.href = "/contact-delivery?tab=contact")
+                    }
                     aria-label="Edit Phone"
                   >
                     <Edit3 size={12} />
@@ -150,7 +162,9 @@ export function PersonDetailsSection() {
                     variant="ghost"
                     size="sm"
                     className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() => (window.location.href = "/contact-delivery?tab=contact")}
+                    onClick={() =>
+                      (window.location.href = "/contact-delivery?tab=contact")
+                    }
                     aria-label="Edit Email"
                   >
                     <Edit3 size={12} />
@@ -167,7 +181,9 @@ export function PersonDetailsSection() {
                 variant="ghost"
                 size="sm"
                 className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                onClick={() => (window.location.href = "/profile?section=addresses")}
+                onClick={() =>
+                  (window.location.href = "/profile?section=addresses")
+                }
                 aria-label="Edit Address"
               >
                 <Edit3 size={12} />
