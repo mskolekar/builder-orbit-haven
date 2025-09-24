@@ -981,22 +981,27 @@ export default function Dashboard() {
                   <TableBody>
                     {(() => {
                       const counters = { P: 0, C: 0, S: 0 };
-                      return selectedActivities.slice(0, 4).map((activity, index) => (
-                        <TableRow key={index} className="h-10 hover:bg-gray-50">
-                          <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
-                            {formatToMMDDYY(activity.date)}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
-                            {activity.type}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
-                            {normalizeFileTag(activity.file, counters)}
-                          </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-600">
-                            {activity.user}
-                          </TableCell>
-                        </TableRow>
-                      ));
+                      return selectedActivities
+                        .slice(0, 4)
+                        .map((activity, index) => (
+                          <TableRow
+                            key={index}
+                            className="h-10 hover:bg-gray-50"
+                          >
+                            <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
+                              {formatToMMDDYY(activity.date)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {activity.type}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
+                              {normalizeFileTag(activity.file, counters)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-600">
+                              {activity.user}
+                            </TableCell>
+                          </TableRow>
+                        ));
                     })()}
                   </TableBody>
                 </Table>
