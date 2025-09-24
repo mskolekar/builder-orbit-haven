@@ -2,6 +2,7 @@ import { Button } from "./button";
 import { Badge } from "./badge";
 import { Card, CardContent } from "./card";
 import { Phone, Mail, MapPin, Edit3, FileText } from "lucide-react";
+import SensitiveText from "@/components/ui/sensitive-text";
 
 const customerData = {
   name: "Josh Fernandes",
@@ -79,7 +80,7 @@ export function PersonDetailsProspect() {
                   <FileText size={14} className="text-gray-400" />
                   <div>
                     <span className="text-xs text-gray-500">SSN#</span>
-                    <p className="text-sm font-medium">{customerData.ssn}</p>
+                    <p className="text-sm font-medium"><SensitiveText value={customerData.ssn} masked="•••-••-••••" /></p>
                   </div>
                   <Button
                     variant="ghost"
