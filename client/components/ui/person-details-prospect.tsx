@@ -55,15 +55,6 @@ export function PersonDetailsProspect() {
               </div>
 
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
-                  onClick={navigateToProfile}
-                  title="Edit Personal Details"
-                >
-                  <Edit3 size={12} />
-                </Button>
                 <div className="flex items-center gap-2">
                   <Phone size={14} className="text-gray-400" />
                   <div className="min-w-0">
@@ -72,6 +63,17 @@ export function PersonDetailsProspect() {
                       {customerData.phone}
                     </p>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                    onClick={() =>
+                      (window.location.href = "/contact-delivery?tab=contact")
+                    }
+                    aria-label="Edit Phone"
+                  >
+                    <Edit3 size={12} />
+                  </Button>
                 </div>
                 <div className="flex items-center gap-2">
                   <FileText size={14} className="text-gray-400" />
@@ -79,6 +81,17 @@ export function PersonDetailsProspect() {
                     <span className="text-xs text-gray-500">SSN#</span>
                     <p className="text-sm font-medium">{customerData.ssn}</p>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                    onClick={() =>
+                      (window.location.href = "/profile?section=personal-info")
+                    }
+                    aria-label="Edit SSN"
+                  >
+                    <Edit3 size={12} />
+                  </Button>
                 </div>
                 <div className="col-span-2 flex items-center gap-2">
                   <Mail size={14} className="text-gray-400" />
@@ -88,6 +101,17 @@ export function PersonDetailsProspect() {
                       {customerData.email}
                     </p>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                    onClick={() =>
+                      (window.location.href = "/contact-delivery?tab=contact")
+                    }
+                    aria-label="Edit Email"
+                  >
+                    <Edit3 size={12} />
+                  </Button>
                 </div>
               </div>
             </div>
@@ -96,6 +120,17 @@ export function PersonDetailsProspect() {
               <MapPin size={14} className="text-gray-400" />
               <span className="text-gray-500">Address:</span>
               <span className="font-medium">{customerData.address}</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                onClick={() =>
+                  (window.location.href = "/profile?section=addresses")
+                }
+                aria-label="Edit Address"
+              >
+                <Edit3 size={12} />
+              </Button>
             </div>
           </CardContent>
         </Card>
