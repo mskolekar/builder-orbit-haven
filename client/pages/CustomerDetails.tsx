@@ -265,7 +265,7 @@ export default function CustomerDetails() {
                       <Calendar size={14} className="text-gray-400" />
                       <div>
                         <span className="text-xs text-gray-500">DOB</span>
-                        <p className="text-sm font-medium"><SensitiveText value={customerData.dateOfBirth} /></p>
+                        <p className="text-sm font-medium"><SensitiveText value="1990" /></p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">

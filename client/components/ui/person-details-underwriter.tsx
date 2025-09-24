@@ -61,7 +61,7 @@ export function PersonDetailsUnderwriter() {
                   <div>
                     <span className="text-xs text-gray-500">DOB</span>
                     <p className="text-sm font-medium">
-                      <SensitiveText value={customerData.dateOfBirth} />
+                      <SensitiveText value="1990" />
                     </p>
                   </div>
                   <Button
