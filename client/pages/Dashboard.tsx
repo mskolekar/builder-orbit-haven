@@ -762,6 +762,39 @@ export default function Dashboard() {
       ? activitiesByProfile[profileId]
       : activitiesByProfile["olivia"];
 
+  // Build lists of numbers from the tiles below for consistency
+  const policyNumbers = filteredPolicies.map((p) => p.policy);
+  const claimNumbers = filteredClaims.map((c) => c.claimNumber);
+  const submissionNumbers = filteredSubmissions.map((s) => s.id);
+
+  const displayClaimNumber = (cn: string) => {
+    const core = cn.trim().replace(/^c\s*/i, "");
+    return `C ${core}`;
+  };
+
+  const normalizeFileTag = (
+    tag: string,
+    counters: { P: number; C: number; S: number },
+  ): string => {
+    const initial = tag.trim().charAt(0).toUpperCase();
+    if (initial === "P" && policyNumbers.length > 0) {
+      const idx = counters.P % policyNumbers.length;
+      counters.P += 1;
+      return `P ${policyNumbers[idx]}`;
+    }
+    if (initial === "S" && submissionNumbers.length > 0) {
+      const idx = counters.S % submissionNumbers.length;
+      counters.S += 1;
+      return `S ${submissionNumbers[idx]}`;
+    }
+    if (initial === "C" && claimNumbers.length > 0) {
+      const idx = counters.C % claimNumbers.length;
+      counters.C += 1;
+      return displayClaimNumber(claimNumbers[idx]);
+    }
+    return tag;
+  };
+
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -946,22 +979,30 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {selectedActivities.slice(0, 4).map((activity, index) => (
-                      <TableRow key={index} className="h-10 hover:bg-gray-50">
-                        <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
-                          {formatToMMDDYY(activity.date)}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700">
-                          {activity.type}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
-                          {activity.file}
-                        </TableCell>
-                        <TableCell className="text-sm py-2 text-gray-600">
-                          {activity.user}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {(() => {
+                      const counters = { P: 0, C: 0, S: 0 };
+                      return selectedActivities
+                        .slice(0, 4)
+                        .map((activity, index) => (
+                          <TableRow
+                            key={index}
+                            className="h-10 hover:bg-gray-50"
+                          >
+                            <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
+                              {formatToMMDDYY(activity.date)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700">
+                              {activity.type}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
+                              {normalizeFileTag(activity.file, counters)}
+                            </TableCell>
+                            <TableCell className="text-sm py-2 text-gray-600">
+                              {activity.user}
+                            </TableCell>
+                          </TableRow>
+                        ));
+                    })()}
                   </TableBody>
                 </Table>
               </div>
@@ -1046,65 +1087,68 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {openDiaries.map((diary, index) => (
-                      <TableRow
-                        key={diary.id}
-                        className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
-                      >
-                        <TableCell className="text-xs py-1">
-                          {formatToMMDDYY(diary.dueDate)}
-                        </TableCell>
-                        <TableCell className="text-xs py-1">
-                          {diary.title}
-                        </TableCell>
-                        <TableCell className="py-1">
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
-                          >
-                            {diary.priority}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
-                          {diary.file}
-                        </TableCell>
-                        <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
-                          {getAssignedTo(
-                            profileId,
-                            diary.file,
-                            index,
-                            openDiaries.length,
-                          )}
-                        </TableCell>
-                        <TableCell className="py-1">
-                          <div className="flex gap-1">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                navigate("/journals?tab=diaries");
-                              }}
-                              aria-label="Go to diary"
+                    {(() => {
+                      const counters = { P: 0, C: 0, S: 0 };
+                      return openDiaries.map((diary, index) => (
+                        <TableRow
+                          key={diary.id}
+                          className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
+                        >
+                          <TableCell className="text-xs py-1">
+                            {formatToMMDDYY(diary.dueDate)}
+                          </TableCell>
+                          <TableCell className="text-xs py-1">
+                            {diary.title}
+                          </TableCell>
+                          <TableCell className="py-1">
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
                             >
-                              <ArrowRight size={12} />
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleCloseDiary(diary.id);
-                              }}
-                              aria-label="Mark diary complete"
-                            >
-                              <Check size={12} />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                              {diary.priority}
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
+                            {normalizeFileTag(diary.file, counters)}
+                          </TableCell>
+                          <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
+                            {getAssignedTo(
+                              profileId,
+                              diary.file,
+                              index,
+                              openDiaries.length,
+                            )}
+                          </TableCell>
+                          <TableCell className="py-1">
+                            <div className="flex gap-1">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  navigate("/journals?tab=diaries");
+                                }}
+                                aria-label="Go to diary"
+                              >
+                                <ArrowRight size={12} />
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCloseDiary(diary.id);
+                                }}
+                                aria-label="Mark diary complete"
+                              >
+                                <Check size={12} />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ));
+                    })()}
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
