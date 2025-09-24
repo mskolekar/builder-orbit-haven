@@ -17,6 +17,7 @@ import {
   Edit3
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import SensitiveText from '@/components/ui/sensitive-text';
 
 interface SubItem {
   label: string;
@@ -264,7 +265,7 @@ export default function CustomerDetails() {
                       <Calendar size={14} className="text-gray-400" />
                       <div>
                         <span className="text-xs text-gray-500">DOB</span>
-                        <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
+                        <p className="text-sm font-medium"><SensitiveText value={customerData.dateOfBirth} /></p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
