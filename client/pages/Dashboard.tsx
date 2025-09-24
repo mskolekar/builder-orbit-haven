@@ -23,6 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { shortenAfterDash } from "@/lib/utils";
 import {
   Eye,
   Plus,
@@ -763,9 +764,9 @@ export default function Dashboard() {
       : activitiesByProfile["olivia"];
 
   // Build lists of numbers from the tiles below for consistency
-  const policyNumbers = filteredPolicies.map((p) => p.policy);
+  const policyNumbers = filteredPolicies.map((p) => shortenAfterDash(p.policy));
   const claimNumbers = filteredClaims.map((c) => c.claimNumber);
-  const submissionNumbers = filteredSubmissions.map((s) => s.id);
+  const submissionNumbers = filteredSubmissions.map((s) => shortenAfterDash(s.id));
 
   const displayClaimNumber = (cn: string) => {
     const core = cn.trim().replace(/^c\s*/i, "");
@@ -988,7 +989,7 @@ export default function Dashboard() {
                             key={index}
                             className="h-10 hover:bg-gray-50"
                           >
-                            <TableCell className="text-xs py-2 w-24 whitespace-nowrap">
+                            <TableCell className="text-sm py-2 w-24 whitespace-nowrap">
                               {formatToMMDDYY(activity.date)}
                             </TableCell>
                             <TableCell className="text-sm py-2 text-gray-700">
@@ -1094,10 +1095,10 @@ export default function Dashboard() {
                           key={diary.id}
                           className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
                         >
-                          <TableCell className="text-xs py-1">
+                          <TableCell className="text-sm font-medium py-1">
                             {formatToMMDDYY(diary.dueDate)}
                           </TableCell>
-                          <TableCell className="text-xs py-1">
+                          <TableCell className="text-sm py-1 text-gray-700">
                             {diary.title}
                           </TableCell>
                           <TableCell className="py-1">
@@ -1107,10 +1108,10 @@ export default function Dashboard() {
                               {diary.priority}
                             </span>
                           </TableCell>
-                          <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
+                          <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap">
                             {normalizeFileTag(diary.file, counters)}
                           </TableCell>
-                          <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
+                          <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap">
                             {getAssignedTo(
                               profileId,
                               diary.file,
@@ -1270,7 +1271,7 @@ export default function Dashboard() {
                         >
                           <TableCell className="py-2">
                             <span className="text-sm font-medium text-gray-800">
-                              {policy.policy}
+                              {shortenAfterDash(policy.policy)}
                             </span>
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
@@ -1380,7 +1381,7 @@ export default function Dashboard() {
                           }}
                         >
                           <TableCell className="text-sm font-medium py-2 text-gray-800">
-                            {submission.id}
+                            {shortenAfterDash(submission.id)}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
                             {submission.program}
@@ -1732,7 +1733,7 @@ export default function Dashboard() {
                           }}
                         >
                           <TableCell className="text-sm font-medium py-2 text-gray-800">
-                            {submission.id}
+                            {shortenAfterDash(submission.id)}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
                             {submission.program}
