@@ -762,6 +762,39 @@ export default function Dashboard() {
       ? activitiesByProfile[profileId]
       : activitiesByProfile["olivia"];
 
+  // Build lists of numbers from the tiles below for consistency
+  const policyNumbers = filteredPolicies.map((p) => p.policy);
+  const claimNumbers = filteredClaims.map((c) => c.claimNumber);
+  const submissionNumbers = filteredSubmissions.map((s) => s.id);
+
+  const displayClaimNumber = (cn: string) => {
+    const core = cn.trim().replace(/^c\s*/i, "");
+    return `C ${core}`;
+  };
+
+  const normalizeFileTag = (
+    tag: string,
+    counters: { P: number; C: number; S: number },
+  ): string => {
+    const initial = tag.trim().charAt(0).toUpperCase();
+    if (initial === "P" && policyNumbers.length > 0) {
+      const idx = counters.P % policyNumbers.length;
+      counters.P += 1;
+      return `P ${policyNumbers[idx]}`;
+    }
+    if (initial === "S" && submissionNumbers.length > 0) {
+      const idx = counters.S % submissionNumbers.length;
+      counters.S += 1;
+      return `S ${submissionNumbers[idx]}`;
+    }
+    if (initial === "C" && claimNumbers.length > 0) {
+      const idx = counters.C % claimNumbers.length;
+      counters.C += 1;
+      return displayClaimNumber(claimNumbers[idx]);
+    }
+    return tag;
+  };
+
   return (
     <div className="flex-1 bg-gray-50 p-6 overflow-auto">
       <div className="max-w-7xl mx-auto space-y-6">
