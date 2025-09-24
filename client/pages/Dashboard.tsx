@@ -678,6 +678,30 @@ export default function Dashboard() {
     return "hover:bg-gray-50";
   };
 
+  const getAssignedTo = (
+    profileId: string | undefined,
+    file: string,
+    index: number,
+    total: number,
+  ): string => {
+    const firstChar = file.trim().charAt(0).toUpperCase();
+    switch (profileId) {
+      case "john-wills":
+        return "John";
+      case "shawn-elkins": {
+        const cutoff = Math.max(0, total - 2);
+        return index < cutoff ? "Myra" : "Mike";
+      }
+      case "olivia":
+      case "abc-ltd":
+        if (firstChar === "P" || firstChar === "S") return "John";
+        if (firstChar === "C") return "Myra";
+        return "John";
+      default:
+        return "John";
+    }
+  };
+
   // Get unique values for filters
   const policyStatuses = [...new Set(policyData.map((p) => p.status))];
   const policyLobs = [...new Set(policyData.map((p) => p.lob))];
@@ -1010,13 +1034,19 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center gap-1">
+                          Assigned To
+                          <ArrowUpDown size={12} className="text-gray-400" />
+                        </div>
+                      </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600">
                         Actions
                       </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {openDiaries.map((diary) => (
+                    {openDiaries.map((diary, index) => (
                       <TableRow
                         key={diary.id}
                         className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
@@ -1036,6 +1066,9 @@ export default function Dashboard() {
                         </TableCell>
                         <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
                           {diary.file}
+                        </TableCell>
+                        <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
+                          {getAssignedTo(profileId, diary.file, index, openDiaries.length)}
                         </TableCell>
                         <TableCell className="py-1">
                           <div className="flex gap-1">
@@ -1070,7 +1103,7 @@ export default function Dashboard() {
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
-                          colSpan={5}
+                          colSpan={6}
                           className="text-center py-4 text-gray-500 text-sm"
                         >
                           No open diaries
