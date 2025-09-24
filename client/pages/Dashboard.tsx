@@ -1058,7 +1058,7 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-[40%]">
                         <div className="flex items-center gap-1">
                           Title
                           <ArrowUpDown size={12} className="text-gray-400" />
@@ -1076,7 +1076,7 @@ export default function Dashboard() {
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
-                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                      <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-20">
                         <div className="flex items-center gap-1">
                           Assigned To
                           <ArrowUpDown size={12} className="text-gray-400" />
@@ -1095,10 +1095,10 @@ export default function Dashboard() {
                           key={diary.id}
                           className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
                         >
-                          <TableCell className="text-sm font-medium py-1">
+                          <TableCell className="text-sm font-medium py-1 whitespace-nowrap">
                             {formatToMMDDYY(diary.dueDate)}
                           </TableCell>
-                          <TableCell className="text-sm py-1 text-gray-700">
+                          <TableCell className="text-sm py-1 text-gray-700 w-[40%]">
                             {diary.title}
                           </TableCell>
                           <TableCell className="py-1">
@@ -1111,7 +1111,7 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap">
                             {normalizeFileTag(diary.file, counters)}
                           </TableCell>
-                          <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap">
+                          <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap w-20">
                             {getAssignedTo(
                               profileId,
                               diary.file,
@@ -1280,10 +1280,10 @@ export default function Dashboard() {
                           <TableCell className="py-2">
                             {getStatusBadge(policy.status)}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
+                          <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {policy.startDate}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
+                          <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {policy.endDate}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700 font-semibold">
@@ -1386,7 +1386,7 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700">
                             {submission.program}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
+                          <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {submission.proposedEffectiveDate}
                           </TableCell>
                           <TableCell className="py-2">
@@ -1495,7 +1495,7 @@ export default function Dashboard() {
                               <TableCell className="text-sm text-gray-700">
                                 {row.desc}
                               </TableCell>
-                              <TableCell className="text-sm text-gray-700">
+                              <TableCell className="text-sm text-gray-700 whitespace-nowrap">
                                 {row.date}
                               </TableCell>
                             </TableRow>
@@ -1738,7 +1738,7 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700">
                             {submission.program}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700">
+                          <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {submission.proposedEffectiveDate}
                           </TableCell>
                           <TableCell className="py-2">
