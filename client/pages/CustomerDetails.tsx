@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   ChevronDown,
   ChevronRight,
@@ -14,9 +14,10 @@ import {
   Phone,
   Mail,
   MapPin,
-  Edit3
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+  Edit3,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import SensitiveText from "@/components/ui/sensitive-text";
 
 interface SubItem {
   label: string;
@@ -30,41 +31,68 @@ interface CustomerCenterSidebarItem {
 }
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
-  { label: 'Overview', path: '/customer-details' },
+  { label: "Overview", path: "/customer-details" },
   {
-    label: 'Personal Details',
-    path: '/customer-details/personal-details',
+    label: "Personal Details",
+    path: "/customer-details/personal-details",
     subItems: [
-      { label: 'Basic Info', path: '/customer-details/profile?section=person-info' },
-      { label: 'Addresses', path: '/customer-details/profile?section=addresses' },
-      { label: 'Contact Info', path: '/customer-details/contact-delivery?tab=contact' },
-      { label: 'Additional Info', path: '/customer-details/profile?section=additional-info' },
-      { label: 'Work History', path: '/customer-details/profile?section=person-history' }
-    ]
+      {
+        label: "Basic Info",
+        path: "/customer-details/profile?section=person-info",
+      },
+      {
+        label: "Addresses",
+        path: "/customer-details/profile?section=addresses",
+      },
+      {
+        label: "Contact Info",
+        path: "/customer-details/contact-delivery?tab=contact",
+      },
+      {
+        label: "Additional Info",
+        path: "/customer-details/profile?section=additional-info",
+      },
+      {
+        label: "Work History",
+        path: "/customer-details/profile?section=person-history",
+      },
+    ],
   },
   {
-    label: 'Loss History',
-    path: '/customer-details/loss-history',
+    label: "Loss History",
+    path: "/customer-details/loss-history",
     subItems: [
-      { label: 'Prior Policy', path: '/customer-details/loss-history?tab=prior-policy' },
-      { label: 'Prior Losses', path: '/customer-details/loss-history?tab=prior-losses' }
-    ]
+      {
+        label: "Prior Policy",
+        path: "/customer-details/loss-history?tab=prior-policy",
+      },
+      {
+        label: "Prior Losses",
+        path: "/customer-details/loss-history?tab=prior-losses",
+      },
+    ],
   },
-  { label: 'Relationships & Roles', path: '/customer-details/relationships' },
-  { label: 'Workgroups', path: '/customer-details/workgroups' },
-  { label: 'Risk Mgt Credit Program', path: '/customer-details/risk-management-credit' },
+  { label: "Relationships & Roles", path: "/customer-details/relationships" },
+  { label: "Workgroups", path: "/customer-details/workgroups" },
   {
-    label: 'Journals',
-    path: '/customer-details/journals',
-    subItems: [
-      { label: 'Diaries', path: '/customer-details/journals?tab=diaries' },
-      { label: 'Notes', path: '/customer-details/journals?tab=notes' },
-      { label: 'Document', path: '/customer-details/journals?tab=document' },
-      { label: 'Email', path: '/customer-details/journals?tab=email' },
-      { label: 'Assignment/Approval History', path: '/customer-details/journals?tab=assignment-approval' }
-    ]
+    label: "Risk Mgt Credit Program",
+    path: "/customer-details/risk-management-credit",
   },
-  { label: 'Financials', path: '/customer-details/financials' }
+  {
+    label: "Journals",
+    path: "/customer-details/journals",
+    subItems: [
+      { label: "Diaries", path: "/customer-details/journals?tab=diaries" },
+      { label: "Notes", path: "/customer-details/journals?tab=notes" },
+      { label: "Document", path: "/customer-details/journals?tab=document" },
+      { label: "Email", path: "/customer-details/journals?tab=email" },
+      {
+        label: "Assignment/Approval History",
+        path: "/customer-details/journals?tab=assignment-approval",
+      },
+    ],
+  },
+  { label: "Financials", path: "/customer-details/financials" },
 ];
 
 const customerData = {
@@ -78,7 +106,7 @@ const customerData = {
   email: "rose.greenthumb@example.com",
   address: "1508 - 141 Lyon Court, Toronto, ON M5B 3H2",
   memberSince: "2019",
-  satisfactionScore: 4.8
+  satisfactionScore: 4.8,
 };
 
 export default function CustomerDetails() {
@@ -87,32 +115,38 @@ export default function CustomerDetails() {
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
-  const currentPath = `/customer-details${window.location.pathname.replace('/customer-details', '')}${window.location.search}`;
+  const currentPath = `/customer-details${window.location.pathname.replace("/customer-details", "")}${window.location.search}`;
 
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems(prev =>
+    setExpandedItems((prev) =>
       prev.includes(itemPath)
-        ? prev.filter(path => path !== itemPath)
-        : [...prev, itemPath]
+        ? prev.filter((path) => path !== itemPath)
+        : [...prev, itemPath],
     );
   };
 
   const isActive = (path: string) => {
-    if (path === '/customer-details') {
-      return currentPath === '/customer-details' || currentPath === '/customer-details/';
+    if (path === "/customer-details") {
+      return (
+        currentPath === "/customer-details" ||
+        currentPath === "/customer-details/"
+      );
     }
     return currentPath === path || currentPath.startsWith(path);
   };
 
   const isMainPageActive = (item: CustomerCenterSidebarItem) => {
-    if (item.path === '/customer-details') {
-      return currentPath === '/customer-details' || currentPath === '/customer-details/';
+    if (item.path === "/customer-details") {
+      return (
+        currentPath === "/customer-details" ||
+        currentPath === "/customer-details/"
+      );
     }
     return currentPath.startsWith(item.path);
   };
 
   const navigateToProfile = () => {
-    navigate('/customer-details/profile?section=personal-info');
+    navigate("/customer-details/profile?section=personal-info");
   };
 
   return (
@@ -126,9 +160,13 @@ export default function CustomerDetails() {
           className="text-white hover:bg-white/10 p-1 h-8 w-8"
           title={isLeftPanelCollapsed ? "Expand Panel" : "Collapse Panel"}
         >
-          {isLeftPanelCollapsed ? <Menu size={16} /> : <ChevronLeft size={16} />}
+          {isLeftPanelCollapsed ? (
+            <Menu size={16} />
+          ) : (
+            <ChevronLeft size={16} />
+          )}
         </Button>
-        
+
         <div className="flex items-center gap-3">
           <h1 className="text-lg font-semibold">{customerData.name}</h1>
           <div className="text-white/70">|</div>
@@ -140,11 +178,17 @@ export default function CustomerDetails() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Left Panel */}
-        <div className={cn(
-          "bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-lg transition-all duration-300",
-          isLeftPanelCollapsed ? "w-0 overflow-hidden" : "w-64"
-        )}>
-          <nav className="flex-1 px-3 py-4 overflow-y-auto" role="navigation" aria-label="Customer Center Navigation">
+        <div
+          className={cn(
+            "bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-lg transition-all duration-300",
+            isLeftPanelCollapsed ? "w-0 overflow-hidden" : "w-64",
+          )}
+        >
+          <nav
+            className="flex-1 px-3 py-4 overflow-y-auto"
+            role="navigation"
+            aria-label="Customer Center Navigation"
+          >
             <ul className="space-y-1" role="menubar">
               {customerCenterItems.map((item) => {
                 const hasSubItems = item.subItems && item.subItems.length > 0;
@@ -166,7 +210,7 @@ export default function CustomerDetails() {
                         "flex items-center justify-between rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
                         isMainActive && !window.location.search
                           ? "bg-white text-[#0054A6]"
-                          : "text-white/80 hover:bg-white/10 hover:text-white"
+                          : "text-white/80 hover:bg-white/10 hover:text-white",
                       )}
                       aria-label={item.label}
                       aria-expanded={hasSubItems ? isExpanded : undefined}
@@ -175,11 +219,12 @@ export default function CustomerDetails() {
                       <div className="flex items-center gap-3">
                         {item.label}
                       </div>
-                      {hasSubItems && (
-                        isExpanded ?
-                          <ChevronDown size={14} /> :
+                      {hasSubItems &&
+                        (isExpanded ? (
+                          <ChevronDown size={14} />
+                        ) : (
                           <ChevronRight size={14} />
-                      )}
+                        ))}
                     </button>
 
                     {hasSubItems && isExpanded && (
@@ -192,7 +237,7 @@ export default function CustomerDetails() {
                                 "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4 w-full text-left",
                                 isActive(subItem.path)
                                   ? "bg-white/15 text-white border-white/40"
-                                  : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30"
+                                  : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30",
                               )}
                               role="menuitem"
                               aria-label={subItem.label}
@@ -215,9 +260,19 @@ export default function CustomerDetails() {
           {/* Breadcrumb */}
           <div className="bg-white border-b border-gray-200 px-6 py-3">
             <div className="text-sm text-gray-600">
-              <span className="hover:text-blue-600 cursor-pointer" onClick={() => navigate('/')}>Home</span>
+              <span
+                className="hover:text-blue-600 cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                Home
+              </span>
               <span className="mx-2">&gt;</span>
-              <span className="hover:text-blue-600 cursor-pointer" onClick={() => navigate('/')}>Customer Center</span>
+              <span
+                className="hover:text-blue-600 cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                Customer Center
+              </span>
               <span className="mx-2">&gt;</span>
               <span className="text-gray-900">Overview</span>
             </div>
@@ -236,12 +291,16 @@ export default function CustomerDetails() {
                     </div>
                     <div>
                       <div className="flex items-center gap-3">
-                        <h2 className="text-xl font-bold text-gray-900">{customerData.name}</h2>
+                        <h2 className="text-xl font-bold text-gray-900">
+                          {customerData.name}
+                        </h2>
                         <Badge className="bg-gray-100 text-gray-700 border-gray-200">
                           {customerData.status}
                         </Badge>
                       </div>
-                      <p className="text-gray-600 font-medium">{customerData.role}</p>
+                      <p className="text-gray-600 font-medium">
+                        {customerData.role}
+                      </p>
                       <div className="flex items-center gap-4 mt-2">
                         <div className="flex items-center gap-1 text-sm text-gray-500">
                           <Calendar size={12} />
@@ -250,7 +309,7 @@ export default function CustomerDetails() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative">
                     <Button
                       variant="ghost"
@@ -264,38 +323,48 @@ export default function CustomerDetails() {
                       <Calendar size={14} className="text-gray-400" />
                       <div>
                         <span className="text-xs text-gray-500">DOB</span>
-                        <p className="text-sm font-medium">{customerData.dateOfBirth}</p>
+                        <p className="text-sm font-medium">
+                          <SensitiveText value="1990" />
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <div>
                         <span className="text-xs text-gray-500">Gender</span>
-                        <p className="text-sm font-medium">{customerData.gender}</p>
+                        <p className="text-sm font-medium">
+                          {customerData.gender}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <div>
                         <span className="text-xs text-gray-500">LSC#</span>
-                        <p className="text-sm font-medium">{customerData.lsc}</p>
+                        <p className="text-sm font-medium">
+                          {customerData.lsc}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone size={14} className="text-gray-400" />
                       <div className="min-w-0">
                         <span className="text-xs text-gray-500">Phone</span>
-                        <p className="text-sm font-medium whitespace-nowrap">{customerData.phone}</p>
+                        <p className="text-sm font-medium whitespace-nowrap">
+                          {customerData.phone}
+                        </p>
                       </div>
                     </div>
                     <div className="col-span-2 flex items-center gap-2">
                       <Mail size={14} className="text-gray-400" />
                       <div>
                         <span className="text-xs text-gray-500">Email</span>
-                        <p className="text-sm font-medium">{customerData.email}</p>
+                        <p className="text-sm font-medium">
+                          {customerData.email}
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="mt-3 flex items-center gap-2 text-sm">
                   <MapPin size={14} className="text-gray-400" />
                   <span className="text-gray-500">Address:</span>
@@ -308,7 +377,9 @@ export default function CustomerDetails() {
             <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Quick Actions
+                  </h3>
                   <div className="space-y-3">
                     <Button className="w-full justify-start bg-[#0054A6] hover:bg-[#003d7a]">
                       Create New Policy
@@ -325,7 +396,9 @@ export default function CustomerDetails() {
 
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Recent Activity
+                  </h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
                       <span className="text-gray-600">Last Login</span>
