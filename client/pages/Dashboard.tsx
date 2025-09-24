@@ -1082,65 +1082,68 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {openDiaries.map((diary, index) => (
-                      <TableRow
-                        key={diary.id}
-                        className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
-                      >
-                        <TableCell className="text-xs py-1">
-                          {formatToMMDDYY(diary.dueDate)}
-                        </TableCell>
-                        <TableCell className="text-xs py-1">
-                          {diary.title}
-                        </TableCell>
-                        <TableCell className="py-1">
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
-                          >
-                            {diary.priority}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
-                          {diary.file}
-                        </TableCell>
-                        <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
-                          {getAssignedTo(
-                            profileId,
-                            diary.file,
-                            index,
-                            openDiaries.length,
-                          )}
-                        </TableCell>
-                        <TableCell className="py-1">
-                          <div className="flex gap-1">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                navigate("/journals?tab=diaries");
-                              }}
-                              aria-label="Go to diary"
+                    {(() => {
+                      const counters = { P: 0, C: 0, S: 0 };
+                      return openDiaries.map((diary, index) => (
+                        <TableRow
+                          key={diary.id}
+                          className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
+                        >
+                          <TableCell className="text-xs py-1">
+                            {formatToMMDDYY(diary.dueDate)}
+                          </TableCell>
+                          <TableCell className="text-xs py-1">
+                            {diary.title}
+                          </TableCell>
+                          <TableCell className="py-1">
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
                             >
-                              <ArrowRight size={12} />
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleCloseDiary(diary.id);
-                              }}
-                              aria-label="Mark diary complete"
-                            >
-                              <Check size={12} />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                              {diary.priority}
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
+                            {normalizeFileTag(diary.file, counters)}
+                          </TableCell>
+                          <TableCell className="text-xs py-1 text-gray-700 whitespace-nowrap">
+                            {getAssignedTo(
+                              profileId,
+                              diary.file,
+                              index,
+                              openDiaries.length,
+                            )}
+                          </TableCell>
+                          <TableCell className="py-1">
+                            <div className="flex gap-1">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  navigate("/journals?tab=diaries");
+                                }}
+                                aria-label="Go to diary"
+                              >
+                                <ArrowRight size={12} />
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCloseDiary(diary.id);
+                                }}
+                                aria-label="Mark diary complete"
+                              >
+                                <Check size={12} />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ));
+                    })()}
                     {openDiaries.length === 0 && (
                       <TableRow>
                         <TableCell
