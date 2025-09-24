@@ -2,6 +2,7 @@ import { Button } from "./button";
 import { Badge } from "./badge";
 import { Card, CardContent } from "./card";
 import { Calendar, Users, FileText, Phone, Mail, Edit3 } from "lucide-react";
+import SensitiveText from "@/components/ui/sensitive-text";
 
 const customerData = {
   name: "John Wills",
@@ -60,7 +61,7 @@ export function PersonDetailsUnderwriter() {
                   <div>
                     <span className="text-xs text-gray-500">DOB</span>
                     <p className="text-sm font-medium">
-                      {customerData.dateOfBirth}
+                      <SensitiveText value={customerData.dateOfBirth} />
                     </p>
                   </div>
                   <Button
