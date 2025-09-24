@@ -119,7 +119,9 @@ export function PersonDetailsSection() {
                   <FileText size={14} className="text-gray-400" />
                   <div>
                     <span className="text-xs text-gray-500">SSN#</span>
-                    <p className="text-sm font-medium"><SensitiveText value="123-45-6789" masked="•••-••-••••" /></p>
+                    <p className="text-sm font-medium">
+                      <SensitiveText value="123-45-6789" masked="•••-••-••••" />
+                    </p>
                   </div>
                   <Button
                     variant="ghost"

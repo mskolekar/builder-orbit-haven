@@ -766,7 +766,9 @@ export default function Dashboard() {
   // Build lists of numbers from the tiles below for consistency
   const policyNumbers = filteredPolicies.map((p) => shortenAfterDash(p.policy));
   const claimNumbers = filteredClaims.map((c) => c.claimNumber);
-  const submissionNumbers = filteredSubmissions.map((s) => shortenAfterDash(s.id));
+  const submissionNumbers = filteredSubmissions.map((s) =>
+    shortenAfterDash(s.id),
+  );
 
   const displayClaimNumber = (cn: string) => {
     const core = cn.trim().replace(/^c\s*/i, "");
