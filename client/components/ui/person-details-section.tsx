@@ -77,6 +77,28 @@ export function PersonDetailsSection() {
               </div>
 
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative">
+                <div className="absolute top-0 right-0 flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                    onClick={() => (window.location.href = "/profile?section=personal-info")}
+                    aria-label="Edit Basic Details"
+                    title="Edit Basic Details"
+                  >
+                    <Edit3 size={12} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                    onClick={() => (window.location.href = "/contact-delivery?tab=contact")}
+                    aria-label="Edit Contact Info"
+                    title="Edit Contact Info"
+                  >
+                    <Edit3 size={12} />
+                  </Button>
+                </div>
                 <div className="flex items-center gap-2">
                   <Calendar size={14} className="text-gray-400" />
                   <div>
@@ -85,17 +107,6 @@ export function PersonDetailsSection() {
                       <SensitiveText value="1990" />
                     </p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() =>
-                      (window.location.href = "/profile?section=personal-info")
-                    }
-                    aria-label="Edit DOB"
-                  >
-                    <Edit3 size={12} />
-                  </Button>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users size={14} className="text-gray-400" />
@@ -103,17 +114,6 @@ export function PersonDetailsSection() {
                     <span className="text-xs text-gray-500">Gender</span>
                     <p className="text-sm font-medium">{customerData.gender}</p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() =>
-                      (window.location.href = "/profile?section=personal-info")
-                    }
-                    aria-label="Edit Gender"
-                  >
-                    <Edit3 size={12} />
-                  </Button>
                 </div>
                 <div className="flex items-center gap-2">
                   <FileText size={14} className="text-gray-400" />
@@ -123,17 +123,6 @@ export function PersonDetailsSection() {
                       <SensitiveText value="123-45-6789" masked="•••-••-••••" />
                     </p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() =>
-                      (window.location.href = "/profile?section=personal-info")
-                    }
-                    aria-label="Edit SSN"
-                  >
-                    <Edit3 size={12} />
-                  </Button>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone size={14} className="text-gray-400" />
@@ -143,17 +132,6 @@ export function PersonDetailsSection() {
                       {customerData.phone}
                     </p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() =>
-                      (window.location.href = "/contact-delivery?tab=contact")
-                    }
-                    aria-label="Edit Phone"
-                  >
-                    <Edit3 size={12} />
-                  </Button>
                 </div>
                 <div className="col-span-2 flex items-center gap-2">
                   <Mail size={14} className="text-gray-400" />
@@ -161,17 +139,6 @@ export function PersonDetailsSection() {
                     <span className="text-xs text-gray-500">Email</span>
                     <p className="text-sm font-medium">{customerData.email}</p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() =>
-                      (window.location.href = "/contact-delivery?tab=contact")
-                    }
-                    aria-label="Edit Email"
-                  >
-                    <Edit3 size={12} />
-                  </Button>
                 </div>
               </div>
             </div>
