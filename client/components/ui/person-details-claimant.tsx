@@ -59,12 +59,17 @@ export function PersonDetailsClaimant() {
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-xs font-medium text-gray-600">Basic Info</div>
+                    <div className="text-xs font-medium text-gray-600">
+                      Basic Info
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
-                      onClick={() => (window.location.href = "/profile?section=personal-info")}
+                      onClick={() =>
+                        (window.location.href =
+                          "/profile?section=personal-info")
+                      }
                       aria-label="Edit Basic Info"
                       title="Edit Basic Info"
                     >
@@ -76,7 +81,9 @@ export function PersonDetailsClaimant() {
                       <Users size={14} className="text-gray-400" />
                       <div>
                         <span className="text-xs text-gray-500">Gender</span>
-                        <p className="text-sm font-medium">{customerData.gender}</p>
+                        <p className="text-sm font-medium">
+                          {customerData.gender}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -84,7 +91,10 @@ export function PersonDetailsClaimant() {
                       <div>
                         <span className="text-xs text-gray-500">SSN#</span>
                         <p className="text-sm font-medium">
-                          <SensitiveText value="123-45-6789" masked="•••-••-••••" />
+                          <SensitiveText
+                            value="123-45-6789"
+                            masked="•••-••-••••"
+                          />
                         </p>
                       </div>
                     </div>
@@ -93,12 +103,16 @@ export function PersonDetailsClaimant() {
 
                 <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-xs font-medium text-gray-600">Contact Info</div>
+                    <div className="text-xs font-medium text-gray-600">
+                      Contact Info
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
-                      onClick={() => (window.location.href = "/contact-delivery?tab=contact")}
+                      onClick={() =>
+                        (window.location.href = "/contact-delivery?tab=contact")
+                      }
                       aria-label="Edit Contact Info"
                       title="Edit Contact Info"
                     >
@@ -119,7 +133,9 @@ export function PersonDetailsClaimant() {
                       <Mail size={14} className="text-gray-400" />
                       <div>
                         <span className="text-xs text-gray-500">Email</span>
-                        <p className="text-sm font-medium">{customerData.email}</p>
+                        <p className="text-sm font-medium">
+                          {customerData.email}
+                        </p>
                       </div>
                     </div>
                   </div>

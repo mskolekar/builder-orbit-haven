@@ -62,7 +62,9 @@ export function PersonDetailsProspect() {
                     variant="ghost"
                     size="sm"
                     className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() => (window.location.href = "/profile?section=personal-info")}
+                    onClick={() =>
+                      (window.location.href = "/profile?section=personal-info")
+                    }
                     aria-label="Edit Basic Details"
                     title="Edit Basic Details"
                   >
@@ -72,7 +74,9 @@ export function PersonDetailsProspect() {
                     variant="ghost"
                     size="sm"
                     className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
-                    onClick={() => (window.location.href = "/contact-delivery?tab=contact")}
+                    onClick={() =>
+                      (window.location.href = "/contact-delivery?tab=contact")
+                    }
                     aria-label="Edit Contact Info"
                     title="Edit Contact Info"
                   >
@@ -81,12 +85,17 @@ export function PersonDetailsProspect() {
                 </div>
                 <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-xs font-medium text-gray-600">Basic Info</div>
+                    <div className="text-xs font-medium text-gray-600">
+                      Basic Info
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
-                      onClick={() => (window.location.href = "/profile?section=personal-info")}
+                      onClick={() =>
+                        (window.location.href =
+                          "/profile?section=personal-info")
+                      }
                       aria-label="Edit Basic Info"
                       title="Edit Basic Info"
                     >
@@ -99,7 +108,10 @@ export function PersonDetailsProspect() {
                       <div>
                         <span className="text-xs text-gray-500">SSN#</span>
                         <p className="text-sm font-medium">
-                          <SensitiveText value="123-45-6789" masked="•••-••-••••" />
+                          <SensitiveText
+                            value="123-45-6789"
+                            masked="•••-••-••••"
+                          />
                         </p>
                       </div>
                     </div>
@@ -108,12 +120,16 @@ export function PersonDetailsProspect() {
 
                 <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-xs font-medium text-gray-600">Contact Info</div>
+                    <div className="text-xs font-medium text-gray-600">
+                      Contact Info
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
-                      onClick={() => (window.location.href = "/contact-delivery?tab=contact")}
+                      onClick={() =>
+                        (window.location.href = "/contact-delivery?tab=contact")
+                      }
                       aria-label="Edit Contact Info"
                       title="Edit Contact Info"
                     >

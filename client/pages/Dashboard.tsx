@@ -23,7 +23,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card";
 import { shortenAfterDash } from "@/lib/utils";
 import {
   Eye,
@@ -950,8 +954,12 @@ export default function Dashboard() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <CardTitle className="text-base text-gray-700">Activity Timeline</CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{selectedActivities.length}</Badge>
+                  <CardTitle className="text-base text-gray-700">
+                    Activity Timeline
+                  </CardTitle>
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    {selectedActivities.length}
+                  </Badge>
                 </div>
                 <div className="flex items-center">
                   <Button
@@ -1041,8 +1049,12 @@ export default function Dashboard() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <CardTitle className="text-base text-gray-700">Diaries</CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{openDiaries.length}</Badge>
+                  <CardTitle className="text-base text-gray-700">
+                    Diaries
+                  </CardTitle>
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    {openDiaries.length}
+                  </Badge>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -1140,14 +1152,16 @@ export default function Dashboard() {
                               return (
                                 <HoverCard>
                                   <HoverCardTrigger asChild>
-                                    <span>
-                                      {assigned}
-                                    </span>
+                                    <span>{assigned}</span>
                                   </HoverCardTrigger>
                                   <HoverCardContent>
                                     <div className="text-sm">
-                                      <div className="font-medium text-gray-900">{assigned}</div>
-                                      <div className="text-gray-600">{getUserRole(assigned)}</div>
+                                      <div className="font-medium text-gray-900">
+                                        {assigned}
+                                      </div>
+                                      <div className="text-gray-600">
+                                        {getUserRole(assigned)}
+                                      </div>
                                     </div>
                                   </HoverCardContent>
                                 </HoverCard>
@@ -1221,8 +1235,12 @@ export default function Dashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CardTitle className="text-base text-gray-700">Policies</CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{filteredPolicies.length}</Badge>
+                    <CardTitle className="text-base text-gray-700">
+                      Policies
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {filteredPolicies.length}
+                    </Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1352,8 +1370,12 @@ export default function Dashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CardTitle className="text-base text-gray-700">Submissions</CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{filteredSubmissions.length}</Badge>
+                    <CardTitle className="text-base text-gray-700">
+                      Submissions
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {filteredSubmissions.length}
+                    </Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1453,8 +1475,16 @@ export default function Dashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CardTitle className="text-base text-gray-700">{isShawn ? "Claims & Incidents" : "Claims"}</CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{isShawn ? 4 : filteredClaims.filter((c) => c.status === "Open" || c.status === "Reopen").length}</Badge>
+                    <CardTitle className="text-base text-gray-700">
+                      {isShawn ? "Claims & Incidents" : "Claims"}
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {isShawn
+                        ? 4
+                        : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length}
+                    </Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1696,8 +1726,12 @@ export default function Dashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CardTitle className="text-base text-gray-700">Submissions</CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{filteredSubmissions.length}</Badge>
+                    <CardTitle className="text-base text-gray-700">
+                      Submissions
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {filteredSubmissions.length}
+                    </Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
