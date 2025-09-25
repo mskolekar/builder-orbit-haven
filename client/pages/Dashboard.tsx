@@ -1078,7 +1078,7 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-[40%]">
                         <div className="flex items-center gap-1">
-                          Title
+                          Description
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
