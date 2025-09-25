@@ -23,6 +23,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card";
 import { shortenAfterDash } from "@/lib/utils";
 import {
   Eye,
@@ -703,6 +708,19 @@ export default function Dashboard() {
     }
   };
 
+  const getUserRole = (name: string): string => {
+    switch (name) {
+      case "John":
+        return "Underwriter";
+      case "Myra":
+        return "Claim Accessor";
+      case "Mike":
+        return "Claim Processor";
+      default:
+        return "User";
+    }
+  };
+
   // Get unique values for filters
   const policyStatuses = [...new Set(policyData.map((p) => p.status))];
   const policyLobs = [...new Set(policyData.map((p) => p.lob))];
@@ -748,8 +766,8 @@ export default function Dashboard() {
     const key = profileId && diariesByProfile[profileId] ? profileId : "olivia";
     setDiariesData(diariesByProfile[key]);
 
-    // Collapse all tiles by default for new prospect
-    const collapse = !!(profileId === "josh-fernandes");
+    // Collapse all tiles by default (personal details header remains expanded)
+    const collapse = true;
     setIsFinancialCollapsed(collapse);
     setIsActivityCollapsed(collapse);
     setIsDiariesCollapsed(collapse);
@@ -935,9 +953,14 @@ export default function Dashboard() {
               }}
             >
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base text-gray-700">
-                  Activity Timeline
-                </CardTitle>
+                <div className="flex items-center gap-2">
+                  <CardTitle className="text-base text-gray-700">
+                    Activity Timeline
+                  </CardTitle>
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    {selectedActivities.length}
+                  </Badge>
+                </div>
                 <div className="flex items-center">
                   <Button
                     variant="ghost"
@@ -1025,9 +1048,14 @@ export default function Dashboard() {
               }}
             >
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base text-gray-700">
-                  Diaries
-                </CardTitle>
+                <div className="flex items-center gap-2">
+                  <CardTitle className="text-base text-gray-700">
+                    Diaries
+                  </CardTitle>
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    {openDiaries.length}
+                  </Badge>
+                </div>
                 <div className="flex items-center gap-2">
                   <Button
                     variant="ghost"
@@ -1062,7 +1090,7 @@ export default function Dashboard() {
                       </TableHead>
                       <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-[40%]">
                         <div className="flex items-center gap-1">
-                          Title
+                          Description
                           <ArrowUpDown size={12} className="text-gray-400" />
                         </div>
                       </TableHead>
@@ -1114,12 +1142,31 @@ export default function Dashboard() {
                             {normalizeFileTag(diary.file, counters)}
                           </TableCell>
                           <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap w-20">
-                            {getAssignedTo(
-                              profileId,
-                              diary.file,
-                              index,
-                              openDiaries.length,
-                            )}
+                            {(() => {
+                              const assigned = getAssignedTo(
+                                profileId,
+                                diary.file,
+                                index,
+                                openDiaries.length,
+                              );
+                              return (
+                                <HoverCard>
+                                  <HoverCardTrigger asChild>
+                                    <span>{assigned}</span>
+                                  </HoverCardTrigger>
+                                  <HoverCardContent>
+                                    <div className="text-sm">
+                                      <div className="font-medium text-gray-900">
+                                        {assigned}
+                                      </div>
+                                      <div className="text-gray-600">
+                                        {getUserRole(assigned)}
+                                      </div>
+                                    </div>
+                                  </HoverCardContent>
+                                </HoverCard>
+                              );
+                            })()}
                           </TableCell>
                           <TableCell className="py-1">
                             <div className="flex gap-1">
@@ -1187,9 +1234,14 @@ export default function Dashboard() {
                 }}
               >
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base text-gray-700">
-                    Policies
-                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base text-gray-700">
+                      Policies
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {filteredPolicies.length}
+                    </Badge>
+                  </div>
                   <div className="flex items-center">
                     <Button
                       variant="ghost"
@@ -1317,9 +1369,14 @@ export default function Dashboard() {
                 }}
               >
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base text-gray-700">
-                    Submissions
-                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base text-gray-700">
+                      Submissions
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {filteredSubmissions.length}
+                    </Badge>
+                  </div>
                   <div className="flex items-center">
                     <Button
                       variant="ghost"
@@ -1417,9 +1474,18 @@ export default function Dashboard() {
                 }}
               >
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base text-gray-700">
-                    {isShawn ? "Claims & Incidents" : "Claims"}
-                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base text-gray-700">
+                      {isShawn ? "Claims & Incidents" : "Claims"}
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {isShawn
+                        ? 4
+                        : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length}
+                    </Badge>
+                  </div>
                   <div className="flex items-center">
                     <Button
                       variant="ghost"
@@ -1659,9 +1725,14 @@ export default function Dashboard() {
                 }}
               >
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base text-gray-700">
-                    Submissions
-                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base text-gray-700">
+                      Submissions
+                    </CardTitle>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                      {filteredSubmissions.length}
+                    </Badge>
+                  </div>
                   <div className="flex items-center">
                     <Button
                       variant="ghost"
