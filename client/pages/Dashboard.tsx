@@ -951,7 +951,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <CardTitle className="text-base text-gray-700">Activity Timeline</CardTitle>
-                  <span className="text-xs text-gray-500">({selectedActivities.length})</span>
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{selectedActivities.length}</Badge>
                 </div>
                 <div className="flex items-center">
                   <Button
@@ -1042,7 +1042,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <CardTitle className="text-base text-gray-700">Diaries</CardTitle>
-                  <span className="text-xs text-gray-500">({openDiaries.length})</span>
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{openDiaries.length}</Badge>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -1140,7 +1140,7 @@ export default function Dashboard() {
                               return (
                                 <HoverCard>
                                   <HoverCardTrigger asChild>
-                                    <span className="underline decoration-dotted cursor-help">
+                                    <span>
                                       {assigned}
                                     </span>
                                   </HoverCardTrigger>
@@ -1222,7 +1222,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">Policies</CardTitle>
-                    <span className="text-xs text-gray-500">({filteredPolicies.length})</span>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{filteredPolicies.length}</Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1353,7 +1353,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">Submissions</CardTitle>
-                    <span className="text-xs text-gray-500">({filteredSubmissions.length})</span>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{filteredSubmissions.length}</Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1454,7 +1454,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">{isShawn ? "Claims & Incidents" : "Claims"}</CardTitle>
-                    <span className="text-xs text-gray-500">({isShawn ? 4 : filteredClaims.filter((c) => c.status === "Open" || c.status === "Reopen").length})</span>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{isShawn ? 4 : filteredClaims.filter((c) => c.status === "Open" || c.status === "Reopen").length}</Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1697,7 +1697,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">Submissions</CardTitle>
-                    <span className="text-xs text-gray-500">({filteredSubmissions.length})</span>
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">{filteredSubmissions.length}</Badge>
                   </div>
                   <div className="flex items-center">
                     <Button
