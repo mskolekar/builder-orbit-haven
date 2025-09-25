@@ -57,15 +57,15 @@ export function PersonDetailsUnderwriter() {
               </div>
 
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
-                  <div className="flex items-center justify-between mb-2">
+                <div className="col-span-2 md:col-span-4 lg:col-span-3">
+                  <div className="flex items-center gap-1 mb-1">
                     <div className="text-xs font-medium text-gray-600">
                       Basic Info
                     </div>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
+                      className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
                       onClick={() =>
                         (window.location.href =
                           "/profile?section=personal-info")
@@ -76,7 +76,7 @@ export function PersonDetailsUnderwriter() {
                       <Edit3 size={12} />
                     </Button>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     <div className="flex items-center gap-2">
                       <Calendar size={14} className="text-gray-400" />
                       <div>
@@ -107,15 +107,15 @@ export function PersonDetailsUnderwriter() {
                   </div>
                 </div>
 
-                <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
-                  <div className="flex items-center justify-between mb-2">
+                <div className="col-span-2 md:col-span-4 lg:col-span-3">
+                  <div className="flex items-center gap-1 mb-1">
                     <div className="text-xs font-medium text-gray-600">
                       Contact Info
                     </div>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
+                      className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
                       onClick={() =>
                         (window.location.href = "/contact-delivery?tab=contact")
                       }
@@ -125,7 +125,7 @@ export function PersonDetailsUnderwriter() {
                       <Edit3 size={12} />
                     </Button>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-2">
                     <div className="flex items-center gap-2">
                       <Phone size={14} className="text-gray-400" />
                       <div className="min-w-0">
