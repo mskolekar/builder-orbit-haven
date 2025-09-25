@@ -77,8 +77,8 @@ export function PersonDetailsSection() {
               </div>
 
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
-                  <div className="flex items-center justify-between mb-2">
+                <div className="col-span-2 md:col-span-4 lg:col-span-3">
+                  <div className="flex items-center justify-between mb-1">
                     <div className="text-xs font-medium text-gray-600">
                       Basic Info
                     </div>
@@ -96,7 +96,7 @@ export function PersonDetailsSection() {
                       <Edit3 size={12} />
                     </Button>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3">
                     <div className="flex items-center gap-2">
                       <Calendar size={14} className="text-gray-400" />
                       <div>
@@ -120,18 +120,15 @@ export function PersonDetailsSection() {
                       <div>
                         <span className="text-xs text-gray-500">SSN#</span>
                         <p className="text-sm font-medium">
-                          <SensitiveText
-                            value="123-45-6789"
-                            masked="•••-••-••••"
-                          />
+                          <SensitiveText value="123-45-6789" masked="•••-••-••••" />
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="col-span-2 md:col-span-4 lg:col-span-3 border rounded-md p-3 bg-gray-50">
-                  <div className="flex items-center justify-between mb-2">
+                <div className="col-span-2 md:col-span-4 lg:col-span-3">
+                  <div className="flex items-center justify-between mb-1">
                     <div className="text-xs font-medium text-gray-600">
                       Contact Info
                     </div>
@@ -148,7 +145,7 @@ export function PersonDetailsSection() {
                       <Edit3 size={12} />
                     </Button>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3">
                     <div className="flex items-center gap-2">
                       <Phone size={14} className="text-gray-400" />
                       <div className="min-w-0">
