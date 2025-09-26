@@ -958,7 +958,7 @@ export default function Dashboard() {
                     Activity Timeline
                   </CardTitle>
                   <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                    {selectedActivities.length}
+                    {selectedActivities.length} entries
                   </Badge>
                 </div>
                 <div className="flex items-center">
@@ -1053,7 +1053,7 @@ export default function Dashboard() {
                     Diaries
                   </CardTitle>
                   <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                    {openDiaries.length}
+                    {openDiaries.length} open
                   </Badge>
                 </div>
                 <div className="flex items-center gap-2">
@@ -1239,7 +1239,7 @@ export default function Dashboard() {
                       Policies
                     </CardTitle>
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                      {filteredPolicies.length}
+                      {filteredPolicies.length} policies
                     </Badge>
                   </div>
                   <div className="flex items-center">
@@ -1374,7 +1374,7 @@ export default function Dashboard() {
                       Submissions
                     </CardTitle>
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                      {filteredSubmissions.length}
+                      {filteredSubmissions.length} submissions
                     </Badge>
                   </div>
                   <div className="flex items-center">
@@ -1483,7 +1483,7 @@ export default function Dashboard() {
                         ? 4
                         : filteredClaims.filter(
                             (c) => c.status === "Open" || c.status === "Reopen",
-                          ).length}
+                          ).length} {isShawn ? "items" : "open"}
                     </Badge>
                   </div>
                   <div className="flex items-center">
@@ -1730,7 +1730,7 @@ export default function Dashboard() {
                       Submissions
                     </CardTitle>
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                      {filteredSubmissions.length}
+                      {filteredSubmissions.length} submissions
                     </Badge>
                   </div>
                   <div className="flex items-center">
