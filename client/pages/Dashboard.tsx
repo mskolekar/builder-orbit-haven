@@ -964,7 +964,7 @@ export default function Dashboard() {
                   <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                     {Math.min(selectedActivities.length, 4)}
                   </Badge>
-                  <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
+                  <span className="text-[11px] md:text-xs text-gray-500">of {Math.min(selectedActivities.length, 4) === 0 ? 0 : TILE_TOTAL}</span>
                 </div>
                 <div className="flex items-center">
                   <Button
@@ -1060,7 +1060,7 @@ export default function Dashboard() {
                   <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                     {openDiaries.length}
                   </Badge>
-                  <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
+                  <span className="text-[11px] md:text-xs text-gray-500">of {openDiaries.length === 0 ? 0 : TILE_TOTAL}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -1247,7 +1247,7 @@ export default function Dashboard() {
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredPolicies.length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {filteredPolicies.length === 0 ? 0 : TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1383,7 +1383,7 @@ export default function Dashboard() {
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredSubmissions.length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1493,7 +1493,7 @@ export default function Dashboard() {
                             (c) => c.status === "Open" || c.status === "Reopen",
                           ).length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {(isShawn ? 4 : filteredClaims.filter((c) => c.status === "Open" || c.status === "Reopen").length) === 0 ? 0 : TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1741,7 +1741,7 @@ export default function Dashboard() {
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredSubmissions.length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
