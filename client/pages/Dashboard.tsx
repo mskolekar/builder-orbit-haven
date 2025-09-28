@@ -757,7 +757,8 @@ export default function Dashboard() {
   const isNewProspect = profileId === "josh-fernandes";
   const hideFinancial = isJohn || isShawn;
   const location = useLocation();
-  const isFintechFonts = new URLSearchParams(location.search).get("style") === "fintech-fonts";
+  const isFintechFonts =
+    new URLSearchParams(location.search).get("style") === "fintech-fonts";
 
   if (isNewProspect) {
     // No data for new prospect
@@ -821,7 +822,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className={`${isFintechFonts ? "fintech-fonts" : ""} flex-1 bg-gray-50 p-6 overflow-auto`}>
+    <div
+      className={`${isFintechFonts ? "fintech-fonts" : ""} flex-1 bg-gray-50 p-6 overflow-auto`}
+    >
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div
@@ -918,7 +921,9 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Total Due
                     </div>
-                    <div className="text-xl font-bold text-gray-800 font-monoid">$275</div>
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
+                      $275
+                    </div>
                     <div className="text-xs text-gray-500 mt-1">
                       <p>Current Premium Due (YTD)</p>
                     </div>
@@ -928,7 +933,9 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Outstanding Balance
                     </div>
-                    <div className="text-xl font-bold text-gray-800 font-monoid">$190</div>
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
+                      $190
+                    </div>
                     <div className="text-xs text-gray-500 mt-1">
                       <p>Outstanding Balance (after credits)</p>
                     </div>
@@ -964,7 +971,12 @@ export default function Dashboard() {
                   <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                     {Math.min(selectedActivities.length, 4)}
                   </Badge>
-                  <span className="text-[11px] md:text-xs text-gray-500">of {Math.min(selectedActivities.length, 4) === 0 ? 0 : TILE_TOTAL}</span>
+                  <span className="text-[11px] md:text-xs text-gray-500">
+                    of{" "}
+                    {Math.min(selectedActivities.length, 4) === 0
+                      ? 0
+                      : TILE_TOTAL}
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Button
@@ -1060,7 +1072,9 @@ export default function Dashboard() {
                   <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                     {openDiaries.length}
                   </Badge>
-                  <span className="text-[11px] md:text-xs text-gray-500">of {openDiaries.length === 0 ? 0 : TILE_TOTAL}</span>
+                  <span className="text-[11px] md:text-xs text-gray-500">
+                    of {openDiaries.length === 0 ? 0 : TILE_TOTAL}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -1247,7 +1261,9 @@ export default function Dashboard() {
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredPolicies.length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {filteredPolicies.length === 0 ? 0 : TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of {filteredPolicies.length === 0 ? 0 : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1383,7 +1399,9 @@ export default function Dashboard() {
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredSubmissions.length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1493,7 +1511,16 @@ export default function Dashboard() {
                             (c) => c.status === "Open" || c.status === "Reopen",
                           ).length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {(isShawn ? 4 : filteredClaims.filter((c) => c.status === "Open" || c.status === "Reopen").length) === 0 ? 0 : TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of{" "}
+                      {(isShawn
+                        ? 4
+                        : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length) === 0
+                        ? 0
+                        : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1741,7 +1768,9 @@ export default function Dashboard() {
                     <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredSubmissions.length}
                     </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}</span>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button

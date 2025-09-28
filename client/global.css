@@ -152,19 +152,41 @@
 .fintech-fonts h3,
 .fintech-fonts th,
 .fintech-fonts .font-header {
-  font-family: 'Lato', 'Source Sans Pro', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    "Lato",
+    "Source Sans Pro",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-weight: 700;
 }
 
 .fintech-fonts tbody,
 .fintech-fonts .font-data {
-  font-family: 'Open Sans', 'Source Sans Pro', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    "Open Sans",
+    "Source Sans Pro",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-weight: 400;
 }
 
 .fintech-fonts .font-monoid,
 .fintech-fonts code,
 .fintech-fonts .mono {
-  font-family: 'Inconsolata', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-family:
+    "Inconsolata", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
   font-variant-numeric: tabular-nums;
 }

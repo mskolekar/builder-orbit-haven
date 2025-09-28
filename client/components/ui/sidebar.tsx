@@ -46,7 +46,10 @@ const sidebarItems: SidebarItem[] = [
     path: "/overview",
     subItems: [
       { label: "Olivia R (Insured)", path: "/overview/olivia" },
-      { label: "Fintech Fonts sample", path: "/overview/olivia?style=fintech-fonts" },
+      {
+        label: "Fintech Fonts sample",
+        path: "/overview/olivia?style=fintech-fonts",
+      },
       { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
       { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
       { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
