@@ -148,7 +148,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
               <div className="w-8 h-8 bg-[#0054A6] rounded flex items-center justify-center">
                 <span className="text-white font-bold text-sm">OS</span>
               </div>
-              <span className="text-[#0054A6] font-semibold text-lg">
+              <span className="text-[#0054A6] font-semibold text-lg font-header">
                 OneShield
               </span>
             </div>
@@ -193,7 +193,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       }
                     }}
                     className={cn(
-                      "flex items-center rounded-lg text-sm transition-colors w-full",
+                      "flex items-center rounded-lg text-sm transition-colors w-full font-header",
                       isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
                         ? "bg-[#0054A6] text-white"
@@ -213,7 +213,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                             to={subItem.path}
                             onClick={() => setIsOpen(false)}
                             className={cn(
-                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4",
+                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4 font-header",
                               isActive(subItem.path)
                                 ? "bg-gray-100 text-gray-900 border-gray-300"
                                 : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300",

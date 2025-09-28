@@ -865,7 +865,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Total Incurred (This Claimant)
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $11,800.00
                     </div>
                     <Progress value={21} className="h-2 mt-2" />
@@ -877,7 +877,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Outstanding Reserves
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $7,250.00
                     </div>
                     <Progress value={60} className="h-2 mt-2" />
@@ -889,7 +889,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Amount Paid
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $5,200.00
                     </div>
                     <Progress value={40} className="h-2 mt-2" />
@@ -904,7 +904,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Amount Paid
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $8,460
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
@@ -916,7 +916,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Total Due
                     </div>
-                    <div className="text-xl font-bold text-gray-800">$275</div>
+                    <div className="text-xl font-bold text-gray-800 font-monoid">$275</div>
                     <div className="text-xs text-gray-500 mt-1">
                       <p>Current Premium Due (YTD)</p>
                     </div>
@@ -926,7 +926,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Outstanding Balance
                     </div>
-                    <div className="text-xl font-bold text-gray-800">$190</div>
+                    <div className="text-xl font-bold text-gray-800 font-monoid">$190</div>
                     <div className="text-xs text-gray-500 mt-1">
                       <p>Outstanding Balance (after credits)</p>
                     </div>
