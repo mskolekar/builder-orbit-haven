@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -754,6 +754,8 @@ export default function Dashboard() {
   const isJohn = profileId === "john-wills";
   const isNewProspect = profileId === "josh-fernandes";
   const hideFinancial = isJohn || isShawn;
+  const location = useLocation();
+  const isFintechFonts = new URLSearchParams(location.search).get("style") === "fintech-fonts";
 
   if (isNewProspect) {
     // No data for new prospect
@@ -817,7 +819,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex-1 bg-gray-50 p-6 overflow-auto">
+    <div className={`${isFintechFonts ? "fintech-fonts" : ""} flex-1 bg-gray-50 p-6 overflow-auto`}>
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div
@@ -1020,7 +1022,7 @@ export default function Dashboard() {
                             <TableCell className="text-sm py-2 text-gray-700">
                               {activity.type}
                             </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
+                            <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap font-monoid">
                               {normalizeFileTag(activity.file, counters)}
                             </TableCell>
                             <TableCell className="text-sm py-2 text-gray-600">
@@ -1324,7 +1326,7 @@ export default function Dashboard() {
                           }}
                         >
                           <TableCell className="py-2">
-                            <span className="text-sm font-medium text-gray-800">
+                            <span className="text-sm font-medium text-gray-800 font-monoid">
                               {shortenAfterDash(policy.policy)}
                             </span>
                           </TableCell>
@@ -1340,10 +1342,10 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {policy.endDate}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold font-monoid">
                             {policy.premiumDue}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold font-monoid">
                             {policy.premiumPaid}
                           </TableCell>
                         </TableRow>
@@ -1439,7 +1441,7 @@ export default function Dashboard() {
                             );
                           }}
                         >
-                          <TableCell className="text-sm font-medium py-2 text-gray-800">
+                          <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                             {shortenAfterDash(submission.id)}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
@@ -1672,7 +1674,7 @@ export default function Dashboard() {
                                   );
                                 }}
                               >
-                                <TableCell className="text-sm font-medium py-2 text-gray-800">
+                                <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                                   {claim.claimNumber}
                                 </TableCell>
                                 <TableCell className="py-2">
@@ -1681,16 +1683,16 @@ export default function Dashboard() {
                                 <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
                                   {claim.date}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.incurred}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.reserves}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.paid}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.recoveries}
                                 </TableCell>
                               </TableRow>
@@ -1805,7 +1807,7 @@ export default function Dashboard() {
                             );
                           }}
                         >
-                          <TableCell className="text-sm font-medium py-2 text-gray-800">
+                          <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                             {shortenAfterDash(submission.id)}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
