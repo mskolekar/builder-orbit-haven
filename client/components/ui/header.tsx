@@ -1,8 +1,17 @@
-import { useState } from 'react';
-import { Bell, Settings, User, LogOut, ChevronDown, MessageSquare, HelpCircle, Search } from 'lucide-react';
-import { Button } from './button';
-import { SearchBar } from './search-bar';
-import { Badge } from './badge';
+import { useState } from "react";
+import {
+  Bell,
+  Settings,
+  User,
+  LogOut,
+  ChevronDown,
+  MessageSquare,
+  HelpCircle,
+  Search,
+} from "lucide-react";
+import { Button } from "./button";
+import { SearchBar } from "./search-bar";
+import { Badge } from "./badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,12 +20,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './dropdown-menu';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from './popover';
+} from "./dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 export function Header() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -24,39 +29,40 @@ export function Header() {
   const notifications = [
     {
       id: 1,
-      title: 'Policy Renewal Due',
-      message: 'Auto policy A9876 renewal due in 7 days',
-      time: '2 hours ago',
-      unread: true
+      title: "Policy Renewal Due",
+      message: "Auto policy A9876 renewal due in 7 days",
+      time: "2 hours ago",
+      unread: true,
     },
     {
       id: 2,
-      title: 'Claim Update',
-      message: 'Claim C1122 has been approved for processing',
-      time: '4 hours ago',
-      unread: true
+      title: "Claim Update",
+      message: "Claim C1122 has been approved for processing",
+      time: "4 hours ago",
+      unread: true,
     },
     {
       id: 3,
-      title: 'Payment Received',
-      message: 'Premium payment of $150 has been processed',
-      time: '1 day ago',
-      unread: false
-    }
+      title: "Payment Received",
+      message: "Premium payment of $150 has been processed",
+      time: "1 day ago",
+      unread: false,
+    },
   ];
 
-  const unreadCount = notifications.filter(n => n.unread).length;
+  const unreadCount = notifications.filter((n) => n.unread).length;
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 shadow-sm">
-      <div className="flex items-center gap-4">
-        {/* Empty space for now */}
-      </div>
-      
+    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 shadow-sm font-header">
+      <div className="flex items-center gap-4">{/* Empty space for now */}</div>
+
       <div className="flex items-center gap-4">
         {/* Global Search - Moved next to bell icon */}
         <div className="relative">
-          <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Search
+            size={16}
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          />
           <input
             type="text"
             placeholder="Search..."
@@ -66,7 +72,11 @@ export function Header() {
         {/* Notifications */}
         <Popover open={notificationsOpen} onOpenChange={setNotificationsOpen}>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="sm" className="relative p-2 text-gray-600 hover:bg-gray-100">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative p-2 text-gray-600 hover:bg-gray-100"
+            >
               <Bell size={18} />
               {unreadCount > 0 && (
                 <Badge className="absolute -top-1 -right-1 h-5 w-5 text-xs bg-brand-red text-white rounded-full flex items-center justify-center">
@@ -78,21 +88,29 @@ export function Header() {
           <PopoverContent className="w-80 p-0" align="end">
             <div className="p-4 border-b">
               <h3 className="font-semibold">Notifications</h3>
-              <p className="text-sm text-gray-500">{unreadCount} unread notifications</p>
+              <p className="text-sm text-gray-500">
+                {unreadCount} unread notifications
+              </p>
             </div>
             <div className="max-h-80 overflow-y-auto">
               {notifications.map((notification) => (
-                <div 
-                  key={notification.id} 
+                <div
+                  key={notification.id}
                   className={`p-4 border-b hover:bg-gray-50 cursor-pointer ${
-                    notification.unread ? 'bg-blue-50' : ''
+                    notification.unread ? "bg-blue-50" : ""
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <p className="font-medium text-sm">{notification.title}</p>
-                      <p className="text-sm text-gray-600 mt-1">{notification.message}</p>
-                      <p className="text-xs text-gray-400 mt-2">{notification.time}</p>
+                      <p className="font-medium text-sm">
+                        {notification.title}
+                      </p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {notification.message}
+                      </p>
+                      <p className="text-xs text-gray-400 mt-2">
+                        {notification.time}
+                      </p>
                     </div>
                     {notification.unread && (
                       <div className="w-2 h-2 bg-brand-blue rounded-full"></div>
@@ -108,21 +126,30 @@ export function Header() {
             </div>
           </PopoverContent>
         </Popover>
-        
+
         {/* Settings */}
-        <Button variant="ghost" size="sm" className="p-2 text-gray-600 hover:bg-gray-100">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="p-2 text-gray-600 hover:bg-gray-100"
+        >
           <Settings size={18} />
         </Button>
 
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-9 px-3 text-gray-600 hover:bg-gray-100">
+            <Button
+              variant="ghost"
+              className="h-9 px-3 text-gray-600 hover:bg-gray-100"
+            >
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-[#0054A6] to-[#003d7a] rounded-full flex items-center justify-center text-white text-sm font-semibold">
                   J
                 </div>
-                <span className="hidden lg:block text-sm font-medium">UW John</span>
+                <span className="hidden lg:block text-sm font-medium">
+                  UW John
+                </span>
                 <ChevronDown size={14} />
               </div>
             </Button>

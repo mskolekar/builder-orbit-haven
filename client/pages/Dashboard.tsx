@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -749,11 +749,16 @@ export default function Dashboard() {
       claimsStatusFilter.includes(claim.status),
   );
 
+  const TILE_TOTAL = 10;
+
   const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
   const isNewProspect = profileId === "josh-fernandes";
   const hideFinancial = isJohn || isShawn;
+  const location = useLocation();
+  const isFintechFonts =
+    new URLSearchParams(location.search).get("style") === "fintech-fonts";
 
   if (isNewProspect) {
     // No data for new prospect
@@ -817,7 +822,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex-1 bg-gray-50 p-6 overflow-auto">
+    <div
+      className={`${isFintechFonts ? "fintech-fonts" : ""} flex-1 bg-gray-50 p-6 overflow-auto`}
+    >
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div
@@ -863,7 +870,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Total Incurred (This Claimant)
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $11,800.00
                     </div>
                     <Progress value={21} className="h-2 mt-2" />
@@ -875,7 +882,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Outstanding Reserves
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $7,250.00
                     </div>
                     <Progress value={60} className="h-2 mt-2" />
@@ -887,7 +894,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Amount Paid
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $5,200.00
                     </div>
                     <Progress value={40} className="h-2 mt-2" />
@@ -902,7 +909,7 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Amount Paid
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
                       $8,460
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
@@ -914,7 +921,9 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Total Due
                     </div>
-                    <div className="text-xl font-bold text-gray-800">$275</div>
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
+                      $275
+                    </div>
                     <div className="text-xs text-gray-500 mt-1">
                       <p>Current Premium Due (YTD)</p>
                     </div>
@@ -924,7 +933,9 @@ export default function Dashboard() {
                     <div className="text-xs text-gray-600 mb-1 font-medium">
                       Outstanding Balance
                     </div>
-                    <div className="text-xl font-bold text-gray-800">$190</div>
+                    <div className="text-xl font-bold text-gray-800 font-monoid">
+                      $190
+                    </div>
                     <div className="text-xs text-gray-500 mt-1">
                       <p>Outstanding Balance (after credits)</p>
                     </div>
@@ -957,9 +968,15 @@ export default function Dashboard() {
                   <CardTitle className="text-base text-gray-700">
                     Activity Timeline
                   </CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                    {selectedActivities.length}
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
+                    {Math.min(selectedActivities.length, 4)}
                   </Badge>
+                  <span className="text-[11px] md:text-xs text-gray-500">
+                    of{" "}
+                    {Math.min(selectedActivities.length, 4) === 0
+                      ? 0
+                      : TILE_TOTAL}
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Button
@@ -1020,7 +1037,7 @@ export default function Dashboard() {
                             <TableCell className="text-sm py-2 text-gray-700">
                               {activity.type}
                             </TableCell>
-                            <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
+                            <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap font-monoid">
                               {normalizeFileTag(activity.file, counters)}
                             </TableCell>
                             <TableCell className="text-sm py-2 text-gray-600">
@@ -1052,9 +1069,12 @@ export default function Dashboard() {
                   <CardTitle className="text-base text-gray-700">
                     Diaries
                   </CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                     {openDiaries.length}
                   </Badge>
+                  <span className="text-[11px] md:text-xs text-gray-500">
+                    of {openDiaries.length === 0 ? 0 : TILE_TOTAL}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -1238,9 +1258,12 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Policies
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredPolicies.length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of {filteredPolicies.length === 0 ? 0 : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1324,7 +1347,7 @@ export default function Dashboard() {
                           }}
                         >
                           <TableCell className="py-2">
-                            <span className="text-sm font-medium text-gray-800">
+                            <span className="text-sm font-medium text-gray-800 font-monoid">
                               {shortenAfterDash(policy.policy)}
                             </span>
                           </TableCell>
@@ -1340,10 +1363,10 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {policy.endDate}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold font-monoid">
                             {policy.premiumDue}
                           </TableCell>
-                          <TableCell className="text-sm py-2 text-gray-700 font-semibold">
+                          <TableCell className="text-sm py-2 text-gray-700 font-semibold font-monoid">
                             {policy.premiumPaid}
                           </TableCell>
                         </TableRow>
@@ -1373,9 +1396,12 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Submissions
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredSubmissions.length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1439,7 +1465,7 @@ export default function Dashboard() {
                             );
                           }}
                         >
-                          <TableCell className="text-sm font-medium py-2 text-gray-800">
+                          <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                             {shortenAfterDash(submission.id)}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
@@ -1478,13 +1504,23 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       {isShawn ? "Claims & Incidents" : "Claims"}
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {isShawn
                         ? 4
                         : filteredClaims.filter(
                             (c) => c.status === "Open" || c.status === "Reopen",
                           ).length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of{" "}
+                      {(isShawn
+                        ? 4
+                        : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length) === 0
+                        ? 0
+                        : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1672,7 +1708,7 @@ export default function Dashboard() {
                                   );
                                 }}
                               >
-                                <TableCell className="text-sm font-medium py-2 text-gray-800">
+                                <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                                   {claim.claimNumber}
                                 </TableCell>
                                 <TableCell className="py-2">
@@ -1681,16 +1717,16 @@ export default function Dashboard() {
                                 <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
                                   {claim.date}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.incurred}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.reserves}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.paid}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700">
+                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                   {claim.recoveries}
                                 </TableCell>
                               </TableRow>
@@ -1729,9 +1765,12 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Submissions
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {filteredSubmissions.length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">
+                      of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1805,7 +1844,7 @@ export default function Dashboard() {
                             );
                           }}
                         >
-                          <TableCell className="text-sm font-medium py-2 text-gray-800">
+                          <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                             {shortenAfterDash(submission.id)}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">

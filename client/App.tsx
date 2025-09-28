@@ -102,8 +102,13 @@ function AppContent() {
     );
   }
 
+  const isFintechFonts =
+    new URLSearchParams(location.search).get("style") === "fintech-fonts";
+
   return (
-    <div className="h-screen bg-gray-50 flex">
+    <div
+      className={`h-screen bg-gray-50 flex ${isFintechFonts ? "fintech-fonts" : ""}`}
+    >
       {/* OneShield Sidebar - Starts from top of page */}
       <Sidebar
         isCollapsed={isOmsSidebarCollapsed}
