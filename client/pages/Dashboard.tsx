@@ -749,6 +749,8 @@ export default function Dashboard() {
       claimsStatusFilter.includes(claim.status),
   );
 
+  const TILE_TOTAL = 10;
+
   const { profileId } = useParams();
   const isShawn = profileId === "shawn-elkins";
   const isJohn = profileId === "john-wills";
@@ -959,9 +961,10 @@ export default function Dashboard() {
                   <CardTitle className="text-base text-gray-700">
                     Activity Timeline
                   </CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                    {selectedActivities.length} entries
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
+                    {Math.min(selectedActivities.length, 4)}
                   </Badge>
+                  <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
                 </div>
                 <div className="flex items-center">
                   <Button
@@ -1054,9 +1057,10 @@ export default function Dashboard() {
                   <CardTitle className="text-base text-gray-700">
                     Diaries
                   </CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                    {openDiaries.length} open
+                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
+                    {openDiaries.length}
                   </Badge>
+                  <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -1240,9 +1244,10 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Policies
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                      {filteredPolicies.length} policies
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
+                      {filteredPolicies.length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1375,9 +1380,10 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Submissions
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                      {filteredSubmissions.length} submissions
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
+                      {filteredSubmissions.length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1480,13 +1486,14 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       {isShawn ? "Claims & Incidents" : "Claims"}
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
                       {isShawn
                         ? 4
                         : filteredClaims.filter(
                             (c) => c.status === "Open" || c.status === "Reopen",
-                          ).length} {isShawn ? "items" : "open"}
+                          ).length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -1731,9 +1738,10 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Submissions
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-blue-100 text-blue-700 border-blue-200">
-                      {filteredSubmissions.length} submissions
+                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
+                      {filteredSubmissions.length}
                     </Badge>
+                    <span className="text-[11px] md:text-xs text-gray-500">of {TILE_TOTAL}</span>
                   </div>
                   <div className="flex items-center">
                     <Button
