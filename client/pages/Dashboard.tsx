@@ -758,7 +758,12 @@ export default function Dashboard() {
   const hideFinancial = isJohn || isShawn;
   const location = useLocation();
   const styleParam = new URLSearchParams(location.search).get("style");
-  const styleClass = styleParam === "fintech-fonts" ? "fintech-fonts" : styleParam === "modern-enterprise" ? "modern-enterprise" : "";
+  const styleClass =
+    styleParam === "fintech-fonts"
+      ? "fintech-fonts"
+      : styleParam === "modern-enterprise"
+        ? "modern-enterprise"
+        : "";
 
   if (isNewProspect) {
     // No data for new prospect

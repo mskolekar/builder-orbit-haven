@@ -63,7 +63,8 @@ export function PersonDetailsClaimant() {
                       size="sm"
                       className="absolute top-1 right-1 h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
                       onClick={() =>
-                        (window.location.href = "/profile?section=personal-info")
+                        (window.location.href =
+                          "/profile?section=personal-info")
                       }
                       aria-label="Edit Basic Info"
                       title="Edit Basic Info"
@@ -85,7 +86,10 @@ export function PersonDetailsClaimant() {
                         <div>
                           <span className="text-xs text-gray-500">SSN#</span>
                           <p className="text-sm font-medium">
-                            <SensitiveText value="123-45-6789" masked="•••-••-••••" />
+                            <SensitiveText
+                              value="123-45-6789"
+                              masked="•••-••-••••"
+                            />
                           </p>
                         </div>
                       </div>

@@ -103,7 +103,12 @@ function AppContent() {
   }
 
   const styleParam = new URLSearchParams(location.search).get("style");
-  const styleClass = styleParam === "fintech-fonts" ? "fintech-fonts" : styleParam === "modern-enterprise" ? "modern-enterprise" : "";
+  const styleClass =
+    styleParam === "fintech-fonts"
+      ? "fintech-fonts"
+      : styleParam === "modern-enterprise"
+        ? "modern-enterprise"
+        : "";
 
   return (
     <div className={`h-screen bg-gray-50 flex ${styleClass}`}>
