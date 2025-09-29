@@ -190,3 +190,52 @@
     "Liberation Mono", "Courier New", monospace;
   font-variant-numeric: tabular-nums;
 }
+
+/* Modern Enterprise Fonts sample styles */
+.modern-enterprise h1,
+.modern-enterprise h2,
+.modern-enterprise h3,
+.modern-enterprise th,
+.modern-enterprise .font-header,
+.modern-enterprise nav,
+.modern-enterprise .menu {
+  font-family:
+    "Montserrat",
+    "Source Sans Pro",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-weight: 600;
+}
+
+.modern-enterprise tbody,
+.modern-enterprise .font-data {
+  font-family:
+    "Inter",
+    "Source Sans Pro",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-weight: 400;
+}
+
+.modern-enterprise .font-monoid,
+.modern-enterprise code,
+.modern-enterprise .mono,
+.modern-enterprise .id,
+.modern-enterprise .number {
+  font-family:
+    "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
+}
