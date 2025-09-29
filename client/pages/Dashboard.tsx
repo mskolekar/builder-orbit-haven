@@ -757,8 +757,13 @@ export default function Dashboard() {
   const isNewProspect = profileId === "josh-fernandes";
   const hideFinancial = isJohn || isShawn;
   const location = useLocation();
-  const isFintechFonts =
-    new URLSearchParams(location.search).get("style") === "fintech-fonts";
+  const styleParam = new URLSearchParams(location.search).get("style");
+  const styleClass =
+    styleParam === "fintech-fonts"
+      ? "fintech-fonts"
+      : styleParam === "modern-enterprise"
+        ? "modern-enterprise"
+        : "";
 
   if (isNewProspect) {
     // No data for new prospect
@@ -822,9 +827,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div
-      className={`${isFintechFonts ? "fintech-fonts" : ""} flex-1 bg-gray-50 p-6 overflow-auto`}
-    >
+    <div className={`${styleClass} flex-1 bg-gray-50 p-6 overflow-auto`}>
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Row 1: Financial Information - Horizontal Strip */}
         <div
