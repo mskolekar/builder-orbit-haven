@@ -78,64 +78,57 @@ export function PersonDetailsSection() {
 
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 <div className="col-span-2 md:col-span-4 lg:col-span-3">
-                  <div className="flex items-center gap-1 mb-1">
-                    <div className="text-xs font-medium text-gray-600">
-                      Basic Info
-                    </div>
+                  <div className="relative rounded-md border border-gray-200 bg-gray-50 p-2">
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                      className="absolute top-1 right-1 h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
                       onClick={() =>
-                        (window.location.href =
-                          "/profile?section=personal-info")
+                        (window.location.href = "/profile?section=personal-info")
                       }
                       aria-label="Edit Basic Info"
                       title="Edit Basic Info"
                     >
                       <Edit3 size={12} />
                     </Button>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={14} className="text-gray-400" />
-                      <div>
-                        <span className="text-xs text-gray-500">DOB</span>
-                        <p className="text-sm font-medium">
-                          <SensitiveText value="1990" />
-                        </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      <div className="flex items-center gap-2">
+                        <Calendar size={14} className="text-gray-400" />
+                        <div>
+                          <span className="text-xs text-gray-500">DOB</span>
+                          <p className="text-sm font-medium">
+                            <SensitiveText value="1990" />
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users size={14} className="text-gray-400" />
-                      <div>
-                        <span className="text-xs text-gray-500">Gender</span>
-                        <p className="text-sm font-medium">
-                          {customerData.gender}
-                        </p>
+                      <div className="flex items-center gap-2">
+                        <Users size={14} className="text-gray-400" />
+                        <div>
+                          <span className="text-xs text-gray-500">Gender</span>
+                          <p className="text-sm font-medium">
+                            {customerData.gender}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <FileText size={14} className="text-gray-400" />
-                      <div>
-                        <span className="text-xs text-gray-500">SSN#</span>
-                        <p className="text-sm font-medium">
-                          <SensitiveText value="123-45-6789" masked="•••-••-••••" />
-                        </p>
+                      <div className="flex items-center gap-2">
+                        <FileText size={14} className="text-gray-400" />
+                        <div>
+                          <span className="text-xs text-gray-500">SSN#</span>
+                          <p className="text-sm font-medium">
+                            <SensitiveText value="123-45-6789" masked="•••-••-••••" />
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="col-span-2 md:col-span-4 lg:col-span-3">
-                  <div className="flex items-center gap-1 mb-1">
-                    <div className="text-xs font-medium text-gray-600">
-                      Contact Info
-                    </div>
+                  <div className="relative rounded-md border border-gray-200 bg-gray-50 p-2">
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
+                      className="absolute top-1 right-1 h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
                       onClick={() =>
                         (window.location.href = "/contact-delivery?tab=contact")
                       }
@@ -144,24 +137,24 @@ export function PersonDetailsSection() {
                     >
                       <Edit3 size={12} />
                     </Button>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="flex items-center gap-2">
-                      <Phone size={14} className="text-gray-400" />
-                      <div className="min-w-0">
-                        <span className="text-xs text-gray-500">Phone</span>
-                        <p className="text-sm font-medium whitespace-nowrap">
-                          {customerData.phone}
-                        </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-2">
+                        <Phone size={14} className="text-gray-400" />
+                        <div className="min-w-0">
+                          <span className="text-xs text-gray-500">Phone</span>
+                          <p className="text-sm font-medium whitespace-nowrap">
+                            {customerData.phone}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Mail size={14} className="text-gray-400" />
-                      <div>
-                        <span className="text-xs text-gray-500">Email</span>
-                        <p className="text-sm font-medium">
-                          {customerData.email}
-                        </p>
+                      <div className="flex items-center gap-2">
+                        <Mail size={14} className="text-gray-400" />
+                        <div>
+                          <span className="text-xs text-gray-500">Email</span>
+                          <p className="text-sm font-medium">
+                            {customerData.email}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
