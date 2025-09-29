@@ -57,7 +57,7 @@ export function PersonDetailsUnderwriter() {
 
               <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 <div className="col-span-2 md:col-span-4 lg:col-span-3">
-                  <div className="relative rounded-md border border-gray-200 bg-gray-50 p-2">
+                  <div className="relative rounded-md bg-gray-50 p-2">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -103,7 +103,7 @@ export function PersonDetailsUnderwriter() {
                 </div>
 
                 <div className="col-span-2 md:col-span-4 lg:col-span-3">
-                  <div className="relative rounded-md border border-gray-200 bg-gray-50 p-2">
+                  <div className="relative rounded-md bg-gray-50 p-2">
                     <Button
                       variant="ghost"
                       size="sm"
