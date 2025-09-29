@@ -102,13 +102,11 @@ function AppContent() {
     );
   }
 
-  const isFintechFonts =
-    new URLSearchParams(location.search).get("style") === "fintech-fonts";
+  const styleParam = new URLSearchParams(location.search).get("style");
+  const styleClass = styleParam === "fintech-fonts" ? "fintech-fonts" : styleParam === "modern-enterprise" ? "modern-enterprise" : "";
 
   return (
-    <div
-      className={`h-screen bg-gray-50 flex ${isFintechFonts ? "fintech-fonts" : ""}`}
-    >
+    <div className={`h-screen bg-gray-50 flex ${styleClass}`}>
       {/* OneShield Sidebar - Starts from top of page */}
       <Sidebar
         isCollapsed={isOmsSidebarCollapsed}
