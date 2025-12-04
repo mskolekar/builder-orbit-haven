@@ -303,8 +303,8 @@ export default function Submissions() {
           <div className="pb-6 border-b border-gray-200">
             <h3 className="text-xs font-semibold text-gray-900 mb-4 uppercase tracking-wide">Internal Status</h3>
             <div className="grid grid-cols-2 gap-6">
-              <div className="flex items-center gap-4">
-                <Label htmlFor="internal-status" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="internal-status" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Internal Status
                 </Label>
                 <Select>
@@ -319,52 +319,8 @@ export default function Submissions() {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="new-renewal-flag" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  New/Renewal Flag
-                </Label>
-                <Input 
-                  id="new-renewal-flag" 
-                  placeholder="New" 
-                  className="bg-yellow-50 border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="prior-policy-number-status" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Prior Policy Number
-                </Label>
-                <Input 
-                  id="prior-policy-number-status" 
-                  placeholder="Enter policy number" 
-                  className="bg-white border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="has-treaty-exceptions-flag" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Has Treaty Exceptions
-                </Label>
-                <Input 
-                  id="has-treaty-exceptions-flag" 
-                  placeholder="Yes" 
-                  className="bg-white border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="has-facultative-reinsurance-flag" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Has Facultative Reinsurance
-                </Label>
-                <Input 
-                  id="has-facultative-reinsurance-flag" 
-                  placeholder="Yes" 
-                  className="bg-white border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="carrier" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="carrier" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Carrier
                 </Label>
                 <Select>
@@ -378,24 +334,68 @@ export default function Submissions() {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="net-limit" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="new-renewal-flag" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  New/Renewal Flag
+                </Label>
+                <Input
+                  id="new-renewal-flag"
+                  placeholder="New"
+                  className="bg-yellow-50 border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="net-limit" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Net Limit
                 </Label>
-                <Input 
-                  id="net-limit" 
-                  placeholder="0" 
+                <Input
+                  id="net-limit"
+                  placeholder="0"
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="net-premium" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="prior-policy-number-status" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Prior Policy Number
+                </Label>
+                <Input
+                  id="prior-policy-number-status"
+                  placeholder="Enter policy number"
+                  className="bg-white border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="net-premium" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Net Premium
                 </Label>
-                <Input 
-                  id="net-premium" 
-                  placeholder="0.000" 
+                <Input
+                  id="net-premium"
+                  placeholder="0.000"
+                  className="bg-white border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="has-treaty-exceptions-flag" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Has Treaty Exceptions
+                </Label>
+                <Input
+                  id="has-treaty-exceptions-flag"
+                  placeholder="Yes"
+                  className="bg-white border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="has-facultative-reinsurance-flag" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Has Facultative Reinsurance
+                </Label>
+                <Input
+                  id="has-facultative-reinsurance-flag"
+                  placeholder="Yes"
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
