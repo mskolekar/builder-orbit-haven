@@ -141,7 +141,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-200 text-gray-700 rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-blue-50 border border-gray-200 text-gray-700 rounded-lg shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
