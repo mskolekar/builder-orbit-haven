@@ -19,8 +19,9 @@ import {
   TrendingUp,
   Search,
   ChevronLeft,
+  ChevronDown,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 interface SubItem {
