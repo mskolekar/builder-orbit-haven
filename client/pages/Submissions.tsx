@@ -302,7 +302,7 @@ export default function Submissions() {
           {/* Section 3: Internal Status */}
           <div className="pb-6 border-b border-gray-200">
             <h3 className="text-xs font-semibold text-gray-900 mb-4 uppercase tracking-wide">Internal Status</h3>
-            <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-6">
               <div className="flex items-center gap-4">
                 <Label htmlFor="internal-status" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
                   Internal Status
