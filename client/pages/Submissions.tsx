@@ -21,42 +21,75 @@ export default function Submissions() {
           {/* Section 1: Submission Information */}
           <div className="pb-6 border-b border-gray-200">
             <h3 className="text-xs font-semibold text-gray-900 mb-4 uppercase tracking-wide">Submission</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-4">
-                <Label htmlFor="insured" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="insured" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Insured
                 </Label>
-                <Input 
-                  id="insured" 
-                  placeholder="DMAround_21421" 
+                <Input
+                  id="insured"
+                  placeholder="DMAround_21421"
                   className="bg-yellow-50 border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="issued" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="broker" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Broker
+                </Label>
+                <Input
+                  id="broker"
+                  placeholder="Adamson E. Brokerage of Washington, Seattle, WA, 98101"
+                  className="bg-yellow-50 border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="issued" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Issued
                 </Label>
-                <Input 
-                  id="issued" 
-                  placeholder="QAA" 
+                <Input
+                  id="issued"
+                  placeholder="QAA"
                   className="bg-yellow-50 border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="project-identifier" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Project Identifier
+              <div className="flex items-center gap-3">
+                <Label htmlFor="broker-contact" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Broker Contact
                 </Label>
-                <Input 
-                  id="project-identifier" 
-                  placeholder="QAA" 
+                <Input
+                  id="broker-contact"
+                  placeholder="Christian, Emily"
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="product" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="project-identifier" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Project Identifier
+                </Label>
+                <Input
+                  id="project-identifier"
+                  placeholder="QAA"
+                  className="bg-white border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="broker-contact-lookup" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Broker Contact Lookup
+                </Label>
+                <Input
+                  id="broker-contact-lookup"
+                  placeholder="Search contact"
+                  className="bg-white border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="product" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Product
                 </Label>
                 <Select>
@@ -71,82 +104,8 @@ export default function Submissions() {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="proposed-eff-date" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Proposed Eff Date
-                </Label>
-                <Input 
-                  id="proposed-eff-date" 
-                  type="date" 
-                  className="bg-yellow-50 border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="underwriter" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Underwriter
-                </Label>
-                <Select>
-                  <SelectTrigger id="underwriter" className="bg-white border-gray-300 flex-1">
-                    <SelectValue placeholder="Select underwriter" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="uw1">Underwriter 1</SelectItem>
-                    <SelectItem value="uw2">Underwriter 2</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="renewal-underwriter" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Renewal Underwriter
-                </Label>
-                <Select>
-                  <SelectTrigger id="renewal-underwriter" className="bg-white border-gray-300 flex-1">
-                    <SelectValue placeholder="Select renewal underwriter" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="uw1">Underwriter 1</SelectItem>
-                    <SelectItem value="uw2">Underwriter 2</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="broker" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Broker
-                </Label>
-                <Input 
-                  id="broker" 
-                  placeholder="Adamson E. Brokerage of Washington, Seattle, WA, 98101" 
-                  className="bg-yellow-50 border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="broker-contact" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Broker Contact
-                </Label>
-                <Input 
-                  id="broker-contact" 
-                  placeholder="Christian, Emily" 
-                  className="bg-white border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="broker-contact-lookup" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Broker Contact Lookup
-                </Label>
-                <Input 
-                  id="broker-contact-lookup" 
-                  placeholder="Search contact" 
-                  className="bg-white border-gray-300 flex-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Label htmlFor="coverage" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="coverage" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Coverage
                 </Label>
                 <Select>
@@ -161,26 +120,67 @@ export default function Submissions() {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="proposed-cup-date" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
-                  Proposed Cup Date
+              <div className="flex items-center gap-3">
+                <Label htmlFor="proposed-eff-date" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Proposed Eff Date
                 </Label>
-                <Input 
-                  id="proposed-cup-date" 
-                  type="date" 
+                <Input
+                  id="proposed-eff-date"
+                  type="date"
                   className="bg-yellow-50 border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="underwriter-assistant" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="proposed-cup-date" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Proposed Cup Date
+                </Label>
+                <Input
+                  id="proposed-cup-date"
+                  type="date"
+                  className="bg-yellow-50 border-gray-300 flex-1"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="underwriter" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Underwriter
+                </Label>
+                <Select>
+                  <SelectTrigger id="underwriter" className="bg-white border-gray-300 flex-1">
+                    <SelectValue placeholder="Select underwriter" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="uw1">Underwriter 1</SelectItem>
+                    <SelectItem value="uw2">Underwriter 2</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="underwriter-assistant" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Underwriter Assistant
                 </Label>
-                <Input 
-                  id="underwriter-assistant" 
-                  placeholder="Enter assistant name" 
+                <Input
+                  id="underwriter-assistant"
+                  placeholder="Enter assistant name"
                   className="bg-white border-gray-300 flex-1"
                 />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Label htmlFor="renewal-underwriter" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
+                  Renewal Underwriter
+                </Label>
+                <Select>
+                  <SelectTrigger id="renewal-underwriter" className="bg-white border-gray-300 flex-1">
+                    <SelectValue placeholder="Select renewal underwriter" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="uw1">Underwriter 1</SelectItem>
+                    <SelectItem value="uw2">Underwriter 2</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
