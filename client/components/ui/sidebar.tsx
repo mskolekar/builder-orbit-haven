@@ -221,36 +221,51 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       }
                     }}
                     className={cn(
-                      "flex items-center rounded-lg text-sm transition-colors w-full font-header",
+                      "flex items-center justify-between rounded-lg text-sm transition-colors w-full font-header",
                       isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
                         ? "bg-[#0054A6] text-white"
-                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+                        : "text-gray-600 hover:bg-gray-400 hover:text-[#0054A6]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
-                    <Icon size={16} />
-                    {!isCollapsed && item.label}
+                    <span className="flex items-center gap-3">
+                      <Icon size={16} strokeWidth={1.5} />
+                      {!isCollapsed && item.label}
+                    </span>
+                    {!isCollapsed && hasSubItems && (
+                      <ChevronDown
+                        size={16}
+                        strokeWidth={1.5}
+                        className={cn(
+                          "transition-transform",
+                          isExpanded ? "rotate-0" : "-rotate-90"
+                        )}
+                      />
+                    )}
                   </RouterLink>
 
-                  {hasSubItems && isExpanded && (
-                    <ul className="mt-1 ml-6 space-y-1">
-                      {item.subItems!.map((subItem) => (
-                        <li key={subItem.path}>
-                          <RouterLink
-                            to={subItem.path}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4 font-header",
-                              isActive(subItem.path)
-                                ? "bg-gray-100 text-gray-900 border-gray-300"
-                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300",
-                            )}
-                          >
-                            {subItem.label}
-                          </RouterLink>
-                        </li>
-                      ))}
+                  {hasSubItems && isExpanded && !isCollapsed && (
+                    <ul className="mt-1 space-y-0.5">
+                      {item.subItems!.map((subItem) => {
+                        const isSubActive = isActive(subItem.path);
+                        return (
+                          <li key={subItem.path}>
+                            <RouterLink
+                              to={subItem.path}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "flex items-center px-3 py-2 text-sm rounded transition-colors border-l-4 ml-6 font-header",
+                                isSubActive
+                                  ? "bg-brand-light-gray text-[#0054A6] border-l-[#0054A6]"
+                                  : "text-gray-600 border-l-transparent hover:bg-brand-light-gray hover:text-[#0054A6]",
+                              )}
+                            >
+                              {subItem.label}
+                            </RouterLink>
+                          </li>
+                        );
+                      })}
                     </ul>
                   )}
                 </li>
