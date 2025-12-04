@@ -405,9 +405,9 @@ export default function Submissions() {
           {/* Section 4: Risk Information */}
           <div className="pb-6 border-b border-gray-200">
             <h3 className="text-xs font-semibold text-gray-900 mb-4 uppercase tracking-wide">Risk State</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-4">
-                <Label htmlFor="risk-state" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="risk-state" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Risk State
                 </Label>
                 <Select>
@@ -423,13 +423,13 @@ export default function Submissions() {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="secondary-iso-code" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="secondary-iso-code" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Secondary ISO Code
                 </Label>
-                <Input 
-                  id="secondary-iso-code" 
-                  placeholder="Enter ISO code" 
+                <Input
+                  id="secondary-iso-code"
+                  placeholder="Enter ISO code"
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
