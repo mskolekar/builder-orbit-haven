@@ -439,9 +439,9 @@ export default function Submissions() {
           {/* Section 5: Status & Alerts */}
           <div className="pb-6 border-b border-gray-200">
             <h3 className="text-xs font-semibold text-gray-900 mb-4 uppercase tracking-wide">Status</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-4">
-                <Label htmlFor="status" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="status" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Status
                 </Label>
                 <Select>
@@ -457,8 +457,8 @@ export default function Submissions() {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="treaty-applies" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="treaty-applies" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Treaty Applies
                 </Label>
                 <Select>
@@ -472,46 +472,46 @@ export default function Submissions() {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="treaty-number" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="treaty-number" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Treaty Number
                 </Label>
-                <Input 
-                  id="treaty-number" 
-                  placeholder="12~45/2025 Casualty..." 
+                <Input
+                  id="treaty-number"
+                  placeholder="12~45/2025 Casualty..."
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="treaty-exceptions" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="treaty-exceptions" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Treaty Exceptions
                 </Label>
-                <Input 
-                  id="treaty-exceptions" 
-                  placeholder="Enter exceptions" 
+                <Input
+                  id="treaty-exceptions"
+                  placeholder="Enter exceptions"
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="treaty-exception-reason" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="treaty-exception-reason" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Treaty Exception Reason
                 </Label>
-                <Input 
-                  id="treaty-exception-reason" 
-                  placeholder="Type here..." 
+                <Input
+                  id="treaty-exception-reason"
+                  placeholder="Type here..."
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="servicing-company" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="servicing-company" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Servicing Company
                 </Label>
-                <Input 
-                  id="servicing-company" 
-                  placeholder="Data" 
+                <Input
+                  id="servicing-company"
+                  placeholder="Data"
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
