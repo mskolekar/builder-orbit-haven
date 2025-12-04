@@ -225,7 +225,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
                         ? "bg-[#0054A6] text-white"
-                        : "text-gray-600 hover:bg-gray-400 hover:text-[#0054A6]",
+                        : "text-gray-600 hover:bg-gray-300 hover:text-[#0054A6]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
