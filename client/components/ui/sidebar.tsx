@@ -19,8 +19,9 @@ import {
   TrendingUp,
   Search,
   ChevronLeft,
+  ChevronDown,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 interface SubItem {
@@ -77,16 +78,40 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>(() =>
-    location.pathname.startsWith("/overview") ? ["/overview"] : [],
-  );
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  // Update expanded items whenever location changes
+  useEffect(() => {
+    // Determine which items should be expanded based on current location
+    const newExpandedItems: string[] = [];
+
+    for (const item of sidebarItems) {
+      if (item.subItems && item.subItems.length > 0) {
+        // Check if any subitem matches current location
+        const isAnySubItemActive = item.subItems.some(
+          (subItem) =>
+            location.pathname === subItem.path ||
+            location.pathname + location.search === subItem.path
+        );
+
+        if (isAnySubItemActive || isMainPageActive(item)) {
+          newExpandedItems.push(item.path);
+        }
+      }
+    }
+
+    setExpandedItems(newExpandedItems);
+  }, [location]);
 
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(itemPath)
-        ? prev.filter((path) => path !== itemPath)
-        : [...prev, itemPath],
-    );
+    setExpandedItems((prev) => {
+      // If expanding, close all other items with submenus
+      if (!prev.includes(itemPath)) {
+        return [itemPath];
+      }
+      // If collapsing, just remove this item
+      return prev.filter((path) => path !== itemPath);
+    });
   };
 
   const isActive = (path: string) => {
@@ -116,7 +141,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-200 text-gray-700 rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-blue-50 border border-gray-200 text-gray-700 rounded-lg shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -132,7 +157,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={cn(
-          "h-screen bg-white border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
+          "h-screen bg-blue-50 border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
           "lg:translate-x-0 lg:static lg:z-auto",
           isCollapsed ? "w-16" : "w-64",
           isOpen
@@ -196,36 +221,51 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       }
                     }}
                     className={cn(
-                      "flex items-center rounded-lg text-sm transition-colors w-full font-header",
+                      "flex items-center justify-between rounded-lg text-sm transition-colors w-full font-header",
                       isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
                       isMainActive && !location.search
                         ? "bg-[#0054A6] text-white"
-                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+                        : "text-gray-600 hover:bg-gray-300 hover:text-[#0054A6]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
-                    <Icon size={16} />
-                    {!isCollapsed && item.label}
+                    <span className="flex items-center gap-3">
+                      <Icon size={16} strokeWidth={1.5} />
+                      {!isCollapsed && item.label}
+                    </span>
+                    {!isCollapsed && hasSubItems && (
+                      <ChevronDown
+                        size={16}
+                        strokeWidth={1.5}
+                        className={cn(
+                          "transition-transform",
+                          isExpanded ? "rotate-0" : "-rotate-90"
+                        )}
+                      />
+                    )}
                   </RouterLink>
 
-                  {hasSubItems && isExpanded && (
-                    <ul className="mt-1 ml-6 space-y-1">
-                      {item.subItems!.map((subItem) => (
-                        <li key={subItem.path}>
-                          <RouterLink
-                            to={subItem.path}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4 font-header",
-                              isActive(subItem.path)
-                                ? "bg-gray-100 text-gray-900 border-gray-300"
-                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300",
-                            )}
-                          >
-                            {subItem.label}
-                          </RouterLink>
-                        </li>
-                      ))}
+                  {hasSubItems && isExpanded && !isCollapsed && (
+                    <ul className="mt-1 space-y-0.5">
+                      {item.subItems!.map((subItem) => {
+                        const isSubActive = isActive(subItem.path);
+                        return (
+                          <li key={subItem.path}>
+                            <RouterLink
+                              to={subItem.path}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "flex items-center px-3 py-2 text-sm rounded transition-colors border-l-4 ml-6 font-header",
+                                isSubActive
+                                  ? "bg-brand-light-gray text-[#0054A6] border-l-[#0054A6]"
+                                  : "text-gray-600 border-l-transparent hover:bg-brand-light-gray hover:text-[#0054A6]",
+                              )}
+                            >
+                              {subItem.label}
+                            </RouterLink>
+                          </li>
+                        );
+                      })}
                     </ul>
                   )}
                 </li>
