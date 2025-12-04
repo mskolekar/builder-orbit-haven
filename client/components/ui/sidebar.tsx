@@ -78,16 +78,40 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>(() =>
-    location.pathname.startsWith("/overview") ? ["/overview"] : [],
-  );
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  // Update expanded items whenever location changes
+  useEffect(() => {
+    // Determine which items should be expanded based on current location
+    const newExpandedItems: string[] = [];
+
+    for (const item of sidebarItems) {
+      if (item.subItems && item.subItems.length > 0) {
+        // Check if any subitem matches current location
+        const isAnySubItemActive = item.subItems.some(
+          (subItem) =>
+            location.pathname === subItem.path ||
+            location.pathname + location.search === subItem.path
+        );
+
+        if (isAnySubItemActive || isMainPageActive(item)) {
+          newExpandedItems.push(item.path);
+        }
+      }
+    }
+
+    setExpandedItems(newExpandedItems);
+  }, [location]);
 
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(itemPath)
-        ? prev.filter((path) => path !== itemPath)
-        : [...prev, itemPath],
-    );
+    setExpandedItems((prev) => {
+      // If expanding, close all other items with submenus
+      if (!prev.includes(itemPath)) {
+        return [itemPath];
+      }
+      // If collapsing, just remove this item
+      return prev.filter((path) => path !== itemPath);
+    });
   };
 
   const isActive = (path: string) => {
