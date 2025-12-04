@@ -428,15 +428,7 @@ function AppContent() {
                   />
                 }
               />
-              <Route
-                path="/submissions"
-                element={
-                  <PlaceholderPage
-                    title="Submissions"
-                    description="Manage insurance submissions."
-                  />
-                }
-              />
+              <Route path="/submissions" element={<Submissions />} />
               <Route
                 path="/policies"
                 element={
