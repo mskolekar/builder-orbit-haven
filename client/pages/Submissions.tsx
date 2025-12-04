@@ -521,29 +521,29 @@ export default function Submissions() {
           {/* Section 6: Direct Links & Named Insured */}
           <div>
             <h3 className="text-xs font-semibold text-gray-900 mb-4 uppercase tracking-wide">Direct Links</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-4">
-                <Label htmlFor="policy-number" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="policy-number" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Policy Number
                 </Label>
-                <Input 
-                  id="policy-number" 
-                  placeholder="not on file" 
+                <Input
+                  id="policy-number"
+                  placeholder="not on file"
                   className="bg-white border-gray-300 flex-1"
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="named-insured" className="text-sm font-medium text-gray-700 w-40 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="named-insured" className="text-sm font-medium text-gray-700 w-32 flex-shrink-0">
                   Named Insured
                 </Label>
                 <div className="flex gap-2 flex-1">
-                  <Input 
-                    id="named-insured" 
-                    placeholder="OrgName_97926" 
+                  <Input
+                    id="named-insured"
+                    placeholder="OrgName_97926"
                     className="flex-1 bg-white border-gray-300"
                   />
-                  <Button variant="outline" className="whitespace-nowrap">Go To Customer Center for Insured</Button>
+                  <Button variant="outline" className="whitespace-nowrap text-xs">Go To Customer Center for Insured</Button>
                 </div>
               </div>
             </div>
