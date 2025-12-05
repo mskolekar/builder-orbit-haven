@@ -384,7 +384,7 @@ export default function Submissions() {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Section 1: Insured & Submission Overview */}
-              <FormSection title="Insured & Submission Overview (Who is the submission for + basic identifiers)">
+              <FormSection title="Insured & Submission Overview">
                 <FormField label="Insured" required>
                   <Input
                     value={formData.insured}
@@ -449,7 +449,7 @@ export default function Submissions() {
               </FormSection>
 
               {/* Section 2: Product & Coverage Details */}
-              <FormSection title="Product & Coverage Details (What product is being submitted)">
+              <FormSection title="Product & Coverage Details">
                 <FormField label="Product" required>
                   <Select
                     value={formData.product}
@@ -536,7 +536,7 @@ export default function Submissions() {
               </FormSection>
 
               {/* Section 3: Dates */}
-              <FormSection title="Dates (All dates together — much easier for users)">
+              <FormSection title="Dates">
                 <FormField label="Proposed Effective Date" required>
                   <DatePickerField
                     value={formData.proposedEffectiveDate}
@@ -572,7 +572,7 @@ export default function Submissions() {
               </FormSection>
 
               {/* Section 4: Underwriting & Broker Details */}
-              <FormSection title="Underwriting & Broker Details (Who is involved in the submission process)">
+              <FormSection title="Underwriting & Broker Details">
                 <FormField label="Underwriter" required>
                   <Input
                     value={formData.underwriter}
@@ -630,7 +630,7 @@ export default function Submissions() {
               </FormSection>
 
               {/* Section 5: Additional Details & Financials */}
-              <FormSection title="Additional Details & Financials (Everything else that supports the submission)">
+              <FormSection title="Additional Details & Financials">
                 <FormField label="Internal Status">
                   <Select
                     value={formData.internalStatus}
