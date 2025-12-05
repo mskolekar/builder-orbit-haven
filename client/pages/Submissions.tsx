@@ -792,18 +792,20 @@ export default function Submissions() {
                 </FormSection>
 
                 {/* Form Footer */}
-                <div className="space-y-4 pt-8 border-t border-gray-200">
-                  {/* Row 1: Business Action Buttons */}
-                  <div className="flex justify-end gap-4">
-                    <Button variant="outline">Cancel</Button>
-                    <Button variant="outline">Rerate</Button>
-                    <Button type="submit">Save</Button>
-                  </div>
-
-                  {/* Row 2: Navigation Buttons */}
-                  <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <Button variant="outline">Previous</Button>
-                    <Button type="submit">Next</Button>
+                <div className="flex justify-between items-center gap-4 pt-8 border-t border-gray-200">
+                  <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
+                    Previous
+                  </Button>
+                  <div className="flex gap-4">
+                    <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
+                      Cancel
+                    </Button>
+                    <Button type="submit" className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
+                      Save
+                    </Button>
+                    <Button type="submit" className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
+                      Next
+                    </Button>
                   </div>
                 </div>
               </form>
