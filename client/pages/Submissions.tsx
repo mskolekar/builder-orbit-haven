@@ -378,7 +378,7 @@ export default function Submissions() {
       <div className="flex-1 overflow-auto">
         <Card className="h-full rounded-none border-none bg-background">
           <CardContent className="h-full p-0">
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8 p-6 max-w-7xl mx-auto">
                 {/* Section 1: Insured & Submission Overview */}
                 <FormSection title="Insured & Submission Overview">
                   <FormField label="Insured" required>
