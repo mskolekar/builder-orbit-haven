@@ -240,6 +240,28 @@ function FormField({
   required?: boolean;
   children: React.ReactNode;
 }) {
+  const applyYellowBg = (child: any) => {
+    if (!required || !child) return child;
+
+    // Handle styled button/input elements from radix or custom components
+    if (child.props) {
+      const existingClass = child.props.className || "";
+      const updatedClass = cn(existingClass, "bg-yellow-50");
+      return {
+        ...child,
+        props: {
+          ...child.props,
+          className: updatedClass,
+        },
+      };
+    }
+    return child;
+  };
+
+  const processedChildren = required
+    ? React.Children.map(children, applyYellowBg)
+    : children;
+
   return (
     <div className="flex items-center gap-4">
       <label className="text-sm font-medium text-gray-700 min-w-fit">
@@ -247,13 +269,7 @@ function FormField({
         {required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
       <div className="flex-1">
-        {required ? (
-          <div className="bg-yellow-50 rounded-md">
-            {children}
-          </div>
-        ) : (
-          children
-        )}
+        {processedChildren}
       </div>
     </div>
   );
