@@ -256,9 +256,7 @@ function FormField({
         {label}
         {required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
-      <div className="flex-1">
-        {processedChildren}
-      </div>
+      <div className="flex-1">{processedChildren}</div>
     </div>
   );
 }
@@ -706,7 +704,10 @@ export default function Submissions() {
                         )
                       }
                     />
-                    <label htmlFor="facultative-reinsurance" className="text-sm">
+                    <label
+                      htmlFor="facultative-reinsurance"
+                      className="text-sm"
+                    >
                       Yes
                     </label>
                   </div>
