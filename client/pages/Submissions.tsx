@@ -78,9 +78,11 @@ function DatePickerField({
   placeholder?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [displayMonth, setDisplayMonth] = useState<Date>(new Date());
+  const [inputValue, setInputValue] = useState(value);
 
   const formatDateForDisplay = (dateStr: string) => {
-    if (!dateStr) return placeholder;
+    if (!dateStr) return "";
     // If already formatted as MM/DD/YYYY, return as is
     if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return dateStr;
     // Parse ISO or other formats
@@ -92,37 +94,138 @@ function DatePickerField({
     return `${month}/${day}/${year}`;
   };
 
+  const parseInputDate = (input: string): Date | null => {
+    const match = input.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (!match) return null;
+    const [, month, day, year] = match;
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    if (isNaN(date.getTime())) return null;
+    return date;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    setInputValue(input);
+
+    // Try to parse and validate the date
+    const parsed = parseInputDate(input);
+    if (parsed && !isNaN(parsed.getTime())) {
+      const month = String(parsed.getMonth() + 1).padStart(2, "0");
+      const day = String(parsed.getDate()).padStart(2, "0");
+      const year = parsed.getFullYear();
+      onChange(`${month}/${day}/${year}`);
+      setDisplayMonth(parsed);
+    }
+  };
+
   const handleDateSelect = (date: Date | undefined) => {
     if (date) {
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
       const year = date.getFullYear();
-      onChange(`${month}/${day}/${year}`);
+      const formatted = `${month}/${day}/${year}`;
+      setInputValue(formatted);
+      onChange(formatted);
+      setDisplayMonth(date);
       setIsOpen(false);
     }
   };
 
+  const handleYearChange = (newYear: number) => {
+    setDisplayMonth(new Date(newYear, displayMonth.getMonth(), 1));
+  };
+
+  const handleMonthChange = (offset: number) => {
+    const newMonth = new Date(
+      displayMonth.getFullYear(),
+      displayMonth.getMonth() + offset,
+      1,
+    );
+    setDisplayMonth(newMonth);
+  };
+
+  // Update display month when value changes externally
+  if (value && value !== inputValue) {
+    const parsed = parseInputDate(value);
+    if (parsed) {
+      setDisplayMonth(parsed);
+    }
+    setInputValue(formatDateForDisplay(value));
+  }
+
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
-        <button
-          type="button"
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={handleInputChange}
+          onFocus={() => setIsOpen(true)}
           className={cn(
-            "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+            "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
           )}
-        >
-          <span className="text-foreground">{formatDateForDisplay(value)}</span>
-          <CalendarIcon className="h-4 w-4 opacity-50" />
-        </button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          selected={value ? new Date(value) : undefined}
-          onSelect={handleDateSelect}
-          disabled={(date) => date > new Date()}
-          initialFocus
         />
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-4" align="start">
+        <div className="space-y-4">
+          {/* Year Selector */}
+          <div className="flex items-center justify-between gap-2">
+            <label className="text-sm font-medium">Year</label>
+            <select
+              value={displayMonth.getFullYear()}
+              onChange={(e) => handleYearChange(parseInt(e.target.value))}
+              className="rounded border border-input px-2 py-1 text-sm"
+            >
+              {Array.from(
+                { length: 50 },
+                (_, i) => new Date().getFullYear() - 25 + i,
+              ).map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Month Navigation and Calendar */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={() => handleMonthChange(-1)}
+                className="rounded p-1 hover:bg-gray-100"
+                aria-label="Previous month"
+              >
+                ←
+              </button>
+              <span className="text-sm font-medium">
+                {displayMonth.toLocaleDateString("en-US", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
+              <button
+                type="button"
+                onClick={() => handleMonthChange(1)}
+                className="rounded p-1 hover:bg-gray-100"
+                aria-label="Next month"
+              >
+                →
+              </button>
+            </div>
+
+            <Calendar
+              mode="single"
+              month={displayMonth}
+              onMonthChange={setDisplayMonth}
+              selected={value ? parseInputDate(value) || undefined : undefined}
+              onSelect={handleDateSelect}
+              disabled={(date) => date > new Date()}
+              initialFocus
+            />
+          </div>
+        </div>
       </PopoverContent>
     </Popover>
   );
