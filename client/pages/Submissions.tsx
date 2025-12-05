@@ -251,12 +251,12 @@ function FormField({
     : children;
 
   return (
-    <div className="flex items-center gap-4">
-      <label className="text-sm font-medium text-gray-700 min-w-fit">
+    <div className="flex items-center gap-6">
+      <label className="text-sm font-medium text-gray-700 w-48 flex-shrink-0">
         {label}
         {required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
-      <div className="flex-1">{processedChildren}</div>
+      <div className="flex-1 min-w-0">{processedChildren}</div>
     </div>
   );
 }
@@ -273,8 +273,41 @@ function FormSection({
       <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-200">
         {title}
       </h3>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-4 gap-x-8">
+      <div className="grid grid-cols-1 gap-y-6">
         {children}
+      </div>
+    </div>
+  );
+}
+
+function SubmissionHeader() {
+  // Sample submission data - in real app, this would come from props or state
+  const submissionInfo = {
+    id: "OrgName_97828",
+    dates: "11-24-2025 - 11-24-2026",
+    state: "AK",
+    code: "XPE-016135 : 01",
+    status: "InProgress",
+    type: "New Submission",
+  };
+
+  return (
+    <div className="sticky top-0 z-40 bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-6 py-4 shadow-lg">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-semibold">Submission:</span>
+          <span>{submissionInfo.id}</span>
+          <span className="text-white/70">|</span>
+          <span>{submissionInfo.dates}</span>
+          <span className="text-white/70">|</span>
+          <span>{submissionInfo.state}</span>
+          <span className="text-white/70">|</span>
+          <span>{submissionInfo.code}</span>
+          <span className="text-white/70">|</span>
+          <span>
+            Status: <span className="font-semibold">{submissionInfo.status}</span> - {submissionInfo.type}
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -340,8 +373,10 @@ export default function Submissions() {
   };
 
   return (
-    <div className="flex-1 overflow-auto">
-      <div className="p-6 max-w-7xl mx-auto">
+    <div className="flex-1 flex flex-col">
+      <SubmissionHeader />
+      <div className="flex-1 overflow-auto">
+        <div className="p-6 max-w-7xl mx-auto">
         <Card>
           <CardHeader>
             <CardTitle>Submission Form</CardTitle>
@@ -761,6 +796,7 @@ export default function Submissions() {
             </form>
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   );
