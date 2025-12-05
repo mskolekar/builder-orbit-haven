@@ -791,10 +791,20 @@ export default function Submissions() {
                   </FormField>
                 </FormSection>
 
-                {/* Form Actions */}
-                <div className="flex justify-end gap-3 pt-6 border-t border-gray-200">
-                  <Button variant="outline">Clear</Button>
-                  <Button type="submit">Save Submission</Button>
+                {/* Form Footer */}
+                <div className="space-y-4 pt-8 border-t border-gray-200">
+                  {/* Row 1: Business Action Buttons */}
+                  <div className="flex justify-end gap-4">
+                    <Button variant="outline">Cancel</Button>
+                    <Button variant="outline">Rerate</Button>
+                    <Button type="submit">Save</Button>
+                  </div>
+
+                  {/* Row 2: Navigation Buttons */}
+                  <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                    <Button variant="outline">Previous</Button>
+                    <Button type="submit">Next</Button>
+                  </div>
                 </div>
               </form>
             </CardContent>
