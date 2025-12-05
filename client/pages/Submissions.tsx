@@ -271,7 +271,7 @@ function FormSection({
       <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-200">
         {title}
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-4 gap-x-8">
         {children}
       </div>
     </div>
