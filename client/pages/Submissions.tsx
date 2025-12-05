@@ -792,16 +792,21 @@ export default function Submissions() {
                 </FormSection>
 
                 {/* Form Footer */}
-                <div className="flex justify-between items-center gap-4 pt-8 border-t border-gray-200">
-                  <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
-                    Previous
-                  </Button>
-                  <div className="flex gap-4">
+                <div className="space-y-4 pt-8 border-t border-gray-200">
+                  {/* Row 1: Cancel and Save */}
+                  <div className="flex justify-end gap-4">
                     <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
                       Cancel
                     </Button>
                     <Button type="submit" className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
                       Save
+                    </Button>
+                  </div>
+
+                  {/* Row 2: Previous and Next */}
+                  <div className="flex justify-between gap-4">
+                    <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
+                      Previous
                     </Button>
                     <Button type="submit" className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
                       Next
