@@ -15,6 +15,7 @@ import Communication from "@/pages/Communication";
 import History from "@/pages/History";
 import CustomerDetails from "@/pages/CustomerDetails";
 import CustomerCenterHome from "@/pages/CustomerCenterHome";
+import Submissions from "@/pages/Submissions";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
@@ -427,15 +428,7 @@ function AppContent() {
                   />
                 }
               />
-              <Route
-                path="/submissions"
-                element={
-                  <PlaceholderPage
-                    title="Submissions"
-                    description="Manage insurance submissions."
-                  />
-                }
-              />
+              <Route path="/submissions" element={<Submissions />} />
               <Route
                 path="/policies"
                 element={
