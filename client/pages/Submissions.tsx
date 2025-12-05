@@ -378,441 +378,439 @@ export default function Submissions() {
       <div className="flex-1 overflow-auto">
         <Card className="h-full rounded-none border-none bg-background">
           <CardContent className="h-full p-0">
-              <form onSubmit={handleSubmit} className="space-y-8 p-6 w-full">
-                {/* Section 1: Insured & Submission Overview */}
-                <FormSection title="Insured & Submission Overview">
-                  <FormField label="Insured" required>
-                    <Input
-                      value={formData.insured}
-                      onChange={(e) =>
-                        handleInputChange("insured", e.target.value)
-                      }
-                      placeholder="Enter insured name"
-                    />
-                  </FormField>
-                  <FormField label="DBA" required>
-                    <Input
-                      value={formData.dba}
-                      onChange={(e) => handleInputChange("dba", e.target.value)}
-                      placeholder="Enter DBA"
-                    />
-                  </FormField>
-                  <FormField label="Project Identifier">
-                    <Input
-                      value={formData.projectIdentifier}
-                      onChange={(e) =>
-                        handleInputChange("projectIdentifier", e.target.value)
-                      }
-                      placeholder="Enter project identifier"
-                    />
-                  </FormField>
-                  <FormField label="Submission Number" required>
-                    <Input
-                      value={formData.submissionNumber}
-                      onChange={(e) =>
-                        handleInputChange("submissionNumber", e.target.value)
-                      }
-                      placeholder="Enter submission number"
-                    />
-                  </FormField>
-                  <FormField label="Submission Suffix">
-                    <Input
-                      value={formData.submissionSuffix}
-                      onChange={(e) =>
-                        handleInputChange("submissionSuffix", e.target.value)
-                      }
-                      placeholder="Enter suffix"
-                    />
-                  </FormField>
-                  <FormField label="Named Insured">
-                    <Input
-                      value={formData.namedInsured}
-                      onChange={(e) =>
-                        handleInputChange("namedInsured", e.target.value)
-                      }
-                      placeholder="Enter named insured"
-                    />
-                  </FormField>
-                  <FormField label="Direct Links / Policy Number">
-                    <Input
-                      value={formData.directLinksPolicy}
-                      onChange={(e) =>
-                        handleInputChange("directLinksPolicy", e.target.value)
-                      }
-                      placeholder="Enter policy number or link"
-                    />
-                  </FormField>
-                </FormSection>
+            <form onSubmit={handleSubmit} className="space-y-8 p-6 w-full">
+              {/* Section 1: Insured & Submission Overview */}
+              <FormSection title="Insured & Submission Overview">
+                <FormField label="Insured" required>
+                  <Input
+                    value={formData.insured}
+                    onChange={(e) =>
+                      handleInputChange("insured", e.target.value)
+                    }
+                    placeholder="Enter insured name"
+                  />
+                </FormField>
+                <FormField label="DBA" required>
+                  <Input
+                    value={formData.dba}
+                    onChange={(e) => handleInputChange("dba", e.target.value)}
+                    placeholder="Enter DBA"
+                  />
+                </FormField>
+                <FormField label="Project Identifier">
+                  <Input
+                    value={formData.projectIdentifier}
+                    onChange={(e) =>
+                      handleInputChange("projectIdentifier", e.target.value)
+                    }
+                    placeholder="Enter project identifier"
+                  />
+                </FormField>
+                <FormField label="Submission Number" required>
+                  <Input
+                    value={formData.submissionNumber}
+                    onChange={(e) =>
+                      handleInputChange("submissionNumber", e.target.value)
+                    }
+                    placeholder="Enter submission number"
+                  />
+                </FormField>
+                <FormField label="Submission Suffix">
+                  <Input
+                    value={formData.submissionSuffix}
+                    onChange={(e) =>
+                      handleInputChange("submissionSuffix", e.target.value)
+                    }
+                    placeholder="Enter suffix"
+                  />
+                </FormField>
+                <FormField label="Named Insured">
+                  <Input
+                    value={formData.namedInsured}
+                    onChange={(e) =>
+                      handleInputChange("namedInsured", e.target.value)
+                    }
+                    placeholder="Enter named insured"
+                  />
+                </FormField>
+                <FormField label="Direct Links / Policy Number">
+                  <Input
+                    value={formData.directLinksPolicy}
+                    onChange={(e) =>
+                      handleInputChange("directLinksPolicy", e.target.value)
+                    }
+                    placeholder="Enter policy number or link"
+                  />
+                </FormField>
+              </FormSection>
 
-                {/* Section 2: Product & Coverage Details */}
-                <FormSection title="Product & Coverage Details">
-                  <FormField label="Product" required>
-                    <Select
-                      value={formData.product}
-                      onValueChange={(value) =>
-                        handleInputChange("product", value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select product" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="primary-eo">Primary E&O</SelectItem>
-                        <SelectItem value="mgmt-liability">
-                          Management Liability
-                        </SelectItem>
-                        <SelectItem value="crime">Crime</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                  <FormField label="Coverage" required>
-                    <Select
-                      value={formData.coverage}
-                      onValueChange={(value) =>
-                        handleInputChange("coverage", value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select coverage" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="general">General</SelectItem>
-                        <SelectItem value="professional">
-                          Professional
-                        </SelectItem>
-                        <SelectItem value="specialized">Specialized</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                  <FormField label="Sub Class">
-                    <Input
-                      value={formData.subClass}
-                      onChange={(e) =>
-                        handleInputChange("subClass", e.target.value)
-                      }
-                      placeholder="Enter sub class"
-                    />
-                  </FormField>
-                  <FormField label="Main ISO Code">
-                    <Input
-                      value={formData.mainISOCode}
-                      onChange={(e) =>
-                        handleInputChange("mainISOCode", e.target.value)
-                      }
-                      placeholder="Enter main ISO code"
-                    />
-                  </FormField>
-                  <FormField label="Secondary ISO Code">
-                    <Input
-                      value={formData.secondaryISOCode}
-                      onChange={(e) =>
-                        handleInputChange("secondaryISOCode", e.target.value)
-                      }
-                      placeholder="Enter secondary ISO code"
-                    />
-                  </FormField>
-                  <FormField label="Risk State" required>
-                    <Select
-                      value={formData.riskState}
-                      onValueChange={(value) =>
-                        handleInputChange("riskState", value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select state" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="CA">California</SelectItem>
-                        <SelectItem value="TX">Texas</SelectItem>
-                        <SelectItem value="NY">New York</SelectItem>
-                        <SelectItem value="FL">Florida</SelectItem>
-                        <SelectItem value="IL">Illinois</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                </FormSection>
+              {/* Section 2: Product & Coverage Details */}
+              <FormSection title="Product & Coverage Details">
+                <FormField label="Product" required>
+                  <Select
+                    value={formData.product}
+                    onValueChange={(value) =>
+                      handleInputChange("product", value)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select product" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="primary-eo">Primary E&O</SelectItem>
+                      <SelectItem value="mgmt-liability">
+                        Management Liability
+                      </SelectItem>
+                      <SelectItem value="crime">Crime</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField label="Coverage" required>
+                  <Select
+                    value={formData.coverage}
+                    onValueChange={(value) =>
+                      handleInputChange("coverage", value)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select coverage" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="general">General</SelectItem>
+                      <SelectItem value="professional">Professional</SelectItem>
+                      <SelectItem value="specialized">Specialized</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField label="Sub Class">
+                  <Input
+                    value={formData.subClass}
+                    onChange={(e) =>
+                      handleInputChange("subClass", e.target.value)
+                    }
+                    placeholder="Enter sub class"
+                  />
+                </FormField>
+                <FormField label="Main ISO Code">
+                  <Input
+                    value={formData.mainISOCode}
+                    onChange={(e) =>
+                      handleInputChange("mainISOCode", e.target.value)
+                    }
+                    placeholder="Enter main ISO code"
+                  />
+                </FormField>
+                <FormField label="Secondary ISO Code">
+                  <Input
+                    value={formData.secondaryISOCode}
+                    onChange={(e) =>
+                      handleInputChange("secondaryISOCode", e.target.value)
+                    }
+                    placeholder="Enter secondary ISO code"
+                  />
+                </FormField>
+                <FormField label="Risk State" required>
+                  <Select
+                    value={formData.riskState}
+                    onValueChange={(value) =>
+                      handleInputChange("riskState", value)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select state" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="CA">California</SelectItem>
+                      <SelectItem value="TX">Texas</SelectItem>
+                      <SelectItem value="NY">New York</SelectItem>
+                      <SelectItem value="FL">Florida</SelectItem>
+                      <SelectItem value="IL">Illinois</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+              </FormSection>
 
-                {/* Section 3: Dates */}
-                <FormSection title="Dates">
-                  <FormField label="Proposed Effective Date" required>
-                    <DatePickerField
-                      value={formData.proposedEffectiveDate}
-                      onChange={(value) =>
-                        handleInputChange("proposedEffectiveDate", value)
-                      }
-                    />
-                  </FormField>
-                  <FormField label="Proposed Expiration Date" required>
-                    <DatePickerField
-                      value={formData.proposedExpirationDate}
-                      onChange={(value) =>
-                        handleInputChange("proposedExpirationDate", value)
-                      }
-                    />
-                  </FormField>
-                  <FormField label="Received Date">
-                    <DatePickerField
-                      value={formData.receivedDate}
-                      onChange={(value) =>
-                        handleInputChange("receivedDate", value)
-                      }
-                    />
-                  </FormField>
-                  <FormField label="Requested By Date">
-                    <DatePickerField
-                      value={formData.requestedByDate}
-                      onChange={(value) =>
-                        handleInputChange("requestedByDate", value)
-                      }
-                    />
-                  </FormField>
-                </FormSection>
+              {/* Section 3: Dates */}
+              <FormSection title="Dates">
+                <FormField label="Proposed Effective Date" required>
+                  <DatePickerField
+                    value={formData.proposedEffectiveDate}
+                    onChange={(value) =>
+                      handleInputChange("proposedEffectiveDate", value)
+                    }
+                  />
+                </FormField>
+                <FormField label="Proposed Expiration Date" required>
+                  <DatePickerField
+                    value={formData.proposedExpirationDate}
+                    onChange={(value) =>
+                      handleInputChange("proposedExpirationDate", value)
+                    }
+                  />
+                </FormField>
+                <FormField label="Received Date">
+                  <DatePickerField
+                    value={formData.receivedDate}
+                    onChange={(value) =>
+                      handleInputChange("receivedDate", value)
+                    }
+                  />
+                </FormField>
+                <FormField label="Requested By Date">
+                  <DatePickerField
+                    value={formData.requestedByDate}
+                    onChange={(value) =>
+                      handleInputChange("requestedByDate", value)
+                    }
+                  />
+                </FormField>
+              </FormSection>
 
-                {/* Section 4: Underwriting & Broker Details */}
-                <FormSection title="Underwriting & Broker Details">
-                  <FormField label="Underwriter" required>
-                    <Input
-                      value={formData.underwriter}
-                      onChange={(e) =>
-                        handleInputChange("underwriter", e.target.value)
-                      }
-                      placeholder="Enter underwriter name"
-                    />
-                  </FormField>
-                  <FormField label="Renewal Underwriter">
-                    <Input
-                      value={formData.renewalUnderwriter}
-                      onChange={(e) =>
-                        handleInputChange("renewalUnderwriter", e.target.value)
-                      }
-                      placeholder="Enter renewal underwriter"
-                    />
-                  </FormField>
-                  <FormField label="Underwriter Assistant">
-                    <Input
-                      value={formData.underwriterAssistant}
-                      onChange={(e) =>
+              {/* Section 4: Underwriting & Broker Details */}
+              <FormSection title="Underwriting & Broker Details">
+                <FormField label="Underwriter" required>
+                  <Input
+                    value={formData.underwriter}
+                    onChange={(e) =>
+                      handleInputChange("underwriter", e.target.value)
+                    }
+                    placeholder="Enter underwriter name"
+                  />
+                </FormField>
+                <FormField label="Renewal Underwriter">
+                  <Input
+                    value={formData.renewalUnderwriter}
+                    onChange={(e) =>
+                      handleInputChange("renewalUnderwriter", e.target.value)
+                    }
+                    placeholder="Enter renewal underwriter"
+                  />
+                </FormField>
+                <FormField label="Underwriter Assistant">
+                  <Input
+                    value={formData.underwriterAssistant}
+                    onChange={(e) =>
+                      handleInputChange("underwriterAssistant", e.target.value)
+                    }
+                    placeholder="Enter assistant name"
+                  />
+                </FormField>
+                <FormField label="Broker" required>
+                  <Input
+                    value={formData.broker}
+                    onChange={(e) =>
+                      handleInputChange("broker", e.target.value)
+                    }
+                    placeholder="Enter broker name"
+                  />
+                </FormField>
+                <FormField label="Broker Contact">
+                  <Input
+                    value={formData.brokerContact}
+                    onChange={(e) =>
+                      handleInputChange("brokerContact", e.target.value)
+                    }
+                    placeholder="Enter broker contact"
+                  />
+                </FormField>
+                <FormField label="Broker Contact Lookup">
+                  <Input
+                    value={formData.brokerContactLookup}
+                    onChange={(e) =>
+                      handleInputChange("brokerContactLookup", e.target.value)
+                    }
+                    placeholder="Enter lookup value"
+                  />
+                </FormField>
+              </FormSection>
+
+              {/* Section 5: Additional Details & Financials */}
+              <FormSection title="Additional Details & Financials">
+                <FormField label="Internal Status">
+                  <Select
+                    value={formData.internalStatus}
+                    onValueChange={(value) =>
+                      handleInputChange("internalStatus", value)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="completed">Completed</SelectItem>
+                      <SelectItem value="archived">Archived</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField label="New/Renewal">
+                  <Select
+                    value={formData.newRenewal}
+                    onValueChange={(value) =>
+                      handleInputChange("newRenewal", value)
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="new">New</SelectItem>
+                      <SelectItem value="renewal">Renewal</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField label="Prior Policy Number">
+                  <Input
+                    value={formData.priorPolicyNumber}
+                    onChange={(e) =>
+                      handleInputChange("priorPolicyNumber", e.target.value)
+                    }
+                    placeholder="Enter prior policy number"
+                  />
+                </FormField>
+                <FormField label="Has Treaty Exceptions (Y/N)">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="treaty-exceptions"
+                      checked={formData.hasTreatyExceptions}
+                      onCheckedChange={(checked) =>
                         handleInputChange(
-                          "underwriterAssistant",
-                          e.target.value,
+                          "hasTreatyExceptions",
+                          checked === true,
                         )
                       }
-                      placeholder="Enter assistant name"
                     />
-                  </FormField>
-                  <FormField label="Broker" required>
-                    <Input
-                      value={formData.broker}
-                      onChange={(e) =>
-                        handleInputChange("broker", e.target.value)
-                      }
-                      placeholder="Enter broker name"
-                    />
-                  </FormField>
-                  <FormField label="Broker Contact">
-                    <Input
-                      value={formData.brokerContact}
-                      onChange={(e) =>
-                        handleInputChange("brokerContact", e.target.value)
-                      }
-                      placeholder="Enter broker contact"
-                    />
-                  </FormField>
-                  <FormField label="Broker Contact Lookup">
-                    <Input
-                      value={formData.brokerContactLookup}
-                      onChange={(e) =>
-                        handleInputChange("brokerContactLookup", e.target.value)
-                      }
-                      placeholder="Enter lookup value"
-                    />
-                  </FormField>
-                </FormSection>
-
-                {/* Section 5: Additional Details & Financials */}
-                <FormSection title="Additional Details & Financials">
-                  <FormField label="Internal Status">
-                    <Select
-                      value={formData.internalStatus}
-                      onValueChange={(value) =>
-                        handleInputChange("internalStatus", value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="completed">Completed</SelectItem>
-                        <SelectItem value="archived">Archived</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                  <FormField label="New/Renewal">
-                    <Select
-                      value={formData.newRenewal}
-                      onValueChange={(value) =>
-                        handleInputChange("newRenewal", value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="new">New</SelectItem>
-                        <SelectItem value="renewal">Renewal</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                  <FormField label="Prior Policy Number">
-                    <Input
-                      value={formData.priorPolicyNumber}
-                      onChange={(e) =>
-                        handleInputChange("priorPolicyNumber", e.target.value)
-                      }
-                      placeholder="Enter prior policy number"
-                    />
-                  </FormField>
-                  <FormField label="Has Treaty Exceptions (Y/N)">
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        id="treaty-exceptions"
-                        checked={formData.hasTreatyExceptions}
-                        onCheckedChange={(checked) =>
-                          handleInputChange(
-                            "hasTreatyExceptions",
-                            checked === true,
-                          )
-                        }
-                      />
-                      <label htmlFor="treaty-exceptions" className="text-sm">
-                        Yes
-                      </label>
-                    </div>
-                  </FormField>
-                  <FormField label="Treaty Applies">
-                    <Input
-                      value={formData.treatyApplies}
-                      onChange={(e) =>
-                        handleInputChange("treatyApplies", e.target.value)
-                      }
-                      placeholder="Enter treaty details"
-                    />
-                  </FormField>
-                  <FormField label="Treaty Number">
-                    <Input
-                      value={formData.treatyNumber}
-                      onChange={(e) =>
-                        handleInputChange("treatyNumber", e.target.value)
-                      }
-                      placeholder="Enter treaty number"
-                    />
-                  </FormField>
-                  <FormField label="Treaty Exceptions">
-                    <Input
-                      value={formData.treatyExceptions}
-                      onChange={(e) =>
-                        handleInputChange("treatyExceptions", e.target.value)
-                      }
-                      placeholder="Enter exceptions"
-                    />
-                  </FormField>
-                  <FormField label="Treaty Exception Reason">
-                    <Input
-                      value={formData.treatyExceptionReason}
-                      onChange={(e) =>
+                    <label htmlFor="treaty-exceptions" className="text-sm">
+                      Yes
+                    </label>
+                  </div>
+                </FormField>
+                <FormField label="Treaty Applies">
+                  <Input
+                    value={formData.treatyApplies}
+                    onChange={(e) =>
+                      handleInputChange("treatyApplies", e.target.value)
+                    }
+                    placeholder="Enter treaty details"
+                  />
+                </FormField>
+                <FormField label="Treaty Number">
+                  <Input
+                    value={formData.treatyNumber}
+                    onChange={(e) =>
+                      handleInputChange("treatyNumber", e.target.value)
+                    }
+                    placeholder="Enter treaty number"
+                  />
+                </FormField>
+                <FormField label="Treaty Exceptions">
+                  <Input
+                    value={formData.treatyExceptions}
+                    onChange={(e) =>
+                      handleInputChange("treatyExceptions", e.target.value)
+                    }
+                    placeholder="Enter exceptions"
+                  />
+                </FormField>
+                <FormField label="Treaty Exception Reason">
+                  <Input
+                    value={formData.treatyExceptionReason}
+                    onChange={(e) =>
+                      handleInputChange("treatyExceptionReason", e.target.value)
+                    }
+                    placeholder="Enter reason"
+                  />
+                </FormField>
+                <FormField label="Has Facultative Reinsurance (Y/N)">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="facultative-reinsurance"
+                      checked={formData.hasFacultativeReinsurance}
+                      onCheckedChange={(checked) =>
                         handleInputChange(
-                          "treatyExceptionReason",
-                          e.target.value,
+                          "hasFacultativeReinsurance",
+                          checked === true,
                         )
                       }
-                      placeholder="Enter reason"
                     />
-                  </FormField>
-                  <FormField label="Has Facultative Reinsurance (Y/N)">
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        id="facultative-reinsurance"
-                        checked={formData.hasFacultativeReinsurance}
-                        onCheckedChange={(checked) =>
-                          handleInputChange(
-                            "hasFacultativeReinsurance",
-                            checked === true,
-                          )
-                        }
-                      />
-                      <label
-                        htmlFor="facultative-reinsurance"
-                        className="text-sm"
-                      >
-                        Yes
-                      </label>
-                    </div>
-                  </FormField>
-                  <FormField label="Carrier">
-                    <Input
-                      value={formData.carrier}
-                      onChange={(e) =>
-                        handleInputChange("carrier", e.target.value)
-                      }
-                      placeholder="Enter carrier name"
-                    />
-                  </FormField>
-                  <FormField label="Net Limit">
-                    <Input
-                      value={formData.netLimit}
-                      onChange={(e) =>
-                        handleInputChange("netLimit", e.target.value)
-                      }
-                      placeholder="Enter net limit"
-                    />
-                  </FormField>
-                  <FormField label="Net Premium">
-                    <Input
-                      value={formData.netPremium}
-                      onChange={(e) =>
-                        handleInputChange("netPremium", e.target.value)
-                      }
-                      placeholder="Enter net premium"
-                    />
-                  </FormField>
-                  <FormField label="Special Instructions">
-                    <Textarea
-                      value={formData.specialInstructions}
-                      onChange={(e) =>
-                        handleInputChange("specialInstructions", e.target.value)
-                      }
-                      placeholder="Enter any special instructions or notes"
-                      rows={4}
-                    />
-                  </FormField>
-                </FormSection>
-
-                {/* Form Footer */}
-                <div className="space-y-4 pt-8 border-t border-gray-200">
-                  {/* Row 1: Cancel and Save */}
-                  <div className="flex justify-end gap-4">
-                    <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
-                      Cancel
-                    </Button>
-                    <Button type="submit" className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
-                      Save
-                    </Button>
+                    <label
+                      htmlFor="facultative-reinsurance"
+                      className="text-sm"
+                    >
+                      Yes
+                    </label>
                   </div>
+                </FormField>
+                <FormField label="Carrier">
+                  <Input
+                    value={formData.carrier}
+                    onChange={(e) =>
+                      handleInputChange("carrier", e.target.value)
+                    }
+                    placeholder="Enter carrier name"
+                  />
+                </FormField>
+                <FormField label="Net Limit">
+                  <Input
+                    value={formData.netLimit}
+                    onChange={(e) =>
+                      handleInputChange("netLimit", e.target.value)
+                    }
+                    placeholder="Enter net limit"
+                  />
+                </FormField>
+                <FormField label="Net Premium">
+                  <Input
+                    value={formData.netPremium}
+                    onChange={(e) =>
+                      handleInputChange("netPremium", e.target.value)
+                    }
+                    placeholder="Enter net premium"
+                  />
+                </FormField>
+                <FormField label="Special Instructions">
+                  <Textarea
+                    value={formData.specialInstructions}
+                    onChange={(e) =>
+                      handleInputChange("specialInstructions", e.target.value)
+                    }
+                    placeholder="Enter any special instructions or notes"
+                    rows={4}
+                  />
+                </FormField>
+              </FormSection>
 
-                  {/* Row 2: Previous and Next */}
-                  <div className="flex justify-between gap-4">
-                    <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
-                      Previous
-                    </Button>
-                    <Button type="submit" className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
-                      Next
-                    </Button>
-                  </div>
+              {/* Form Footer */}
+              <div className="space-y-4 pt-8 border-t border-gray-200">
+                {/* Row 1: Cancel and Save */}
+                <div className="flex justify-end gap-4">
+                  <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                  >
+                    Save
+                  </Button>
                 </div>
-              </form>
+
+                {/* Row 2: Previous and Next */}
+                <div className="flex justify-between gap-4">
+                  <Button className="bg-[#0054A6] hover:bg-[#003d7a] text-white">
+                    Previous
+                  </Button>
+                  <Button
+                    type="submit"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                  >
+                    Next
+                  </Button>
+                </div>
+              </div>
+            </form>
           </CardContent>
         </Card>
       </div>
