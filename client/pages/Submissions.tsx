@@ -774,18 +774,16 @@ export default function Submissions() {
                     placeholder="Enter net premium"
                   />
                 </FormField>
-                <div className="lg:col-span-2">
-                  <FormField label="Special Instructions">
-                    <Textarea
-                      value={formData.specialInstructions}
-                      onChange={(e) =>
-                        handleInputChange("specialInstructions", e.target.value)
-                      }
-                      placeholder="Enter any special instructions or notes"
-                      rows={4}
-                    />
-                  </FormField>
-                </div>
+                <FormField label="Special Instructions">
+                  <Textarea
+                    value={formData.specialInstructions}
+                    onChange={(e) =>
+                      handleInputChange("specialInstructions", e.target.value)
+                    }
+                    placeholder="Enter any special instructions or notes"
+                    rows={4}
+                  />
+                </FormField>
               </FormSection>
 
               {/* Form Actions */}
