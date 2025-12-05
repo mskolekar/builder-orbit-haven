@@ -734,7 +734,7 @@ export default function Submissions() {
                     placeholder="Enter net premium"
                   />
                 </FormField>
-                <div className="col-span-1 md:col-span-2">
+                <div className="lg:col-span-2">
                   <FormField label="Special Instructions">
                     <Textarea
                       value={formData.specialInstructions}
