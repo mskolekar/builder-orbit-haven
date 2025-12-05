@@ -378,7 +378,7 @@ export default function Submissions() {
       <div className="flex-1 overflow-auto">
         <div className="p-6 max-w-7xl mx-auto">
           <Card>
-          <CardContent>
+            <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Section 1: Insured & Submission Overview */}
                 <FormSection title="Insured & Submission Overview">
