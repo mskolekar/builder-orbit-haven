@@ -430,6 +430,7 @@ function AppContent() {
                 }
               />
               <Route path="/submissions" element={<Submissions />} />
+              <Route path="/submissions/:id" element={<SubmissionDetails />} />
               <Route
                 path="/policies"
                 element={
