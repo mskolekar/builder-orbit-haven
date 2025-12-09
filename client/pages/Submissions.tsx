@@ -92,13 +92,6 @@ interface LongAnswerQuestion {
   required: boolean;
 }
 
-interface GridItem {
-  id: string;
-  title: string;
-  description: string;
-  status: string;
-}
-
 interface TableRowData {
   id: string;
   name: string;
