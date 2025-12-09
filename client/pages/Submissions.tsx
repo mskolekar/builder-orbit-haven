@@ -719,7 +719,24 @@ export default function Submissions() {
       <div className="flex-1 overflow-auto">
         <Card className="h-full rounded-none border-none bg-background">
           <CardContent className="h-full p-0">
-            <form onSubmit={handleSubmit} className="space-y-8 p-6 w-full">
+            <Tabs defaultValue="form" className="w-full h-full flex flex-col">
+              <TabsList className="rounded-none border-b border-gray-200 bg-white h-auto p-0 w-full justify-start px-6">
+                <TabsTrigger
+                  value="form"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#0054A6] data-[state=active]:bg-transparent"
+                >
+                  New Submission
+                </TabsTrigger>
+                <TabsTrigger
+                  value="details"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#0054A6] data-[state=active]:bg-transparent"
+                >
+                  Submission Details
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="form" className="flex-1 overflow-auto m-0">
+                <form onSubmit={handleSubmit} className="space-y-8 p-6 w-full">
               {/* Section 1: Insured & Submission Overview */}
               <FormSection title="Insured & Submission Overview">
                 <FormField label="Insured" required>
@@ -1152,6 +1169,12 @@ export default function Submissions() {
                 </div>
               </div>
             </form>
+              </TabsContent>
+
+              <TabsContent value="details" className="flex-1 overflow-auto m-0">
+                <SubmissionDetailsTab />
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
       </div>
