@@ -427,27 +427,6 @@ function SubmissionDetailsTab() {
     },
   ]);
 
-  const [gridItems] = useState<GridItem[]>([
-    {
-      id: "1",
-      title: "Coverage Analysis",
-      description: "Review coverage limits and exclusions",
-      status: "Pending",
-    },
-    {
-      id: "2",
-      title: "Risk Assessment",
-      description: "Evaluate underwriting risk factors",
-      status: "In Progress",
-    },
-    {
-      id: "3",
-      title: "Documentation Review",
-      description: "Review required documentation",
-      status: "Completed",
-    },
-  ]);
-
   const [tableData] = useState<TableRowData[]>([
     {
       id: "1",
