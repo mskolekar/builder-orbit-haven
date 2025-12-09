@@ -522,48 +522,6 @@ function SubmissionDetailsTab() {
         </CardContent>
       </Card>
 
-      {/* Grid with Action Buttons Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Submission Tasks</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {gridItems.map((item) => (
-              <div
-                key={item.id}
-                className="border rounded-lg p-4 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                  <Badge
-                    className={cn(
-                      "text-xs",
-                      item.status === "Completed"
-                        ? "bg-emerald-100 text-emerald-700 border-emerald-200"
-                        : item.status === "In Progress"
-                          ? "bg-blue-100 text-blue-700 border-blue-200"
-                          : "bg-gray-100 text-gray-700 border-gray-200"
-                    )}
-                  >
-                    {item.status}
-                  </Badge>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="text-xs">
-                    View
-                  </Button>
-                  <Button size="sm" variant="default" className="text-xs">
-                    Action
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Table Section */}
       <Card>
         <CardHeader>
