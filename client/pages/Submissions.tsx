@@ -85,6 +85,29 @@ interface FormData {
   specialInstructions: string;
 }
 
+interface LongAnswerQuestion {
+  id: string;
+  question: string;
+  answer: string;
+  required: boolean;
+}
+
+interface GridItem {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+}
+
+interface TableRowData {
+  id: string;
+  name: string;
+  status: string;
+  effectiveDate: string;
+  expirationDate: string;
+  premium: string;
+}
+
 function DatePickerField({
   value,
   onChange,
