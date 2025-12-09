@@ -17,7 +17,24 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
+import { Calendar as CalendarIcon, MoreVertical, ArrowUpDown, Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FormData {
@@ -66,6 +83,22 @@ interface FormData {
   netLimit: string;
   netPremium: string;
   specialInstructions: string;
+}
+
+interface LongAnswerQuestion {
+  id: string;
+  question: string;
+  answer: string;
+  required: boolean;
+}
+
+interface TableRowData {
+  id: string;
+  name: string;
+  status: string;
+  effectiveDate: string;
+  expirationDate: string;
+  premium: string;
 }
 
 function DatePickerField({
@@ -313,6 +346,244 @@ function SubmissionHeader() {
   );
 }
 
+function ActionMenuCell() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+          <MoreVertical className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-48">
+        <DropdownMenuItem onClick={() => console.log("Complete")}>
+          <Check className="mr-2 h-4 w-4" />
+          Complete
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => console.log("Invalidate")}>
+          <X className="mr-2 h-4 w-4" />
+          Invalidate
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => console.log("Edit")}>
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => console.log("View Details")}>
+          View Details
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={() => console.log("Delete")}
+          className="text-destructive"
+        >
+          Delete
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function SubmissionDetailsTab() {
+  const [longAnswers, setLongAnswers] = useState<LongAnswerQuestion[]>([
+    {
+      id: "1",
+      question:
+        "Risk Description (Include key operations and exposures that are absent/excluded/insured elsewhere)",
+      answer: "",
+      required: true,
+    },
+    {
+      id: "2",
+      question:
+        "Main exposure (Population, ADJ; # of Employees; # of Law Enforcement; Fleet summary)",
+      answer: "",
+      required: true,
+    },
+    {
+      id: "3",
+      question:
+        "Financial (Latest CAFR; Operating Budget; AM Best/Moody's/S&P Rating)",
+      answer: "",
+      required: false,
+    },
+    {
+      id: "4",
+      question:
+        "Controls to Mitigate Losses/Safety Management/ Claim and Litigation Management",
+      answer: "",
+      required: true,
+    },
+    {
+      id: "5",
+      question: "Legal Environment (Sit Caps; Sovereign Immunities; State Hazard Rating (LJHMI))",
+      answer: "",
+      required: false,
+    },
+  ]);
+
+  const [tableData] = useState<TableRowData[]>([
+    {
+      id: "1",
+      name: "American Strategic Insurance Corporation",
+      status: "Active",
+      effectiveDate: "12-31-2025",
+      expirationDate: "12-31-2026",
+      premium: "$250,000",
+    },
+    {
+      id: "2",
+      name: "Lloyd's Syndicate 1234",
+      status: "Pending",
+      effectiveDate: "01-01-2026",
+      expirationDate: "01-01-2027",
+      premium: "$150,000",
+    },
+    {
+      id: "3",
+      name: "XYZ Mutual Insurance Co",
+      status: "Active",
+      effectiveDate: "12-31-2025",
+      expirationDate: "12-31-2026",
+      premium: "$300,000",
+    },
+  ]);
+
+  const handleAnswerChange = (id: string, value: string) => {
+    setLongAnswers(
+      longAnswers.map((item) =>
+        item.id === id ? { ...item, answer: value } : item
+      )
+    );
+  };
+
+  const handleSave = () => {
+    console.log("Saving form data:", longAnswers);
+  };
+
+  return (
+    <div className="space-y-8 p-6 w-full">
+      {/* Long Answer Questions Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Long Answer Questions</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-8">
+          {longAnswers.map((item) => (
+            <div
+              key={item.id}
+              className="flex gap-6 items-start pb-6 border-b last:border-b-0 last:pb-0"
+            >
+              <div className="flex-1 min-w-0">
+                <label className="text-sm font-medium text-gray-700 flex items-start gap-1">
+                  {item.question}
+                  {item.required && <span className="text-red-500">*</span>}
+                </label>
+              </div>
+              <div className="flex-1 min-w-0">
+                <Textarea
+                  value={item.answer}
+                  onChange={(e) => handleAnswerChange(item.id, e.target.value)}
+                  placeholder="Enter your answer here..."
+                  className="min-h-24 resize-vertical"
+                />
+                <div className="text-xs text-gray-500 mt-1">
+                  Characters Remaining: 4000
+                </div>
+              </div>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Table Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Placement Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>
+                    <div className="flex items-center gap-1">
+                      Carrier Name
+                      <ArrowUpDown size={12} className="text-gray-400" />
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-1">
+                      Status
+                      <ArrowUpDown size={12} className="text-gray-400" />
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-1">
+                      Effective Date
+                      <ArrowUpDown size={12} className="text-gray-400" />
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-1">
+                      Expiration Date
+                      <ArrowUpDown size={12} className="text-gray-400" />
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-1">
+                      Premium
+                      <ArrowUpDown size={12} className="text-gray-400" />
+                    </div>
+                  </TableHead>
+                  <TableHead className="text-right">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {tableData.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell className="text-sm font-medium text-gray-800">
+                      {row.name}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        className={cn(
+                          "text-xs",
+                          row.status === "Active"
+                            ? "bg-emerald-100 text-emerald-700 border-emerald-200"
+                            : "bg-amber-100 text-amber-700 border-amber-200"
+                        )}
+                      >
+                        {row.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm text-gray-700">
+                      {row.effectiveDate}
+                    </TableCell>
+                    <TableCell className="text-sm text-gray-700">
+                      {row.expirationDate}
+                    </TableCell>
+                    <TableCell className="text-sm text-gray-700 font-medium">
+                      {row.premium}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <ActionMenuCell />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Action Buttons */}
+      <div className="flex gap-3 justify-end pt-4">
+        <Button variant="outline">Cancel</Button>
+        <Button onClick={handleSave}>Save Changes</Button>
+      </div>
+    </div>
+  );
+}
+
 export default function Submissions() {
   const [formData, setFormData] = useState<FormData>({
     // Insured & Submission Overview
@@ -378,7 +649,24 @@ export default function Submissions() {
       <div className="flex-1 overflow-auto">
         <Card className="h-full rounded-none border-none bg-background">
           <CardContent className="h-full p-0">
-            <form onSubmit={handleSubmit} className="space-y-8 p-6 w-full">
+            <Tabs defaultValue="form" className="w-full h-full flex flex-col">
+              <TabsList className="rounded-none border-b border-gray-200 bg-white h-auto p-0 w-full justify-start px-6">
+                <TabsTrigger
+                  value="form"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#0054A6] data-[state=active]:bg-transparent"
+                >
+                  New Submission
+                </TabsTrigger>
+                <TabsTrigger
+                  value="details"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#0054A6] data-[state=active]:bg-transparent"
+                >
+                  Submission Details
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="form" className="flex-1 overflow-auto m-0">
+                <form onSubmit={handleSubmit} className="space-y-8 p-6 w-full">
               {/* Section 1: Insured & Submission Overview */}
               <FormSection title="Insured & Submission Overview">
                 <FormField label="Insured" required>
@@ -811,6 +1099,12 @@ export default function Submissions() {
                 </div>
               </div>
             </form>
+              </TabsContent>
+
+              <TabsContent value="details" className="flex-1 overflow-auto m-0">
+                <SubmissionDetailsTab />
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
       </div>
