@@ -16,6 +16,7 @@ import History from "@/pages/History";
 import CustomerDetails from "@/pages/CustomerDetails";
 import CustomerCenterHome from "@/pages/CustomerCenterHome";
 import Submissions from "@/pages/Submissions";
+import SubmissionDetails from "@/pages/SubmissionDetails";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
