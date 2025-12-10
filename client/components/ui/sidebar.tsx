@@ -120,6 +120,9 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
         location.pathname.startsWith("/overview")
       );
     }
+    if (item.label === "Rapid Claims") {
+      return location.pathname.startsWith("/rapid-claims");
+    }
     if (item.path === "/" && item.label === "Home") {
       return location.pathname === "/";
     }
