@@ -16,41 +16,13 @@ interface CustomerCenterSidebarItem {
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Overview", path: "/overview" },
-  {
-    label: "Personal Details",
-    path: "/personal-details",
-    subItems: [
-      { label: "Basic Info", path: "/profile?section=person-info" },
-      { label: "Addresses", path: "/profile?section=addresses" },
-      { label: "Contact Info", path: "/contact-delivery?tab=contact" },
-      { label: "Additional Info", path: "/profile?section=additional-info" },
-      { label: "Work History", path: "/profile?section=person-history" },
-    ],
-  },
-  {
-    label: "Loss History",
-    path: "/loss-history",
-    subItems: [
-      { label: "Prior Policy", path: "/loss-history?tab=prior-policy" },
-      { label: "Prior Losses", path: "/loss-history?tab=prior-losses" },
-    ],
-  },
+  { label: "Personal Details", path: "/personal-details" },
+  { label: "Loss History", path: "/loss-history" },
   { label: "Relationships & Roles", path: "/relationships" },
   { label: "Workgroups", path: "/workgroups" },
-  {
-    label: "Journals",
-    path: "/journals",
-    subItems: [
-      { label: "Diaries", path: "/journals?tab=diaries" },
-      { label: "Notes", path: "/journals?tab=notes" },
-      { label: "Document", path: "/journals?tab=document" },
-      { label: "Email", path: "/journals?tab=email" },
-      {
-        label: "Assignment/Approval History",
-        path: "/journals?tab=assignment-approval",
-      },
-    ],
-  },
+  { label: "Risk Mgt Credit Program", path: "/risk-management-credit" },
+  { label: "Contact & Delivery", path: "/contact-delivery" },
+  { label: "Journals", path: "/journals" },
   { label: "Financials", path: "/financials" },
 ];
 
