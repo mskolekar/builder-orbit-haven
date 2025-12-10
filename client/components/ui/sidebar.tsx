@@ -220,11 +220,16 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       }
                     }}
                     className={cn(
-                      "flex items-center rounded-lg text-sm transition-colors w-full font-header",
-                      isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
-                      isMainActive && !location.search
-                        ? "bg-gray-600 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-100 hover:text-blue-600",
+                      "flex items-center transition-colors w-full font-header rounded-md",
+                      isCollapsed ? "justify-center p-2" : "gap-3 px-3.5 py-2.5",
+                      // Active main menu with subitems: dark slate background, white text
+                      isMainActive && hasSubItems
+                        ? "bg-[#3C4654] text-white"
+                        : // Active main menu without subitems: light grey (like active submenu)
+                          !hasSubItems && isMainActive && !location.search
+                          ? "bg-[#DCE1EA] text-[#2F3A45]"
+                          : // Inactive: transparent with grey text
+                            "bg-transparent text-[#6F7C88] hover:bg-[#F2F4F7]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
