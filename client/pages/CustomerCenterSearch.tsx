@@ -407,13 +407,16 @@ export default function CustomerCenterSearch() {
 
         {/* Action Buttons */}
         <div className="flex gap-2 mb-4">
-          <Button variant="primary" className="bg-blue-600 text-white">
+          <Button variant="primary" className="bg-blue-600 text-white flex items-center gap-2">
+            <Plus size={16} />
             Add Person
           </Button>
-          <Button variant="primary" className="bg-blue-600 text-white">
+          <Button variant="primary" className="bg-blue-600 text-white flex items-center gap-2">
+            <Plus size={16} />
             Add Location
           </Button>
-          <Button variant="primary" className="bg-blue-600 text-white">
+          <Button variant="primary" className="bg-blue-600 text-white flex items-center gap-2">
+            <Plus size={16} />
             Add Organization
           </Button>
         </div>
@@ -424,7 +427,8 @@ export default function CustomerCenterSearch() {
             <Search size={16} />
             Run Search
           </Button>
-          <Button variant="outline" onClick={handleClearFilters}>
+          <Button variant="outline" onClick={handleClearFilters} className="flex items-center gap-2">
+            <RotateCcw size={16} />
             Clear
           </Button>
         </div>
