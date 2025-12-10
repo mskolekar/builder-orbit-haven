@@ -20,6 +20,7 @@ import {
   Search,
   ChevronLeft,
   Zap,
+  AlertCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
