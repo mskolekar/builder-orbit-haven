@@ -356,11 +356,9 @@ function ActionMenuCell() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem onClick={() => console.log("Complete")}>
-          <Check className="mr-2 h-4 w-4" />
           Complete
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => console.log("Invalidate")}>
-          <X className="mr-2 h-4 w-4" />
           Invalidate
         </DropdownMenuItem>
         <DropdownMenuSeparator />
@@ -371,10 +369,7 @@ function ActionMenuCell() {
           View Details
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => console.log("Delete")}
-          className="text-destructive"
-        >
+        <DropdownMenuItem onClick={() => console.log("Delete")}>
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
