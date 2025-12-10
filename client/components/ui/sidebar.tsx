@@ -106,7 +106,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
     setExpandedItems((prev) =>
       prev.includes(itemPath)
         ? prev.filter((path) => path !== itemPath)
-        : [...prev, itemPath],
+        : [itemPath], // Only one submenu expanded at a time
     );
   };
 
