@@ -75,10 +75,19 @@ const sidebarItems: SidebarItem[] = [
     subItems: [
       { label: "Bulk Payments", path: "/rapid-claims/bulk-payments" },
       { label: "Bulk Receipts", path: "/rapid-claims/bulk-receipts" },
-      { label: "Process Groups of Payments", path: "/rapid-claims/process-groups" },
-      { label: "Release Repetitive Payments", path: "/rapid-claims/release-repetitive" },
+      {
+        label: "Process Groups of Payments",
+        path: "/rapid-claims/process-groups",
+      },
+      {
+        label: "Release Repetitive Payments",
+        path: "/rapid-claims/release-repetitive",
+      },
       { label: "Review Held Reserves", path: "/rapid-claims/review-reserves" },
-      { label: "Transfer/Void/Stop/Reissue Payments", path: "/rapid-claims/transfer-void" },
+      {
+        label: "Transfer/Void/Stop/Reissue Payments",
+        path: "/rapid-claims/transfer-void",
+      },
       { label: "Post Payments to Claims", path: "/rapid-claims/post-payments" },
     ],
   },
@@ -103,10 +112,11 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   });
 
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(itemPath)
-        ? prev.filter((path) => path !== itemPath)
-        : [itemPath], // Only one submenu expanded at a time
+    setExpandedItems(
+      (prev) =>
+        prev.includes(itemPath)
+          ? prev.filter((path) => path !== itemPath)
+          : [itemPath], // Only one submenu expanded at a time
     );
   };
 
@@ -221,7 +231,9 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                     }}
                     className={cn(
                       "flex items-center transition-colors w-full font-header rounded-md",
-                      isCollapsed ? "justify-center p-2" : "gap-3 px-3.5 py-2.5",
+                      isCollapsed
+                        ? "justify-center p-2"
+                        : "gap-3 px-3.5 py-2.5",
                       // Active main menu with subitems: dark slate background, white text
                       isMainActive && hasSubItems
                         ? "bg-[#3C4654] text-white"
