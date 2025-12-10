@@ -122,6 +122,11 @@ export function CustomerCenterSidebar({
     return location.pathname === item.path;
   };
 
+  // Check if a submenu item is active (accounts for query params)
+  const isSubmenuActive = (subItem: SubItem) => {
+    return location.pathname + location.search === subItem.path;
+  };
+
   return (
     <div
       className={cn(
@@ -164,9 +169,14 @@ export function CustomerCenterSidebar({
                     isCollapsed
                       ? "justify-center p-2"
                       : "justify-between gap-3 px-3 py-2",
-                    isMainActive && !location.search
-                      ? "bg-white text-[#0054A6]"
-                      : "text-white/80 hover:bg-white/10 hover:text-white",
+                    // Active main menu with submenus: dark grey background, white text
+                    isMainActive && hasSubItems && !location.search
+                      ? "bg-[#6F7C88] text-white"
+                      : // Active main menu without submenus: light grey background, dark text
+                        isMainActive && !hasSubItems && !location.search
+                        ? "bg-[#EEF1F6] text-[#2F3A45]"
+                        : // Inactive: light blue text on hover, transparent background
+                          "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                   )}
                   title={isCollapsed ? item.label : undefined}
                   aria-label={item.label}
@@ -184,33 +194,52 @@ export function CustomerCenterSidebar({
                       </div>
                       {hasSubItems &&
                         (isExpanded ? (
-                          <ChevronDown size={14} />
+                          <ChevronDown
+                            size={14}
+                            className={cn(
+                              "transition-colors",
+                              isMainActive && hasSubItems
+                                ? "text-white"
+                                : "text-white/80",
+                            )}
+                          />
                         ) : (
-                          <ChevronRight size={14} />
+                          <ChevronRight
+                            size={14}
+                            className={cn(
+                              "transition-colors",
+                              isMainActive && hasSubItems
+                                ? "text-white"
+                                : "text-white/80",
+                            )}
+                          />
                         ))}
                     </>
                   )}
                 </button>
 
                 {hasSubItems && isExpanded && !isCollapsed && (
-                  <ul className="mt-1 ml-6 space-y-1">
-                    {item.subItems!.map((subItem) => (
-                      <li key={subItem.path}>
-                        <Link
-                          to={subItem.path}
-                          className={cn(
-                            "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4",
-                            isActive(subItem.path)
-                              ? "bg-white/15 text-white border-white/40"
-                              : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30",
-                          )}
-                          role="menuitem"
-                          aria-label={subItem.label}
-                        >
-                          {subItem.label}
-                        </Link>
-                      </li>
-                    ))}
+                  <ul className="mt-1 ml-2 space-y-1">
+                    {item.subItems!.map((subItem) => {
+                      const isSubActive = isSubmenuActive(subItem);
+                      return (
+                        <li key={subItem.path}>
+                          <Link
+                            to={subItem.path}
+                            className={cn(
+                              "block px-3 py-2 text-sm rounded transition-colors",
+                              isSubActive
+                                ? "bg-[#EEF1F6] text-[#2F3A45] pl-3"
+                                : "text-white/70 hover:bg-[#EEF1F6] hover:text-[#0054A6] pl-3",
+                            )}
+                            role="menuitem"
+                            aria-label={subItem.label}
+                          >
+                            {subItem.label}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
               </li>
