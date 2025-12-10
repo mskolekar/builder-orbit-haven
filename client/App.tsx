@@ -501,6 +501,69 @@ function AppContent() {
                   />
                 }
               />
+              <Route
+                path="/rapid-claims/bulk-payments"
+                element={
+                  <PlaceholderPage
+                    title="Bulk Payments"
+                    description="Process bulk payment operations."
+                  />
+                }
+              />
+              <Route
+                path="/rapid-claims/bulk-receipts"
+                element={
+                  <PlaceholderPage
+                    title="Bulk Receipts"
+                    description="Manage bulk receipt operations."
+                  />
+                }
+              />
+              <Route
+                path="/rapid-claims/process-groups"
+                element={
+                  <PlaceholderPage
+                    title="Process Groups of Payments"
+                    description="Process groups of payments."
+                  />
+                }
+              />
+              <Route
+                path="/rapid-claims/release-repetitive"
+                element={
+                  <PlaceholderPage
+                    title="Release Repetitive Payments"
+                    description="Release repetitive payment batches."
+                  />
+                }
+              />
+              <Route
+                path="/rapid-claims/review-reserves"
+                element={
+                  <PlaceholderPage
+                    title="Review Held Reserves"
+                    description="Review and manage held reserves."
+                  />
+                }
+              />
+              <Route
+                path="/rapid-claims/transfer-void"
+                element={
+                  <PlaceholderPage
+                    title="Transfer/Void/Stop/Reissue Payments"
+                    description="Manage payment modifications and transfers."
+                  />
+                }
+              />
+              <Route
+                path="/rapid-claims/post-payments"
+                element={
+                  <PlaceholderPage
+                    title="Post Payments to Claims"
+                    description="Post payments to claim records."
+                  />
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

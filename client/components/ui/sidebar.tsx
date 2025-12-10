@@ -19,6 +19,7 @@ import {
   TrendingUp,
   Search,
   ChevronLeft,
+  Zap,
 } from "lucide-react";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -67,6 +68,29 @@ const sidebarItems: SidebarItem[] = [
   },
   { icon: Users, label: "Manage Users", path: "/users" },
   { icon: BarChart, label: "Analytic Reports", path: "/reports" },
+  {
+    icon: Zap,
+    label: "Rapid Claims",
+    path: "/rapid-claims",
+    subItems: [
+      { label: "Bulk Payments", path: "/rapid-claims/bulk-payments" },
+      { label: "Bulk Receipts", path: "/rapid-claims/bulk-receipts" },
+      {
+        label: "Process Groups of Payments",
+        path: "/rapid-claims/process-groups",
+      },
+      {
+        label: "Release Repetitive Payments",
+        path: "/rapid-claims/release-repetitive",
+      },
+      { label: "Review Held Reserves", path: "/rapid-claims/review-reserves" },
+      {
+        label: "Transfer/Void/Stop/Reissue Payments",
+        path: "/rapid-claims/transfer-void",
+      },
+      { label: "Post Payments to Claims", path: "/rapid-claims/post-payments" },
+    ],
+  },
 ];
 
 interface SidebarProps {
@@ -77,15 +101,22 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>(() =>
-    location.pathname.startsWith("/overview") ? ["/overview"] : [],
-  );
+  const [expandedItems, setExpandedItems] = useState<string[]>(() => {
+    if (location.pathname.startsWith("/overview")) {
+      return ["/overview"];
+    }
+    if (location.pathname.startsWith("/rapid-claims")) {
+      return ["/rapid-claims"];
+    }
+    return [];
+  });
 
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(itemPath)
-        ? prev.filter((path) => path !== itemPath)
-        : [...prev, itemPath],
+    setExpandedItems(
+      (prev) =>
+        prev.includes(itemPath)
+          ? prev.filter((path) => path !== itemPath)
+          : [itemPath], // Only one submenu expanded at a time
     );
   };
 
@@ -104,6 +135,9 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
         location.pathname.startsWith("/customer-center") ||
         location.pathname.startsWith("/overview")
       );
+    }
+    if (item.label === "Rapid Claims") {
+      return location.pathname.startsWith("/rapid-claims");
     }
     if (item.path === "/" && item.label === "Home") {
       return location.pathname === "/";
@@ -196,11 +230,18 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       }
                     }}
                     className={cn(
-                      "flex items-center rounded-lg text-sm transition-colors w-full font-header",
-                      isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2",
-                      isMainActive && !location.search
-                        ? "bg-[#0054A6] text-white"
-                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+                      "flex items-center transition-colors w-full font-header rounded-md",
+                      isCollapsed
+                        ? "justify-center p-2"
+                        : "gap-3 px-3.5 py-2.5",
+                      // Active main menu with subitems: dark slate background, white text
+                      isMainActive && hasSubItems
+                        ? "bg-[#3C4654] text-white"
+                        : // Active main menu without subitems: light grey (like active submenu)
+                          !hasSubItems && isMainActive && !location.search
+                          ? "bg-[#DCE1EA] text-[#2F3A45]"
+                          : // Inactive: transparent with grey text
+                            "bg-transparent text-[#6F7C88] hover:bg-[#F2F4F7]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
@@ -209,17 +250,17 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                   </RouterLink>
 
                   {hasSubItems && isExpanded && (
-                    <ul className="mt-1 ml-6 space-y-1">
+                    <ul className="mt-1 space-y-1">
                       {item.subItems!.map((subItem) => (
                         <li key={subItem.path}>
                           <RouterLink
                             to={subItem.path}
                             onClick={() => setIsOpen(false)}
                             className={cn(
-                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4 font-header",
+                              "block text-sm transition-colors rounded-md font-header",
                               isActive(subItem.path)
-                                ? "bg-gray-100 text-gray-900 border-gray-300"
-                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300",
+                                ? "bg-[#DCE1EA] text-[#2F3A45] px-3.5 py-2.5 pl-[22px]"
+                                : "bg-transparent text-[#6F7C88] px-3.5 py-2.5 pl-[22px] hover:bg-[#EEF1F6]",
                             )}
                           >
                             {subItem.label}
