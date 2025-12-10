@@ -259,7 +259,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                             ? "text-white"
                             : !hasSubItems && isMainActive && !location.search
                               ? "text-[#2F3A45]"
-                              : "group-hover:text-[#0054A6]",
+                              : "text-[#6F7C88]",
                         )}
                       />
                       {!isCollapsed && item.label}
