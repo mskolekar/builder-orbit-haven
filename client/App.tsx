@@ -79,7 +79,7 @@ function AppContent() {
   const activeProfileKey = overviewMatch ? overviewMatch[1] : "olivia";
   const activeProfile = profileMap[activeProfileKey] || profileMap["olivia"];
 
-  // Define which routes should show the Customer Center sidebar (exclude /customer-center picker)
+  // Define which routes should show the Customer Center sidebar (exclude /customer-center search)
   const customerCenterRoutes = [
     "/overview",
     "/profile",
