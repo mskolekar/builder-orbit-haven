@@ -68,6 +68,20 @@ const sidebarItems: SidebarItem[] = [
   },
   { icon: Users, label: "Manage Users", path: "/users" },
   { icon: BarChart, label: "Analytic Reports", path: "/reports" },
+  {
+    icon: Zap,
+    label: "Rapid Claims",
+    path: "/rapid-claims",
+    subItems: [
+      { label: "Bulk Payments", path: "/rapid-claims/bulk-payments" },
+      { label: "Bulk Receipts", path: "/rapid-claims/bulk-receipts" },
+      { label: "Process Groups of Payments", path: "/rapid-claims/process-groups" },
+      { label: "Release Repetitive Payments", path: "/rapid-claims/release-repetitive" },
+      { label: "Review Held Reserves", path: "/rapid-claims/review-reserves" },
+      { label: "Transfer/Void/Stop/Reissue Payments", path: "/rapid-claims/transfer-void" },
+      { label: "Post Payments to Claims", path: "/rapid-claims/post-payments" },
+    ],
+  },
 ];
 
 interface SidebarProps {
