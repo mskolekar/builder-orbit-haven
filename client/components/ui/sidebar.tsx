@@ -107,6 +107,9 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
     if (location.pathname.startsWith("/rapid-claims")) {
       return ["/rapid-claims"];
     }
+    if (location.pathname.startsWith("/accounting")) {
+      return ["/accounting"];
+    }
     return [];
   });
 
