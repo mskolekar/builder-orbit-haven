@@ -233,8 +233,8 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                             className={cn(
                               "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4 font-header",
                               isActive(subItem.path)
-                                ? "bg-gray-100 text-gray-900 border-gray-300"
-                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300",
+                                ? "bg-gray-400 text-white border-gray-400"
+                                : "text-gray-600 hover:bg-gray-100 hover:text-blue-600 hover:border-gray-300",
                             )}
                           >
                             {subItem.label}
