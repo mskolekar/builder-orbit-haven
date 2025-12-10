@@ -135,6 +135,10 @@ export default function CustomerDetails() {
     return currentPath === path || currentPath.startsWith(path);
   };
 
+  const isSubmenuActive = (path: string) => {
+    return currentPath === path;
+  };
+
   const isMainPageActive = (item: CustomerCenterSidebarItem) => {
     if (item.path === "/customer-details") {
       return (
