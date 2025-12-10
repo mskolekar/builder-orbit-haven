@@ -47,7 +47,16 @@ const sidebarItems: SidebarItem[] = [
     label: "Customer Center",
     path: "/customer-center",
   },
-  { icon: Briefcase, label: "Accounting", path: "/accounting" },
+  {
+    icon: Briefcase,
+    label: "Accounting",
+    path: "/accounting",
+    subItems: [
+      { label: "Record Payment", path: "/accounting/record-payment" },
+      { label: "Check Printing", path: "/accounting/check-printing" },
+      { label: "Invoicing", path: "/accounting/invoicing" },
+    ],
+  },
   { icon: Search, label: "Search Center", path: "/search" },
   { icon: Settings, label: "Other Utilities", path: "/utilities" },
   { icon: LinkIcon, label: "Quick Links", path: "/links" },
