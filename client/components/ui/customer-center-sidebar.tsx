@@ -201,7 +201,7 @@ export function CustomerCenterSidebar({
                             className={cn(
                               "block px-3 py-2 text-sm rounded transition-colors",
                               isSubActive
-                                ? "bg-[#EEF1F6] text-[#2F3A45] pl-3"
+                                ? "bg-[#6F7C88] text-white pl-3"
                                 : "text-white/70 hover:bg-[#EEF1F6] hover:text-[#0054A6] pl-3",
                             )}
                             role="menuitem"
