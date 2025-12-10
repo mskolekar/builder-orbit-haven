@@ -258,7 +258,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                         className={cn(
                           "transition-colors",
                           // Light grey main menu with expanded submenu: black icon
-                          isMainActive && hasSubItems && isExpanded
+                          hasSubItems && isExpanded
                             ? "text-[#2F3A45]"
                             : // Main menu without subs: white icon
                               !hasSubItems && isMainActive && !location.search
