@@ -432,14 +432,8 @@ export default function CustomerCenterSearch() {
 
       {/* Records Search Input */}
       <div className="mb-4 flex items-center gap-4">
-        <Input
-          placeholder="Search in records..."
-          className="flex-1"
-        />
-        <div className="flex gap-2">
-          <Button variant="ghost" size="sm" className="p-2">
-            {/* Settings icon placeholder */}
-          </Button>
+        <div className="flex-1 text-sm text-gray-600">
+          Search in records...
         </div>
       </div>
 
