@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { Search, Plus, RotateCcw } from "lucide-react";
 
 interface CustomerRecord {
   id: string;
