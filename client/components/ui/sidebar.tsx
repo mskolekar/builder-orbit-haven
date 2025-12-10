@@ -275,7 +275,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                           "transition-transform flex-shrink-0",
                           isExpanded ? "rotate-90" : "rotate-0",
                           // Light grey main menu with expanded submenu: black chevron
-                          isMainActive && hasSubItems && isExpanded
+                          hasSubItems && isExpanded
                             ? "text-[#2F3A45]"
                             : // Main menu without subs: white chevron
                               !hasSubItems && isMainActive
