@@ -145,6 +145,11 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
     return location.pathname === item.path;
   };
 
+  // Helper to check if user is on a direct submenu item (with query params)
+  const isSubmenuActive = (subItem: SubItem) => {
+    return location.pathname + location.search === subItem.path;
+  };
+
   return (
     <>
       {/* Mobile menu button */}
@@ -230,43 +235,70 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       }
                     }}
                     className={cn(
-                      "flex items-center transition-colors w-full font-header rounded-md",
+                      "flex items-center justify-between transition-colors w-full font-header rounded-md",
                       isCollapsed
                         ? "justify-center p-2"
                         : "gap-3 px-3.5 py-2.5",
-                      // Active main menu with subitems: dark slate background, white text
+                      // Active main menu with subitems: dark grey background, white text/icons
                       isMainActive && hasSubItems
-                        ? "bg-[#3C4654] text-white"
+                        ? "bg-[#6F7C88] text-white"
                         : // Active main menu without subitems: light grey (like active submenu)
                           !hasSubItems && isMainActive && !location.search
-                          ? "bg-[#DCE1EA] text-[#2F3A45]"
-                          : // Inactive: transparent with grey text
-                            "bg-transparent text-[#6F7C88] hover:bg-[#F2F4F7]",
+                          ? "bg-[#EEF1F6] text-[#2F3A45]"
+                          : // Inactive: transparent with grey text, light blue on hover
+                            "bg-transparent text-[#6F7C88] hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
-                    <Icon size={16} />
-                    {!isCollapsed && item.label}
+                    <div className="flex items-center gap-3">
+                      <Icon
+                        size={16}
+                        className={cn(
+                          "transition-colors",
+                          isMainActive && hasSubItems
+                            ? "text-white"
+                            : !hasSubItems && isMainActive && !location.search
+                              ? "text-[#2F3A45]"
+                              : "group-hover:text-[#0054A6]",
+                        )}
+                      />
+                      {!isCollapsed && item.label}
+                    </div>
+                    {!isCollapsed && hasSubItems && (
+                      <ChevronLeft
+                        size={16}
+                        className={cn(
+                          "transition-transform flex-shrink-0",
+                          isExpanded ? "rotate-90" : "rotate-0",
+                          isMainActive && hasSubItems
+                            ? "text-white"
+                            : "text-[#6F7C88]",
+                        )}
+                      />
+                    )}
                   </RouterLink>
 
                   {hasSubItems && isExpanded && (
                     <ul className="mt-1 space-y-1">
-                      {item.subItems!.map((subItem) => (
-                        <li key={subItem.path}>
-                          <RouterLink
-                            to={subItem.path}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                              "block text-sm transition-colors rounded-md font-header",
-                              isActive(subItem.path)
-                                ? "bg-[#DCE1EA] text-[#2F3A45] px-3.5 py-2.5 pl-[22px]"
-                                : "bg-transparent text-[#6F7C88] px-3.5 py-2.5 pl-[22px] hover:bg-[#EEF1F6]",
-                            )}
-                          >
-                            {subItem.label}
-                          </RouterLink>
-                        </li>
-                      ))}
+                      {item.subItems!.map((subItem) => {
+                        const isSubActive = isSubmenuActive(subItem);
+                        return (
+                          <li key={subItem.path}>
+                            <RouterLink
+                              to={subItem.path}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "block text-sm transition-colors rounded-md font-header",
+                                isSubActive
+                                  ? "bg-[#EEF1F6] text-[#2F3A45] px-3.5 py-2.5 pl-[22px]"
+                                  : "bg-transparent text-[#6F7C88] px-3.5 py-2.5 pl-[22px] hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                              )}
+                            >
+                              {subItem.label}
+                            </RouterLink>
+                          </li>
+                        );
+                      })}
                     </ul>
                   )}
                 </li>
