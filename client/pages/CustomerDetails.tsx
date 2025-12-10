@@ -216,7 +216,9 @@ export default function CustomerDetails() {
                         isMainActive && hasSubItems && !window.location.search
                           ? "bg-[#6F7C88] text-white"
                           : // Active main menu without submenus: light grey background, dark text
-                            isMainActive && !hasSubItems && !window.location.search
+                            isMainActive &&
+                              !hasSubItems &&
+                              !window.location.search
                             ? "bg-[#EEF1F6] text-[#2F3A45]"
                             : // Inactive: light blue text on hover
                               "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",

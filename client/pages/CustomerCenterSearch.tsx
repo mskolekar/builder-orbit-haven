@@ -163,7 +163,7 @@ export default function CustomerCenterSearch() {
 
   const paginatedRecords = filteredRecords.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   const totalPages = Math.ceil(filteredRecords.length / itemsPerPage);
@@ -432,9 +432,7 @@ export default function CustomerCenterSearch() {
 
       {/* Records Search Input */}
       <div className="mb-4 flex items-center gap-4">
-        <div className="flex-1 text-sm text-gray-600">
-          Search in records...
-        </div>
+        <div className="flex-1 text-sm text-gray-600">Search in records...</div>
       </div>
 
       {/* Results Table */}
@@ -550,8 +548,7 @@ export default function CustomerCenterSearch() {
             <option value="50">50</option>
           </select>
           <span className="ml-4">
-            {(currentPage - 1) * itemsPerPage + 1} of{" "}
-            {filteredRecords.length}
+            {(currentPage - 1) * itemsPerPage + 1} of {filteredRecords.length}
           </span>
         </div>
         <div className="flex gap-2">
@@ -567,7 +564,9 @@ export default function CustomerCenterSearch() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+            onClick={() =>
+              setCurrentPage(Math.min(totalPages, currentPage + 1))
+            }
             disabled={currentPage === totalPages}
           >
             Next

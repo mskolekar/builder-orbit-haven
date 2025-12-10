@@ -416,7 +416,10 @@ function AppContent() {
         ) : (
           <div className="flex-1 flex flex-col">
             <Routes>
-              <Route path="/customer-center" element={<CustomerCenterSearch />} />
+              <Route
+                path="/customer-center"
+                element={<CustomerCenterSearch />}
+              />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/communication" element={<Communication />} />
