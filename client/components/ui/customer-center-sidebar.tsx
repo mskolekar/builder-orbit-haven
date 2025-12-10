@@ -141,12 +141,12 @@ export function CustomerCenterSidebar({
                     isCollapsed
                       ? "justify-center p-2"
                       : "justify-between gap-3 px-3 py-2",
-                    // Active main menu with submenus: dark grey background, white text
-                    isMainActive && hasSubItems && !location.search
-                      ? "bg-[#6F7C88] text-white"
-                      : // Active main menu without submenus: light grey background, dark text
-                        isMainActive && !hasSubItems && !location.search
-                        ? "bg-[#EEF1F6] text-[#2F3A45]"
+                    // Main menu with expanded submenus: light grey background, dark text
+                    hasSubItems && isExpanded
+                      ? "bg-[#EEF1F6] text-[#2F3A45]"
+                      : // Active main menu without submenus: dark grey background, white text
+                        !hasSubItems && isMainActive && !location.search
+                        ? "bg-[#6F7C88] text-white"
                         : // Inactive: light blue text on hover, transparent background
                           "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                   )}
