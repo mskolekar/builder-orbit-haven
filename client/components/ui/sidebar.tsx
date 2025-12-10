@@ -295,7 +295,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                               className={cn(
                                 "block text-sm transition-colors rounded-md font-header",
                                 isSubActive
-                                  ? "bg-[#EEF1F6] text-[#2F3A45] px-3.5 py-2.5 pl-[22px]"
+                                  ? "bg-[#6F7C88] text-white px-3.5 py-2.5 pl-[22px]"
                                   : "bg-transparent text-[#6F7C88] px-3.5 py-2.5 pl-[22px] hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                               )}
                             >
