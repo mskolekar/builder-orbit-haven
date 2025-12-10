@@ -238,17 +238,17 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                   </RouterLink>
 
                   {hasSubItems && isExpanded && (
-                    <ul className="mt-1 ml-6 space-y-1">
+                    <ul className="mt-1 space-y-1">
                       {item.subItems!.map((subItem) => (
                         <li key={subItem.path}>
                           <RouterLink
                             to={subItem.path}
                             onClick={() => setIsOpen(false)}
                             className={cn(
-                              "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-gray-200 pl-4 font-header",
+                              "block text-sm transition-colors rounded-md font-header",
                               isActive(subItem.path)
-                                ? "bg-gray-400 text-white border-gray-400"
-                                : "text-gray-600 hover:bg-gray-100 hover:text-blue-600 hover:border-gray-300",
+                                ? "bg-[#DCE1EA] text-[#2F3A45] px-3.5 py-2.5 pl-[22px]"
+                                : "bg-transparent text-[#6F7C88] px-3.5 py-2.5 pl-[22px] hover:bg-[#EEF1F6]",
                             )}
                           >
                             {subItem.label}
