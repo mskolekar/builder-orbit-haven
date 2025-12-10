@@ -15,7 +15,9 @@ import Communication from "@/pages/Communication";
 import History from "@/pages/History";
 import CustomerDetails from "@/pages/CustomerDetails";
 import CustomerCenterHome from "@/pages/CustomerCenterHome";
+import CustomerCenterSearch from "@/pages/CustomerCenterSearch";
 import Submissions from "@/pages/Submissions";
+import Incidents from "@/pages/Incidents";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
@@ -77,7 +79,7 @@ function AppContent() {
   const activeProfileKey = overviewMatch ? overviewMatch[1] : "olivia";
   const activeProfile = profileMap[activeProfileKey] || profileMap["olivia"];
 
-  // Define which routes should show the Customer Center sidebar (exclude /customer-center picker)
+  // Define which routes should show the Customer Center sidebar (exclude /customer-center search)
   const customerCenterRoutes = [
     "/overview",
     "/profile",
@@ -414,20 +416,15 @@ function AppContent() {
         ) : (
           <div className="flex-1 flex flex-col">
             <Routes>
-              <Route path="/customer-center" element={<CustomerCenterHome />} />
+              <Route
+                path="/customer-center"
+                element={<CustomerCenterSearch />}
+              />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/communication" element={<Communication />} />
               <Route path="/history" element={<History />} />
-              <Route
-                path="/new-submission"
-                element={
-                  <PlaceholderPage
-                    title="New Submission"
-                    description="Create new insurance submissions."
-                  />
-                }
-              />
+              <Route path="/incidents" element={<Incidents />} />
               <Route path="/submissions" element={<Submissions />} />
               <Route
                 path="/policies"

@@ -135,6 +135,10 @@ export default function CustomerDetails() {
     return currentPath === path || currentPath.startsWith(path);
   };
 
+  const isSubmenuActive = (path: string) => {
+    return currentPath === path;
+  };
+
   const isMainPageActive = (item: CustomerCenterSidebarItem) => {
     if (item.path === "/customer-details") {
       return (
@@ -208,9 +212,16 @@ export default function CustomerDetails() {
                       }}
                       className={cn(
                         "flex items-center justify-between rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
-                        isMainActive && !window.location.search
-                          ? "bg-white text-[#0054A6]"
-                          : "text-white/80 hover:bg-white/10 hover:text-white",
+                        // Active main menu with submenus: dark grey background, white text
+                        isMainActive && hasSubItems && !window.location.search
+                          ? "bg-[#6F7C88] text-white"
+                          : // Active main menu without submenus: light grey background, dark text
+                            isMainActive &&
+                              !hasSubItems &&
+                              !window.location.search
+                            ? "bg-[#EEF1F6] text-[#2F3A45]"
+                            : // Inactive: light blue text on hover
+                              "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                       )}
                       aria-label={item.label}
                       aria-expanded={hasSubItems ? isExpanded : undefined}
@@ -221,23 +232,39 @@ export default function CustomerDetails() {
                       </div>
                       {hasSubItems &&
                         (isExpanded ? (
-                          <ChevronDown size={14} />
+                          <ChevronDown
+                            size={14}
+                            className={cn(
+                              "transition-colors",
+                              isMainActive && hasSubItems
+                                ? "text-white"
+                                : "text-white/80",
+                            )}
+                          />
                         ) : (
-                          <ChevronRight size={14} />
+                          <ChevronRight
+                            size={14}
+                            className={cn(
+                              "transition-colors",
+                              isMainActive && hasSubItems
+                                ? "text-white"
+                                : "text-white/80",
+                            )}
+                          />
                         ))}
                     </button>
 
                     {hasSubItems && isExpanded && (
-                      <ul className="mt-1 ml-6 space-y-1">
+                      <ul className="mt-1 ml-2 space-y-1">
                         {item.subItems!.map((subItem) => (
                           <li key={subItem.path}>
                             <button
                               onClick={() => navigate(subItem.path)}
                               className={cn(
-                                "block px-3 py-1.5 text-xs rounded transition-colors border-l-2 border-white/20 pl-4 w-full text-left",
-                                isActive(subItem.path)
-                                  ? "bg-white/15 text-white border-white/40"
-                                  : "text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30",
+                                "block px-3 py-2 text-sm rounded transition-colors w-full text-left",
+                                isSubmenuActive(subItem.path)
+                                  ? "bg-[#EEF1F6] text-[#2F3A45] pl-3"
+                                  : "text-white/70 hover:bg-[#EEF1F6] hover:text-[#0054A6] pl-3",
                               )}
                               role="menuitem"
                               aria-label={subItem.label}

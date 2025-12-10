@@ -20,6 +20,7 @@ import {
   Search,
   ChevronLeft,
   Zap,
+  AlertCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -38,26 +39,24 @@ interface SidebarItem {
 
 const sidebarItems: SidebarItem[] = [
   { icon: Home, label: "Home", path: "/" },
-  { icon: FileText, label: "New Submission", path: "/new-submission" },
   { icon: FileText, label: "Submissions", path: "/submissions" },
+  { icon: AlertCircle, label: "Incidents", path: "/incidents" },
   { icon: Shield, label: "Policies", path: "/policies" },
   {
     icon: User,
     label: "Customer Center",
-    path: "/overview",
+    path: "/customer-center",
+  },
+  {
+    icon: Briefcase,
+    label: "Accounting",
+    path: "/accounting",
     subItems: [
-      { label: "Olivia R (Insured)", path: "/overview/olivia" },
-      {
-        label: "Fintech Fonts sample",
-        path: "/overview/olivia?style=fintech-fonts",
-      },
-      { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
-      { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
-      { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
-      { label: "New Prospect", path: "/overview/josh-fernandes" },
+      { label: "Record Payment", path: "/accounting/record-payment" },
+      { label: "Check Printing", path: "/accounting/check-printing" },
+      { label: "Invoicing", path: "/accounting/invoicing" },
     ],
   },
-  { icon: Briefcase, label: "Accounting", path: "/accounting" },
   { icon: Search, label: "Search Center", path: "/search" },
   { icon: Settings, label: "Other Utilities", path: "/utilities" },
   { icon: LinkIcon, label: "Quick Links", path: "/links" },
@@ -108,6 +107,9 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
     if (location.pathname.startsWith("/rapid-claims")) {
       return ["/rapid-claims"];
     }
+    if (location.pathname.startsWith("/accounting")) {
+      return ["/accounting"];
+    }
     return [];
   });
 
@@ -143,6 +145,11 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       return location.pathname === "/";
     }
     return location.pathname === item.path;
+  };
+
+  // Helper to check if user is on a direct submenu item (with query params)
+  const isSubmenuActive = (subItem: SubItem) => {
+    return location.pathname + location.search === subItem.path;
   };
 
   return (
@@ -230,43 +237,76 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       }
                     }}
                     className={cn(
-                      "flex items-center transition-colors w-full font-header rounded-md",
+                      "flex items-center justify-between transition-colors w-full font-header rounded-md",
                       isCollapsed
                         ? "justify-center p-2"
                         : "gap-3 px-3.5 py-2.5",
-                      // Active main menu with subitems: dark slate background, white text
-                      isMainActive && hasSubItems
-                        ? "bg-[#3C4654] text-white"
-                        : // Active main menu without subitems: light grey (like active submenu)
+                      // When a submenu is expanded and selected: main menu light grey background, black text
+                      isMainActive && hasSubItems && isExpanded
+                        ? "bg-[#EEF1F6] text-[#2F3A45]"
+                        : // Active main menu without subitems: dark grey background, white text
                           !hasSubItems && isMainActive && !location.search
-                          ? "bg-[#DCE1EA] text-[#2F3A45]"
-                          : // Inactive: transparent with grey text
-                            "bg-transparent text-[#6F7C88] hover:bg-[#F2F4F7]",
+                          ? "bg-[#6F7C88] text-white"
+                          : // Inactive: transparent with grey text, light blue on hover
+                            "bg-transparent text-[#6F7C88] hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
-                    <Icon size={16} />
-                    {!isCollapsed && item.label}
+                    <div className="flex items-center gap-3">
+                      <Icon
+                        size={16}
+                        className={cn(
+                          "transition-colors",
+                          // Light grey main menu with expanded submenu: black icon
+                          isMainActive && hasSubItems && isExpanded
+                            ? "text-[#2F3A45]"
+                            : // Main menu without subs: white icon
+                              !hasSubItems && isMainActive && !location.search
+                              ? "text-white"
+                              : "text-[#6F7C88]",
+                        )}
+                      />
+                      {!isCollapsed && item.label}
+                    </div>
+                    {!isCollapsed && hasSubItems && (
+                      <ChevronLeft
+                        size={16}
+                        className={cn(
+                          "transition-transform flex-shrink-0",
+                          isExpanded ? "rotate-90" : "rotate-0",
+                          // Light grey main menu with expanded submenu: black chevron
+                          isMainActive && hasSubItems && isExpanded
+                            ? "text-[#2F3A45]"
+                            : // Main menu without subs: white chevron
+                              !hasSubItems && isMainActive
+                              ? "text-white"
+                              : "text-[#6F7C88]",
+                        )}
+                      />
+                    )}
                   </RouterLink>
 
                   {hasSubItems && isExpanded && (
                     <ul className="mt-1 space-y-1">
-                      {item.subItems!.map((subItem) => (
-                        <li key={subItem.path}>
-                          <RouterLink
-                            to={subItem.path}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                              "block text-sm transition-colors rounded-md font-header",
-                              isActive(subItem.path)
-                                ? "bg-[#DCE1EA] text-[#2F3A45] px-3.5 py-2.5 pl-[22px]"
-                                : "bg-transparent text-[#6F7C88] px-3.5 py-2.5 pl-[22px] hover:bg-[#EEF1F6]",
-                            )}
-                          >
-                            {subItem.label}
-                          </RouterLink>
-                        </li>
-                      ))}
+                      {item.subItems!.map((subItem) => {
+                        const isSubActive = isSubmenuActive(subItem);
+                        return (
+                          <li key={subItem.path}>
+                            <RouterLink
+                              to={subItem.path}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "block text-sm transition-colors rounded-md font-header",
+                                isSubActive
+                                  ? "bg-[#6F7C88] text-white px-3.5 py-2.5 pl-[22px]"
+                                  : "bg-transparent text-[#6F7C88] px-3.5 py-2.5 pl-[22px] hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                              )}
+                            >
+                              {subItem.label}
+                            </RouterLink>
+                          </li>
+                        );
+                      })}
                     </ul>
                   )}
                 </li>
