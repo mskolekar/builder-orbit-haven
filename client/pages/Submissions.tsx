@@ -661,7 +661,7 @@ export default function Submissions() {
                   value="details"
                   className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#0054A6] data-[state=active]:bg-transparent"
                 >
-                  Submission Details
+                  Summary
                 </TabsTrigger>
               </TabsList>
 
