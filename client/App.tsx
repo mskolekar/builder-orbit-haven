@@ -416,20 +416,12 @@ function AppContent() {
         ) : (
           <div className="flex-1 flex flex-col">
             <Routes>
-              <Route path="/customer-center" element={<CustomerCenterHome />} />
+              <Route path="/customer-center" element={<CustomerCenterSearch />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/communication" element={<Communication />} />
               <Route path="/history" element={<History />} />
-              <Route
-                path="/new-submission"
-                element={
-                  <PlaceholderPage
-                    title="New Submission"
-                    description="Create new insurance submissions."
-                  />
-                }
-              />
+              <Route path="/incidents" element={<Incidents />} />
               <Route path="/submissions" element={<Submissions />} />
               <Route
                 path="/policies"
