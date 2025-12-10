@@ -39,24 +39,13 @@ interface SidebarItem {
 
 const sidebarItems: SidebarItem[] = [
   { icon: Home, label: "Home", path: "/" },
-  { icon: FileText, label: "New Submission", path: "/new-submission" },
   { icon: FileText, label: "Submissions", path: "/submissions" },
+  { icon: AlertCircle, label: "Incidents", path: "/incidents" },
   { icon: Shield, label: "Policies", path: "/policies" },
   {
     icon: User,
     label: "Customer Center",
-    path: "/overview",
-    subItems: [
-      { label: "Olivia R (Insured)", path: "/overview/olivia" },
-      {
-        label: "Fintech Fonts sample",
-        path: "/overview/olivia?style=fintech-fonts",
-      },
-      { label: "John Wills (Underwriter)", path: "/overview/john-wills" },
-      { label: "Shawn Elkins (Claimant)", path: "/overview/shawn-elkins" },
-      { label: "ABC Ltd (Organization)", path: "/overview/abc-ltd" },
-      { label: "New Prospect", path: "/overview/josh-fernandes" },
-    ],
+    path: "/customer-center",
   },
   { icon: Briefcase, label: "Accounting", path: "/accounting" },
   { icon: Search, label: "Search Center", path: "/search" },
