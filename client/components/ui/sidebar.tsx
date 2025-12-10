@@ -238,12 +238,12 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                       isCollapsed
                         ? "justify-center p-2"
                         : "gap-3 px-3.5 py-2.5",
-                      // Active main menu with subitems: dark grey background, white text/icons
-                      isMainActive && hasSubItems
-                        ? "bg-[#6F7C88] text-white"
-                        : // Active main menu without subitems: light grey (like active submenu)
+                      // When a submenu is expanded and selected: main menu light grey background, black text
+                      isMainActive && hasSubItems && isExpanded
+                        ? "bg-[#EEF1F6] text-[#2F3A45]"
+                        : // Active main menu without subitems: dark grey background, white text
                           !hasSubItems && isMainActive && !location.search
-                          ? "bg-[#EEF1F6] text-[#2F3A45]"
+                          ? "bg-[#6F7C88] text-white"
                           : // Inactive: transparent with grey text, light blue on hover
                             "bg-transparent text-[#6F7C88] hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                     )}
@@ -254,10 +254,12 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                         size={16}
                         className={cn(
                           "transition-colors",
-                          isMainActive && hasSubItems
-                            ? "text-white"
-                            : !hasSubItems && isMainActive && !location.search
-                              ? "text-[#2F3A45]"
+                          // Light grey main menu with expanded submenu: black icon
+                          isMainActive && hasSubItems && isExpanded
+                            ? "text-[#2F3A45]"
+                            : // Main menu without subs: white icon
+                              !hasSubItems && isMainActive && !location.search
+                              ? "text-white"
                               : "text-[#6F7C88]",
                         )}
                       />
@@ -269,9 +271,13 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                         className={cn(
                           "transition-transform flex-shrink-0",
                           isExpanded ? "rotate-90" : "rotate-0",
-                          isMainActive && hasSubItems
-                            ? "text-white"
-                            : "text-[#6F7C88]",
+                          // Light grey main menu with expanded submenu: black chevron
+                          isMainActive && hasSubItems && isExpanded
+                            ? "text-[#2F3A45]"
+                            : // Main menu without subs: white chevron
+                              !hasSubItems && isMainActive
+                              ? "text-white"
+                              : "text-[#6F7C88]",
                         )}
                       />
                     )}
