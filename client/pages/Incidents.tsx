@@ -1,4 +1,4 @@
-import PlaceholderPage from "@/components/ui/placeholder-page";
+import PlaceholderPage from "./PlaceholderPage";
 
 export default function Incidents() {
   return (
