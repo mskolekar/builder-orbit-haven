@@ -73,9 +73,8 @@ export default function AddNew() {
                   </div>
 
                   {isInternal ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label>Security Profile</Label>
+                    <div className="space-y-4">
+                      <HorizontalFormField label="Security Profile">
                         <Select>
                           <SelectTrigger>
                             <SelectValue placeholder="Select profile" />
@@ -86,12 +85,11 @@ export default function AddNew() {
                             <SelectItem value="admin">Admin</SelectItem>
                           </SelectContent>
                         </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Login ID</Label>
+                      </HorizontalFormField>
+                      <HorizontalFormField label="Login ID">
                         <Input placeholder="user@company" />
-                      </div>
-                      <div className="md:col-span-2 text-xs text-gray-500">
+                      </HorizontalFormField>
+                      <div className="text-xs text-gray-500 pl-44">
                         Relationship will be added as Employee with appropriate
                         role.
                       </div>
