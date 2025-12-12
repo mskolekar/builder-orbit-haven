@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SubmissionSidebarItem {
@@ -23,40 +21,45 @@ interface SubmissionSidebarProps {
   activeTab: string;
   onTabChange: (tabId: string) => void;
   isCollapsed: boolean;
-  onToggleCollapse: () => void;
 }
 
 export function SubmissionSidebar({
   activeTab,
   onTabChange,
   isCollapsed,
-  onToggleCollapse,
 }: SubmissionSidebarProps) {
   return (
     <div
       className={cn(
-        "bg-blue-600 text-white transition-all duration-300 overflow-hidden flex flex-col",
-        isCollapsed ? "w-0" : "w-64"
+        "h-full bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300",
+        isCollapsed ? "w-0 overflow-hidden" : "w-64"
       )}
     >
-      <div className="flex-1 overflow-y-auto">
-        <nav className="p-4 space-y-1">
+      <nav
+        className="flex-1 px-3 pt-4 pb-4 overflow-y-auto"
+        role="navigation"
+        aria-label="Submission Navigation"
+      >
+        <ul className="space-y-1" role="menubar">
           {submissionMenuItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onTabChange(item.id)}
-              className={cn(
-                "w-full text-left px-4 py-2 rounded transition-colors",
-                activeTab === item.id
-                  ? "bg-white/20 text-white font-semibold"
-                  : "text-white/80 hover:bg-white/10"
-              )}
-            >
-              {item.label}
-            </button>
+            <li key={item.id}>
+              <button
+                onClick={() => onTabChange(item.id)}
+                className={cn(
+                  "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
+                  activeTab === item.id
+                    ? "bg-[#6F7C88] text-white"
+                    : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]"
+                )}
+                title={isCollapsed ? item.label : undefined}
+                aria-label={item.label}
+              >
+                {item.label}
+              </button>
+            </li>
           ))}
-        </nav>
-      </div>
+        </ul>
+      </nav>
     </div>
   );
 }
