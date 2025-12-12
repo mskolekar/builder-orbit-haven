@@ -47,81 +47,71 @@ function SubmissionHeader() {
   );
 }
 
+function FormRow({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-2 gap-8 mb-4">{children}</div>;
+}
+
+function FormField({
+  label,
+  isMandatory,
+  children,
+}: {
+  label: string;
+  isMandatory?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={cn(
+        "p-3 rounded flex items-center gap-4",
+        isMandatory ? "bg-yellow-100" : "bg-gray-50"
+      )}
+    >
+      <label className="font-medium text-gray-700 whitespace-nowrap w-32 text-sm">
+        {label}
+        {isMandatory && <span className="text-red-600 ml-1">*</span>}
+      </label>
+      <div className="flex-1">{children}</div>
+    </div>
+  );
+}
+
 function OverviewSection() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Insured & Submission Overview */}
       <div>
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           Insured & Submission Overview
         </h3>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <Label htmlFor="insured" className="text-gray-700 font-medium">
-              Insured *
-            </Label>
-            <Input
-              id="insured"
-              placeholder="Enter Insured name"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="doa" className="text-gray-700 font-medium">
-              DOA *
-            </Label>
-            <Input id="doa" placeholder="Enter DOA" className="mt-1" />
-          </div>
-          <div>
-            <Label htmlFor="project-identifier" className="text-gray-700 font-medium">
-              Project Identifier
-            </Label>
-            <Input
-              id="project-identifier"
-              placeholder="Enter project identifier"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="submission-number" className="text-gray-700 font-medium">
-              Submission Number *
-            </Label>
-            <Input
-              id="submission-number"
-              placeholder="Enter submission number"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="submission-suffix" className="text-gray-700 font-medium">
-              Submission Suffix
-            </Label>
-            <Input
-              id="submission-suffix"
-              placeholder="Enter suffix"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="named-insured" className="text-gray-700 font-medium">
-              Named Insured
-            </Label>
-            <Input
-              id="named-insured"
-              placeholder="Enter named insured"
-              className="mt-1"
-            />
-          </div>
-          <div className="col-span-2">
-            <Label htmlFor="direct-link" className="text-gray-700 font-medium">
-              Direct Link / Policy Number
-            </Label>
-            <Input
-              id="direct-link"
-              placeholder="Enter policy number or link"
-              className="mt-1"
-            />
-          </div>
+        <FormRow>
+          <FormField label="Insured" isMandatory>
+            <Input placeholder="Enter Insured name" />
+          </FormField>
+          <FormField label="DOA" isMandatory>
+            <Input placeholder="Enter DOA" />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Project Identifier">
+            <Input placeholder="Enter project identifier" />
+          </FormField>
+          <FormField label="Submission Number" isMandatory>
+            <Input placeholder="Enter submission number" />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Submission Suffix">
+            <Input placeholder="Enter suffix" />
+          </FormField>
+          <FormField label="Named Insured">
+            <Input placeholder="Enter named insured" />
+          </FormField>
+        </FormRow>
+        <div className="mb-4">
+          <FormField label="Direct Link / Policy Number">
+            <Input placeholder="Enter policy number or link" />
+          </FormField>
         </div>
       </div>
 
@@ -130,13 +120,10 @@ function OverviewSection() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           Product & Coverage Details
         </h3>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <Label htmlFor="product" className="text-gray-700 font-medium">
-              Product *
-            </Label>
+        <FormRow>
+          <FormField label="Product" isMandatory>
             <Select>
-              <SelectTrigger className="mt-1">
+              <SelectTrigger>
                 <SelectValue placeholder="Select product" />
               </SelectTrigger>
               <SelectContent>
@@ -144,13 +131,10 @@ function OverviewSection() {
                 <SelectItem value="product2">Product 2</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-          <div>
-            <Label htmlFor="coverage" className="text-gray-700 font-medium">
-              Coverage *
-            </Label>
+          </FormField>
+          <FormField label="Coverage" isMandatory>
             <Select>
-              <SelectTrigger className="mt-1">
+              <SelectTrigger>
                 <SelectValue placeholder="Select coverage" />
               </SelectTrigger>
               <SelectContent>
@@ -158,43 +142,23 @@ function OverviewSection() {
                 <SelectItem value="coverage2">Coverage 2</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-          <div>
-            <Label htmlFor="sub-class" className="text-gray-700 font-medium">
-              Sub Class
-            </Label>
-            <Input
-              id="sub-class"
-              placeholder="Enter sub class"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="main-iso-code" className="text-gray-700 font-medium">
-              Main ISO Code
-            </Label>
-            <Input
-              id="main-iso-code"
-              placeholder="Enter main ISO code"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="secondary-iso-code" className="text-gray-700 font-medium">
-              Secondary ISO Code
-            </Label>
-            <Input
-              id="secondary-iso-code"
-              placeholder="Enter secondary ISO code"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="risk-state" className="text-gray-700 font-medium">
-              Risk State *
-            </Label>
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Sub Class">
+            <Input placeholder="Enter sub class" />
+          </FormField>
+          <FormField label="Main ISO Code">
+            <Input placeholder="Enter main ISO code" />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Secondary ISO Code">
+            <Input placeholder="Enter secondary ISO code" />
+          </FormField>
+          <FormField label="Risk State" isMandatory>
             <Select>
-              <SelectTrigger className="mt-1">
+              <SelectTrigger>
                 <SelectValue placeholder="Select state" />
               </SelectTrigger>
               <SelectContent>
@@ -203,55 +167,29 @@ function OverviewSection() {
                 <SelectItem value="ar">AR</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-        </div>
+          </FormField>
+        </FormRow>
       </div>
 
       {/* Dates */}
       <div>
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Dates</h3>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <Label htmlFor="proposed-effective-date" className="text-gray-700 font-medium">
-              Proposed Effective Date *
-            </Label>
-            <Input
-              id="proposed-effective-date"
-              placeholder="MM/DD/YYYY"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="proposed-expiration-date" className="text-gray-700 font-medium">
-              Proposed Expiration Date *
-            </Label>
-            <Input
-              id="proposed-expiration-date"
-              placeholder="MM/DD/YYYY"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="received-date" className="text-gray-700 font-medium">
-              Received Date
-            </Label>
-            <Input
-              id="received-date"
-              placeholder="MM/DD/YYYY"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="requested-by-date" className="text-gray-700 font-medium">
-              Requested By Date
-            </Label>
-            <Input
-              id="requested-by-date"
-              placeholder="MM/DD/YYYY"
-              className="mt-1"
-            />
-          </div>
-        </div>
+        <FormRow>
+          <FormField label="Proposed Effective Date" isMandatory>
+            <Input placeholder="MM/DD/YYYY" />
+          </FormField>
+          <FormField label="Proposed Expiration Date" isMandatory>
+            <Input placeholder="MM/DD/YYYY" />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Received Date">
+            <Input placeholder="MM/DD/YYYY" />
+          </FormField>
+          <FormField label="Requested By Date">
+            <Input placeholder="MM/DD/YYYY" />
+          </FormField>
+        </FormRow>
       </div>
     </div>
   );
