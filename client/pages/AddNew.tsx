@@ -207,7 +207,7 @@ export default function AddNew() {
                   </HorizontalFormField>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-6 flex items-center justify-between pl-44">
                   <div className="space-y-1">
                     <div className="text-sm font-medium text-gray-700">
                       Define employees/contacts?
@@ -222,7 +222,7 @@ export default function AddNew() {
                   />
                 </div>
 
-                <div className="mt-6 flex justify-end">
+                <div className="mt-8 flex justify-end">
                   <Button
                     className="bg-[#0054A6] hover:bg-[#003d7a]"
                     onClick={saveToOlivia}
