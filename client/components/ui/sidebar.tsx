@@ -23,7 +23,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 interface SubItem {
   label: string;
