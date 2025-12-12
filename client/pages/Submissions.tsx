@@ -348,13 +348,15 @@ export default function Submissions() {
             <div className="w-full h-full p-8">
               {renderContent()}
               {/* Action Buttons */}
-              <div className="flex gap-3 justify-end mt-12 pt-6 border-t border-gray-200">
+              <div className="flex gap-3 justify-between mt-12 pt-6 border-t border-gray-200">
                 <Button variant="outline">Previous</Button>
-                <Button className="bg-blue-600 hover:bg-blue-700">
-                  Cancel
-                </Button>
-                <Button className="bg-blue-600 hover:bg-blue-700">Save</Button>
-                <Button className="bg-blue-600 hover:bg-blue-700">Next</Button>
+                <div className="flex gap-3">
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Cancel
+                  </Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">Save</Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">Next</Button>
+                </div>
               </div>
             </div>
           </div>
