@@ -46,7 +46,7 @@ function SubmissionHeader() {
 }
 
 function FormRow({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-2 gap-12">{children}</div>;
+  return <div className="grid grid-cols-2 gap-12 mb-6">{children}</div>;
 }
 
 function FormField({
