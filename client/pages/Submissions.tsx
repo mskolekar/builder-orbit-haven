@@ -356,12 +356,16 @@ export default function Submissions() {
                   <Button className="bg-blue-600 hover:bg-blue-700">
                     Cancel
                   </Button>
-                  <Button className="bg-blue-600 hover:bg-blue-700">Save</Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Save
+                  </Button>
                 </div>
                 {/* Row 2: Navigation */}
                 <div className="flex justify-between">
                   <Button variant="outline">Previous</Button>
-                  <Button className="bg-blue-600 hover:bg-blue-700">Next</Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Next
+                  </Button>
                 </div>
               </div>
             </div>

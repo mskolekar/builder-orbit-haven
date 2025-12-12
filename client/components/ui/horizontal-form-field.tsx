@@ -31,7 +31,7 @@ export const HorizontalFormField = React.forwardRef<
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -39,11 +39,13 @@ export const HorizontalFormField = React.forwardRef<
         className={cn("flex items-start gap-4", className)}
         {...props}
       >
-        <div className={cn("flex-shrink-0 pt-2", labelWidthClasses[labelWidth])}>
+        <div
+          className={cn("flex-shrink-0 pt-2", labelWidthClasses[labelWidth])}
+        >
           <Label
             className={cn(
               "text-sm font-medium text-gray-700",
-              required && "after:content-['_*'] after:text-destructive"
+              required && "after:content-['_*'] after:text-destructive",
             )}
           >
             {label}
@@ -52,14 +54,12 @@ export const HorizontalFormField = React.forwardRef<
         <div className="flex-1">
           {children}
           {error && (
-            <p className="text-sm font-medium text-destructive mt-1">
-              {error}
-            </p>
+            <p className="text-sm font-medium text-destructive mt-1">{error}</p>
           )}
         </div>
       </div>
     );
-  }
+  },
 );
 
 HorizontalFormField.displayName = "HorizontalFormField";
