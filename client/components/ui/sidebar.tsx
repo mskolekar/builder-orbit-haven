@@ -39,7 +39,7 @@ interface SidebarItem {
 
 const sidebarItems: SidebarItem[] = [
   { icon: Home, label: "Home", path: "/" },
-  { icon: FileText, label: "Submissions", path: "/submissions" },
+  { icon: FileText, label: "Submissions", path: "/submission-search" },
   { icon: AlertCircle, label: "Incidents", path: "/incidents" },
   { icon: Shield, label: "Policies", path: "/policies" },
   {
