@@ -278,6 +278,18 @@ function JournalSection() {
   );
 }
 
+const submissionTabs = [
+  { label: "Overview", id: "overview" },
+  { label: "UW Questions", id: "uw-questions" },
+  { label: "Additional Interests", id: "additional-interests" },
+  { label: "Exposures", id: "exposures" },
+  { label: "Manual Multi Rating", id: "manual-multi-rating" },
+  { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
+  { label: "Quotations", id: "quotations" },
+  { label: "Parties", id: "parties" },
+  { label: "Journal", id: "journal" },
+];
+
 export default function Submissions() {
   const [activeTab, setActiveTab] = useState("overview");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -307,6 +319,8 @@ export default function Submissions() {
     }
   };
 
+  const activeTabLabel = submissionTabs.find((tab) => tab.id === activeTab)?.label || "Overview";
+
   return (
     <div className="flex-1 flex flex-col">
       <SubmissionHeader />
@@ -317,11 +331,21 @@ export default function Submissions() {
           isCollapsed={isSidebarCollapsed}
         />
         <div className="flex-1 flex flex-col overflow-auto">
-          <div className="flex-1 overflow-auto">
-            <div className="max-w-6xl mx-auto p-6">
+          {/* Breadcrumb Bar */}
+          <div className="bg-white border-b border-gray-200 px-6 py-3">
+            <div className="text-sm text-gray-600 flex items-center gap-1">
+              <span>Submission</span>
+              <span>&gt;</span>
+              <span className="text-gray-900">{activeTabLabel}</span>
+            </div>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-1 overflow-auto bg-white">
+            <div className="w-full h-full p-8">
               {renderContent()}
               {/* Action Buttons */}
-              <div className="flex gap-3 justify-end mt-8 pt-6 border-t border-gray-200">
+              <div className="flex gap-3 justify-end mt-12 pt-6 border-t border-gray-200">
                 <Button variant="outline">Previous</Button>
                 <Button className="bg-blue-600 hover:bg-blue-700">
                   Cancel
