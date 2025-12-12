@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useNavigate } from "react-router-dom";
+import { HorizontalFormField } from "@/components/ui/horizontal-form-field";
 
 export default function AddNew() {
   const [isInternal, setIsInternal] = useState(false);
