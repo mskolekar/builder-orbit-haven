@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { Menu, ChevronLeft } from "lucide-react";
+import { SubmissionSidebar } from "@/components/ui/submission-sidebar";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 function SubmissionHeader() {
   const submissionInfo = {
@@ -36,32 +45,316 @@ function SubmissionHeader() {
   );
 }
 
+function FormRow({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-2 gap-12">{children}</div>;
+}
+
+function FormField({
+  label,
+  isMandatory,
+  children,
+}: {
+  label: string;
+  isMandatory?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={cn(
+        "px-4 py-3 rounded",
+        isMandatory ? "bg-yellow-100" : "bg-white",
+      )}
+    >
+      <label className="block font-medium text-gray-700 text-sm mb-2">
+        {label}
+        {isMandatory && <span className="text-red-600 ml-1">*</span>}
+      </label>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+function SectionHeader({ title }: { title: string }) {
+  return (
+    <div className="mb-6">
+      <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300">
+        {title}
+      </h3>
+    </div>
+  );
+}
+
+function OverviewSection() {
+  return (
+    <div className="space-y-8">
+      {/* Insured & Submission Overview */}
+      <div>
+        <SectionHeader title="Insured & Submission Overview" />
+        <FormRow>
+          <FormField label="Insured" isMandatory>
+            <Input />
+          </FormField>
+          <FormField label="DOA" isMandatory>
+            <Input />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Project Identifier">
+            <Input />
+          </FormField>
+          <FormField label="Submission Number" isMandatory>
+            <Input />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Submission Suffix">
+            <Input />
+          </FormField>
+          <FormField label="Named Insured">
+            <Input />
+          </FormField>
+        </FormRow>
+        <div className="grid grid-cols-2 gap-12">
+          <FormField label="Direct Link / Policy Number">
+            <Input />
+          </FormField>
+          <div />
+        </div>
+      </div>
+
+      {/* Product & Coverage Details */}
+      <div>
+        <SectionHeader title="Product & Coverage Details" />
+        <FormRow>
+          <FormField label="Product" isMandatory>
+            <Select>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="product1">Product 1</SelectItem>
+                <SelectItem value="product2">Product 2</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormField>
+          <FormField label="Coverage" isMandatory>
+            <Select>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="coverage1">Coverage 1</SelectItem>
+                <SelectItem value="coverage2">Coverage 2</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Sub Class">
+            <Input />
+          </FormField>
+          <FormField label="Main ISO Code">
+            <Input />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Secondary ISO Code">
+            <Input />
+          </FormField>
+          <FormField label="Risk State" isMandatory>
+            <Select>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ak">AK</SelectItem>
+                <SelectItem value="al">AL</SelectItem>
+                <SelectItem value="ar">AR</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormField>
+        </FormRow>
+      </div>
+
+      {/* Dates */}
+      <div>
+        <SectionHeader title="Dates" />
+        <FormRow>
+          <FormField label="Proposed Effective Date" isMandatory>
+            <Input />
+          </FormField>
+          <FormField label="Proposed Expiration Date" isMandatory>
+            <Input />
+          </FormField>
+        </FormRow>
+        <FormRow>
+          <FormField label="Received Date">
+            <Input />
+          </FormField>
+          <FormField label="Requested By Date">
+            <Input />
+          </FormField>
+        </FormRow>
+      </div>
+    </div>
+  );
+}
+
+function UWQuestionsSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">UW Questions</h3>
+      <p className="text-gray-600">UW Questions content goes here</p>
+    </div>
+  );
+}
+
+function AdditionalInterestsSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">
+        Additional Interests
+      </h3>
+      <p className="text-gray-600">Additional Interests content goes here</p>
+    </div>
+  );
+}
+
+function ExposuresSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Exposures</h3>
+      <p className="text-gray-600">Exposures content goes here</p>
+    </div>
+  );
+}
+
+function ManualMultiRatingSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">
+        Manual Multi Rating
+      </h3>
+      <p className="text-gray-600">Manual Multi Rating content goes here</p>
+    </div>
+  );
+}
+
+function InclusionsExclusionsSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">
+        Inclusions/Exclusions
+      </h3>
+      <p className="text-gray-600">Inclusions/Exclusions content goes here</p>
+    </div>
+  );
+}
+
+function QuotationsSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Quotations</h3>
+      <p className="text-gray-600">Quotations content goes here</p>
+    </div>
+  );
+}
+
+function PartiesSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Parties</h3>
+      <p className="text-gray-600">Parties content goes here</p>
+    </div>
+  );
+}
+
+function JournalSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Journal</h3>
+      <p className="text-gray-600">Journal content goes here</p>
+    </div>
+  );
+}
+
+const submissionTabs = [
+  { label: "Overview", id: "overview" },
+  { label: "UW Questions", id: "uw-questions" },
+  { label: "Additional Interests", id: "additional-interests" },
+  { label: "Exposures", id: "exposures" },
+  { label: "Manual Multi Rating", id: "manual-multi-rating" },
+  { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
+  { label: "Quotations", id: "quotations" },
+  { label: "Parties", id: "parties" },
+  { label: "Journal", id: "journal" },
+];
+
 export default function Submissions() {
   const [activeTab, setActiveTab] = useState("overview");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "overview":
+        return <OverviewSection />;
+      case "uw-questions":
+        return <UWQuestionsSection />;
+      case "additional-interests":
+        return <AdditionalInterestsSection />;
+      case "exposures":
+        return <ExposuresSection />;
+      case "manual-multi-rating":
+        return <ManualMultiRatingSection />;
+      case "inclusions-exclusions":
+        return <InclusionsExclusionsSection />;
+      case "quotations":
+        return <QuotationsSection />;
+      case "parties":
+        return <PartiesSection />;
+      case "journal":
+        return <JournalSection />;
+      default:
+        return <OverviewSection />;
+    }
+  };
+
+  const activeTabLabel =
+    submissionTabs.find((tab) => tab.id === activeTab)?.label || "Overview";
 
   return (
     <div className="flex-1 flex flex-col">
       <SubmissionHeader />
       <div className="flex flex-1 overflow-hidden">
-        <div className="w-64 bg-blue-600 text-white">
-          <div className="p-4">Tab menu</div>
-        </div>
+        <SubmissionSidebar
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          isCollapsed={isSidebarCollapsed}
+        />
         <div className="flex-1 flex flex-col overflow-auto">
-          <div className="sticky top-0 z-30 bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-gray-700 hover:bg-gray-100 p-1 h-8 w-8"
-            >
-              <Menu size={16} />
-            </Button>
-            <h2 className="text-sm font-semibold text-gray-900">
-              Test Content
-            </h2>
+          {/* Breadcrumb Bar */}
+          <div className="bg-white border-b border-gray-200 px-6 py-3">
+            <div className="text-sm text-gray-600 flex items-center gap-1">
+              <span>Submission</span>
+              <span>&gt;</span>
+              <span className="text-gray-900">{activeTabLabel}</span>
+            </div>
           </div>
-          <div className="p-6">
-            <p className="text-gray-600">Content area</p>
+
+          {/* Main Content Area */}
+          <div className="flex-1 overflow-auto bg-white">
+            <div className="w-full h-full p-8">
+              {renderContent()}
+              {/* Action Buttons */}
+              <div className="flex gap-3 justify-end mt-12 pt-6 border-t border-gray-200">
+                <Button variant="outline">Previous</Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">
+                  Cancel
+                </Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">Save</Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">Next</Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
