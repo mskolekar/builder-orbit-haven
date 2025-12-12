@@ -127,8 +127,8 @@ export default function AddNew() {
                         </Select>
                       </HorizontalFormField>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="flex items-center justify-between">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between pl-44">
                           <div className="space-y-1">
                             <div className="text-sm font-medium text-gray-700">
                               Login access to OMS?
@@ -142,7 +142,7 @@ export default function AddNew() {
                             onCheckedChange={setNeedsOMS}
                           />
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between pl-44">
                           <div className="space-y-1">
                             <div className="text-sm font-medium text-gray-700">
                               Login access to B2C?
@@ -157,8 +157,7 @@ export default function AddNew() {
                           />
                         </div>
                         {needsOMS && (
-                          <div className="space-y-2">
-                            <Label>Security Profile</Label>
+                          <HorizontalFormField label="Security Profile">
                             <Select>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select profile" />
@@ -170,13 +169,12 @@ export default function AddNew() {
                                 </SelectItem>
                               </SelectContent>
                             </Select>
-                          </div>
+                          </HorizontalFormField>
                         )}
                         {needsB2C && (
-                          <div className="space-y-2">
-                            <Label>Login ID</Label>
+                          <HorizontalFormField label="Login ID">
                             <Input placeholder="user@example.com" />
-                          </div>
+                          </HorizontalFormField>
                         )}
                       </div>
                     </div>
