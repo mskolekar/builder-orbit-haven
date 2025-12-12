@@ -180,7 +180,7 @@ export default function AddNew() {
                     </div>
                   )}
 
-                  <div className="mt-6 flex justify-end">
+                  <div className="mt-8 flex justify-end">
                     <Button
                       className="bg-[#0054A6] hover:bg-[#003d7a]"
                       onClick={saveToOlivia}
