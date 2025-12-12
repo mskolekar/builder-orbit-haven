@@ -59,17 +59,25 @@ function FormField({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={cn(
-        "px-4 py-3 rounded",
-        isMandatory ? "bg-yellow-100" : "bg-white",
-      )}
-    >
-      <label className="block font-medium text-gray-700 text-sm mb-2">
+    <div className="flex gap-4 items-start">
+      <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm pt-2">
         {label}
         {isMandatory && <span className="text-red-600 ml-1">*</span>}
       </label>
-      <div>{children}</div>
+      <div
+        className={cn(
+          "flex-1",
+          isMandatory && "rounded overflow-hidden",
+        )}
+      >
+        <div
+          className={cn(
+            isMandatory && "bg-yellow-100 px-3 py-2 rounded",
+          )}
+        >
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
