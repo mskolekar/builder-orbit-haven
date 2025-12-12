@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { SubmissionSidebar } from "@/components/ui/submission-sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -46,7 +46,7 @@ function SubmissionHeader() {
 }
 
 function FormRow({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-2 gap-12">{children}</div>;
+  return <div className="grid grid-cols-2 gap-12 mb-6">{children}</div>;
 }
 
 function FormField({
@@ -59,17 +59,21 @@ function FormField({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={cn(
-        "px-4 py-3 rounded",
-        isMandatory ? "bg-yellow-100" : "bg-white",
-      )}
-    >
-      <label className="block font-medium text-gray-700 text-sm mb-2">
+    <div className="flex gap-4 items-start">
+      <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm pt-2">
         {label}
         {isMandatory && <span className="text-red-600 ml-1">*</span>}
       </label>
-      <div>{children}</div>
+      <div className="flex-1">
+        {isMandatory
+          ? React.cloneElement(children as React.ReactElement, {
+              className: cn(
+                (children as React.ReactElement).props.className,
+                "bg-yellow-100",
+              ),
+            })
+          : children}
+      </div>
     </div>
   );
 }
@@ -346,13 +350,23 @@ export default function Submissions() {
             <div className="w-full h-full p-8">
               {renderContent()}
               {/* Action Buttons */}
-              <div className="flex gap-3 justify-end mt-12 pt-6 border-t border-gray-200">
-                <Button variant="outline">Previous</Button>
-                <Button className="bg-blue-600 hover:bg-blue-700">
-                  Cancel
-                </Button>
-                <Button className="bg-blue-600 hover:bg-blue-700">Save</Button>
-                <Button className="bg-blue-600 hover:bg-blue-700">Next</Button>
+              <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
+                {/* Row 1: Business Actions */}
+                <div className="flex justify-end gap-3">
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Cancel
+                  </Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Save
+                  </Button>
+                </div>
+                {/* Row 2: Navigation */}
+                <div className="flex justify-between">
+                  <Button variant="outline">Previous</Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    Next
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

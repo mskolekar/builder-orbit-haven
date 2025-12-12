@@ -1,8 +1,11 @@
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SubmissionSidebarItem {
   label: string;
   id: string;
+  subItems?: SubmissionSidebarItem[];
 }
 
 const submissionMenuItems: SubmissionSidebarItem[] = [
@@ -14,7 +17,15 @@ const submissionMenuItems: SubmissionSidebarItem[] = [
   { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
   { label: "Quotations", id: "quotations" },
   { label: "Parties", id: "parties" },
-  { label: "Journal", id: "journal" },
+  {
+    label: "Journal",
+    id: "journal",
+    subItems: [
+      { label: "Document", id: "journal-document" },
+      { label: "Email", id: "journal-email" },
+      { label: "Diaries", id: "journal-diaries" },
+    ],
+  },
 ];
 
 interface SubmissionSidebarProps {
@@ -28,6 +39,14 @@ export function SubmissionSidebar({
   onTabChange,
   isCollapsed,
 }: SubmissionSidebarProps) {
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  const toggleExpanded = (id: string) => {
+    setExpandedItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
+  };
+
   return (
     <div
       className={cn(
@@ -43,19 +62,55 @@ export function SubmissionSidebar({
         <ul className="space-y-1" role="menubar">
           {submissionMenuItems.map((item) => (
             <li key={item.id}>
-              <button
-                onClick={() => onTabChange(item.id)}
-                className={cn(
-                  "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
-                  activeTab === item.id
-                    ? "bg-[#6F7C88] text-white"
-                    : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
-                )}
-                title={isCollapsed ? item.label : undefined}
-                aria-label={item.label}
-              >
-                {item.label}
-              </button>
+              <div>
+                <button
+                  onClick={() => {
+                    onTabChange(item.id);
+                    if (item.subItems) {
+                      toggleExpanded(item.id);
+                    }
+                  }}
+                  className={cn(
+                    "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
+                    activeTab === item.id
+                      ? "bg-[#6F7C88] text-white"
+                      : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                  )}
+                  title={isCollapsed ? item.label : undefined}
+                  aria-label={item.label}
+                >
+                  {item.subItems && (
+                    <ChevronDown
+                      size={16}
+                      className={cn(
+                        "transition-transform flex-shrink-0",
+                        expandedItems.includes(item.id) ? "rotate-180" : "",
+                      )}
+                    />
+                  )}
+                  {item.label}
+                </button>
+              </div>
+              {item.subItems && expandedItems.includes(item.id) && (
+                <ul className="mt-1 space-y-1 ml-4">
+                  {item.subItems.map((subItem) => (
+                    <li key={subItem.id}>
+                      <button
+                        onClick={() => onTabChange(subItem.id)}
+                        className={cn(
+                          "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
+                          activeTab === subItem.id
+                            ? "bg-[#6F7C88] text-white"
+                            : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                        )}
+                        aria-label={subItem.label}
+                      >
+                        {subItem.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>

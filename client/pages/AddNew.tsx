@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useNavigate } from "react-router-dom";
+import { HorizontalFormField } from "@/components/ui/horizontal-form-field";
 
 export default function AddNew() {
   const [isInternal, setIsInternal] = useState(false);
@@ -40,23 +41,19 @@ export default function AddNew() {
               </TabsList>
 
               <TabsContent value="person" className="mt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="p-name">Name</Label>
+                <div className="space-y-4">
+                  <HorizontalFormField label="Name">
                     <Input id="p-name" placeholder="Full name" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Email</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Email">
                     <Input type="email" placeholder="email@example.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Phone</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Phone">
                     <Input placeholder="(000) 000-0000" />
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <Label>Address</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Address">
                     <Input placeholder="Street, City, State, ZIP" />
-                  </div>
+                  </HorizontalFormField>
                 </div>
 
                 <div className="mt-6 space-y-4">
@@ -76,9 +73,8 @@ export default function AddNew() {
                   </div>
 
                   {isInternal ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label>Security Profile</Label>
+                    <div className="space-y-4">
+                      <HorizontalFormField label="Security Profile">
                         <Select>
                           <SelectTrigger>
                             <SelectValue placeholder="Select profile" />
@@ -89,56 +85,50 @@ export default function AddNew() {
                             <SelectItem value="admin">Admin</SelectItem>
                           </SelectContent>
                         </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Login ID</Label>
+                      </HorizontalFormField>
+                      <HorizontalFormField label="Login ID">
                         <Input placeholder="user@company" />
-                      </div>
-                      <div className="md:col-span-2 text-xs text-gray-500">
+                      </HorizontalFormField>
+                      <div className="text-xs text-gray-500 pl-44">
                         Relationship will be added as Employee with appropriate
                         role.
                       </div>
                     </div>
                   ) : (
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label>Related to Organization?</Label>
-                          <Select>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="yes">Yes</SelectItem>
-                              <SelectItem value="no">No</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Organization Name</Label>
-                          <Input placeholder="Search or add & link" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Relationship Type</Label>
-                          <Select>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="broker">
-                                Broker Contact
-                              </SelectItem>
-                              <SelectItem value="insured">
-                                Insured Contact
-                              </SelectItem>
-                              <SelectItem value="claim">Claim Party</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
+                    <div className="space-y-4">
+                      <HorizontalFormField label="Related to Organization?">
+                        <Select>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="yes">Yes</SelectItem>
+                            <SelectItem value="no">No</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </HorizontalFormField>
+                      <HorizontalFormField label="Organization Name">
+                        <Input placeholder="Search or add & link" />
+                      </HorizontalFormField>
+                      <HorizontalFormField label="Relationship Type">
+                        <Select>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="broker">
+                              Broker Contact
+                            </SelectItem>
+                            <SelectItem value="insured">
+                              Insured Contact
+                            </SelectItem>
+                            <SelectItem value="claim">Claim Party</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </HorizontalFormField>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="flex items-center justify-between">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between pl-44">
                           <div className="space-y-1">
                             <div className="text-sm font-medium text-gray-700">
                               Login access to OMS?
@@ -152,7 +142,7 @@ export default function AddNew() {
                             onCheckedChange={setNeedsOMS}
                           />
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between pl-44">
                           <div className="space-y-1">
                             <div className="text-sm font-medium text-gray-700">
                               Login access to B2C?
@@ -167,8 +157,7 @@ export default function AddNew() {
                           />
                         </div>
                         {needsOMS && (
-                          <div className="space-y-2">
-                            <Label>Security Profile</Label>
+                          <HorizontalFormField label="Security Profile">
                             <Select>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select profile" />
@@ -180,19 +169,18 @@ export default function AddNew() {
                                 </SelectItem>
                               </SelectContent>
                             </Select>
-                          </div>
+                          </HorizontalFormField>
                         )}
                         {needsB2C && (
-                          <div className="space-y-2">
-                            <Label>Login ID</Label>
+                          <HorizontalFormField label="Login ID">
                             <Input placeholder="user@example.com" />
-                          </div>
+                          </HorizontalFormField>
                         )}
                       </div>
                     </div>
                   )}
 
-                  <div className="mt-6 flex justify-end">
+                  <div className="mt-8 flex justify-end">
                     <Button
                       className="bg-[#0054A6] hover:bg-[#003d7a]"
                       onClick={saveToOlivia}
@@ -204,26 +192,22 @@ export default function AddNew() {
               </TabsContent>
 
               <TabsContent value="organization" className="mt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="o-name">Name</Label>
+                <div className="space-y-4">
+                  <HorizontalFormField label="Name">
                     <Input id="o-name" placeholder="Organization name" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Email</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Email">
                     <Input type="email" placeholder="email@org.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Phone</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Phone">
                     <Input placeholder="(000) 000-0000" />
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <Label>Address</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Address">
                     <Input placeholder="Street, City, State, ZIP" />
-                  </div>
+                  </HorizontalFormField>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-6 flex items-center justify-between pl-44">
                   <div className="space-y-1">
                     <div className="text-sm font-medium text-gray-700">
                       Define employees/contacts?
@@ -238,7 +222,7 @@ export default function AddNew() {
                   />
                 </div>
 
-                <div className="mt-6 flex justify-end">
+                <div className="mt-8 flex justify-end">
                   <Button
                     className="bg-[#0054A6] hover:bg-[#003d7a]"
                     onClick={saveToOlivia}
