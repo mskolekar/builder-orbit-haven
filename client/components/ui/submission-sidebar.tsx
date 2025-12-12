@@ -1,8 +1,11 @@
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SubmissionSidebarItem {
   label: string;
   id: string;
+  subItems?: SubmissionSidebarItem[];
 }
 
 const submissionMenuItems: SubmissionSidebarItem[] = [
@@ -14,7 +17,15 @@ const submissionMenuItems: SubmissionSidebarItem[] = [
   { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
   { label: "Quotations", id: "quotations" },
   { label: "Parties", id: "parties" },
-  { label: "Journal", id: "journal" },
+  {
+    label: "Journal",
+    id: "journal",
+    subItems: [
+      { label: "Document", id: "journal-document" },
+      { label: "Email", id: "journal-email" },
+      { label: "Diaries", id: "journal-diaries" },
+    ],
+  },
 ];
 
 interface SubmissionSidebarProps {
