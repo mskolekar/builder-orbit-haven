@@ -16,6 +16,7 @@ import History from "@/pages/History";
 import CustomerDetails from "@/pages/CustomerDetails";
 import CustomerCenterHome from "@/pages/CustomerCenterHome";
 import CustomerCenterSearch from "@/pages/CustomerCenterSearch";
+import SubmissionSearch from "@/pages/SubmissionSearch";
 import Submissions from "@/pages/Submissions";
 import Incidents from "@/pages/Incidents";
 import PlaceholderPage from "@/pages/PlaceholderPage";
@@ -420,6 +421,7 @@ function AppContent() {
                 path="/customer-center"
                 element={<CustomerCenterSearch />}
               />
+              <Route path="/submission-search" element={<SubmissionSearch />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/communication" element={<Communication />} />
