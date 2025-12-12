@@ -350,13 +350,17 @@ export default function Submissions() {
             <div className="w-full h-full p-8">
               {renderContent()}
               {/* Action Buttons */}
-              <div className="flex gap-3 justify-between mt-12 pt-6 border-t border-gray-200">
-                <Button variant="outline">Previous</Button>
-                <div className="flex gap-3">
+              <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
+                {/* Row 1: Business Actions */}
+                <div className="flex justify-end gap-3">
                   <Button className="bg-blue-600 hover:bg-blue-700">
                     Cancel
                   </Button>
                   <Button className="bg-blue-600 hover:bg-blue-700">Save</Button>
+                </div>
+                {/* Row 2: Navigation */}
+                <div className="flex justify-between">
+                  <Button variant="outline">Previous</Button>
                   <Button className="bg-blue-600 hover:bg-blue-700">Next</Button>
                 </div>
               </div>
