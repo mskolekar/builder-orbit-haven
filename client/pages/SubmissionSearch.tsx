@@ -56,7 +56,6 @@ export default function SubmissionSearch() {
   };
 
   const handleRunSearch = () => {
-    // TODO: Implement search functionality
     console.log("Running search with filters:", filters);
   };
 
@@ -69,9 +68,10 @@ export default function SubmissionSearch() {
 
       {/* Filters Section */}
       <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+        {/* First Row of Filters */}
+        <div className="flex gap-8 mb-6 items-end">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Organization or Last Name
             </label>
             <Input
@@ -83,8 +83,8 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Email Address
             </label>
             <Input
@@ -95,8 +95,8 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Email Address
             </label>
             <Input
@@ -105,8 +105,8 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Organization Type
             </label>
             <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -115,8 +115,8 @@ export default function SubmissionSearch() {
               <option value="organization">Organization</option>
             </select>
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Policy#
             </label>
             <Input
@@ -128,9 +128,12 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
+        </div>
 
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+        {/* Second Row of Filters */}
+        <div className="flex gap-8 mb-6 items-end">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               First Name
             </label>
             <Input
@@ -140,8 +143,8 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Phone Number
             </label>
             <Input
@@ -151,8 +154,8 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Contact Type
             </label>
             <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -161,8 +164,8 @@ export default function SubmissionSearch() {
               <option value="agent">Agent</option>
             </select>
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Tax ID (PEN/EIN)
             </label>
             <Input
@@ -172,31 +175,8 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
-
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
-              Address
-            </label>
-            <Input
-              placeholder="Address"
-              value={filters.address}
-              onChange={(e) => handleFilterChange("address", e.target.value)}
-              className="w-full text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
-              City
-            </label>
-            <Input
-              placeholder="City"
-              value={filters.city}
-              onChange={(e) => handleFilterChange("city", e.target.value)}
-              className="w-full text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Status
             </label>
             <select
@@ -209,39 +189,42 @@ export default function SubmissionSearch() {
               <option value="Inactive">Inactive</option>
             </select>
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
-              Soc Sec
-            </label>
-            <Input
-              placeholder="Soc Sec"
-              value={filters.socialSec}
-              onChange={(e) => handleFilterChange("socialSec", e.target.value)}
-              className="w-full text-sm"
-            />
-          </div>
+        </div>
 
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
-              State
+        {/* Third Row of Filters */}
+        <div className="flex gap-8 mb-6 items-end">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
+              Address
             </label>
             <Input
-              placeholder="State"
-              value={filters.state}
-              onChange={(e) => handleFilterChange("state", e.target.value)}
+              placeholder="Address"
+              value={filters.address}
+              onChange={(e) => handleFilterChange("address", e.target.value)}
               className="w-full text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
+              City
+            </label>
+            <Input
+              placeholder="City"
+              value={filters.city}
+              onChange={(e) => handleFilterChange("city", e.target.value)}
+              className="w-full text-sm"
+            />
+          </div>
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Record Type
             </label>
             <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
               <option value="">Select Type</option>
             </select>
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               DOT/NPI Number
             </label>
             <Input
@@ -251,8 +234,8 @@ export default function SubmissionSearch() {
               className="w-full text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Postal Code
             </label>
             <Input
@@ -264,32 +247,60 @@ export default function SubmissionSearch() {
           </div>
         </div>
 
+        {/* Fourth Row of Filters */}
+        <div className="flex gap-8 mb-6 items-end">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
+              State
+            </label>
+            <Input
+              placeholder="State"
+              value={filters.state}
+              onChange={(e) => handleFilterChange("state", e.target.value)}
+              className="w-full text-sm"
+            />
+          </div>
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
+              Soc Sec
+            </label>
+            <Input
+              placeholder="Soc Sec"
+              value={filters.socialSec}
+              onChange={(e) => handleFilterChange("socialSec", e.target.value)}
+              className="w-full text-sm"
+            />
+          </div>
+          <div className="flex-1"></div>
+          <div className="flex-1"></div>
+          <div className="flex-1"></div>
+        </div>
+
         {/* Action Buttons */}
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-3 mb-4">
           <Button
             onClick={handleAddSubmission}
-            className="bg-blue-600 text-white flex items-center gap-2 hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-medium text-sm"
           >
-            <Plus size={16} />
+            <Plus size={16} className="mr-2" />
             Add Submission
           </Button>
         </div>
 
         {/* Search and Clear Buttons */}
-        <div className="flex gap-2 justify-end">
+        <div className="flex gap-3 justify-end">
           <Button
             onClick={handleRunSearch}
-            className="bg-blue-600 text-white flex items-center gap-2 hover:bg-blue-700"
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-medium text-sm"
           >
-            <Search size={16} />
+            <Search size={16} className="mr-2" />
             Run Search
           </Button>
           <Button
             variant="outline"
             onClick={handleClearFilters}
-            className="flex items-center gap-2"
+            className="border-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-50 font-medium text-sm"
           >
-            <RotateCcw size={16} />
             Clear
           </Button>
         </div>
