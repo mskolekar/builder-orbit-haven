@@ -421,10 +421,7 @@ function AppContent() {
                 path="/customer-center"
                 element={<CustomerCenterSearch />}
               />
-              <Route
-                path="/submission-search"
-                element={<SubmissionSearch />}
-              />
+              <Route path="/submission-search" element={<SubmissionSearch />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/communication" element={<Communication />} />
