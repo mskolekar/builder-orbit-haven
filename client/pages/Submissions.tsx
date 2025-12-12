@@ -129,7 +129,7 @@ function OverviewSection() {
           <FormField label="Product" isMandatory>
             <Select>
               <SelectTrigger>
-                <SelectValue placeholder="Select product" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="product1">Product 1</SelectItem>
@@ -140,7 +140,7 @@ function OverviewSection() {
           <FormField label="Coverage" isMandatory>
             <Select>
               <SelectTrigger>
-                <SelectValue placeholder="Select coverage" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="coverage1">Coverage 1</SelectItem>
@@ -164,7 +164,7 @@ function OverviewSection() {
           <FormField label="Risk State" isMandatory>
             <Select>
               <SelectTrigger>
-                <SelectValue placeholder="Select state" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ak">AK</SelectItem>
