@@ -32,7 +32,7 @@ export function SubmissionSidebar({
     <div
       className={cn(
         "h-full bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300",
-        isCollapsed ? "w-0 overflow-hidden" : "w-64"
+        isCollapsed ? "w-0 overflow-hidden" : "w-64",
       )}
     >
       <nav
@@ -49,7 +49,7 @@ export function SubmissionSidebar({
                   "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
                   activeTab === item.id
                     ? "bg-[#6F7C88] text-white"
-                    : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]"
+                    : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                 )}
                 title={isCollapsed ? item.label : undefined}
                 aria-label={item.label}

@@ -62,7 +62,7 @@ function FormField({
     <div
       className={cn(
         "px-4 py-3 rounded",
-        isMandatory ? "bg-yellow-100" : "bg-white"
+        isMandatory ? "bg-yellow-100" : "bg-white",
       )}
     >
       <label className="block font-medium text-gray-700 text-sm mb-2">
@@ -319,7 +319,8 @@ export default function Submissions() {
     }
   };
 
-  const activeTabLabel = submissionTabs.find((tab) => tab.id === activeTab)?.label || "Overview";
+  const activeTabLabel =
+    submissionTabs.find((tab) => tab.id === activeTab)?.label || "Overview";
 
   return (
     <div className="flex-1 flex flex-col">
