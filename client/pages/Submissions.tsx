@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SubmissionSidebar } from "@/components/ui/submission-sidebar";
 
 function SubmissionHeader() {
   const submissionInfo = {
@@ -39,49 +38,30 @@ function SubmissionHeader() {
 
 export default function Submissions() {
   const [activeTab, setActiveTab] = useState("overview");
-  const [activeSubTab, setActiveSubTab] = useState<string | undefined>(undefined);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-
-  const handleTabChange = (tabId: string, subTabId?: string) => {
-    setActiveTab(tabId);
-    setActiveSubTab(subTabId);
-  };
 
   return (
     <div className="flex-1 flex flex-col">
       <SubmissionHeader />
       <div className="flex flex-1 overflow-hidden">
-        <SubmissionSidebar
-          isCollapsed={isSidebarCollapsed}
-          activeTab={activeTab}
-          activeSubTab={activeSubTab}
-          onTabChange={handleTabChange}
-          onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        />
+        <div className="w-64 bg-blue-600 text-white">
+          <div className="p-4">Tab menu</div>
+        </div>
         <div className="flex-1 flex flex-col overflow-auto">
           <div className="sticky top-0 z-30 bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-4">
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
               className="text-gray-700 hover:bg-gray-100 p-1 h-8 w-8"
-              title={
-                isSidebarCollapsed ? "Expand Panel" : "Collapse Panel"
-              }
             >
-              {isSidebarCollapsed ? (
-                <Menu size={16} />
-              ) : (
-                <ChevronLeft size={16} />
-              )}
+              <Menu size={16} />
             </Button>
             <h2 className="text-sm font-semibold text-gray-900">
-              {activeTab.replace(/-/g, " ").toUpperCase()}
-              {activeSubTab && ` - ${activeSubTab.replace(/-/g, " ").toUpperCase()}`}
+              Test Content
             </h2>
           </div>
           <div className="p-6">
-            <p className="text-gray-600">Content for {activeTab} tab</p>
+            <p className="text-gray-600">Content area</p>
           </div>
         </div>
       </div>
