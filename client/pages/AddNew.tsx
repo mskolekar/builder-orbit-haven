@@ -192,23 +192,19 @@ export default function AddNew() {
               </TabsContent>
 
               <TabsContent value="organization" className="mt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="o-name">Name</Label>
+                <div className="space-y-4">
+                  <HorizontalFormField label="Name">
                     <Input id="o-name" placeholder="Organization name" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Email</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Email">
                     <Input type="email" placeholder="email@org.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Phone</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Phone">
                     <Input placeholder="(000) 000-0000" />
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <Label>Address</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Address">
                     <Input placeholder="Street, City, State, ZIP" />
-                  </div>
+                  </HorizontalFormField>
                 </div>
 
                 <div className="mt-6 flex items-center justify-between">
