@@ -41,23 +41,19 @@ export default function AddNew() {
               </TabsList>
 
               <TabsContent value="person" className="mt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="p-name">Name</Label>
+                <div className="space-y-4">
+                  <HorizontalFormField label="Name">
                     <Input id="p-name" placeholder="Full name" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Email</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Email">
                     <Input type="email" placeholder="email@example.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Phone</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Phone">
                     <Input placeholder="(000) 000-0000" />
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <Label>Address</Label>
+                  </HorizontalFormField>
+                  <HorizontalFormField label="Address">
                     <Input placeholder="Street, City, State, ZIP" />
-                  </div>
+                  </HorizontalFormField>
                 </div>
 
                 <div className="mt-6 space-y-4">
