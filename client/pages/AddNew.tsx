@@ -95,42 +95,37 @@ export default function AddNew() {
                       </div>
                     </div>
                   ) : (
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label>Related to Organization?</Label>
-                          <Select>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="yes">Yes</SelectItem>
-                              <SelectItem value="no">No</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Organization Name</Label>
-                          <Input placeholder="Search or add & link" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Relationship Type</Label>
-                          <Select>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="broker">
-                                Broker Contact
-                              </SelectItem>
-                              <SelectItem value="insured">
-                                Insured Contact
-                              </SelectItem>
-                              <SelectItem value="claim">Claim Party</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
+                    <div className="space-y-4">
+                      <HorizontalFormField label="Related to Organization?">
+                        <Select>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="yes">Yes</SelectItem>
+                            <SelectItem value="no">No</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </HorizontalFormField>
+                      <HorizontalFormField label="Organization Name">
+                        <Input placeholder="Search or add & link" />
+                      </HorizontalFormField>
+                      <HorizontalFormField label="Relationship Type">
+                        <Select>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="broker">
+                              Broker Contact
+                            </SelectItem>
+                            <SelectItem value="insured">
+                              Insured Contact
+                            </SelectItem>
+                            <SelectItem value="claim">Claim Party</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </HorizontalFormField>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex items-center justify-between">
