@@ -66,17 +66,11 @@ function FormField({
       </label>
       <div
         className={cn(
-          "flex-1",
-          isMandatory && "rounded overflow-hidden",
+          "flex-1 rounded",
+          isMandatory && "bg-yellow-100 p-2",
         )}
       >
-        <div
-          className={cn(
-            isMandatory && "bg-yellow-100 px-3 py-2 rounded",
-          )}
-        >
-          {children}
-        </div>
+        {children}
       </div>
     </div>
   );
