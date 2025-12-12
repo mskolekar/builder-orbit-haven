@@ -46,7 +46,7 @@ function SubmissionHeader() {
 }
 
 function FormRow({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-2 gap-8 mb-4">{children}</div>;
+  return <div className="grid grid-cols-2 gap-12">{children}</div>;
 }
 
 function FormField({
@@ -61,63 +61,70 @@ function FormField({
   return (
     <div
       className={cn(
-        "p-3 rounded flex items-center gap-4",
-        isMandatory ? "bg-yellow-100" : "bg-gray-50"
+        "px-4 py-3 rounded",
+        isMandatory ? "bg-yellow-100" : "bg-white"
       )}
     >
-      <label className="font-medium text-gray-700 whitespace-nowrap w-32 text-sm">
+      <label className="block font-medium text-gray-700 text-sm mb-2">
         {label}
         {isMandatory && <span className="text-red-600 ml-1">*</span>}
       </label>
-      <div className="flex-1">{children}</div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+function SectionHeader({ title }: { title: string }) {
+  return (
+    <div className="mb-6">
+      <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300">
+        {title}
+      </h3>
     </div>
   );
 }
 
 function OverviewSection() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Insured & Submission Overview */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Insured & Submission Overview
-        </h3>
+        <SectionHeader title="Insured & Submission Overview" />
         <FormRow>
           <FormField label="Insured" isMandatory>
-            <Input placeholder="Enter Insured name" />
+            <Input />
           </FormField>
           <FormField label="DOA" isMandatory>
-            <Input placeholder="Enter DOA" />
+            <Input />
           </FormField>
         </FormRow>
         <FormRow>
           <FormField label="Project Identifier">
-            <Input placeholder="Enter project identifier" />
+            <Input />
           </FormField>
           <FormField label="Submission Number" isMandatory>
-            <Input placeholder="Enter submission number" />
+            <Input />
           </FormField>
         </FormRow>
         <FormRow>
           <FormField label="Submission Suffix">
-            <Input placeholder="Enter suffix" />
+            <Input />
           </FormField>
           <FormField label="Named Insured">
-            <Input placeholder="Enter named insured" />
+            <Input />
           </FormField>
         </FormRow>
-        <div className="mb-4">
+        <div className="grid grid-cols-2 gap-12">
           <FormField label="Direct Link / Policy Number">
-            <Input placeholder="Enter policy number or link" />
+            <Input />
           </FormField>
+          <div />
         </div>
       </div>
 
       {/* Product & Coverage Details */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Product & Coverage Details
-        </h3>
+        <SectionHeader title="Product & Coverage Details" />
         <FormRow>
           <FormField label="Product" isMandatory>
             <Select>
@@ -144,15 +151,15 @@ function OverviewSection() {
         </FormRow>
         <FormRow>
           <FormField label="Sub Class">
-            <Input placeholder="Enter sub class" />
+            <Input />
           </FormField>
           <FormField label="Main ISO Code">
-            <Input placeholder="Enter main ISO code" />
+            <Input />
           </FormField>
         </FormRow>
         <FormRow>
           <FormField label="Secondary ISO Code">
-            <Input placeholder="Enter secondary ISO code" />
+            <Input />
           </FormField>
           <FormField label="Risk State" isMandatory>
             <Select>
@@ -171,21 +178,21 @@ function OverviewSection() {
 
       {/* Dates */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Dates</h3>
+        <SectionHeader title="Dates" />
         <FormRow>
           <FormField label="Proposed Effective Date" isMandatory>
-            <Input placeholder="MM/DD/YYYY" />
+            <Input />
           </FormField>
           <FormField label="Proposed Expiration Date" isMandatory>
-            <Input placeholder="MM/DD/YYYY" />
+            <Input />
           </FormField>
         </FormRow>
         <FormRow>
           <FormField label="Received Date">
-            <Input placeholder="MM/DD/YYYY" />
+            <Input />
           </FormField>
           <FormField label="Requested By Date">
-            <Input placeholder="MM/DD/YYYY" />
+            <Input />
           </FormField>
         </FormRow>
       </div>
