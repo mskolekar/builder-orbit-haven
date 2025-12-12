@@ -310,7 +310,6 @@ export default function Submissions() {
           activeTab={activeTab}
           onTabChange={setActiveTab}
           isCollapsed={isSidebarCollapsed}
-          onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         />
         <div className="flex-1 flex flex-col overflow-auto">
           <div className="flex-1 overflow-auto">
