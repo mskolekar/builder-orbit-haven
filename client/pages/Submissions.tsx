@@ -64,13 +64,15 @@ function FormField({
         {label}
         {isMandatory && <span className="text-red-600 ml-1">*</span>}
       </label>
-      <div
-        className={cn(
-          "flex-1 rounded",
-          isMandatory && "bg-yellow-100 p-2",
-        )}
-      >
-        {children}
+      <div className="flex-1">
+        {isMandatory
+          ? React.cloneElement(children as React.ReactElement, {
+              className: cn(
+                (children as React.ReactElement).props.className,
+                "bg-yellow-100",
+              ),
+            })
+          : children}
       </div>
     </div>
   );
