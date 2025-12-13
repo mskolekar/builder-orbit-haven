@@ -411,7 +411,52 @@ export default function Submissions() {
     return "Overview";
   };
 
+  const getBreadcrumbPath = (): { label: string; level: number }[] => {
+    const path: { label: string; level: number }[] = [
+      { label: "Submissions", level: 0 },
+    ];
+
+    // Handle quotations submodules
+    if (activeTab.startsWith("quotations-")) {
+      if (activeTab !== "quotations") {
+        path.push({ label: "Quotations", level: 1 });
+        const subLabel = activeTab.replace("quotations-", "");
+        const formatted =
+          subLabel.charAt(0).toUpperCase() +
+          subLabel.slice(1).replace("-", " ");
+        path.push({ label: formatted, level: 2 });
+      } else {
+        path.push({ label: "Quotations", level: 1 });
+      }
+    }
+    // Handle journal submodules
+    else if (activeTab.startsWith("journal-")) {
+      if (activeTab !== "journal") {
+        path.push({ label: "Journal", level: 1 });
+        const subLabel = activeTab.replace("journal-", "");
+        const formatted =
+          subLabel.charAt(0).toUpperCase() +
+          subLabel.slice(1).replace("-", " ");
+        path.push({ label: formatted, level: 2 });
+      } else {
+        path.push({ label: "Journal", level: 1 });
+      }
+    }
+    // Handle regular tabs
+    else {
+      const tab = submissionTabs.find((t) => t.id === activeTab);
+      if (tab && activeTab !== "overview") {
+        path.push({ label: tab.label, level: 1 });
+      } else if (activeTab === "overview") {
+        path.push({ label: "Overview", level: 1 });
+      }
+    }
+
+    return path;
+  };
+
   const activeTabLabel = getActiveTabLabel();
+  const breadcrumbPath = getBreadcrumbPath();
 
   return (
     <div className="flex-1 flex flex-col">
