@@ -10,8 +10,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { ChevronLeft, Menu } from "lucide-react";
 
-function SubmissionHeader() {
+function SubmissionHeader({
+  isCollapsed,
+  onToggleCollapse,
+}: {
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
+}) {
   const submissionInfo = {
     id: "OrgName_97828",
     dates: "11-24-2025 - 11-24-2026",
@@ -23,22 +30,37 @@ function SubmissionHeader() {
 
   return (
     <div className="sticky top-0 z-40 bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-6 py-4 shadow-lg">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-semibold">Submission:</span>
-          <span>{submissionInfo.id}</span>
-          <span className="text-white/70">|</span>
-          <span>{submissionInfo.dates}</span>
-          <span className="text-white/70">|</span>
-          <span>{submissionInfo.state}</span>
-          <span className="text-white/70">|</span>
-          <span>{submissionInfo.code}</span>
-          <span className="text-white/70">|</span>
-          <span>
-            Status:{" "}
-            <span className="font-semibold">{submissionInfo.status}</span> -{" "}
-            {submissionInfo.type}
-          </span>
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onToggleCollapse}
+          className="text-white hover:bg-white/10 p-1 h-8 w-8"
+          title={isCollapsed ? "Expand Panel" : "Collapse Panel"}
+        >
+          {isCollapsed ? (
+            <Menu size={16} />
+          ) : (
+            <ChevronLeft size={16} />
+          )}
+        </Button>
+        <div className="flex items-center justify-between flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-semibold">Submission:</span>
+            <span>{submissionInfo.id}</span>
+            <span className="text-white/70">|</span>
+            <span>{submissionInfo.dates}</span>
+            <span className="text-white/70">|</span>
+            <span>{submissionInfo.state}</span>
+            <span className="text-white/70">|</span>
+            <span>{submissionInfo.code}</span>
+            <span className="text-white/70">|</span>
+            <span>
+              Status:{" "}
+              <span className="font-semibold">{submissionInfo.status}</span> -{" "}
+              {submissionInfo.type}
+            </span>
+          </div>
         </div>
       </div>
     </div>
