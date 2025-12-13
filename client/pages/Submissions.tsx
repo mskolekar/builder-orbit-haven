@@ -506,7 +506,7 @@ export default function Submissions() {
                 </div>
                 {/* Row 2: Navigation */}
                 <div className="flex justify-between">
-                  <Button variant="outline">Previous</Button>
+                  <Button>Previous</Button>
                   <Button>Next</Button>
                 </div>
               </div>
