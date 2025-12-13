@@ -405,8 +405,8 @@ export default function CustomerCenterSearch() {
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-2 mb-4">
+        {/* Action and Search Buttons */}
+        <div className="flex gap-2 items-center">
           <Button>
             <Plus size={16} />
             Add Person
@@ -419,10 +419,7 @@ export default function CustomerCenterSearch() {
             <Plus size={16} />
             Add Organization
           </Button>
-        </div>
-
-        {/* Search and Clear Buttons */}
-        <div className="flex gap-2 justify-end">
+          <div className="flex-1" />
           <Button>
             <Search size={16} />
             Run Search
