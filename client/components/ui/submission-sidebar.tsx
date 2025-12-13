@@ -15,7 +15,17 @@ const submissionMenuItems: SubmissionSidebarItem[] = [
   { label: "Exposures", id: "exposures" },
   { label: "Manual Multi Rating", id: "manual-multi-rating" },
   { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
-  { label: "Quotations", id: "quotations" },
+  {
+    label: "Quotations",
+    id: "quotations",
+    subItems: [
+      { label: "Pricing", id: "quotations-pricing" },
+      { label: "Subjectivity", id: "quotations-subjectivity" },
+      { label: "Proposal", id: "quotations-proposal" },
+      { label: "Forms", id: "quotations-forms" },
+      { label: "Bind", id: "quotations-bind" },
+    ],
+  },
   { label: "Parties", id: "parties" },
   {
     label: "Journal",
