@@ -278,29 +278,19 @@ export default function SubmissionSearch() {
 
         {/* Action Buttons */}
         <div className="flex gap-3 mb-4">
-          <Button
-            onClick={handleAddSubmission}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-medium text-sm"
-          >
-            <Plus size={16} className="mr-2" />
+          <Button onClick={handleAddSubmission}>
+            <Plus size={16} />
             Add Submission
           </Button>
         </div>
 
         {/* Search and Clear Buttons */}
         <div className="flex gap-3 justify-end">
-          <Button
-            onClick={handleRunSearch}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-medium text-sm"
-          >
-            <Search size={16} className="mr-2" />
+          <Button onClick={handleRunSearch}>
+            <Search size={16} />
             Run Search
           </Button>
-          <Button
-            variant="outline"
-            onClick={handleClearFilters}
-            className="border-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-50 font-medium text-sm"
-          >
+          <Button variant="outline" onClick={handleClearFilters}>
             Clear
           </Button>
         </div>
