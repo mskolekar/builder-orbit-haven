@@ -474,9 +474,22 @@ export default function Submissions() {
           {/* Breadcrumb Bar */}
           <div className="bg-white border-b border-gray-200 px-6 py-3">
             <div className="text-sm text-gray-600 flex items-center gap-1">
-              <span>Submission</span>
-              <span>&gt;</span>
-              <span className="text-gray-900">{activeTabLabel}</span>
+              {breadcrumbPath.map((item, index) => (
+                <React.Fragment key={index}>
+                  <span
+                    className={
+                      index === breadcrumbPath.length - 1
+                        ? "text-gray-900"
+                        : ""
+                    }
+                  >
+                    {item.label}
+                  </span>
+                  {index < breadcrumbPath.length - 1 && (
+                    <span>&gt;</span>
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </div>
 
