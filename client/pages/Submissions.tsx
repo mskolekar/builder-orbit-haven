@@ -10,8 +10,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { ChevronLeft, Menu } from "lucide-react";
 
-function SubmissionHeader() {
+function SubmissionHeader({
+  isCollapsed,
+  onToggleCollapse,
+}: {
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
+}) {
   const submissionInfo = {
     id: "OrgName_97828",
     dates: "11-24-2025 - 11-24-2026",
@@ -23,22 +30,33 @@ function SubmissionHeader() {
 
   return (
     <div className="sticky top-0 z-40 bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-6 py-4 shadow-lg">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-semibold">Submission:</span>
-          <span>{submissionInfo.id}</span>
-          <span className="text-white/70">|</span>
-          <span>{submissionInfo.dates}</span>
-          <span className="text-white/70">|</span>
-          <span>{submissionInfo.state}</span>
-          <span className="text-white/70">|</span>
-          <span>{submissionInfo.code}</span>
-          <span className="text-white/70">|</span>
-          <span>
-            Status:{" "}
-            <span className="font-semibold">{submissionInfo.status}</span> -{" "}
-            {submissionInfo.type}
-          </span>
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onToggleCollapse}
+          className="text-white hover:bg-white/10 p-1 h-8 w-8"
+          title={isCollapsed ? "Expand Panel" : "Collapse Panel"}
+        >
+          {isCollapsed ? <Menu size={16} /> : <ChevronLeft size={16} />}
+        </Button>
+        <div className="flex items-center justify-between flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-semibold">Submission:</span>
+            <span>{submissionInfo.id}</span>
+            <span className="text-white/70">|</span>
+            <span>{submissionInfo.dates}</span>
+            <span className="text-white/70">|</span>
+            <span>{submissionInfo.state}</span>
+            <span className="text-white/70">|</span>
+            <span>{submissionInfo.code}</span>
+            <span className="text-white/70">|</span>
+            <span>
+              Status:{" "}
+              <span className="font-semibold">{submissionInfo.status}</span> -{" "}
+              {submissionInfo.type}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -264,6 +282,51 @@ function QuotationsSection() {
   );
 }
 
+function PricingSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Pricing</h3>
+      <p className="text-gray-600">Pricing content goes here</p>
+    </div>
+  );
+}
+
+function SubjectivitySection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Subjectivity</h3>
+      <p className="text-gray-600">Subjectivity content goes here</p>
+    </div>
+  );
+}
+
+function ProposalSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Proposal</h3>
+      <p className="text-gray-600">Proposal content goes here</p>
+    </div>
+  );
+}
+
+function FormsSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Forms</h3>
+      <p className="text-gray-600">Forms content goes here</p>
+    </div>
+  );
+}
+
+function BindSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Bind</h3>
+      <p className="text-gray-600">Bind content goes here</p>
+    </div>
+  );
+}
+
 function PartiesSection() {
   return (
     <div className="space-y-6">
@@ -290,6 +353,11 @@ const submissionTabs = [
   { label: "Manual Multi Rating", id: "manual-multi-rating" },
   { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
   { label: "Quotations", id: "quotations" },
+  { label: "Pricing", id: "quotations-pricing" },
+  { label: "Subjectivity", id: "quotations-subjectivity" },
+  { label: "Proposal", id: "quotations-proposal" },
+  { label: "Forms", id: "quotations-forms" },
+  { label: "Bind", id: "quotations-bind" },
   { label: "Parties", id: "parties" },
   { label: "Journal", id: "journal" },
 ];
@@ -314,6 +382,16 @@ export default function Submissions() {
         return <InclusionsExclusionsSection />;
       case "quotations":
         return <QuotationsSection />;
+      case "quotations-pricing":
+        return <PricingSection />;
+      case "quotations-subjectivity":
+        return <SubjectivitySection />;
+      case "quotations-proposal":
+        return <ProposalSection />;
+      case "quotations-forms":
+        return <FormsSection />;
+      case "quotations-bind":
+        return <BindSection />;
       case "parties":
         return <PartiesSection />;
       case "journal":
@@ -323,12 +401,65 @@ export default function Submissions() {
     }
   };
 
-  const activeTabLabel =
-    submissionTabs.find((tab) => tab.id === activeTab)?.label || "Overview";
+  const getActiveTabLabel = (): string => {
+    const tab = submissionTabs.find((t) => t.id === activeTab);
+    if (tab) return tab.label;
+    return "Overview";
+  };
+
+  const getBreadcrumbPath = (): { label: string; level: number }[] => {
+    const path: { label: string; level: number }[] = [
+      { label: "Submissions", level: 0 },
+    ];
+
+    // Handle quotations submodules
+    if (activeTab.startsWith("quotations-")) {
+      if (activeTab !== "quotations") {
+        path.push({ label: "Quotations", level: 1 });
+        const subLabel = activeTab.replace("quotations-", "");
+        const formatted =
+          subLabel.charAt(0).toUpperCase() +
+          subLabel.slice(1).replace("-", " ");
+        path.push({ label: formatted, level: 2 });
+      } else {
+        path.push({ label: "Quotations", level: 1 });
+      }
+    }
+    // Handle journal submodules
+    else if (activeTab.startsWith("journal-")) {
+      if (activeTab !== "journal") {
+        path.push({ label: "Journal", level: 1 });
+        const subLabel = activeTab.replace("journal-", "");
+        const formatted =
+          subLabel.charAt(0).toUpperCase() +
+          subLabel.slice(1).replace("-", " ");
+        path.push({ label: formatted, level: 2 });
+      } else {
+        path.push({ label: "Journal", level: 1 });
+      }
+    }
+    // Handle regular tabs
+    else {
+      const tab = submissionTabs.find((t) => t.id === activeTab);
+      if (tab && activeTab !== "overview") {
+        path.push({ label: tab.label, level: 1 });
+      } else if (activeTab === "overview") {
+        path.push({ label: "Overview", level: 1 });
+      }
+    }
+
+    return path;
+  };
+
+  const activeTabLabel = getActiveTabLabel();
+  const breadcrumbPath = getBreadcrumbPath();
 
   return (
     <div className="flex-1 flex flex-col">
-      <SubmissionHeader />
+      <SubmissionHeader
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+      />
       <div className="flex flex-1 overflow-hidden">
         <SubmissionSidebar
           activeTab={activeTab}
@@ -339,9 +470,18 @@ export default function Submissions() {
           {/* Breadcrumb Bar */}
           <div className="bg-white border-b border-gray-200 px-6 py-3">
             <div className="text-sm text-gray-600 flex items-center gap-1">
-              <span>Submission</span>
-              <span>&gt;</span>
-              <span className="text-gray-900">{activeTabLabel}</span>
+              {breadcrumbPath.map((item, index) => (
+                <React.Fragment key={index}>
+                  <span
+                    className={
+                      index === breadcrumbPath.length - 1 ? "text-gray-900" : ""
+                    }
+                  >
+                    {item.label}
+                  </span>
+                  {index < breadcrumbPath.length - 1 && <span>&gt;</span>}
+                </React.Fragment>
+              ))}
             </div>
           </div>
 
@@ -353,19 +493,13 @@ export default function Submissions() {
               <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
                 {/* Row 1: Business Actions */}
                 <div className="flex justify-end gap-3">
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    Cancel
-                  </Button>
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    Save
-                  </Button>
+                  <Button>Cancel</Button>
+                  <Button>Save</Button>
                 </div>
                 {/* Row 2: Navigation */}
                 <div className="flex justify-between">
-                  <Button variant="outline">Previous</Button>
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    Next
-                  </Button>
+                  <Button>Previous</Button>
+                  <Button>Next</Button>
                 </div>
               </div>
             </div>

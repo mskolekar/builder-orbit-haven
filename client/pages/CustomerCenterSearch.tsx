@@ -405,29 +405,26 @@ export default function CustomerCenterSearch() {
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-2 mb-4">
-          <Button variant="primary" className="bg-blue-600 text-white flex items-center gap-2">
+        {/* Action and Search Buttons */}
+        <div className="flex gap-2 items-center">
+          <Button>
             <Plus size={16} />
             Add Person
           </Button>
-          <Button variant="primary" className="bg-blue-600 text-white flex items-center gap-2">
+          <Button>
             <Plus size={16} />
             Add Location
           </Button>
-          <Button variant="primary" className="bg-blue-600 text-white flex items-center gap-2">
+          <Button>
             <Plus size={16} />
             Add Organization
           </Button>
-        </div>
-
-        {/* Search and Clear Buttons */}
-        <div className="flex gap-2 justify-end">
-          <Button className="bg-blue-600 text-white flex items-center gap-2">
+          <div className="flex-1" />
+          <Button>
             <Search size={16} />
             Run Search
           </Button>
-          <Button variant="outline" onClick={handleClearFilters} className="flex items-center gap-2">
+          <Button variant="outline" onClick={handleClearFilters}>
             <RotateCcw size={16} />
             Clear
           </Button>

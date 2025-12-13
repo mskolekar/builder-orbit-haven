@@ -15,7 +15,17 @@ const submissionMenuItems: SubmissionSidebarItem[] = [
   { label: "Exposures", id: "exposures" },
   { label: "Manual Multi Rating", id: "manual-multi-rating" },
   { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
-  { label: "Quotations", id: "quotations" },
+  {
+    label: "Quotations",
+    id: "quotations",
+    subItems: [
+      { label: "Pricing", id: "quotations-pricing" },
+      { label: "Subjectivity", id: "quotations-subjectivity" },
+      { label: "Proposal", id: "quotations-proposal" },
+      { label: "Forms", id: "quotations-forms" },
+      { label: "Bind", id: "quotations-bind" },
+    ],
+  },
   { label: "Parties", id: "parties" },
   {
     label: "Journal",
@@ -47,6 +57,13 @@ export function SubmissionSidebar({
     );
   };
 
+  const isSubitemActive = (item: SubmissionSidebarItem): boolean => {
+    if (item.subItems) {
+      return item.subItems.some((sub) => sub.id === activeTab);
+    }
+    return false;
+  };
+
   return (
     <div
       className={cn(
@@ -60,59 +77,70 @@ export function SubmissionSidebar({
         aria-label="Submission Navigation"
       >
         <ul className="space-y-1" role="menubar">
-          {submissionMenuItems.map((item) => (
-            <li key={item.id}>
-              <div>
-                <button
-                  onClick={() => {
-                    onTabChange(item.id);
-                    if (item.subItems) {
-                      toggleExpanded(item.id);
-                    }
-                  }}
-                  className={cn(
-                    "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
-                    activeTab === item.id
-                      ? "bg-[#6F7C88] text-white"
-                      : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
-                  )}
-                  title={isCollapsed ? item.label : undefined}
-                  aria-label={item.label}
-                >
-                  {item.subItems && (
-                    <ChevronDown
-                      size={16}
-                      className={cn(
-                        "transition-transform flex-shrink-0",
-                        expandedItems.includes(item.id) ? "rotate-180" : "",
-                      )}
-                    />
-                  )}
-                  {item.label}
-                </button>
-              </div>
-              {item.subItems && expandedItems.includes(item.id) && (
-                <ul className="mt-1 space-y-1 ml-4">
-                  {item.subItems.map((subItem) => (
-                    <li key={subItem.id}>
-                      <button
-                        onClick={() => onTabChange(subItem.id)}
+          {submissionMenuItems.map((item) => {
+            const hasSubItems = item.subItems && item.subItems.length > 0;
+            const isMainActive = activeTab === item.id;
+            const isSubActive = isSubitemActive(item);
+            const isExpanded = expandedItems.includes(item.id);
+
+            return (
+              <li key={item.id}>
+                <div>
+                  <button
+                    onClick={() => {
+                      onTabChange(item.id);
+                      if (item.subItems) {
+                        toggleExpanded(item.id);
+                      }
+                    }}
+                    className={cn(
+                      "flex items-center justify-between rounded-lg text-sm transition-colors w-full px-3 py-2",
+                      isMainActive
+                        ? "bg-[#6F7C88] text-white"
+                        : isSubActive
+                          ? "bg-[#EEF1F6] text-[#2F3A45]"
+                          : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                    )}
+                    title={isCollapsed ? item.label : undefined}
+                    aria-label={item.label}
+                    aria-expanded={hasSubItems ? isExpanded : undefined}
+                    aria-haspopup={hasSubItems ? "menu" : undefined}
+                  >
+                    <span>{item.label}</span>
+                    {hasSubItems && (
+                      <ChevronDown
+                        size={16}
                         className={cn(
-                          "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
-                          activeTab === subItem.id
-                            ? "bg-[#6F7C88] text-white"
-                            : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                          "transition-transform flex-shrink-0",
+                          isExpanded ? "rotate-180" : "",
                         )}
-                        aria-label={subItem.label}
-                      >
-                        {subItem.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+                      />
+                    )}
+                  </button>
+                </div>
+                {item.subItems && expandedItems.includes(item.id) && (
+                  <ul className="mt-1 space-y-1 ml-4">
+                    {item.subItems.map((subItem) => (
+                      <li key={subItem.id}>
+                        <button
+                          onClick={() => onTabChange(subItem.id)}
+                          className={cn(
+                            "flex items-center rounded-lg text-sm transition-colors w-full px-3 py-2",
+                            activeTab === subItem.id
+                              ? "bg-[#6F7C88] text-white"
+                              : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                          )}
+                          aria-label={subItem.label}
+                        >
+                          {subItem.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
