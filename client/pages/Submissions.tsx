@@ -405,8 +405,13 @@ export default function Submissions() {
     }
   };
 
-  const activeTabLabel =
-    submissionTabs.find((tab) => tab.id === activeTab)?.label || "Overview";
+  const getActiveTabLabel = (): string => {
+    const tab = submissionTabs.find((t) => t.id === activeTab);
+    if (tab) return tab.label;
+    return "Overview";
+  };
+
+  const activeTabLabel = getActiveTabLabel();
 
   return (
     <div className="flex-1 flex flex-col">
