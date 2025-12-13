@@ -38,11 +38,7 @@ function SubmissionHeader({
           className="text-white hover:bg-white/10 p-1 h-8 w-8"
           title={isCollapsed ? "Expand Panel" : "Collapse Panel"}
         >
-          {isCollapsed ? (
-            <Menu size={16} />
-          ) : (
-            <ChevronLeft size={16} />
-          )}
+          {isCollapsed ? <Menu size={16} /> : <ChevronLeft size={16} />}
         </Button>
         <div className="flex items-center justify-between flex-1">
           <div className="flex items-center gap-2 flex-wrap">
@@ -478,16 +474,12 @@ export default function Submissions() {
                 <React.Fragment key={index}>
                   <span
                     className={
-                      index === breadcrumbPath.length - 1
-                        ? "text-gray-900"
-                        : ""
+                      index === breadcrumbPath.length - 1 ? "text-gray-900" : ""
                     }
                   >
                     {item.label}
                   </span>
-                  {index < breadcrumbPath.length - 1 && (
-                    <span>&gt;</span>
-                  )}
+                  {index < breadcrumbPath.length - 1 && <span>&gt;</span>}
                 </React.Fragment>
               ))}
             </div>

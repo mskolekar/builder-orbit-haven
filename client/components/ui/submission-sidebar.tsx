@@ -84,61 +84,61 @@ export function SubmissionSidebar({
             const isExpanded = expandedItems.includes(item.id);
 
             return (
-            <li key={item.id}>
-              <div>
-                <button
-                  onClick={() => {
-                    onTabChange(item.id);
-                    if (item.subItems) {
-                      toggleExpanded(item.id);
-                    }
-                  }}
-                  className={cn(
-                    "flex items-center justify-between rounded-lg text-sm transition-colors w-full px-3 py-2",
-                    isMainActive
-                      ? "bg-[#6F7C88] text-white"
-                      : isSubActive
-                        ? "bg-[#EEF1F6] text-[#2F3A45]"
-                        : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
-                  )}
-                  title={isCollapsed ? item.label : undefined}
-                  aria-label={item.label}
-                  aria-expanded={hasSubItems ? isExpanded : undefined}
-                  aria-haspopup={hasSubItems ? "menu" : undefined}
-                >
-                  <span>{item.label}</span>
-                  {hasSubItems && (
-                    <ChevronDown
-                      size={16}
-                      className={cn(
-                        "transition-transform flex-shrink-0",
-                        isExpanded ? "rotate-180" : "",
-                      )}
-                    />
-                  )}
-                </button>
-              </div>
-              {item.subItems && expandedItems.includes(item.id) && (
-                <ul className="mt-1 space-y-1 ml-4">
-                  {item.subItems.map((subItem) => (
-                    <li key={subItem.id}>
-                      <button
-                        onClick={() => onTabChange(subItem.id)}
+              <li key={item.id}>
+                <div>
+                  <button
+                    onClick={() => {
+                      onTabChange(item.id);
+                      if (item.subItems) {
+                        toggleExpanded(item.id);
+                      }
+                    }}
+                    className={cn(
+                      "flex items-center justify-between rounded-lg text-sm transition-colors w-full px-3 py-2",
+                      isMainActive
+                        ? "bg-[#6F7C88] text-white"
+                        : isSubActive
+                          ? "bg-[#EEF1F6] text-[#2F3A45]"
+                          : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                    )}
+                    title={isCollapsed ? item.label : undefined}
+                    aria-label={item.label}
+                    aria-expanded={hasSubItems ? isExpanded : undefined}
+                    aria-haspopup={hasSubItems ? "menu" : undefined}
+                  >
+                    <span>{item.label}</span>
+                    {hasSubItems && (
+                      <ChevronDown
+                        size={16}
                         className={cn(
-                          "flex items-center rounded-lg text-sm transition-colors w-full px-3 py-2",
-                          activeTab === subItem.id
-                            ? "bg-[#6F7C88] text-white"
-                            : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                          "transition-transform flex-shrink-0",
+                          isExpanded ? "rotate-180" : "",
                         )}
-                        aria-label={subItem.label}
-                      >
-                        {subItem.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
+                      />
+                    )}
+                  </button>
+                </div>
+                {item.subItems && expandedItems.includes(item.id) && (
+                  <ul className="mt-1 space-y-1 ml-4">
+                    {item.subItems.map((subItem) => (
+                      <li key={subItem.id}>
+                        <button
+                          onClick={() => onTabChange(subItem.id)}
+                          className={cn(
+                            "flex items-center rounded-lg text-sm transition-colors w-full px-3 py-2",
+                            activeTab === subItem.id
+                              ? "bg-[#6F7C88] text-white"
+                              : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                          )}
+                          aria-label={subItem.label}
+                        >
+                          {subItem.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
             );
           })}
         </ul>
