@@ -77,7 +77,13 @@ export function SubmissionSidebar({
         aria-label="Submission Navigation"
       >
         <ul className="space-y-1" role="menubar">
-          {submissionMenuItems.map((item) => (
+          {submissionMenuItems.map((item) => {
+            const hasSubItems = item.subItems && item.subItems.length > 0;
+            const isMainActive = activeTab === item.id;
+            const isSubActive = isSubitemActive(item);
+            const isExpanded = expandedItems.includes(item.id);
+
+            return (
             <li key={item.id}>
               <div>
                 <button
@@ -88,24 +94,28 @@ export function SubmissionSidebar({
                     }
                   }}
                   className={cn(
-                    "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
-                    activeTab === item.id
+                    "flex items-center justify-between rounded-lg text-sm transition-colors w-full px-3 py-2",
+                    isMainActive
                       ? "bg-[#6F7C88] text-white"
-                      : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                      : isSubActive
+                        ? "bg-[#EEF1F6] text-[#2F3A45]"
+                        : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
                   )}
                   title={isCollapsed ? item.label : undefined}
                   aria-label={item.label}
+                  aria-expanded={hasSubItems ? isExpanded : undefined}
+                  aria-haspopup={hasSubItems ? "menu" : undefined}
                 >
-                  {item.subItems && (
+                  <span>{item.label}</span>
+                  {hasSubItems && (
                     <ChevronDown
                       size={16}
                       className={cn(
                         "transition-transform flex-shrink-0",
-                        expandedItems.includes(item.id) ? "rotate-180" : "",
+                        isExpanded ? "rotate-180" : "",
                       )}
                     />
                   )}
-                  {item.label}
                 </button>
               </div>
               {item.subItems && expandedItems.includes(item.id) && (
@@ -115,7 +125,7 @@ export function SubmissionSidebar({
                       <button
                         onClick={() => onTabChange(subItem.id)}
                         className={cn(
-                          "flex items-center rounded-lg text-sm transition-colors w-full gap-3 px-3 py-2",
+                          "flex items-center rounded-lg text-sm transition-colors w-full px-3 py-2",
                           activeTab === subItem.id
                             ? "bg-[#6F7C88] text-white"
                             : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
@@ -129,7 +139,8 @@ export function SubmissionSidebar({
                 </ul>
               )}
             </li>
-          ))}
+            );
+          })}
         </ul>
       </nav>
     </div>
