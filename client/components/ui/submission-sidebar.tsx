@@ -57,6 +57,13 @@ export function SubmissionSidebar({
     );
   };
 
+  const isSubitemActive = (item: SubmissionSidebarItem): boolean => {
+    if (item.subItems) {
+      return item.subItems.some((sub) => sub.id === activeTab);
+    }
+    return false;
+  };
+
   return (
     <div
       className={cn(
