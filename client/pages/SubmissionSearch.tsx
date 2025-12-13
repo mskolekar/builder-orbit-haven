@@ -276,16 +276,13 @@ export default function SubmissionSearch() {
           <div className="flex-1"></div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-3 mb-4">
+        {/* Action and Search Buttons */}
+        <div className="flex gap-3 items-center">
           <Button onClick={handleAddSubmission}>
             <Plus size={16} />
             Add Submission
           </Button>
-        </div>
-
-        {/* Search and Clear Buttons */}
-        <div className="flex gap-3 justify-end">
+          <div className="flex-1" />
           <Button onClick={handleRunSearch}>
             <Search size={16} />
             Run Search
