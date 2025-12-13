@@ -350,7 +350,10 @@ export default function Submissions() {
 
   return (
     <div className="flex-1 flex flex-col">
-      <SubmissionHeader />
+      <SubmissionHeader
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+      />
       <div className="flex flex-1 overflow-hidden">
         <SubmissionSidebar
           activeTab={activeTab}
