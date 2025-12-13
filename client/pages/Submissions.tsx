@@ -286,6 +286,51 @@ function QuotationsSection() {
   );
 }
 
+function PricingSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Pricing</h3>
+      <p className="text-gray-600">Pricing content goes here</p>
+    </div>
+  );
+}
+
+function SubjectivitySection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Subjectivity</h3>
+      <p className="text-gray-600">Subjectivity content goes here</p>
+    </div>
+  );
+}
+
+function ProposalSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Proposal</h3>
+      <p className="text-gray-600">Proposal content goes here</p>
+    </div>
+  );
+}
+
+function FormsSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Forms</h3>
+      <p className="text-gray-600">Forms content goes here</p>
+    </div>
+  );
+}
+
+function BindSection() {
+  return (
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-900">Bind</h3>
+      <p className="text-gray-600">Bind content goes here</p>
+    </div>
+  );
+}
+
 function PartiesSection() {
   return (
     <div className="space-y-6">
@@ -312,6 +357,11 @@ const submissionTabs = [
   { label: "Manual Multi Rating", id: "manual-multi-rating" },
   { label: "Inclusions/Exclusions", id: "inclusions-exclusions" },
   { label: "Quotations", id: "quotations" },
+  { label: "Pricing", id: "quotations-pricing" },
+  { label: "Subjectivity", id: "quotations-subjectivity" },
+  { label: "Proposal", id: "quotations-proposal" },
+  { label: "Forms", id: "quotations-forms" },
+  { label: "Bind", id: "quotations-bind" },
   { label: "Parties", id: "parties" },
   { label: "Journal", id: "journal" },
 ];
@@ -336,6 +386,16 @@ export default function Submissions() {
         return <InclusionsExclusionsSection />;
       case "quotations":
         return <QuotationsSection />;
+      case "quotations-pricing":
+        return <PricingSection />;
+      case "quotations-subjectivity":
+        return <SubjectivitySection />;
+      case "quotations-proposal":
+        return <ProposalSection />;
+      case "quotations-forms":
+        return <FormsSection />;
+      case "quotations-bind":
+        return <BindSection />;
       case "parties":
         return <PartiesSection />;
       case "journal":
