@@ -989,6 +989,10 @@ export default function Dashboard() {
                     Activity Timeline ({selectedActivities.length})
                   </CardTitle>
                 </div>
+                <ChevronDown
+                  size={20}
+                  className={`text-gray-600 transition-transform ${isActivityCollapsed ? "-rotate-90" : ""}`}
+                />
               </div>
             </CardHeader>
             <CardContent
