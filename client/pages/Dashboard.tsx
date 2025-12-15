@@ -1000,7 +1000,9 @@ export default function Dashboard() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={`${isActivityCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+            <CardContent
+              className={`${isActivityCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+            >
               <div className="overflow-x-auto flex-1">
                 <Table>
                   <TableHeader>
@@ -1126,7 +1128,9 @@ export default function Dashboard() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={`${isDiariesCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+            <CardContent
+              className={`${isDiariesCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+            >
               <div className="overflow-x-auto flex-1">
                 <Table>
                   <TableHeader>
@@ -1226,7 +1230,10 @@ export default function Dashboard() {
                                   className="h-6 w-6 p-0 hover:bg-gray-100"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  <MoreHorizontal size={16} className="text-gray-600" />
+                                  <MoreHorizontal
+                                    size={16}
+                                    className="text-gray-600"
+                                  />
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end">
@@ -1329,7 +1336,9 @@ export default function Dashboard() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className={`${isPoliciesCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+              <CardContent
+                className={`${isPoliciesCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
                 <div className="overflow-x-auto flex-1">
                   <Table>
                     <TableHeader>
@@ -1486,7 +1495,9 @@ export default function Dashboard() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className={`${isSubmissionsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+              <CardContent
+                className={`${isSubmissionsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
                 <div className="overflow-x-auto flex-1">
                   <Table>
                     <TableHeader>
@@ -1564,8 +1575,8 @@ export default function Dashboard() {
                   </span>
                   <div className="flex items-center gap-1">
                     <span className="text-xs text-gray-600 mr-2">
-                      1-{Math.min(ITEMS_PER_PAGE, filteredSubmissions.length)} of{" "}
-                      {filteredSubmissions.length}
+                      1-{Math.min(ITEMS_PER_PAGE, filteredSubmissions.length)}{" "}
+                      of {filteredSubmissions.length}
                     </span>
                     <Button
                       variant="ghost"
@@ -1624,7 +1635,9 @@ export default function Dashboard() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className={`${isClaimsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+              <CardContent
+                className={`${isClaimsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
                 <div className="overflow-x-auto flex-1">
                   <Table>
                     {isShawn ? (
@@ -1827,19 +1840,31 @@ export default function Dashboard() {
                   </Table>
                 </div>
               </CardContent>
-              {((isShawn ? 4 : filteredClaims.filter(
-                            (c) => c.status === "Open" || c.status === "Reopen",
-                          ).length) > 0) && (
+              {(isShawn
+                ? 4
+                : filteredClaims.filter(
+                    (c) => c.status === "Open" || c.status === "Reopen",
+                  ).length) > 0 && (
                 <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
                   <span className="text-xs text-gray-600">
                     Rows per page: {ITEMS_PER_PAGE}
                   </span>
                   <div className="flex items-center gap-1">
                     <span className="text-xs text-gray-600 mr-2">
-                      1-{Math.min(ITEMS_PER_PAGE, isShawn ? 4 : filteredClaims.filter(
-                            (c) => c.status === "Open" || c.status === "Reopen",
-                          ).length)} of{" "}
-                      {isShawn ? 4 : filteredClaims.filter(
+                      1-
+                      {Math.min(
+                        ITEMS_PER_PAGE,
+                        isShawn
+                          ? 4
+                          : filteredClaims.filter(
+                              (c) =>
+                                c.status === "Open" || c.status === "Reopen",
+                            ).length,
+                      )}{" "}
+                      of{" "}
+                      {isShawn
+                        ? 4
+                        : filteredClaims.filter(
                             (c) => c.status === "Open" || c.status === "Reopen",
                           ).length}
                     </span>
@@ -1899,7 +1924,9 @@ export default function Dashboard() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className={`${isSubmissionsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+              <CardContent
+                className={`${isSubmissionsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
                 <div className="overflow-x-auto flex-1">
                   <Table>
                     <TableHeader>
@@ -1987,8 +2014,8 @@ export default function Dashboard() {
                   </span>
                   <div className="flex items-center gap-1">
                     <span className="text-xs text-gray-600 mr-2">
-                      1-{Math.min(ITEMS_PER_PAGE, filteredSubmissions.length)} of{" "}
-                      {filteredSubmissions.length}
+                      1-{Math.min(ITEMS_PER_PAGE, filteredSubmissions.length)}{" "}
+                      of {filteredSubmissions.length}
                     </span>
                     <Button
                       variant="ghost"
