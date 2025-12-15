@@ -973,7 +973,7 @@ export default function Dashboard() {
         >
           {/* Activity Timeline */}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isDiariesCollapsed ? "lg:col-span-2" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
             onClick={() => setIsActivityCollapsed((v) => !v)}
           >
             <CardHeader
@@ -1086,7 +1086,7 @@ export default function Dashboard() {
 
           {/* Diaries */}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isActivityCollapsed ? "lg:col-span-2" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
             onClick={() => setIsDiariesCollapsed((v) => !v)}
           >
             <CardHeader
@@ -1297,7 +1297,7 @@ export default function Dashboard() {
           {/* Policy Details */}
           {!isShawn && (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isSubmissionsCollapsed || isClaimsCollapsed ? "lg:col-span-2" : ""}`}
+              className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
               onClick={() => setIsPoliciesCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1450,7 +1450,7 @@ export default function Dashboard() {
           {/* Right column: Submissions for John, Claims otherwise */}
           {isJohn ? (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
+              className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
               onClick={() => setIsSubmissionsCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1573,7 +1573,7 @@ export default function Dashboard() {
             </Card>
           ) : (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
+              className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
               onClick={() => setIsClaimsCollapsed((v) => !v)}
             >
               <CardHeader
