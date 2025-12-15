@@ -59,7 +59,16 @@ import {
   ChevronDown,
   ArrowRight,
   Check,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const customerData = {
   name: "Rose K",
@@ -648,6 +657,14 @@ export default function Dashboard() {
   const [isClaimsCollapsed, setIsClaimsCollapsed] = useState(false);
   const [isSubmissionsCollapsed, setIsSubmissionsCollapsed] = useState(false);
 
+  // Pagination states
+  const [activityPage, setActivityPage] = useState(1);
+  const [diariesPage, setDiariesPage] = useState(1);
+  const [policiesPage, setPoliciesPage] = useState(1);
+  const [submissionsPage, setSubmissionsPage] = useState(1);
+  const [claimsPage, setClaimsPage] = useState(1);
+  const ITEMS_PER_PAGE = 4;
+
   // Diary functions
   const handleCloseDiary = (diaryId: number) => {
     setDiaryToClose(diaryId);
@@ -956,7 +973,7 @@ export default function Dashboard() {
         >
           {/* Activity Timeline */}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isDiariesCollapsed ? "lg:col-span-2" : ""}`}
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isDiariesCollapsed ? "lg:col-span-2" : ""}`}
             onClick={() => setIsActivityCollapsed((v) => !v)}
           >
             <CardHeader
@@ -981,20 +998,12 @@ export default function Dashboard() {
                       : TILE_TOTAL}
                   </span>
                 </div>
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View All
-                  </Button>
-                </div>
               </div>
             </CardHeader>
-            <CardContent className={isActivityCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
+            <CardContent
+              className={`${isActivityCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+            >
+              <div className="overflow-x-auto flex-1">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -1053,11 +1062,40 @@ export default function Dashboard() {
                 </Table>
               </div>
             </CardContent>
+            {selectedActivities.length > 0 && (
+              <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
+                <span className="text-xs text-gray-600">
+                  Rows per page: {ITEMS_PER_PAGE}
+                </span>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-gray-600 mr-2">
+                    1-{Math.min(ITEMS_PER_PAGE, selectedActivities.length)} of{" "}
+                    {selectedActivities.length}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 w-6 p-0"
+                    disabled
+                  >
+                    <ChevronLeft size={14} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 w-6 p-0"
+                    disabled
+                  >
+                    <ChevronRight size={14} />
+                  </Button>
+                </div>
+              </div>
+            )}
           </Card>
 
           {/* Diaries */}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isActivityCollapsed ? "lg:col-span-2" : ""}`}
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isActivityCollapsed ? "lg:col-span-2" : ""}`}
             onClick={() => setIsDiariesCollapsed((v) => !v)}
           >
             <CardHeader
@@ -1081,27 +1119,19 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
-                    variant="ghost"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                     size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    View All
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-7 border-gray-300 text-gray-600"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <Plus size={10} className="mr-1" />
                     Add
                   </Button>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isDiariesCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
+            <CardContent
+              className={`${isDiariesCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+            >
+              <div className="overflow-x-auto flex-1">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -1192,32 +1222,39 @@ export default function Dashboard() {
                             })()}
                           </TableCell>
                           <TableCell className="py-1">
-                            <div className="flex gap-1">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  navigate("/journals?tab=diaries");
-                                }}
-                                aria-label="Go to diary"
-                              >
-                                <ArrowRight size={12} />
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleCloseDiary(diary.id);
-                                }}
-                                aria-label="Mark diary complete"
-                              >
-                                <Check size={12} />
-                              </Button>
-                            </div>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-6 w-6 p-0 hover:bg-gray-100"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <MoreHorizontal
+                                    size={16}
+                                    className="text-gray-600"
+                                  />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuItem
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate("/journals?tab=diaries");
+                                  }}
+                                >
+                                  View
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleCloseDiary(diary.id);
+                                  }}
+                                >
+                                  Mark Complete
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </TableCell>
                         </TableRow>
                       ));
@@ -1236,6 +1273,35 @@ export default function Dashboard() {
                 </Table>
               </div>
             </CardContent>
+            {openDiaries.length > 0 && (
+              <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
+                <span className="text-xs text-gray-600">
+                  Rows per page: {ITEMS_PER_PAGE}
+                </span>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-gray-600 mr-2">
+                    1-{Math.min(ITEMS_PER_PAGE, openDiaries.length)} of{" "}
+                    {openDiaries.length}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 w-6 p-0"
+                    disabled
+                  >
+                    <ChevronLeft size={14} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 w-6 p-0"
+                    disabled
+                  >
+                    <ChevronRight size={14} />
+                  </Button>
+                </div>
+              </div>
+            )}
           </Card>
         </div>
 
@@ -1246,7 +1312,7 @@ export default function Dashboard() {
           {/* Policy Details */}
           {!isShawn && (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isSubmissionsCollapsed || isClaimsCollapsed ? "lg:col-span-2" : ""}`}
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isSubmissionsCollapsed || isClaimsCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsPoliciesCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1268,20 +1334,12 @@ export default function Dashboard() {
                       of {filteredPolicies.length === 0 ? 0 : TILE_TOTAL}
                     </span>
                   </div>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
                 </div>
               </CardHeader>
-              <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
-                <div className="overflow-x-auto">
+              <CardContent
+                className={`${isPoliciesCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
+                <div className="overflow-x-auto flex-1">
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -1378,13 +1436,42 @@ export default function Dashboard() {
                   </Table>
                 </div>
               </CardContent>
+              {filteredPolicies.length > 0 && (
+                <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
+                  <span className="text-xs text-gray-600">
+                    Rows per page: {ITEMS_PER_PAGE}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs text-gray-600 mr-2">
+                      1-{Math.min(ITEMS_PER_PAGE, filteredPolicies.length)} of{" "}
+                      {filteredPolicies.length}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronLeft size={14} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronRight size={14} />
+                    </Button>
+                  </div>
+                </div>
+              )}
             </Card>
           )}
 
           {/* Right column: Submissions for John, Claims otherwise */}
           {isJohn ? (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsSubmissionsCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1406,20 +1493,12 @@ export default function Dashboard() {
                       of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
                     </span>
                   </div>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
                 </div>
               </CardHeader>
-              <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
-                <div className="overflow-x-auto">
+              <CardContent
+                className={`${isSubmissionsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
+                <div className="overflow-x-auto flex-1">
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -1489,10 +1568,39 @@ export default function Dashboard() {
                   </Table>
                 </div>
               </CardContent>
+              {filteredSubmissions.length > 0 && (
+                <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
+                  <span className="text-xs text-gray-600">
+                    Rows per page: {ITEMS_PER_PAGE}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs text-gray-600 mr-2">
+                      1-{Math.min(ITEMS_PER_PAGE, filteredSubmissions.length)}{" "}
+                      of {filteredSubmissions.length}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronLeft size={14} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronRight size={14} />
+                    </Button>
+                  </div>
+                </div>
+              )}
             </Card>
           ) : (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsClaimsCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1525,20 +1633,12 @@ export default function Dashboard() {
                         : TILE_TOTAL}
                     </span>
                   </div>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
                 </div>
               </CardHeader>
-              <CardContent className={isClaimsCollapsed ? "hidden" : ""}>
-                <div className="overflow-x-auto">
+              <CardContent
+                className={`${isClaimsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
+                <div className="overflow-x-auto flex-1">
                   <Table>
                     {isShawn ? (
                       <>
@@ -1740,6 +1840,53 @@ export default function Dashboard() {
                   </Table>
                 </div>
               </CardContent>
+              {(isShawn
+                ? 4
+                : filteredClaims.filter(
+                    (c) => c.status === "Open" || c.status === "Reopen",
+                  ).length) > 0 && (
+                <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
+                  <span className="text-xs text-gray-600">
+                    Rows per page: {ITEMS_PER_PAGE}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs text-gray-600 mr-2">
+                      1-
+                      {Math.min(
+                        ITEMS_PER_PAGE,
+                        isShawn
+                          ? 4
+                          : filteredClaims.filter(
+                              (c) =>
+                                c.status === "Open" || c.status === "Reopen",
+                            ).length,
+                      )}{" "}
+                      of{" "}
+                      {isShawn
+                        ? 4
+                        : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronLeft size={14} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronRight size={14} />
+                    </Button>
+                  </div>
+                </div>
+              )}
             </Card>
           )}
         </div>
@@ -1752,7 +1899,7 @@ export default function Dashboard() {
             {/* Submissions */}
             <Card
               className={
-                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+                "shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
               }
               onClick={() => setIsSubmissionsCollapsed((v) => !v)}
             >
@@ -1775,20 +1922,12 @@ export default function Dashboard() {
                       of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
                     </span>
                   </div>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
                 </div>
               </CardHeader>
-              <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
-                <div className="overflow-x-auto">
+              <CardContent
+                className={`${isSubmissionsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
+                <div className="overflow-x-auto flex-1">
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -1868,6 +2007,35 @@ export default function Dashboard() {
                   </Table>
                 </div>
               </CardContent>
+              {filteredSubmissions.length > 0 && (
+                <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
+                  <span className="text-xs text-gray-600">
+                    Rows per page: {ITEMS_PER_PAGE}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs text-gray-600 mr-2">
+                      1-{Math.min(ITEMS_PER_PAGE, filteredSubmissions.length)}{" "}
+                      of {filteredSubmissions.length}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronLeft size={14} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronRight size={14} />
+                    </Button>
+                  </div>
+                </div>
+              )}
             </Card>
 
             {/* Empty space to maintain layout consistency with Policy/Claims row */}
