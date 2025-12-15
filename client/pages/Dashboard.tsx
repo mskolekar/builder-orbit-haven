@@ -1426,36 +1426,36 @@ export default function Dashboard() {
                     </TableBody>
                   </Table>
                 </div>
-                {filteredPolicies.length > 0 && (
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <span className="text-xs text-gray-600">
-                      Rows per page: {ITEMS_PER_PAGE}
-                    </span>
-                    <div className="flex items-center gap-1">
-                      <span className="text-xs text-gray-600 mr-2">
-                        1-{Math.min(ITEMS_PER_PAGE, filteredPolicies.length)} of{" "}
-                        {filteredPolicies.length}
-                      </span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0"
-                        disabled
-                      >
-                        <ChevronLeft size={14} />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0"
-                        disabled
-                      >
-                        <ChevronRight size={14} />
-                      </Button>
-                    </div>
-                  </div>
-                )}
               </CardContent>
+              {filteredPolicies.length > 0 && (
+                <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
+                  <span className="text-xs text-gray-600">
+                    Rows per page: {ITEMS_PER_PAGE}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs text-gray-600 mr-2">
+                      1-{Math.min(ITEMS_PER_PAGE, filteredPolicies.length)} of{" "}
+                      {filteredPolicies.length}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronLeft size={14} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0"
+                      disabled
+                    >
+                      <ChevronRight size={14} />
+                    </Button>
+                  </div>
+                </div>
+              )}
             </Card>
           )}
 
