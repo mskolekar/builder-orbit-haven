@@ -1826,6 +1826,41 @@ export default function Dashboard() {
                     )}
                   </Table>
                 </div>
+                {((isShawn ? 4 : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length) > 0) && (
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <span className="text-xs text-gray-600">
+                      Rows per page: {ITEMS_PER_PAGE}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-xs text-gray-600 mr-2">
+                        1-{Math.min(ITEMS_PER_PAGE, isShawn ? 4 : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length)} of{" "}
+                        {isShawn ? 4 : filteredClaims.filter(
+                            (c) => c.status === "Open" || c.status === "Reopen",
+                          ).length}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 w-6 p-0"
+                        disabled
+                      >
+                        <ChevronLeft size={14} />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 w-6 p-0"
+                        disabled
+                      >
+                        <ChevronRight size={14} />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}
