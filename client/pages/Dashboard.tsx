@@ -1088,20 +1088,10 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
-                    variant="ghost"
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                     size="sm"
-                    className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    View All
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-7 border-gray-300 text-gray-600"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <Plus size={10} className="mr-1" />
                     Add
                   </Button>
                 </div>
