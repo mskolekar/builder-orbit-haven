@@ -1189,32 +1189,36 @@ export default function Dashboard() {
                             })()}
                           </TableCell>
                           <TableCell className="py-1">
-                            <div className="flex gap-1">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  navigate("/journals?tab=diaries");
-                                }}
-                                aria-label="Go to diary"
-                              >
-                                <ArrowRight size={12} />
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="h-6 w-6 p-0 border-brand-blue text-brand-blue hover:bg-blue-50"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleCloseDiary(diary.id);
-                                }}
-                                aria-label="Mark diary complete"
-                              >
-                                <Check size={12} />
-                              </Button>
-                            </div>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-6 w-6 p-0 hover:bg-gray-100"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <MoreHorizontal size={16} className="text-gray-600" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuItem
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate("/journals?tab=diaries");
+                                  }}
+                                >
+                                  View
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleCloseDiary(diary.id);
+                                  }}
+                                >
+                                  Mark Complete
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </TableCell>
                         </TableRow>
                       ));
