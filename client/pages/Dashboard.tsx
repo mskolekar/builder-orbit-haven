@@ -1329,8 +1329,8 @@ export default function Dashboard() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className={isPoliciesCollapsed ? "hidden" : ""}>
-                <div className="overflow-x-auto">
+              <CardContent className={`${isPoliciesCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+                <div className="overflow-x-auto flex-1">
                   <Table>
                     <TableHeader>
                       <TableRow>
