@@ -1462,7 +1462,7 @@ export default function Dashboard() {
           {/* Right column: Submissions for John, Claims otherwise */}
           {isJohn ? (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
+              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
               onClick={() => setIsSubmissionsCollapsed((v) => !v)}
             >
               <CardHeader
