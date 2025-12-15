@@ -1000,8 +1000,8 @@ export default function Dashboard() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className={isActivityCollapsed ? "hidden" : ""}>
-              <div className="overflow-x-auto">
+            <CardContent className={`${isActivityCollapsed ? "hidden" : ""} flex-1 flex flex-col`}>
+              <div className="overflow-x-auto flex-1">
                 <Table>
                   <TableHeader>
                     <TableRow>
