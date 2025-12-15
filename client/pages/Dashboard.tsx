@@ -973,7 +973,7 @@ export default function Dashboard() {
         >
           {/* Activity Timeline */}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow ${isDiariesCollapsed ? "lg:col-span-2" : ""}`}
+            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isDiariesCollapsed ? "lg:col-span-2" : ""}`}
             onClick={() => setIsActivityCollapsed((v) => !v)}
           >
             <CardHeader
