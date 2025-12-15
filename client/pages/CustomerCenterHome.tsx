@@ -29,7 +29,6 @@ export default function CustomerCenterHome() {
                     </div>
                     <div>
                       <div className="text-gray-900 font-medium">{p.name}</div>
-                      <div className="text-gray-500 text-sm">{p.role}</div>
                     </div>
                   </div>
                 </CardContent>

@@ -973,7 +973,7 @@ export default function Dashboard() {
         >
           {/* Activity Timeline */}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isDiariesCollapsed ? "lg:col-span-2" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
             onClick={() => setIsActivityCollapsed((v) => !v)}
           >
             <CardHeader
@@ -986,17 +986,12 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <CardTitle className="text-base text-gray-700">
-                    Activity Timeline
+                    Activity Timeline ({selectedActivities.length})
                   </CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
-                    {Math.min(selectedActivities.length, 4)}
-                  </Badge>
-                  <span className="text-[11px] md:text-xs text-gray-500">
-                    of{" "}
-                    {Math.min(selectedActivities.length, 4) === 0
-                      ? 0
-                      : TILE_TOTAL}
-                  </span>
+                  <ChevronDown
+                    size={20}
+                    className={`text-gray-600 transition-transform ${isActivityCollapsed ? "-rotate-90" : ""}`}
+                  />
                 </div>
               </div>
             </CardHeader>
@@ -1095,7 +1090,7 @@ export default function Dashboard() {
 
           {/* Diaries */}
           <Card
-            className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isActivityCollapsed ? "lg:col-span-2" : ""}`}
+            className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
             onClick={() => setIsDiariesCollapsed((v) => !v)}
           >
             <CardHeader
@@ -1108,14 +1103,12 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <CardTitle className="text-base text-gray-700">
-                    Diaries
+                    Diaries ({openDiaries.length})
                   </CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
-                    {openDiaries.length}
-                  </Badge>
-                  <span className="text-[11px] md:text-xs text-gray-500">
-                    of {openDiaries.length === 0 ? 0 : TILE_TOTAL}
-                  </span>
+                  <ChevronDown
+                    size={20}
+                    className={`text-gray-600 transition-transform ${isDiariesCollapsed ? "-rotate-90" : ""}`}
+                  />
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -1312,7 +1305,7 @@ export default function Dashboard() {
           {/* Policy Details */}
           {!isShawn && (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isSubmissionsCollapsed || isClaimsCollapsed ? "lg:col-span-2" : ""}`}
+              className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
               onClick={() => setIsPoliciesCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1325,14 +1318,12 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">
-                      Policies
+                      Policies ({filteredPolicies.length})
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
-                      {filteredPolicies.length}
-                    </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">
-                      of {filteredPolicies.length === 0 ? 0 : TILE_TOTAL}
-                    </span>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isPoliciesCollapsed ? "-rotate-90" : ""}`}
+                    />
                   </div>
                 </div>
               </CardHeader>
@@ -1471,7 +1462,7 @@ export default function Dashboard() {
           {/* Right column: Submissions for John, Claims otherwise */}
           {isJohn ? (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
+              className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
               onClick={() => setIsSubmissionsCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1484,14 +1475,12 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">
-                      Submissions
+                      Submissions ({filteredSubmissions.length})
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
-                      {filteredSubmissions.length}
-                    </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">
-                      of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
-                    </span>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : ""}`}
+                    />
                   </div>
                 </div>
               </CardHeader>
@@ -1600,7 +1589,7 @@ export default function Dashboard() {
             </Card>
           ) : (
             <Card
-              className={`shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col ${isPoliciesCollapsed ? "lg:col-span-2" : ""}`}
+              className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
               onClick={() => setIsClaimsCollapsed((v) => !v)}
             >
               <CardHeader
@@ -1613,25 +1602,18 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">
-                      {isShawn ? "Claims & Incidents" : "Claims"}
-                    </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
+                      {isShawn ? "Claims & Incidents" : "Claims"} (
                       {isShawn
                         ? 4
                         : filteredClaims.filter(
                             (c) => c.status === "Open" || c.status === "Reopen",
                           ).length}
-                    </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">
-                      of{" "}
-                      {(isShawn
-                        ? 4
-                        : filteredClaims.filter(
-                            (c) => c.status === "Open" || c.status === "Reopen",
-                          ).length) === 0
-                        ? 0
-                        : TILE_TOTAL}
-                    </span>
+                      )
+                    </CardTitle>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isClaimsCollapsed ? "-rotate-90" : ""}`}
+                    />
                   </div>
                 </div>
               </CardHeader>
@@ -1913,14 +1895,12 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">
-                      Submissions
+                      Submissions ({filteredSubmissions.length})
                     </CardTitle>
-                    <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
-                      {filteredSubmissions.length}
-                    </Badge>
-                    <span className="text-[11px] md:text-xs text-gray-500">
-                      of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
-                    </span>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : ""}`}
+                    />
                   </div>
                 </div>
               </CardHeader>
