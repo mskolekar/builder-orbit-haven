@@ -986,17 +986,8 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <CardTitle className="text-base text-gray-700">
-                    Activity Timeline
+                    Activity Timeline ({selectedActivities.length})
                   </CardTitle>
-                  <Badge className="ml-1 px-2 py-0.5 text-[11px] md:text-xs bg-gray-100 text-gray-700 border-gray-200">
-                    {Math.min(selectedActivities.length, 4)}
-                  </Badge>
-                  <span className="text-[11px] md:text-xs text-gray-500">
-                    of{" "}
-                    {Math.min(selectedActivities.length, 4) === 0
-                      ? 0
-                      : TILE_TOTAL}
-                  </span>
                 </div>
               </div>
             </CardHeader>
