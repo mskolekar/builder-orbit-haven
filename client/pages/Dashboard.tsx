@@ -1320,6 +1320,10 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Policies ({filteredPolicies.length})
                     </CardTitle>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isPoliciesCollapsed ? "-rotate-90" : ""}`}
+                    />
                   </div>
                 </div>
               </CardHeader>
