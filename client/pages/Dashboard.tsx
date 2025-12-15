@@ -657,6 +657,14 @@ export default function Dashboard() {
   const [isClaimsCollapsed, setIsClaimsCollapsed] = useState(false);
   const [isSubmissionsCollapsed, setIsSubmissionsCollapsed] = useState(false);
 
+  // Pagination states
+  const [activityPage, setActivityPage] = useState(1);
+  const [diariesPage, setDiariesPage] = useState(1);
+  const [policiesPage, setPoliciesPage] = useState(1);
+  const [submissionsPage, setSubmissionsPage] = useState(1);
+  const [claimsPage, setClaimsPage] = useState(1);
+  const ITEMS_PER_PAGE = 4;
+
   // Diary functions
   const handleCloseDiary = (diaryId: number) => {
     setDiaryToClose(diaryId);
