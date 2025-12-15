@@ -1484,16 +1484,6 @@ export default function Dashboard() {
                       of {filteredSubmissions.length === 0 ? 0 : TILE_TOTAL}
                     </span>
                   </div>
-                  <div className="flex items-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View All
-                    </Button>
-                  </div>
                 </div>
               </CardHeader>
               <CardContent className={isSubmissionsCollapsed ? "hidden" : ""}>
