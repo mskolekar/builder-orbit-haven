@@ -1608,6 +1608,10 @@ export default function Dashboard() {
                             (c) => c.status === "Open" || c.status === "Reopen",
                           ).length})
                     </CardTitle>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isClaimsCollapsed ? "-rotate-90" : ""}`}
+                    />
                   </div>
                 </div>
               </CardHeader>
