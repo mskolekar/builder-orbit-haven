@@ -1477,6 +1477,10 @@ export default function Dashboard() {
                     <CardTitle className="text-base text-gray-700">
                       Submissions ({filteredSubmissions.length})
                     </CardTitle>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : ""}`}
+                    />
                   </div>
                 </div>
               </CardHeader>
