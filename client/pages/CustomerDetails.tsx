@@ -156,7 +156,7 @@ export default function CustomerDetails() {
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       {/* Unified Blue Header */}
-      <div className="bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-3 flex items-center gap-4 shadow-lg">
+      <div className="bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-2 flex items-center gap-4 shadow-lg">
         <Button
           variant="ghost"
           size="sm"
