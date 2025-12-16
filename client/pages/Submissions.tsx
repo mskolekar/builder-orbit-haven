@@ -30,7 +30,7 @@ function SubmissionHeader({
   };
 
   return (
-    <div className="sticky top-0 z-40 bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-6 py-4 shadow-lg">
+    <div className="sticky top-0 z-40 bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-6 py-2 shadow-lg">
       <div className="flex items-center gap-4">
         <Button
           variant="ghost"
