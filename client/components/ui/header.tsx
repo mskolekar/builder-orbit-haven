@@ -53,7 +53,7 @@ export function Header() {
   const unreadCount = notifications.filter((n) => n.unread).length;
 
   return (
-    <header className="h-13 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 shadow-sm font-header">
+    <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-6 shadow-sm font-header">
       <div className="flex items-center gap-4">{/* Empty space for now */}</div>
 
       <div className="flex items-center gap-4">
