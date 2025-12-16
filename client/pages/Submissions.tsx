@@ -458,6 +458,12 @@ export default function Submissions() {
 
   return (
     <div className="flex-1 flex flex-col">
+      {showValidationAlert && (
+        <ValidationAlertBanner
+          message="Payment Plan is required. Please select a payment plan to continue."
+          onDismiss={() => setShowValidationAlert(false)}
+        />
+      )}
       <SubmissionHeader
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
