@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SubmissionSidebar } from "@/components/ui/submission-sidebar";
+import { ValidationAlertBanner } from "@/components/ui/validation-alert-banner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
