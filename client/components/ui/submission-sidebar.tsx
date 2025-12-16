@@ -9,7 +9,7 @@ interface SubmissionSidebarItem {
 }
 
 const submissionMenuItems: SubmissionSidebarItem[] = [
-  { label: "Overview", id: "overview" },
+  { label: "Basic Details", id: "overview" },
   { label: "UW Questions", id: "uw-questions" },
   { label: "Additional Interests", id: "additional-interests" },
   { label: "Exposures", id: "exposures" },
