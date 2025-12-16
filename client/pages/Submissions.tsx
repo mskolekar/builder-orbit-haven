@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SubmissionSidebar } from "@/components/ui/submission-sidebar";
+import { ValidationAlertBanner } from "@/components/ui/validation-alert-banner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -29,7 +30,7 @@ function SubmissionHeader({
   };
 
   return (
-    <div className="sticky top-0 z-40 bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-6 py-4 shadow-lg">
+    <div className="sticky top-0 z-40 bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-6 py-2 shadow-lg">
       <div className="flex items-center gap-4">
         <Button
           variant="ghost"
@@ -365,6 +366,7 @@ const submissionTabs = [
 export default function Submissions() {
   const [activeTab, setActiveTab] = useState("overview");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [showValidationAlert, setShowValidationAlert] = useState(true);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -456,6 +458,12 @@ export default function Submissions() {
 
   return (
     <div className="flex-1 flex flex-col">
+      {showValidationAlert && (
+        <ValidationAlertBanner
+          message="Payment Plan is required. Please select a payment plan to continue."
+          onDismiss={() => setShowValidationAlert(false)}
+        />
+      )}
       <SubmissionHeader
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}

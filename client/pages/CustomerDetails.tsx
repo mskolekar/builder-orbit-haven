@@ -156,7 +156,7 @@ export default function CustomerDetails() {
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       {/* Unified Blue Header */}
-      <div className="bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-3 flex items-center gap-4 shadow-lg">
+      <div className="bg-gradient-to-r from-[#0054A6] to-[#003d7a] text-white px-4 py-2 flex items-center gap-4 shadow-lg">
         <Button
           variant="ghost"
           size="sm"
@@ -408,13 +408,13 @@ export default function CustomerDetails() {
                     Quick Actions
                   </h3>
                   <div className="space-y-3">
-                    <Button className="w-full justify-start bg-[#0054A6] hover:bg-[#003d7a]">
+                    <Button size="sm" className="w-full justify-start bg-[#0054A6] hover:bg-[#003d7a]">
                       Create New Policy
                     </Button>
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button variant="outline" size="sm" className="w-full justify-start">
                       View Claims History
                     </Button>
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button variant="outline" size="sm" className="w-full justify-start">
                       Generate Report
                     </Button>
                   </div>
