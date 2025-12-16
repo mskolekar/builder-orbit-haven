@@ -406,6 +406,10 @@ export default function Submissions() {
         return <PartiesSection />;
       case "journal":
         return <JournalSection />;
+      case "journal-document":
+      case "journal-email":
+      case "journal-diaries":
+        return <JournalPlaceholder />;
       default:
         return <OverviewSection />;
     }
