@@ -347,7 +347,7 @@ function JournalSection() {
 }
 
 const submissionTabs = [
-  { label: "Overview", id: "overview" },
+  { label: "Basic Details", id: "overview" },
   { label: "UW Questions", id: "uw-questions" },
   { label: "Additional Interests", id: "additional-interests" },
   { label: "Exposures", id: "exposures" },
@@ -406,12 +406,12 @@ export default function Submissions() {
   const getActiveTabLabel = (): string => {
     const tab = submissionTabs.find((t) => t.id === activeTab);
     if (tab) return tab.label;
-    return "Overview";
+    return "Basic Details";
   };
 
   const getBreadcrumbPath = (): { label: string; level: number }[] => {
     const path: { label: string; level: number }[] = [
-      { label: "Submissions", level: 0 },
+      { label: "Submission", level: 0 },
     ];
 
     // Handle quotations submodules
@@ -446,7 +446,7 @@ export default function Submissions() {
       if (tab && activeTab !== "overview") {
         path.push({ label: tab.label, level: 1 });
       } else if (activeTab === "overview") {
-        path.push({ label: "Overview", level: 1 });
+        path.push({ label: "Basic Details", level: 1 });
       }
     }
 
