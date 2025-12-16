@@ -45,7 +45,7 @@ export function ValidationAlertBanner({
         className="flex-shrink-0 p-1 hover:bg-red-700 rounded transition-colors"
         title="Dismiss alert"
       >
-        <X size={18} />
+        <X size={16} />
       </button>
     </div>
   );
