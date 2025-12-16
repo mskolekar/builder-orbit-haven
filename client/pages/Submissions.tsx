@@ -366,6 +366,7 @@ const submissionTabs = [
 export default function Submissions() {
   const [activeTab, setActiveTab] = useState("overview");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [showValidationAlert, setShowValidationAlert] = useState(true);
 
   const renderContent = () => {
     switch (activeTab) {
