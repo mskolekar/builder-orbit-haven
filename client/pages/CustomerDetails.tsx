@@ -408,13 +408,13 @@ export default function CustomerDetails() {
                     Quick Actions
                   </h3>
                   <div className="space-y-3">
-                    <Button className="w-full justify-start bg-[#0054A6] hover:bg-[#003d7a]">
+                    <Button size="sm" className="w-full justify-start bg-[#0054A6] hover:bg-[#003d7a]">
                       Create New Policy
                     </Button>
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button variant="outline" size="sm" className="w-full justify-start">
                       View Claims History
                     </Button>
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button variant="outline" size="sm" className="w-full justify-start">
                       Generate Report
                     </Button>
                   </div>
