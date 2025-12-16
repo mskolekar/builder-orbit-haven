@@ -346,6 +346,14 @@ function JournalSection() {
   );
 }
 
+function JournalPlaceholder() {
+  return (
+    <div className="space-y-6">
+      <p className="text-gray-600">This section is coming soon</p>
+    </div>
+  );
+}
+
 const submissionTabs = [
   { label: "Basic Details", id: "overview" },
   { label: "UW Questions", id: "uw-questions" },
