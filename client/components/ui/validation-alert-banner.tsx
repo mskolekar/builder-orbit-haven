@@ -35,8 +35,8 @@ export function ValidationAlertBanner({
   if (!isVisible) return null;
 
   return (
-    <div className="w-full bg-red-600 text-white px-4 py-3 flex items-center gap-3 shadow-md">
-      <AlertCircle size={20} className="flex-shrink-0" />
+    <div className="w-full bg-red-600 text-white px-4 py-2 flex items-center gap-3 shadow-md">
+      <AlertCircle size={18} className="flex-shrink-0" />
       <div className="flex-1">
         <p className="text-sm font-medium">{message}</p>
       </div>
