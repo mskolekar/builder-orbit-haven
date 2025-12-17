@@ -138,9 +138,7 @@ export default function Communication() {
   };
 
   const deleteDocumentPref = (id: number) => {
-    setDocumentDeliveryPrefs(
-      documentDeliveryPrefs.filter((d) => d.id !== id)
-    );
+    setDocumentDeliveryPrefs(documentDeliveryPrefs.filter((d) => d.id !== id));
   };
 
   return (
@@ -324,8 +322,8 @@ export default function Communication() {
                           otherAddresses.map((a) =>
                             a.id === address.id
                               ? { ...a, type: e.target.value }
-                              : a
-                          )
+                              : a,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -339,8 +337,8 @@ export default function Communication() {
                           otherAddresses.map((a) =>
                             a.id === address.id
                               ? { ...a, fullAddress: e.target.value }
-                              : a
-                          )
+                              : a,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -354,8 +352,8 @@ export default function Communication() {
                           otherAddresses.map((a) =>
                             a.id === address.id
                               ? { ...a, city: e.target.value }
-                              : a
-                          )
+                              : a,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -369,8 +367,8 @@ export default function Communication() {
                           otherAddresses.map((a) =>
                             a.id === address.id
                               ? { ...a, state: e.target.value }
-                              : a
-                          )
+                              : a,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -384,8 +382,8 @@ export default function Communication() {
                           otherAddresses.map((a) =>
                             a.id === address.id
                               ? { ...a, postal: e.target.value }
-                              : a
-                          )
+                              : a,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -399,8 +397,8 @@ export default function Communication() {
                           otherAddresses.map((a) =>
                             a.id === address.id
                               ? { ...a, country: e.target.value }
-                              : a
-                          )
+                              : a,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -408,11 +406,7 @@ export default function Communication() {
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-1">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0"
-                      >
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
                         <Edit size={12} />
                       </Button>
                       <Button
@@ -480,8 +474,8 @@ export default function Communication() {
                           documentDeliveryPrefs.map((d) =>
                             d.id === pref.id
                               ? { ...d, documentType: value }
-                              : d
-                          )
+                              : d,
+                          ),
                         )
                       }
                     >
@@ -513,10 +507,8 @@ export default function Communication() {
                       onValueChange={(value) =>
                         setDocumentDeliveryPrefs(
                           documentDeliveryPrefs.map((d) =>
-                            d.id === pref.id
-                              ? { ...d, preference: value }
-                              : d
-                          )
+                            d.id === pref.id ? { ...d, preference: value } : d,
+                          ),
                         )
                       }
                     >
@@ -531,9 +523,7 @@ export default function Communication() {
                         <SelectItem value="Secure Portal">
                           Secure Portal
                         </SelectItem>
-                        <SelectItem value="No Delivery">
-                          No Delivery
-                        </SelectItem>
+                        <SelectItem value="No Delivery">No Delivery</SelectItem>
                       </SelectContent>
                     </Select>
                   </TableCell>
@@ -545,8 +535,8 @@ export default function Communication() {
                           documentDeliveryPrefs.map((d) =>
                             d.id === pref.id
                               ? { ...d, emailOrAddress: e.target.value }
-                              : d
-                          )
+                              : d,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -558,8 +548,8 @@ export default function Communication() {
                       onValueChange={(value) =>
                         setDocumentDeliveryPrefs(
                           documentDeliveryPrefs.map((d) =>
-                            d.id === pref.id ? { ...d, status: value } : d
-                          )
+                            d.id === pref.id ? { ...d, status: value } : d,
+                          ),
                         )
                       }
                     >
@@ -582,8 +572,8 @@ export default function Communication() {
                           documentDeliveryPrefs.map((d) =>
                             d.id === pref.id
                               ? { ...d, effectiveDate: e.target.value }
-                              : d
-                          )
+                              : d,
+                          ),
                         )
                       }
                       className="h-7 text-xs border-gray-300"
@@ -591,11 +581,7 @@ export default function Communication() {
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-1">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0"
-                      >
+                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
                         <Edit size={12} />
                       </Button>
                       <Button
@@ -650,7 +636,10 @@ export default function Communication() {
             <div className="w-40 flex-shrink-0" />
             <div className="flex-1 flex items-center space-x-2">
               <Checkbox id="newsletter-delivery" defaultChecked />
-              <Label htmlFor="newsletter-delivery" className="text-sm font-medium">
+              <Label
+                htmlFor="newsletter-delivery"
+                className="text-sm font-medium"
+              >
                 Newsletter Subscription
               </Label>
             </div>
