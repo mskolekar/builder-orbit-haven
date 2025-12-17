@@ -155,6 +155,9 @@ export default function CustomerDetails() {
         currentPath === "/customer-details/"
       );
     }
+    if (item.path === "/customer-details/personal-details") {
+      return currentPath.includes("/profile") || currentPath.includes("/communication");
+    }
     return currentPath.startsWith(item.path);
   };
 
