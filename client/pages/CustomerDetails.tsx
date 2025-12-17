@@ -111,7 +111,6 @@ export default function CustomerDetails() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   const currentPath = `/customer-details${window.location.pathname.replace("/customer-details", "")}${window.location.search}`;
 
