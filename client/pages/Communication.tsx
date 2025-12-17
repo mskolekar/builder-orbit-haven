@@ -189,6 +189,7 @@ export default function Communication() {
                   <Label className="text-xs text-gray-600">Work Email</Label>
                   <Input
                     value="rose.k@lawfirm.com"
+                    readOnly
                     className="mt-1 h-8 border-gray-300"
                   />
                 </div>
@@ -198,6 +199,7 @@ export default function Communication() {
                   </Label>
                   <Input
                     value="rose.greenthumb@example.com"
+                    readOnly
                     className="mt-1 h-8 border-gray-300"
                   />
                 </div>
@@ -215,6 +217,7 @@ export default function Communication() {
                   </Label>
                   <Input
                     value="(416) 555-0123"
+                    readOnly
                     className="mt-1 h-8 border-gray-300"
                   />
                 </div>
@@ -266,6 +269,7 @@ export default function Communication() {
                     </Label>
                     <Input
                       value="1508 - 141 Lyon Court"
+                      readOnly
                       className="mt-1 h-8 border-gray-300"
                     />
                   </div>
@@ -273,6 +277,7 @@ export default function Communication() {
                     <Label className="text-xs text-gray-600">City</Label>
                     <Input
                       value="Toronto"
+                      readOnly
                       className="mt-1 h-8 border-gray-300"
                     />
                   </div>
@@ -299,6 +304,7 @@ export default function Communication() {
                     <Label className="text-xs text-gray-600">Postal Code</Label>
                     <Input
                       value="M5B 3H2"
+                      readOnly
                       className="mt-1 h-8 border-gray-300"
                     />
                   </div>
@@ -395,36 +401,90 @@ export default function Communication() {
                       <TableCell>
                         <Input
                           value={address.type}
+                          onChange={(e) =>
+                            setOtherAddresses(
+                              otherAddresses.map((a) =>
+                                a.id === address.id
+                                  ? { ...a, type: e.target.value }
+                                  : a
+                              )
+                            )
+                          }
                           className="h-7 text-xs border-gray-300"
                         />
                       </TableCell>
                       <TableCell>
                         <Input
                           value={address.fullAddress}
+                          onChange={(e) =>
+                            setOtherAddresses(
+                              otherAddresses.map((a) =>
+                                a.id === address.id
+                                  ? { ...a, fullAddress: e.target.value }
+                                  : a
+                              )
+                            )
+                          }
                           className="h-7 text-xs border-gray-300"
                         />
                       </TableCell>
                       <TableCell>
                         <Input
                           value={address.city}
+                          onChange={(e) =>
+                            setOtherAddresses(
+                              otherAddresses.map((a) =>
+                                a.id === address.id
+                                  ? { ...a, city: e.target.value }
+                                  : a
+                              )
+                            )
+                          }
                           className="h-7 text-xs border-gray-300"
                         />
                       </TableCell>
                       <TableCell>
                         <Input
                           value={address.state}
+                          onChange={(e) =>
+                            setOtherAddresses(
+                              otherAddresses.map((a) =>
+                                a.id === address.id
+                                  ? { ...a, state: e.target.value }
+                                  : a
+                              )
+                            )
+                          }
                           className="h-7 text-xs border-gray-300"
                         />
                       </TableCell>
                       <TableCell>
                         <Input
                           value={address.postal}
+                          onChange={(e) =>
+                            setOtherAddresses(
+                              otherAddresses.map((a) =>
+                                a.id === address.id
+                                  ? { ...a, postal: e.target.value }
+                                  : a
+                              )
+                            )
+                          }
                           className="h-7 text-xs border-gray-300"
                         />
                       </TableCell>
                       <TableCell>
                         <Input
                           value={address.country}
+                          onChange={(e) =>
+                            setOtherAddresses(
+                              otherAddresses.map((a) =>
+                                a.id === address.id
+                                  ? { ...a, country: e.target.value }
+                                  : a
+                              )
+                            )
+                          }
                           className="h-7 text-xs border-gray-300"
                         />
                       </TableCell>
@@ -542,6 +602,15 @@ export default function Communication() {
                     <TableCell>
                       <Input
                         value={pref.emailOrAddress}
+                        onChange={(e) =>
+                          setDocumentDeliveryPrefs(
+                            documentDeliveryPrefs.map((d) =>
+                              d.id === pref.id
+                                ? { ...d, emailOrAddress: e.target.value }
+                                : d
+                            )
+                          )
+                        }
                         className="h-7 text-xs border-gray-300"
                       />
                     </TableCell>
@@ -561,6 +630,15 @@ export default function Communication() {
                       <Input
                         type="date"
                         value={pref.effectiveDate}
+                        onChange={(e) =>
+                          setDocumentDeliveryPrefs(
+                            documentDeliveryPrefs.map((d) =>
+                              d.id === pref.id
+                                ? { ...d, effectiveDate: e.target.value }
+                                : d
+                            )
+                          )
+                        }
                         className="h-7 text-xs border-gray-300"
                       />
                     </TableCell>
