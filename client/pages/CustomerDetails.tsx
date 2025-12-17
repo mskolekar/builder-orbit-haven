@@ -209,7 +209,7 @@ export default function CustomerDetails() {
               {customerCenterItems.map((item) => {
                 const hasSubItems = item.subItems && item.subItems.length > 0;
                 const isMainActive = isMainPageActive(item);
-                const isExpanded = expandedItems.includes(item.path);
+                const isExpanded = expandedItemsState.includes(item.path);
 
                 return (
                   <li key={item.path}>
