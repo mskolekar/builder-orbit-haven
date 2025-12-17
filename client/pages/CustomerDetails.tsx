@@ -497,10 +497,19 @@ export default function CustomerDetails() {
                           </div>
                         </div>
 
-                        <div className="mt-3 flex items-center gap-2 text-sm">
+                        <div className="mt-3 flex items-center gap-2 text-sm relative group">
                           <MapPin size={14} className="text-gray-400" />
                           <span className="text-gray-500">Address:</span>
                           <span className="font-medium">{customerData.address}</span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity ml-2"
+                            onClick={() => navigate("/customer-details/communication")}
+                            title="Edit Address"
+                          >
+                            <Edit3 size={12} />
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>
