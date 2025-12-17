@@ -557,7 +557,18 @@ export default function Communication() {
                 {documentDeliveryPrefs.map((pref) => (
                   <TableRow key={pref.id}>
                     <TableCell>
-                      <Select value={pref.documentType}>
+                      <Select
+                        value={pref.documentType}
+                        onValueChange={(value) =>
+                          setDocumentDeliveryPrefs(
+                            documentDeliveryPrefs.map((d) =>
+                              d.id === pref.id
+                                ? { ...d, documentType: value }
+                                : d
+                            )
+                          )
+                        }
+                      >
                         <SelectTrigger className="h-7 text-xs border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
@@ -581,7 +592,18 @@ export default function Communication() {
                       </Select>
                     </TableCell>
                     <TableCell>
-                      <Select value={pref.preference}>
+                      <Select
+                        value={pref.preference}
+                        onValueChange={(value) =>
+                          setDocumentDeliveryPrefs(
+                            documentDeliveryPrefs.map((d) =>
+                              d.id === pref.id
+                                ? { ...d, preference: value }
+                                : d
+                            )
+                          )
+                        }
+                      >
                         <SelectTrigger className="h-7 text-xs border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
