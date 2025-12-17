@@ -82,7 +82,7 @@ export function PersonDetailsSection() {
                       className="absolute top-1 right-1 h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
                       onClick={() =>
                         (window.location.href =
-                          "/profile?section=personal-info")
+                          "/customer-details/profile?section=personal-info")
                       }
                       aria-label="Edit Basic Info"
                       title="Edit Basic Info"
