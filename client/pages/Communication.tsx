@@ -238,7 +238,7 @@ export default function Communication() {
                 </SelectContent>
               </Select>
             </FormField>
-            <FormField label="Postal Code">
+            <FormField label="Postal Code" isMandatory>
               <Input value="M5B 3H2" readOnly />
             </FormField>
           </FormRow>
