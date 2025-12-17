@@ -113,8 +113,21 @@ export default function CustomerDetails() {
 
   const currentPath = `/customer-details${window.location.pathname.replace("/customer-details", "")}${window.location.search}`;
 
+  // Initialize expandedItems to keep Personal Details expanded when a submenu is active
+  const getInitialExpandedItems = () => {
+    const pathName = window.location.pathname;
+    if (pathName.includes("/profile") || pathName.includes("/communication")) {
+      return ["/customer-details/personal-details"];
+    }
+    return [];
+  };
+
+  const [expandedItemsState, setExpandedItemsState] = useState<string[]>(() =>
+    getInitialExpandedItems()
+  );
+
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems((prev) =>
+    setExpandedItemsState((prev) =>
       prev.includes(itemPath)
         ? prev.filter((path) => path !== itemPath)
         : [...prev, itemPath],
