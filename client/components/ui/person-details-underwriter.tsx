@@ -49,9 +49,6 @@ export function PersonDetailsUnderwriter() {
                       {customerData.status}
                     </Badge>
                   </div>
-                  <p className="text-gray-600 font-medium">
-                    {customerData.role}
-                  </p>
                 </div>
               </div>
 
