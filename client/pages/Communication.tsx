@@ -285,15 +285,21 @@ export default function Communication() {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="font-medium text-gray-900">Other Addresses</div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={addOtherAddress}
-              className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50"
-            >
-              <Plus size={14} className="mr-2" />
-              Add Address
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={addOtherAddress}
+                    className="text-blue-600 hover:bg-blue-50"
+                  >
+                    <Plus size={18} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Add Address</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <Table>
             <TableHeader>
