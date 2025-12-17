@@ -41,12 +41,8 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
         path: "/customer-details/profile?section=person-info",
       },
       {
-        label: "Addresses",
-        path: "/customer-details/profile?section=addresses",
-      },
-      {
-        label: "Contact Info",
-        path: "/customer-details/contact-delivery?tab=contact",
+        label: "Communication",
+        path: "/customer-details/communication",
       },
       {
         label: "Additional Info",
