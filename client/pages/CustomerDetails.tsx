@@ -297,7 +297,45 @@ export default function CustomerDetails() {
                 Customer Center
               </span>
               <span className="mx-2">&gt;</span>
-              <span className="text-gray-900">Overview</span>
+              {(() => {
+                const path = window.location.pathname;
+                const search = window.location.search;
+                const section = new URLSearchParams(search).get("section");
+
+                if (path === "/customer-details" || path === "/customer-details/") {
+                  return <span className="text-gray-900">Overview</span>;
+                }
+
+                if (path === "/customer-details/profile" || path === "/customer-details/communication") {
+                  return (
+                    <>
+                      <span
+                        className="hover:text-blue-600 cursor-pointer"
+                        onClick={() =>
+                          navigate("/customer-details/profile?section=person-info")
+                        }
+                      >
+                        Personal Details
+                      </span>
+                      <span className="mx-2">&gt;</span>
+                      {path === "/customer-details/profile" && section === "person-info" && (
+                        <span className="text-gray-900">Basic Info</span>
+                      )}
+                      {path === "/customer-details/profile" && section === "additional-info" && (
+                        <span className="text-gray-900">Additional Info</span>
+                      )}
+                      {path === "/customer-details/profile" && section === "person-history" && (
+                        <span className="text-gray-900">Work History</span>
+                      )}
+                      {path === "/customer-details/communication" && (
+                        <span className="text-gray-900">Communication</span>
+                      )}
+                    </>
+                  );
+                }
+
+                return <span className="text-gray-900">Overview</span>;
+              })()}
             </div>
           </div>
 
