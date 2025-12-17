@@ -514,9 +514,7 @@ export default function CustomerCenterSearch() {
                   <TableCell className="text-xs text-gray-700">
                     {record.name.split(" ")[0] || "-"}
                   </TableCell>
-                  <TableCell className="text-xs text-gray-700">
-                    {record.role}
-                  </TableCell>
+                  <TableCell className="text-xs text-gray-700">-</TableCell>
                   <TableCell className="text-xs text-gray-700">
                     {record.email}
                   </TableCell>

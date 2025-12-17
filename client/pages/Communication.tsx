@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,7 +24,23 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Plus, Edit, Trash2, MoreVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function FormRow({ children }: { children: React.ReactNode }) {
@@ -102,6 +118,11 @@ export default function Communication() {
     },
   ]);
 
+  const [deleteConfirmation, setDeleteConfirmation] = useState<{
+    type: "address" | "document";
+    id: number;
+  } | null>(null);
+
   const addOtherAddress = () => {
     const newId = Math.max(...otherAddresses.map((a) => a.id), 0) + 1;
     setOtherAddresses([
@@ -120,6 +141,7 @@ export default function Communication() {
 
   const deleteOtherAddress = (id: number) => {
     setOtherAddresses(otherAddresses.filter((a) => a.id !== id));
+    setDeleteConfirmation(null);
   };
 
   const addDocumentPref = () => {
@@ -139,6 +161,7 @@ export default function Communication() {
 
   const deleteDocumentPref = (id: number) => {
     setDocumentDeliveryPrefs(documentDeliveryPrefs.filter((d) => d.id !== id));
+    setDeleteConfirmation(null);
   };
 
   return (
@@ -154,7 +177,7 @@ export default function Communication() {
             <FormField label="Work Email">
               <Input value="rose.k@lawfirm.com" readOnly />
             </FormField>
-            <FormField label="Personal Email">
+            <FormField label="Personal Email" isMandatory>
               <Input value="rose.greenthumb@example.com" readOnly />
             </FormField>
           </FormRow>
@@ -215,7 +238,7 @@ export default function Communication() {
                 </SelectContent>
               </Select>
             </FormField>
-            <FormField label="Postal Code">
+            <FormField label="Postal Code" isMandatory>
               <Input value="M5B 3H2" readOnly />
             </FormField>
           </FormRow>
@@ -405,19 +428,35 @@ export default function Communication() {
                     />
                   </TableCell>
                   <TableCell>
-                    <div className="flex gap-1">
-                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                        <Edit size={12} />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0 text-red-600"
-                        onClick={() => deleteOtherAddress(address.id)}
-                      >
-                        <Trash2 size={12} />
-                      </Button>
-                    </div>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 w-6 p-0"
+                        >
+                          <MoreVertical size={14} />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem>
+                          <Edit size={14} className="mr-2" />
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="text-red-600"
+                          onClick={() =>
+                            setDeleteConfirmation({
+                              type: "address",
+                              id: address.id,
+                            })
+                          }
+                        >
+                          <Trash2 size={14} className="mr-2" />
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               ))}
@@ -443,7 +482,7 @@ export default function Communication() {
                     variant="ghost"
                     size="icon"
                     onClick={addDocumentPref}
-                    className="text-blue-600 hover:bg-blue-50"
+                    className="text-brand-blue hover:bg-blue-50"
                   >
                     <Plus size={18} />
                   </Button>
@@ -580,19 +619,35 @@ export default function Communication() {
                     />
                   </TableCell>
                   <TableCell>
-                    <div className="flex gap-1">
-                      <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                        <Edit size={12} />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0 text-red-600"
-                        onClick={() => deleteDocumentPref(pref.id)}
-                      >
-                        <Trash2 size={12} />
-                      </Button>
-                    </div>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 w-6 p-0"
+                        >
+                          <MoreVertical size={14} />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem>
+                          <Edit size={14} className="mr-2" />
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="text-red-600"
+                          onClick={() =>
+                            setDeleteConfirmation({
+                              type: "document",
+                              id: pref.id,
+                            })
+                          }
+                        >
+                          <Trash2 size={14} className="mr-2" />
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               ))}
@@ -652,14 +707,45 @@ export default function Communication() {
         {/* Row 1: Business Actions */}
         <div className="flex justify-end gap-3">
           <Button variant="outline">Cancel</Button>
-          <Button variant="default">Save</Button>
+          <Button>Save</Button>
         </div>
         {/* Row 2: Navigation */}
         <div className="flex justify-between">
-          <Button variant="outline">Previous</Button>
-          <Button variant="outline">Next</Button>
+          <Button>Previous</Button>
+          <Button>Next</Button>
         </div>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog
+        open={deleteConfirmation !== null}
+        onOpenChange={() => setDeleteConfirmation(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this item? This action cannot be
+              undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (deleteConfirmation?.type === "address") {
+                  deleteOtherAddress(deleteConfirmation.id);
+                } else if (deleteConfirmation?.type === "document") {
+                  deleteDocumentPref(deleteConfirmation.id);
+                }
+              }}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
