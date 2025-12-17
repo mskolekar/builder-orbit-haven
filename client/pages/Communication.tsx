@@ -707,14 +707,45 @@ export default function Communication() {
         {/* Row 1: Business Actions */}
         <div className="flex justify-end gap-3">
           <Button variant="outline">Cancel</Button>
-          <Button variant="default">Save</Button>
+          <Button>Save</Button>
         </div>
         {/* Row 2: Navigation */}
         <div className="flex justify-between">
-          <Button variant="outline">Previous</Button>
-          <Button variant="outline">Next</Button>
+          <Button>Previous</Button>
+          <Button>Next</Button>
         </div>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog
+        open={deleteConfirmation !== null}
+        onOpenChange={() => setDeleteConfirmation(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this item? This action cannot be
+              undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (deleteConfirmation?.type === "address") {
+                  deleteOtherAddress(deleteConfirmation.id);
+                } else if (deleteConfirmation?.type === "document") {
+                  deleteDocumentPref(deleteConfirmation.id);
+                }
+              }}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
