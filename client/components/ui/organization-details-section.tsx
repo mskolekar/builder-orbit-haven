@@ -36,7 +36,6 @@ export function OrganizationDetailsSection() {
                       {org.status}
                     </Badge>
                   </div>
-                  <p className="text-gray-600 font-medium">Organization</p>
                 </div>
               </div>
 
