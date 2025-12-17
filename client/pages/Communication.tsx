@@ -118,6 +118,11 @@ export default function Communication() {
     },
   ]);
 
+  const [deleteConfirmation, setDeleteConfirmation] = useState<{
+    type: "address" | "document";
+    id: number;
+  } | null>(null);
+
   const addOtherAddress = () => {
     const newId = Math.max(...otherAddresses.map((a) => a.id), 0) + 1;
     setOtherAddresses([
@@ -136,6 +141,7 @@ export default function Communication() {
 
   const deleteOtherAddress = (id: number) => {
     setOtherAddresses(otherAddresses.filter((a) => a.id !== id));
+    setDeleteConfirmation(null);
   };
 
   const addDocumentPref = () => {
@@ -155,6 +161,7 @@ export default function Communication() {
 
   const deleteDocumentPref = (id: number) => {
     setDocumentDeliveryPrefs(documentDeliveryPrefs.filter((d) => d.id !== id));
+    setDeleteConfirmation(null);
   };
 
   return (
