@@ -33,10 +33,9 @@ export function BasicDetailsSection({
                     {status}
                   </Badge>
                 </div>
-                <p className="text-gray-600 font-medium">{role}</p>
                 <div className="flex items-center gap-4 mt-2">
                   <div className="flex items-center gap-1 text-sm text-gray-500">
-                    Customer since {memberSince}
+                    Active Since {memberSince}
                   </div>
                 </div>
               </div>
