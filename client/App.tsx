@@ -85,6 +85,7 @@ function AppContent() {
     "/overview",
     "/profile",
     "/personal-details",
+    "/communication",
     "/loss-history",
     "/relationships",
     "/workgroups",
