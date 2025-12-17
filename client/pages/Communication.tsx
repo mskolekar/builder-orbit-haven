@@ -663,9 +663,7 @@ export default function Communication() {
         {/* Row 1: Business Actions */}
         <div className="flex justify-end gap-3">
           <Button variant="outline">Cancel</Button>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-            Save
-          </Button>
+          <Button variant="default">Save</Button>
         </div>
         {/* Row 2: Navigation */}
         <div className="flex justify-between">
