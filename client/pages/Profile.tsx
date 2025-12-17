@@ -1262,7 +1262,7 @@ export default function Profile() {
                     </div>
                     <div>
                       <Label className="text-xs text-gray-600">
-                        Customer Since
+                        Active Since
                       </Label>
                       <Select defaultValue="2019">
                         <SelectTrigger className="mt-1 h-8 border-gray-300">
