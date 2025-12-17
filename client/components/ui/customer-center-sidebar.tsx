@@ -16,7 +16,19 @@ interface CustomerCenterSidebarItem {
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Overview", path: "/overview" },
-  { label: "Personal Details", path: "/personal-details" },
+  {
+    label: "Personal Details",
+    path: "/personal-details",
+    subItems: [
+      { label: "Basic Info", path: "/personal-details?section=person-info" },
+      { label: "Communication", path: "/communication" },
+      {
+        label: "Additional Info",
+        path: "/personal-details?section=additional-info",
+      },
+      { label: "Work History", path: "/personal-details?section=person-history" },
+    ],
+  },
   { label: "Loss History", path: "/loss-history" },
   { label: "Relationships & Roles", path: "/relationships" },
   { label: "Workgroups", path: "/workgroups" },
