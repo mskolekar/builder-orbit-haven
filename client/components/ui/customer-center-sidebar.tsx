@@ -16,7 +16,22 @@ interface CustomerCenterSidebarItem {
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Overview", path: "/overview" },
-  { label: "Personal Details", path: "/personal-details" },
+  {
+    label: "Personal Details",
+    path: "/personal-details",
+    subItems: [
+      { label: "Basic Info", path: "/personal-details?section=person-info" },
+      { label: "Communication", path: "/communication" },
+      {
+        label: "Additional Info",
+        path: "/personal-details?section=additional-info",
+      },
+      {
+        label: "Work History",
+        path: "/personal-details?section=person-history",
+      },
+    ],
+  },
   { label: "Loss History", path: "/loss-history" },
   { label: "Relationships & Roles", path: "/relationships" },
   { label: "Workgroups", path: "/workgroups" },
@@ -71,10 +86,11 @@ export function CustomerCenterSidebar({
   };
 
   const toggleExpanded = (itemPath: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(itemPath)
-        ? prev.filter((path) => path !== itemPath)
-        : [itemPath], // Only one submenu expanded at a time
+    setExpandedItems(
+      (prev) =>
+        prev.includes(itemPath)
+          ? prev.filter((path) => path !== itemPath)
+          : [itemPath], // Only one submenu expanded at a time
     );
   };
 
@@ -90,6 +106,12 @@ export function CustomerCenterSidebar({
   const isMainPageActive = (item: CustomerCenterSidebarItem) => {
     if (item.path === "/overview") {
       return location.pathname.startsWith("/overview");
+    }
+    if (item.path === "/personal-details") {
+      return (
+        location.pathname === item.path ||
+        location.pathname === "/communication"
+      );
     }
     return location.pathname === item.path;
   };
