@@ -396,56 +396,103 @@ export default function CustomerDetails() {
                           </div>
 
                           <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
-                              onClick={navigateToProfile}
-                            >
-                              <Edit3 size={12} />
-                            </Button>
-                            <div className="flex items-center gap-2">
-                              <Calendar size={14} className="text-gray-400" />
-                              <div>
-                                <span className="text-xs text-gray-500">DOB</span>
-                                <p className="text-sm font-medium">
-                                  <SensitiveText value="1990" />
-                                </p>
+                            <div className="relative group">
+                              <div className="flex items-center gap-2">
+                                <Calendar size={14} className="text-gray-400" />
+                                <div>
+                                  <span className="text-xs text-gray-500">DOB</span>
+                                  <p className="text-sm font-medium">
+                                    <SensitiveText value="1990" />
+                                  </p>
+                                </div>
                               </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => navigate("/customer-details/profile?section=personal-info")}
+                                title="Edit DOB"
+                              >
+                                <Edit3 size={12} />
+                              </Button>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <div>
-                                <span className="text-xs text-gray-500">Gender</span>
-                                <p className="text-sm font-medium">
-                                  {customerData.gender}
-                                </p>
+                            <div className="relative group">
+                              <div className="flex items-center gap-2">
+                                <div>
+                                  <span className="text-xs text-gray-500">Gender</span>
+                                  <p className="text-sm font-medium">
+                                    {customerData.gender}
+                                  </p>
+                                </div>
                               </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => navigate("/customer-details/profile?section=personal-info")}
+                                title="Edit Gender"
+                              >
+                                <Edit3 size={12} />
+                              </Button>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <div>
-                                <span className="text-xs text-gray-500">LSC#</span>
-                                <p className="text-sm font-medium">
-                                  {customerData.lsc}
-                                </p>
+                            <div className="relative group">
+                              <div className="flex items-center gap-2">
+                                <div>
+                                  <span className="text-xs text-gray-500">LSC#</span>
+                                  <p className="text-sm font-medium">
+                                    {customerData.lsc}
+                                  </p>
+                                </div>
                               </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => navigate("/customer-details/profile?section=personal-info")}
+                                title="Edit SSN"
+                              >
+                                <Edit3 size={12} />
+                              </Button>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <Phone size={14} className="text-gray-400" />
-                              <div className="min-w-0">
-                                <span className="text-xs text-gray-500">Phone</span>
-                                <p className="text-sm font-medium whitespace-nowrap">
-                                  {customerData.phone}
-                                </p>
+                            <div className="relative group">
+                              <div className="flex items-center gap-2">
+                                <Phone size={14} className="text-gray-400" />
+                                <div className="min-w-0">
+                                  <span className="text-xs text-gray-500">Phone</span>
+                                  <p className="text-sm font-medium whitespace-nowrap">
+                                    {customerData.phone}
+                                  </p>
+                                </div>
                               </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => navigate("/customer-details/communication")}
+                                title="Edit Phone"
+                              >
+                                <Edit3 size={12} />
+                              </Button>
                             </div>
-                            <div className="col-span-2 flex items-center gap-2">
-                              <Mail size={14} className="text-gray-400" />
-                              <div>
-                                <span className="text-xs text-gray-500">Email</span>
-                                <p className="text-sm font-medium">
-                                  {customerData.email}
-                                </p>
+                            <div className="col-span-2 relative group">
+                              <div className="flex items-center gap-2">
+                                <Mail size={14} className="text-gray-400" />
+                                <div>
+                                  <span className="text-xs text-gray-500">Email</span>
+                                  <p className="text-sm font-medium">
+                                    {customerData.email}
+                                  </p>
+                                </div>
                               </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => navigate("/customer-details/communication")}
+                                title="Edit Email"
+                              >
+                                <Edit3 size={12} />
+                              </Button>
                             </div>
                           </div>
                         </div>
