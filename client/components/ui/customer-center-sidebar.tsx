@@ -103,6 +103,12 @@ export function CustomerCenterSidebar({
     if (item.path === "/overview") {
       return location.pathname.startsWith("/overview");
     }
+    if (item.path === "/personal-details") {
+      return (
+        location.pathname === item.path ||
+        location.pathname === "/communication"
+      );
+    }
     return location.pathname === item.path;
   };
 
