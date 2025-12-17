@@ -274,16 +274,24 @@ function AppContent() {
                         crumbs.push({ label: mainMap["/"].label });
                       }
 
-                      const subLabel = section
-                        ? sectionMap[section]
-                        : tab
-                          ? tabMap[tab]
-                          : undefined;
-                      if (subLabel) {
+                      // Add Communication as a sub-breadcrumb if on /communication path
+                      if (path === "/communication") {
                         crumbs.push({
-                          label: subLabel,
-                          to: location.pathname + location.search,
+                          label: "Communication",
+                          to: "/communication",
                         });
+                      } else {
+                        const subLabel = section
+                          ? sectionMap[section]
+                          : tab
+                            ? tabMap[tab]
+                            : undefined;
+                        if (subLabel) {
+                          crumbs.push({
+                            label: subLabel,
+                            to: location.pathname + location.search,
+                          });
+                        }
                       }
 
                       return (
