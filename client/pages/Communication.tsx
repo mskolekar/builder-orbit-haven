@@ -177,7 +177,7 @@ export default function Communication() {
             <FormField label="Work Email">
               <Input value="rose.k@lawfirm.com" readOnly />
             </FormField>
-            <FormField label="Personal Email">
+            <FormField label="Personal Email" isMandatory>
               <Input value="rose.greenthumb@example.com" readOnly />
             </FormField>
           </FormRow>
