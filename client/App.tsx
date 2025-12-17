@@ -206,6 +206,10 @@ function AppContent() {
                           label: "Personal Details",
                           to: "/personal-details",
                         },
+                        "/communication": {
+                          label: "Personal Details",
+                          to: "/personal-details",
+                        },
                         "/loss-history": {
                           label: "Loss History",
                           to: "/loss-history",
