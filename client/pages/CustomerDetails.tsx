@@ -389,7 +389,7 @@ export default function CustomerDetails() {
                               <div className="flex items-center gap-4 mt-2">
                                 <div className="flex items-center gap-1 text-sm text-gray-500">
                                   <Calendar size={12} />
-                                  Customer since {customerData.memberSince}
+                                  Active Since {customerData.memberSince}
                                 </div>
                               </div>
                             </div>
