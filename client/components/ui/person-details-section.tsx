@@ -131,7 +131,7 @@ export function PersonDetailsSection() {
                       size="sm"
                       className="absolute top-1 right-1 h-5 w-5 p-0 text-blue-600 hover:bg-blue-50"
                       onClick={() =>
-                        (window.location.href = "/contact-delivery?tab=contact")
+                        (window.location.href = "/customer-details/communication")
                       }
                       aria-label="Edit Contact Info"
                       title="Edit Contact Info"
