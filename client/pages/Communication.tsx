@@ -442,15 +442,21 @@ export default function Communication() {
             <div className="font-medium text-gray-900">
               Document Delivery Settings
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={addDocumentPref}
-              className="h-8 border-blue-300 text-blue-600 hover:bg-blue-50"
-            >
-              <Plus size={14} className="mr-2" />
-              Add Preference
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={addDocumentPref}
+                    className="text-blue-600 hover:bg-blue-50"
+                  >
+                    <Plus size={18} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Add Preference</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <Table>
             <TableHeader>
