@@ -637,7 +637,16 @@ export default function Communication() {
                       />
                     </TableCell>
                     <TableCell>
-                      <Select value={pref.status}>
+                      <Select
+                        value={pref.status}
+                        onValueChange={(value) =>
+                          setDocumentDeliveryPrefs(
+                            documentDeliveryPrefs.map((d) =>
+                              d.id === pref.id ? { ...d, status: value } : d
+                            )
+                          )
+                        }
+                      >
                         <SelectTrigger className="h-7 text-xs border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
