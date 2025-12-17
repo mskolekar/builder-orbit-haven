@@ -124,7 +124,7 @@ export default function CustomerDetails() {
   };
 
   const [expandedItemsState, setExpandedItemsState] = useState<string[]>(() =>
-    getInitialExpandedItems()
+    getInitialExpandedItems(),
   );
 
   const toggleExpanded = (itemPath: string) => {
@@ -157,7 +157,10 @@ export default function CustomerDetails() {
       );
     }
     if (item.path === "/customer-details/personal-details") {
-      return currentPath.includes("/profile") || currentPath.includes("/communication");
+      return (
+        currentPath.includes("/profile") ||
+        currentPath.includes("/communication")
+      );
     }
     return currentPath.startsWith(item.path);
   };
@@ -319,31 +322,42 @@ export default function CustomerDetails() {
                 const search = window.location.search;
                 const section = new URLSearchParams(search).get("section");
 
-                if (path === "/customer-details" || path === "/customer-details/") {
+                if (
+                  path === "/customer-details" ||
+                  path === "/customer-details/"
+                ) {
                   return <span className="text-gray-900">Overview</span>;
                 }
 
-                if (path === "/customer-details/profile" || path === "/customer-details/communication") {
+                if (
+                  path === "/customer-details/profile" ||
+                  path === "/customer-details/communication"
+                ) {
                   return (
                     <>
                       <span
                         className="hover:text-blue-600 cursor-pointer"
                         onClick={() =>
-                          navigate("/customer-details/profile?section=person-info")
+                          navigate(
+                            "/customer-details/profile?section=person-info",
+                          )
                         }
                       >
                         Personal Details
                       </span>
                       <span className="mx-2">&gt;</span>
-                      {path === "/customer-details/profile" && section === "person-info" && (
-                        <span className="text-gray-900">Basic Info</span>
-                      )}
-                      {path === "/customer-details/profile" && section === "additional-info" && (
-                        <span className="text-gray-900">Additional Info</span>
-                      )}
-                      {path === "/customer-details/profile" && section === "person-history" && (
-                        <span className="text-gray-900">Work History</span>
-                      )}
+                      {path === "/customer-details/profile" &&
+                        section === "person-info" && (
+                          <span className="text-gray-900">Basic Info</span>
+                        )}
+                      {path === "/customer-details/profile" &&
+                        section === "additional-info" && (
+                          <span className="text-gray-900">Additional Info</span>
+                        )}
+                      {path === "/customer-details/profile" &&
+                        section === "person-history" && (
+                          <span className="text-gray-900">Work History</span>
+                        )}
                       {path === "/customer-details/communication" && (
                         <span className="text-gray-900">Communication</span>
                       )}
@@ -362,7 +376,10 @@ export default function CustomerDetails() {
               const pathName = window.location.pathname;
               const search = window.location.search;
 
-              if (pathName === "/customer-details" || pathName === "/customer-details/") {
+              if (
+                pathName === "/customer-details" ||
+                pathName === "/customer-details/"
+              ) {
                 return (
                   <div className="p-6">
                     <Card className="shadow-sm border">
@@ -400,7 +417,9 @@ export default function CustomerDetails() {
                               <div className="flex items-center gap-2">
                                 <Calendar size={14} className="text-gray-400" />
                                 <div>
-                                  <span className="text-xs text-gray-500">DOB</span>
+                                  <span className="text-xs text-gray-500">
+                                    DOB
+                                  </span>
                                   <p className="text-sm font-medium">
                                     <SensitiveText value="1990" />
                                   </p>
@@ -410,7 +429,11 @@ export default function CustomerDetails() {
                                 variant="ghost"
                                 size="sm"
                                 className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
-                                onClick={() => navigate("/customer-details/profile?section=personal-info")}
+                                onClick={() =>
+                                  navigate(
+                                    "/customer-details/profile?section=personal-info",
+                                  )
+                                }
                                 title="Edit DOB"
                               >
                                 <Edit3 size={12} />
@@ -419,7 +442,9 @@ export default function CustomerDetails() {
                             <div className="relative group">
                               <div className="flex items-center gap-2">
                                 <div>
-                                  <span className="text-xs text-gray-500">Gender</span>
+                                  <span className="text-xs text-gray-500">
+                                    Gender
+                                  </span>
                                   <p className="text-sm font-medium">
                                     {customerData.gender}
                                   </p>
@@ -429,7 +454,11 @@ export default function CustomerDetails() {
                                 variant="ghost"
                                 size="sm"
                                 className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
-                                onClick={() => navigate("/customer-details/profile?section=personal-info")}
+                                onClick={() =>
+                                  navigate(
+                                    "/customer-details/profile?section=personal-info",
+                                  )
+                                }
                                 title="Edit Gender"
                               >
                                 <Edit3 size={12} />
@@ -438,7 +467,9 @@ export default function CustomerDetails() {
                             <div className="relative group">
                               <div className="flex items-center gap-2">
                                 <div>
-                                  <span className="text-xs text-gray-500">LSC#</span>
+                                  <span className="text-xs text-gray-500">
+                                    LSC#
+                                  </span>
                                   <p className="text-sm font-medium">
                                     {customerData.lsc}
                                   </p>
@@ -448,7 +479,11 @@ export default function CustomerDetails() {
                                 variant="ghost"
                                 size="sm"
                                 className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
-                                onClick={() => navigate("/customer-details/profile?section=personal-info")}
+                                onClick={() =>
+                                  navigate(
+                                    "/customer-details/profile?section=personal-info",
+                                  )
+                                }
                                 title="Edit SSN"
                               >
                                 <Edit3 size={12} />
@@ -458,7 +493,9 @@ export default function CustomerDetails() {
                               <div className="flex items-center gap-2">
                                 <Phone size={14} className="text-gray-400" />
                                 <div className="min-w-0">
-                                  <span className="text-xs text-gray-500">Phone</span>
+                                  <span className="text-xs text-gray-500">
+                                    Phone
+                                  </span>
                                   <p className="text-sm font-medium whitespace-nowrap">
                                     {customerData.phone}
                                   </p>
@@ -468,7 +505,9 @@ export default function CustomerDetails() {
                                 variant="ghost"
                                 size="sm"
                                 className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
-                                onClick={() => navigate("/customer-details/communication")}
+                                onClick={() =>
+                                  navigate("/customer-details/communication")
+                                }
                                 title="Edit Phone"
                               >
                                 <Edit3 size={12} />
@@ -478,7 +517,9 @@ export default function CustomerDetails() {
                               <div className="flex items-center gap-2">
                                 <Mail size={14} className="text-gray-400" />
                                 <div>
-                                  <span className="text-xs text-gray-500">Email</span>
+                                  <span className="text-xs text-gray-500">
+                                    Email
+                                  </span>
                                   <p className="text-sm font-medium">
                                     {customerData.email}
                                   </p>
@@ -488,7 +529,9 @@ export default function CustomerDetails() {
                                 variant="ghost"
                                 size="sm"
                                 className="absolute -top-2 -right-2 h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity"
-                                onClick={() => navigate("/customer-details/communication")}
+                                onClick={() =>
+                                  navigate("/customer-details/communication")
+                                }
                                 title="Edit Email"
                               >
                                 <Edit3 size={12} />
@@ -500,12 +543,16 @@ export default function CustomerDetails() {
                         <div className="mt-3 flex items-center gap-2 text-sm relative group">
                           <MapPin size={14} className="text-gray-400" />
                           <span className="text-gray-500">Address:</span>
-                          <span className="font-medium">{customerData.address}</span>
+                          <span className="font-medium">
+                            {customerData.address}
+                          </span>
                           <Button
                             variant="ghost"
                             size="sm"
                             className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity ml-2"
-                            onClick={() => navigate("/customer-details/communication")}
+                            onClick={() =>
+                              navigate("/customer-details/communication")
+                            }
                             title="Edit Address"
                           >
                             <Edit3 size={12} />
@@ -521,13 +568,24 @@ export default function CustomerDetails() {
                             Quick Actions
                           </h3>
                           <div className="space-y-3">
-                            <Button size="sm" className="w-full justify-start bg-[#0054A6] hover:bg-[#003d7a]">
+                            <Button
+                              size="sm"
+                              className="w-full justify-start bg-[#0054A6] hover:bg-[#003d7a]"
+                            >
                               Create New Policy
                             </Button>
-                            <Button variant="outline" size="sm" className="w-full justify-start">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start"
+                            >
                               View Claims History
                             </Button>
-                            <Button variant="outline" size="sm" className="w-full justify-start">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start"
+                            >
                               Generate Report
                             </Button>
                           </div>
@@ -545,11 +603,15 @@ export default function CustomerDetails() {
                               <span className="font-medium">2 hours ago</span>
                             </div>
                             <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Policy Updated</span>
+                              <span className="text-gray-600">
+                                Policy Updated
+                              </span>
                               <span className="font-medium">Yesterday</span>
                             </div>
                             <div className="flex justify-between items-center py-2">
-                              <span className="text-gray-600">Document Uploaded</span>
+                              <span className="text-gray-600">
+                                Document Uploaded
+                              </span>
                               <span className="font-medium">3 days ago</span>
                             </div>
                           </div>
