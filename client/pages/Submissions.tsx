@@ -513,7 +513,7 @@ export default function Submissions() {
               <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
                 {/* Row 1: Business Actions */}
                 <div className="flex justify-end gap-3">
-                  <Button variant="outline">Cancel</Button>
+                  <Button variant="cancel">Cancel</Button>
                   <Button>Save</Button>
                 </div>
                 {/* Row 2: Navigation */}
