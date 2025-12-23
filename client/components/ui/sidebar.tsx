@@ -173,7 +173,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={cn(
-          "h-screen bg-white border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
+          "h-screen bg-[#F5F5F5] border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
           "lg:translate-x-0 lg:static lg:z-auto",
           isCollapsed ? "w-16" : "w-64",
           isOpen
