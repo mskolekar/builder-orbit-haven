@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, Menu } from "lucide-react";
+import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
 
 function SubmissionHeader({
   isCollapsed,
@@ -541,8 +541,12 @@ export default function Submissions() {
                 </div>
                 {/* Row 2: Navigation */}
                 <div className="flex justify-between">
-                  <Button>Previous</Button>
-                  <Button>Next</Button>
+                  <Button variant="outline" size="icon" title="Previous">
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" size="icon" title="Next">
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </div>
