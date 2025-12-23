@@ -128,7 +128,7 @@ export function SubmissionSidebar({
                             "flex items-center rounded-lg text-sm transition-colors w-full px-3 py-2",
                             activeTab === subItem.id
                               ? "bg-[#6F7C88] text-white"
-                              : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                              : "text-[#6F7C88] hover:bg-white hover:text-[#0054A6]",
                           )}
                           aria-label={subItem.label}
                         >
