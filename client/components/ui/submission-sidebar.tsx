@@ -67,7 +67,7 @@ export function SubmissionSidebar({
   return (
     <div
       className={cn(
-        "h-full bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300",
+        "h-full bg-[#F5F5F5] text-gray-700 flex flex-col shadow-sm transition-all duration-300",
         isCollapsed ? "w-0 overflow-hidden" : "w-64",
       )}
     >
