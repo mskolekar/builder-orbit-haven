@@ -98,8 +98,8 @@ export function SubmissionSidebar({
                       isMainActive
                         ? "bg-[#6F7C88] text-white"
                         : isSubActive
-                          ? "bg-[#EEF1F6] text-[#2F3A45]"
-                          : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                          ? "bg-white text-[#6F7C88]"
+                          : "text-[#6F7C88] hover:bg-white hover:text-[#0054A6]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                     aria-label={item.label}
