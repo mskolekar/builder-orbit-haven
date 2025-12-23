@@ -77,22 +77,39 @@ function FormField({
   isMandatory?: boolean;
   children: React.ReactNode;
 }) {
+  const processedChildren = isMandatory
+    ? React.Children.map(children, (child) => {
+        if (!React.isValidElement(child)) return child;
+
+        // Handle Select components
+        if (child.type?.displayName === "SelectRoot" || child.type?.name === "Select") {
+          return React.cloneElement(child, {
+            children: React.Children.map(child.props.children, (selectChild) => {
+              if (!React.isValidElement(selectChild)) return selectChild;
+              if (selectChild.type?.displayName === "SelectTrigger") {
+                return React.cloneElement(selectChild, {
+                  className: cn(selectChild.props.className, "bg-[#F5F5F5]"),
+                });
+              }
+              return selectChild;
+            }),
+          });
+        }
+
+        // Handle Input components
+        return React.cloneElement(child, {
+          className: cn(child.props.className, "bg-[#F5F5F5]"),
+        });
+      })
+    : children;
+
   return (
     <div className="flex gap-4 items-start">
       <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm pt-2">
         {label}
         {isMandatory && <span className="text-red-600 ml-1">*</span>}
       </label>
-      <div className="flex-1">
-        {isMandatory
-          ? React.cloneElement(children as React.ReactElement, {
-              className: cn(
-                (children as React.ReactElement).props.className,
-                "bg-[#F5F5F5]",
-              ),
-            })
-          : children}
-      </div>
+      <div className="flex-1">{processedChildren}</div>
     </div>
   );
 }
