@@ -82,17 +82,23 @@ function FormField({
         if (!React.isValidElement(child)) return child;
 
         // Handle Select components
-        if (child.type?.displayName === "SelectRoot" || child.type?.name === "Select") {
+        if (
+          child.type?.displayName === "SelectRoot" ||
+          child.type?.name === "Select"
+        ) {
           return React.cloneElement(child, {
-            children: React.Children.map(child.props.children, (selectChild) => {
-              if (!React.isValidElement(selectChild)) return selectChild;
-              if (selectChild.type?.displayName === "SelectTrigger") {
-                return React.cloneElement(selectChild, {
-                  className: cn(selectChild.props.className, "bg-[#F5F5F5]"),
-                });
-              }
-              return selectChild;
-            }),
+            children: React.Children.map(
+              child.props.children,
+              (selectChild) => {
+                if (!React.isValidElement(selectChild)) return selectChild;
+                if (selectChild.type?.displayName === "SelectTrigger") {
+                  return React.cloneElement(selectChild, {
+                    className: cn(selectChild.props.className, "bg-[#F5F5F5]"),
+                  });
+                }
+                return selectChild;
+              },
+            ),
           });
         }
 
