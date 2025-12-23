@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, Menu } from "lucide-react";
+import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
 
 function SubmissionHeader({
   isCollapsed,
@@ -93,7 +93,7 @@ function FormField({
                 if (!React.isValidElement(selectChild)) return selectChild;
                 if (selectChild.type?.displayName === "SelectTrigger") {
                   return React.cloneElement(selectChild, {
-                    className: cn(selectChild.props.className, "bg-[#F5F5F5]"),
+                    className: cn(selectChild.props.className, "bg-white"),
                   });
                 }
                 return selectChild;
@@ -104,7 +104,7 @@ function FormField({
 
         // Handle Input components
         return React.cloneElement(child, {
-          className: cn(child.props.className, "bg-[#F5F5F5]"),
+          className: cn(child.props.className, "bg-white"),
         });
       })
     : children;
@@ -541,8 +541,12 @@ export default function Submissions() {
                 </div>
                 {/* Row 2: Navigation */}
                 <div className="flex justify-between">
-                  <Button>Previous</Button>
-                  <Button>Next</Button>
+                  <Button variant="outline" size="icon" title="Previous">
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" size="icon" title="Next">
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </div>

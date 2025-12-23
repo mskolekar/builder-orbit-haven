@@ -157,7 +157,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-200 text-gray-700 rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-[#F5F5F5] border border-gray-200 text-gray-700 rounded-lg shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -173,7 +173,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={cn(
-          "h-screen bg-white border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
+          "h-screen bg-[#F5F5F5] border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
           "lg:translate-x-0 lg:static lg:z-auto",
           isCollapsed ? "w-16" : "w-64",
           isOpen
