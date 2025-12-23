@@ -88,7 +88,7 @@ function FormField({
           ? React.cloneElement(children as React.ReactElement, {
               className: cn(
                 (children as React.ReactElement).props.className,
-                "bg-yellow-100",
+                "bg-[#F5F5F5]",
               ),
             })
           : children}
