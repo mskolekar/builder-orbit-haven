@@ -67,7 +67,7 @@ export function SubmissionSidebar({
   return (
     <div
       className={cn(
-        "h-full bg-gradient-to-b from-[#0054A6] to-[#003d7a] text-white flex flex-col shadow-sm transition-all duration-300",
+        "h-full bg-[#F5F5F5] text-gray-700 flex flex-col shadow-sm transition-all duration-300",
         isCollapsed ? "w-0 overflow-hidden" : "w-64",
       )}
     >
@@ -98,8 +98,8 @@ export function SubmissionSidebar({
                       isMainActive
                         ? "bg-[#6F7C88] text-white"
                         : isSubActive
-                          ? "bg-[#EEF1F6] text-[#2F3A45]"
-                          : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                          ? "bg-white text-[#6F7C88]"
+                          : "text-[#6F7C88] hover:bg-white hover:text-[#0054A6]",
                     )}
                     title={isCollapsed ? item.label : undefined}
                     aria-label={item.label}
@@ -128,7 +128,7 @@ export function SubmissionSidebar({
                             "flex items-center rounded-lg text-sm transition-colors w-full px-3 py-2",
                             activeTab === subItem.id
                               ? "bg-[#6F7C88] text-white"
-                              : "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                              : "text-[#6F7C88] hover:bg-white hover:text-[#0054A6]",
                           )}
                           aria-label={subItem.label}
                         >
