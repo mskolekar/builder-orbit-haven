@@ -186,28 +186,18 @@ export function CustomerCenterSidebar({
                       <div className="flex items-center gap-3">
                         {item.label}
                       </div>
-                      {hasSubItems &&
-                        (isExpanded ? (
-                          <ChevronDown
-                            size={14}
-                            className={cn(
-                              "transition-colors",
-                              isMainActive && hasSubItems
-                                ? "text-white"
-                                : "text-white/80",
-                            )}
-                          />
-                        ) : (
-                          <ChevronRight
-                            size={14}
-                            className={cn(
-                              "transition-colors",
-                              isMainActive && hasSubItems
-                                ? "text-white"
-                                : "text-white/80",
-                            )}
-                          />
-                        ))}
+                      {hasSubItems && (
+                        <ChevronDown
+                          size={14}
+                          className={cn(
+                            "transition-transform",
+                            isExpanded ? "rotate-180" : "",
+                            isMainActive && hasSubItems
+                              ? "text-white"
+                              : "text-white/80",
+                          )}
+                        />
+                      )}
                     </>
                   )}
                 </button>
