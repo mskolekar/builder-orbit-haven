@@ -72,7 +72,7 @@ export function SubmissionSidebar({
       )}
     >
       <nav
-        className="flex-1 px-3 pt-4 pb-4 overflow-y-auto"
+        className="px-3 pt-4 pb-4"
         role="navigation"
         aria-label="Submission Navigation"
       >

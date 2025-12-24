@@ -126,7 +126,9 @@ function AppContent() {
       />
 
       {/* Main content area with header and content */}
-      <div className="flex flex-col flex-1">
+      <div
+        className={`flex flex-col flex-1 transition-all duration-300 ${isOmsSidebarCollapsed ? "ml-16" : "ml-64"}`}
+      >
         {/* White OneShield Header */}
         <Header />
 

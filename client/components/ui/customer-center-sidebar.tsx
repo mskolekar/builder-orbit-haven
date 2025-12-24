@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 interface SubItem {
   label: string;
@@ -129,7 +129,7 @@ export function CustomerCenterSidebar({
       )}
     >
       <nav
-        className="flex-1 px-3 pt-4 pb-4 overflow-y-auto"
+        className="px-3 pt-4 pb-4"
         role="navigation"
         aria-label="Customer Center Navigation"
       >
@@ -186,28 +186,18 @@ export function CustomerCenterSidebar({
                       <div className="flex items-center gap-3">
                         {item.label}
                       </div>
-                      {hasSubItems &&
-                        (isExpanded ? (
-                          <ChevronDown
-                            size={14}
-                            className={cn(
-                              "transition-colors",
-                              isMainActive && hasSubItems
-                                ? "text-white"
-                                : "text-white/80",
-                            )}
-                          />
-                        ) : (
-                          <ChevronRight
-                            size={14}
-                            className={cn(
-                              "transition-colors",
-                              isMainActive && hasSubItems
-                                ? "text-white"
-                                : "text-white/80",
-                            )}
-                          />
-                        ))}
+                      {hasSubItems && (
+                        <ChevronDown
+                          size={14}
+                          className={cn(
+                            "transition-transform",
+                            isExpanded ? "rotate-180" : "",
+                            isMainActive && hasSubItems
+                              ? "text-white"
+                              : "text-white/80",
+                          )}
+                        />
+                      )}
                     </>
                   )}
                 </button>

@@ -25,6 +25,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 export function Header() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const notifications = [
     {
@@ -137,7 +138,7 @@ export function Header() {
         </Button>
 
         {/* User Menu */}
-        <DropdownMenu>
+        <DropdownMenu open={userMenuOpen} onOpenChange={setUserMenuOpen}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
@@ -150,7 +151,10 @@ export function Header() {
                 <span className="hidden lg:block text-sm font-medium">
                   UW John
                 </span>
-                <ChevronDown size={14} />
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform ${userMenuOpen ? "rotate-180" : ""}`}
+                />
               </div>
             </Button>
           </DropdownMenuTrigger>

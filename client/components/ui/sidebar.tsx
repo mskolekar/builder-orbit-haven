@@ -173,12 +173,9 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={cn(
-          "h-screen bg-[#F5F5F5] border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm",
-          "lg:translate-x-0 lg:static lg:z-auto",
+          "h-screen bg-[#F5F5F5] border-r border-gray-200 text-gray-700 flex flex-col transition-all duration-300 z-40 shadow-sm fixed top-0 left-0 lg:translate-x-0",
           isCollapsed ? "w-16" : "w-64",
-          isOpen
-            ? "fixed translate-x-0"
-            : "fixed -translate-x-full lg:translate-x-0",
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
         <div
@@ -273,7 +270,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                         size={16}
                         className={cn(
                           "transition-transform flex-shrink-0",
-                          isExpanded ? "rotate-90" : "rotate-0",
+                          isExpanded ? "-rotate-90" : "rotate-90",
                           // Light grey main menu with expanded submenu: black chevron
                           hasSubItems && isExpanded
                             ? "text-[#2F3A45]"

@@ -990,7 +990,7 @@ export default function Dashboard() {
                   </CardTitle>
                   <ChevronDown
                     size={20}
-                    className={`text-gray-600 transition-transform ${isActivityCollapsed ? "-rotate-90" : ""}`}
+                    className={`text-gray-600 transition-transform ${isActivityCollapsed ? "" : "rotate-180"}`}
                   />
                 </div>
               </div>
@@ -1107,7 +1107,7 @@ export default function Dashboard() {
                   </CardTitle>
                   <ChevronDown
                     size={20}
-                    className={`text-gray-600 transition-transform ${isDiariesCollapsed ? "-rotate-90" : ""}`}
+                    className={`text-gray-600 transition-transform ${isDiariesCollapsed ? "" : "rotate-180"}`}
                   />
                 </div>
                 <div className="flex items-center gap-2">
@@ -1322,7 +1322,7 @@ export default function Dashboard() {
                     </CardTitle>
                     <ChevronDown
                       size={20}
-                      className={`text-gray-600 transition-transform ${isPoliciesCollapsed ? "-rotate-90" : ""}`}
+                      className={`text-gray-600 transition-transform ${isPoliciesCollapsed ? "" : "rotate-180"}`}
                     />
                   </div>
                 </div>
@@ -1479,7 +1479,7 @@ export default function Dashboard() {
                     </CardTitle>
                     <ChevronDown
                       size={20}
-                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : ""}`}
+                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "" : "rotate-180"}`}
                     />
                   </div>
                 </div>
@@ -1612,7 +1612,7 @@ export default function Dashboard() {
                     </CardTitle>
                     <ChevronDown
                       size={20}
-                      className={`text-gray-600 transition-transform ${isClaimsCollapsed ? "-rotate-90" : ""}`}
+                      className={`text-gray-600 transition-transform ${isClaimsCollapsed ? "" : "rotate-180"}`}
                     />
                   </div>
                 </div>
@@ -1899,7 +1899,7 @@ export default function Dashboard() {
                     </CardTitle>
                     <ChevronDown
                       size={20}
-                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : ""}`}
+                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "" : "rotate-180"}`}
                     />
                   </div>
                 </div>
