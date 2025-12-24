@@ -990,7 +990,7 @@ export default function Dashboard() {
                   </CardTitle>
                   <ChevronDown
                     size={20}
-                    className={`text-gray-600 transition-transform ${isActivityCollapsed ? "-rotate-90" : ""}`}
+                    className={`text-gray-600 transition-transform ${isActivityCollapsed ? "" : "rotate-180"}`}
                   />
                 </div>
               </div>
