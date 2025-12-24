@@ -151,7 +151,10 @@ export function Header() {
                 <span className="hidden lg:block text-sm font-medium">
                   UW John
                 </span>
-                <ChevronDown size={14} className={`transition-transform ${userMenuOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform ${userMenuOpen ? "rotate-180" : ""}`}
+                />
               </div>
             </Button>
           </DropdownMenuTrigger>
