@@ -1479,7 +1479,7 @@ export default function Dashboard() {
                     </CardTitle>
                     <ChevronDown
                       size={20}
-                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : ""}`}
+                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "" : "rotate-180"}`}
                     />
                   </div>
                 </div>
@@ -1899,7 +1899,7 @@ export default function Dashboard() {
                     </CardTitle>
                     <ChevronDown
                       size={20}
-                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "-rotate-90" : ""}`}
+                      className={`text-gray-600 transition-transform ${isSubmissionsCollapsed ? "" : "rotate-180"}`}
                     />
                   </div>
                 </div>
