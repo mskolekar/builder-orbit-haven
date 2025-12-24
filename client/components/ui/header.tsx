@@ -25,6 +25,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 export function Header() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const notifications = [
     {
