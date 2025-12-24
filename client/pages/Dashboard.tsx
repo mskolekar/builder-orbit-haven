@@ -1107,7 +1107,7 @@ export default function Dashboard() {
                   </CardTitle>
                   <ChevronDown
                     size={20}
-                    className={`text-gray-600 transition-transform ${isDiariesCollapsed ? "-rotate-90" : ""}`}
+                    className={`text-gray-600 transition-transform ${isDiariesCollapsed ? "" : "rotate-180"}`}
                   />
                 </div>
                 <div className="flex items-center gap-2">
