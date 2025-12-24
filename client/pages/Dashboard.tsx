@@ -1612,7 +1612,7 @@ export default function Dashboard() {
                     </CardTitle>
                     <ChevronDown
                       size={20}
-                      className={`text-gray-600 transition-transform ${isClaimsCollapsed ? "-rotate-90" : ""}`}
+                      className={`text-gray-600 transition-transform ${isClaimsCollapsed ? "" : "rotate-180"}`}
                     />
                   </div>
                 </div>
