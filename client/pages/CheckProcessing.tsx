@@ -287,28 +287,6 @@ export default function CheckProcessing() {
 
   return (
     <div className="flex flex-col flex-1">
-      {/* Page Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Check Processing
-            </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              Manage and process payment checks and electronic fund transfers
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <Button variant="outline" size="sm">
-              Export
-            </Button>
-            <Button size="sm" className="bg-[#0054A6] hover:bg-[#003d7a]">
-              New Check
-            </Button>
-          </div>
-        </div>
-      </div>
-
       {/* Search Panel */}
       <div className="px-6 py-6 bg-gray-50">
         <CheckProcessingSearchPanel
