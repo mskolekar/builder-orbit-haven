@@ -307,10 +307,10 @@ export default function CheckProcessing() {
                   onCheckedChange={toggleSelectAll}
                 />
               </TableHead>
-              <TableHead className="text-sm font-semibold w-40">
+              <TableHead className="font-semibold w-40">
                 Payee
               </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
+              <TableHead className="whitespace-nowrap font-semibold">
                 Financial Account Code
               </TableHead>
               <TableHead className="whitespace-nowrap text-sm font-semibold">
