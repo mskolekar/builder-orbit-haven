@@ -70,7 +70,8 @@ const mockCheckData: CheckRecord[] = [
   },
   {
     id: "3",
-    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    payee:
+      "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
     financialAccountCode: "BMO",
     batch: "4947",
     checkNumber: "",
@@ -86,7 +87,8 @@ const mockCheckData: CheckRecord[] = [
   },
   {
     id: "4",
-    payee: "Lawpro_l_name_86700, Lawpro_Fname_68678 | 21 Ave, Toronto KS WOODSON 66777",
+    payee:
+      "Lawpro_l_name_86700, Lawpro_Fname_68678 | 21 Ave, Toronto KS WOODSON 66777",
     financialAccountCode: "BMO",
     batch: "4937",
     checkNumber: "8336",
@@ -102,7 +104,8 @@ const mockCheckData: CheckRecord[] = [
   },
   {
     id: "5",
-    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    payee:
+      "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
     financialAccountCode: "BMO",
     batch: "4933",
     checkNumber: "",
@@ -118,7 +121,8 @@ const mockCheckData: CheckRecord[] = [
   },
   {
     id: "6",
-    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    payee:
+      "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
     financialAccountCode: "BMO",
     batch: "4925",
     checkNumber: "",
@@ -134,7 +138,8 @@ const mockCheckData: CheckRecord[] = [
   },
   {
     id: "7",
-    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    payee:
+      "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
     financialAccountCode: "BMO",
     batch: "4918",
     checkNumber: "",
@@ -150,7 +155,8 @@ const mockCheckData: CheckRecord[] = [
   },
   {
     id: "8",
-    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    payee:
+      "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
     financialAccountCode: "BMO",
     batch: "4911",
     checkNumber: "",
@@ -166,7 +172,8 @@ const mockCheckData: CheckRecord[] = [
   },
   {
     id: "9",
-    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    payee:
+      "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
     financialAccountCode: "BMO",
     batch: "4904",
     checkNumber: "",
@@ -212,7 +219,10 @@ function ActionMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuItem onClick={handleViewDetails} className="cursor-pointer">
+        <DropdownMenuItem
+          onClick={handleViewDetails}
+          className="cursor-pointer"
+        >
           <Eye size={16} className="mr-2" />
           <span>View Details</span>
         </DropdownMenuItem>
