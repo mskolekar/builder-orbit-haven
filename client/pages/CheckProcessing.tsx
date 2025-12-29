@@ -318,7 +318,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 bg-white overflow-y-auto">
+      <div className="flex-1 bg-gray-50 overflow-y-auto px-6">
         <Table>
           <TableHeader className="bg-gray-50 sticky top-0">
             <TableRow className="border-b border-gray-200">
