@@ -54,6 +54,7 @@ const sidebarItems: SidebarItem[] = [
     subItems: [
       { label: "Record Payment", path: "/accounting/record-payment" },
       { label: "Check Printing", path: "/accounting/check-printing" },
+      { label: "Check Processing", path: "/accounting/check-processing" },
       { label: "Invoicing", path: "/accounting/invoicing" },
     ],
   },
@@ -270,7 +271,7 @@ export function Sidebar({ isCollapsed, onToggleCollapse }: SidebarProps) {
                         size={16}
                         className={cn(
                           "transition-transform flex-shrink-0",
-                          isExpanded ? "-rotate-90" : "rotate-90",
+                          isExpanded ? "rotate-90" : "-rotate-90",
                           // Light grey main menu with expanded submenu: black chevron
                           hasSubItems && isExpanded
                             ? "text-[#2F3A45]"

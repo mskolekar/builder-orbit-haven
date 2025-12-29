@@ -19,6 +19,7 @@ import CustomerCenterSearch from "@/pages/CustomerCenterSearch";
 import SubmissionSearch from "@/pages/SubmissionSearch";
 import Submissions from "@/pages/Submissions";
 import Incidents from "@/pages/Incidents";
+import CheckProcessing from "@/pages/CheckProcessing";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
@@ -460,6 +461,10 @@ function AppContent() {
                     description="Handle accounting and financial operations."
                   />
                 }
+              />
+              <Route
+                path="/accounting/check-processing"
+                element={<CheckProcessing />}
               />
               <Route
                 path="/search"
