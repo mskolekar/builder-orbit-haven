@@ -361,7 +361,7 @@ export default function CheckProcessing() {
                     onCheckedChange={() => toggleRowSelection(record.id)}
                   />
                 </TableCell>
-                <TableCell className="text-sm text-gray-900 w-48 break-words whitespace-normal">
+                <TableCell className="text-gray-900 w-40 break-words whitespace-normal">
                   {record.payee}
                 </TableCell>
                 <TableCell className="text-sm text-gray-700">
