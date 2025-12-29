@@ -17,6 +17,10 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { MoreVertical, Eye, X, MessageSquare, Upload } from "lucide-react";
+import {
+  CheckProcessingSearchPanel,
+  type CheckProcessingFilters,
+} from "@/components/ui/check-processing-search-panel";
 
 interface CheckRecord {
   id: string;
