@@ -421,15 +421,15 @@ export default function CheckProcessing() {
       {/* Action buttons at bottom right */}
       <div className="bg-white border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
         <Button
-          variant="outline"
           size="sm"
+          className="bg-[#0054A6] hover:bg-[#003d7a]"
           onClick={() => console.log("Create Output clicked")}
         >
           Create Output
         </Button>
         <Button
-          variant="outline"
           size="sm"
+          className="bg-[#0054A6] hover:bg-[#003d7a]"
           onClick={() => console.log("Mark as Printed clicked")}
         >
           Mark as Printed
