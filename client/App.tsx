@@ -463,6 +463,10 @@ function AppContent() {
                 }
               />
               <Route
+                path="/accounting/check-processing"
+                element={<CheckProcessing />}
+              />
+              <Route
                 path="/search"
                 element={
                   <PlaceholderPage
