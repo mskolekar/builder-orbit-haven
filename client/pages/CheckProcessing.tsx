@@ -253,6 +253,7 @@ function ActionMenu() {
 
 export default function CheckProcessing() {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
+  const [searchFilters, setSearchFilters] = useState<CheckProcessingFilters | null>(null);
 
   const toggleRowSelection = (id: string) => {
     const newSelected = new Set(selectedRows);
@@ -270,6 +271,18 @@ export default function CheckProcessing() {
     } else {
       setSelectedRows(new Set(mockCheckData.map((r) => r.id)));
     }
+  };
+
+  const handleSearch = (filters: CheckProcessingFilters) => {
+    setSearchFilters(filters);
+    console.log("Running search with filters:", filters);
+    // Here you would typically make an API call with the filters
+  };
+
+  const handleReset = () => {
+    setSearchFilters(null);
+    setSelectedRows(new Set());
+    console.log("Search filters reset");
   };
 
   return (
