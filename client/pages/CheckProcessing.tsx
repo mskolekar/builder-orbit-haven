@@ -288,7 +288,7 @@ export default function CheckProcessing() {
   return (
     <div className="flex flex-col flex-1">
       {/* Search Panel */}
-      <div className="px-6 py-6 bg-gray-50">
+      <div className="px-4 py-4 bg-gray-50">
         <CheckProcessingSearchPanel
           onSearch={handleSearch}
           onReset={handleReset}
@@ -296,7 +296,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 bg-gray-50 overflow-y-auto px-6 py-6">
+      <div className="flex-1 bg-gray-50 overflow-y-auto px-4 py-4">
         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
           <Table>
             <TableHeader className="bg-gray-50 sticky top-0">
@@ -417,7 +417,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Footer with pagination and actions */}
-      <div className="bg-gray-50 px-6 pt-0 pb-4">
+      <div className="bg-gray-50 px-4 pt-0 pb-4">
         <div className="flex items-center justify-between">
           <div className="text-sm text-gray-600">
             Showing {mockCheckData.length} of {mockCheckData.length} records
@@ -434,7 +434,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Action buttons at bottom right */}
-      <div className="bg-gray-50 px-6 py-4 flex justify-end gap-3">
+      <div className="bg-gray-50 px-4 py-4 flex justify-end gap-3">
         <Button
           size="sm"
           className="bg-[#0054A6] hover:bg-[#003d7a]"
