@@ -253,7 +253,8 @@ function ActionMenu() {
 
 export default function CheckProcessing() {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
-  const [searchFilters, setSearchFilters] = useState<CheckProcessingFilters | null>(null);
+  const [searchFilters, setSearchFilters] =
+    useState<CheckProcessingFilters | null>(null);
 
   const toggleRowSelection = (id: string) => {
     const newSelected = new Set(selectedRows);
@@ -300,119 +301,117 @@ export default function CheckProcessing() {
         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
           <Table className="text-xs [&_td]:p-2 [&_th]:p-2">
             <TableHeader className="bg-gray-50 sticky top-0">
-            <TableRow className="border-b border-gray-200">
-              <TableHead className="w-12 px-2 py-2 h-auto">
-                <Checkbox
-                  checked={selectedRows.size === mockCheckData.length}
-                  onCheckedChange={toggleSelectAll}
-                />
-              </TableHead>
-              <TableHead className="font-semibold w-40">
-                Payee
-              </TableHead>
-              <TableHead className="whitespace-nowrap font-semibold">
-                Financial Account Code
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Batch#
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Check#
-              </TableHead>
-              <TableHead className="text-right whitespace-nowrap text-sm font-semibold">
-                Amount
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Payment Processed Date
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Payment Method
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Status
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Extract Status
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Extract Date
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Extract File Name
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Check Output
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Approver(s)
-              </TableHead>
-              <TableHead className="w-12 text-center">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {mockCheckData.map((record) => (
-              <TableRow
-                key={record.id}
-                className="border-b border-gray-200 hover:bg-gray-50"
-              >
-                <TableCell className="px-4">
+              <TableRow className="border-b border-gray-200">
+                <TableHead className="w-12 px-2 py-2 h-auto">
                   <Checkbox
-                    checked={selectedRows.has(record.id)}
-                    onCheckedChange={() => toggleRowSelection(record.id)}
+                    checked={selectedRows.size === mockCheckData.length}
+                    onCheckedChange={toggleSelectAll}
                   />
-                </TableCell>
-                <TableCell className="text-gray-900 w-40 break-words whitespace-normal">
-                  {record.payee}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.financialAccountCode}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.batch}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.checkNumber}
-                </TableCell>
-                <TableCell className="text-right text-gray-700">
-                  {record.amount}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.paymentProcessedDate}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.paymentMethod}
-                </TableCell>
-                <TableCell>
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
-                    {record.status}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  {record.extractStatus && (
-                    <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
-                      {record.extractStatus}
-                    </span>
-                  )}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.extractDate}
-                </TableCell>
-                <TableCell className="text-blue-600">
-                  {record.extractFileName}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.checkOutput}
-                </TableCell>
-                <TableCell className="text-gray-700">
-                  {record.approvers}
-                </TableCell>
-                <TableCell className="text-center">
-                  <ActionMenu />
-                </TableCell>
+                </TableHead>
+                <TableHead className="font-semibold w-40">Payee</TableHead>
+                <TableHead className="whitespace-nowrap font-semibold">
+                  Financial Account Code
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Batch#
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Check#
+                </TableHead>
+                <TableHead className="text-right whitespace-nowrap text-sm font-semibold">
+                  Amount
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Payment Processed Date
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Payment Method
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Status
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Extract Status
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Extract Date
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Extract File Name
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Check Output
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Approver(s)
+                </TableHead>
+                <TableHead className="w-12 text-center">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-            </Table>
+            </TableHeader>
+            <TableBody>
+              {mockCheckData.map((record) => (
+                <TableRow
+                  key={record.id}
+                  className="border-b border-gray-200 hover:bg-gray-50"
+                >
+                  <TableCell className="px-4">
+                    <Checkbox
+                      checked={selectedRows.has(record.id)}
+                      onCheckedChange={() => toggleRowSelection(record.id)}
+                    />
+                  </TableCell>
+                  <TableCell className="text-gray-900 w-40 break-words whitespace-normal">
+                    {record.payee}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.financialAccountCode}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.batch}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.checkNumber}
+                  </TableCell>
+                  <TableCell className="text-right text-gray-700">
+                    {record.amount}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.paymentProcessedDate}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.paymentMethod}
+                  </TableCell>
+                  <TableCell>
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                      {record.status}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    {record.extractStatus && (
+                      <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
+                        {record.extractStatus}
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.extractDate}
+                  </TableCell>
+                  <TableCell className="text-blue-600">
+                    {record.extractFileName}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.checkOutput}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.approvers}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <ActionMenu />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
 

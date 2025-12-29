@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar, Search } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { format } from "date-fns";
 
@@ -45,14 +49,20 @@ export function CheckProcessingSearchPanel({
     extractFileDateGte: "",
   });
 
-  const handleInputChange = (field: keyof CheckProcessingFilters, value: string) => {
+  const handleInputChange = (
+    field: keyof CheckProcessingFilters,
+    value: string,
+  ) => {
     setFilters((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
 
-  const handleDateChange = (field: keyof CheckProcessingFilters, date: Date | undefined) => {
+  const handleDateChange = (
+    field: keyof CheckProcessingFilters,
+    date: Date | undefined,
+  ) => {
     if (date) {
       const formattedDate = format(date, "MM/dd/yyyy");
       handleInputChange(field, formattedDate);
@@ -104,7 +114,9 @@ export function CheckProcessingSearchPanel({
         <Popover>
           <PopoverTrigger asChild>
             <button className="flex items-center justify-between h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-gray-50">
-              <span className={value ? "text-foreground" : "text-muted-foreground"}>
+              <span
+                className={value ? "text-foreground" : "text-muted-foreground"}
+              >
                 {value || placeholder}
               </span>
               <Calendar size={16} className="text-gray-400" />
@@ -149,7 +161,9 @@ export function CheckProcessingSearchPanel({
             <Input
               type="number"
               value={filters.checkAmountGte}
-              onChange={(e) => handleInputChange("checkAmountGte", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("checkAmountGte", e.target.value)
+              }
               className="text-sm"
             />
           </div>
@@ -174,7 +188,9 @@ export function CheckProcessingSearchPanel({
             </label>
             <select
               value={filters.transactionType}
-              onChange={(e) => handleInputChange("transactionType", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("transactionType", e.target.value)
+              }
               className="w-full px-3 py-2 border border-input rounded-md text-sm bg-background hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
               <option value="">All</option>
@@ -209,7 +225,9 @@ export function CheckProcessingSearchPanel({
           <DatePickerField
             label="Payment Processed Date ≤"
             value={filters.paymentProcessedDateLte}
-            onChange={(date) => handleDateChange("paymentProcessedDateLte", date)}
+            onChange={(date) =>
+              handleDateChange("paymentProcessedDateLte", date)
+            }
           />
 
           {/* Extract File Date <= */}
@@ -230,7 +248,9 @@ export function CheckProcessingSearchPanel({
             <Input
               type="number"
               value={filters.checkAmountLte}
-              onChange={(e) => handleInputChange("checkAmountLte", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("checkAmountLte", e.target.value)
+              }
               className="text-sm"
             />
           </div>
@@ -255,7 +275,9 @@ export function CheckProcessingSearchPanel({
             </label>
             <select
               value={filters.paymentMethod}
-              onChange={(e) => handleInputChange("paymentMethod", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("paymentMethod", e.target.value)
+              }
               className="w-full px-3 py-2 border border-input rounded-md text-sm bg-background hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
               <option value="">All</option>
@@ -272,7 +294,9 @@ export function CheckProcessingSearchPanel({
           <DatePickerField
             label="Payment Processed Date ≥"
             value={filters.paymentProcessedDateGte}
-            onChange={(date) => handleDateChange("paymentProcessedDateGte", date)}
+            onChange={(date) =>
+              handleDateChange("paymentProcessedDateGte", date)
+            }
           />
 
           {/* Extract File Date >= */}
