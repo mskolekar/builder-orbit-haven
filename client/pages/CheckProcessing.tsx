@@ -318,9 +318,10 @@ export default function CheckProcessing() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 bg-gray-50 overflow-y-auto px-6">
-        <Table>
-          <TableHeader className="bg-gray-50 sticky top-0">
+      <div className="flex-1 bg-gray-50 overflow-y-auto px-6 py-6">
+        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <Table>
+            <TableHeader className="bg-gray-50 sticky top-0">
             <TableRow className="border-b border-gray-200">
               <TableHead className="w-12 px-4">
                 <Checkbox
@@ -433,7 +434,8 @@ export default function CheckProcessing() {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+            </Table>
+        </div>
       </div>
 
       {/* Footer with pagination and actions */}
