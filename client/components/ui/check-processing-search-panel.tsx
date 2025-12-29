@@ -123,11 +123,11 @@ export function CheckProcessingSearchPanel({
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+    <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
       {/* 4-Column Grid Layout */}
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-4 gap-4">
         {/* Column 1 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Payee */}
           <div className="flex flex-col">
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -186,7 +186,7 @@ export function CheckProcessingSearchPanel({
         </div>
 
         {/* Column 2 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Status */}
           <div className="flex flex-col">
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -221,7 +221,7 @@ export function CheckProcessingSearchPanel({
         </div>
 
         {/* Column 3 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Check Amount <= */}
           <div className="flex flex-col">
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -267,7 +267,7 @@ export function CheckProcessingSearchPanel({
         </div>
 
         {/* Column 4 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Payment Processed Date >= */}
           <DatePickerField
             label="Payment Processed Date ≥"
@@ -285,7 +285,7 @@ export function CheckProcessingSearchPanel({
       </div>
 
       {/* Action Buttons at Bottom Right */}
-      <div className="flex justify-end gap-3 mt-8 pt-6 border-t border-gray-200">
+      <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
         <Button
           variant="outline"
           size="sm"
