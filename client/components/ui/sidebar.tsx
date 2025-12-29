@@ -54,6 +54,7 @@ const sidebarItems: SidebarItem[] = [
     subItems: [
       { label: "Record Payment", path: "/accounting/record-payment" },
       { label: "Check Printing", path: "/accounting/check-printing" },
+      { label: "Check Processing", path: "/accounting/check-processing" },
       { label: "Invoicing", path: "/accounting/invoicing" },
     ],
   },
