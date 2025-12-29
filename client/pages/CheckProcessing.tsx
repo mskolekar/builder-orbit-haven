@@ -439,7 +439,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Footer with pagination and actions */}
-      <div className="bg-gray-50 border-t border-gray-200 px-6 py-4">
+      <div className="bg-gray-50 px-6 pt-0 pb-4">
         <div className="flex items-center justify-between">
           <div className="text-sm text-gray-600">
             Showing {mockCheckData.length} of {mockCheckData.length} records
@@ -456,7 +456,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Action buttons at bottom right */}
-      <div className="bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
+      <div className="bg-gray-50 px-6 py-4 flex justify-end gap-3">
         <Button
           size="sm"
           className="bg-[#0054A6] hover:bg-[#003d7a]"
