@@ -295,10 +295,10 @@ export default function CheckProcessing() {
                   {record.payer}
                 </TableCell>
                 <TableCell className="text-right text-sm text-gray-700">
-                  {record.financialAmount}
+                  {record.financial}
                 </TableCell>
                 <TableCell className="text-right text-sm text-gray-700">
-                  ${record.checkAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {record.checkAmount}
                 </TableCell>
                 <TableCell className="text-sm text-gray-700">
                   {record.paymentMethod}
