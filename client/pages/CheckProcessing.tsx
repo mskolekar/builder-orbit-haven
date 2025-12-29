@@ -17,6 +17,10 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { MoreVertical, Eye, X, MessageSquare, Upload } from "lucide-react";
+import {
+  CheckProcessingSearchPanel,
+  type CheckProcessingFilters,
+} from "@/components/ui/check-processing-search-panel";
 
 interface CheckRecord {
   id: string;
@@ -249,6 +253,8 @@ function ActionMenu() {
 
 export default function CheckProcessing() {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
+  const [searchFilters, setSearchFilters] =
+    useState<CheckProcessingFilters | null>(null);
 
   const toggleRowSelection = (id: string) => {
     const newSelected = new Set(selectedRows);
@@ -268,151 +274,149 @@ export default function CheckProcessing() {
     }
   };
 
+  const handleSearch = (filters: CheckProcessingFilters) => {
+    setSearchFilters(filters);
+    console.log("Running search with filters:", filters);
+    // Here you would typically make an API call with the filters
+  };
+
+  const handleReset = () => {
+    setSearchFilters(null);
+    setSelectedRows(new Set());
+    console.log("Search filters reset");
+  };
+
   return (
     <div className="flex flex-col flex-1">
-      {/* Page Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Check Processing
-            </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              Manage and process payment checks and electronic fund transfers
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <Button variant="outline" size="sm">
-              Export
-            </Button>
-            <Button size="sm" className="bg-[#0054A6] hover:bg-[#003d7a]">
-              New Check
-            </Button>
-          </div>
-        </div>
+      {/* Search Panel */}
+      <div className="px-4 py-4 bg-gray-50">
+        <CheckProcessingSearchPanel
+          onSearch={handleSearch}
+          onReset={handleReset}
+        />
       </div>
 
       {/* Table */}
-      <div className="flex-1 bg-white overflow-y-auto">
-        <Table>
-          <TableHeader className="bg-gray-50 sticky top-0">
-            <TableRow className="border-b border-gray-200">
-              <TableHead className="w-12 px-4">
-                <Checkbox
-                  checked={selectedRows.size === mockCheckData.length}
-                  onCheckedChange={toggleSelectAll}
-                />
-              </TableHead>
-              <TableHead className="text-sm font-semibold w-48">
-                Payee
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Financial Account Code
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Batch#
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Check#
-              </TableHead>
-              <TableHead className="text-right whitespace-nowrap text-sm font-semibold">
-                Amount
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Payment Processed Date
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Payment Method
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Status
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Extract Status
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Extract Date
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Extract File Name
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Check Output
-              </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
-                Approver(s)
-              </TableHead>
-              <TableHead className="w-12 text-center">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {mockCheckData.map((record) => (
-              <TableRow
-                key={record.id}
-                className="border-b border-gray-200 hover:bg-gray-50"
-              >
-                <TableCell className="px-4">
+      <div className="flex-1 bg-gray-50 overflow-y-auto px-4 py-4">
+        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <Table className="text-xs [&_td]:p-2 [&_th]:p-2">
+            <TableHeader className="bg-gray-50 sticky top-0">
+              <TableRow className="border-b border-gray-200">
+                <TableHead className="w-12 px-2 py-2 h-auto">
                   <Checkbox
-                    checked={selectedRows.has(record.id)}
-                    onCheckedChange={() => toggleRowSelection(record.id)}
+                    checked={selectedRows.size === mockCheckData.length}
+                    onCheckedChange={toggleSelectAll}
                   />
-                </TableCell>
-                <TableCell className="text-sm text-gray-900 w-48 break-words whitespace-normal">
-                  {record.payee}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.financialAccountCode}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.batch}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.checkNumber}
-                </TableCell>
-                <TableCell className="text-right text-sm text-gray-700">
-                  {record.amount}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.paymentProcessedDate}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.paymentMethod}
-                </TableCell>
-                <TableCell className="text-sm">
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
-                    {record.status}
-                  </span>
-                </TableCell>
-                <TableCell className="text-sm">
-                  {record.extractStatus && (
-                    <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
-                      {record.extractStatus}
-                    </span>
-                  )}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.extractDate}
-                </TableCell>
-                <TableCell className="text-sm text-blue-600">
-                  {record.extractFileName}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.checkOutput}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700">
-                  {record.approvers}
-                </TableCell>
-                <TableCell className="text-center">
-                  <ActionMenu />
-                </TableCell>
+                </TableHead>
+                <TableHead className="font-semibold w-40">Payee</TableHead>
+                <TableHead className="whitespace-nowrap font-semibold">
+                  Financial Account Code
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Batch#
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Check#
+                </TableHead>
+                <TableHead className="text-right whitespace-nowrap text-sm font-semibold">
+                  Amount
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Payment Processed Date
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Payment Method
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Status
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Extract Status
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Extract Date
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Extract File Name
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Check Output
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                  Approver(s)
+                </TableHead>
+                <TableHead className="w-12 text-center">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {mockCheckData.map((record) => (
+                <TableRow
+                  key={record.id}
+                  className="border-b border-gray-200 hover:bg-gray-50"
+                >
+                  <TableCell className="px-4">
+                    <Checkbox
+                      checked={selectedRows.has(record.id)}
+                      onCheckedChange={() => toggleRowSelection(record.id)}
+                    />
+                  </TableCell>
+                  <TableCell className="text-gray-900 w-40 break-words whitespace-normal">
+                    {record.payee}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.financialAccountCode}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.batch}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.checkNumber}
+                  </TableCell>
+                  <TableCell className="text-right text-gray-700">
+                    {record.amount}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.paymentProcessedDate}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.paymentMethod}
+                  </TableCell>
+                  <TableCell>
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                      {record.status}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    {record.extractStatus && (
+                      <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
+                        {record.extractStatus}
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.extractDate}
+                  </TableCell>
+                  <TableCell className="text-blue-600">
+                    {record.extractFileName}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.checkOutput}
+                  </TableCell>
+                  <TableCell className="text-gray-700">
+                    {record.approvers}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <ActionMenu />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
 
       {/* Footer with pagination and actions */}
-      <div className="bg-white border-t border-gray-200 px-6 py-4">
+      <div className="bg-gray-50 px-4 pt-0 pb-4">
         <div className="flex items-center justify-between">
           <div className="text-sm text-gray-600">
             Showing {mockCheckData.length} of {mockCheckData.length} records
@@ -429,7 +433,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Action buttons at bottom right */}
-      <div className="bg-white border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
+      <div className="bg-gray-50 px-4 py-4 flex justify-end gap-3">
         <Button
           size="sm"
           className="bg-[#0054A6] hover:bg-[#003d7a]"
