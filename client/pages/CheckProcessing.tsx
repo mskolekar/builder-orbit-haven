@@ -301,7 +301,7 @@ export default function CheckProcessing() {
           <Table className="text-xs">
             <TableHeader className="bg-gray-50 sticky top-0">
             <TableRow className="border-b border-gray-200">
-              <TableHead className="w-12 px-4">
+              <TableHead className="w-12 px-2 py-2 h-auto">
                 <Checkbox
                   checked={selectedRows.size === mockCheckData.length}
                   onCheckedChange={toggleSelectAll}
