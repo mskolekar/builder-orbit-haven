@@ -20,77 +20,165 @@ import { MoreVertical, Eye, X, MessageSquare, Upload } from "lucide-react";
 
 interface CheckRecord {
   id: string;
-  payer: string;
-  financial: number;
-  checkAmount: string;
-  paymentMethod: string;
+  payee: string;
+  financialAccountCode: string;
+  batch: string;
+  checkNumber: string;
+  amount: string;
   paymentProcessedDate: string;
-  extractFileDate: string;
+  paymentMethod: string;
+  status: string;
+  extractStatus: string;
+  extractDate: string;
   extractFileName: string;
-  checkStatus: string;
-  approvalStatus: string;
+  checkOutput: string;
+  approvers: string;
 }
 
 const mockCheckData: CheckRecord[] = [
   {
     id: "1",
-    payer: "Weight Bodily Injury CLAIM ON ANAND",
-    financial: 4954,
-    checkAmount: "150000.00",
-    paymentMethod: "Check",
+    payee: "Wright, Bobby | 16 Charles St ALMONTE ON K0A1A0",
+    financialAccountCode: "BMO",
+    batch: "4954",
+    checkNumber: "8345",
+    amount: "20000.00",
     paymentProcessedDate: "12-27-2025",
-    extractFileDate: "12-27-2025",
-    extractFileName: "PJ052025UJOI.txt",
-    checkStatus: "Issued",
-    approvalStatus: "Approved",
+    paymentMethod: "Check",
+    status: "Issued",
+    extractStatus: "",
+    extractDate: "",
+    extractFileName: "",
+    checkOutput: "No File Exists",
+    approvers: "View",
   },
   {
     id: "2",
-    payer: "First Lawsuit_2025 CLAIM #1 $150 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financial: 4953,
-    checkAmount: "150000.00",
-    paymentMethod: "EFT",
+    payee: "First_LawFirm_79725 | 21 Main street, Accord NY ULSTER 12404",
+    financialAccountCode: "BMO",
+    batch: "4953",
+    checkNumber: "8351",
+    amount: "2000.00",
     paymentProcessedDate: "12-27-2025",
-    extractFileDate: "12-27-2025",
-    extractFileName: "PJ052025UJOI.txt",
-    checkStatus: "Issued SENT",
-    approvalStatus: "Approved",
+    paymentMethod: "Check",
+    status: "Issued",
+    extractStatus: "",
+    extractDate: "",
+    extractFileName: "",
+    checkOutput: "No File Exists",
+    approvers: "View",
   },
   {
     id: "3",
-    payer: "Second Lawsuit_2025 CLAIM #1 $180 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financial: 4947,
-    checkAmount: "150000.00",
+    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    financialAccountCode: "BMO",
+    batch: "4947",
+    checkNumber: "",
+    amount: "18588.00",
+    paymentProcessedDate: "12-26-2025",
     paymentMethod: "EFT",
-    paymentProcessedDate: "12-24-2025",
-    extractFileDate: "12-24-2025",
-    extractFileName: "PJ052025UJOI.txt",
-    checkStatus: "Issued SENT",
-    approvalStatus: "Approved",
+    status: "Issued",
+    extractStatus: "SENT",
+    extractDate: "12-26-2025",
+    extractFileName: "PL037120251226.txt",
+    checkOutput: "No File Exists",
+    approvers: "View",
   },
   {
     id: "4",
-    payer: "Third Lawsuit_2025 CLAIM #1 $210 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financial: 4943,
-    checkAmount: "150000.00",
-    paymentMethod: "EFT",
-    paymentProcessedDate: "12-24-2025",
-    extractFileDate: "12-24-2025",
-    extractFileName: "PJ052025UJOI.txt",
-    checkStatus: "Issued SENT",
-    approvalStatus: "Approved",
+    payee: "Lawpro_l_name_86700, Lawpro_Fname_68678 | 21 Ave, Toronto KS WOODSON 66777",
+    financialAccountCode: "BMO",
+    batch: "4937",
+    checkNumber: "8336",
+    amount: "1000.00",
+    paymentProcessedDate: "12-25-2025",
+    paymentMethod: "Check",
+    status: "Issued",
+    extractStatus: "",
+    extractDate: "",
+    extractFileName: "",
+    checkOutput: "No File Exists",
+    approvers: "View",
   },
   {
     id: "5",
-    payer: "Fourth Lawsuit_2025 CLAIM #1 $240 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financial: 4941,
-    checkAmount: "150000.00",
-    paymentMethod: "EFT",
+    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    financialAccountCode: "BMO",
+    batch: "4933",
+    checkNumber: "",
+    amount: "18588.00",
     paymentProcessedDate: "12-24-2025",
-    extractFileDate: "12-24-2025",
-    extractFileName: "PJ052025UJOI.txt",
-    checkStatus: "Issued SENT",
-    approvalStatus: "Approved",
+    paymentMethod: "EFT",
+    status: "Issued",
+    extractStatus: "SENT",
+    extractDate: "12-26-2025",
+    extractFileName: "PL037120251226.txt",
+    checkOutput: "No File Exists",
+    approvers: "View",
+  },
+  {
+    id: "6",
+    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    financialAccountCode: "BMO",
+    batch: "4925",
+    checkNumber: "",
+    amount: "18588.00",
+    paymentProcessedDate: "12-23-2025",
+    paymentMethod: "EFT",
+    status: "Issued",
+    extractStatus: "SENT",
+    extractDate: "12-24-2025",
+    extractFileName: "PL037020251224.txt",
+    checkOutput: "No File Exists",
+    approvers: "View",
+  },
+  {
+    id: "7",
+    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    financialAccountCode: "BMO",
+    batch: "4918",
+    checkNumber: "",
+    amount: "18588.00",
+    paymentProcessedDate: "12-23-2025",
+    paymentMethod: "EFT",
+    status: "Issued",
+    extractStatus: "SENT",
+    extractDate: "12-23-2025",
+    extractFileName: "PL036920251223.txt",
+    checkOutput: "No File Exists",
+    approvers: "View",
+  },
+  {
+    id: "8",
+    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    financialAccountCode: "BMO",
+    batch: "4911",
+    checkNumber: "",
+    amount: "18588.00",
+    paymentProcessedDate: "12-22-2025",
+    paymentMethod: "EFT",
+    status: "Issued",
+    extractStatus: "SENT",
+    extractDate: "12-23-2025",
+    extractFileName: "PL036920251223.txt",
+    checkOutput: "No File Exists",
+    approvers: "View",
+  },
+  {
+    id: "9",
+    payee: "LAWLER ADVOCACY PROFESSIONAL CORPORATION | 5700 - 100 KING STREET WEST TORONTO ON M5X 1C7",
+    financialAccountCode: "BMO",
+    batch: "4904",
+    checkNumber: "",
+    amount: "18588.00",
+    paymentProcessedDate: "12-21-2025",
+    paymentMethod: "EFT",
+    status: "Issued",
+    extractStatus: "SENT",
+    extractDate: "12-22-2025",
+    extractFileName: "PL036820251222.txt",
+    checkOutput: "No File Exists",
+    approvers: "View",
   },
 ];
 
@@ -194,56 +282,10 @@ export default function CheckProcessing() {
         </div>
       </div>
 
-      {/* Filters and Controls */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="grid grid-cols-4 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Payer
-            </label>
-            <input
-              type="text"
-              placeholder="Search payer..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#0054A6]"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Check Amount
-            </label>
-            <input
-              type="text"
-              placeholder="Search amount..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#0054A6]"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Payment Method
-            </label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#0054A6]">
-              <option value="">All Methods</option>
-              <option value="check">Check</option>
-              <option value="eft">EFT</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Status
-            </label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#0054A6]">
-              <option value="">All Status</option>
-              <option value="issued">Issued</option>
-              <option value="pending">Pending</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
       {/* Table */}
       <div className="flex-1 overflow-x-auto bg-white">
         <Table>
-          <TableHeader className="bg-gray-50">
+          <TableHeader className="bg-gray-50 sticky top-0">
             <TableRow className="border-b border-gray-200">
               <TableHead className="w-12 px-4">
                 <Checkbox
@@ -251,30 +293,44 @@ export default function CheckProcessing() {
                   onCheckedChange={toggleSelectAll}
                 />
               </TableHead>
-              <TableHead className="whitespace-nowrap">Payer</TableHead>
-              <TableHead className="text-right whitespace-nowrap">
-                Financial
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Payee
               </TableHead>
-              <TableHead className="text-right whitespace-nowrap">
-                Check Amount
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Financial Account Code
               </TableHead>
-              <TableHead className="whitespace-nowrap">
-                Payment Method
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Batch#
               </TableHead>
-              <TableHead className="whitespace-nowrap">
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Check#
+              </TableHead>
+              <TableHead className="text-right whitespace-nowrap text-sm font-semibold">
+                Amount
+              </TableHead>
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
                 Payment Processed Date
               </TableHead>
-              <TableHead className="whitespace-nowrap">
-                Extract File Date
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Payment Method
               </TableHead>
-              <TableHead className="whitespace-nowrap">
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Status
+              </TableHead>
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Extract Status
+              </TableHead>
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Extract Date
+              </TableHead>
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
                 Extract File Name
               </TableHead>
-              <TableHead className="whitespace-nowrap">
-                Check Status
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Check Output
               </TableHead>
-              <TableHead className="whitespace-nowrap">
-                Approval Status
+              <TableHead className="whitespace-nowrap text-sm font-semibold">
+                Approver(s)
               </TableHead>
               <TableHead className="w-12 text-center">Actions</TableHead>
             </TableRow>
@@ -291,36 +347,50 @@ export default function CheckProcessing() {
                     onCheckedChange={() => toggleRowSelection(record.id)}
                   />
                 </TableCell>
-                <TableCell className="text-sm text-gray-900 max-w-xs truncate">
-                  {record.payer}
-                </TableCell>
-                <TableCell className="text-right text-sm text-gray-700">
-                  {record.financial}
-                </TableCell>
-                <TableCell className="text-right text-sm text-gray-700">
-                  {record.checkAmount}
+                <TableCell className="text-sm text-gray-900 max-w-sm truncate">
+                  {record.payee}
                 </TableCell>
                 <TableCell className="text-sm text-gray-700">
-                  {record.paymentMethod}
+                  {record.financialAccountCode}
+                </TableCell>
+                <TableCell className="text-sm text-gray-700">
+                  {record.batch}
+                </TableCell>
+                <TableCell className="text-sm text-gray-700">
+                  {record.checkNumber}
+                </TableCell>
+                <TableCell className="text-right text-sm text-gray-700">
+                  {record.amount}
                 </TableCell>
                 <TableCell className="text-sm text-gray-700">
                   {record.paymentProcessedDate}
                 </TableCell>
                 <TableCell className="text-sm text-gray-700">
-                  {record.extractFileDate}
-                </TableCell>
-                <TableCell className="text-sm text-gray-700 text-blue-600">
-                  {record.extractFileName}
+                  {record.paymentMethod}
                 </TableCell>
                 <TableCell className="text-sm">
                   <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
-                    {record.checkStatus}
+                    {record.status}
                   </span>
                 </TableCell>
                 <TableCell className="text-sm">
-                  <span className="px-2 py-1 bg-emerald-100 text-emerald-800 rounded text-xs font-medium">
-                    {record.approvalStatus}
-                  </span>
+                  {record.extractStatus && (
+                    <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
+                      {record.extractStatus}
+                    </span>
+                  )}
+                </TableCell>
+                <TableCell className="text-sm text-gray-700">
+                  {record.extractDate}
+                </TableCell>
+                <TableCell className="text-sm text-blue-600">
+                  {record.extractFileName}
+                </TableCell>
+                <TableCell className="text-sm text-gray-700">
+                  {record.checkOutput}
+                </TableCell>
+                <TableCell className="text-sm text-gray-700">
+                  {record.approvers}
                 </TableCell>
                 <TableCell className="text-center">
                   <ActionMenu />
