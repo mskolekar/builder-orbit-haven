@@ -309,6 +309,14 @@ export default function CheckProcessing() {
         </div>
       </div>
 
+      {/* Search Panel */}
+      <div className="px-6 py-6 bg-gray-50">
+        <CheckProcessingSearchPanel
+          onSearch={handleSearch}
+          onReset={handleReset}
+        />
+      </div>
+
       {/* Table */}
       <div className="flex-1 bg-white overflow-y-auto">
         <Table>
