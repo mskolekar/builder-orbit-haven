@@ -287,8 +287,8 @@ export function CheckProcessingSearchPanel({
       {/* Action Buttons at Bottom Right */}
       <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
         <Button
-          variant="outline"
           size="sm"
+          className="bg-[#0054A6] hover:bg-[#003d7a]"
           onClick={handleReset}
         >
           Reset
@@ -298,6 +298,7 @@ export function CheckProcessingSearchPanel({
           className="bg-[#0054A6] hover:bg-[#003d7a]"
           onClick={handleSearch}
         >
+          <Search size={16} className="mr-2" />
           Run Search
         </Button>
       </div>
