@@ -283,7 +283,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-x-auto bg-white">
+      <div className="flex-1 bg-white overflow-y-auto">
         <Table>
           <TableHeader className="bg-gray-50 sticky top-0">
             <TableRow className="border-b border-gray-200">
@@ -293,7 +293,7 @@ export default function CheckProcessing() {
                   onCheckedChange={toggleSelectAll}
                 />
               </TableHead>
-              <TableHead className="whitespace-nowrap text-sm font-semibold">
+              <TableHead className="text-sm font-semibold w-48">
                 Payee
               </TableHead>
               <TableHead className="whitespace-nowrap text-sm font-semibold">
@@ -347,7 +347,7 @@ export default function CheckProcessing() {
                     onCheckedChange={() => toggleRowSelection(record.id)}
                   />
                 </TableCell>
-                <TableCell className="text-sm text-gray-900 max-w-sm truncate">
+                <TableCell className="text-sm text-gray-900 w-48 break-words whitespace-normal">
                   {record.payee}
                 </TableCell>
                 <TableCell className="text-sm text-gray-700">
