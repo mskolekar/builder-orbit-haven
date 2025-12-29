@@ -364,46 +364,46 @@ export default function CheckProcessing() {
                 <TableCell className="text-gray-900 w-40 break-words whitespace-normal">
                   {record.payee}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.financialAccountCode}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.batch}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.checkNumber}
                 </TableCell>
-                <TableCell className="text-right text-sm text-gray-700">
+                <TableCell className="text-right text-gray-700">
                   {record.amount}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.paymentProcessedDate}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.paymentMethod}
                 </TableCell>
-                <TableCell className="text-sm">
+                <TableCell>
                   <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
                     {record.status}
                   </span>
                 </TableCell>
-                <TableCell className="text-sm">
+                <TableCell>
                   {record.extractStatus && (
                     <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
                       {record.extractStatus}
                     </span>
                   )}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.extractDate}
                 </TableCell>
-                <TableCell className="text-sm text-blue-600">
+                <TableCell className="text-blue-600">
                   {record.extractFileName}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.checkOutput}
                 </TableCell>
-                <TableCell className="text-sm text-gray-700">
+                <TableCell className="text-gray-700">
                   {record.approvers}
                 </TableCell>
                 <TableCell className="text-center">
