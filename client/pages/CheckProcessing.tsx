@@ -21,8 +21,8 @@ import { MoreVertical, Eye, X, MessageSquare, Upload } from "lucide-react";
 interface CheckRecord {
   id: string;
   payer: string;
-  financialAmount: number;
-  checkAmount: number;
+  financial: number;
+  checkAmount: string;
   paymentMethod: string;
   paymentProcessedDate: string;
   extractFileDate: string;
@@ -35,8 +35,8 @@ const mockCheckData: CheckRecord[] = [
   {
     id: "1",
     payer: "Weight Bodily Injury CLAIM ON ANAND",
-    financialAmount: 4954,
-    checkAmount: 150000.00,
+    financial: 4954,
+    checkAmount: "150000.00",
     paymentMethod: "Check",
     paymentProcessedDate: "12-27-2025",
     extractFileDate: "12-27-2025",
@@ -47,8 +47,8 @@ const mockCheckData: CheckRecord[] = [
   {
     id: "2",
     payer: "First Lawsuit_2025 CLAIM #1 $150 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financialAmount: 4953,
-    checkAmount: 150000.00,
+    financial: 4953,
+    checkAmount: "150000.00",
     paymentMethod: "EFT",
     paymentProcessedDate: "12-27-2025",
     extractFileDate: "12-27-2025",
@@ -59,8 +59,8 @@ const mockCheckData: CheckRecord[] = [
   {
     id: "3",
     payer: "Second Lawsuit_2025 CLAIM #1 $180 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financialAmount: 4947,
-    checkAmount: 150000.00,
+    financial: 4947,
+    checkAmount: "150000.00",
     paymentMethod: "EFT",
     paymentProcessedDate: "12-24-2025",
     extractFileDate: "12-24-2025",
@@ -71,8 +71,8 @@ const mockCheckData: CheckRecord[] = [
   {
     id: "4",
     payer: "Third Lawsuit_2025 CLAIM #1 $210 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financialAmount: 4943,
-    checkAmount: 150000.00,
+    financial: 4943,
+    checkAmount: "150000.00",
     paymentMethod: "EFT",
     paymentProcessedDate: "12-24-2025",
     extractFileDate: "12-24-2025",
@@ -83,8 +83,8 @@ const mockCheckData: CheckRecord[] = [
   {
     id: "5",
     payer: "Fourth Lawsuit_2025 CLAIM #1 $240 CLAIM #1 LARUEN ADVOCACY PROFESSIONAL CORPORATION",
-    financialAmount: 4941,
-    checkAmount: 150000.00,
+    financial: 4941,
+    checkAmount: "150000.00",
     paymentMethod: "EFT",
     paymentProcessedDate: "12-24-2025",
     extractFileDate: "12-24-2025",
