@@ -366,7 +366,11 @@ export default function CheckProcessing() {
               {mockCheckData.map((record) => (
                 <TableRow
                   key={record.id}
-                  className="border-b border-gray-200 hover:bg-gray-50"
+                  className={`border-b border-gray-200 transition-colors ${
+                    highlightedRowId === record.id
+                      ? "bg-gray-200"
+                      : "hover:bg-gray-50"
+                  }`}
                 >
                   <TableCell className="px-4">
                     <Checkbox
