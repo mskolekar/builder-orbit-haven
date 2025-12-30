@@ -1828,7 +1828,7 @@ export default function Dashboard() {
                   </div>
                 )}
               </CardContent>
-              {(isShawn
+              {!isJohn && (isShawn
                 ? 4
                 : filteredClaims.filter(
                     (c) => c.status === "Open" || c.status === "Reopen",
