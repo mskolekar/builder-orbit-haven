@@ -1624,7 +1624,7 @@ export default function Dashboard() {
               >
                 {isJohn ? (
                   <div className="text-center py-8 text-gray-600">
-                    <p className="text-sm">You don't have access to claims</p>
+                    <p className="text-sm">You don't have access to this section. Please contact your administrator if you believe this is incorrect.</p>
                   </div>
                 ) : (
                   <div className="overflow-x-auto flex-1">
