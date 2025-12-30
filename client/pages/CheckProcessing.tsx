@@ -260,6 +260,7 @@ export default function CheckProcessing() {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [searchFilters, setSearchFilters] =
     useState<CheckProcessingFilters | null>(null);
+  const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null);
 
   const toggleRowSelection = (id: string) => {
     const newSelected = new Set(selectedRows);
