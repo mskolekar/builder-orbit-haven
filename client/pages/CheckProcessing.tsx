@@ -376,13 +376,13 @@ export default function CheckProcessing() {
                       : "hover:bg-gray-50"
                   }`}
                 >
-                  <TableCell className="px-4">
+                  <TableCell className="px-3">
                     <Checkbox
                       checked={selectedRows.has(record.id)}
                       onCheckedChange={() => toggleRowSelection(record.id)}
                     />
                   </TableCell>
-                  <TableCell className="text-gray-900 w-40 break-words whitespace-normal">
+                  <TableCell className="text-gray-900 font-medium w-40 break-words whitespace-normal">
                     {record.payee}
                   </TableCell>
                   <TableCell className="text-gray-700">
@@ -394,7 +394,7 @@ export default function CheckProcessing() {
                   <TableCell className="text-gray-700">
                     {record.checkNumber}
                   </TableCell>
-                  <TableCell className="text-right text-gray-700">
+                  <TableCell className="text-right text-gray-700 font-medium">
                     {record.amount}
                   </TableCell>
                   <TableCell className="text-gray-700">
@@ -412,7 +412,7 @@ export default function CheckProcessing() {
                   <TableCell className="text-gray-700">
                     {record.extractDate}
                   </TableCell>
-                  <TableCell className="text-blue-600">
+                  <TableCell className="text-blue-600 font-medium">
                     {record.extractFileName}
                   </TableCell>
                   <TableCell className="text-gray-700">
