@@ -399,10 +399,8 @@ export default function CheckProcessing() {
                   <TableCell className="text-gray-700">
                     {record.paymentMethod}
                   </TableCell>
-                  <TableCell>
-                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
-                      {record.status}
-                    </span>
+                  <TableCell className="text-gray-700">
+                    {record.status}
                   </TableCell>
                   <TableCell>
                     {record.extractStatus && (
