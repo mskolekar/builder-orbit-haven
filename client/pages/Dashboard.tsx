@@ -1881,6 +1881,45 @@ export default function Dashboard() {
           )}
         </div>
 
+        {/* Claims Card for John Wills */}
+        {isJohn && (
+          <div
+            className={`transition-all duration-1000 delay-500 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+          >
+            <Card
+              className="shadow-sm bg-white border border-gray-200 cursor-pointer hover:shadow-md transition-shadow flex flex-col"
+              onClick={() => setIsClaimsCollapsed((v) => !v)}
+            >
+              <CardHeader
+                className="pb-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsClaimsCollapsed((v) => !v);
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-base text-gray-700">
+                      Claims (0)
+                    </CardTitle>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-600 transition-transform ${isClaimsCollapsed ? "" : "rotate-180"}`}
+                    />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent
+                className={`${isClaimsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
+              >
+                <div className="text-center py-8 text-gray-600">
+                  <p className="text-sm">You don't have access to claims</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         {/* Row 3 */}
         {!isJohn && !isShawn && (
           <div
