@@ -424,7 +424,10 @@ export default function CheckProcessing() {
                     {record.approvers}
                   </TableCell>
                   <TableCell className="text-center">
-                    <ActionMenu />
+                    <ActionMenu
+                      recordId={record.id}
+                      onOpenChange={handleActionMenuOpenChange}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
