@@ -193,7 +193,12 @@ const mockCheckData: CheckRecord[] = [
   },
 ];
 
-function ActionMenu() {
+interface ActionMenuProps {
+  recordId: string;
+  onOpenChange: (isOpen: boolean, recordId: string) => void;
+}
+
+function ActionMenu({ recordId, onOpenChange }: ActionMenuProps) {
   const handleViewDetails = () => {
     console.log("View Details clicked");
   };
@@ -211,7 +216,7 @@ function ActionMenu() {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={(isOpen) => onOpenChange(isOpen, recordId)}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
