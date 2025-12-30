@@ -313,53 +313,57 @@ export default function CheckProcessing() {
       {/* Table */}
       <div className="flex-1 bg-gray-50 overflow-y-auto px-4 py-4">
         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-          <Table className="text-xs [&_td]:p-2 [&_th]:p-2">
-            <TableHeader className="bg-gray-50 sticky top-0">
-              <TableRow className="border-b border-gray-200">
-                <TableHead className="w-12 px-2 py-2 h-auto">
+          <Table className="text-sm [&_td]:p-3 [&_th]:p-3">
+            <TableHeader className="bg-gray-100 sticky top-0">
+              <TableRow className="border-b border-gray-300">
+                <TableHead className="w-12 px-3 py-3 h-auto">
                   <Checkbox
                     checked={selectedRows.size === mockCheckData.length}
                     onCheckedChange={toggleSelectAll}
                   />
                 </TableHead>
-                <TableHead className="font-semibold w-40">Payee</TableHead>
-                <TableHead className="whitespace-nowrap font-semibold">
+                <TableHead className="font-bold w-40 text-gray-900">
+                  Payee
+                </TableHead>
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Financial Account Code
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Batch#
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Check#
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap text-sm font-semibold">
+                <TableHead className="text-right whitespace-nowrap font-bold text-gray-900">
                   Amount
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Payment Processed Date
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Payment Method
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Status
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Extract Status
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Extract Date
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Extract File Name
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Check Output
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Approver(s)
                 </TableHead>
-                <TableHead className="w-12 text-center">Actions</TableHead>
+                <TableHead className="w-12 text-center font-bold text-gray-900">
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
