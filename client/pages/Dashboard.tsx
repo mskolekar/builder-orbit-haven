@@ -1603,11 +1603,13 @@ export default function Dashboard() {
                   <div className="flex items-center gap-2">
                     <CardTitle className="text-base text-gray-700">
                       {isShawn ? "Claims & Incidents" : "Claims"} (
-                      {isShawn
-                        ? 4
-                        : filteredClaims.filter(
-                            (c) => c.status === "Open" || c.status === "Reopen",
-                          ).length}
+                      {isJohn
+                        ? 0
+                        : isShawn
+                          ? 4
+                          : filteredClaims.filter(
+                              (c) => c.status === "Open" || c.status === "Reopen",
+                            ).length}
                       )
                     </CardTitle>
                     <ChevronDown
