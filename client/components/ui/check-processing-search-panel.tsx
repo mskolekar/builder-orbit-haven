@@ -142,7 +142,7 @@ export function CheckProcessingSearchPanel({
         <div className="space-y-4">
           {/* Payee */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Payee
             </label>
             <Input
