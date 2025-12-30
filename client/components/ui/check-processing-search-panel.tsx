@@ -108,7 +108,7 @@ export function CheckProcessingSearchPanel({
 
     return (
       <div className="flex flex-col">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           {label}
         </label>
         <Popover>
@@ -142,7 +142,7 @@ export function CheckProcessingSearchPanel({
         <div className="space-y-4">
           {/* Payee */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Payee
             </label>
             <Input
@@ -155,7 +155,7 @@ export function CheckProcessingSearchPanel({
 
           {/* Check Amount >= */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Check Amount ≥
             </label>
             <Input
@@ -170,7 +170,7 @@ export function CheckProcessingSearchPanel({
 
           {/* Batch# */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Batch#
             </label>
             <Input
@@ -183,7 +183,7 @@ export function CheckProcessingSearchPanel({
 
           {/* Transaction Type */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Transaction Type
             </label>
             <select
@@ -205,7 +205,7 @@ export function CheckProcessingSearchPanel({
         <div className="space-y-4">
           {/* Status */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Status
             </label>
             <select
@@ -242,7 +242,7 @@ export function CheckProcessingSearchPanel({
         <div className="space-y-4">
           {/* Check Amount <= */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Check Amount ≤
             </label>
             <Input
@@ -257,7 +257,7 @@ export function CheckProcessingSearchPanel({
 
           {/* Check# */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Check#
             </label>
             <Input
@@ -270,7 +270,7 @@ export function CheckProcessingSearchPanel({
 
           {/* Payment Method */}
           <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Payment Method
             </label>
             <select

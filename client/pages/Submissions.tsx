@@ -227,18 +227,18 @@ function OverviewSection() {
         <SectionHeader title="Dates" />
         <FormRow>
           <FormField label="Proposed Effective Date" isMandatory>
-            <Input />
+            <Input type="date" />
           </FormField>
           <FormField label="Proposed Expiration Date" isMandatory>
-            <Input />
+            <Input type="date" />
           </FormField>
         </FormRow>
         <FormRow>
           <FormField label="Received Date">
-            <Input />
+            <Input type="date" />
           </FormField>
           <FormField label="Requested By Date">
-            <Input />
+            <Input type="date" />
           </FormField>
         </FormRow>
       </div>

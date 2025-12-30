@@ -193,7 +193,12 @@ const mockCheckData: CheckRecord[] = [
   },
 ];
 
-function ActionMenu() {
+interface ActionMenuProps {
+  recordId: string;
+  onOpenChange: (isOpen: boolean, recordId: string) => void;
+}
+
+function ActionMenu({ recordId, onOpenChange }: ActionMenuProps) {
   const handleViewDetails = () => {
     console.log("View Details clicked");
   };
@@ -211,7 +216,7 @@ function ActionMenu() {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={(isOpen) => onOpenChange(isOpen, recordId)}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
@@ -255,6 +260,7 @@ export default function CheckProcessing() {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [searchFilters, setSearchFilters] =
     useState<CheckProcessingFilters | null>(null);
+  const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null);
 
   const toggleRowSelection = (id: string) => {
     const newSelected = new Set(selectedRows);
@@ -264,6 +270,14 @@ export default function CheckProcessing() {
       newSelected.add(id);
     }
     setSelectedRows(newSelected);
+  };
+
+  const handleActionMenuOpenChange = (isOpen: boolean, recordId: string) => {
+    if (isOpen) {
+      setHighlightedRowId(recordId);
+    } else {
+      setHighlightedRowId(null);
+    }
   };
 
   const toggleSelectAll = () => {
@@ -289,7 +303,7 @@ export default function CheckProcessing() {
   return (
     <div className="flex flex-col flex-1">
       {/* Search Panel */}
-      <div className="px-4 py-4 bg-gray-50">
+      <div className="px-6 py-4 bg-gray-50">
         <CheckProcessingSearchPanel
           onSearch={handleSearch}
           onReset={handleReset}
@@ -297,70 +311,78 @@ export default function CheckProcessing() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 bg-gray-50 overflow-y-auto px-4 py-4">
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-          <Table className="text-xs [&_td]:p-2 [&_th]:p-2">
-            <TableHeader className="bg-gray-50 sticky top-0">
-              <TableRow className="border-b border-gray-200">
-                <TableHead className="w-12 px-2 py-2 h-auto">
+      <div className="flex-1 bg-gray-50 overflow-y-auto px-6 py-4">
+        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+          <Table className="text-sm [&_td]:p-3 [&_th]:p-3">
+            <TableHeader className="bg-gray-100 sticky top-0">
+              <TableRow className="border-b border-gray-300">
+                <TableHead className="w-12 px-3 py-3 h-auto">
                   <Checkbox
                     checked={selectedRows.size === mockCheckData.length}
                     onCheckedChange={toggleSelectAll}
                   />
                 </TableHead>
-                <TableHead className="font-semibold w-40">Payee</TableHead>
-                <TableHead className="whitespace-nowrap font-semibold">
+                <TableHead className="font-bold w-40 text-gray-900">
+                  Payee
+                </TableHead>
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Financial Account Code
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Batch#
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Check#
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap text-sm font-semibold">
+                <TableHead className="text-right whitespace-nowrap font-bold text-gray-900">
                   Amount
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Payment Processed Date
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Payment Method
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Status
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Extract Status
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Extract Date
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Extract File Name
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Check Output
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-sm font-semibold">
+                <TableHead className="whitespace-nowrap font-bold text-gray-900">
                   Approver(s)
                 </TableHead>
-                <TableHead className="w-12 text-center">Actions</TableHead>
+                <TableHead className="w-12 text-center font-bold text-gray-900">
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {mockCheckData.map((record) => (
                 <TableRow
                   key={record.id}
-                  className="border-b border-gray-200 hover:bg-gray-50"
+                  className={`border-b border-gray-200 transition-colors ${
+                    highlightedRowId === record.id
+                      ? "bg-gray-200"
+                      : "hover:bg-gray-50"
+                  }`}
                 >
-                  <TableCell className="px-4">
+                  <TableCell className="px-3">
                     <Checkbox
                       checked={selectedRows.has(record.id)}
                       onCheckedChange={() => toggleRowSelection(record.id)}
                     />
                   </TableCell>
-                  <TableCell className="text-gray-900 w-40 break-words whitespace-normal">
+                  <TableCell className="text-gray-900 font-medium w-40 break-words whitespace-normal">
                     {record.payee}
                   </TableCell>
                   <TableCell className="text-gray-700">
@@ -372,7 +394,7 @@ export default function CheckProcessing() {
                   <TableCell className="text-gray-700">
                     {record.checkNumber}
                   </TableCell>
-                  <TableCell className="text-right text-gray-700">
+                  <TableCell className="text-right text-gray-700 font-medium">
                     {record.amount}
                   </TableCell>
                   <TableCell className="text-gray-700">
@@ -381,22 +403,16 @@ export default function CheckProcessing() {
                   <TableCell className="text-gray-700">
                     {record.paymentMethod}
                   </TableCell>
-                  <TableCell>
-                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
-                      {record.status}
-                    </span>
+                  <TableCell className="text-gray-700">
+                    {record.status}
                   </TableCell>
-                  <TableCell>
-                    {record.extractStatus && (
-                      <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
-                        {record.extractStatus}
-                      </span>
-                    )}
+                  <TableCell className="text-gray-700">
+                    {record.extractStatus}
                   </TableCell>
                   <TableCell className="text-gray-700">
                     {record.extractDate}
                   </TableCell>
-                  <TableCell className="text-blue-600">
+                  <TableCell className="text-blue-600 font-medium">
                     {record.extractFileName}
                   </TableCell>
                   <TableCell className="text-gray-700">
@@ -406,7 +422,10 @@ export default function CheckProcessing() {
                     {record.approvers}
                   </TableCell>
                   <TableCell className="text-center">
-                    <ActionMenu />
+                    <ActionMenu
+                      recordId={record.id}
+                      onOpenChange={handleActionMenuOpenChange}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
@@ -416,9 +435,9 @@ export default function CheckProcessing() {
       </div>
 
       {/* Footer with pagination and actions */}
-      <div className="bg-gray-50 px-4 pt-0 pb-4">
+      <div className="bg-gray-50 px-6 pt-4 pb-2 border-t border-gray-200">
         <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-600">
+          <div className="text-sm font-medium text-gray-700">
             Showing {mockCheckData.length} of {mockCheckData.length} records
           </div>
           <div className="flex gap-2">
@@ -433,7 +452,7 @@ export default function CheckProcessing() {
       </div>
 
       {/* Action buttons at bottom right */}
-      <div className="bg-gray-50 px-4 py-4 flex justify-end gap-3">
+      <div className="bg-gray-50 px-6 py-4 flex justify-end gap-3 border-t border-gray-200">
         <Button
           size="sm"
           className="bg-[#0054A6] hover:bg-[#003d7a]"
