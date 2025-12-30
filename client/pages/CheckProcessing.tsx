@@ -302,16 +302,6 @@ export default function CheckProcessing() {
 
   return (
     <div className="flex flex-col flex-1">
-      {/* Page Header */}
-      <div className="px-6 py-6 bg-white border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">
-          Check Processing
-        </h1>
-        <p className="text-sm font-normal text-gray-600">
-          Manage and process check transactions
-        </p>
-      </div>
-
       {/* Search Panel */}
       <div className="px-6 py-4 bg-gray-50">
         <CheckProcessingSearchPanel
