@@ -402,12 +402,8 @@ export default function CheckProcessing() {
                   <TableCell className="text-gray-700">
                     {record.status}
                   </TableCell>
-                  <TableCell>
-                    {record.extractStatus && (
-                      <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">
-                        {record.extractStatus}
-                      </span>
-                    )}
+                  <TableCell className="text-gray-700">
+                    {record.extractStatus}
                   </TableCell>
                   <TableCell className="text-gray-700">
                     {record.extractDate}
