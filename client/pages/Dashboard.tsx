@@ -1620,207 +1620,213 @@ export default function Dashboard() {
               <CardContent
                 className={`${isClaimsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
               >
-                <div className="overflow-x-auto flex-1">
-                  <Table>
-                    {isShawn ? (
-                      <>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              ID
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              Type
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              Description
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              Date
-                            </TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {[
-                            {
-                              id: "23E-1234",
-                              type: "Claim",
-                              desc: "Property damage - Garage Fire",
-                              date: "2024-01-15",
-                            },
-                            {
-                              id: "23E-5678",
-                              type: "Claim",
-                              desc: "Auto accident - Rear end collision",
-                              date: "2024-02-20",
-                            },
-                            {
-                              id: "INCIDENT-1234",
-                              type: "Incident",
-                              desc: "Multi-vehicle collision",
-                              date: "2024-03-10",
-                            },
-                            {
-                              id: "INCIDENT-5678",
-                              type: "Incident",
-                              desc: "Weather-related damage",
-                              date: "2024-03-25",
-                            },
-                          ].map((row) => (
-                            <TableRow
-                              key={row.id}
-                              className="h-10 hover:bg-gray-50"
-                            >
-                              <TableCell className="text-sm font-medium text-gray-800">
-                                {row.id}
-                              </TableCell>
-                              <TableCell>
-                                <span
-                                  className={`px-2 py-1 rounded-full text-xs border ${row.type === "Claim" ? "bg-gray-100 text-gray-700 border-gray-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
-                                >
-                                  {row.type}
-                                </span>
-                              </TableCell>
-                              <TableCell className="text-sm text-gray-700">
-                                {row.desc}
-                              </TableCell>
-                              <TableCell className="text-sm text-gray-700 whitespace-nowrap">
-                                {row.date}
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </>
-                    ) : (
-                      <>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Claim Number
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Status
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
-                              <div className="flex items-center gap-1">
-                                Loss Date
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Incurred
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Reserves
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Paid
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                            <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
-                              <div className="flex items-center gap-1">
-                                Recoveries
-                                <ArrowUpDown
-                                  size={12}
-                                  className="text-gray-400"
-                                />
-                              </div>
-                            </TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {filteredClaims.filter(
-                            (claim) =>
-                              claim.status === "Open" ||
-                              claim.status === "Reopen",
-                          ).length === 0 && (
+                {isJohn ? (
+                  <div className="text-center py-8 text-gray-600">
+                    <p className="text-sm">You don't have access to claims</p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto flex-1">
+                    <Table>
+                      {isShawn ? (
+                        <>
+                          <TableHeader>
                             <TableRow>
-                              <TableCell
-                                colSpan={7}
-                                className="text-center py-4 text-gray-500 text-sm"
-                              >
-                                No claims
-                              </TableCell>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                ID
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                Type
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                Description
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                Date
+                              </TableHead>
                             </TableRow>
-                          )}
-                          {filteredClaims
-                            .filter(
-                              (claim) =>
-                                claim.status === "Open" ||
-                                claim.status === "Reopen",
-                            )
-                            .map((claim, index) => (
+                          </TableHeader>
+                          <TableBody>
+                            {[
+                              {
+                                id: "23E-1234",
+                                type: "Claim",
+                                desc: "Property damage - Garage Fire",
+                                date: "2024-01-15",
+                              },
+                              {
+                                id: "23E-5678",
+                                type: "Claim",
+                                desc: "Auto accident - Rear end collision",
+                                date: "2024-02-20",
+                              },
+                              {
+                                id: "INCIDENT-1234",
+                                type: "Incident",
+                                desc: "Multi-vehicle collision",
+                                date: "2024-03-10",
+                              },
+                              {
+                                id: "INCIDENT-5678",
+                                type: "Incident",
+                                desc: "Weather-related damage",
+                                date: "2024-03-25",
+                              },
+                            ].map((row) => (
                               <TableRow
-                                key={index}
-                                className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  console.log(
-                                    "Open claim details",
-                                    claim.claimNumber,
-                                  );
-                                }}
+                                key={row.id}
+                                className="h-10 hover:bg-gray-50"
                               >
-                                <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
-                                  {claim.claimNumber}
+                                <TableCell className="text-sm font-medium text-gray-800">
+                                  {row.id}
                                 </TableCell>
-                                <TableCell className="py-2">
-                                  {getStatusBadge(claim.status)}
+                                <TableCell>
+                                  <span
+                                    className={`px-2 py-1 rounded-full text-xs border ${row.type === "Claim" ? "bg-gray-100 text-gray-700 border-gray-200" : "bg-gray-100 text-gray-700 border-gray-200"}`}
+                                  >
+                                    {row.type}
+                                  </span>
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
-                                  {claim.date}
+                                <TableCell className="text-sm text-gray-700">
+                                  {row.desc}
                                 </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
-                                  {claim.incurred}
-                                </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
-                                  {claim.reserves}
-                                </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
-                                  {claim.paid}
-                                </TableCell>
-                                <TableCell className="text-sm py-2 text-gray-700 font-monoid">
-                                  {claim.recoveries}
+                                <TableCell className="text-sm text-gray-700 whitespace-nowrap">
+                                  {row.date}
                                 </TableCell>
                               </TableRow>
                             ))}
-                        </TableBody>
-                      </>
-                    )}
-                  </Table>
-                </div>
+                          </TableBody>
+                        </>
+                      ) : (
+                        <>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Claim Number
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Status
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50 w-24">
+                                <div className="flex items-center gap-1">
+                                  Loss Date
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Incurred
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Reserves
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Paid
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
+                                  Recoveries
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {filteredClaims.filter(
+                              (claim) =>
+                                claim.status === "Open" ||
+                                claim.status === "Reopen",
+                            ).length === 0 && (
+                              <TableRow>
+                                <TableCell
+                                  colSpan={7}
+                                  className="text-center py-4 text-gray-500 text-sm"
+                                >
+                                  No claims
+                                </TableCell>
+                              </TableRow>
+                            )}
+                            {filteredClaims
+                              .filter(
+                                (claim) =>
+                                  claim.status === "Open" ||
+                                  claim.status === "Reopen",
+                              )
+                              .map((claim, index) => (
+                                <TableRow
+                                  key={index}
+                                  className={`h-10 ${getRowBgColor(claim.status, "claim")} cursor-pointer`}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    console.log(
+                                      "Open claim details",
+                                      claim.claimNumber,
+                                    );
+                                  }}
+                                >
+                                  <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
+                                    {claim.claimNumber}
+                                  </TableCell>
+                                  <TableCell className="py-2">
+                                    {getStatusBadge(claim.status)}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
+                                    {claim.date}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700 font-monoid">
+                                    {claim.incurred}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700 font-monoid">
+                                    {claim.reserves}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700 font-monoid">
+                                    {claim.paid}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700 font-monoid">
+                                    {claim.recoveries}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                          </TableBody>
+                        </>
+                      )}
+                    </Table>
+                  </div>
+                )}
               </CardContent>
               {(isShawn
                 ? 4
