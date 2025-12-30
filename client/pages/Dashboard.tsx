@@ -1913,7 +1913,7 @@ export default function Dashboard() {
                 className={`${isClaimsCollapsed ? "hidden" : ""} flex-1 flex flex-col`}
               >
                 <div className="text-center py-8 text-gray-600">
-                  <p className="text-sm">You don't have access to claims</p>
+                  <p className="text-sm">You don't have access to this section. Please contact your administrator if you believe this is incorrect.</p>
                 </div>
               </CardContent>
             </Card>
