@@ -272,6 +272,14 @@ export default function CheckProcessing() {
     setSelectedRows(newSelected);
   };
 
+  const handleActionMenuOpenChange = (isOpen: boolean, recordId: string) => {
+    if (isOpen) {
+      setHighlightedRowId(recordId);
+    } else {
+      setHighlightedRowId(null);
+    }
+  };
+
   const toggleSelectAll = () => {
     if (selectedRows.size === mockCheckData.length) {
       setSelectedRows(new Set());
