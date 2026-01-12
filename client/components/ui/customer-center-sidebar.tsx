@@ -63,27 +63,14 @@ export function CustomerCenterSidebar({
     if (path === "/overview") {
       return location.pathname.startsWith("/overview");
     }
-    return (
-      location.pathname === path || location.pathname + location.search === path
-    );
+    return location.pathname === path;
   };
 
   const isMainPageActive = (item: CustomerCenterSidebarItem) => {
     if (item.path === "/overview") {
       return location.pathname.startsWith("/overview");
     }
-    if (item.path === "/personal-details") {
-      return (
-        location.pathname === item.path ||
-        location.pathname === "/communication"
-      );
-    }
     return location.pathname === item.path;
-  };
-
-  // Check if a submenu item is active (accounts for query params)
-  const isSubmenuActive = (subItem: SubItem) => {
-    return location.pathname + location.search === subItem.path;
   };
 
   return (
