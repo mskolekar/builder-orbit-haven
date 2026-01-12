@@ -165,12 +165,12 @@ export function CustomerCenterSidebar({
                       : "justify-between gap-3 px-3 py-2",
                     // Main menu with expanded submenus: light grey background, dark text
                     hasSubItems && isExpanded
-                      ? "bg-[#EEF1F6] text-[#2F3A45]"
+                      ? "bg-gray-100 text-gray-900"
                       : // Active main menu without submenus: dark grey background, white text
                         !hasSubItems && isMainActive && !location.search
                         ? "bg-[#6F7C88] text-white"
-                        : // Inactive: light blue text on hover, transparent background
-                          "text-white/80 hover:bg-[#EEF1F6] hover:text-[#0054A6]",
+                        : // Inactive: grey text on hover, light grey background on hover
+                          "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
                   )}
                   title={isCollapsed ? item.label : undefined}
                   aria-label={item.label}
