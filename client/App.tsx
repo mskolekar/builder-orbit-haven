@@ -202,41 +202,36 @@ function AppContent() {
                           to: `/overview/${activeProfileKey}`,
                         },
                         "/profile": {
-                          label: "Personal Details",
-                          to: "/personal-details",
-                        },
-                        "/personal-details": {
-                          label: "Personal Details",
-                          to: "/personal-details",
-                        },
-                        "/communication": {
-                          label: "Personal Details",
-                          to: "/personal-details",
-                        },
-                        "/loss-history": {
-                          label: "Loss History",
-                          to: "/loss-history",
-                        },
-                        "/relationships": {
-                          label: "Relationships & Roles",
-                          to: "/relationships",
-                        },
-                        "/workgroups": {
-                          label: "Workgroups",
-                          to: "/workgroups",
-                        },
-                        "/risk-management-credit": {
-                          label: "Risk Mgt Credit Program",
-                          to: "/risk-management-credit",
+                          label: "Profile",
+                          to: "/profile",
                         },
                         "/contact-delivery": {
-                          label: "Contact & Delivery",
+                          label: "Contact & Communication",
                           to: "/contact-delivery",
                         },
-                        "/journals": { label: "Journals", to: "/journals" },
+                        "/relationships": {
+                          label: "Relationships",
+                          to: "/relationships",
+                        },
+                        "/licenses-certifications": {
+                          label: "Licenses & Certifications",
+                          to: "/licenses-certifications",
+                        },
                         "/financials": {
-                          label: "Financials",
+                          label: "Financials (LawPro only)",
                           to: "/financials",
+                        },
+                        "/associated-records": {
+                          label: "Associated Records",
+                          to: "/associated-records",
+                        },
+                        "/journals": {
+                          label: "Journal",
+                          to: "/journals",
+                        },
+                        "/login-info": {
+                          label: "Login Info",
+                          to: "/login-info",
                         },
                       };
 
