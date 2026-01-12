@@ -218,7 +218,7 @@ function AppContent() {
                           to: "/licenses-certifications",
                         },
                         "/financials": {
-                          label: "Financials (LawPro only)",
+                          label: "Financials",
                           to: "/financials",
                         },
                         "/associated-records": {
