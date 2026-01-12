@@ -1825,6 +1825,9 @@ export default function Dashboard() {
                                   <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
                                     {claim.date}
                                   </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.role}
+                                  </TableCell>
                                   <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                     {claim.incurred}
                                   </TableCell>
