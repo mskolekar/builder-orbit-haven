@@ -214,7 +214,7 @@ export function CustomerCenterSidebar({
                               "block px-3 py-2 text-sm rounded transition-colors",
                               isSubActive
                                 ? "bg-[#6F7C88] text-white pl-3"
-                                : "text-white/70 hover:bg-[#EEF1F6] hover:text-[#0054A6] pl-3",
+                                : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 pl-3",
                             )}
                             role="menuitem"
                             aria-label={subItem.label}
