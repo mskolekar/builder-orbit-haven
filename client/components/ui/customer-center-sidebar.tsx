@@ -20,7 +20,7 @@ const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Contact & Communication", path: "/contact-delivery" },
   { label: "Relationships", path: "/relationships" },
   { label: "Licenses & Certifications", path: "/licenses-certifications" },
-  { label: "Financials (LawPro only)", path: "/financials" },
+  { label: "Financials", path: "/financials" },
   { label: "Associated Records", path: "/associated-records" },
   { label: "Journal", path: "/journals" },
   { label: "Login Info", path: "/login-info" },
