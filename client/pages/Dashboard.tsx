@@ -542,6 +542,7 @@ const claimsHistory = [
     reserves: "$2,000",
     paid: "$5,300",
     recoveries: "$500",
+    role: "Insured",
   },
   {
     type: "Auto Collision",
@@ -553,6 +554,7 @@ const claimsHistory = [
     reserves: "$2,000",
     paid: "$0",
     recoveries: "$0",
+    role: "Claimant",
   },
   {
     type: "Critical Illness",
@@ -564,6 +566,7 @@ const claimsHistory = [
     reserves: "$0",
     paid: "$0",
     recoveries: "$0",
+    role: "Insured",
   },
 ];
 
