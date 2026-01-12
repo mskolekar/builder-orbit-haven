@@ -123,7 +123,11 @@ export function CustomerCenterSidebar({
                   </a>
                 ) : (
                   <Link
-                    to={item.path === "/overview" ? `/overview/${activeProfileKey}` : item.path}
+                    to={
+                      item.path === "/overview"
+                        ? `/overview/${activeProfileKey}`
+                        : item.path
+                    }
                     className={cn(
                       "flex items-center rounded-lg text-sm transition-colors w-full",
                       isCollapsed
