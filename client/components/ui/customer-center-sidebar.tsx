@@ -16,29 +16,14 @@ interface CustomerCenterSidebarItem {
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Overview", path: "/overview" },
-  {
-    label: "Personal Details",
-    path: "/personal-details",
-    subItems: [
-      { label: "Basic Info", path: "/personal-details?section=person-info" },
-      { label: "Communication", path: "/communication" },
-      {
-        label: "Additional Info",
-        path: "/personal-details?section=additional-info",
-      },
-      {
-        label: "Work History",
-        path: "/personal-details?section=person-history",
-      },
-    ],
-  },
-  { label: "Loss History", path: "/loss-history" },
-  { label: "Relationships & Roles", path: "/relationships" },
-  { label: "Workgroups", path: "/workgroups" },
-  { label: "Risk Mgt Credit Program", path: "/risk-management-credit" },
-  { label: "Contact & Delivery", path: "/contact-delivery" },
-  { label: "Journals", path: "/journals" },
-  { label: "Financials", path: "/financials" },
+  { label: "Profile", path: "/profile" },
+  { label: "Contact & Communication", path: "/contact-delivery" },
+  { label: "Relationships", path: "/relationships" },
+  { label: "Licenses & Certifications", path: "/licenses-certifications" },
+  { label: "Financials (LawPro only)", path: "/financials" },
+  { label: "Associated Records", path: "/associated-records" },
+  { label: "Journal", path: "/journals" },
+  { label: "Login Info", path: "/login-info" },
 ];
 
 interface CustomerCenterSidebarProps {
