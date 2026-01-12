@@ -38,6 +38,10 @@ export function CustomerCenterSidebar({
   const location = useLocation();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
+  // Extract active profile from URL
+  const overviewMatch = location.pathname.match(/^\/overview\/([^/]+)/);
+  const activeProfileKey = overviewMatch ? overviewMatch[1] : "olivia";
+
   const getBreadcrumb = () => {
     const path = location.pathname;
 
