@@ -193,8 +193,8 @@ export function CustomerCenterSidebar({
                             "transition-transform",
                             isExpanded ? "rotate-180" : "",
                             isMainActive && hasSubItems
-                              ? "text-white"
-                              : "text-white/80",
+                              ? "text-gray-700"
+                              : "text-gray-600",
                           )}
                         />
                       )}
