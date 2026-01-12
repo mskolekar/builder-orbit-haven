@@ -40,9 +40,6 @@ export function CustomerCenterSidebar({
 
   const getBreadcrumb = () => {
     const path = location.pathname;
-    const searchParams = new URLSearchParams(location.search);
-    const section = searchParams.get("section");
-    const tab = searchParams.get("tab");
 
     // Find the main menu item
     const mainItem = customerCenterItems.find((item) => {
@@ -50,24 +47,7 @@ export function CustomerCenterSidebar({
       return path.startsWith(item.path);
     });
 
-    if (!mainItem) return "Overview";
-
-    let breadcrumb = mainItem.label;
-
-    // If there's a section or tab, find the sub-item
-    if ((section || tab) && mainItem.subItems) {
-      const subItem = mainItem.subItems.find((sub) => {
-        const subParams = new URLSearchParams(sub.path.split("?")[1] || "");
-        return (
-          subParams.get("section") === section || subParams.get("tab") === tab
-        );
-      });
-      if (subItem) {
-        breadcrumb += ` > ${subItem.label}`;
-      }
-    }
-
-    return breadcrumb;
+    return mainItem ? mainItem.label : "Overview";
   };
 
   const toggleExpanded = (itemPath: string) => {
