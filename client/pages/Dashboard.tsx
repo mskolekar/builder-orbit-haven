@@ -542,6 +542,7 @@ const claimsHistory = [
     reserves: "$2,000",
     paid: "$5,300",
     recoveries: "$500",
+    role: "Insured",
   },
   {
     type: "Auto Collision",
@@ -553,6 +554,7 @@ const claimsHistory = [
     reserves: "$2,000",
     paid: "$0",
     recoveries: "$0",
+    role: "Claimant",
   },
   {
     type: "Critical Illness",
@@ -564,6 +566,7 @@ const claimsHistory = [
     reserves: "$0",
     paid: "$0",
     recoveries: "$0",
+    role: "Insured",
   },
 ];
 
@@ -1735,6 +1738,15 @@ export default function Dashboard() {
                               </TableHead>
                               <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
                                 <div className="flex items-center gap-1">
+                                  Role
+                                  <ArrowUpDown
+                                    size={12}
+                                    className="text-gray-400"
+                                  />
+                                </div>
+                              </TableHead>
+                              <TableHead className="text-xs h-8 text-gray-600 cursor-pointer hover:bg-gray-50">
+                                <div className="flex items-center gap-1">
                                   Incurred
                                   <ArrowUpDown
                                     size={12}
@@ -1812,6 +1824,9 @@ export default function Dashboard() {
                                   </TableCell>
                                   <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
                                     {claim.date}
+                                  </TableCell>
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.role}
                                   </TableCell>
                                   <TableCell className="text-sm py-2 text-gray-700 font-monoid">
                                     {claim.incurred}
