@@ -240,6 +240,18 @@ export default function Workgroup() {
             </div>
           </div>
 
+          {/* Add New Button */}
+          {!isFormVisible && (
+            <div className="flex justify-end">
+              <Button
+                onClick={handleAddNew}
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+              >
+                Add
+              </Button>
+            </div>
+          )}
+
           {/* Workgroup Detail/Add-Edit Form Section */}
           {isFormVisible && (
             <div>
