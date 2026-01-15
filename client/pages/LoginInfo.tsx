@@ -204,17 +204,17 @@ export default function LoginInfo() {
               <div />
             </FormRow>
 
-            <div className="flex gap-4 items-start mb-6">
-              <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm pt-2">
+            <div className="flex gap-4 items-center mb-6">
+              <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm">
                 Force User to change password at next login
               </label>
-              <div className="flex-1 flex items-center">
-                <Checkbox
+              <div className="flex-1">
+                <Switch
                   checked={formState.forceChangePassword}
                   onCheckedChange={(checked) =>
                     setFormState({
                       ...formState,
-                      forceChangePassword: checked as boolean,
+                      forceChangePassword: checked,
                     })
                   }
                   id="force-change"
