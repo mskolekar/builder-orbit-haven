@@ -374,25 +374,25 @@ export default function Licenses() {
           {/* Action Buttons */}
           {(selectedLicense || Object.values(formState).some((v) => v)) && (
             <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
-            <div className="flex justify-end gap-3">
-              <Button variant="cancel" onClick={handleCancel}>
-                Cancel
-              </Button>
-              <Button
-                onClick={handleSave}
-                disabled={isSaving || !formState.state || !formState.licenseNumber || !formState.expirationDate}
-                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-              >
-                {isSaving ? "Saving..." : "Save"}
-              </Button>
-              <Button
-                onClick={handleAddNew}
-                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-              >
-                Add New
-              </Button>
+              <div className="flex justify-end gap-3">
+                <Button variant="cancel" onClick={handleCancel}>
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleSave}
+                  disabled={isSaving || !formState.state || !formState.licenseNumber || !formState.expirationDate}
+                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                >
+                  {isSaving ? "Saving..." : "Save"}
+                </Button>
+                <Button
+                  onClick={handleAddNew}
+                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                >
+                  Add New
+                </Button>
+              </div>
             </div>
-          </div>
           )}
         </div>
       </div>
