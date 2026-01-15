@@ -108,6 +108,7 @@ export default function Licenses() {
 
     setTimeout(() => {
       setIsSaving(false);
+      setIsAddingNew(false);
       setSelectedLicense(null);
       setFormState({
         state: "",
