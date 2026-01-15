@@ -83,6 +83,9 @@ function SectionHeader({ title }: { title: string }) {
 
 export default function AdditionalInfo() {
   const [isSaving, setIsSaving] = useState(false);
+  const [marketingSource, setMarketingSource] = useState<string[]>([]);
+  const [programInterests, setProgramInterests] = useState<string[]>([]);
+  const [hazardousPursuits, setHazardousPursuits] = useState<string[]>([]);
 
   const handleSave = () => {
     setIsSaving(true);
