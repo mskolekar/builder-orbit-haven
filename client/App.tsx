@@ -20,6 +20,8 @@ import SubmissionSearch from "@/pages/SubmissionSearch";
 import Submissions from "@/pages/Submissions";
 import Incidents from "@/pages/Incidents";
 import CheckProcessing from "@/pages/CheckProcessing";
+import PersonInfo from "@/pages/PersonInfo";
+import AdditionalInfo from "@/pages/AdditionalInfo";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
@@ -84,16 +86,16 @@ function AppContent() {
   // Define which routes should show the Customer Center sidebar (exclude /customer-center search)
   const customerCenterRoutes = [
     "/overview",
-    "/profile",
-    "/personal-details",
-    "/communication",
-    "/loss-history",
-    "/relationships",
+    "/person-info",
+    "/additional-info",
+    "/licenses-certifications",
     "/workgroups",
-    "/risk-management-credit",
-    "/contact-delivery",
+    "/relationships",
+    "/prior-policy",
+    "/prior-losses",
+    "/login-info",
+    "/upload-sign",
     "/journals",
-    "/financials",
   ];
   const showCustomerCenterSidebar = customerCenterRoutes.some((route) =>
     location.pathname.startsWith(route),
@@ -201,37 +203,45 @@ function AppContent() {
                           label: "Overview",
                           to: `/overview/${activeProfileKey}`,
                         },
-                        "/profile": {
-                          label: "Profile",
-                          to: "/profile",
+                        "/person-info": {
+                          label: "Person Info",
+                          to: "/person-info",
                         },
-                        "/contact-delivery": {
-                          label: "Contact & Communication",
-                          to: "/contact-delivery",
-                        },
-                        "/relationships": {
-                          label: "Relationships",
-                          to: "/relationships",
+                        "/additional-info": {
+                          label: "Additional Info",
+                          to: "/additional-info",
                         },
                         "/licenses-certifications": {
-                          label: "Licenses & Certifications",
+                          label: "Licenses",
                           to: "/licenses-certifications",
                         },
-                        "/financials": {
-                          label: "Financials",
-                          to: "/financials",
+                        "/workgroups": {
+                          label: "Work Groups",
+                          to: "/workgroups",
                         },
-                        "/associated-records": {
-                          label: "Associated Records",
-                          to: "/associated-records",
+                        "/relationships": {
+                          label: "Relationship & Roles",
+                          to: "/relationships",
                         },
-                        "/journals": {
-                          label: "Journal",
-                          to: "/journals",
+                        "/prior-policy": {
+                          label: "Prior Policy",
+                          to: "/prior-policy",
+                        },
+                        "/prior-losses": {
+                          label: "Prior Losses",
+                          to: "/prior-losses",
                         },
                         "/login-info": {
                           label: "Login Info",
                           to: "/login-info",
+                        },
+                        "/upload-sign": {
+                          label: "Upload Sign",
+                          to: "/upload-sign",
+                        },
+                        "/journals": {
+                          label: "Journal",
+                          to: "/journals",
                         },
                       };
 
@@ -345,24 +355,14 @@ function AppContent() {
                   ))}
                 <Routes>
                   <Route path="/overview/:profileId" element={<Dashboard />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/communication" element={<Communication />} />
-                  <Route path="/history" element={<History />} />
+                  <Route path="/person-info" element={<PersonInfo />} />
+                  <Route path="/additional-info" element={<AdditionalInfo />} />
                   <Route
-                    path="/loss-history"
+                    path="/licenses-certifications"
                     element={
                       <PlaceholderPage
-                        title="Loss History"
-                        description="View prior policies and losses history."
-                      />
-                    }
-                  />
-                  <Route
-                    path="/relationships"
-                    element={
-                      <PlaceholderPage
-                        title="Relationships & Roles"
-                        description="View and manage customer relationships and roles."
+                        title="Licenses"
+                        description="View and manage licenses and certifications."
                       />
                     }
                   />
@@ -370,26 +370,53 @@ function AppContent() {
                     path="/workgroups"
                     element={
                       <PlaceholderPage
-                        title="Workgroups"
+                        title="Work Groups"
                         description="Manage workgroup assignments and team collaboration."
                       />
                     }
                   />
                   <Route
-                    path="/risk-management-credit"
+                    path="/relationships"
                     element={
                       <PlaceholderPage
-                        title="Risk Management Credit Program"
-                        description="Manage risk assessment and credit programs."
+                        title="Relationship & Roles"
+                        description="View and manage customer relationships and roles."
                       />
                     }
                   />
                   <Route
-                    path="/contact-delivery"
+                    path="/prior-policy"
                     element={
                       <PlaceholderPage
-                        title="Contact & Delivery"
-                        description="Manage contact information and delivery preferences."
+                        title="Prior Policy"
+                        description="View prior insurance policy information."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/prior-losses"
+                    element={
+                      <PlaceholderPage
+                        title="Prior Losses"
+                        description="View prior loss history and claims information."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/login-info"
+                    element={
+                      <PlaceholderPage
+                        title="Login Info"
+                        description="Manage login credentials and account access information."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/upload-sign"
+                    element={
+                      <PlaceholderPage
+                        title="Upload Sign"
+                        description="Upload signature and verify identity."
                       />
                     }
                   />
@@ -397,26 +424,8 @@ function AppContent() {
                     path="/journals"
                     element={
                       <PlaceholderPage
-                        title="Journals"
+                        title="Journal"
                         description="View and manage customer journals and notes."
-                      />
-                    }
-                  />
-                  <Route
-                    path="/financials"
-                    element={
-                      <PlaceholderPage
-                        title="Financials"
-                        description="View financial information and transactions."
-                      />
-                    }
-                  />
-                  <Route
-                    path="/personal-details"
-                    element={
-                      <PlaceholderPage
-                        title="Personal Details"
-                        description="Manage customer personal information and details."
                       />
                     }
                   />
