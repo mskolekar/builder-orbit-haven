@@ -299,18 +299,6 @@ export default function Licenses() {
                     </SelectContent>
                   </Select>
                 </FormField>
-                <div />
-              </FormRow>
-              <FormRow>
-                <MultiSelectDropdown
-                  label="Lines of Authority"
-                  options={linesOfAuthorityOptions}
-                  selectedValues={formState.linesOfAuthority || []}
-                  onChange={(values) =>
-                    setFormState({ ...formState, linesOfAuthority: values })
-                  }
-                  placeholder="Select authorities..."
-                />
                 <FormField label="Expiration Date" isMandatory>
                   <Input
                     type="date"
@@ -323,6 +311,18 @@ export default function Licenses() {
                     }
                   />
                 </FormField>
+              </FormRow>
+              <FormRow>
+                <MultiSelectDropdown
+                  label="Lines of Authority"
+                  options={linesOfAuthorityOptions}
+                  selectedValues={formState.linesOfAuthority || []}
+                  onChange={(values) =>
+                    setFormState({ ...formState, linesOfAuthority: values })
+                  }
+                  placeholder="Select authorities..."
+                />
+                <div />
               </FormRow>
             </div>
           )}
@@ -340,12 +340,6 @@ export default function Licenses() {
                   className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                 >
                   {isSaving ? "Saving..." : "Save"}
-                </Button>
-                <Button
-                  onClick={handleAddNew}
-                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                >
-                  Add New
                 </Button>
               </div>
             </div>
