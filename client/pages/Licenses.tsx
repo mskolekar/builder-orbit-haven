@@ -257,8 +257,20 @@ export default function Licenses() {
             </div>
           </div>
 
+          {/* Add New Button */}
+          {!isFormVisible && (
+            <div className="flex justify-end">
+              <Button
+                onClick={handleAddNew}
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+              >
+                Add
+              </Button>
+            </div>
+          )}
+
           {/* License Detail/Add-Edit Form Section */}
-          {(selectedLicense || Object.values(formState).some((v) => v)) && (
+          {isFormVisible && (
             <div>
               <SectionHeader title="License Detail" />
 
