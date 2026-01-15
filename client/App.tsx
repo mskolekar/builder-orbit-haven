@@ -397,12 +397,7 @@ function AppContent() {
                   />
                   <Route
                     path="/login-info"
-                    element={
-                      <PlaceholderPage
-                        title="Login Info"
-                        description="Manage login credentials and account access information."
-                      />
-                    }
+                    element={<LoginInfo />}
                   />
                   <Route
                     path="/upload-sign"
