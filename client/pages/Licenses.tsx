@@ -69,17 +69,6 @@ export default function Licenses() {
     linesOfAuthority: [],
   });
 
-  const handleAddNew = () => {
-    setSelectedLicense(null);
-    setFormState({
-      state: "",
-      licenseNumber: "",
-      category: "",
-      expirationDate: "",
-      linesOfAuthority: [],
-    });
-  };
-
   const handleSelectLicense = (license: License) => {
     setSelectedLicense(license);
     setFormState(license);
