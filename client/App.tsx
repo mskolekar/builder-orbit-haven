@@ -84,16 +84,16 @@ function AppContent() {
   // Define which routes should show the Customer Center sidebar (exclude /customer-center search)
   const customerCenterRoutes = [
     "/overview",
-    "/profile",
-    "/personal-details",
-    "/communication",
-    "/loss-history",
-    "/relationships",
+    "/person-info",
+    "/additional-info",
+    "/licenses-certifications",
     "/workgroups",
-    "/risk-management-credit",
-    "/contact-delivery",
+    "/relationships",
+    "/prior-policy",
+    "/prior-losses",
+    "/login-info",
+    "/upload-sign",
     "/journals",
-    "/financials",
   ];
   const showCustomerCenterSidebar = customerCenterRoutes.some((route) =>
     location.pathname.startsWith(route),
