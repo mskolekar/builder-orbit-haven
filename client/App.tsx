@@ -22,6 +22,7 @@ import Incidents from "@/pages/Incidents";
 import CheckProcessing from "@/pages/CheckProcessing";
 import PersonInfo from "@/pages/PersonInfo";
 import AdditionalInfo from "@/pages/AdditionalInfo";
+import Licenses from "@/pages/Licenses";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
@@ -359,12 +360,7 @@ function AppContent() {
                   <Route path="/additional-info" element={<AdditionalInfo />} />
                   <Route
                     path="/licenses-certifications"
-                    element={
-                      <PlaceholderPage
-                        title="Licenses"
-                        description="View and manage licenses and certifications."
-                      />
-                    }
+                    element={<Licenses />}
                   />
                   <Route
                     path="/workgroups"

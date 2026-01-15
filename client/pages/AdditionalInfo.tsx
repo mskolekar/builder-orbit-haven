@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
+import { MultiSelectDropdown } from "@/components/ui/multiselect-dropdown";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -82,6 +82,9 @@ function SectionHeader({ title }: { title: string }) {
 
 export default function AdditionalInfo() {
   const [isSaving, setIsSaving] = useState(false);
+  const [marketingSource, setMarketingSource] = useState<string[]>([]);
+  const [programInterests, setProgramInterests] = useState<string[]>([]);
+  const [hazardousPursuits, setHazardousPursuits] = useState<string[]>([]);
 
   const handleSave = () => {
     setIsSaving(true);
@@ -109,7 +112,17 @@ export default function AdditionalInfo() {
                 </Select>
               </FormField>
               <FormField label="Record Type">
-                <Input placeholder="Enter record type" />
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
+                    <SelectItem value="archived">Archived</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
@@ -191,7 +204,19 @@ export default function AdditionalInfo() {
                 <Input placeholder="Enter job title" />
               </FormField>
               <FormField label="Department">
-                <Input placeholder="Enter department" />
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sales">Sales</SelectItem>
+                    <SelectItem value="marketing">Marketing</SelectItem>
+                    <SelectItem value="operations">Operations</SelectItem>
+                    <SelectItem value="hr">HR</SelectItem>
+                    <SelectItem value="finance">Finance</SelectItem>
+                    <SelectItem value="it">IT</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
@@ -224,56 +249,75 @@ export default function AdditionalInfo() {
             </FormRow>
           </div>
 
-          {/* 4. Tax, Legal & Compliance Information Section */}
+          {/* 4. Legal, Compliance & Risk Disclosures Section */}
           <div>
-            <SectionHeader title="Tax, Legal & Compliance Information" />
+            <SectionHeader title="Legal, Compliance & Risk Disclosures" />
             <FormRow>
               <FormField label="W9 on File">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="w9" />
-                  <label htmlFor="w9" className="text-sm font-medium">
-                    W9 Form on File
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
               <FormField label="Validated Tax ID">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="validated-tax" />
-                  <label
-                    htmlFor="validated-tax"
-                    className="text-sm font-medium"
-                  >
-                    Tax ID Validated
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
               <FormField label="Release Tax ID">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="release-tax" />
-                  <label htmlFor="release-tax" className="text-sm font-medium">
-                    Release Tax ID
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
               <FormField label="Release Medical Info">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="release-medical" />
-                  <label
-                    htmlFor="release-medical"
-                    className="text-sm font-medium"
-                  >
-                    Release Medical Information
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
               <FormField label="Death Date">
                 <Input type="date" />
               </FormField>
-              <div />
+              <MultiSelectDropdown
+                label="Hazardous Pursuits"
+                options={[
+                  { value: "hang-gliding", label: "Hang Gliding" },
+                  { value: "stock-car", label: "Stock Car Dr" },
+                ]}
+                selectedValues={hazardousPursuits}
+                onChange={setHazardousPursuits}
+                placeholder="Select pursuits..."
+              />
             </FormRow>
           </div>
 
@@ -295,22 +339,28 @@ export default function AdditionalInfo() {
                 </Select>
               </FormField>
               <FormField label="Market via Fax">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="market-fax" />
-                  <label htmlFor="market-fax" className="text-sm font-medium">
-                    Marketing via Fax
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
               <FormField label="Market via E-Mail">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="market-email" />
-                  <label htmlFor="market-email" className="text-sm font-medium">
-                    Marketing via Email
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
               <div />
             </FormRow>
@@ -369,76 +419,27 @@ export default function AdditionalInfo() {
           <div>
             <SectionHeader title="Marketing & Interest Information" />
             <FormRow>
-              <FormField label="Marketing Source">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="referral">Referral</SelectItem>
-                    <SelectItem value="advertising">Advertising</SelectItem>
-                    <SelectItem value="web">Web Search</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="RI May 2008">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="ri-2008" />
-                  <label htmlFor="ri-2008" className="text-sm font-medium">
-                    RI May 2008
-                  </label>
-                </div>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Target Conf">
-                <Input placeholder="Enter target configuration" />
-              </FormField>
-              <FormField label="Program Interests">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="banking" />
-                    <label htmlFor="banking" className="text-sm font-medium">
-                      Banking
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="prof-liab" />
-                    <label htmlFor="prof-liab" className="text-sm font-medium">
-                      Prof Liab
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="technology" />
-                    <label htmlFor="technology" className="text-sm font-medium">
-                      Technology
-                    </label>
-                  </div>
-                </div>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Hazardous Pursuits">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="hang-gliding" />
-                    <label
-                      htmlFor="hang-gliding"
-                      className="text-sm font-medium"
-                    >
-                      Hang Gliding
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="stock-car" />
-                    <label htmlFor="stock-car" className="text-sm font-medium">
-                      Stock Car Dr
-                    </label>
-                  </div>
-                </div>
-              </FormField>
-              <div />
+              <MultiSelectDropdown
+                label="Marketing Source"
+                options={[
+                  { value: "ri-2008", label: "RI May 2008" },
+                  { value: "target-conf", label: "Target Conf" },
+                ]}
+                selectedValues={marketingSource}
+                onChange={setMarketingSource}
+                placeholder="Select marketing sources..."
+              />
+              <MultiSelectDropdown
+                label="Program Interests"
+                options={[
+                  { value: "banking", label: "Banking" },
+                  { value: "prof-liab", label: "Prof Liab" },
+                  { value: "technology", label: "Technology" },
+                ]}
+                selectedValues={programInterests}
+                onChange={setProgramInterests}
+                placeholder="Select interests..."
+              />
             </FormRow>
           </div>
 
