@@ -21,6 +21,7 @@ import Submissions from "@/pages/Submissions";
 import Incidents from "@/pages/Incidents";
 import CheckProcessing from "@/pages/CheckProcessing";
 import PersonInfo from "@/pages/PersonInfo";
+import AdditionalInfo from "@/pages/AdditionalInfo";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
