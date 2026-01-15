@@ -407,93 +407,75 @@ export default function AdditionalInfo() {
           <div>
             <SectionHeader title="Marketing & Interest Information" />
 
-            {/* Marketing Source Subsection */}
-            <div className="mb-8">
-              <h4 className="text-sm font-semibold text-gray-800 mb-4">
-                Marketing Source
-              </h4>
-              <FormRow>
-                <FormField label="RI May 2008">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="ri-2008" />
-                    <label htmlFor="ri-2008" className="text-sm font-medium">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Marketing Source Card */}
+              <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white transition-colors">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">
+                  Marketing Source
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="ri-2008" className="mt-0" />
+                    <label htmlFor="ri-2008" className="text-sm font-medium text-gray-700 cursor-pointer">
                       RI May 2008
                     </label>
                   </div>
-                </FormField>
-                <FormField label="Target Conf">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="target-conf" />
-                    <label htmlFor="target-conf" className="text-sm font-medium">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="target-conf" className="mt-0" />
+                    <label htmlFor="target-conf" className="text-sm font-medium text-gray-700 cursor-pointer">
                       Target Conf
                     </label>
                   </div>
-                </FormField>
-              </FormRow>
-            </div>
+                </div>
+              </div>
 
-            {/* Program Interests Subsection */}
-            <div className="mb-8">
-              <h4 className="text-sm font-semibold text-gray-800 mb-4">
-                Program Interests
-              </h4>
-              <FormRow>
-                <FormField label="Banking">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="banking" />
-                    <label htmlFor="banking" className="text-sm font-medium">
+              {/* Program Interests Card */}
+              <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white transition-colors">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">
+                  Program Interests
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="banking" className="mt-0" />
+                    <label htmlFor="banking" className="text-sm font-medium text-gray-700 cursor-pointer">
                       Banking
                     </label>
                   </div>
-                </FormField>
-                <FormField label="Prof Liab">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="prof-liab" />
-                    <label htmlFor="prof-liab" className="text-sm font-medium">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="prof-liab" className="mt-0" />
+                    <label htmlFor="prof-liab" className="text-sm font-medium text-gray-700 cursor-pointer">
                       Prof Liab
                     </label>
                   </div>
-                </FormField>
-              </FormRow>
-              <FormRow>
-                <FormField label="Technology">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="technology" />
-                    <label htmlFor="technology" className="text-sm font-medium">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="technology" className="mt-0" />
+                    <label htmlFor="technology" className="text-sm font-medium text-gray-700 cursor-pointer">
                       Technology
                     </label>
                   </div>
-                </FormField>
-                <div />
-              </FormRow>
-            </div>
+                </div>
+              </div>
 
-            {/* Hazardous Pursuits Subsection */}
-            <div>
-              <h4 className="text-sm font-semibold text-gray-800 mb-4">
-                Hazardous Pursuits
-              </h4>
-              <FormRow>
-                <FormField label="Hang Gliding">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="hang-gliding" />
-                    <label
-                      htmlFor="hang-gliding"
-                      className="text-sm font-medium"
-                    >
+              {/* Hazardous Pursuits Card */}
+              <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white transition-colors lg:col-span-1">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">
+                  Hazardous Pursuits
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="hang-gliding" className="mt-0" />
+                    <label htmlFor="hang-gliding" className="text-sm font-medium text-gray-700 cursor-pointer">
                       Hang Gliding
                     </label>
                   </div>
-                </FormField>
-                <FormField label="Stock Car Dr">
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="stock-car" />
-                    <label htmlFor="stock-car" className="text-sm font-medium">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="stock-car" className="mt-0" />
+                    <label htmlFor="stock-car" className="text-sm font-medium text-gray-700 cursor-pointer">
                       Stock Car Dr
                     </label>
                   </div>
-                </FormField>
-              </FormRow>
+                </div>
+              </div>
             </div>
           </div>
 
