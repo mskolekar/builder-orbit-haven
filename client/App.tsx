@@ -361,12 +361,7 @@ function AppContent() {
                   />
                   <Route
                     path="/additional-info"
-                    element={
-                      <PlaceholderPage
-                        title="Additional Info"
-                        description="View and manage additional customer information."
-                      />
-                    }
+                    element={<AdditionalInfo />}
                   />
                   <Route
                     path="/licenses-certifications"
