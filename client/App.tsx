@@ -365,12 +365,7 @@ function AppContent() {
                   />
                   <Route
                     path="/workgroups"
-                    element={
-                      <PlaceholderPage
-                        title="Work Groups"
-                        description="Manage workgroup assignments and team collaboration."
-                      />
-                    }
+                    element={<Workgroup />}
                   />
                   <Route
                     path="/relationships"
