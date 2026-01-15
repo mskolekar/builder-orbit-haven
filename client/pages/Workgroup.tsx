@@ -127,7 +127,14 @@ export default function Workgroup() {
   const handleDeleteWorkgroup = (id: string) => {
     setWorkgroups(workgroups.filter((w) => w.id !== id));
     if (selectedWorkgroup?.id === id) {
-      handleCancel();
+      setIsAddingNew(false);
+      setSelectedWorkgroup(null);
+      setFormState({
+        workgroupCode: "",
+        active: "",
+        comments: "",
+        outputDevice: "",
+      });
     }
   };
 
