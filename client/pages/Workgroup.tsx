@@ -243,7 +243,7 @@ export default function Workgroup() {
           </div>
 
           {/* Workgroup Detail/Add-Edit Form Section */}
-          {(selectedWorkgroup || Object.values(formState).some((v) => v)) && (
+          {isFormVisible && (
             <div>
               <SectionHeader title="Workgroup Detail" />
 
