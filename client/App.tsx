@@ -201,37 +201,45 @@ function AppContent() {
                           label: "Overview",
                           to: `/overview/${activeProfileKey}`,
                         },
-                        "/profile": {
-                          label: "Profile",
-                          to: "/profile",
+                        "/person-info": {
+                          label: "Person Info",
+                          to: "/person-info",
                         },
-                        "/contact-delivery": {
-                          label: "Contact & Communication",
-                          to: "/contact-delivery",
-                        },
-                        "/relationships": {
-                          label: "Relationships",
-                          to: "/relationships",
+                        "/additional-info": {
+                          label: "Additional Info",
+                          to: "/additional-info",
                         },
                         "/licenses-certifications": {
-                          label: "Licenses & Certifications",
+                          label: "Licenses",
                           to: "/licenses-certifications",
                         },
-                        "/financials": {
-                          label: "Financials",
-                          to: "/financials",
+                        "/workgroups": {
+                          label: "Work Groups",
+                          to: "/workgroups",
                         },
-                        "/associated-records": {
-                          label: "Associated Records",
-                          to: "/associated-records",
+                        "/relationships": {
+                          label: "Relationship & Roles",
+                          to: "/relationships",
                         },
-                        "/journals": {
-                          label: "Journal",
-                          to: "/journals",
+                        "/prior-policy": {
+                          label: "Prior Policy",
+                          to: "/prior-policy",
+                        },
+                        "/prior-losses": {
+                          label: "Prior Losses",
+                          to: "/prior-losses",
                         },
                         "/login-info": {
                           label: "Login Info",
                           to: "/login-info",
+                        },
+                        "/upload-sign": {
+                          label: "Upload Sign",
+                          to: "/upload-sign",
+                        },
+                        "/journals": {
+                          label: "Journal",
+                          to: "/journals",
                         },
                       };
 
