@@ -356,12 +356,7 @@ function AppContent() {
                   <Route path="/overview/:profileId" element={<Dashboard />} />
                   <Route
                     path="/person-info"
-                    element={
-                      <PlaceholderPage
-                        title="Person Info"
-                        description="View and manage personal information."
-                      />
-                    }
+                    element={<PersonInfo />}
                   />
                   <Route
                     path="/additional-info"
