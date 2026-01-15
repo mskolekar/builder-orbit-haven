@@ -60,6 +60,7 @@ export default function Workgroup() {
   const [selectedWorkgroup, setSelectedWorkgroup] = useState<Workgroup | null>(
     null,
   );
+  const [isAddingNew, setIsAddingNew] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [formState, setFormState] = useState<Partial<Workgroup>>({
     workgroupCode: "",
