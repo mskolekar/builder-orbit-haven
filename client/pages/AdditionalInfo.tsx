@@ -239,7 +239,10 @@ export default function AdditionalInfo() {
               <FormField label="Validated Tax ID">
                 <div className="flex items-center gap-2">
                   <Checkbox id="validated-tax" />
-                  <label htmlFor="validated-tax" className="text-sm font-medium">
+                  <label
+                    htmlFor="validated-tax"
+                    className="text-sm font-medium"
+                  >
                     Tax ID Validated
                   </label>
                 </div>
@@ -257,7 +260,10 @@ export default function AdditionalInfo() {
               <FormField label="Release Medical Info">
                 <div className="flex items-center gap-2">
                   <Checkbox id="release-medical" />
-                  <label htmlFor="release-medical" className="text-sm font-medium">
+                  <label
+                    htmlFor="release-medical"
+                    className="text-sm font-medium"
+                  >
                     Release Medical Information
                   </label>
                 </div>
@@ -417,7 +423,10 @@ export default function AdditionalInfo() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <Checkbox id="hang-gliding" />
-                    <label htmlFor="hang-gliding" className="text-sm font-medium">
+                    <label
+                      htmlFor="hang-gliding"
+                      className="text-sm font-medium"
+                    >
                       Hang Gliding
                     </label>
                   </div>

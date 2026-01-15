@@ -135,8 +135,8 @@ export default function PersonInfo() {
   const updateOtherName = (id: string, field: string, value: string) => {
     setOtherNames(
       otherNames.map((name) =>
-        name.id === id ? { ...name, [field]: value } : name
-      )
+        name.id === id ? { ...name, [field]: value } : name,
+      ),
     );
   };
 
@@ -163,8 +163,8 @@ export default function PersonInfo() {
   const updateOtherAddress = (id: string, field: string, value: string) => {
     setOtherAddresses(
       otherAddresses.map((addr) =>
-        addr.id === id ? { ...addr, [field]: value } : addr
-      )
+        addr.id === id ? { ...addr, [field]: value } : addr,
+      ),
     );
   };
 
@@ -270,7 +270,9 @@ export default function PersonInfo() {
                     <SelectItem value="male">Male</SelectItem>
                     <SelectItem value="female">Female</SelectItem>
                     <SelectItem value="other">Other</SelectItem>
-                    <SelectItem value="prefer-not">Prefer Not to Say</SelectItem>
+                    <SelectItem value="prefer-not">
+                      Prefer Not to Say
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </FormField>
@@ -335,7 +337,9 @@ export default function PersonInfo() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="morning">Morning (8am-12pm)</SelectItem>
-                    <SelectItem value="afternoon">Afternoon (12pm-5pm)</SelectItem>
+                    <SelectItem value="afternoon">
+                      Afternoon (12pm-5pm)
+                    </SelectItem>
                     <SelectItem value="evening">Evening (5pm-8pm)</SelectItem>
                     <SelectItem value="anytime">Anytime</SelectItem>
                   </SelectContent>
@@ -424,9 +428,13 @@ export default function PersonInfo() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="terrorism">Associated with Terrorism</SelectItem>
+                    <SelectItem value="terrorism">
+                      Associated with Terrorism
+                    </SelectItem>
                     <SelectItem value="claims">Claim History</SelectItem>
-                    <SelectItem value="underwriting">Underwriting Reasons</SelectItem>
+                    <SelectItem value="underwriting">
+                      Underwriting Reasons
+                    </SelectItem>
                     <SelectItem value="others">Others</SelectItem>
                   </SelectContent>
                 </Select>
@@ -514,13 +522,19 @@ export default function PersonInfo() {
                 <tbody>
                   {otherNames.length === 0 ? (
                     <tr>
-                      <td colSpan={7} className="px-4 py-6 text-center text-gray-500 text-sm">
+                      <td
+                        colSpan={7}
+                        className="px-4 py-6 text-center text-gray-500 text-sm"
+                      >
                         No other names added
                       </td>
                     </tr>
                   ) : (
                     otherNames.map((name) => (
-                      <tr key={name.id} className="border-b border-gray-200 hover:bg-gray-50">
+                      <tr
+                        key={name.id}
+                        className="border-b border-gray-200 hover:bg-gray-50"
+                      >
                         <td className="px-4 py-3">
                           <Select
                             value={name.type}
@@ -532,9 +546,13 @@ export default function PersonInfo() {
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="maiden">Maiden Name</SelectItem>
+                              <SelectItem value="maiden">
+                                Maiden Name
+                              </SelectItem>
                               <SelectItem value="alias">Alias</SelectItem>
-                              <SelectItem value="previous">Previous Name</SelectItem>
+                              <SelectItem value="previous">
+                                Previous Name
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                         </td>
@@ -543,7 +561,11 @@ export default function PersonInfo() {
                             className="h-8"
                             value={name.lastName}
                             onChange={(e) =>
-                              updateOtherName(name.id, "lastName", e.target.value)
+                              updateOtherName(
+                                name.id,
+                                "lastName",
+                                e.target.value,
+                              )
                             }
                             placeholder="Last Name"
                           />
@@ -553,7 +575,11 @@ export default function PersonInfo() {
                             className="h-8"
                             value={name.firstName}
                             onChange={(e) =>
-                              updateOtherName(name.id, "firstName", e.target.value)
+                              updateOtherName(
+                                name.id,
+                                "firstName",
+                                e.target.value,
+                              )
                             }
                             placeholder="First Name"
                           />
@@ -567,7 +593,7 @@ export default function PersonInfo() {
                               updateOtherName(
                                 name.id,
                                 "middleInitial",
-                                e.target.value
+                                e.target.value,
                               )
                             }
                             placeholder="MI"
@@ -582,7 +608,7 @@ export default function PersonInfo() {
                               updateOtherName(
                                 name.id,
                                 "effectiveDate",
-                                e.target.value
+                                e.target.value,
                               )
                             }
                           />
@@ -596,7 +622,7 @@ export default function PersonInfo() {
                               updateOtherName(
                                 name.id,
                                 "expirationDate",
-                                e.target.value
+                                e.target.value,
                               )
                             }
                           />
@@ -667,13 +693,19 @@ export default function PersonInfo() {
                 <tbody>
                   {otherAddresses.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="px-4 py-6 text-center text-gray-500 text-sm">
+                      <td
+                        colSpan={8}
+                        className="px-4 py-6 text-center text-gray-500 text-sm"
+                      >
                         No other addresses added
                       </td>
                     </tr>
                   ) : (
                     otherAddresses.map((addr) => (
-                      <tr key={addr.id} className="border-b border-gray-200 hover:bg-gray-50">
+                      <tr
+                        key={addr.id}
+                        className="border-b border-gray-200 hover:bg-gray-50"
+                      >
                         <td className="px-4 py-3">
                           <Select
                             value={addr.type}
@@ -685,9 +717,15 @@ export default function PersonInfo() {
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="previous">Previous Address</SelectItem>
-                              <SelectItem value="business">Business Address</SelectItem>
-                              <SelectItem value="seasonal">Seasonal Address</SelectItem>
+                              <SelectItem value="previous">
+                                Previous Address
+                              </SelectItem>
+                              <SelectItem value="business">
+                                Business Address
+                              </SelectItem>
+                              <SelectItem value="seasonal">
+                                Seasonal Address
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                         </td>
@@ -696,7 +734,11 @@ export default function PersonInfo() {
                             className="h-8"
                             value={addr.addressName}
                             onChange={(e) =>
-                              updateOtherAddress(addr.id, "addressName", e.target.value)
+                              updateOtherAddress(
+                                addr.id,
+                                "addressName",
+                                e.target.value,
+                              )
                             }
                             placeholder="Address Name"
                           />
@@ -706,7 +748,11 @@ export default function PersonInfo() {
                             className="h-8"
                             value={addr.address}
                             onChange={(e) =>
-                              updateOtherAddress(addr.id, "address", e.target.value)
+                              updateOtherAddress(
+                                addr.id,
+                                "address",
+                                e.target.value,
+                              )
                             }
                             placeholder="Address"
                           />
@@ -716,7 +762,11 @@ export default function PersonInfo() {
                             className="h-8"
                             value={addr.city}
                             onChange={(e) =>
-                              updateOtherAddress(addr.id, "city", e.target.value)
+                              updateOtherAddress(
+                                addr.id,
+                                "city",
+                                e.target.value,
+                              )
                             }
                             placeholder="City"
                           />
@@ -744,7 +794,11 @@ export default function PersonInfo() {
                             className="h-8"
                             value={addr.postal}
                             onChange={(e) =>
-                              updateOtherAddress(addr.id, "postal", e.target.value)
+                              updateOtherAddress(
+                                addr.id,
+                                "postal",
+                                e.target.value,
+                              )
                             }
                             placeholder="Postal"
                           />
@@ -754,7 +808,11 @@ export default function PersonInfo() {
                             className="h-8"
                             value={addr.county}
                             onChange={(e) =>
-                              updateOtherAddress(addr.id, "county", e.target.value)
+                              updateOtherAddress(
+                                addr.id,
+                                "county",
+                                e.target.value,
+                              )
                             }
                             placeholder="County"
                           />
