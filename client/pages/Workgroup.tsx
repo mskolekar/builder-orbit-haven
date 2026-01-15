@@ -141,10 +141,35 @@ export default function Workgroup() {
     { value: "no", label: "No" },
   ];
 
+  const handleAddNew = () => {
+    setSelectedWorkgroup(null);
+    setFormState({
+      workgroupCode: "",
+      active: "",
+      comments: "",
+      outputDevice: "",
+    });
+  };
+
+  const isFormVisible =
+    selectedWorkgroup || Object.values(formState).some((v) => v);
+
   return (
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
         <div className="space-y-8 max-w-6xl">
+          {/* Add New Button */}
+          {!isFormVisible && (
+            <div className="flex justify-end mb-4">
+              <Button
+                onClick={handleAddNew}
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+              >
+                Add New Workgroup
+              </Button>
+            </div>
+          )}
+
           {/* Workgroup List Table Section */}
           <div>
             <div className="overflow-x-auto">
