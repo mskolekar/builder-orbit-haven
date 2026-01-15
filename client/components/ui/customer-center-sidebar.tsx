@@ -16,14 +16,16 @@ interface CustomerCenterSidebarItem {
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Overview", path: "/overview" },
-  { label: "Profile", path: "/profile" },
-  { label: "Contact & Communication", path: "/contact-delivery" },
-  { label: "Relationships", path: "/relationships" },
-  { label: "Licenses & Certifications", path: "/licenses-certifications" },
-  { label: "Financials", path: "/financials" },
-  { label: "Associated Records", path: "/associated-records" },
-  { label: "Journal", path: "/journals" },
+  { label: "Person Info", path: "/person-info" },
+  { label: "Additional Info", path: "/additional-info" },
+  { label: "Licenses", path: "/licenses-certifications" },
+  { label: "Work Groups", path: "/workgroups" },
+  { label: "Relationship & Roles", path: "/relationships" },
+  { label: "Prior Policy", path: "/prior-policy" },
+  { label: "Prior Losses", path: "/prior-losses" },
   { label: "Login Info", path: "/login-info" },
+  { label: "Upload Sign", path: "/upload-sign" },
+  { label: "Journal", path: "/journals" },
 ];
 
 interface CustomerCenterSidebarProps {
