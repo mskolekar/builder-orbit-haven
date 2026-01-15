@@ -143,6 +143,7 @@ export default function Workgroup() {
   ];
 
   const handleAddNew = () => {
+    setIsAddingNew(true);
     setSelectedWorkgroup(null);
     setFormState({
       workgroupCode: "",
@@ -152,8 +153,7 @@ export default function Workgroup() {
     });
   };
 
-  const isFormVisible =
-    selectedWorkgroup || Object.values(formState).some((v) => v);
+  const isFormVisible = isAddingNew || selectedWorkgroup;
 
   return (
     <div className="flex-1 flex flex-col overflow-auto bg-white">
