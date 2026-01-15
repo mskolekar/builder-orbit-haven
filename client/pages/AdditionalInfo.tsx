@@ -424,56 +424,29 @@ export default function AdditionalInfo() {
           {/* 7. Marketing & Interest Information Section */}
           <div>
             <SectionHeader title="Marketing & Interest Information" />
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Marketing Source Card */}
-              <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white transition-colors">
-                <h4 className="text-sm font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">
-                  Marketing Source
-                </h4>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="ri-2008" className="mt-0" />
-                    <label htmlFor="ri-2008" className="text-sm font-medium text-gray-700 cursor-pointer">
-                      RI May 2008
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="target-conf" className="mt-0" />
-                    <label htmlFor="target-conf" className="text-sm font-medium text-gray-700 cursor-pointer">
-                      Target Conf
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {/* Program Interests Card */}
-              <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white transition-colors">
-                <h4 className="text-sm font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">
-                  Program Interests
-                </h4>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="banking" className="mt-0" />
-                    <label htmlFor="banking" className="text-sm font-medium text-gray-700 cursor-pointer">
-                      Banking
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="prof-liab" className="mt-0" />
-                    <label htmlFor="prof-liab" className="text-sm font-medium text-gray-700 cursor-pointer">
-                      Prof Liab
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="technology" className="mt-0" />
-                    <label htmlFor="technology" className="text-sm font-medium text-gray-700 cursor-pointer">
-                      Technology
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <FormRow>
+              <MultiSelectDropdown
+                label="Marketing Source"
+                options={[
+                  { value: "ri-2008", label: "RI May 2008" },
+                  { value: "target-conf", label: "Target Conf" },
+                ]}
+                selectedValues={marketingSource}
+                onChange={setMarketingSource}
+                placeholder="Select marketing sources..."
+              />
+              <MultiSelectDropdown
+                label="Program Interests"
+                options={[
+                  { value: "banking", label: "Banking" },
+                  { value: "prof-liab", label: "Prof Liab" },
+                  { value: "technology", label: "Technology" },
+                ]}
+                selectedValues={programInterests}
+                onChange={setProgramInterests}
+                placeholder="Select interests..."
+              />
+            </FormRow>
           </div>
 
           {/* Action Buttons */}
