@@ -75,7 +75,11 @@ export default function Licenses() {
   };
 
   const handleSave = () => {
-    if (!formState.state || !formState.licenseNumber || !formState.expirationDate) {
+    if (
+      !formState.state ||
+      !formState.licenseNumber ||
+      !formState.expirationDate
+    ) {
       return;
     }
 
@@ -85,9 +89,7 @@ export default function Licenses() {
       // Update existing license
       setLicenses(
         licenses.map((l) =>
-          l.id === selectedLicense.id
-            ? { ...formState as License }
-            : l,
+          l.id === selectedLicense.id ? { ...(formState as License) } : l,
         ),
       );
     } else {
@@ -133,7 +135,6 @@ export default function Licenses() {
       handleCancel();
     }
   };
-
 
   const stateOptions = [
     { value: "ca", label: "California" },
@@ -201,7 +202,8 @@ export default function Licenses() {
                         onClick={() => handleSelectLicense(license)}
                       >
                         <td className="px-4 py-3 text-sm text-gray-700">
-                          {stateOptions.find((s) => s.value === license.state)?.label || license.state}
+                          {stateOptions.find((s) => s.value === license.state)
+                            ?.label || license.state}
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-700">
                           {license.licenseNumber}
@@ -325,7 +327,12 @@ export default function Licenses() {
                 </Button>
                 <Button
                   onClick={handleSave}
-                  disabled={isSaving || !formState.state || !formState.licenseNumber || !formState.expirationDate}
+                  disabled={
+                    isSaving ||
+                    !formState.state ||
+                    !formState.licenseNumber ||
+                    !formState.expirationDate
+                  }
                   className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                 >
                   {isSaving ? "Saving..." : "Save"}
