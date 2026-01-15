@@ -402,12 +402,7 @@ function AppContent() {
                   />
                   <Route
                     path="/upload-sign"
-                    element={
-                      <PlaceholderPage
-                        title="Upload Sign"
-                        description="Upload signature and verify identity."
-                      />
-                    }
+                    element={<UploadSign />}
                   />
                   <Route
                     path="/journals"
