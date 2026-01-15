@@ -356,7 +356,7 @@ export default function Licenses() {
           )}
 
           {/* Action Buttons */}
-          {(selectedLicense || Object.values(formState).some((v) => v)) && (
+          {isFormVisible && (
             <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
               <div className="flex justify-end gap-3">
                 <Button variant="cancel" onClick={handleCancel}>
