@@ -471,53 +471,55 @@ export default function PersonInfo() {
 
           {/* Other Names Section */}
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300 flex-1">
+            <div className="mb-6">
+              <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300">
                 Other Names
               </h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={addOtherName}
-                className="ml-4"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add
-              </Button>
             </div>
 
-            {otherNames.length === 0 ? (
-              <div className="text-center py-6 bg-gray-50 rounded border border-gray-200">
-                <p className="text-gray-500 text-sm">No other names added</p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200">
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Type
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Last Name
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        First Name
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Middle Initial
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Effective Date
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Expiration Date
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3"></th>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Type
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Last Name
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      First Name
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Middle Initial
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Effective Date
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Expiration Date
+                    </th>
+                    <th className="text-center text-sm font-semibold text-gray-900 px-4 py-3">
+                      <Button
+                        size="icon"
+                        onClick={addOtherName}
+                        className="h-6 w-6 bg-[#0054A6] hover:bg-[#003d7a] text-white p-0"
+                        title="Add Other Name"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </Button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {otherNames.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} className="px-4 py-6 text-center text-gray-500 text-sm">
+                        No other names added
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {otherNames.map((name) => (
+                  ) : (
+                    otherNames.map((name) => (
                       <tr key={name.id} className="border-b border-gray-200 hover:bg-gray-50">
                         <td className="px-4 py-3">
                           <Select
@@ -599,7 +601,7 @@ export default function PersonInfo() {
                             }
                           />
                         </td>
-                        <td className="px-4 py-3 text-right">
+                        <td className="px-4 py-3 text-center">
                           <Button
                             variant="ghost"
                             size="sm"
@@ -610,11 +612,11 @@ export default function PersonInfo() {
                           </Button>
                         </td>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Other Addresses Section */}
