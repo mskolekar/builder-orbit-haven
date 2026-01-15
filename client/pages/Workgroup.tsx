@@ -113,6 +113,7 @@ export default function Workgroup() {
   };
 
   const handleCancel = () => {
+    setIsAddingNew(false);
     setSelectedWorkgroup(null);
     setFormState({
       workgroupCode: "",
