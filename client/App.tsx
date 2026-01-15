@@ -360,12 +360,7 @@ function AppContent() {
                   <Route path="/additional-info" element={<AdditionalInfo />} />
                   <Route
                     path="/licenses-certifications"
-                    element={
-                      <PlaceholderPage
-                        title="Licenses"
-                        description="View and manage licenses and certifications."
-                      />
-                    }
+                    element={<Licenses />}
                   />
                   <Route
                     path="/workgroups"
