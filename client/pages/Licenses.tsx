@@ -187,8 +187,6 @@ export default function Licenses() {
         <div className="space-y-8 max-w-6xl">
           {/* License List Table Section */}
           <div>
-            <SectionHeader title="License List" />
-
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
