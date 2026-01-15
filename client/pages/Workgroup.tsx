@@ -102,6 +102,7 @@ export default function Workgroup() {
 
     setTimeout(() => {
       setIsSaving(false);
+      setIsAddingNew(false);
       setSelectedWorkgroup(null);
       setFormState({
         workgroupCode: "",
