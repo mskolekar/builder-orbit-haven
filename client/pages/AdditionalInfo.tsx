@@ -308,11 +308,6 @@ export default function AdditionalInfo() {
               <FormField label="Death Date">
                 <Input type="date" />
               </FormField>
-              <div />
-            </FormRow>
-
-            {/* Hazardous Pursuits Multiselect */}
-            <div className="mt-6">
               <MultiSelectDropdown
                 label="Hazardous Pursuits"
                 options={[
@@ -323,7 +318,7 @@ export default function AdditionalInfo() {
                 onChange={setHazardousPursuits}
                 placeholder="Select pursuits..."
               />
-            </div>
+            </FormRow>
           </div>
 
           {/* 5. Communication & Preference Settings Section */}
