@@ -149,7 +149,15 @@ export default function Licenses() {
   const handleDeleteLicense = (id: string) => {
     setLicenses(licenses.filter((l) => l.id !== id));
     if (selectedLicense?.id === id) {
-      handleCancel();
+      setIsAddingNew(false);
+      setSelectedLicense(null);
+      setFormState({
+        state: "",
+        licenseNumber: "",
+        category: "",
+        expirationDate: "",
+        linesOfAuthority: [],
+      });
     }
   };
 
