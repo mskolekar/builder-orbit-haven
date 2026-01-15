@@ -353,24 +353,30 @@ function AppContent() {
                   ))}
                 <Routes>
                   <Route path="/overview/:profileId" element={<Dashboard />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/communication" element={<Communication />} />
-                  <Route path="/history" element={<History />} />
                   <Route
-                    path="/loss-history"
+                    path="/person-info"
                     element={
                       <PlaceholderPage
-                        title="Loss History"
-                        description="View prior policies and losses history."
+                        title="Person Info"
+                        description="View and manage personal information."
                       />
                     }
                   />
                   <Route
-                    path="/relationships"
+                    path="/additional-info"
                     element={
                       <PlaceholderPage
-                        title="Relationships & Roles"
-                        description="View and manage customer relationships and roles."
+                        title="Additional Info"
+                        description="View and manage additional customer information."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/licenses-certifications"
+                    element={
+                      <PlaceholderPage
+                        title="Licenses"
+                        description="View and manage licenses and certifications."
                       />
                     }
                   />
@@ -378,26 +384,53 @@ function AppContent() {
                     path="/workgroups"
                     element={
                       <PlaceholderPage
-                        title="Workgroups"
+                        title="Work Groups"
                         description="Manage workgroup assignments and team collaboration."
                       />
                     }
                   />
                   <Route
-                    path="/risk-management-credit"
+                    path="/relationships"
                     element={
                       <PlaceholderPage
-                        title="Risk Management Credit Program"
-                        description="Manage risk assessment and credit programs."
+                        title="Relationship & Roles"
+                        description="View and manage customer relationships and roles."
                       />
                     }
                   />
                   <Route
-                    path="/contact-delivery"
+                    path="/prior-policy"
                     element={
                       <PlaceholderPage
-                        title="Contact & Delivery"
-                        description="Manage contact information and delivery preferences."
+                        title="Prior Policy"
+                        description="View prior insurance policy information."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/prior-losses"
+                    element={
+                      <PlaceholderPage
+                        title="Prior Losses"
+                        description="View prior loss history and claims information."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/login-info"
+                    element={
+                      <PlaceholderPage
+                        title="Login Info"
+                        description="Manage login credentials and account access information."
+                      />
+                    }
+                  />
+                  <Route
+                    path="/upload-sign"
+                    element={
+                      <PlaceholderPage
+                        title="Upload Sign"
+                        description="Upload signature and verify identity."
                       />
                     }
                   />
@@ -405,26 +438,8 @@ function AppContent() {
                     path="/journals"
                     element={
                       <PlaceholderPage
-                        title="Journals"
+                        title="Journal"
                         description="View and manage customer journals and notes."
-                      />
-                    }
-                  />
-                  <Route
-                    path="/financials"
-                    element={
-                      <PlaceholderPage
-                        title="Financials"
-                        description="View financial information and transactions."
-                      />
-                    }
-                  />
-                  <Route
-                    path="/personal-details"
-                    element={
-                      <PlaceholderPage
-                        title="Personal Details"
-                        description="Manage customer personal information and details."
                       />
                     }
                   />
