@@ -120,6 +120,7 @@ export default function Licenses() {
   };
 
   const handleCancel = () => {
+    setIsAddingNew(false);
     setSelectedLicense(null);
     setFormState({
       state: "",
@@ -129,6 +130,20 @@ export default function Licenses() {
       linesOfAuthority: [],
     });
   };
+
+  const handleAddNew = () => {
+    setIsAddingNew(true);
+    setSelectedLicense(null);
+    setFormState({
+      state: "",
+      licenseNumber: "",
+      category: "",
+      expirationDate: "",
+      linesOfAuthority: [],
+    });
+  };
+
+  const isFormVisible = isAddingNew || selectedLicense;
 
   const handleDeleteLicense = (id: string) => {
     setLicenses(licenses.filter((l) => l.id !== id));
