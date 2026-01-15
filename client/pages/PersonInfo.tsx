@@ -621,56 +621,58 @@ export default function PersonInfo() {
 
           {/* Other Addresses Section */}
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300 flex-1">
+            <div className="mb-6">
+              <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300">
                 Other Addresses
               </h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={addOtherAddress}
-                className="ml-4"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add
-              </Button>
             </div>
 
-            {otherAddresses.length === 0 ? (
-              <div className="text-center py-6 bg-gray-50 rounded border border-gray-200">
-                <p className="text-gray-500 text-sm">No other addresses added</p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200">
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Type
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Address Name
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Address
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        City
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        State
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        Postal
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                        County
-                      </th>
-                      <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3"></th>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Type
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Address Name
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Address
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      City
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      State
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      Postal
+                    </th>
+                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                      County
+                    </th>
+                    <th className="text-center text-sm font-semibold text-gray-900 px-4 py-3">
+                      <Button
+                        size="icon"
+                        onClick={addOtherAddress}
+                        className="h-6 w-6 bg-[#0054A6] hover:bg-[#003d7a] text-white p-0"
+                        title="Add Other Address"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </Button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {otherAddresses.length === 0 ? (
+                    <tr>
+                      <td colSpan={8} className="px-4 py-6 text-center text-gray-500 text-sm">
+                        No other addresses added
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {otherAddresses.map((addr) => (
+                  ) : (
+                    otherAddresses.map((addr) => (
                       <tr key={addr.id} className="border-b border-gray-200 hover:bg-gray-50">
                         <td className="px-4 py-3">
                           <Select
@@ -757,7 +759,7 @@ export default function PersonInfo() {
                             placeholder="County"
                           />
                         </td>
-                        <td className="px-4 py-3 text-right">
+                        <td className="px-4 py-3 text-center">
                           <Button
                             variant="ghost"
                             size="sm"
@@ -768,11 +770,11 @@ export default function PersonInfo() {
                           </Button>
                         </td>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Action Buttons */}
