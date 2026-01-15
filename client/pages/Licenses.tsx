@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -9,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { MultiSelectDropdown } from "@/components/ui/multiselect-dropdown";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 
@@ -145,20 +145,6 @@ export default function Licenses() {
     }
   };
 
-  const handleLinesOfAuthorityChange = (value: string) => {
-    const current = formState.linesOfAuthority || [];
-    if (current.includes(value)) {
-      setFormState({
-        ...formState,
-        linesOfAuthority: current.filter((v) => v !== value),
-      });
-    } else {
-      setFormState({
-        ...formState,
-        linesOfAuthority: [...current, value],
-      });
-    }
-  };
 
   const stateOptions = [
     { value: "ca", label: "California" },
@@ -260,114 +246,84 @@ export default function Licenses() {
             <div>
               <SectionHeader title="License Detail" />
 
-              {/* Identification Section */}
-              <div className="mb-8">
-                <h4 className="text-sm font-semibold text-gray-800 mb-4">
-                  Identification
-                </h4>
-                <FormRow>
-                  <FormField label="License State" isMandatory>
-                    <Select
-                      value={formState.state || ""}
-                      onValueChange={(value) =>
-                        setFormState({ ...formState, state: value })
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {stateOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                  <FormField label="License Number" isMandatory>
-                    <Input
-                      placeholder="Enter license number"
-                      value={formState.licenseNumber || ""}
-                      onChange={(e) =>
-                        setFormState({
-                          ...formState,
-                          licenseNumber: e.target.value,
-                        })
-                      }
-                    />
-                  </FormField>
-                </FormRow>
-                <FormRow>
-                  <FormField label="License Category" isMandatory>
-                    <Select
-                      value={formState.category || ""}
-                      onValueChange={(value) =>
-                        setFormState({ ...formState, category: value })
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categoryOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                  <div />
-                </FormRow>
-              </div>
-
-              {/* Authority & Validity Section */}
-              <div>
-                <h4 className="text-sm font-semibold text-gray-800 mb-4">
-                  Authority & Validity
-                </h4>
-                <FormRow>
-                  <FormField label="Lines of Authority">
-                    <div className="space-y-2">
-                      {linesOfAuthorityOptions.map((option) => (
-                        <div
-                          key={option.value}
-                          className="flex items-center gap-2"
-                        >
-                          <Checkbox
-                            id={option.value}
-                            checked={(formState.linesOfAuthority || []).includes(
-                              option.value,
-                            )}
-                            onCheckedChange={() =>
-                              handleLinesOfAuthorityChange(option.value)
-                            }
-                          />
-                          <label
-                            htmlFor={option.value}
-                            className="text-sm font-medium text-gray-700 cursor-pointer"
-                          >
-                            {option.label}
-                          </label>
-                        </div>
+              <FormRow>
+                <FormField label="License State" isMandatory>
+                  <Select
+                    value={formState.state || ""}
+                    onValueChange={(value) =>
+                      setFormState({ ...formState, state: value })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {stateOptions.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
                       ))}
-                    </div>
-                  </FormField>
-                  <FormField label="Expiration Date" isMandatory>
-                    <Input
-                      type="date"
-                      value={formState.expirationDate || ""}
-                      onChange={(e) =>
-                        setFormState({
-                          ...formState,
-                          expirationDate: e.target.value,
-                        })
-                      }
-                    />
-                  </FormField>
-                </FormRow>
-              </div>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField label="License Number" isMandatory>
+                  <Input
+                    placeholder="Enter license number"
+                    value={formState.licenseNumber || ""}
+                    onChange={(e) =>
+                      setFormState({
+                        ...formState,
+                        licenseNumber: e.target.value,
+                      })
+                    }
+                  />
+                </FormField>
+              </FormRow>
+              <FormRow>
+                <FormField label="License Category" isMandatory>
+                  <Select
+                    value={formState.category || ""}
+                    onValueChange={(value) =>
+                      setFormState({ ...formState, category: value })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categoryOptions.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <div />
+              </FormRow>
+              <FormRow>
+                <MultiSelectDropdown
+                  label="Lines of Authority"
+                  options={linesOfAuthorityOptions}
+                  selectedValues={formState.linesOfAuthority || []}
+                  onChange={(values) =>
+                    setFormState({ ...formState, linesOfAuthority: values })
+                  }
+                  placeholder="Select authorities..."
+                />
+                <FormField label="Expiration Date" isMandatory>
+                  <Input
+                    type="date"
+                    value={formState.expirationDate || ""}
+                    onChange={(e) =>
+                      setFormState({
+                        ...formState,
+                        expirationDate: e.target.value,
+                      })
+                    }
+                  />
+                </FormField>
+              </FormRow>
             </div>
           )}
 
