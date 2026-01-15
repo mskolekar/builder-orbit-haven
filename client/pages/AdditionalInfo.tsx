@@ -109,7 +109,17 @@ export default function AdditionalInfo() {
                 </Select>
               </FormField>
               <FormField label="Record Type">
-                <Input placeholder="Enter record type" />
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
+                    <SelectItem value="archived">Archived</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
@@ -191,7 +201,19 @@ export default function AdditionalInfo() {
                 <Input placeholder="Enter job title" />
               </FormField>
               <FormField label="Department">
-                <Input placeholder="Enter department" />
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sales">Sales</SelectItem>
+                    <SelectItem value="marketing">Marketing</SelectItem>
+                    <SelectItem value="operations">Operations</SelectItem>
+                    <SelectItem value="hr">HR</SelectItem>
+                    <SelectItem value="finance">Finance</SelectItem>
+                    <SelectItem value="it">IT</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
@@ -229,44 +251,54 @@ export default function AdditionalInfo() {
             <SectionHeader title="Tax, Legal & Compliance Information" />
             <FormRow>
               <FormField label="W9 on File">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="w9" />
-                  <label htmlFor="w9" className="text-sm font-medium">
-                    W9 Form on File
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
               <FormField label="Validated Tax ID">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="validated-tax" />
-                  <label
-                    htmlFor="validated-tax"
-                    className="text-sm font-medium"
-                  >
-                    Tax ID Validated
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
               <FormField label="Release Tax ID">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="release-tax" />
-                  <label htmlFor="release-tax" className="text-sm font-medium">
-                    Release Tax ID
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
               <FormField label="Release Medical Info">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="release-medical" />
-                  <label
-                    htmlFor="release-medical"
-                    className="text-sm font-medium"
-                  >
-                    Release Medical Information
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
@@ -295,22 +327,28 @@ export default function AdditionalInfo() {
                 </Select>
               </FormField>
               <FormField label="Market via Fax">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="market-fax" />
-                  <label htmlFor="market-fax" className="text-sm font-medium">
-                    Marketing via Fax
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
             </FormRow>
             <FormRow>
               <FormField label="Market via E-Mail">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="market-email" />
-                  <label htmlFor="market-email" className="text-sm font-medium">
-                    Marketing via Email
-                  </label>
-                </div>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormField>
               <div />
             </FormRow>
@@ -368,59 +406,75 @@ export default function AdditionalInfo() {
           {/* 7. Marketing & Interest Information Section */}
           <div>
             <SectionHeader title="Marketing & Interest Information" />
-            <FormRow>
-              <FormField label="Marketing Source">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="referral">Referral</SelectItem>
-                    <SelectItem value="advertising">Advertising</SelectItem>
-                    <SelectItem value="web">Web Search</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="RI May 2008">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="ri-2008" />
-                  <label htmlFor="ri-2008" className="text-sm font-medium">
-                    RI May 2008
-                  </label>
-                </div>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Target Conf">
-                <Input placeholder="Enter target configuration" />
-              </FormField>
-              <FormField label="Program Interests">
-                <div className="space-y-2">
+
+            {/* Marketing Source Subsection */}
+            <div className="mb-8">
+              <h4 className="text-sm font-semibold text-gray-800 mb-4">
+                Marketing Source
+              </h4>
+              <FormRow>
+                <FormField label="RI May 2008">
+                  <div className="flex items-center gap-2">
+                    <Checkbox id="ri-2008" />
+                    <label htmlFor="ri-2008" className="text-sm font-medium">
+                      RI May 2008
+                    </label>
+                  </div>
+                </FormField>
+                <FormField label="Target Conf">
+                  <div className="flex items-center gap-2">
+                    <Checkbox id="target-conf" />
+                    <label htmlFor="target-conf" className="text-sm font-medium">
+                      Target Conf
+                    </label>
+                  </div>
+                </FormField>
+              </FormRow>
+            </div>
+
+            {/* Program Interests Subsection */}
+            <div className="mb-8">
+              <h4 className="text-sm font-semibold text-gray-800 mb-4">
+                Program Interests
+              </h4>
+              <FormRow>
+                <FormField label="Banking">
                   <div className="flex items-center gap-2">
                     <Checkbox id="banking" />
                     <label htmlFor="banking" className="text-sm font-medium">
                       Banking
                     </label>
                   </div>
+                </FormField>
+                <FormField label="Prof Liab">
                   <div className="flex items-center gap-2">
                     <Checkbox id="prof-liab" />
                     <label htmlFor="prof-liab" className="text-sm font-medium">
                       Prof Liab
                     </label>
                   </div>
+                </FormField>
+              </FormRow>
+              <FormRow>
+                <FormField label="Technology">
                   <div className="flex items-center gap-2">
                     <Checkbox id="technology" />
                     <label htmlFor="technology" className="text-sm font-medium">
                       Technology
                     </label>
                   </div>
-                </div>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Hazardous Pursuits">
-                <div className="space-y-2">
+                </FormField>
+                <div />
+              </FormRow>
+            </div>
+
+            {/* Hazardous Pursuits Subsection */}
+            <div>
+              <h4 className="text-sm font-semibold text-gray-800 mb-4">
+                Hazardous Pursuits
+              </h4>
+              <FormRow>
+                <FormField label="Hang Gliding">
                   <div className="flex items-center gap-2">
                     <Checkbox id="hang-gliding" />
                     <label
@@ -430,16 +484,17 @@ export default function AdditionalInfo() {
                       Hang Gliding
                     </label>
                   </div>
+                </FormField>
+                <FormField label="Stock Car Dr">
                   <div className="flex items-center gap-2">
                     <Checkbox id="stock-car" />
                     <label htmlFor="stock-car" className="text-sm font-medium">
                       Stock Car Dr
                     </label>
                   </div>
-                </div>
-              </FormField>
-              <div />
-            </FormRow>
+                </FormField>
+              </FormRow>
+            </div>
           </div>
 
           {/* Action Buttons */}
