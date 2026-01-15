@@ -60,6 +60,7 @@ interface License {
 export default function Licenses() {
   const [licenses, setLicenses] = useState<License[]>([]);
   const [selectedLicense, setSelectedLicense] = useState<License | null>(null);
+  const [isAddingNew, setIsAddingNew] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [formState, setFormState] = useState<Partial<License>>({
     state: "",
