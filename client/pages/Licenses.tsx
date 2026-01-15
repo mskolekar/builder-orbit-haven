@@ -256,15 +256,16 @@ export default function Licenses() {
           </div>
 
           {/* License Detail/Add-Edit Form Section */}
-          <div>
-            <SectionHeader title="License Detail" />
+          {(selectedLicense || Object.values(formState).some((v) => v)) && (
+            <div>
+              <SectionHeader title="License Detail" />
 
-            {/* Identification Section */}
-            <div className="mb-8">
-              <h4 className="text-sm font-semibold text-gray-800 mb-4">
-                Identification
-              </h4>
-              <FormRow>
+              {/* Identification Section */}
+              <div className="mb-8">
+                <h4 className="text-sm font-semibold text-gray-800 mb-4">
+                  Identification
+                </h4>
+                <FormRow>
                 <FormField label="License State" isMandatory>
                   <Select
                     value={formState.state || ""}
@@ -295,9 +296,9 @@ export default function Licenses() {
                       })
                     }
                   />
-                </FormField>
-              </FormRow>
-              <FormRow>
+                  </FormField>
+                </FormRow>
+                <FormRow>
                 <FormField label="License Category" isMandatory>
                   <Select
                     value={formState.category || ""}
@@ -317,16 +318,16 @@ export default function Licenses() {
                     </SelectContent>
                   </Select>
                 </FormField>
-                <div />
-              </FormRow>
-            </div>
+                  <div />
+                </FormRow>
+              </div>
 
-            {/* Authority & Validity Section */}
-            <div>
-              <h4 className="text-sm font-semibold text-gray-800 mb-4">
-                Authority & Validity
-              </h4>
-              <FormRow>
+              {/* Authority & Validity Section */}
+              <div>
+                <h4 className="text-sm font-semibold text-gray-800 mb-4">
+                  Authority & Validity
+                </h4>
+                <FormRow>
                 <FormField label="Lines of Authority">
                   <div className="space-y-2">
                     {linesOfAuthorityOptions.map((option) => (
@@ -364,13 +365,15 @@ export default function Licenses() {
                       })
                     }
                   />
-                </FormField>
-              </FormRow>
+                  </FormField>
+                </FormRow>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Action Buttons */}
-          <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
+          {(selectedLicense || Object.values(formState).some((v) => v)) && (
+            <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
             <div className="flex justify-end gap-3">
               <Button variant="cancel" onClick={handleCancel}>
                 Cancel
@@ -390,6 +393,7 @@ export default function Licenses() {
               </Button>
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>
