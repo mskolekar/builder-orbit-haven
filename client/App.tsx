@@ -23,6 +23,9 @@ import CheckProcessing from "@/pages/CheckProcessing";
 import PersonInfo from "@/pages/PersonInfo";
 import AdditionalInfo from "@/pages/AdditionalInfo";
 import Licenses from "@/pages/Licenses";
+import Workgroup from "@/pages/Workgroup";
+import LoginInfo from "@/pages/LoginInfo";
+import UploadSign from "@/pages/UploadSign";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
@@ -364,12 +367,7 @@ function AppContent() {
                   />
                   <Route
                     path="/workgroups"
-                    element={
-                      <PlaceholderPage
-                        title="Work Groups"
-                        description="Manage workgroup assignments and team collaboration."
-                      />
-                    }
+                    element={<Workgroup />}
                   />
                   <Route
                     path="/relationships"
@@ -400,21 +398,11 @@ function AppContent() {
                   />
                   <Route
                     path="/login-info"
-                    element={
-                      <PlaceholderPage
-                        title="Login Info"
-                        description="Manage login credentials and account access information."
-                      />
-                    }
+                    element={<LoginInfo />}
                   />
                   <Route
                     path="/upload-sign"
-                    element={
-                      <PlaceholderPage
-                        title="Upload Sign"
-                        description="Upload signature and verify identity."
-                      />
-                    }
+                    element={<UploadSign />}
                   />
                   <Route
                     path="/journals"

@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { MultiSelectDropdown } from "@/components/ui/multiselect-dropdown";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 
@@ -48,158 +47,141 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
-interface License {
+interface Workgroup {
   id: string;
-  state: string;
-  licenseNumber: string;
-  expirationDate: string;
-  category: string;
-  linesOfAuthority: string[];
+  workgroupCode: string;
+  active: string;
+  comments: string;
+  outputDevice?: string;
 }
 
-export default function Licenses() {
-  const [licenses, setLicenses] = useState<License[]>([]);
-  const [selectedLicense, setSelectedLicense] = useState<License | null>(null);
+export default function Workgroup() {
+  const [workgroups, setWorkgroups] = useState<Workgroup[]>([]);
+  const [selectedWorkgroup, setSelectedWorkgroup] = useState<Workgroup | null>(
+    null,
+  );
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [formState, setFormState] = useState<Partial<License>>({
-    state: "",
-    licenseNumber: "",
-    category: "",
-    expirationDate: "",
-    linesOfAuthority: [],
+  const [formState, setFormState] = useState<Partial<Workgroup>>({
+    workgroupCode: "",
+    active: "",
+    comments: "",
+    outputDevice: "",
   });
 
-  const handleSelectLicense = (license: License) => {
-    setSelectedLicense(license);
-    setFormState(license);
+  const handleSelectWorkgroup = (workgroup: Workgroup) => {
+    setSelectedWorkgroup(workgroup);
+    setFormState(workgroup);
   };
 
   const handleSave = () => {
-    if (
-      !formState.state ||
-      !formState.licenseNumber ||
-      !formState.expirationDate
-    ) {
+    if (!formState.workgroupCode || !formState.active) {
       return;
     }
 
     setIsSaving(true);
 
-    if (selectedLicense) {
-      // Update existing license
-      setLicenses(
-        licenses.map((l) =>
-          l.id === selectedLicense.id ? { ...(formState as License) } : l,
+    if (selectedWorkgroup) {
+      // Update existing workgroup
+      setWorkgroups(
+        workgroups.map((w) =>
+          w.id === selectedWorkgroup.id ? { ...(formState as Workgroup) } : w,
         ),
       );
     } else {
-      // Add new license
-      const newLicense: License = {
+      // Add new workgroup
+      const newWorkgroup: Workgroup = {
         id: Date.now().toString(),
-        state: formState.state || "",
-        licenseNumber: formState.licenseNumber || "",
-        category: formState.category || "",
-        expirationDate: formState.expirationDate || "",
-        linesOfAuthority: formState.linesOfAuthority || [],
+        workgroupCode: formState.workgroupCode || "",
+        active: formState.active || "",
+        comments: formState.comments || "",
+        outputDevice: formState.outputDevice || "",
       };
-      setLicenses([...licenses, newLicense]);
+      setWorkgroups([...workgroups, newWorkgroup]);
     }
 
     setTimeout(() => {
       setIsSaving(false);
       setIsAddingNew(false);
-      setSelectedLicense(null);
+      setSelectedWorkgroup(null);
       setFormState({
-        state: "",
-        licenseNumber: "",
-        category: "",
-        expirationDate: "",
-        linesOfAuthority: [],
+        workgroupCode: "",
+        active: "",
+        comments: "",
+        outputDevice: "",
       });
     }, 1000);
   };
 
   const handleCancel = () => {
     setIsAddingNew(false);
-    setSelectedLicense(null);
+    setSelectedWorkgroup(null);
     setFormState({
-      state: "",
-      licenseNumber: "",
-      category: "",
-      expirationDate: "",
-      linesOfAuthority: [],
+      workgroupCode: "",
+      active: "",
+      comments: "",
+      outputDevice: "",
     });
   };
 
-  const handleAddNew = () => {
-    setIsAddingNew(true);
-    setSelectedLicense(null);
-    setFormState({
-      state: "",
-      licenseNumber: "",
-      category: "",
-      expirationDate: "",
-      linesOfAuthority: [],
-    });
-  };
-
-  const isFormVisible = isAddingNew || selectedLicense;
-
-  const handleDeleteLicense = (id: string) => {
-    setLicenses(licenses.filter((l) => l.id !== id));
-    if (selectedLicense?.id === id) {
+  const handleDeleteWorkgroup = (id: string) => {
+    setWorkgroups(workgroups.filter((w) => w.id !== id));
+    if (selectedWorkgroup?.id === id) {
       setIsAddingNew(false);
-      setSelectedLicense(null);
+      setSelectedWorkgroup(null);
       setFormState({
-        state: "",
-        licenseNumber: "",
-        category: "",
-        expirationDate: "",
-        linesOfAuthority: [],
+        workgroupCode: "",
+        active: "",
+        comments: "",
+        outputDevice: "",
       });
     }
   };
 
-  const stateOptions = [
-    { value: "ca", label: "California" },
-    { value: "ny", label: "New York" },
-    { value: "tx", label: "Texas" },
-    { value: "fl", label: "Florida" },
-    { value: "wa", label: "Washington" },
+  const workgroupCodeOptions = [
+    { value: "wg-001", label: "WG-001" },
+    { value: "wg-002", label: "WG-002" },
+    { value: "wg-003", label: "WG-003" },
+    { value: "wg-004", label: "WG-004" },
+    { value: "wg-005", label: "WG-005" },
   ];
 
-  const categoryOptions = [
-    { value: "producer", label: "Producer" },
-    { value: "agent", label: "Agent" },
-    { value: "broker", label: "Broker" },
-    { value: "adjuster", label: "Adjuster" },
+  const activeOptions = [
+    { value: "yes", label: "Yes" },
+    { value: "no", label: "No" },
   ];
 
-  const linesOfAuthorityOptions = [
-    { value: "casualty", label: "Casualty" },
-    { value: "health", label: "Health" },
-    { value: "life", label: "Life" },
-  ];
+  const handleAddNew = () => {
+    setIsAddingNew(true);
+    setSelectedWorkgroup(null);
+    setFormState({
+      workgroupCode: "",
+      active: "",
+      comments: "",
+      outputDevice: "",
+    });
+  };
+
+  const isFormVisible = isAddingNew || selectedWorkgroup;
 
   return (
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
         <div className="space-y-8 max-w-6xl">
-          {/* License List Table Section */}
+          {/* Workgroup List Table Section */}
           <div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-gray-200">
                     <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                      License State
+                      Workgroup Code
                     </th>
                     <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                      License Number
+                      Active?
                     </th>
                     <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                      Expiration Date
+                      Comments
                     </th>
                     <th className="text-center text-sm font-semibold text-gray-900 px-4 py-3">
                       Actions
@@ -207,34 +189,35 @@ export default function Licenses() {
                   </tr>
                 </thead>
                 <tbody>
-                  {licenses.length === 0 ? (
+                  {workgroups.length === 0 ? (
                     <tr>
                       <td
                         colSpan={4}
                         className="px-4 py-6 text-center text-gray-500 text-sm"
                       >
-                        No licenses added
+                        No workgroups added
                       </td>
                     </tr>
                   ) : (
-                    licenses.map((license) => (
+                    workgroups.map((workgroup) => (
                       <tr
-                        key={license.id}
+                        key={workgroup.id}
                         className={cn(
                           "border-b border-gray-200 hover:bg-gray-50 cursor-pointer",
-                          selectedLicense?.id === license.id && "bg-blue-50",
+                          selectedWorkgroup?.id === workgroup.id &&
+                            "bg-blue-50",
                         )}
-                        onClick={() => handleSelectLicense(license)}
+                        onClick={() => handleSelectWorkgroup(workgroup)}
                       >
                         <td className="px-4 py-3 text-sm text-gray-700">
-                          {stateOptions.find((s) => s.value === license.state)
-                            ?.label || license.state}
+                          {workgroup.workgroupCode}
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-700">
-                          {license.licenseNumber}
+                          {activeOptions.find((a) => a.value === workgroup.active)
+                            ?.label || workgroup.active}
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-700">
-                          {license.expirationDate}
+                          {workgroup.comments}
                         </td>
                         <td className="px-4 py-3 text-center">
                           <Button
@@ -242,7 +225,7 @@ export default function Licenses() {
                             size="sm"
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleDeleteLicense(license.id);
+                              handleDeleteWorkgroup(workgroup.id);
                             }}
                             className="text-red-600 hover:text-red-700 hover:bg-red-50"
                           >
@@ -269,24 +252,24 @@ export default function Licenses() {
             </div>
           )}
 
-          {/* License Detail/Add-Edit Form Section */}
+          {/* Workgroup Detail/Add-Edit Form Section */}
           {isFormVisible && (
             <div>
-              <SectionHeader title="License Detail" />
+              <SectionHeader title="Workgroup Detail" />
 
               <FormRow>
-                <FormField label="License State" isMandatory>
+                <FormField label="Workgroup Code" isMandatory>
                   <Select
-                    value={formState.state || ""}
+                    value={formState.workgroupCode || ""}
                     onValueChange={(value) =>
-                      setFormState({ ...formState, state: value })
+                      setFormState({ ...formState, workgroupCode: value })
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue placeholder="Select workgroup code" />
                     </SelectTrigger>
                     <SelectContent>
-                      {stateOptions.map((option) => (
+                      {workgroupCodeOptions.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
                         </SelectItem>
@@ -294,32 +277,18 @@ export default function Licenses() {
                     </SelectContent>
                   </Select>
                 </FormField>
-                <FormField label="License Number" isMandatory>
-                  <Input
-                    placeholder="Enter license number"
-                    value={formState.licenseNumber || ""}
-                    onChange={(e) =>
-                      setFormState({
-                        ...formState,
-                        licenseNumber: e.target.value,
-                      })
-                    }
-                  />
-                </FormField>
-              </FormRow>
-              <FormRow>
-                <FormField label="License Category" isMandatory>
+                <FormField label="Active?" isMandatory>
                   <Select
-                    value={formState.category || ""}
+                    value={formState.active || ""}
                     onValueChange={(value) =>
-                      setFormState({ ...formState, category: value })
+                      setFormState({ ...formState, active: value })
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select category" />
+                      <SelectValue placeholder="Select active status" />
                     </SelectTrigger>
                     <SelectContent>
-                      {categoryOptions.map((option) => (
+                      {activeOptions.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
                         </SelectItem>
@@ -327,30 +296,25 @@ export default function Licenses() {
                     </SelectContent>
                   </Select>
                 </FormField>
-                <FormField label="Expiration Date" isMandatory>
+              </FormRow>
+              <FormRow>
+                <FormField label="Comments">
                   <Input
-                    type="date"
-                    value={formState.expirationDate || ""}
+                    placeholder="Enter comments"
+                    value={formState.comments || ""}
                     onChange={(e) =>
-                      setFormState({
-                        ...formState,
-                        expirationDate: e.target.value,
-                      })
+                      setFormState({ ...formState, comments: e.target.value })
                     }
                   />
                 </FormField>
-              </FormRow>
-              <FormRow>
-                <MultiSelectDropdown
-                  label="Lines of Authority"
-                  options={linesOfAuthorityOptions}
-                  selectedValues={formState.linesOfAuthority || []}
-                  onChange={(values) =>
-                    setFormState({ ...formState, linesOfAuthority: values })
-                  }
-                  placeholder="Select authorities..."
-                />
-                <div />
+                <FormField label="Output Device – Future" className="opacity-50">
+                  <Input
+                    placeholder="Not available yet"
+                    disabled
+                    value={formState.outputDevice || ""}
+                    readOnly
+                  />
+                </FormField>
               </FormRow>
             </div>
           )}
@@ -366,9 +330,8 @@ export default function Licenses() {
                   onClick={handleSave}
                   disabled={
                     isSaving ||
-                    !formState.state ||
-                    !formState.licenseNumber ||
-                    !formState.expirationDate
+                    !formState.workgroupCode ||
+                    !formState.active
                   }
                   className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                 >
