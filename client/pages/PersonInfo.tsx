@@ -174,16 +174,10 @@ export default function PersonInfo() {
               </FormField>
               <FormField label="Active">
                 <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="active"
+                  <Switch
                     checked={activeCheckbox}
-                    onCheckedChange={(checked) =>
-                      setActiveCheckbox(checked as boolean)
-                    }
+                    onCheckedChange={setActiveCheckbox}
                   />
-                  <label htmlFor="active" className="text-sm font-medium">
-                    Mark as active
-                  </label>
                 </div>
               </FormField>
             </FormRow>
@@ -216,20 +210,6 @@ export default function PersonInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Upload Sign">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <div />
             </FormRow>
           </div>
 
