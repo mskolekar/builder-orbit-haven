@@ -116,7 +116,12 @@ export default function Addresses() {
   };
 
   const handleAddAddress = () => {
-    if (!formData.type || !formData.addressLine1 || !formData.city || !formData.state) {
+    if (
+      !formData.type ||
+      !formData.addressLine1 ||
+      !formData.city ||
+      !formData.state
+    ) {
       alert("Please fill in all required fields");
       return;
     }
@@ -176,7 +181,7 @@ export default function Addresses() {
       addresses.map((addr) => ({
         ...addr,
         preferred: addr.id === id ? true : false,
-      }))
+      })),
     );
   };
 
@@ -445,10 +450,7 @@ export default function Addresses() {
                   </div>
                 </FormField>
                 <div className="flex justify-end gap-3">
-                  <Button
-                    variant="cancel"
-                    onClick={handleCancelAdd}
-                  >
+                  <Button variant="cancel" onClick={handleCancelAdd}>
                     Cancel
                   </Button>
                   <Button

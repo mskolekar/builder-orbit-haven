@@ -372,10 +372,7 @@ function AppContent() {
                     path="/licenses-certifications"
                     element={<Licenses />}
                   />
-                  <Route
-                    path="/workgroups"
-                    element={<Workgroup />}
-                  />
+                  <Route path="/workgroups" element={<Workgroup />} />
                   <Route
                     path="/relationships"
                     element={
@@ -403,14 +400,8 @@ function AppContent() {
                       />
                     }
                   />
-                  <Route
-                    path="/login-info"
-                    element={<LoginInfo />}
-                  />
-                  <Route
-                    path="/upload-sign"
-                    element={<UploadSign />}
-                  />
+                  <Route path="/login-info" element={<LoginInfo />} />
+                  <Route path="/upload-sign" element={<UploadSign />} />
                   <Route
                     path="/journals"
                     element={
