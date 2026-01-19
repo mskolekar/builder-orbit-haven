@@ -208,7 +208,7 @@ function AppContent() {
                           to: `/overview/${activeProfileKey}`,
                         },
                         "/person-info": {
-                          label: "Person Info",
+                          label: "Personal Details",
                           to: "/person-info",
                         },
                         "/additional-info": {
