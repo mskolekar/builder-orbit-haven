@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 import { MultiSelectDropdown } from "@/components/ui/multiselect-dropdown";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -83,7 +83,7 @@ function SectionHeader({ title }: { title: string }) {
 
 export default function PersonInfo() {
   const [isSaving, setIsSaving] = useState(false);
-  const [activeToggle, setActiveToggle] = useState(false);
+  const [activeCheckbox, setActiveCheckbox] = useState(false);
   const [riskProfileReasons, setRiskProfileReasons] = useState<string[]>([]);
 
   const handleSave = () => {
@@ -174,10 +174,16 @@ export default function PersonInfo() {
               </FormField>
               <FormField label="Active">
                 <div className="flex items-center gap-2">
-                  <Switch
-                    checked={activeToggle}
-                    onCheckedChange={setActiveToggle}
+                  <Checkbox
+                    id="active"
+                    checked={activeCheckbox}
+                    onCheckedChange={(checked) =>
+                      setActiveCheckbox(checked as boolean)
+                    }
                   />
+                  <label htmlFor="active" className="text-sm font-medium">
+                    Mark as active
+                  </label>
                 </div>
               </FormField>
             </FormRow>
@@ -223,21 +229,21 @@ export default function PersonInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
-              <FormField label="Social Security Number" isMandatory>
-                <Input placeholder="XXX-XX-XXXX" type="password" />
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Confirm Social Security Number" isMandatory>
-                <Input placeholder="XXX-XX-XXXX" type="password" />
-              </FormField>
               <div />
             </FormRow>
           </div>
 
-          {/* Professional & Risk Details Section */}
+          {/* Compliance & Risk Details Section */}
           <div>
-            <SectionHeader title="Professional & Risk Details" />
+            <SectionHeader title="Compliance & Risk Details" />
+            <FormRow>
+              <FormField label="Social Security Number" isMandatory>
+                <Input placeholder="XXX-XX-XXXX" type="password" />
+              </FormField>
+              <FormField label="Confirm Social Security Number" isMandatory>
+                <Input placeholder="XXX-XX-XXXX" type="password" />
+              </FormField>
+            </FormRow>
             <FormRow>
               <FormField label="Job Title">
                 <Input placeholder="Enter job title" />
@@ -292,11 +298,6 @@ export default function PersonInfo() {
                 <div />
               </FormRow>
             )}
-          </div>
-
-          {/* Contact Details Section */}
-          <div>
-            <SectionHeader title="Contact Details" />
             <FormRow>
               <FormField label="Account Group">
                 <Select>
@@ -310,38 +311,46 @@ export default function PersonInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
+              <div />
+            </FormRow>
+          </div>
+
+          {/* Contact Details Section */}
+          <div>
+            <SectionHeader title="Contact Details" />
+            <FormRow>
               <FormField label="E-mail Address">
                 <Input type="email" placeholder="Enter email address" />
               </FormField>
-            </FormRow>
-            <FormRow>
               <FormField label="Fax">
                 <Input placeholder="Enter fax number" />
               </FormField>
+            </FormRow>
+            <FormRow>
               <FormField label="Business Phone">
                 <Input placeholder="Enter business phone" />
               </FormField>
-            </FormRow>
-            <FormRow>
               <FormField label="Mobile Phone">
                 <Input placeholder="Enter mobile phone" />
               </FormField>
+            </FormRow>
+            <FormRow>
               <FormField label="Home Phone">
                 <Input placeholder="Enter home phone" />
               </FormField>
-            </FormRow>
-            <FormRow>
               <FormField label="Alternate Phone">
                 <Input placeholder="Enter alternate phone" />
               </FormField>
+            </FormRow>
+            <FormRow>
               <FormField label="Best Time To Call">
                 <Input placeholder="Enter best time to call" />
               </FormField>
-            </FormRow>
-            <FormRow>
               <FormField label="Date Of Call">
                 <Input type="date" />
               </FormField>
+            </FormRow>
+            <FormRow>
               <FormField label="Preferred Method">
                 <Select>
                   <SelectTrigger>
@@ -355,6 +364,7 @@ export default function PersonInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
+              <div />
             </FormRow>
           </div>
 
