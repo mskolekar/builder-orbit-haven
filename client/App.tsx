@@ -92,6 +92,7 @@ function AppContent() {
   const customerCenterRoutes = [
     "/overview",
     "/person-info",
+    "/addresses",
     "/additional-info",
     "/licenses-certifications",
     "/workgroups",
