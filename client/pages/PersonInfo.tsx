@@ -269,26 +269,20 @@ export default function PersonInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
-              <FormField label="Risk Profile Reason">
-                <MultiSelect
-                  value={riskProfileReasons}
-                  onValueChange={setRiskProfileReasons}
-                >
-                  <MultiSelectTrigger>
-                    <MultiSelectValue />
-                  </MultiSelectTrigger>
-                  <MultiSelectContent>
-                    <MultiSelectItem value="terrorism">
-                      Associated with Terrorism
-                    </MultiSelectItem>
-                    <MultiSelectItem value="claims">Claim History</MultiSelectItem>
-                    <MultiSelectItem value="underwriting">
-                      Underwriting Reasons
-                    </MultiSelectItem>
-                    <MultiSelectItem value="others">Others</MultiSelectItem>
-                  </MultiSelectContent>
-                </MultiSelect>
-              </FormField>
+              <div>
+                <MultiSelectDropdown
+                  label="Risk Profile Reason"
+                  options={[
+                    { value: "terrorism", label: "Associated with Terrorism" },
+                    { value: "claims", label: "Claim History" },
+                    { value: "underwriting", label: "Underwriting Reasons" },
+                    { value: "others", label: "Others" },
+                  ]}
+                  selectedValues={riskProfileReasons}
+                  onChange={setRiskProfileReasons}
+                  placeholder="Select reasons..."
+                />
+              </div>
             </FormRow>
             {riskProfileReasons.includes("others") && (
               <FormRow>
