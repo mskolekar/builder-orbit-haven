@@ -95,6 +95,7 @@ interface Address {
 
 export default function Addresses() {
   const [isSaving, setIsSaving] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [formData, setFormData] = useState<Address>({
     id: "",
