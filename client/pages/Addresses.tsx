@@ -184,161 +184,6 @@ export default function Addresses() {
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
         <div className="space-y-8 max-w-6xl">
-          {/* Address Form Section */}
-          <div>
-            <SectionHeader title="Add New Address" />
-            <FormRow>
-              <FormField label="Type" isMandatory>
-                <Select
-                  value={formData.type}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, type: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="primary">Primary</SelectItem>
-                    <SelectItem value="secondary">Secondary</SelectItem>
-                    <SelectItem value="business">Business</SelectItem>
-                    <SelectItem value="seasonal">Seasonal</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="Address Line 1" isMandatory>
-                <Input
-                  placeholder="Enter address line 1"
-                  value={formData.addressLine1}
-                  onChange={(e) =>
-                    setFormData({ ...formData, addressLine1: e.target.value })
-                  }
-                />
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Address Line 2">
-                <Input
-                  placeholder="Enter address line 2"
-                  value={formData.addressLine2}
-                  onChange={(e) =>
-                    setFormData({ ...formData, addressLine2: e.target.value })
-                  }
-                />
-              </FormField>
-              <FormField label="Address Line 3">
-                <Input
-                  placeholder="Enter address line 3"
-                  value={formData.addressLine3}
-                  onChange={(e) =>
-                    setFormData({ ...formData, addressLine3: e.target.value })
-                  }
-                />
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="City" isMandatory>
-                <Select
-                  value={formData.city}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, city: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select city" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="new-york">New York</SelectItem>
-                    <SelectItem value="los-angeles">Los Angeles</SelectItem>
-                    <SelectItem value="chicago">Chicago</SelectItem>
-                    <SelectItem value="houston">Houston</SelectItem>
-                    <SelectItem value="phoenix">Phoenix</SelectItem>
-                    <SelectItem value="philadelphia">Philadelphia</SelectItem>
-                    <SelectItem value="san-antonio">San Antonio</SelectItem>
-                    <SelectItem value="san-diego">San Diego</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="Province/State/Postal" isMandatory>
-                <Select
-                  value={formData.state}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, state: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select state" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="ca">California</SelectItem>
-                    <SelectItem value="ny">New York</SelectItem>
-                    <SelectItem value="tx">Texas</SelectItem>
-                    <SelectItem value="fl">Florida</SelectItem>
-                    <SelectItem value="il">Illinois</SelectItem>
-                    <SelectItem value="pa">Pennsylvania</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="County">
-                <Input
-                  placeholder="Enter county"
-                  value={formData.county}
-                  onChange={(e) =>
-                    setFormData({ ...formData, county: e.target.value })
-                  }
-                />
-              </FormField>
-              <FormField label="Validated">
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="validated"
-                    checked={formData.validated}
-                    onCheckedChange={(checked) =>
-                      setFormData({
-                        ...formData,
-                        validated: checked as boolean,
-                      })
-                    }
-                  />
-                  <label htmlFor="validated" className="text-sm font-medium">
-                    Address is validated
-                  </label>
-                </div>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Preferred Address">
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="preferred"
-                    checked={formData.preferred}
-                    onCheckedChange={(checked) =>
-                      setFormData({
-                        ...formData,
-                        preferred: checked as boolean,
-                      })
-                    }
-                  />
-                  <label htmlFor="preferred" className="text-sm font-medium">
-                    Set as preferred address
-                  </label>
-                </div>
-              </FormField>
-              <div className="flex justify-end">
-                <Button
-                  onClick={handleAddAddress}
-                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Address
-                </Button>
-              </div>
-            </FormRow>
-          </div>
-
           {/* Addresses Grid Section */}
           <div>
             <SectionHeader title="Address List" />
@@ -442,7 +287,181 @@ export default function Addresses() {
                 </tbody>
               </table>
             </div>
+
+            {/* Add Button */}
+            <div className="mt-4 flex justify-end">
+              <Button
+                onClick={() => setShowForm(!showForm)}
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add Address
+              </Button>
+            </div>
           </div>
+
+          {/* Add New Address Form Section - Conditional */}
+          {showForm && (
+            <div>
+              <SectionHeader title="Add New Address" />
+              <FormRow>
+                <FormField label="Type" isMandatory>
+                  <Select
+                    value={formData.type}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, type: value })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="primary">Primary</SelectItem>
+                      <SelectItem value="secondary">Secondary</SelectItem>
+                      <SelectItem value="business">Business</SelectItem>
+                      <SelectItem value="seasonal">Seasonal</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField label="Address Line 1" isMandatory>
+                  <Input
+                    placeholder="Enter address line 1"
+                    value={formData.addressLine1}
+                    onChange={(e) =>
+                      setFormData({ ...formData, addressLine1: e.target.value })
+                    }
+                  />
+                </FormField>
+              </FormRow>
+              <FormRow>
+                <FormField label="Address Line 2">
+                  <Input
+                    placeholder="Enter address line 2"
+                    value={formData.addressLine2}
+                    onChange={(e) =>
+                      setFormData({ ...formData, addressLine2: e.target.value })
+                    }
+                  />
+                </FormField>
+                <FormField label="Address Line 3">
+                  <Input
+                    placeholder="Enter address line 3"
+                    value={formData.addressLine3}
+                    onChange={(e) =>
+                      setFormData({ ...formData, addressLine3: e.target.value })
+                    }
+                  />
+                </FormField>
+              </FormRow>
+              <FormRow>
+                <FormField label="City" isMandatory>
+                  <Select
+                    value={formData.city}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, city: value })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select city" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="new-york">New York</SelectItem>
+                      <SelectItem value="los-angeles">Los Angeles</SelectItem>
+                      <SelectItem value="chicago">Chicago</SelectItem>
+                      <SelectItem value="houston">Houston</SelectItem>
+                      <SelectItem value="phoenix">Phoenix</SelectItem>
+                      <SelectItem value="philadelphia">Philadelphia</SelectItem>
+                      <SelectItem value="san-antonio">San Antonio</SelectItem>
+                      <SelectItem value="san-diego">San Diego</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField label="Province/State/Postal" isMandatory>
+                  <Select
+                    value={formData.state}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, state: value })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select state" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="ca">California</SelectItem>
+                      <SelectItem value="ny">New York</SelectItem>
+                      <SelectItem value="tx">Texas</SelectItem>
+                      <SelectItem value="fl">Florida</SelectItem>
+                      <SelectItem value="il">Illinois</SelectItem>
+                      <SelectItem value="pa">Pennsylvania</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+              </FormRow>
+              <FormRow>
+                <FormField label="County">
+                  <Input
+                    placeholder="Enter county"
+                    value={formData.county}
+                    onChange={(e) =>
+                      setFormData({ ...formData, county: e.target.value })
+                    }
+                  />
+                </FormField>
+                <FormField label="Validated">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="validated"
+                      checked={formData.validated}
+                      onCheckedChange={(checked) =>
+                        setFormData({
+                          ...formData,
+                          validated: checked as boolean,
+                        })
+                      }
+                    />
+                    <label htmlFor="validated" className="text-sm font-medium">
+                      Address is validated
+                    </label>
+                  </div>
+                </FormField>
+              </FormRow>
+              <FormRow>
+                <FormField label="Preferred Address">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="preferred"
+                      checked={formData.preferred}
+                      onCheckedChange={(checked) =>
+                        setFormData({
+                          ...formData,
+                          preferred: checked as boolean,
+                        })
+                      }
+                    />
+                    <label htmlFor="preferred" className="text-sm font-medium">
+                      Set as preferred address
+                    </label>
+                  </div>
+                </FormField>
+                <div className="flex justify-end gap-3">
+                  <Button
+                    variant="cancel"
+                    onClick={handleCancelAdd}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={handleAddAddress}
+                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Save Address
+                  </Button>
+                </div>
+              </FormRow>
+            </div>
+          )}
 
           {/* Action Buttons */}
           <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
