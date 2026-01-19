@@ -213,6 +213,10 @@ function AppContent() {
                           label: "Personal Details",
                           to: "/person-info",
                         },
+                        "/addresses": {
+                          label: "Addresses",
+                          to: "/addresses",
+                        },
                         "/additional-info": {
                           label: "Additional Info",
                           to: "/additional-info",
