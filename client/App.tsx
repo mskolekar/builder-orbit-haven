@@ -21,6 +21,7 @@ import Submissions from "@/pages/Submissions";
 import Incidents from "@/pages/Incidents";
 import CheckProcessing from "@/pages/CheckProcessing";
 import PersonInfo from "@/pages/PersonInfo";
+import Addresses from "@/pages/Addresses";
 import AdditionalInfo from "@/pages/AdditionalInfo";
 import Licenses from "@/pages/Licenses";
 import Workgroup from "@/pages/Workgroup";
@@ -91,6 +92,7 @@ function AppContent() {
   const customerCenterRoutes = [
     "/overview",
     "/person-info",
+    "/addresses",
     "/additional-info",
     "/licenses-certifications",
     "/workgroups",
@@ -208,8 +210,12 @@ function AppContent() {
                           to: `/overview/${activeProfileKey}`,
                         },
                         "/person-info": {
-                          label: "Person Info",
+                          label: "Personal Details",
                           to: "/person-info",
+                        },
+                        "/addresses": {
+                          label: "Addresses",
+                          to: "/addresses",
                         },
                         "/additional-info": {
                           label: "Additional Info",
@@ -360,15 +366,13 @@ function AppContent() {
                 <Routes>
                   <Route path="/overview/:profileId" element={<Dashboard />} />
                   <Route path="/person-info" element={<PersonInfo />} />
+                  <Route path="/addresses" element={<Addresses />} />
                   <Route path="/additional-info" element={<AdditionalInfo />} />
                   <Route
                     path="/licenses-certifications"
                     element={<Licenses />}
                   />
-                  <Route
-                    path="/workgroups"
-                    element={<Workgroup />}
-                  />
+                  <Route path="/workgroups" element={<Workgroup />} />
                   <Route
                     path="/relationships"
                     element={
@@ -396,14 +400,8 @@ function AppContent() {
                       />
                     }
                   />
-                  <Route
-                    path="/login-info"
-                    element={<LoginInfo />}
-                  />
-                  <Route
-                    path="/upload-sign"
-                    element={<UploadSign />}
-                  />
+                  <Route path="/login-info" element={<LoginInfo />} />
+                  <Route path="/upload-sign" element={<UploadSign />} />
                   <Route
                     path="/journals"
                     element={

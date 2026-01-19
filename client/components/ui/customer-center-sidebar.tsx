@@ -16,7 +16,8 @@ interface CustomerCenterSidebarItem {
 
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Overview", path: "/overview" },
-  { label: "Person Info", path: "/person-info" },
+  { label: "Personal Details", path: "/person-info" },
+  { label: "Addresses", path: "/addresses" },
   { label: "Additional Info", path: "/additional-info" },
   { label: "Licenses", path: "/licenses-certifications" },
   { label: "Work Groups", path: "/workgroups" },
