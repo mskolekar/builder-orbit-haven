@@ -21,6 +21,7 @@ import Submissions from "@/pages/Submissions";
 import Incidents from "@/pages/Incidents";
 import CheckProcessing from "@/pages/CheckProcessing";
 import PersonInfo from "@/pages/PersonInfo";
+import Addresses from "@/pages/Addresses";
 import AdditionalInfo from "@/pages/AdditionalInfo";
 import Licenses from "@/pages/Licenses";
 import Workgroup from "@/pages/Workgroup";
