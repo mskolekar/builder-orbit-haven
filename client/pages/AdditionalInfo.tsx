@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { MultiSelectDropdown } from "@/components/ui/multiselect-dropdown";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -82,9 +81,6 @@ function SectionHeader({ title }: { title: string }) {
 
 export default function AdditionalInfo() {
   const [isSaving, setIsSaving] = useState(false);
-  const [marketingSource, setMarketingSource] = useState<string[]>([]);
-  const [programInterests, setProgramInterests] = useState<string[]>([]);
-  const [hazardousPursuits, setHazardousPursuits] = useState<string[]>([]);
 
   const handleSave = () => {
     setIsSaving(true);
@@ -95,75 +91,74 @@ export default function AdditionalInfo() {
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
         <div className="space-y-8 max-w-6xl">
-          {/* 1. Identification & Record Details Section */}
+          {/* Identifiers Section */}
           <div>
-            <SectionHeader title="Identification & Record Details" />
+            <SectionHeader title="Identifiers" />
             <FormRow>
-              <FormField label="Type">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="individual">Individual</SelectItem>
-                    <SelectItem value="business">Business</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="Record Type">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
-                    <SelectItem value="archived">Archived</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Employee ID Number">
-                <Input placeholder="Enter employee ID number" />
-              </FormField>
               <FormField label="Accounting ID">
                 <Input placeholder="Enter accounting ID" />
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Alien ID Number">
-                <Input placeholder="Enter alien ID number" />
               </FormField>
               <FormField label="Passport ID">
                 <Input placeholder="Enter passport ID" />
               </FormField>
             </FormRow>
             <FormRow>
+              <FormField label="Employee ID Number">
+                <Input placeholder="Enter employee ID number" />
+              </FormField>
+              <FormField label="Alien ID Number">
+                <Input placeholder="Enter alien ID number" />
+              </FormField>
+            </FormRow>
+            <FormRow>
               <FormField label="Visa ID">
                 <Input placeholder="Enter visa ID" />
               </FormField>
-              <div />
+              <FormField label="W9 on File">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormField>
+            </FormRow>
+            <FormRow>
+              <FormField label="Validated Tax ID">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormField>
+              <FormField label="Release Tax ID">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormField>
             </FormRow>
           </div>
 
-          {/* 2. Name & Personal Titles Section */}
+          {/* Others Section */}
           <div>
-            <SectionHeader title="Name & Personal Titles" />
+            <SectionHeader title="Others" />
             <FormRow>
-              <FormField label="Last Name" isMandatory>
-                <Input placeholder="Enter last name" />
-              </FormField>
-              <FormField label="First Name" isMandatory>
-                <Input placeholder="Enter first name" />
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Middle Initial">
-                <Input placeholder="Enter middle initial" maxLength={1} />
-              </FormField>
               <FormField label="Salutation">
                 <Select>
                   <SelectTrigger>
@@ -177,49 +172,22 @@ export default function AdditionalInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
-            </FormRow>
-            <FormRow>
               <FormField label="Honorary Suffix">
                 <Input placeholder="Enter honorary suffix" />
               </FormField>
+            </FormRow>
+            <FormRow>
               <FormField label="Academic Suffix">
                 <Input placeholder="Enter academic suffix" />
               </FormField>
-            </FormRow>
-            <FormRow>
               <FormField label="Professional Suffix">
                 <Input placeholder="Enter professional suffix" />
               </FormField>
+            </FormRow>
+            <FormRow>
               <FormField label="Pronunciation">
                 <Input placeholder="Enter pronunciation guide" />
               </FormField>
-            </FormRow>
-          </div>
-
-          {/* 3. Employment & Organizational Details Section */}
-          <div>
-            <SectionHeader title="Employment & Organizational Details" />
-            <FormRow>
-              <FormField label="Job Title">
-                <Input placeholder="Enter job title" />
-              </FormField>
-              <FormField label="Department">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="sales">Sales</SelectItem>
-                    <SelectItem value="marketing">Marketing</SelectItem>
-                    <SelectItem value="operations">Operations</SelectItem>
-                    <SelectItem value="hr">HR</SelectItem>
-                    <SelectItem value="finance">Finance</SelectItem>
-                    <SelectItem value="it">IT</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-            </FormRow>
-            <FormRow>
               <FormField label="Education Level">
                 <Select>
                   <SelectTrigger>
@@ -234,141 +202,7 @@ export default function AdditionalInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
-              <FormField label="Status">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
-                    <SelectItem value="retired">Retired</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
             </FormRow>
-          </div>
-
-          {/* 4. Legal, Compliance & Risk Disclosures Section */}
-          <div>
-            <SectionHeader title="Legal, Compliance & Risk Disclosures" />
-            <FormRow>
-              <FormField label="W9 on File">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="Validated Tax ID">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Release Tax ID">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="Release Medical Info">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Death Date">
-                <Input type="date" />
-              </FormField>
-              <MultiSelectDropdown
-                label="Hazardous Pursuits"
-                options={[
-                  { value: "hang-gliding", label: "Hang Gliding" },
-                  { value: "stock-car", label: "Stock Car Dr" },
-                ]}
-                selectedValues={hazardousPursuits}
-                onChange={setHazardousPursuits}
-                placeholder="Select pursuits..."
-              />
-            </FormRow>
-          </div>
-
-          {/* 5. Communication & Preference Settings Section */}
-          <div>
-            <SectionHeader title="Communication & Preference Settings" />
-            <FormRow>
-              <FormField label="Preferred Method">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="email">Email</SelectItem>
-                    <SelectItem value="phone">Phone</SelectItem>
-                    <SelectItem value="fax">Fax</SelectItem>
-                    <SelectItem value="mail">Mail</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <FormField label="Market via Fax">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Market via E-Mail">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-              <div />
-            </FormRow>
-          </div>
-
-          {/* 6. Language & Nationality Section */}
-          <div>
-            <SectionHeader title="Language & Nationality" />
             <FormRow>
               <FormField label="Nationality">
                 <Select>
@@ -411,35 +245,48 @@ export default function AdditionalInfo() {
                   </SelectContent>
                 </Select>
               </FormField>
-              <div />
+              <FormField label="Death Date">
+                <Input type="date" />
+              </FormField>
             </FormRow>
-          </div>
-
-          {/* 7. Marketing & Interest Information Section */}
-          <div>
-            <SectionHeader title="Marketing & Interest Information" />
             <FormRow>
-              <MultiSelectDropdown
-                label="Marketing Source"
-                options={[
-                  { value: "ri-2008", label: "RI May 2008" },
-                  { value: "target-conf", label: "Target Conf" },
-                ]}
-                selectedValues={marketingSource}
-                onChange={setMarketingSource}
-                placeholder="Select marketing sources..."
-              />
-              <MultiSelectDropdown
-                label="Program Interests"
-                options={[
-                  { value: "banking", label: "Banking" },
-                  { value: "prof-liab", label: "Prof Liab" },
-                  { value: "technology", label: "Technology" },
-                ]}
-                selectedValues={programInterests}
-                onChange={setProgramInterests}
-                placeholder="Select interests..."
-              />
+              <FormField label="Market via Fax">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormField>
+              <FormField label="Market via E-Mail">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormField>
+            </FormRow>
+            <FormRow>
+              <FormField label="Release Medical Info">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormField>
+              <div />
             </FormRow>
           </div>
 
