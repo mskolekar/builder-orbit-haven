@@ -148,6 +148,23 @@ export default function Addresses() {
       validated: false,
       preferred: false,
     });
+    setShowForm(false);
+  };
+
+  const handleCancelAdd = () => {
+    setFormData({
+      id: "",
+      type: "",
+      addressLine1: "",
+      addressLine2: "",
+      addressLine3: "",
+      city: "",
+      state: "",
+      county: "",
+      validated: false,
+      preferred: false,
+    });
+    setShowForm(false);
   };
 
   const handleRemoveAddress = (id: string) => {
