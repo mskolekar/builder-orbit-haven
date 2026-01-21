@@ -17,16 +17,17 @@ interface CustomerCenterSidebarItem {
 const customerCenterItems: CustomerCenterSidebarItem[] = [
   { label: "Overview", path: "/overview" },
   { label: "Personal Details", path: "/person-info" },
-  { label: "Addresses", path: "/addresses" },
+  { label: "Address", path: "/addresses" },
+  { label: "Other Names", path: "/other-names" },
   { label: "Additional Info", path: "/additional-info" },
-  { label: "Licenses", path: "/licenses-certifications" },
-  { label: "Work Groups", path: "/workgroups" },
   { label: "Relationship & Roles", path: "/relationships" },
+  { label: "Workgroups", path: "/workgroups" },
+  { label: "Licenses", path: "/licenses-certifications" },
   { label: "Prior Policy", path: "/prior-policy" },
   { label: "Prior Losses", path: "/prior-losses" },
+  { label: "Journal", path: "/journals" },
   { label: "Login Info", path: "/login-info" },
   { label: "Upload Sign", path: "/upload-sign" },
-  { label: "Journal", path: "/journals" },
 ];
 
 interface CustomerCenterSidebarProps {
