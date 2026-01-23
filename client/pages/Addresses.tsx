@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, Plus, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Trash2, Edit2 } from "lucide-react";
 
 function FormRow({ children }: { children: React.ReactNode }) {
   return <div className="grid grid-cols-2 gap-12 mb-6">{children}</div>;
@@ -96,6 +96,7 @@ interface Address {
 export default function Addresses() {
   const [isSaving, setIsSaving] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [formData, setFormData] = useState<Address>({
     id: "",
@@ -111,11 +112,6 @@ export default function Addresses() {
   });
 
   const handleSave = () => {
-    setIsSaving(true);
-    setTimeout(() => setIsSaving(false), 1000);
-  };
-
-  const handleAddAddress = () => {
     if (
       !formData.type ||
       !formData.addressLine1 ||
@@ -126,21 +122,56 @@ export default function Addresses() {
       return;
     }
 
-    const newAddress: Address = {
-      ...formData,
-      id: Date.now().toString(),
-    };
+    setIsSaving(true);
 
-    // If this address is marked as preferred, unmark all others
-    let updatedAddresses = addresses;
-    if (newAddress.preferred) {
-      updatedAddresses = addresses.map((addr) => ({
-        ...addr,
-        preferred: false,
-      }));
+    if (editingId) {
+      // Update existing address
+      setAddresses(
+        addresses.map((addr) =>
+          addr.id === editingId
+            ? {
+                ...addr,
+                type: formData.type,
+                addressLine1: formData.addressLine1,
+                addressLine2: formData.addressLine2,
+                addressLine3: formData.addressLine3,
+                city: formData.city,
+                state: formData.state,
+                county: formData.county,
+                validated: formData.validated,
+                preferred: formData.preferred ? true : addr.preferred,
+              }
+            : formData.preferred && addr.preferred
+              ? { ...addr, preferred: false }
+              : addr,
+        ),
+      );
+    } else {
+      // Add new address
+      const newAddress: Address = {
+        ...formData,
+        id: Date.now().toString(),
+      };
+
+      // If this address is marked as preferred, unmark all others
+      let updatedAddresses = addresses;
+      if (newAddress.preferred) {
+        updatedAddresses = addresses.map((addr) => ({
+          ...addr,
+          preferred: false,
+        }));
+      }
+
+      setAddresses([...updatedAddresses, newAddress]);
     }
 
-    setAddresses([...updatedAddresses, newAddress]);
+    setTimeout(() => {
+      setIsSaving(false);
+      resetForm();
+    }, 500);
+  };
+
+  const resetForm = () => {
     setFormData({
       id: "",
       type: "",
@@ -154,22 +185,17 @@ export default function Addresses() {
       preferred: false,
     });
     setShowForm(false);
+    setEditingId(null);
   };
 
   const handleCancelAdd = () => {
-    setFormData({
-      id: "",
-      type: "",
-      addressLine1: "",
-      addressLine2: "",
-      addressLine3: "",
-      city: "",
-      state: "",
-      county: "",
-      validated: false,
-      preferred: false,
-    });
-    setShowForm(false);
+    resetForm();
+  };
+
+  const handleEditAddress = (address: Address) => {
+    setFormData(address);
+    setEditingId(address.id);
+    setShowForm(true);
   };
 
   const handleRemoveAddress = (id: string) => {
@@ -277,14 +303,26 @@ export default function Addresses() {
                           />
                         </td>
                         <td className="px-4 py-3 text-center">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleRemoveAddress(address.id)}
-                            className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                          <div className="flex justify-center gap-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleEditAddress(address)}
+                              className="hover:bg-gray-100"
+                              title="Edit"
+                            >
+                              <Edit2 className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleRemoveAddress(address.id)}
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                              title="Delete"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
                         </td>
                       </tr>
                     ))
@@ -296,7 +334,22 @@ export default function Addresses() {
             {/* Add Button */}
             <div className="mt-4 flex justify-end">
               <Button
-                onClick={() => setShowForm(!showForm)}
+                onClick={() => {
+                  setShowForm(true);
+                  setEditingId(null);
+                  setFormData({
+                    id: "",
+                    type: "",
+                    addressLine1: "",
+                    addressLine2: "",
+                    addressLine3: "",
+                    city: "",
+                    state: "",
+                    county: "",
+                    validated: false,
+                    preferred: false,
+                  });
+                }}
                 className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
               >
                 <Plus className="w-4 h-4 mr-2" />
@@ -308,7 +361,9 @@ export default function Addresses() {
           {/* Add New Address Form Section - Conditional */}
           {showForm && (
             <div>
-              <SectionHeader title="Add New Address" />
+              <SectionHeader
+                title={editingId ? "Edit Address" : "Add New Address"}
+              />
               <FormRow>
                 <FormField label="Type" isMandatory>
                   <Select
@@ -457,8 +512,14 @@ export default function Addresses() {
           <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
             {/* Row 1: Business Actions */}
             <div className="flex justify-end gap-3">
-              <Button variant="cancel">Cancel</Button>
-              <Button onClick={handleSave} disabled={isSaving}>
+              <Button variant="cancel" onClick={handleCancelAdd}>
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSave}
+                disabled={isSaving}
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+              >
                 {isSaving ? "Saving..." : "Save"}
               </Button>
             </div>
