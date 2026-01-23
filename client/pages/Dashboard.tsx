@@ -867,24 +867,6 @@ export default function Dashboard() {
               <CardTitle className="text-base text-gray-700">
                 Financial Summary
               </CardTitle>
-              {!isShawn && (
-                <div className="flex items-center gap-2">
-                  <Button
-                    size="sm"
-                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (isNewProspect) {
-                        console.log("Create quote for prospect");
-                      } else {
-                        console.log("Navigate to payment");
-                      }
-                    }}
-                  >
-                    {isNewProspect ? "Create Quote" : "Pay Now"}
-                  </Button>
-                </div>
-              )}
             </CardHeader>
             <CardContent className={isFinancialCollapsed ? "hidden" : ""}>
               {isShawn ? (
@@ -1218,39 +1200,18 @@ export default function Dashboard() {
                             })()}
                           </TableCell>
                           <TableCell className="py-1">
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-6 w-6 p-0 hover:bg-gray-100"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <MoreHorizontal
-                                    size={16}
-                                    className="text-gray-600"
-                                  />
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
-                                <DropdownMenuItem
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    navigate("/journals?tab=diaries");
-                                  }}
-                                >
-                                  View
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleCloseDiary(diary.id);
-                                  }}
-                                >
-                                  Mark Complete
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0 hover:bg-gray-100"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCloseDiary(diary.id);
+                              }}
+                              title="Mark Complete"
+                            >
+                              <Check size={16} className="text-gray-600" />
+                            </Button>
                           </TableCell>
                         </TableRow>
                       ));

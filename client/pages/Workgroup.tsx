@@ -9,335 +9,259 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { Trash2 } from "lucide-react";
-
-function FormRow({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-2 gap-12 mb-6">{children}</div>;
-}
-
-function FormField({
-  label,
-  isMandatory,
-  children,
-  className,
-}: {
-  label: string;
-  isMandatory?: boolean;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={cn("flex gap-4 items-start", className)}>
-      <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm pt-2">
-        {label}
-        {isMandatory && <span className="text-red-600 ml-1">*</span>}
-      </label>
-      <div className="flex-1">{children}</div>
-    </div>
-  );
-}
-
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div className="mb-6">
-      <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300">
-        {title}
-      </h3>
-    </div>
-  );
-}
+import { Trash2, Check, X } from "lucide-react";
 
 interface Workgroup {
   id: string;
   workgroupCode: string;
   active: string;
   comments: string;
-  outputDevice?: string;
 }
+
+interface EditingRow {
+  id: string;
+  workgroupCode: string;
+  active: string;
+  comments: string;
+}
+
+const workgroupCodeOptions = [
+  { value: "wg-001", label: "WG-001" },
+  { value: "wg-002", label: "WG-002" },
+  { value: "wg-003", label: "WG-003" },
+  { value: "wg-004", label: "WG-004" },
+  { value: "wg-005", label: "WG-005" },
+];
+
+const activeOptions = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+];
 
 export default function Workgroup() {
   const [workgroups, setWorkgroups] = useState<Workgroup[]>([]);
-  const [selectedWorkgroup, setSelectedWorkgroup] = useState<Workgroup | null>(
-    null,
-  );
-  const [isAddingNew, setIsAddingNew] = useState(false);
+  const [editingRow, setEditingRow] = useState<EditingRow | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [formState, setFormState] = useState<Partial<Workgroup>>({
-    workgroupCode: "",
-    active: "",
-    comments: "",
-    outputDevice: "",
-  });
 
-  const handleSelectWorkgroup = (workgroup: Workgroup) => {
-    setSelectedWorkgroup(workgroup);
-    setFormState(workgroup);
+  const handleAddWorkgroup = () => {
+    const newId = "new-" + Date.now();
+    setEditingRow({
+      id: newId,
+      workgroupCode: "",
+      active: "",
+      comments: "",
+    });
   };
 
   const handleSave = () => {
-    if (!formState.workgroupCode || !formState.active) {
+    if (!editingRow || !editingRow.workgroupCode || !editingRow.active) {
       return;
     }
 
     setIsSaving(true);
 
-    if (selectedWorkgroup) {
-      // Update existing workgroup
-      setWorkgroups(
-        workgroups.map((w) =>
-          w.id === selectedWorkgroup.id ? { ...(formState as Workgroup) } : w,
-        ),
-      );
-    } else {
-      // Add new workgroup
+    const isNewRow = editingRow.id.startsWith("new-");
+    if (isNewRow) {
       const newWorkgroup: Workgroup = {
         id: Date.now().toString(),
-        workgroupCode: formState.workgroupCode || "",
-        active: formState.active || "",
-        comments: formState.comments || "",
-        outputDevice: formState.outputDevice || "",
+        workgroupCode: editingRow.workgroupCode,
+        active: editingRow.active,
+        comments: editingRow.comments,
       };
       setWorkgroups([...workgroups, newWorkgroup]);
+    } else {
+      setWorkgroups(
+        workgroups.map((w) =>
+          w.id === editingRow.id
+            ? {
+                id: w.id,
+                workgroupCode: editingRow.workgroupCode,
+                active: editingRow.active,
+                comments: editingRow.comments,
+              }
+            : w,
+        ),
+      );
     }
 
     setTimeout(() => {
       setIsSaving(false);
-      setIsAddingNew(false);
-      setSelectedWorkgroup(null);
-      setFormState({
-        workgroupCode: "",
-        active: "",
-        comments: "",
-        outputDevice: "",
-      });
-    }, 1000);
+      setEditingRow(null);
+    }, 500);
   };
 
   const handleCancel = () => {
-    setIsAddingNew(false);
-    setSelectedWorkgroup(null);
-    setFormState({
-      workgroupCode: "",
-      active: "",
-      comments: "",
-      outputDevice: "",
-    });
+    setEditingRow(null);
   };
 
   const handleDeleteWorkgroup = (id: string) => {
     setWorkgroups(workgroups.filter((w) => w.id !== id));
-    if (selectedWorkgroup?.id === id) {
-      setIsAddingNew(false);
-      setSelectedWorkgroup(null);
-      setFormState({
-        workgroupCode: "",
-        active: "",
-        comments: "",
-        outputDevice: "",
-      });
+  };
+
+  const handleEditChange = (field: keyof EditingRow, value: string) => {
+    if (editingRow) {
+      setEditingRow({ ...editingRow, [field]: value });
     }
   };
-
-  const workgroupCodeOptions = [
-    { value: "wg-001", label: "WG-001" },
-    { value: "wg-002", label: "WG-002" },
-    { value: "wg-003", label: "WG-003" },
-    { value: "wg-004", label: "WG-004" },
-    { value: "wg-005", label: "WG-005" },
-  ];
-
-  const activeOptions = [
-    { value: "yes", label: "Yes" },
-    { value: "no", label: "No" },
-  ];
-
-  const handleAddNew = () => {
-    setIsAddingNew(true);
-    setSelectedWorkgroup(null);
-    setFormState({
-      workgroupCode: "",
-      active: "",
-      comments: "",
-      outputDevice: "",
-    });
-  };
-
-  const isFormVisible = isAddingNew || selectedWorkgroup;
 
   return (
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
-        <div className="space-y-8 max-w-6xl">
-          {/* Workgroup List Table Section */}
-          <div>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                      Workgroup Code
-                    </th>
-                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                      Active?
-                    </th>
-                    <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                      Comments
-                    </th>
-                    <th className="text-center text-sm font-semibold text-gray-900 px-4 py-3">
-                      Actions
-                    </th>
+        <div className="space-y-6 max-w-6xl">
+          {/* Table Section */}
+          <div className="overflow-x-auto border border-gray-200 rounded-lg">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Workgroup Code <span className="text-red-600">*</span>
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Active? <span className="text-red-600">*</span>
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Comments
+                  </th>
+                  <th className="text-center text-sm font-semibold text-gray-900 px-4 py-3">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {workgroups.length === 0 && !editingRow && (
+                  <tr>
+                    <td
+                      colSpan={4}
+                      className="px-4 py-8 text-center text-gray-500 text-sm"
+                    >
+                      No workgroups added
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {workgroups.length === 0 ? (
-                    <tr>
-                      <td
-                        colSpan={4}
-                        className="px-4 py-6 text-center text-gray-500 text-sm"
+                )}
+
+                {/* Existing workgroups */}
+                {workgroups.map((workgroup) => (
+                  <tr
+                    key={workgroup.id}
+                    className="border-b border-gray-200 hover:bg-gray-50"
+                  >
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {workgroup.workgroupCode}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {activeOptions.find((a) => a.value === workgroup.active)
+                        ?.label || workgroup.active}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-700">
+                      {workgroup.comments}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDeleteWorkgroup(workgroup.id)}
+                        title="Delete"
                       >
-                        No workgroups added
-                      </td>
-                    </tr>
-                  ) : (
-                    workgroups.map((workgroup) => (
-                      <tr
-                        key={workgroup.id}
-                        className={cn(
-                          "border-b border-gray-200 hover:bg-gray-50 cursor-pointer",
-                          selectedWorkgroup?.id === workgroup.id &&
-                            "bg-blue-50",
-                        )}
-                        onClick={() => handleSelectWorkgroup(workgroup)}
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+
+                {/* Editing/New row */}
+                {editingRow && (
+                  <tr className="border-b border-gray-200 bg-blue-50">
+                    <td className="px-4 py-3">
+                      <Select
+                        value={editingRow.workgroupCode}
+                        onValueChange={(value) =>
+                          handleEditChange("workgroupCode", value)
+                        }
                       >
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          {workgroup.workgroupCode}
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          {activeOptions.find((a) => a.value === workgroup.active)
-                            ?.label || workgroup.active}
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          {workgroup.comments}
-                        </td>
-                        <td className="px-4 py-3 text-center">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteWorkgroup(workgroup.id);
-                            }}
-                            className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+                        <SelectTrigger className="w-full h-9">
+                          <SelectValue placeholder="Select code" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {workgroupCodeOptions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </td>
+                    <td className="px-4 py-3">
+                      <Select
+                        value={editingRow.active}
+                        onValueChange={(value) =>
+                          handleEditChange("active", value)
+                        }
+                      >
+                        <SelectTrigger className="w-full h-9">
+                          <SelectValue placeholder="Select status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {activeOptions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </td>
+                    <td className="px-4 py-3">
+                      <Input
+                        placeholder="Add comments (optional)"
+                        value={editingRow.comments}
+                        onChange={(e) =>
+                          handleEditChange("comments", e.target.value)
+                        }
+                        className="h-9"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex justify-center gap-2">
+                        <Button
+                          size="sm"
+                          onClick={handleSave}
+                          disabled={
+                            isSaving ||
+                            !editingRow.workgroupCode ||
+                            !editingRow.active
+                          }
+                          variant="ghost"
+                          className="h-8 px-3"
+                          title="Save"
+                        >
+                          <Check className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={handleCancel}
+                          disabled={isSaving}
+                          className="h-8 px-3"
+                          title="Cancel"
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
 
-          {/* Add New Button */}
-          {!isFormVisible && (
+          {/* Add Workgroup Button */}
+          {!editingRow && (
             <div className="flex justify-end">
               <Button
-                onClick={handleAddNew}
+                onClick={handleAddWorkgroup}
                 className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
               >
-                Add
+                Add Workgroup
               </Button>
-            </div>
-          )}
-
-          {/* Workgroup Detail/Add-Edit Form Section */}
-          {isFormVisible && (
-            <div>
-              <SectionHeader title="Workgroup Detail" />
-
-              <FormRow>
-                <FormField label="Workgroup Code" isMandatory>
-                  <Select
-                    value={formState.workgroupCode || ""}
-                    onValueChange={(value) =>
-                      setFormState({ ...formState, workgroupCode: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select workgroup code" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {workgroupCodeOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormField>
-                <FormField label="Active?" isMandatory>
-                  <Select
-                    value={formState.active || ""}
-                    onValueChange={(value) =>
-                      setFormState({ ...formState, active: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select active status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {activeOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormField>
-              </FormRow>
-              <FormRow>
-                <FormField label="Comments">
-                  <Input
-                    placeholder="Enter comments"
-                    value={formState.comments || ""}
-                    onChange={(e) =>
-                      setFormState({ ...formState, comments: e.target.value })
-                    }
-                  />
-                </FormField>
-                <FormField label="Output Device – Future" className="opacity-50">
-                  <Input
-                    placeholder="Not available yet"
-                    disabled
-                    value={formState.outputDevice || ""}
-                    readOnly
-                  />
-                </FormField>
-              </FormRow>
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          {isFormVisible && (
-            <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
-              <div className="flex justify-end gap-3">
-                <Button variant="cancel" onClick={handleCancel}>
-                  Cancel
-                </Button>
-                <Button
-                  onClick={handleSave}
-                  disabled={
-                    isSaving ||
-                    !formState.workgroupCode ||
-                    !formState.active
-                  }
-                  className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                >
-                  {isSaving ? "Saving..." : "Save"}
-                </Button>
-              </div>
             </div>
           )}
         </div>
