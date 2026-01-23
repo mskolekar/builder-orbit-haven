@@ -44,7 +44,7 @@ function FormField({
                 if (!React.isValidElement(selectChild)) return selectChild;
                 if (selectChild.type?.displayName === "SelectTrigger") {
                   return React.cloneElement(selectChild, {
-                    className: cn(selectChild.props.className, "bg-gray-100"),
+                    className: cn(selectChild.props.className, "bg-blue-50"),
                   });
                 }
                 return selectChild;
@@ -55,7 +55,7 @@ function FormField({
 
         // Handle Input components
         return React.cloneElement(child, {
-          className: cn(child.props.className, "bg-gray-100"),
+          className: cn(child.props.className, "bg-blue-50"),
         });
       })
     : children;
