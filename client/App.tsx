@@ -374,15 +374,7 @@ function AppContent() {
                     element={<Licenses />}
                   />
                   <Route path="/workgroups" element={<Workgroup />} />
-                  <Route
-                    path="/relationships"
-                    element={
-                      <PlaceholderPage
-                        title="Relationship & Roles"
-                        description="View and manage customer relationships and roles."
-                      />
-                    }
-                  />
+                  <Route path="/relationships" element={<Relationships />} />
                   <Route
                     path="/prior-policy"
                     element={
