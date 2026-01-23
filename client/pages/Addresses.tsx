@@ -449,18 +449,6 @@ export default function Addresses() {
                     </label>
                   </div>
                 </FormField>
-                <div className="flex justify-end gap-3">
-                  <Button variant="cancel" onClick={handleCancelAdd}>
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={handleAddAddress}
-                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Save Address
-                  </Button>
-                </div>
               </FormRow>
             </div>
           )}
