@@ -230,7 +230,8 @@ export default function Workgroup() {
                             !editingRow.workgroupCode ||
                             !editingRow.active
                           }
-                          className="bg-green-600 hover:bg-green-700 text-white h-8 px-3"
+                          variant="ghost"
+                          className="h-8 px-3"
                           title="Save"
                         >
                           <Check className="w-4 h-4" />
@@ -240,7 +241,7 @@ export default function Workgroup() {
                           variant="ghost"
                           onClick={handleCancel}
                           disabled={isSaving}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50 h-8 px-3"
+                          className="h-8 px-3"
                           title="Cancel"
                         >
                           <X className="w-4 h-4" />
