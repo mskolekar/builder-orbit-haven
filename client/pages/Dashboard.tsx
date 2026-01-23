@@ -867,24 +867,6 @@ export default function Dashboard() {
               <CardTitle className="text-base text-gray-700">
                 Financial Summary
               </CardTitle>
-              {!isShawn && (
-                <div className="flex items-center gap-2">
-                  <Button
-                    size="sm"
-                    className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (isNewProspect) {
-                        console.log("Create quote for prospect");
-                      } else {
-                        console.log("Navigate to payment");
-                      }
-                    }}
-                  >
-                    {isNewProspect ? "Create Quote" : "Pay Now"}
-                  </Button>
-                </div>
-              )}
             </CardHeader>
             <CardContent className={isFinancialCollapsed ? "hidden" : ""}>
               {isShawn ? (
