@@ -25,6 +25,7 @@ import Addresses from "@/pages/Addresses";
 import AdditionalInfo from "@/pages/AdditionalInfo";
 import Licenses from "@/pages/Licenses";
 import Workgroup from "@/pages/Workgroup";
+import Relationships from "@/pages/Relationships";
 import LoginInfo from "@/pages/LoginInfo";
 import UploadSign from "@/pages/UploadSign";
 import PlaceholderPage from "@/pages/PlaceholderPage";
