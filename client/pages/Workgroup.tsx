@@ -160,7 +160,6 @@ export default function Workgroup() {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleDeleteWorkgroup(workgroup.id)}
-                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
                         title="Delete"
                       >
                         <Trash2 className="w-4 h-4" />
