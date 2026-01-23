@@ -308,7 +308,6 @@ export default function Addresses() {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleEditAddress(address)}
-                              className="hover:bg-gray-100"
                               title="Edit"
                             >
                               <Edit2 className="w-4 h-4" />
@@ -317,7 +316,6 @@ export default function Addresses() {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleRemoveAddress(address.id)}
-                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
                               title="Delete"
                             >
                               <Trash2 className="w-4 h-4" />
