@@ -49,7 +49,8 @@ const roleOptions = [
 export default function Relationships() {
   const [relationships, setRelationships] = useState<Relationship[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
-  const [editingRelationshipRow, setEditingRelationshipRow] = useState<EditingRow | null>(null);
+  const [editingRelationshipRow, setEditingRelationshipRow] =
+    useState<EditingRow | null>(null);
   const [editingRoleRow, setEditingRoleRow] = useState<EditingRow | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -237,8 +238,9 @@ export default function Relationships() {
                         {relationship.relationTo}
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-900">
-                        {relationTypeOptions.find((a) => a.value === relationship.relationType)
-                          ?.label || relationship.relationType}
+                        {relationTypeOptions.find(
+                          (a) => a.value === relationship.relationType,
+                        )?.label || relationship.relationType}
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-700">
                         {relationship.effectiveDate}
@@ -250,7 +252,9 @@ export default function Relationships() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleDeleteRelationship(relationship.id)}
+                          onClick={() =>
+                            handleDeleteRelationship(relationship.id)
+                          }
                           title="Delete"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -266,7 +270,10 @@ export default function Relationships() {
                           placeholder="Enter name"
                           value={editingRelationshipRow.relationTo}
                           onChange={(e) =>
-                            handleEditRelationshipChange("relationTo", e.target.value)
+                            handleEditRelationshipChange(
+                              "relationTo",
+                              e.target.value,
+                            )
                           }
                           className="h-9"
                         />
@@ -283,7 +290,10 @@ export default function Relationships() {
                           </SelectTrigger>
                           <SelectContent>
                             {relationTypeOptions.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
+                              <SelectItem
+                                key={option.value}
+                                value={option.value}
+                              >
                                 {option.label}
                               </SelectItem>
                             ))}
@@ -295,7 +305,10 @@ export default function Relationships() {
                           type="date"
                           value={editingRelationshipRow.effectiveDate}
                           onChange={(e) =>
-                            handleEditRelationshipChange("effectiveDate", e.target.value)
+                            handleEditRelationshipChange(
+                              "effectiveDate",
+                              e.target.value,
+                            )
                           }
                           className="h-9"
                         />
@@ -305,7 +318,10 @@ export default function Relationships() {
                           type="date"
                           value={editingRelationshipRow.expirationDate}
                           onChange={(e) =>
-                            handleEditRelationshipChange("expirationDate", e.target.value)
+                            handleEditRelationshipChange(
+                              "expirationDate",
+                              e.target.value,
+                            )
                           }
                           className="h-9"
                         />
@@ -399,8 +415,8 @@ export default function Relationships() {
                       className="border-b border-gray-200 hover:bg-gray-50"
                     >
                       <td className="px-4 py-3 text-sm text-gray-900">
-                        {roleOptions.find((a) => a.value === role.role)?.label ||
-                          role.role}
+                        {roleOptions.find((a) => a.value === role.role)
+                          ?.label || role.role}
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-700">
                         {role.effectiveDate}
@@ -435,7 +451,10 @@ export default function Relationships() {
                           </SelectTrigger>
                           <SelectContent>
                             {roleOptions.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
+                              <SelectItem
+                                key={option.value}
+                                value={option.value}
+                              >
                                 {option.label}
                               </SelectItem>
                             ))}
@@ -447,7 +466,10 @@ export default function Relationships() {
                           type="date"
                           value={editingRoleRow.effectiveDate}
                           onChange={(e) =>
-                            handleEditRoleChange("effectiveDate", e.target.value)
+                            handleEditRoleChange(
+                              "effectiveDate",
+                              e.target.value,
+                            )
                           }
                           className="h-9"
                         />
@@ -457,7 +479,10 @@ export default function Relationships() {
                           type="date"
                           value={editingRoleRow.expirationDate}
                           onChange={(e) =>
-                            handleEditRoleChange("expirationDate", e.target.value)
+                            handleEditRoleChange(
+                              "expirationDate",
+                              e.target.value,
+                            )
                           }
                           className="h-9"
                         />

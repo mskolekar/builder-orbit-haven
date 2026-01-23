@@ -1210,10 +1210,7 @@ export default function Dashboard() {
                               }}
                               title="Mark Complete"
                             >
-                              <Check
-                                size={16}
-                                className="text-gray-600"
-                              />
+                              <Check size={16} className="text-gray-600" />
                             </Button>
                           </TableCell>
                         </TableRow>
