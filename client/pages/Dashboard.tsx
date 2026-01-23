@@ -1200,39 +1200,21 @@ export default function Dashboard() {
                             })()}
                           </TableCell>
                           <TableCell className="py-1">
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-6 w-6 p-0 hover:bg-gray-100"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <MoreHorizontal
-                                    size={16}
-                                    className="text-gray-600"
-                                  />
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
-                                <DropdownMenuItem
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    navigate("/journals?tab=diaries");
-                                  }}
-                                >
-                                  View
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleCloseDiary(diary.id);
-                                  }}
-                                >
-                                  Mark Complete
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0 hover:bg-gray-100"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCloseDiary(diary.id);
+                              }}
+                              title="Mark Complete"
+                            >
+                              <Check
+                                size={16}
+                                className="text-gray-600"
+                              />
+                            </Button>
                           </TableCell>
                         </TableRow>
                       ));
