@@ -258,7 +258,7 @@ export default function Workgroup() {
             <div className="flex justify-end">
               <Button
                 onClick={handleAddWorkgroup}
-                variant="outline"
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
               >
                 Add Workgroup
               </Button>
