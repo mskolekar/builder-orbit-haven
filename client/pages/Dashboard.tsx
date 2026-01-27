@@ -1162,12 +1162,8 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-1 text-gray-700 w-[40%]">
                             {diary.title}
                           </TableCell>
-                          <TableCell className="py-1">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
-                            >
-                              {diary.priority}
-                            </span>
+                          <TableCell className="py-1 text-sm text-gray-700">
+                            {diary.priority}
                           </TableCell>
                           <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap">
                             {normalizeFileTag(diary.file, counters)}
