@@ -1366,8 +1366,8 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700">
                             {policy.lob}
                           </TableCell>
-                          <TableCell className="py-2">
-                            {getStatusBadge(policy.status)}
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.status}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {policy.startDate}
