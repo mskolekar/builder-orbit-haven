@@ -1776,8 +1776,8 @@ export default function Dashboard() {
                                   <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                                     {claim.claimNumber}
                                   </TableCell>
-                                  <TableCell className="py-2">
-                                    {getStatusBadge(claim.status)}
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.status}
                                   </TableCell>
                                   <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
                                     {claim.date}
