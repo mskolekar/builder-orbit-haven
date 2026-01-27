@@ -700,7 +700,19 @@ export default function Dashboard() {
     return "bg-gray-100 text-gray-700 border-gray-200";
   };
 
-  const getDiaryRowBgColor = (priority: string) => {
+  const getDiaryRowBgColor = (priority: string, profile?: string) => {
+    if (profile === "john-wills") {
+      switch (priority) {
+        case "High":
+          return "bg-red-50 hover:bg-red-100";
+        case "Medium":
+          return "bg-amber-50 hover:bg-amber-100";
+        case "Low":
+          return "bg-green-50 hover:bg-green-100";
+        default:
+          return "hover:bg-gray-50";
+      }
+    }
     return "hover:bg-gray-50";
   };
 
