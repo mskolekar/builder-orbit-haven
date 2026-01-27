@@ -1166,7 +1166,7 @@ export default function Dashboard() {
                       return openDiaries.map((diary, index) => (
                         <TableRow
                           key={diary.id}
-                          className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
+                          className={`h-8 ${getDiaryRowBgColor(diary.priority, profileId)} cursor-pointer`}
                         >
                           <TableCell className="text-sm font-medium py-1 whitespace-nowrap">
                             {formatToMMDDYY(diary.dueDate)}
