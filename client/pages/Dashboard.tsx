@@ -700,7 +700,19 @@ export default function Dashboard() {
     return "bg-gray-100 text-gray-700 border-gray-200";
   };
 
-  const getDiaryRowBgColor = (priority: string) => {
+  const getDiaryRowBgColor = (priority: string, profile?: string) => {
+    if (profile === "john-wills") {
+      switch (priority) {
+        case "High":
+          return "bg-red-50 hover:bg-red-100";
+        case "Medium":
+          return "bg-amber-50 hover:bg-amber-100";
+        case "Low":
+          return "bg-green-50 hover:bg-green-100";
+        default:
+          return "hover:bg-gray-50";
+      }
+    }
     return "hover:bg-gray-50";
   };
 
@@ -1154,7 +1166,7 @@ export default function Dashboard() {
                       return openDiaries.map((diary, index) => (
                         <TableRow
                           key={diary.id}
-                          className={`h-8 ${getDiaryRowBgColor(diary.priority)} cursor-pointer`}
+                          className={`h-8 ${getDiaryRowBgColor(diary.priority, profileId)} cursor-pointer`}
                         >
                           <TableCell className="text-sm font-medium py-1 whitespace-nowrap">
                             {formatToMMDDYY(diary.dueDate)}
@@ -1162,12 +1174,8 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-1 text-gray-700 w-[40%]">
                             {diary.title}
                           </TableCell>
-                          <TableCell className="py-1">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs border ${getPriorityBadgeColor(diary.priority)}`}
-                            >
-                              {diary.priority}
-                            </span>
+                          <TableCell className="py-1 text-sm text-gray-700">
+                            {diary.priority}
                           </TableCell>
                           <TableCell className="text-sm py-1 text-gray-700 whitespace-nowrap">
                             {normalizeFileTag(diary.file, counters)}
@@ -1370,8 +1378,8 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700">
                             {policy.lob}
                           </TableCell>
-                          <TableCell className="py-2">
-                            {getStatusBadge(policy.status)}
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {policy.status}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {policy.startDate}
@@ -1509,8 +1517,8 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {submission.proposedEffectiveDate}
                           </TableCell>
-                          <TableCell className="py-2">
-                            {getStatusBadge(submission.status)}
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.status}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
                             {submission.submissionType}
@@ -1780,8 +1788,8 @@ export default function Dashboard() {
                                   <TableCell className="text-sm font-medium py-2 text-gray-800 font-monoid">
                                     {claim.claimNumber}
                                   </TableCell>
-                                  <TableCell className="py-2">
-                                    {getStatusBadge(claim.status)}
+                                  <TableCell className="text-sm py-2 text-gray-700">
+                                    {claim.status}
                                   </TableCell>
                                   <TableCell className="text-sm py-2 text-gray-700 w-24 whitespace-nowrap">
                                     {claim.date}
@@ -2007,8 +2015,8 @@ export default function Dashboard() {
                           <TableCell className="text-sm py-2 text-gray-700 whitespace-nowrap">
                             {submission.proposedEffectiveDate}
                           </TableCell>
-                          <TableCell className="py-2">
-                            {getStatusBadge(submission.status)}
+                          <TableCell className="text-sm py-2 text-gray-700">
+                            {submission.status}
                           </TableCell>
                           <TableCell className="text-sm py-2 text-gray-700">
                             {submission.submissionType}
