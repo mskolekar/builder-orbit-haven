@@ -35,13 +35,45 @@ function FormField({
   children: React.ReactNode;
   className?: string;
 }) {
+  const processedChildren = isMandatory
+    ? React.Children.map(children, (child) => {
+        if (!React.isValidElement(child)) return child;
+
+        // Handle Select components
+        if (
+          child.type?.displayName === "SelectRoot" ||
+          child.type?.name === "Select"
+        ) {
+          return React.cloneElement(child, {
+            children: React.Children.map(
+              child.props.children,
+              (selectChild) => {
+                if (!React.isValidElement(selectChild)) return selectChild;
+                if (selectChild.type?.displayName === "SelectTrigger") {
+                  return React.cloneElement(selectChild, {
+                    className: cn(selectChild.props.className, "bg-blue-50"),
+                  });
+                }
+                return selectChild;
+              },
+            ),
+          });
+        }
+
+        // Handle Input components
+        return React.cloneElement(child, {
+          className: cn(child.props.className, "bg-blue-50"),
+        });
+      })
+    : children;
+
   return (
     <div className={`flex gap-4 items-start ${className || ""}`}>
       <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm pt-2">
         {label}
         {isMandatory && <span className="text-red-600 ml-1">*</span>}
       </label>
-      <div className="flex-1">{children}</div>
+      <div className="flex-1">{processedChildren}</div>
     </div>
   );
 }
