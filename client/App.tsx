@@ -383,15 +383,7 @@ function AppContent() {
                   />
                   <Route path="/workgroups" element={<Workgroup />} />
                   <Route path="/relationships" element={<Relationships />} />
-                  <Route
-                    path="/prior-policy"
-                    element={
-                      <PlaceholderPage
-                        title="Prior Policy"
-                        description="View prior insurance policy information."
-                      />
-                    }
-                  />
+                  <Route path="/prior-policy" element={<PriorPolicy />} />
                   <Route
                     path="/prior-losses"
                     element={
