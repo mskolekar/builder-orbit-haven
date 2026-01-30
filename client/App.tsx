@@ -28,6 +28,8 @@ import Workgroup from "@/pages/Workgroup";
 import Relationships from "@/pages/Relationships";
 import LoginInfo from "@/pages/LoginInfo";
 import UploadSign from "@/pages/UploadSign";
+import OtherNames from "@/pages/OtherNames";
+import PriorPolicy from "@/pages/PriorPolicy";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
@@ -94,6 +96,7 @@ function AppContent() {
     "/overview",
     "/person-info",
     "/addresses",
+    "/other-names",
     "/additional-info",
     "/licenses-certifications",
     "/workgroups",
@@ -217,6 +220,10 @@ function AppContent() {
                         "/addresses": {
                           label: "Addresses",
                           to: "/addresses",
+                        },
+                        "/other-names": {
+                          label: "Other Names",
+                          to: "/other-names",
                         },
                         "/additional-info": {
                           label: "Additional Info",
@@ -368,6 +375,7 @@ function AppContent() {
                   <Route path="/overview/:profileId" element={<Dashboard />} />
                   <Route path="/person-info" element={<PersonInfo />} />
                   <Route path="/addresses" element={<Addresses />} />
+                  <Route path="/other-names" element={<OtherNames />} />
                   <Route path="/additional-info" element={<AdditionalInfo />} />
                   <Route
                     path="/licenses-certifications"
@@ -375,15 +383,7 @@ function AppContent() {
                   />
                   <Route path="/workgroups" element={<Workgroup />} />
                   <Route path="/relationships" element={<Relationships />} />
-                  <Route
-                    path="/prior-policy"
-                    element={
-                      <PlaceholderPage
-                        title="Prior Policy"
-                        description="View prior insurance policy information."
-                      />
-                    }
-                  />
+                  <Route path="/prior-policy" element={<PriorPolicy />} />
                   <Route
                     path="/prior-losses"
                     element={
