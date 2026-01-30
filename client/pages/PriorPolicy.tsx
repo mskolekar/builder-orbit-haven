@@ -203,9 +203,7 @@ export default function PriorPolicy() {
   };
 
   const getLineBusinessLabel = (code: string) => {
-    return (
-      lineBusinessCodeOptions.find((o) => o.value === code)?.label || code
-    );
+    return lineBusinessCodeOptions.find((o) => o.value === code)?.label || code;
   };
 
   const getPolicyTypeLabel = (type: string) => {
@@ -418,7 +416,10 @@ export default function PriorPolicy() {
                     type="date"
                     value={formData.inceptionDate}
                     onChange={(e) =>
-                      setFormData({ ...formData, inceptionDate: e.target.value })
+                      setFormData({
+                        ...formData,
+                        inceptionDate: e.target.value,
+                      })
                     }
                   />
                 </FormField>
@@ -453,7 +454,10 @@ export default function PriorPolicy() {
                     placeholder="0.00"
                     value={formData.limitPerClaim}
                     onChange={(e) =>
-                      setFormData({ ...formData, limitPerClaim: e.target.value })
+                      setFormData({
+                        ...formData,
+                        limitPerClaim: e.target.value,
+                      })
                     }
                     step="0.01"
                   />
