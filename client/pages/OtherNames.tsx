@@ -8,288 +8,319 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
+import { Trash2, Check, X } from "lucide-react";
 
 interface OtherName {
   id: string;
+  type: string;
   firstName: string;
   lastName: string;
   middleName: string;
-  nameType: string;
   effectiveDate: string;
   endDate: string;
 }
 
-function FormRow({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-2 gap-12 mb-6">{children}</div>;
+interface EditingRow {
+  id: string;
+  type: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  effectiveDate: string;
+  endDate: string;
 }
 
-function FormField({
-  label,
-  isMandatory,
-  children,
-  className,
-}: {
-  label: string;
-  isMandatory?: boolean;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const processedChildren = isMandatory
-    ? React.Children.map(children, (child) => {
-        if (!React.isValidElement(child)) return child;
-
-        // Handle Select components
-        if (
-          child.type?.displayName === "SelectRoot" ||
-          child.type?.name === "Select"
-        ) {
-          return React.cloneElement(child, {
-            children: React.Children.map(
-              child.props.children,
-              (selectChild) => {
-                if (!React.isValidElement(selectChild)) return selectChild;
-                if (selectChild.type?.displayName === "SelectTrigger") {
-                  return React.cloneElement(selectChild, {
-                    className: cn(selectChild.props.className, "bg-blue-50"),
-                  });
-                }
-                return selectChild;
-              },
-            ),
-          });
-        }
-
-        // Handle Input components
-        return React.cloneElement(child, {
-          className: cn(child.props.className, "bg-blue-50"),
-        });
-      })
-    : children;
-
-  return (
-    <div className={`flex gap-4 items-start ${className || ""}`}>
-      <label className="w-40 flex-shrink-0 font-medium text-gray-700 text-sm pt-2">
-        {label}
-        {isMandatory && <span className="text-red-600 ml-1">*</span>}
-      </label>
-      <div className="flex-1">{processedChildren}</div>
-    </div>
-  );
-}
-
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div className="mb-6">
-      <h3 className="text-base font-semibold text-gray-900 pb-3 border-b border-gray-300">
-        {title}
-      </h3>
-    </div>
-  );
-}
+const nameTypeOptions = [
+  { value: "maiden", label: "Maiden Name" },
+  { value: "alias", label: "Alias" },
+  { value: "former", label: "Former Name" },
+  { value: "business", label: "Business Name" },
+  { value: "other", label: "Other" },
+];
 
 export default function OtherNames() {
+  const [otherNames, setOtherNames] = useState<OtherName[]>([]);
+  const [editingRow, setEditingRow] = useState<EditingRow | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [otherNames, setOtherNames] = useState<OtherName[]>([
-    {
-      id: "1",
-      firstName: "John",
-      lastName: "Doe",
-      middleName: "Michael",
-      nameType: "Maiden Name",
-      effectiveDate: "2020-01-15",
-      endDate: "2022-12-31",
-    },
-  ]);
-  const [newName, setNewName] = useState<Partial<OtherName>>({
-    firstName: "",
-    lastName: "",
-    middleName: "",
-    nameType: "",
-    effectiveDate: "",
-    endDate: "",
-  });
-
-  const handleSave = () => {
-    setIsSaving(true);
-    setTimeout(() => setIsSaving(false), 1000);
-  };
 
   const handleAddName = () => {
-    if (newName.firstName && newName.lastName) {
-      setOtherNames([
-        ...otherNames,
-        {
-          id: Date.now().toString(),
-          firstName: newName.firstName || "",
-          lastName: newName.lastName || "",
-          middleName: newName.middleName || "",
-          nameType: newName.nameType || "",
-          effectiveDate: newName.effectiveDate || "",
-          endDate: newName.endDate || "",
-        },
-      ]);
-      setNewName({
-        firstName: "",
-        lastName: "",
-        middleName: "",
-        nameType: "",
-        effectiveDate: "",
-        endDate: "",
-      });
+    const newId = "new-" + Date.now();
+    setEditingRow({
+      id: newId,
+      type: "",
+      firstName: "",
+      lastName: "",
+      middleName: "",
+      effectiveDate: "",
+      endDate: "",
+    });
+  };
+
+  const handleSave = () => {
+    if (
+      !editingRow ||
+      !editingRow.type ||
+      !editingRow.firstName ||
+      !editingRow.lastName
+    ) {
+      return;
     }
+
+    setIsSaving(true);
+
+    const isNewRow = editingRow.id.startsWith("new-");
+    if (isNewRow) {
+      const newName: OtherName = {
+        id: Date.now().toString(),
+        type: editingRow.type,
+        firstName: editingRow.firstName,
+        lastName: editingRow.lastName,
+        middleName: editingRow.middleName,
+        effectiveDate: editingRow.effectiveDate,
+        endDate: editingRow.endDate,
+      };
+      setOtherNames([...otherNames, newName]);
+    } else {
+      setOtherNames(
+        otherNames.map((n) =>
+          n.id === editingRow.id
+            ? {
+                id: n.id,
+                type: editingRow.type,
+                firstName: editingRow.firstName,
+                lastName: editingRow.lastName,
+                middleName: editingRow.middleName,
+                effectiveDate: editingRow.effectiveDate,
+                endDate: editingRow.endDate,
+              }
+            : n,
+        ),
+      );
+    }
+
+    setTimeout(() => {
+      setIsSaving(false);
+      setEditingRow(null);
+    }, 500);
+  };
+
+  const handleCancel = () => {
+    setEditingRow(null);
   };
 
   const handleDeleteName = (id: string) => {
-    setOtherNames(otherNames.filter((name) => name.id !== id));
+    setOtherNames(otherNames.filter((n) => n.id !== id));
+  };
+
+  const handleEditChange = (field: keyof EditingRow, value: string) => {
+    if (editingRow) {
+      setEditingRow({ ...editingRow, [field]: value });
+    }
+  };
+
+  const getTypeLabel = (value: string) => {
+    return nameTypeOptions.find((t) => t.value === value)?.label || value;
   };
 
   return (
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
-        <div className="space-y-8 max-w-6xl">
-          {/* Add New Name Section */}
-          <div>
-            <SectionHeader title="Add Other Name" />
-            <FormRow>
-              <FormField label="First Name" isMandatory>
-                <Input
-                  placeholder="Enter first name"
-                  value={newName.firstName || ""}
-                  onChange={(e) =>
-                    setNewName({ ...newName, firstName: e.target.value })
-                  }
-                />
-              </FormField>
-              <FormField label="Last Name" isMandatory>
-                <Input
-                  placeholder="Enter last name"
-                  value={newName.lastName || ""}
-                  onChange={(e) =>
-                    setNewName({ ...newName, lastName: e.target.value })
-                  }
-                />
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Middle Name">
-                <Input
-                  placeholder="Enter middle name"
-                  value={newName.middleName || ""}
-                  onChange={(e) =>
-                    setNewName({ ...newName, middleName: e.target.value })
-                  }
-                />
-              </FormField>
-              <FormField label="Name Type">
-                <Select
-                  value={newName.nameType || ""}
-                  onValueChange={(value) =>
-                    setNewName({ ...newName, nameType: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select name type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="maiden">Maiden Name</SelectItem>
-                    <SelectItem value="alias">Alias</SelectItem>
-                    <SelectItem value="former">Former Name</SelectItem>
-                    <SelectItem value="business">Business Name</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField label="Effective Date">
-                <Input
-                  type="date"
-                  value={newName.effectiveDate || ""}
-                  onChange={(e) =>
-                    setNewName({ ...newName, effectiveDate: e.target.value })
-                  }
-                />
-              </FormField>
-              <FormField label="End Date">
-                <Input
-                  type="date"
-                  value={newName.endDate || ""}
-                  onChange={(e) =>
-                    setNewName({ ...newName, endDate: e.target.value })
-                  }
-                />
-              </FormField>
-            </FormRow>
-            <div className="flex justify-end gap-3 mb-6">
-              <Button onClick={handleAddName}>Add Name</Button>
-            </div>
-          </div>
+        <div className="space-y-6 max-w-full">
+          {/* Table Section */}
+          <div className="overflow-x-auto border border-gray-200 rounded-lg">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Type <span className="text-red-600">*</span>
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    First Name <span className="text-red-600">*</span>
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Last Name <span className="text-red-600">*</span>
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Middle Name
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Effective Date
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    End Date
+                  </th>
+                  <th className="text-center text-sm font-semibold text-gray-900 px-4 py-3">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {otherNames.length === 0 && !editingRow && (
+                  <tr>
+                    <td
+                      colSpan={7}
+                      className="px-4 py-8 text-center text-gray-500 text-sm"
+                    >
+                      No other names added
+                    </td>
+                  </tr>
+                )}
 
-          {/* Other Names List */}
-          <div>
-            <SectionHeader title="Existing Other Names" />
-            {otherNames.length > 0 ? (
-              <div className="space-y-4">
+                {/* Existing other names */}
                 {otherNames.map((name) => (
-                  <div
+                  <tr
                     key={name.id}
-                    className="p-4 border border-gray-200 rounded-lg"
+                    className="border-b border-gray-200 hover:bg-gray-50"
                   >
-                    <div className="flex justify-between items-start mb-3">
-                      <h4 className="font-semibold text-gray-900">
-                        {name.firstName} {name.middleName} {name.lastName}
-                      </h4>
-                      <button
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {getTypeLabel(name.type)}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {name.firstName}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {name.lastName}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-700">
+                      {name.middleName || "-"}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-700">
+                      {name.effectiveDate || "-"}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-700">
+                      {name.endDate || "-"}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         onClick={() => handleDeleteName(name.id)}
-                        className="text-red-600 hover:text-red-700 p-1"
-                        title="Delete name"
+                        title="Delete"
                       >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="text-gray-600">Name Type:</span>
-                        <p className="font-medium">{name.nameType}</p>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Effective Date:</span>
-                        <p className="font-medium">{name.effectiveDate}</p>
-                      </div>
-                      <div className="col-span-2">
-                        <span className="text-gray-600">End Date:</span>
-                        <p className="font-medium">{name.endDate || "N/A"}</p>
-                      </div>
-                    </div>
-                  </div>
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </td>
+                  </tr>
                 ))}
-              </div>
-            ) : (
-              <p className="text-gray-500">No other names added yet.</p>
-            )}
+
+                {/* Editing/New row */}
+                {editingRow && (
+                  <tr className="border-b border-gray-200 bg-blue-50">
+                    <td className="px-4 py-3">
+                      <Select
+                        value={editingRow.type}
+                        onValueChange={(value) =>
+                          handleEditChange("type", value)
+                        }
+                      >
+                        <SelectTrigger className="w-full h-9">
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {nameTypeOptions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </td>
+                    <td className="px-4 py-3">
+                      <Input
+                        placeholder="First name"
+                        value={editingRow.firstName}
+                        onChange={(e) =>
+                          handleEditChange("firstName", e.target.value)
+                        }
+                        className="h-9"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <Input
+                        placeholder="Last name"
+                        value={editingRow.lastName}
+                        onChange={(e) =>
+                          handleEditChange("lastName", e.target.value)
+                        }
+                        className="h-9"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <Input
+                        placeholder="Middle name (optional)"
+                        value={editingRow.middleName}
+                        onChange={(e) =>
+                          handleEditChange("middleName", e.target.value)
+                        }
+                        className="h-9"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <Input
+                        type="date"
+                        value={editingRow.effectiveDate}
+                        onChange={(e) =>
+                          handleEditChange("effectiveDate", e.target.value)
+                        }
+                        className="h-9"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <Input
+                        type="date"
+                        value={editingRow.endDate}
+                        onChange={(e) =>
+                          handleEditChange("endDate", e.target.value)
+                        }
+                        className="h-9"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex justify-center gap-2">
+                        <Button
+                          size="sm"
+                          onClick={handleSave}
+                          disabled={
+                            isSaving ||
+                            !editingRow.type ||
+                            !editingRow.firstName ||
+                            !editingRow.lastName
+                          }
+                          variant="ghost"
+                          className="h-8 px-3"
+                          title="Save"
+                        >
+                          <Check className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={handleCancel}
+                          disabled={isSaving}
+                          className="h-8 px-3"
+                          title="Cancel"
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
 
-          {/* Action Buttons */}
-          <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
-            {/* Row 1: Business Actions */}
-            <div className="flex justify-end gap-3">
-              <Button variant="cancel">Cancel</Button>
-              <Button onClick={handleSave} disabled={isSaving}>
-                {isSaving ? "Saving..." : "Save"}
+          {/* Add Name Button */}
+          {!editingRow && (
+            <div className="flex justify-end">
+              <Button
+                onClick={handleAddName}
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+              >
+                Add Other Name
               </Button>
             </div>
-            {/* Row 2: Navigation */}
-            <div className="flex justify-between">
-              <Button variant="outline" size="icon" title="Previous">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="icon" title="Next">
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
