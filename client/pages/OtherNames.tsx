@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
 
 interface OtherName {
