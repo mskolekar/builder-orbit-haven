@@ -220,6 +220,10 @@ function AppContent() {
                           label: "Addresses",
                           to: "/addresses",
                         },
+                        "/other-names": {
+                          label: "Other Names",
+                          to: "/other-names",
+                        },
                         "/additional-info": {
                           label: "Additional Info",
                           to: "/additional-info",
