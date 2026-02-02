@@ -95,6 +95,7 @@ function AppContent() {
     "/overview",
     "/person-info",
     "/addresses",
+    "/other-names",
     "/additional-info",
     "/licenses-certifications",
     "/workgroups",
