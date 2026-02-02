@@ -29,6 +29,7 @@ import Workgroup from "@/pages/Workgroup";
 import Relationships from "@/pages/Relationships";
 import LoginInfo from "@/pages/LoginInfo";
 import UploadSign from "@/pages/UploadSign";
+import PriorPolicy from "@/pages/PriorPolicy";
 import PlaceholderPage from "@/pages/PlaceholderPage";
 import NotFound from "@/pages/NotFound";
 import { BasicDetailsSection } from "@/components/ui/basic-details-section";
