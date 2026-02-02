@@ -366,7 +366,7 @@ export default function Relationships() {
                   onClick={handleAddRelationship}
                   className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                 >
-                  Add Relationship
+                  Add
                 </Button>
               </div>
             )}
