@@ -9,21 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, Plus, Trash2, Edit2 } from "lucide-react";
-
-interface PriorPolicy {
-  id: string;
-  lineBusinessCode: string;
-  carrier: string;
-  policy: string;
-  policyType: string;
-  inceptionDate: string;
-  expirationDate: string;
-  premium: string;
-  limitPerClaim: string;
-  limitPerAggregate: string;
-  deductible: string;
-}
+import { ChevronLeft, ChevronRight, Trash2, Edit2 } from "lucide-react";
 
 function FormRow({ children }: { children: React.ReactNode }) {
   return <div className="grid grid-cols-2 gap-12 mb-6">{children}</div>;
@@ -93,19 +79,19 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
-const lineBusinessCodeOptions = [
-  { value: "property", label: "Property" },
-  { value: "liability", label: "Liability" },
-  { value: "auto", label: "Auto" },
-  { value: "workers-comp", label: "Workers Compensation" },
-  { value: "other", label: "Other" },
-];
-
-const policyTypeOptions = [
-  { value: "occurrence", label: "Occurrence" },
-  { value: "claims-made", label: "Claims Made" },
-  { value: "hybrid", label: "Hybrid" },
-];
+interface PriorPolicy {
+  id: string;
+  lineBusinessCode: string;
+  carrier: string;
+  policy: string;
+  policyType: string;
+  inceptionDate: string;
+  expirationDate: string;
+  premium: string;
+  limitPerClaim: string;
+  limitPerAggregate: string;
+  deductible: string;
+}
 
 export default function PriorPolicy() {
   const [isSaving, setIsSaving] = useState(false);
@@ -127,8 +113,8 @@ export default function PriorPolicy() {
   });
 
   const handleSave = () => {
-    if (!formData.lineBusinessCode || !formData.carrier || !formData.policy) {
-      alert("Please fill in all required fields");
+    if (!formData.lineBusinessCode) {
+      alert("Please select a Line Business Code");
       return;
     }
 
@@ -161,6 +147,7 @@ export default function PriorPolicy() {
         ...formData,
         id: Date.now().toString(),
       };
+
       setPolicies([...policies, newPolicy]);
     }
 
@@ -202,19 +189,6 @@ export default function PriorPolicy() {
     setPolicies(policies.filter((p) => p.id !== id));
   };
 
-  const getLineBusinessLabel = (code: string) => {
-    return lineBusinessCodeOptions.find((o) => o.value === code)?.label || code;
-  };
-
-  const getPolicyTypeLabel = (type: string) => {
-    return policyTypeOptions.find((o) => o.value === type)?.label || type;
-  };
-
-  const formatCurrency = (value: string) => {
-    if (!value) return "-";
-    return `$${parseFloat(value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  };
-
   return (
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
@@ -222,10 +196,10 @@ export default function PriorPolicy() {
           {/* Prior Policies Grid Section */}
           <div>
             <SectionHeader title="Prior Policies" />
-            <div className="overflow-x-auto border border-gray-200 rounded-lg">
+            <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200">
+                  <tr className="border-b border-gray-200">
                     <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
                       Line Business Code
                     </th>
@@ -268,27 +242,21 @@ export default function PriorPolicy() {
                         key={policy.id}
                         className="border-b border-gray-200 hover:bg-gray-50"
                       >
-                        <td className="px-4 py-3 text-sm text-gray-900">
-                          {getLineBusinessLabel(policy.lineBusinessCode)}
+                        <td className="px-4 py-3 text-sm">
+                          {policy.lineBusinessCode}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900">
-                          {policy.carrier}
+                        <td className="px-4 py-3 text-sm">{policy.carrier}</td>
+                        <td className="px-4 py-3 text-sm">{policy.policy}</td>
+                        <td className="px-4 py-3 text-sm">
+                          {policy.policyType}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900">
-                          {policy.policy}
+                        <td className="px-4 py-3 text-sm">
+                          {policy.inceptionDate}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900">
-                          {getPolicyTypeLabel(policy.policyType) || "-"}
+                        <td className="px-4 py-3 text-sm">
+                          {policy.expirationDate}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          {policy.inceptionDate || "-"}
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          {policy.expirationDate || "-"}
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          {formatCurrency(policy.premium)}
-                        </td>
+                        <td className="px-4 py-3 text-sm">{policy.premium}</td>
                         <td className="px-4 py-3 text-center">
                           <div className="flex justify-center gap-2">
                             <Button
@@ -338,13 +306,12 @@ export default function PriorPolicy() {
                 }}
                 className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
               >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Prior Policy
+                Add
               </Button>
             </div>
           </div>
 
-          {/* Add/Edit Prior Policy Form Section - Conditional */}
+          {/* Add New Policy Form Section - Conditional */}
           {showForm && (
             <div>
               <SectionHeader
@@ -362,15 +329,22 @@ export default function PriorPolicy() {
                       <SelectValue placeholder="Select code" />
                     </SelectTrigger>
                     <SelectContent>
-                      {lineBusinessCodeOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
+                      <SelectItem value="commercial-general">
+                        Commercial General Liability
+                      </SelectItem>
+                      <SelectItem value="professional-liability">
+                        Professional Liability
+                      </SelectItem>
+                      <SelectItem value="property">Property</SelectItem>
+                      <SelectItem value="workers-comp">
+                        Workers Compensation
+                      </SelectItem>
+                      <SelectItem value="auto">Auto</SelectItem>
+                      <SelectItem value="umbrella">Umbrella/Excess</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormField>
-                <FormField label="Carrier" isMandatory>
+                <FormField label="Carrier">
                   <Input
                     placeholder="Enter carrier name"
                     value={formData.carrier}
@@ -381,7 +355,7 @@ export default function PriorPolicy() {
                 </FormField>
               </FormRow>
               <FormRow>
-                <FormField label="Policy" isMandatory>
+                <FormField label="Policy">
                   <Input
                     placeholder="Enter policy number"
                     value={formData.policy}
@@ -391,23 +365,13 @@ export default function PriorPolicy() {
                   />
                 </FormField>
                 <FormField label="Policy Type">
-                  <Select
+                  <Input
+                    placeholder="Enter policy type"
                     value={formData.policyType}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, policyType: value })
+                    onChange={(e) =>
+                      setFormData({ ...formData, policyType: e.target.value })
                     }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {policyTypeOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  />
                 </FormField>
               </FormRow>
               <FormRow>
@@ -439,19 +403,16 @@ export default function PriorPolicy() {
               <FormRow>
                 <FormField label="Premium">
                   <Input
-                    type="number"
-                    placeholder="0.00"
+                    placeholder="Enter premium amount"
                     value={formData.premium}
                     onChange={(e) =>
                       setFormData({ ...formData, premium: e.target.value })
                     }
-                    step="0.01"
                   />
                 </FormField>
                 <FormField label="Limit Per Claim">
                   <Input
-                    type="number"
-                    placeholder="0.00"
+                    placeholder="Enter limit per claim"
                     value={formData.limitPerClaim}
                     onChange={(e) =>
                       setFormData({
@@ -459,15 +420,13 @@ export default function PriorPolicy() {
                         limitPerClaim: e.target.value,
                       })
                     }
-                    step="0.01"
                   />
                 </FormField>
               </FormRow>
               <FormRow>
                 <FormField label="Limit Per Aggregate">
                   <Input
-                    type="number"
-                    placeholder="0.00"
+                    placeholder="Enter limit per aggregate"
                     value={formData.limitPerAggregate}
                     onChange={(e) =>
                       setFormData({
@@ -475,41 +434,46 @@ export default function PriorPolicy() {
                         limitPerAggregate: e.target.value,
                       })
                     }
-                    step="0.01"
                   />
                 </FormField>
                 <FormField label="Deductible">
                   <Input
-                    type="number"
-                    placeholder="0.00"
+                    placeholder="Enter deductible"
                     value={formData.deductible}
                     onChange={(e) =>
                       setFormData({ ...formData, deductible: e.target.value })
                     }
-                    step="0.01"
                   />
                 </FormField>
               </FormRow>
-
-              {/* Action Buttons */}
-              <div className="mt-6 pt-6 border-t border-gray-200 space-y-3 flex justify-between items-center">
-                <div className="flex gap-3">
-                  <Button
-                    variant="cancel"
-                    onClick={handleCancelAdd}
-                    disabled={isSaving}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-                <div className="flex gap-3">
-                  <Button onClick={handleSave} disabled={isSaving}>
-                    {isSaving ? "Saving..." : "Save"}
-                  </Button>
-                </div>
-              </div>
             </div>
           )}
+
+          {/* Action Buttons */}
+          <div className="mt-12 pt-6 border-t border-gray-200 space-y-3">
+            {/* Row 1: Business Actions */}
+            <div className="flex justify-end gap-3">
+              <Button variant="cancel" onClick={handleCancelAdd}>
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSave}
+                disabled={isSaving}
+                className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
+              >
+                {isSaving ? "Saving..." : "Save"}
+              </Button>
+            </div>
+            {/* Row 2: Navigation */}
+            <div className="flex justify-between">
+              <Button variant="outline" size="icon" title="Previous">
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="icon" title="Next">
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

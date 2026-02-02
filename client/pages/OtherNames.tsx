@@ -1,45 +1,48 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Trash2, Check, X } from "lucide-react";
 
 interface OtherName {
   id: string;
   type: string;
-  firstName: string;
   lastName: string;
-  middleName: string;
+  firstName: string;
+  middleInitial: string;
   effectiveDate: string;
-  endDate: string;
+  expirationDate: string;
 }
 
 interface EditingRow {
   id: string;
   type: string;
-  firstName: string;
   lastName: string;
-  middleName: string;
+  firstName: string;
+  middleInitial: string;
   effectiveDate: string;
-  endDate: string;
+  expirationDate: string;
 }
 
-const nameTypeOptions = [
-  { value: "maiden", label: "Maiden Name" },
-  { value: "alias", label: "Alias" },
-  { value: "former", label: "Former Name" },
-  { value: "business", label: "Business Name" },
-  { value: "other", label: "Other" },
+const typeOptions = [
+  "Maiden Name",
+  "Alias",
+  "Legal Name",
+  "Former Name",
+  "Other",
 ];
 
 export default function OtherNames() {
-  const [otherNames, setOtherNames] = useState<OtherName[]>([]);
+  const [otherNames, setOtherNames] = useState<OtherName[]>([
+    {
+      id: "1",
+      type: "Maiden Name",
+      lastName: "Smith",
+      firstName: "Rose",
+      middleInitial: "M",
+      effectiveDate: "2019-01-01",
+      expirationDate: "2024-01-01",
+    },
+  ]);
   const [editingRow, setEditingRow] = useState<EditingRow | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -48,11 +51,11 @@ export default function OtherNames() {
     setEditingRow({
       id: newId,
       type: "",
-      firstName: "",
       lastName: "",
-      middleName: "",
+      firstName: "",
+      middleInitial: "",
       effectiveDate: "",
-      endDate: "",
+      expirationDate: "",
     });
   };
 
@@ -60,8 +63,8 @@ export default function OtherNames() {
     if (
       !editingRow ||
       !editingRow.type ||
-      !editingRow.firstName ||
-      !editingRow.lastName
+      !editingRow.lastName ||
+      !editingRow.firstName
     ) {
       return;
     }
@@ -73,11 +76,11 @@ export default function OtherNames() {
       const newName: OtherName = {
         id: Date.now().toString(),
         type: editingRow.type,
-        firstName: editingRow.firstName,
         lastName: editingRow.lastName,
-        middleName: editingRow.middleName,
+        firstName: editingRow.firstName,
+        middleInitial: editingRow.middleInitial,
         effectiveDate: editingRow.effectiveDate,
-        endDate: editingRow.endDate,
+        expirationDate: editingRow.expirationDate,
       };
       setOtherNames([...otherNames, newName]);
     } else {
@@ -87,11 +90,11 @@ export default function OtherNames() {
             ? {
                 id: n.id,
                 type: editingRow.type,
-                firstName: editingRow.firstName,
                 lastName: editingRow.lastName,
-                middleName: editingRow.middleName,
+                firstName: editingRow.firstName,
+                middleInitial: editingRow.middleInitial,
                 effectiveDate: editingRow.effectiveDate,
-                endDate: editingRow.endDate,
+                expirationDate: editingRow.expirationDate,
               }
             : n,
         ),
@@ -118,14 +121,10 @@ export default function OtherNames() {
     }
   };
 
-  const getTypeLabel = (value: string) => {
-    return nameTypeOptions.find((t) => t.value === value)?.label || value;
-  };
-
   return (
     <div className="flex-1 flex flex-col overflow-auto bg-white">
       <div className="w-full h-full p-8">
-        <div className="space-y-6 max-w-full">
+        <div className="space-y-6 max-w-6xl">
           {/* Table Section */}
           <div className="overflow-x-auto border border-gray-200 rounded-lg">
             <table className="w-full">
@@ -135,19 +134,19 @@ export default function OtherNames() {
                     Type <span className="text-red-600">*</span>
                   </th>
                   <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                    First Name <span className="text-red-600">*</span>
-                  </th>
-                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
                     Last Name <span className="text-red-600">*</span>
                   </th>
                   <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                    Middle Name
+                    First Name <span className="text-red-600">*</span>
+                  </th>
+                  <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
+                    Middle Initial
                   </th>
                   <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
                     Effective Date
                   </th>
                   <th className="text-left text-sm font-semibold text-gray-900 px-4 py-3">
-                    End Date
+                    Expiration Date
                   </th>
                   <th className="text-center text-sm font-semibold text-gray-900 px-4 py-3">
                     Actions
@@ -166,29 +165,29 @@ export default function OtherNames() {
                   </tr>
                 )}
 
-                {/* Existing other names */}
+                {/* Existing names */}
                 {otherNames.map((name) => (
                   <tr
                     key={name.id}
                     className="border-b border-gray-200 hover:bg-gray-50"
                   >
                     <td className="px-4 py-3 text-sm text-gray-900">
-                      {getTypeLabel(name.type)}
+                      {name.type}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {name.lastName}
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-900">
                       {name.firstName}
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-900">
-                      {name.lastName}
+                      {name.middleInitial}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700">
-                      {name.middleName || "-"}
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {name.effectiveDate}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700">
-                      {name.effectiveDate || "-"}
-                    </td>
-                    <td className="px-4 py-3 text-sm text-gray-700">
-                      {name.endDate || "-"}
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {name.expirationDate}
                     </td>
                     <td className="px-4 py-3 text-center">
                       <Button
@@ -207,37 +206,24 @@ export default function OtherNames() {
                 {editingRow && (
                   <tr className="border-b border-gray-200 bg-blue-50">
                     <td className="px-4 py-3">
-                      <Select
+                      <select
                         value={editingRow.type}
-                        onValueChange={(value) =>
-                          handleEditChange("type", value)
-                        }
-                      >
-                        <SelectTrigger className="w-full h-9">
-                          <SelectValue placeholder="Select type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {nameTypeOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </td>
-                    <td className="px-4 py-3">
-                      <Input
-                        placeholder="First name"
-                        value={editingRow.firstName}
                         onChange={(e) =>
-                          handleEditChange("firstName", e.target.value)
+                          handleEditChange("type", e.target.value)
                         }
-                        className="h-9"
-                      />
+                        className="w-full h-9 px-2 border border-gray-300 rounded text-sm"
+                      >
+                        <option value="">Select type</option>
+                        {typeOptions.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
                     </td>
                     <td className="px-4 py-3">
                       <Input
-                        placeholder="Last name"
+                        placeholder="Last Name"
                         value={editingRow.lastName}
                         onChange={(e) =>
                           handleEditChange("lastName", e.target.value)
@@ -247,12 +233,23 @@ export default function OtherNames() {
                     </td>
                     <td className="px-4 py-3">
                       <Input
-                        placeholder="Middle name (optional)"
-                        value={editingRow.middleName}
+                        placeholder="First Name"
+                        value={editingRow.firstName}
                         onChange={(e) =>
-                          handleEditChange("middleName", e.target.value)
+                          handleEditChange("firstName", e.target.value)
                         }
                         className="h-9"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <Input
+                        placeholder="Middle Initial"
+                        value={editingRow.middleInitial}
+                        onChange={(e) =>
+                          handleEditChange("middleInitial", e.target.value)
+                        }
+                        className="h-9"
+                        maxLength={1}
                       />
                     </td>
                     <td className="px-4 py-3">
@@ -268,9 +265,9 @@ export default function OtherNames() {
                     <td className="px-4 py-3">
                       <Input
                         type="date"
-                        value={editingRow.endDate}
+                        value={editingRow.expirationDate}
                         onChange={(e) =>
-                          handleEditChange("endDate", e.target.value)
+                          handleEditChange("expirationDate", e.target.value)
                         }
                         className="h-9"
                       />
@@ -283,8 +280,8 @@ export default function OtherNames() {
                           disabled={
                             isSaving ||
                             !editingRow.type ||
-                            !editingRow.firstName ||
-                            !editingRow.lastName
+                            !editingRow.lastName ||
+                            !editingRow.firstName
                           }
                           variant="ghost"
                           className="h-8 px-3"
@@ -310,14 +307,14 @@ export default function OtherNames() {
             </table>
           </div>
 
-          {/* Add Name Button */}
+          {/* Add Button */}
           {!editingRow && (
             <div className="flex justify-end">
               <Button
                 onClick={handleAddName}
                 className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
               >
-                Add Other Name
+                Add
               </Button>
             </div>
           )}

@@ -253,14 +253,14 @@ export default function Workgroup() {
             </table>
           </div>
 
-          {/* Add Workgroup Button */}
+          {/* Add Button */}
           {!editingRow && (
             <div className="flex justify-end">
               <Button
                 onClick={handleAddWorkgroup}
                 className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
               >
-                Add Workgroup
+                Add
               </Button>
             </div>
           )}
