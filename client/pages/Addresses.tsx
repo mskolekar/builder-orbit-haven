@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, Plus, Trash2, Edit2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trash2, Edit2 } from "lucide-react";
 
 function FormRow({ children }: { children: React.ReactNode }) {
   return <div className="grid grid-cols-2 gap-12 mb-6">{children}</div>;
