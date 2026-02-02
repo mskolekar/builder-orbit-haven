@@ -23,6 +23,7 @@ import CheckProcessing from "@/pages/CheckProcessing";
 import PersonInfo from "@/pages/PersonInfo";
 import Addresses from "@/pages/Addresses";
 import AdditionalInfo from "@/pages/AdditionalInfo";
+import OtherNames from "@/pages/OtherNames";
 import Licenses from "@/pages/Licenses";
 import Workgroup from "@/pages/Workgroup";
 import Relationships from "@/pages/Relationships";
