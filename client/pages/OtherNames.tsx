@@ -307,14 +307,14 @@ export default function OtherNames() {
             </table>
           </div>
 
-          {/* Add Name Button */}
+          {/* Add Button */}
           {!editingRow && (
             <div className="flex justify-end">
               <Button
                 onClick={handleAddName}
                 className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
               >
-                Add Name
+                Add
               </Button>
             </div>
           )}
