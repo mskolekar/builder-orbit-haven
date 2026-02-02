@@ -242,12 +242,20 @@ export default function PriorPolicy() {
                         key={policy.id}
                         className="border-b border-gray-200 hover:bg-gray-50"
                       >
-                        <td className="px-4 py-3 text-sm">{policy.lineBusinessCode}</td>
+                        <td className="px-4 py-3 text-sm">
+                          {policy.lineBusinessCode}
+                        </td>
                         <td className="px-4 py-3 text-sm">{policy.carrier}</td>
                         <td className="px-4 py-3 text-sm">{policy.policy}</td>
-                        <td className="px-4 py-3 text-sm">{policy.policyType}</td>
-                        <td className="px-4 py-3 text-sm">{policy.inceptionDate}</td>
-                        <td className="px-4 py-3 text-sm">{policy.expirationDate}</td>
+                        <td className="px-4 py-3 text-sm">
+                          {policy.policyType}
+                        </td>
+                        <td className="px-4 py-3 text-sm">
+                          {policy.inceptionDate}
+                        </td>
+                        <td className="px-4 py-3 text-sm">
+                          {policy.expirationDate}
+                        </td>
                         <td className="px-4 py-3 text-sm">{policy.premium}</td>
                         <td className="px-4 py-3 text-center">
                           <div className="flex justify-center gap-2">
@@ -372,7 +380,10 @@ export default function PriorPolicy() {
                     type="date"
                     value={formData.inceptionDate}
                     onChange={(e) =>
-                      setFormData({ ...formData, inceptionDate: e.target.value })
+                      setFormData({
+                        ...formData,
+                        inceptionDate: e.target.value,
+                      })
                     }
                   />
                 </FormField>
@@ -381,7 +392,10 @@ export default function PriorPolicy() {
                     type="date"
                     value={formData.expirationDate}
                     onChange={(e) =>
-                      setFormData({ ...formData, expirationDate: e.target.value })
+                      setFormData({
+                        ...formData,
+                        expirationDate: e.target.value,
+                      })
                     }
                   />
                 </FormField>
@@ -401,7 +415,10 @@ export default function PriorPolicy() {
                     placeholder="Enter limit per claim"
                     value={formData.limitPerClaim}
                     onChange={(e) =>
-                      setFormData({ ...formData, limitPerClaim: e.target.value })
+                      setFormData({
+                        ...formData,
+                        limitPerClaim: e.target.value,
+                      })
                     }
                   />
                 </FormField>
