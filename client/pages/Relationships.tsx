@@ -523,7 +523,7 @@ export default function Relationships() {
                   onClick={handleAddRole}
                   className="bg-[#0054A6] hover:bg-[#003d7a] text-white"
                 >
-                  Add Role
+                  Add
                 </Button>
               </div>
             )}
