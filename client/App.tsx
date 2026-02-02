@@ -374,6 +374,7 @@ function AppContent() {
                   <Route path="/overview/:profileId" element={<Dashboard />} />
                   <Route path="/person-info" element={<PersonInfo />} />
                   <Route path="/addresses" element={<Addresses />} />
+                  <Route path="/other-names" element={<OtherNames />} />
                   <Route path="/additional-info" element={<AdditionalInfo />} />
                   <Route
                     path="/licenses-certifications"
